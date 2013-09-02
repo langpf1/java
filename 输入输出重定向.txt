@@ -1,0 +1,43 @@
+import java.io.OutputStream;
+import java.io.PrintStream;
+ 
+ 
+public class TestSetIO {
+ 
+/**
+ * ÃÌº”◊¢ Õ
+ *
+ * Returns ∑µªÿ√Ë ˆ
+ */
+public static void main(String[] args) {
+ 
+PrintStream ps = System.out;
+TestSetIO setIO = new TestSetIO();
+PrintStream out = new FakePrintStream(System.out);
+System.setOut(out);
+setIO.printMethod();
+String tmpStr = ((FakePrintStream)out).getStr();
+System.setOut(ps);
+System.out.println("FakePrintStream : " + tmpStr);
+}
+private void printMethod() {
+System.out.println(" in printMethod ");
+}
+ 
+}
+ 
+class FakePrintStream extends PrintStream{
+private StringBuilder str = new StringBuilder();
+public FakePrintStream(OutputStream out){
+super(out);
+}
+@Override
+public void write(byte buf[], int off, int len){
+str.append(new String(buf, off, len));
+}
+public String getStr(){
+return str.toString();
+}
+}
+
+--------------------------------------------------------------------------------

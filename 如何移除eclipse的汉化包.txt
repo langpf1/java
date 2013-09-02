@@ -1,0 +1,5 @@
+第一步： eclipse/plugins/下将带有 nl_zh_的jar全部删除
+
+第二步： eclipse/features/ 将含有 _zh的文件夹删除
+
+然后启动eclipse，熟悉的英文界面是不是回来了，jadclipse也能正常工作了

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="getProcedureColumnsの引数" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdmrs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefgpc1.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcrsrgpc1.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdmdfns1.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefpgc1" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>getProcedureColumnsの引数</title>
+</head>
+<body id="rrefpgc1"><a name="rrefpgc1"><!-- --></a>
+
+
+<h1 class="topictitle1">getProcedureColumnsの引数</h1>
+
+<div>
+<div class="section"><p>JDBC APIで定められたこのメソッドの引数は、以下のとおりです。</p>
+</div>
+
+<div class="section"> <ul>
+<li><em>catalog</em>   <p><span>Derby</span>では、この引数には<em>null</em>を渡してください。</p>
+</li>
+
+<li><em>schemaPattern</em>   <p>Javaの手続きはスキーマを持ちます。</p>
+</li>
+
+<li><em>procedureNamePattern</em>   <p>手続き名のパターンを表す文字列オブジェクトです。</p>
+</li>
+
+<li id="rrefpgc1__i1024753"><a name="rrefpgc1__i1024753"><!-- --></a><em id="rrefpgc1__jdbc95532"><a name="rrefpgc1__jdbc95532"><!-- --></a>column-Name-Pattern</em>   <p>引数名もしくは返り値の名前パターンを表す文字列オブジェクトです。この値に一致する名前が、CREATE PROCEDURE文にてJavaの手続きに定義されています。全ての引数名を見つけるためには「%」を使ってください。</p>
+</li>
+
+</ul>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefjdbc15905.html" title="">java.sql.DatabaseMetaData インターフェイス</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefdmrs.html" title="">DatabaseMetaData 結果セット</a></div>
+<div><a href="rrefgpc1.html" title="">java.sql.DatabaseMetaData.getProcedureColumnsメソッド</a></div>
+<div><a href="rrefcrsrgpc1.html" title="">getProcedureColumnsから返る結果セットにある列について</a></div>
+<div><a href="rrefdmdfns1.html" title="java.sql.DatabaseMetaData.getBestRowIdentifierメソッドは決められた優先順位で識別子を探します。必ずしも行を特定できる情報が見つかるわけではありません。">java.sql.DatabaseMetaData.getBestRowIdentifierメソッド</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SQL式" />
+<meta name="abstract" content="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。" />
+<meta name="description" content="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。" />
+<meta content="SQL expressions, column reference, constant, SQL expressions, NULL, dynamic parameter, CAST, scalar subquery, table subquery, conditional, numeric, character, string with wildcards, concatenation function, CURRENT_DATE function, CURRENT_TIME function, CURRENT_TIMESTAMP function, mathematical (+ -, *, /, unary + and - ), LENGTH function, expressions, dynamic parameter, scalar subquery, string with wildcards, concatenation function, CURRENT_DATE function, CURRENT_TIME function, CURRENT_TIMESTAMP function, mathematical (+ -, *, /, unary + and - ), LENGTH function" name="DC.subject" />
+<meta content="SQL expressions, column reference, constant, SQL expressions, NULL, dynamic parameter, CAST, scalar subquery, table subquery, conditional, numeric, character, string with wildcards, concatenation function, CURRENT_DATE function, CURRENT_TIME function, CURRENT_TIMESTAMP function, mathematical (+ -, *, /, unary + and - ), LENGTH function, expressions, dynamic parameter, scalar subquery, string with wildcards, concatenation function, CURRENT_DATE function, CURRENT_TIME function, CURRENT_TIMESTAMP function, mathematical (+ -, *, /, unary + and - ), LENGTH function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefkeywords29722.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsql9241891.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexcept16677.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefselectexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftableexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj11277.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1080779.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj23075.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj19433" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SQL式</title>
+</head>
+<body id="rrefsqlj19433"><a name="rrefsqlj19433"><!-- --></a>
+
+
+<h1 class="topictitle1">SQL式</h1>
+
+
+
+<div><p>多くの文や式の構文の語句に、<em>式</em>や<em>表副問合せ</em>のような式の一種があります。
+式は文の定められた場所に置くことができます。</p>
+
+<div class="section"><p>場所によっては決められた種類の式や決められた属性を持つ式のみ置くことができます。</p>
+</div>
+
+<div class="section"><div class="p">特別な指定がなければ、構文にて<em>式</em>と書かれている全ての場所に式を置くことができます。
+これには以下が含まれます。<ul>
+<li><a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY 節</a></li>
+
+<li><em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a></em></li>
+
+<li><a href="rrefsqlj26498.html#rrefsqlj26498">UPDATE文</a> (SETの部分)</li>
+
+<li><a href="rrefsqlj11277.html#rrefsqlj11277">VALUES式</a></li>
+
+<li><a href="rrefsqlj33602.html#rrefsqlj33602">WHERE節</a></li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><p>もちろん他にも、これらの要素を構成の一部とする文はあるので、その一部として式を置くことができます。</p>
+
+<p>以下の表ではSQL式と式を置くことのできる場所を示します。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">一般的な式</h2>
+<div class="p">
+一般的な式とは何らかの型の値となる式のことです。
+<div class="tablenoborder"><a name="rrefsqlj19433__sqlj18370"><!-- --></a><table cellspacing="0" cellpadding="4" summary="表 1. 一般的な式の表" id="rrefsqlj19433__sqlj18370" width="100%" frame="border" border="1" rules="all"><caption>表 1. 一般的な式の表</caption>
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="21.12676056338028%" id="N1024C">式の種類</th>
+
+<th align="left" valign="bottom" width="42.25352112676056%" id="N10255">説明</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="21.12676056338028%" headers="N1024C"> 列参照式</td>
+
+<td valign="top" width="42.25352112676056%" headers="N10255">列への参照がある式では、<a href="rrefcolumnname.html#rrefcolumnname"><var class="varname">列名</var></a>で列の値を参照して、式の中で値を扱うことができます。
+<p>列が曖昧な場合は、<var class="varname">列名</var>を表名あるいは相関名で限定する必要があります。</p>
+  
+<p><a href="rrefsqlj21583.html#rrefsqlj21583">FROM
+節</a>にて表に相関名が与えられていた場合、<var class="varname">列名</var>は相関名で限定される必要があります。別名として相関名が与えられている場合、表名で列を限定することはできません。</p>
+
+<p>これは<em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a>s</em>、UPDATE文やDML文のWHERE節におくことができます。</p>
+</td>
+
+
+</tr>
+
+<tr>
+<td valign="top" width="21.12676056338028%" headers="N1024C">定数</td>
+
+<td valign="top" width="42.25352112676056%" headers="N10255">多くの組込みのデータ型には関連した定数があります。(これは<a href="crefsqlj31068.html#crefsqlj31068">データ型</a>に記述されます。)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="21.12676056338028%" headers="N1024C">NULL</td>
+
+<td valign="top" width="42.25352112676056%" headers="N10255">NULLは不明な値を表す、型のない定数です。<p>CAST式やINSERTのVALUES一覧およびUPDATEのSET節におくことができます。CAST式で利用することで、指定したデータ型を与えることができます。</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="21.12676056338028%" headers="N1024C">&nbsp;</td>
+
+<td valign="top" width="42.25352112676056%" headers="N10255">動的パラメータ</td>
+
+<td valign="top" width="36.61971830985916%">
+動的パラメータは、SQL文が作成された時には未だ決まっていない値へのパラメータです。その値の変わりに疑問符(?)がそれぞれの動的なパラメータのプレースホルダとしておかれます。
+<a href="crefsqlj29911.html#crefsqlj29911">動的パラメータ</a>を参照してください。
+<p>動的パラメータは準備された文においてのみ、使うことができます。準備された文が実行される前に、動的パラメータの値は決められなければなりません。
+また決めた値は文脈に沿った型でなければなりません。</p>
+
+<p>データ型を問題なく推定できる場所では、どこでも利用することができます。<a href="crefsqlj29911.html#crefsqlj29911">動的パラメータ</a>を参照してください。</p>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="21.12676056338028%" headers="N1024C">CAST 式</td>
+
+<td valign="top" width="42.25352112676056%" headers="N10255">NULLや動的パラメータの型を特定したり、値を他の型に変換することができます。
+<a href="rrefsqlj33562.html#rrefsqlj33562">CAST 関数</a>を参照してください。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="21.12676056338028%" headers="N1024C">スカラー副問合せ</td>
+
+<td valign="top" width="42.25352112676056%" headers="N10255">一列のみの一行だけを返す副問合せです。
+<em><a href="rrefscalarsubquery.html#rrefscalarsubquery">スカラー副問合せ</a>を参照してください。</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="21.12676056338028%" headers="N1024C">表副問合せ</td>
+
+<td valign="top" width="42.25352112676056%" headers="N10255">副問合せからは、一列以上、一行以上を返すことができます。
+<em><a href="rreftablesubquery.html#rreftablesubquery">表副問合せ</a></em>を参照してください。
+<p>FROM句やEXISTS、INや定量比較の表式として置くことができます。</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Boolean式</h2>
+<p>ブーリアン式はブーリアン値になる式です。多くの式は、ブーリアン値となれます。
+一般的にWHERE句で用いられるブーリアン式は、SQL演算子で処理されるオペランドからなります。<a href="rrefsqlj23075.html#rrefsqlj23075__sqlj34517">SQL のブーリアン演算子</a>を参照してください。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">数式</h2>
+<div class="p">数式は数値になる式です。多くの式は、数値となれます。
+数値は以下の型のいずれかです。<ul>
+<li>BIGINT</li>
+
+<li>DECIMAL</li>
+
+<li>DOUBLE PRECISION</li>
+
+<li>INTEGER</li>
+
+<li>REAL</li>
+
+<li>SMALLINT</li>
+
+</ul>
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. 数式の表" width="100%" frame="border" border="1" rules="all"><caption>表 1. 数式の表</caption>
+
+<thead align="left">
+
+<tr>
+<th valign="top" width="40%" id="N103FF">条件式</th>
+
+<th valign="top" width="60%" id="N10406">条件式では、ブーリアン値に基づいて評価する式を選ぶことができます。</th>
+
+</tr>
+
+<tr>
+<th align="left" valign="bottom" width="40%" id="N10413">式の種類</th>
+
+<th align="left" valign="bottom" width="60%" id="N1041C">説明</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="40%" headers="N103FF N10413">-、*、/、単一の+と-の式</td>
+
+<td valign="top" width="60%" headers="N10406 N1041C">
+<p>評価されると、オペランドに対して期待される演算処理が行われます。もし両方のオペランドが同じ型であれば、結果の型が昇格されることはありません。従って整数に除算演算子が適用されると、実際の計算結果に切捨て処理が行われて整数となった値が結果となります。
+もし型が混在していた場合は、<a href="crefsqlj31068.html#crefsqlj31068">データ型</a>の記述に従い、型の昇格が行われます。</p>
+  
+<p>単一の+で行われる処理はありません。(例えば+4は4と同じです。)単一の-は、-1をかけることと同じで、その結果符号が反転します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N103FF N10413">AVG</td>
+
+<td valign="top" width="60%" headers="N10406 N1041C">数値の集合から平均を返します。<a href="rrefsqlj32693.html#rrefsqlj32693">AVG関数</a></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N103FF N10413">SUM</td>
+
+<td valign="top" width="60%" headers="N10406 N1041C">数値の集合から合計を返します。<a href="rrefsqlj13083.html#rrefsqlj13083">SUM関数</a></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N103FF N10413">LENGTH</td>
+
+<td valign="top" width="60%" headers="N10406 N1041C">文字列やビット列から、文字数を返します。
+<a href="rrefsqlj16762.html#rrefsqlj16762">LENGTH関数</a>を参照してください。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N103FF N10413">LOWER</td>
+
+<td valign="top" width="60%" headers="N10406 N1041C"><a href="rrefsqlj42049.html#rrefsqlj42049">LCASEあるいはLOWER関数</a>を参照してください。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N103FF N10413">COUNT</td>
+
+<td valign="top" width="60%" headers="N10406 N1041C">値集合の個数を返します。<a href="rrefsqlj38716.html#rrefsqlj38716">COUNT 関数</a>、<a href="rrefsqlj66113.html#rrefsqlj66113">COUNT(*) 関数</a>を参照してください。</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">文字式</h2><div class="p">
+文字式は結果がCHARおよびVARCHARの値となる式です。多くの式の結果がCHARおよびVARCHARの値となります。
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. 文字式の表" width="100%" frame="border" border="1" rules="all"><caption>表 1. 文字式の表</caption>
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="40%" id="N10522">式の種類</th>
+
+<th align="left" valign="bottom" width="60%" id="N1052B">説明</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="40%" headers="N10522">ワイルドカードのあるCHARやVARCHARの値</td>
+
+<td valign="top" width="60%" headers="N1052B">ワイルドカードの%や_を使って、LIKE演算子が一致する情報を探すパターン文字列を作ります。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10522">連結式</td>
+
+<td valign="top" width="60%" headers="N1052B">連結式にて、連結演算子の"||"は、右辺のオペランドを左辺のオペランドの末尾に連結します。これは文字列やビット列に対して利用できます。
+<a href="rrefsqlj40899.html#rrefsqlj40899">Concatenation</a>を参照してください。
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10522">組込みの文字列関数</td>
+
+<td valign="top" width="60%" headers="N1052B">組込みの文字列関数は文字列に作用して、文字列を返します。
+<a href="rrefsqlj97870.html#rrefsqlj97870">LTRIM関数</a>、<a href="rrefsqlj42049.html#rrefsqlj42049">LCASEあるいはLOWER関数</a>、<a href="rrefsqlj32613.html#rrefsqlj32613">RTRIM関数</a>、<a href="rreftrimfunc.html#rreftrimfunc">TRIM 関数</a>、<a href="rrefsqlj93082.html#rrefsqlj93082">SUBSTR関数</a>それと<a href="rrefsqlj29930.html#rrefsqlj29930.dita">rrefsqlj29930.html#rrefsqlj29930.dita</a>を参照してください。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10522">USER関数</td>
+
+<td valign="top" width="60%" headers="N1052B">User関数は現在のユーザに関する情報を文字列で返します。<a href="rrefsqlj42324.html#rrefsqlj42324">CURRENT_USER関数</a>、<a href="rrefsqlj25228.html#rrefsqlj25228">SESSION_USER関数</a>それと
+<a href="rrefsqlj42476.html#rrefsqlj42476">USER関数</a>を参照してください。</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">日付/時刻式</h2>
+<div class="p">
+日付/時刻式は、結果がDATE、TIMEやTIMESTAMPの値となる式です。
+多くの式の結果が日付/時刻の値となります。
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. 日付/時刻式の表" width="100%" frame="border" border="1" rules="all"><caption>表 1. 日付/時刻式の表</caption>
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="37.5%" id="N1061A">式の種類</th>
+
+<th align="left" valign="bottom" width="62.5%" id="N10623">説明</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="37.5%" headers="N1061A">CURRENT_DATE</td>
+
+<td valign="top" width="62.5%" headers="N10623">現在の日付を返します。<a href="rrefsqlj34177.html#rrefsqlj34177">CURRENT_DATE関数</a>を参照してください。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="37.5%" headers="N1061A">CURRENT_TIME</td>
+
+<td valign="top" width="62.5%" headers="N10623">現在の時刻を返します。<a href="rrefsqlj33772.html#rrefsqlj33772">CURRENT_TIME関数</a>を参照してください。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="37.5%" headers="N1061A">CURRENT_TIMESTAMP</td>
+
+<td valign="top" width="62.5%" headers="N10623">現在のタイムスタンプを返します。<a href="rrefsqlj15866.html#rrefsqlj15866">CURRENT_TIMESTAMP関数</a>を参照してください。</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefselectexpression.html">選択式</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rreftableexpression.html">TableExpression</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj11277.html">VALUES式</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj1080779.html">式に関する優先順位</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj23075.html">真偽式</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="crefsqlj29911.html">動的パラメータ</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj23296.html" title="">SQL言語のリファレンス</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQLの識別子</a></div>
+<div><a href="crefsqlj39374.html" title="">文</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">組込みシステム関数</a></div>
+<div><a href="crefjdbc12657.html" title="Derbyは組み込みのJDBCドライバと共に提供されます。">JDBC リファレンス</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqlj28468.html" title="">大文字小文字と特殊文字</a></div>
+<div><a href="rrefclauses.html" title="">SQL 節</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN 演算</a></div>
+<div><a href="rrefqueries.html" title="">SQL 問い合わせ</a></div>
+<div><a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+<div><a href="rrefkeywords29722.html" title="">SQL予約語</a></div>
+<div><a href="rrefsql9241891.html" title="">DerbyのサポートするSQL-92の機能</a></div>
+<div><a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+<div><a href="rrefexcept16677.html" title="Derbyにて発生する全てのエラーは、JDBCからSQLExceptionとして挙がります。 もしユーザの定義した型から例外が挙がって、その例外がSQLExceptionでは無い場合、その例外はSQLExceptionにラップされています。 Derby固有のSQLExceptionは、SQLStateクラスに定義されたXで始まるコードを用います。標準に定義されたSQLStateの値は、対応する例外に対して返されます。">Derbyの例外メッセージとSQL state</a></div>
+<div><a href="rrefjdbc87220.html" title="">java.sql.BatchUpdateException クラス</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">Connected Device ConfigurationおよびFoundation Profile向けのJDBCパッケージ(JSR169)</a></div>
+<div><a href="rrefjdbc32593.html" title="">JDBC 3.0の機能</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0の機能</a></div>
+<div><a href="rrefjdbc1020262.html" title="">JDBCエスケープの構文</a></div>
+</div>
+</div>
+
+</body>
+</html>

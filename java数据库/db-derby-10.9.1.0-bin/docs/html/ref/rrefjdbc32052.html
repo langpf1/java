@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="java.sql.Driver interface" />
+<meta content="java.sql.Driver interface, JDBC driver, loading, jdbc.drivers system property, using to load driver" name="DC.subject" />
+<meta content="java.sql.Driver interface, JDBC driver, loading, jdbc.drivers system property, using to load driver" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34565.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27734.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc40794.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc29874.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc23502.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc38274.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc16643.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc30469.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlsavepoint.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20377.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_1summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34954.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc32052" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>java.sql.Driver interface</title>
+</head>
+<body id="rrefjdbc32052"><a name="rrefjdbc32052"><!-- --></a>
+
+
+<h1 class="topictitle1">java.sql.Driver interface</h1>
+
+
+<div>
+<div class="section"><p>The class that loads <span>Derby</span>'s
+local JDBC driver is the class <em>org.apache.derby.jdbc.EmbeddedDriver</em>.
+The class that loads <span>Derby</span>'s
+network client driver is the class <em>org.apache.derby.jdbc.ClientDriver</em>.
+Listed below are some of the ways to create instances of these classes. Do not use the classes directly through the <em>java.sql.Driver</em> interface.
+Use the <em>DriverManager</em> class to create connections.</p>
+  
+<p>If your application runs on JDK 6 or higher, you do not need to
+do any of the following. The driver will load automatically
+when your application asks for its first connection.</p>
+
+<ul>
+<li><pre id="rrefjdbc32052__jdbc10841"><a name="rrefjdbc32052__jdbc10841"><!-- --></a>Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+Class.forName("org.apache.derby.jdbc.ClientDriver");</pre>
+
+<p>The recommended way to load the driver class.</p>
+
+<p>With the embedded driver, if your application shuts down Derby or calls the
+<em>DriverManager.deregisterDriver</em> method, and you then want to reload the
+driver, call the <em>Class.forName().newInstance()</em> method to do so:</p>
+
+<pre>Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();</pre>
+
+</li>
+
+<li><pre>new org.apache.derby.jdbc.EmbeddedDriver();
+new org.apache.derby.jdbc.ClientDriver();</pre>
+   <p>Same as using
+<em>Class.forName()</em>, except
+that it requires the class to be found when the code is compiled.</p>
+</li>
+
+<li><pre>Class c = org.apache.derby.jdbc.EmbeddedDriver.class;
+Class c = org.apache.derby.jdbc.ClientDriver.class;</pre>
+   <p>This
+is also the same as using <em>Class.forName()</em>, except
+that it requires the class to be found when the code is compiled. The pseudo-static
+field <em>class</em> evaluates to the class that is named.</p>
+</li>
+
+<li><em>Setting the system property jdbc.drivers</em> 
+ <p>To set a system property, you alter the invocation command line or the
+system properties within your application. It is not possible to alter system
+properties within an applet.</p>
+
+<pre>java -Djdbc.drivers=org.apache.derby.jdbc.EmbeddedDriver
+    applicationClass
+
+java -Djdbc.drivers=org.apache.derby.jdbc.ClientDriver
+    applicationClass</pre>
+</li>
+
+</ul>
+</div>
+
+<div class="section"><p>The actual driver that gets registered in the <em>DriverManager</em> to
+handle the <em>jdbc:derby:</em> protocol is not the class <em>org.apache.derby.jdbc.EmbeddedDriver</em>
+or <em>org.apache.derby.jdbc.ClientDriver</em>;
+that class simply detects the type of <span>Derby</span> driver
+needed and then causes the appropriate <span>Derby</span> driver
+to be loaded.</p>
+</div>
+
+<div class="section"><p>The only supported way to connect to a <span>Derby</span> system
+through the <em>jdbc:derby:</em> protocol is using the <em>DriverManager</em> to
+obtain a driver (<em>java.sql.Driver</em>) or connection (<em>java.sql.Connection</em>)
+through the <em>getDriver</em> and <em>getConnection</em> method calls.</p>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefjdbc34954.html">java.sql.Driver.getPropertyInfo method</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefjdbc12657.html" title="Derby comes with a built-in JDBC driver.">JDBC reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjdbc34565.html" title="">java.sql.DriverManager.getConnection method</a></div>
+<div><a href="rrefjdbc27734.html" title="">java.sql.Connection interface</a></div>
+<div><a href="rrefjdbc15905.html" title="">java.sql.DatabaseMetaData interface</a></div>
+<div><a href="rrefjdbc40794.html" title="">java.sql.Statement interface</a></div>
+<div><a href="rrefjdbc20485.html" title="">java.sql.CallableStatement interface</a></div>
+<div><a href="rrefjdbc29874.html" title="">java.sql.PreparedStatement interface</a></div>
+<div><a href="rrefjdbc23502.html" title="">java.sql.ResultSet interface</a></div>
+<div><a href="rrefjdbc38274.html" title="">java.sql.ResultSetMetaData interface</a></div>
+<div><a href="rrefjdbc16643.html" title="">java.sql.SQLException class</a></div>
+<div><a href="rrefjdbc30469.html" title="">java.sql.SQLWarning class</a></div>
+<div><a href="rrefjdbcjavasqlsavepoint.html" title="">java.sql.Savepoint interface</a></div>
+<div><a href="rrefjdbc20377.html" title="In Derby, the java.sql.Types are mapped to SQL data types">Mapping of java.sql.Types to SQL types</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">JDBC Package for Connected Device Configuration/Foundation Profile (JSR 169)</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0 and 4.1 features</a></div>
+<div><a href="rrefjdbc4_1summary.html" title="">JDBC 4.1-only features</a></div>
+<div><a href="rrefjdbc1020262.html" title="">JDBC escape syntax</a></div>
+</div>
+</div>
+
+</body>
+</html>

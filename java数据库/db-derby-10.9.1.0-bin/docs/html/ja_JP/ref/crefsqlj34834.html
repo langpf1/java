@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="SQL92識別子" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj1004091.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="crefsqlj34834" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SQL92識別子</title>
+</head>
+<body id="crefsqlj34834"><a name="crefsqlj34834"><!-- --></a>
+
+
+<h1 class="topictitle1">SQL92識別子</h1>
+
+<div>
+<p><em>SQL92識別子</em>とは、SQL-92に沿ってディクショナリの情報をあらわす識別子です。SQL-92では、ディクショナリの情報をあらわす識別子は、128文字以内かつ(二重引用符によりデリミトされていなければ)システムにより大文字への変換が行われるため、大文字小文字が区別されないことになっています。また、デリミトされない限り識別子とはできない予約語があります。もし128文字以上の名前を使おうとすると、<em>SQLException</em> X0X11が挙がります。</p>
+
+<p><span>Derby</span>には、SQL-92で定められている以外にもキーワードがあります。(<a href="rrefkeywords29722.html#rrefkeywords29722">SQL予約語</a>を参照。)</p>
+
+<div class="section"><h2 class="sectiontitle">例</h2> <pre><strong><span>-- この例ではシステムカタログに格納されビュー名は
+-- ANIDENTIFIERです。</span>
+CREATE VIEW AnIdentifier (RECEIVED) AS VALUES 1
+<span>-- この例ではシステムカタログに格納されたビュー名の
+-- 大文字小文字は損なわれません。</span>
+CREATE VIEW "ACaseSensitiveIdentifier" (RECEIVED) AS VALUES 1</strong></pre>
+</div>
+
+<div class="section"><p>以降の節にて、<em>SQL92識別子</em>によりディクショナリの情報をあらわす時の規則を説明します。</p>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="crefsqlj1004091.html">ディクショナリの情報を名前で限定する</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj18919.html" title="">SQLの識別子</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="JDBCエスケープの構文" />
+<meta content="JDBC escape syntax, Escape syntax (JDBC)" name="DC.subject" />
+<meta content="JDBC escape syntax, Escape syntax (JDBC)" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefkeywords29722.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsql9241891.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexcept16677.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc70824.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27768.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc28456.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc88908.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc37244.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc12124.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcescapedate.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc41784.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc1020262" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>JDBCエスケープの構文</title>
+</head>
+<body id="rrefjdbc1020262"><a name="rrefjdbc1020262"><!-- --></a>
+
+
+<h1 class="topictitle1">JDBCエスケープの構文</h1>
+
+
+<div>
+<div class="section"><p>JDBCにはDBMSベンダーによるSQL実装毎の違いを吸収するための仕組みが用意されています。その仕組みとはエスケープ構文といいます。
+個々のベンダが提供するJDBCドライバは、エスケープ構文を読んで、それを個々のデータベースが理解できる形式に変換することが求められます。この仕組みによりエスケープ構文はDBMS独立に働きます。</p>
+</div>
+
+<div class="section"><p>JDBCエスケープ節は中括弧で開始および終了します。キーワードは常に開いた中括弧に続きます。</p>
+</div>
+
+<div class="example"> <pre><strong>{<strong><em>キーワード</em></strong> }</strong></pre>
+</div>
+
+<div class="section"><div class="p"><span>Derby</span>では以下のJDBCエスケープ構文が利用できます。なお何れも大文字小文字の区別はありません。   <ul>
+<li><em><a href="rrefjdbc70824.html#rrefjdbc70824">呼び出し文のJDBCエスケープキーワード</a></em>   <p>このエスケープキーワードは<em>CallableStatements</em>にて用いられます。</p>
+</li>
+
+<li><em><a href="rrefjdbc27768.html#rrefjdbc27768">JDBCエスケープ構文</a></em>   <p>このエスケープキーワードは日付書式で用いられます。</p>
+</li>
+
+<li><em><a href="rrefjdbc28456.html#rrefjdbc28456">LIKE節のJDBCエスケープ構文</a></em>   <p>このエスケープキーワードはLIKE節にてエスケープ文字を指定するために用いられます。</p>
+</li>
+
+<li><em><a href="rrefjdbc88908.html#rrefjdbc88908">fnキーワードを使ったJDBCエスケープ構文</a></em>   <p>このエスケープキーワードはスカラー関数に用いられます。</p>
+</li>
+
+<li><em><a href="rrefjdbc37244.html#rrefjdbc37244">外部結合のJDBCエスケープ構文</a></em>   <p>このエスケープキーワードは外部結合に用いられます。</p>
+</li>
+
+<li><em><a href="rrefjdbc12124.html#rrefjdbc12124">時刻書式のJDBCエスケープ構文</a></em>   <p>このエスケープキーワードは時刻書式に用いられます。</p>
+</li>
+
+<li><em><a href="rrefjdbc41784.html#rrefjdbc41784">タイムスタンプ書式のJDBCエスケープ構文</a></em>   <p>このエスケープキーワードはタイムスタンプ書式に用いられます。</p>
+</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><div class="p">これ以外のJDBCエスケープキーワードは利用できません。
+<div class="note"><span class="notetitle">注: </span><span>Derby</span>では<em>Connection.nativeSQL</em>が呼ばれた場合、エスケープ構文をSQLのネイティブな構造とみなし、与えられたSQLをそのまま返します。さらに、同様の理由により、<em>Statement.setEscapeProcessing</em>を呼ぶ必要はありません。</div>
+</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefjdbc70824.html">呼び出し文のJDBCエスケープキーワード</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc27768.html">JDBCエスケープ構文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc28456.html">LIKE節のJDBCエスケープ構文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc88908.html">fnキーワードを使ったJDBCエスケープ構文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc37244.html">外部結合のJDBCエスケープ構文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc12124.html">時刻書式のJDBCエスケープ構文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcescapedate.html">日付書式のJDBCエスケープ構文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc41784.html">タイムスタンプ書式のJDBCエスケープ構文</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj23296.html" title="">SQL言語のリファレンス</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQLの識別子</a></div>
+<div><a href="crefsqlj39374.html" title="">文</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">組込みシステム関数</a></div>
+<div><a href="crefjdbc12657.html" title="Derbyは組み込みのJDBCドライバと共に提供されます。">JDBC リファレンス</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqlj28468.html" title="">大文字小文字と特殊文字</a></div>
+<div><a href="rrefclauses.html" title="">SQL 節</a></div>
+<div><a href="rrefsqlj19433.html" title="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。">SQL式</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN 演算</a></div>
+<div><a href="rrefqueries.html" title="">SQL 問い合わせ</a></div>
+<div><a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+<div><a href="rrefkeywords29722.html" title="">SQL予約語</a></div>
+<div><a href="rrefsql9241891.html" title="">DerbyのサポートするSQL-92の機能</a></div>
+<div><a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+<div><a href="rrefexcept16677.html" title="Derbyにて発生する全てのエラーは、JDBCからSQLExceptionとして挙がります。 もしユーザの定義した型から例外が挙がって、その例外がSQLExceptionでは無い場合、その例外はSQLExceptionにラップされています。 Derby固有のSQLExceptionは、SQLStateクラスに定義されたXで始まるコードを用います。標準に定義されたSQLStateの値は、対応する例外に対して返されます。">Derbyの例外メッセージとSQL state</a></div>
+<div><a href="rrefjdbc87220.html" title="">java.sql.BatchUpdateException クラス</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">Connected Device ConfigurationおよびFoundation Profile向けのJDBCパッケージ(JSR169)</a></div>
+<div><a href="rrefjdbc32593.html" title="">JDBC 3.0の機能</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0の機能</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Join order case study" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz20327.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunoptimz32767" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Join order case study</title>
+</head>
+<body id="ctunoptimz32767"><a name="ctunoptimz32767"><!-- --></a>
+
+
+<h1 class="topictitle1">Join order case study</h1>
+
+
+<div>
+<p>For example, consider the following situation:</p>
+
+<p>The <em>Flights</em> table (as you know) stores information
+about flight segments. It has a primary key on the <em>flight_id</em> and <em>segment_number </em>columns. This primary key
+constraint is backed up by a unique index on those columns.</p>
+
+<p>The <em>FlightAvailability</em> table, which stores information
+about the availability of flight segments on particular days, can store several
+rows for a particular row in the <em>Flights</em> table (one
+for each date).</p>
+
+<div class="p">You want to see information about all the flights, and you issue the following
+query:  
+<pre><strong>SELECT *
+FROM FlightAvailability AS fa, Flights AS fts
+WHERE fa.flight_id = fts.flight_id
+AND fa.segment_number = fts.segment_number</strong></pre>
+</div>
+
+<p>First imagine the situation in which there are no useful indexes on the <em>FlightAvailability</em> table.</p>
+
+<p>Using the join order with <em>FlightAvailability</em> as
+the outer table and <em>Flights</em> as the inner table is
+cheaper because it allows the <em>flight_id</em>/<em>segment_number</em> columns from <em>FlightAvailability</em> to
+be used to probe into and find matching rows in <em>Flights,</em> using the primary key index on <em>Flights.flight_id</em> and <em>Flights.segment_number</em>.</p>
+
+<p>This is preferable to the opposite join order (with <em>Flights</em> as the outer table and <em>FlightAvailability</em> as the inner table) because in that case, for each row in <em>Flights,</em> the system would have to scan the entire <em>FlightAvailability</em> table to find the matching rows (because there is
+no useful index- an index on the <em>flight_id</em>/<em>segment_number</em> columns).</p>
+
+<p>Second, imagine the situation in which there is a useful index on the <em>FlightAvailability</em> table (this is actually the case in
+the sample database). <em>FlightAvailability</em> has a primary
+key index on <em>flight_id</em>, <em>segment_number</em>, and <em>booking_date</em>. In that index, the <em>flight_id</em>-<em>segment_number</em> combination is not unique,
+since there is a one-to-many correspondence between the <em>Flights</em> table and the <em>FlightAvailability</em> table.
+However, the index is still very useful for finding rows with particular <em>flight_id</em>/<em>segment_number</em> values.</p>
+
+<div class="p">You issue the same query:  
+<pre><strong>SELECT *
+FROM FlightAvailability AS fa, Flights AS fts
+WHERE fa.flight_id = fts.flight_id
+AND fa.segment_number = fts.segment_number</strong></pre>
+</div>
+
+<p>Although the difference in cost is smaller, it is still cheaper for the <em>Flights</em> table to be the inner table, because its index
+is unique, whereas <em>FlightAvailability</em>'s index
+is not. That is because it is cheaper for <span>Derby</span> to step through a unique
+index than through a non-unique index.</p>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctunoptimz20327.html" title="">About the optimizer's choice of join order</a></div>
+</div>
+</div>
+
+</body>
+</html>

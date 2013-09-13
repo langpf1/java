@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="JDBC escape syntax for fn keyword" />
+<meta content="fn, JDBC escape keyword, JDBC, escape keyword, escape functions, abs, JDBC scalar function, acos, asin, atan, atan2, ceiling, cos, cot, degrees, exp, floor, log, log10, mod, pi, radians, rand, sign, sin, sqrt, tan, concat, lcase, length, locate, ltrim, rtrim, substring, ucase, curdate, curtime, hour, minute, month, second, TIMESTAMPADD function, TIMESTAMPDIFF function, year" name="DC.subject" />
+<meta content="fn, JDBC escape keyword, JDBC, escape keyword, escape functions, abs, JDBC scalar function, acos, asin, atan, atan2, ceiling, cos, cot, degrees, exp, floor, log, log10, mod, pi, radians, rand, sign, sin, sqrt, tan, concat, lcase, length, locate, ltrim, rtrim, substring, ucase, curdate, curtime, hour, minute, month, second, TIMESTAMPADD function, TIMESTAMPDIFF function, year" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc70824.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc28456.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbclimit.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc37244.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc12124.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcescapedate.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc41784.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc88908" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>JDBC escape syntax for fn keyword</title>
+</head>
+<body id="rrefjdbc88908"><a name="rrefjdbc88908"><!-- --></a>
+
+
+<h1 class="topictitle1">JDBC escape syntax for fn keyword</h1>
+
+
+<div>
+<div class="section"> <p>You can specify functions in JDBC escape syntax by using the
+<samp class="codeph">fn</samp> keyword.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>{fn <em>functionCall</em>}</strong></pre>
+
+<p>where <em>functionCall</em> is the name of one of the scalar functions listed
+below. The functions are of the following types:</p>
+
+<ul>
+<li>Numeric functions</li>
+
+<li>String functions</li>
+
+<li>Date and time functions</li>
+
+<li>System function</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Numeric functions</h2>
+<dl>
+<dt class="dlterm">abs</dt>
+
+<dd>Returns the absolute value of a number.
+<pre><strong>abs(<em>NumericExpression</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn abs(<em>NumericExpression</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">ABS(<em>NumericExpression</em>)</samp>.
+For more information, see <a href="rrefsqlj98067.html#rrefsqlj98067">ABS or ABSVAL function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">acos</dt>
+
+<dd>Returns the arc cosine of a specified number.
+<pre><strong>acos(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn acos(<em>number</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">ACOS(<em>number</em>)</samp>. For more
+information, see <a href="rreffuncacos.html#rreffuncacos">ACOS function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">asin</dt>
+
+<dd>Returns the arc sine of a specified number.
+<pre><strong>asin(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn asin(<em>number</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">ASIN(<em>number</em>)</samp>. For more
+information, see <a href="rreffuncasin.html#rreffuncasin">ASIN function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">atan</dt>
+
+<dd>Returns the arc tangent of a specified number.
+<pre><strong>atan(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn atan(<em>number</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">ATAN(<em>number</em>)</samp>. For more
+information, see <a href="rreffuncatan.html#rreffuncatan">ATAN function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">atan2</dt>
+
+<dd>Returns the arc tangent in radians of <samp class="codeph"><em>y</em>/<em>x</em></samp>.
+<pre><strong>atan2(<em>y</em>, <em>x</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn atan2(<em>y</em>, <em>x</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">ATAN2(<em>y</em>, <em>x</em>)</samp>.
+For more information, see <a href="rreffuncatan2.html#rreffuncatan2">ATAN2 function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">ceiling</dt>
+
+<dd>Rounds the specified number up, and returns the smallest number that is
+greater than or equal to the specified number.
+<pre><strong>ceiling(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn ceiling(<em>number</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">CEILING(<em>number</em>)</samp>. For
+more information, see <a href="rreffuncceil.html#rreffuncceil">CEIL or CEILING function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">cos</dt>
+
+<dd>Returns the cosine of a specified number.
+<pre><strong>cos(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn cos(<em>number</em>)}</samp> is equivalent
+to the built-in syntax <samp class="codeph">COS(<em>number</em>)</samp>. For more
+information, see <a href="rreffunccos.html#rreffunccos">COS function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">cot</dt>
+
+<dd>Returns the cotangent of a specified number.
+<pre><strong>cot(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn cot(<em>number</em>)}</samp> is equivalent
+to the built-in syntax <samp class="codeph">COT(<em>number</em>)</samp>. For more
+information, see <a href="rreffunccot.html#rreffunccot">COT function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">degrees</dt>
+
+<dd>Converts a specified number from radians to degrees.
+<pre><strong>degrees(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn degrees(<em>number</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">DEGREES(<em>number</em>)</samp>. For
+more information, see <a href="rreffuncdegrees.html#rreffuncdegrees">DEGREES function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">exp</dt>
+
+<dd>Returns <dfn class="term">e</dfn> raised to the power of the specified number.
+<pre><strong>exp(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn exp(<em>number</em>)}</samp> is equivalent
+to the built-in syntax <samp class="codeph">EXP(<em>number</em>)</samp>. For more
+information, see <a href="rreffuncexp.html#rreffuncexp">EXP function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">floor</dt>
+
+<dd>Rounds the specified number down, and returns the largest number that
+is less than or equal to the specified number.
+<pre><strong>floor(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn floor(<em>number</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">FLOOR(<em>number</em>)</samp>. For
+more information, see <a href="rreffuncfloor.html#rreffuncfloor">FLOOR function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">log</dt>
+
+<dd>Returns the natural logarithm (base <dfn class="term">e</dfn>) of the specified number.
+<pre><strong>log(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn log(<em>number</em>)}</samp> is equivalent
+to the built-in syntax <samp class="codeph">LOG(<em>number</em>)</samp>. For more
+information, see <a href="rreffunclog.html#rreffunclog">LN or LOG function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">log10</dt>
+
+<dd>Returns the base-10 logarithm of the specified number.
+<pre><strong>log10(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn log10(<em>number</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">LOG10(<em>number</em>)</samp>. For
+more information, see <a href="rreffunclog10.html#rreffunclog10">LOG10 function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">mod</dt>
+
+<dd> Returns the remainder (modulus) of argument 1 divided by argument 2.
+The result is negative only if argument 1 is negative.
+<pre><strong>mod(<em>integer_type</em>, <em>integer_type</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn mod(<em>integer_type</em>, <em>integer_type</em>)}</samp> is
+equivalent to the built-in syntax
+<samp class="codeph">MOD(<em>integer_type</em>, <em>integer_type</em>)</samp>. For more
+information, see <a href="rrefsqljmod.html#rrefsqljmod">MOD function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">pi</dt>
+
+<dd>Returns a value that is closer than any other value to <dfn class="term">pi</dfn>.
+<pre><strong>pi()</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn pi()}</samp> is equivalent to the
+built-in syntax <samp class="codeph">PI()</samp>. For more information, see
+<a href="rreffuncpi.html#rreffuncpi">PI function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">radians</dt>
+
+<dd>Converts a specified number from degrees to radians.
+<pre><strong>radians(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn radians(<em>number</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">RADIANS(<em>number</em>)</samp>. For
+more information, see <a href="rreffuncradians.html#rreffuncradians">RADIANS function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">rand</dt>
+
+<dd>Returns a random number given a seed number.
+<pre><strong>rand(<em>seed</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn rand(<em>seed</em>)}</samp> is equivalent
+to the built-in syntax <samp class="codeph">RAND(<em>seed</em>)</samp>. For more
+information, see <a href="rreffuncrand.html#rreffuncrand">RAND function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">sign</dt>
+
+<dd>Returns an integer that represents the sign of a specified number (+1 if the
+number is positive, -1 if it is negative, 0 if it is 0).
+<pre><strong>sign(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn sign(<em>number</em>)}</samp> is equivalent
+to the built-in syntax <samp class="codeph">SIGN(<em>number</em>)</samp>. For more
+information, see <a href="rreffuncsign.html#rreffuncsign">SIGN function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">sin</dt>
+
+<dd>Returns the sine of a specified number.
+<pre><strong>sin(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn sin(<em>number</em>)}</samp> is equivalent
+to the built-in syntax <samp class="codeph">SIN(<em>number</em>)</samp>. For more
+information, see <a href="rreffuncsin.html#rreffuncsin">SIN function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">sqrt</dt>
+
+<dd>Returns the square root of a floating-point number.
+<pre><strong>sqrt(<em>FloatingPointExpression</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn sqrt(<em>FloatingPointExpression</em>)}</samp> is equivalent to the
+built-in syntax <samp class="codeph">SQRT(<em>FloatingPointExpression</em>)</samp>. For more
+information, see <a href="rrefsqlj73147.html#rrefsqlj73147">SQRT function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">tan</dt>
+
+<dd>Returns the tangent of a specified number.
+<pre><strong>tan(<em>number</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn tan(<em>number</em>)}</samp> is equivalent
+to the built-in syntax <samp class="codeph">TAN(<em>number</em>)</samp>. For more
+information, see <a href="rreffunctan.html#rreffunctan">TAN function</a>.</p>
+</dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">String functions</h2>
+<dl>
+<dt class="dlterm">concat</dt>
+
+<dd>Returns the concatenation of character strings; that is, the character
+string formed by appending the second string to the first string. If either
+string is null, the result is NULL. 
+<pre><strong>concat(<em>CharacterExpression</em>, <em>CharacterExpression</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn concat(<em>CharacterExpression</em>,
+<em>CharacterExpression</em>)}</samp> is equivalent to the built-in syntax
+<samp class="codeph"><em>CharacterExpression</em> || <em>CharacterExpression</em></samp>. For more
+information, see <a href="rrefsqlj40899.html#rrefsqlj40899">Concatenation operator</a>.</p>
+</dd>
+
+
+<dt class="dlterm">lcase</dt>
+
+<dd>Returns a string in which all alphabetic characters in the argument have
+been converted to lowercase. 
+<pre><strong>lcase(<em>CharacterExpression</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn lcase(<em>CharacterExpression</em>)}</samp> is equivalent to the
+built-in syntax <samp class="codeph">LCASE(<em>CharacterExpression</em>)</samp>. For more
+information, see <a href="rrefsqlj42049.html#rrefsqlj42049">LCASE or LOWER function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">length</dt>
+
+<dd>Returns the number of characters in a character string expression. 
+<pre><strong>length(<em>CharacterExpression</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn length(<em>CharacterExpression</em>)}</samp> is equivalent to the
+built-in syntax <samp class="codeph">LENGTH(<em>CharacterExpression</em>)</samp>. For more
+information, see <a href="rrefsqlj16762.html#rrefsqlj16762">LENGTH function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">locate</dt>
+
+<dd>Returns the position in the second <em>CharacterExpression</em> of the first
+occurrence of the first <em>CharacterExpression</em>. Searches from the beginning
+of the second <em>CharacterExpression</em>, unless the <em>startIndex</em> parameter
+is specified.
+<pre><strong>locate(<em>CharacterExpression</em>,<em>CharacterExpression</em> [, <em>startIndex</em>] )</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn locate(<em>CharacterExpression</em>, <em>CharacterExpression</em>
+[, <em>startIndex</em>] )}</samp> is equivalent to the built-in syntax
+<samp class="codeph">LOCATE(<em>CharacterExpression</em>, <em>CharacterExpression</em>
+[, <em>StartPosition]</em> )</samp>. For more information, see
+<a href="rrefsqlj61998.html#rrefsqlj61998">LOCATE function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">ltrim</dt>
+
+<dd>Removes blanks from the beginning of a character string expression.
+<pre><strong>ltrim(<em>CharacterExpression</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn ltrim(<em>CharacterExpression</em>)}</samp> is equivalent to the
+built-in syntax <samp class="codeph">LTRIM(<em>CharacterExpression</em>)</samp>. For more
+information, see <a href="rrefsqlj97870.html#rrefsqlj97870">LTRIM function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">rtrim</dt>
+
+<dd>Removes blanks from the end of a character string expression.
+<pre><strong>rtrim(<em>CharacterExpression</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn rtrim(<em>CharacterExpression</em>)}</samp> is equivalent to the
+built-in syntax <samp class="codeph">RTRIM(<em>CharacterExpression</em>)</samp>. For more
+information, see <a href="rrefsqlj32613.html#rrefsqlj32613">RTRIM function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">substring</dt>
+
+<dd>Forms a character string by extracting <em>length</em> characters from the
+<em>CharacterExpression</em> beginning at <em>startIndex</em>. The index of the
+first character in the <em>CharacterExpression</em> is 1.
+<pre><strong>substring(<em>CharacterExpression</em>, <em>startIndex</em>, <em>length</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn substring(<em>CharacterExpression</em>, <em>startIndex</em>,
+<em>length</em>)}</samp> is equivalent to the built-in syntax
+<samp class="codeph">SUBSTR(<em>CharacterExpression</em>, <em>startIndex</em>,
+<em>length</em>)</samp>. For more information, see
+<a href="rrefsqlj93082.html#rrefsqlj93082">SUBSTR function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">ucase</dt>
+
+<dd>Returns a string in which all alphabetic characters in the argument have
+been converted to uppercase. 
+<pre><strong>ucase(<em>CharacterExpression</em>)</strong></pre>
+
+<p>The JDBC escape syntax
+<samp class="codeph">{fn ucase(<em>CharacterExpression</em>)}</samp> is equivalent to the
+built-in syntax <samp class="codeph">UCASE(<em>CharacterExpression</em>)</samp>. For more
+information, see <a href="rrefsqlj29930.html#rrefsqlj29930">UCASE or UPPER function</a>.</p>
+</dd>
+
+
+</dl>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Date and time functions</h2>
+<dl>
+<dt class="dlterm">curdate</dt>
+
+<dd>Returns the current date.
+<pre><strong>curdate()</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn curdate()}</samp> is equivalent to the
+built-in syntax <samp class="codeph">CURRENT_DATE</samp>. For more information, see
+<a href="rrefsqlj34177.html#rrefsqlj34177">CURRENT_DATE function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">curtime</dt>
+
+<dd>Returns the current time.
+<pre><strong>curtime()</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn curtime()}</samp> is equivalent to the
+built-in syntax <samp class="codeph">CURRENT_TIME</samp>. For more information, see
+<a href="rrefsqlj33772.html#rrefsqlj33772">CURRENT_TIME function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">hour</dt>
+
+<dd>Returns the hour part of a time value.
+<pre><strong>hour(<em>expression</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn hour(<em>expression</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">HOUR(<em>expression</em>)</samp>. For
+more information, see <a href="rrefhourfunc.html#rrefhourfunc">HOUR function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">minute</dt>
+
+<dd>Returns the minute part of a time value.
+<pre><strong>minute(<em>expression</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn minute(<em>expression</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">MINUTE(<em>expression</em>)</samp>.
+For more information, see
+<a href="rrefminutefunc.html#rrefminutefunc">MINUTE function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">month</dt>
+
+<dd>Returns the month part of a date value.
+<pre><strong>month(<em>expression</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn month(<em>expression</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">MONTH(<em>expression</em>)</samp>.
+For more information, see
+<a href="rrefmonthfunc.html#rrefmonthfunc">MONTH function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">second</dt>
+
+<dd>Returns the seconds part of a time value.
+<pre><strong>second(<em>expression</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn second(<em>expression</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">SECOND(<em>expression</em>)</samp>.
+For more information, see
+<a href="rrefsecondfunc.html#rrefsecondfunc">SECOND function</a>.</p>
+</dd>
+
+
+<dt class="dlterm">TIMESTAMPADD</dt>
+
+<dd>Use the <samp class="codeph">TIMESTAMPADD</samp> function to add the value of an
+interval to a timestamp. The function applies the integer to the specified
+timestamp based on the interval type and returns the sum as a new timestamp.
+You can subtract from the timestamp by using negative integers.
+<p><samp class="codeph">TIMESTAMPADD</samp> is a JDBC escaped function and is accessible
+only by using the JDBC escape function syntax.</p>
+
+<pre><strong>TIMESTAMPADD( <em>interval</em>, <em>integerExpression</em>, <em>timestampExpression</em> )</strong></pre>
+
+<p>To perform <samp class="codeph">TIMESTAMPADD</samp> on dates and times, it is necessary
+to convert the dates and times to timestamps. Dates are converted to timestamps
+by putting 00:00:00.0 in the time-of-day fields. Times are converted to
+timestamps by putting the current date in the date fields.</p>
+
+<p>Do not put a datetime column inside a timestamp arithmetic function in WHERE
+clauses, because the optimizer will not use any index on the column.</p>
+</dd>
+
+
+<dt class="dlterm">TIMESTAMPDIFF</dt>
+
+<dd>Use the <samp class="codeph">TIMESTAMPDIFF</samp> function to find the difference
+between two timestamp values at a specified interval. For example, the function
+can return the number of minutes between two specified timestamps.
+<p>The <samp class="codeph">TIMESTAMPDIFF</samp> is a JDBC escaped function and is
+accessible only by using the JDBC escape function syntax.</p>
+
+<pre><strong>TIMESTAMPDIFF( <em>interval</em>, <em>timestampExpression1</em>, <em>timestampExpression2</em> )</strong></pre>
+
+<p>To perform <samp class="codeph">TIMESTAMPDIFF</samp> on dates and times, it is necessary
+to convert the dates and times to timestamps. Dates are converted to timestamps
+by putting 00:00:00.0 in the time-of-day fields. Times are converted to
+timestamps by putting the current date in the date fields.</p>
+
+<p>Do not put a datetime column inside a timestamp arithmetic function in WHERE
+clauses, because the optimizer will not use any index on the column.</p>
+</dd>
+
+
+<dt class="dlterm">year</dt>
+
+<dd>Returns the year part of a date value.
+<pre><strong>year(<em>expression</em>)</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn year(<em>expression</em>)}</samp> is
+equivalent to the built-in syntax <samp class="codeph">YEAR(<em>expression</em>)</samp>.
+For more information, see
+<a href="rrefyearfunc.html#rrefyearfunc">YEAR function</a>.</p>
+</dd>
+
+
+</dl>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Valid intervals for TIMESTAMPADD and TIMESTAMPDIFF</h2>
+The <samp class="codeph">TIMESTAMPADD</samp> and <samp class="codeph">TIMESTAMPDIFF</samp> functions
+are used to perform arithmetic with timestamps. These two functions use the
+following valid intervals for arithmetic operations:<ul>
+<li>SQL_TSI_DAY</li>
+
+<li>SQL_TSI_FRAC_SECOND</li>
+
+<li>SQL_TSI_HOUR</li>
+
+<li>SQL_TSI_MINUTE</li>
+
+<li>SQL_TSI_MONTH</li>
+
+<li>SQL_TSI_QUARTER</li>
+
+<li>SQL_TSI_SECOND</li>
+
+<li>SQL_TSI_WEEK</li>
+
+<li>SQL_TSI_YEAR</li>
+
+</ul>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples for the TIMESTAMPADD and TIMESTAMPDIFF escape functions </h2>
+<p>To return a timestamp value one month later than the current timestamp, use
+the following syntax:</p>
+
+<pre><strong>{fn TIMESTAMPADD( SQL_TSI_MONTH, 1, CURRENT_TIMESTAMP)}</strong></pre>
+
+<p>To return the number of weeks between now and the specified time on January
+1, 2008, use the following syntax:</p>
+
+<pre><strong>{fn TIMESTAMPDIFF(SQL_TSI_WEEK, CURRENT_TIMESTAMP, 
+  timestamp('2008-01-01-12.00.00.000000'))}</strong></pre>
+</div>
+
+<div class="section"><h2 class="sectiontitle">System function</h2>
+<dl>
+<dt class="dlterm">user</dt>
+
+<dd>Returns the authorization identifier or name of the current user. If there
+is no current user, it returns APP.
+<pre><strong>user()</strong></pre>
+
+<p>The JDBC escape syntax <samp class="codeph">{fn user()}</samp> is equivalent to the
+built-in syntax <samp class="codeph">USER</samp>. For more information, see
+<a href="rrefsqlj42476.html#rrefsqlj42476">USER function</a>.</p>
+</dd>
+
+
+</dl>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc1020262.html" title="">JDBC escape syntax</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjdbc70824.html" title="">JDBC escape keyword for call statements</a></div>
+<div><a href="rrefjdbc28456.html" title="">JDBC escape syntax for LIKE clauses</a></div>
+<div><a href="rrefjdbclimit.html" title="">JDBC escape syntax for limit/offset clauses</a></div>
+<div><a href="rrefjdbc37244.html" title="">JDBC escape syntax for outer joins</a></div>
+<div><a href="rrefjdbc12124.html" title="">JDBC escape syntax for time formats</a></div>
+<div><a href="rrefjdbcescapedate.html" title="">JDBC escape syntax for date formats</a></div>
+<div><a href="rrefjdbc41784.html" title="">JDBC escape syntax for timestamp formats</a></div>
+</div>
+</div>
+
+</body>
+</html>

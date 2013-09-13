@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="generation-clause" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj30540.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj37836.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljgenerationclause" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>generation-clause</title>
+</head>
+<body id="rrefsqljgenerationclause"><a name="rrefsqljgenerationclause"><!-- --></a>
+
+
+<h1 class="topictitle1">generation-clause</h1>
+
+<div>
+<div class="example">
+<pre><strong>GENERATED ALWAYS AS ( <em>value-expression</em> )</strong></pre>
+
+<p>A <em>value-expression</em> is an <em>Expression</em> that resolves to a single
+value, with some limitations that are described here. See
+<a href="rrefsqlj19433.html#rrefsqlj19433">SQL expressions</a> for more information
+about <em>Expression</em>s.
+</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">References</h2>
+<p>The <em>generation-clause</em> may reference other non-generated columns in
+the table, but it must not reference any generated column. The
+<em>generation-clause</em> must not reference a column in another table.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Functions</h2>
+<p>The <em>generation-clause</em> may invoke user-coded functions, if the
+functions meet the following requirements:</p>
+
+<ul>
+<li>The functions must not read or write SQL data.</li>
+
+<li>The functions must have been declared DETERMINISTIC.</li>
+
+<li>The functions must not invoke any of the following possibly
+non-deterministic system functions:
+<ul>
+<li>CURRENT_DATE</li>
+
+<li>CURRENT_TIME</li>
+
+<li>CURRENT_TIMESTAMP</li>
+
+<li>CURRENT_USER</li>
+
+<li>CURRENT_ROLE</li>
+
+<li>CURRENT SCHEMA</li>
+
+<li>CURRENT SQLID</li>
+
+<li>SESSION_USER</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Subqueries</h2>
+<p>The <em>generation-clause</em> must not include subqueries.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Foreign keys</h2>
+<p>If the generated column is part of a foreign key that references another
+table, the referential action must not specify SET NULL or SET DEFAULT, and the
+update rule must not specify ON UPDATE CASCADE.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre><strong>CREATE TABLE employee
+(
+  employeeID           int,
+  name                 varchar( 50 ),
+  caseInsensitiveName  GENERATED ALWAYS AS( UPPER( name ) )
+);
+CREATE INDEX caseInsensitiveEmployeeName ON employee( caseInsensitiveName );
+</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj24513.html" title="">CREATE TABLE statement</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqlj30540.html" title="">column-definition</a></div>
+<div><a href="rrefsqlj37836.html" title="">generated-column-spec</a></div>
+</div>
+</div>
+
+</body>
+</html>

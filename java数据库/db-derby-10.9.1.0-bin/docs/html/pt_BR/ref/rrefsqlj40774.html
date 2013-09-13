@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Instrução INSERT" />
+<meta content="Instrução INSERT" name="DC.subject" />
+<meta content="Instrução INSERT" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj22771.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj81859.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj80721.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqljrenamestatements.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj35312.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcallprocedure.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj13590.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdeclaretemptable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj35981.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31783.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj21583.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj32654.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj14854.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj35034.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj18922.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj40506.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj13658.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj21571.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj57522.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefscalarsubquery.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefselectexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj41360.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftableexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftablesubquery.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj26498.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj11277.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj33602.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15309.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj40774" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Instrução INSERT</title>
+</head>
+<body id="rrefsqlj40774"><a name="rrefsqlj40774"><!-- --></a>
+
+
+<h1 class="topictitle1">Instrução INSERT</h1>
+
+
+<div>
+<div class="section">
+<p>
+
+A instrução INSERT cria uma ou mais linhas, e as armazena na tabela
+especificada.
+O número de valores especificados na instrução INSERT deve ser idêntico ao
+número de colunas especificadas ou implícitas.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>INSERT INTO nome-da-tabela
+    [ (<em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">nome-de-coluna-simples</a></em> [ , <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">nome-de-coluna-simples</a></em>]* ) ]
+          Consulta</strong>
+</pre>
+
+<div class="p">A <em>Consulta</em> pode ser:
+<ul>
+<li>uma <em><a href="rrefselectexpression.html#rrefselectexpression">ExpressãoSeleção</a></em></li>
+
+<li>uma lista VALUES</li>
+
+<li>uma expressão VALUES de várias linhas
+<p>As listas de uma única linha e de várias linhas podem incluir a palavra chave
+DEFAULT.
+A especificação de DEFAULT para uma coluna insere o valor padrão da coluna na
+coluna.
+Outra forma de inserir o valor padrão na coluna é omitir a coluna na lista
+de colunas, e somente inserir valores nas outras colunas da tabela.
+Para obter mais informações deve ser consultado
+<a href="rrefsqlj11277.html#rrefsqlj11277">VALUES Expressão</a>.</p>
+</li>
+
+<li>expressões UNION</li>
+
+</ul>
+
+</div>
+
+<p>Para obter mais informações sobre a <em>Consulta</em> deve ser consultada
+<a href="rrefsqlj21571.html#rrefsqlj21571">Consulta</a>.</p>
+
+</div>
+
+<div class="example"> <pre><strong>INSERT INTO PAÍSES
+      VALUES ('Taiwan', 'TW', 'Ásia');
+
+-- Inserir um novo departamento na tabela DEPARTAMENTOS,
+-- sem atribuir gerente ao novo departamento
+INSERT INTO DEPARTAMENTOS (NUM_DEP, NOME_DEP, ADMRDEPT)
+        VALUES ('E31', 'ARQUITETURA', 'E01');
+
+<span>-- Inserir dois novos departamentos na tabela DEPARTAMENTOS
+-- utilizando uma instrução, como no exemplo anterior,
+-- sem atribuir gerente aos novos departamentos.</span>
+INSERT INTO DEPARTAMENTOS (NUM_DEP, NOME_DEP, ADMRDEPT)
+        VALUES ('B11', 'COMPRAS', 'B01'),
+        ('E41', 'ADMINISTRAÇÃO DE BANCO DE DADOS', 'E01');
+
+<span>-- Criar a tabela temporária MA_ATIV_EMP com as mesmas
+-- colunas da tabela ATIV_EMP.
+-- Carregar a tabela MA_ATIV_EMP com as linhas da tabela ATIV_EMP
+-- onde o número do projeto (NUM_PROJ)
+-- começa pelas letras 'MA'.</span>
+CREATE TABLE MA_ATIV_EMP
+    (
+        NUM_EMP   CHAR(6)   NOT NULL,
+        NUM_PROJ  CHAR(6)   NOT NULL,
+        ACTNO     SMALLINT  NOT NULL,
+        EMPTIME   DEC(5,2),
+        EMSTDATE  DATE,
+        EMENDATE  DATE
+    );
+
+INSERT INTO MA_ATIV_EMP
+        SELECT * FROM ATIV_EMP
+        WHERE SUBSTR(NUM_PROJ, 1, 2) = 'MA';
+
+<span>-- Inserir o valor DEFAULT para a coluna LOCALIZAÇÃO</span>
+INSERT INTO DEPARTAMENTOS
+      VALUES ('E31', 'ARQUITETURA', '00390', 'E01', DEFAULT);
+</strong>
+</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sistema de dependência de instrução</h2>
+
+<p>A instrução INSERT depende da tabela onde está sendo feita a inserção,
+todos os seus conglomerados (unidades de armazenamento como <em>heaps</em> e
+índices), e todas as outras tabelas citadas na consulta.
+Qualquer instrução que cria ou remove um índice ou uma restrição da tabela de
+destino de uma instrução INSERT preparada, invalida a instrução INSERT
+preparada.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj39374.html" title="">Instruções</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="crefsqlj22771.html" title="">Interação com o sistema de dependências</a></div>
+<div><a href="crefsqlj95081.html" title="">Instruções CREATE</a></div>
+<div><a href="crefsqlj80721.html" title="">Instruções DROP</a></div>
+<div><a href="crefsqljrenamestatements.html" title="">Instruções RENAME</a></div>
+<div><a href="crefsqlj35312.html" title="">Instruções SET</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefsqlj81859.html" title="">Instrução ALTER TABLE</a></div>
+<div><a href="rrefcallprocedure.html" title="">CALL (PROCEDIMENTO)</a></div>
+<div><a href="rrefsqlj13590.html" title="">Cláusula CONSTRAINT</a></div>
+<div><a href="rrefdeclaretemptable.html" title="">Instrução DECLARE GLOBAL TEMPORARY TABLE</a></div>
+<div><a href="rrefsqlj35981.html" title="">Instrução DELETE</a></div>
+<div><a href="rrefsqlj31783.html" title="">Cláusula FOR UPDATE</a></div>
+<div><a href="rrefsqlj21583.html" title="">Cláusula FROM</a></div>
+<div><a href="rrefsqlj32654.html" title="">Cláusula GROUP BY</a></div>
+<div><a href="rrefsqlj14854.html" title="">Cláusula HAVING</a></div>
+<div><a href="rrefsqlj35034.html" title="">INNER JOIN</a></div>
+<div><a href="rrefsqlj29840.html" title="">Operação JOIN</a></div>
+<div><a href="rrefsqlj18922.html" title="">LEFT OUTER JOIN</a></div>
+<div><a href="rrefsqlj40506.html" title="">Instrução LOCK TABLE</a></div>
+<div><a href="rrefsqlj13658.html" title="">Cláusula ORDER BY</a></div>
+<div><a href="rrefsqlj21571.html" title="">Consulta</a></div>
+<div><a href="rrefsqlj57522.html" title="">RIGHT OUTER JOIN</a></div>
+<div><a href="rrefscalarsubquery.html" title="">SubconsultaEscalar</a></div>
+<div><a href="rrefselectexpression.html" title="">ExpressãoSeleção</a></div>
+<div><a href="rrefsqlj41360.html" title="">Instrução SELECT</a></div>
+<div><a href="rreftableexpression.html" title="">ExpressãoTabela</a></div>
+<div><a href="rreftablesubquery.html" title="">SubconsultaTabela</a></div>
+<div><a href="rrefsqlj26498.html" title="">Instrução UPDATE</a></div>
+<div><a href="rrefsqlj11277.html" title="">VALUES Expressão</a></div>
+<div><a href="rrefsqlj33602.html" title="">Cláusula WHERE</a></div>
+<div><a href="rrefsqlj15309.html" title="">Cláusula WHERE CURRENT OF</a></div>
+</div>
+</div>
+
+</body>
+</html>

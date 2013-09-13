@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CallableStatements and INOUT parameters" />
+<meta content="java.sql.CallableStatement, and INOUT parameters" name="DC.subject" />
+<meta content="java.sql.CallableStatement, and INOUT parameters" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjavcallstatout.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc75719" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CallableStatements and INOUT parameters </title>
+</head>
+<body id="rrefjdbc75719"><a name="rrefjdbc75719"><!-- --></a>
+
+
+<h1 class="topictitle1">CallableStatements and INOUT parameters </h1>
+
+
+<div>
+<div class="section"><p>INOUT parameters map to an <em>array</em> of the parameter type
+in the Java programming language. (The method must take an array as its parameter.) This conforms to
+the recommendations of the SQL standard.</p>
+</div>
+
+<div class="section"><div class="p">Given the following example:   <pre><strong>CallableStatement call = conn.prepareCall(
+    "{CALL doubleMyInt(?)}");
+<span>// for inout parameters, it is good practice to
+// register the outparameter before setting the input value</span>
+call.registerOutParameter(1, Types.INTEGER);
+call.setInt(1,10);
+call.execute();
+int retval = call.getInt(1);</strong></pre>
+</div>
+</div>
+
+<div class="section"><div class="p">The method <em>doubleIt</em> should take a one-dimensional array
+of <samp class="codeph">ints</samp>. Here is sample source code for that method:   <pre><strong>public static void doubleMyInt(int[] i) {
+    i[0] *=2;
+    <span>/* <span>Derby</span>  returns the first element of the array.*/</span>
+}</strong></pre>
+</div>
+ <div class="note"><span class="notetitle">Note: </span>The return value is <em>not</em> wrapped in an array
+even though the parameter to the method is.</div>
+ 
+<p>The following table shows the parameter array types and return types that
+correspond to JDBC types.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the JDBC data types and provides the parameter array type and return type for each." frame="border" border="1" rules="all"><caption>Table 1. INOUT parameter type correspondence</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="34%" id="N100D9">JDBC Type</th>
+
+<th valign="bottom" width="33%" id="N100E0">Array Type for Method Parameter</th>
+
+<th valign="bottom" width="33%" id="N100E7">Value and Return Type</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="34%" headers="N100D9">BIGINT</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>long[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>long</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">BINARY</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>byte[][]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>byte[]</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">BLOB</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>java.sql.Blob[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>java.sql.Blob</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">BOOLEAN</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>boolean[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>boolean</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">CLOB</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>java.sql.Clob[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>java.sql.Clob</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">DATE</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>java.sql.Date[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>java.sql.Date</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">DOUBLE</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>double[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>double</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">FLOAT</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>double[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>double</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">INTEGER</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>int[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>int</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">LONGVARBINARY</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>byte[][]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>byte[]</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">REAL</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>float[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>float</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">SMALLINT</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>short[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>short</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">TIME</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>java.sql.Time[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>java.sql.Time</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">TIMESTAMP</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>java.sql.Timestamp[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>java.sql.Timestamp</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">VARBINARY</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>byte[][]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>byte[]</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">OTHER</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>yourType[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>yourType</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="34%" headers="N100D9">JAVA_OBJECT</td>
+
+<td valign="top" width="33%" headers="N100E0"><em>yourType[]</em></td>
+
+<td valign="top" width="33%" headers="N100E7"><em>yourType</em></td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><p>Register the output type of the parameter before executing the
+call. For INOUT parameters, it is good practice to register the output parameter
+before setting its input value.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc20485.html" title="">java.sql.CallableStatement interface</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjavcallstatout.html" title="">CallableStatements and OUT Parameters</a></div>
+</div>
+</div>
+
+</body>
+</html>

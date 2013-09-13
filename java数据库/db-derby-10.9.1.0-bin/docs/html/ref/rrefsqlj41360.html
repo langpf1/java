@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SELECT statement" />
+<meta content="SELECT statement, ORDER BY clause, needed to guarantee order of results" name="DC.subject" />
+<meta content="SELECT statement, ORDER BY clause, needed to guarantee order of results" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj41360" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SELECT statement</title>
+</head>
+<body id="rrefsqlj41360"><a name="rrefsqlj41360"><!-- --></a>
+
+
+<h1 class="topictitle1">SELECT statement</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong><em><a href="rrefsqlj21571.html#rrefsqlj21571">Query</a></em>
+[<em><a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a></em>]
+[<em><a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">result offset clause</a></em>]
+[<em><a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">fetch first clause</a></em>]
+[<em><a href="rrefsqlj31783.html#rrefsqlj31783">FOR UPDATE clause</a></em>]
+[WITH {RR|RS|CS|UR}]</strong></pre>
+</div>
+
+<div class="section"> <p>A SELECT statement consists of a query with an optional <a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a>, an optional <a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">result offset clause</a>, an optional <a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">fetch first clause</a>, an optional <a href="rrefsqlj31783.html#rrefsqlj31783">FOR UPDATE clause</a> and optionally isolation level.
+The SELECT statement is so named because the typical first word of the query
+construct is SELECT. (<em>Query</em> includes the VALUES expression and UNION, INTERSECT, and EXCEPT
+expressions as well as SELECT expressions).</p>
+ <p>The <a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a> guarantees
+the ordering of the <em>ResultSet</em>. 
+The <a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">result offset clause</a> and the
+<a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">fetch first clause</a> can be used to fetch only a subset of the
+otherwise selected rows, possibly with an offset into the result set. 
+
+The <a href="rrefsqlj31783.html#rrefsqlj31783">FOR UPDATE clause</a> makes
+the result set's cursor updatable. The SELECT statement supports the FOR FETCH
+ONLY clause. The FOR FETCH ONLY clause is synonymous with the FOR READ ONLY
+clause.</p>
+ <p>You can set the isolation level in a
+SELECT statement using the WITH {RR|RS|CS|UR} syntax.</p>
+
+<p>For queries that do not select a specific column from the tables involved in
+the SELECT statement (for example, queries that use <samp class="codeph">COUNT(*)</samp>),
+the user must have at least one column-level SELECT privilege or table-level
+SELECT privilege. See <a href="rrefsqljgrant.html#rrefsqljgrant">GRANT statement</a>
+for more information.</p>
+</div>
+
+
+<div class="example"><h2 class="sectiontitle">Example</h2> <pre><strong><span>-- lists the names of the expression 
+-- SAL+BONUS+COMM as TOTAL_PAY and
+-- orders by the new name TOTAL_PAY</span>
+SELECT FIRSTNME, SALARY+BONUS+COMM AS TOTAL_PAY
+     FROM EMPLOYEE
+     ORDER BY TOTAL_PAY
+<span>-- creating an updatable cursor with a FOR UPDATE clause 
+-- to update the start date (PRSTDATE) and the end date (PRENDATE)
+-- columns in the PROJECT table</span>
+SELECT PROJNO, PRSTDATE, PRENDATE
+      FROM PROJECT
+      FOR UPDATE OF PRSTDATE, PRENDATE
+<span>-- set the isolation level to RR for this statement only </span>
+SELECT * 
+FROM Flights 
+WHERE flight_id BETWEEN 'AA1111' AND 'AA1112' 
+WITH RR</strong></pre>
+ <div class="p">A SELECT statement returns a <em>ResultSet</em>.
+A <em>cursor</em> is a pointer to a specific row in <em>ResultSet</em>. In Java
+applications, all <em>ResultSets</em>  have an underlying associated SQL
+cursor, often referred to as the result set's cursor. The cursor can
+be updatable, that is, you can update or delete rows as you step through the <em>ResultSet</em> if
+the SELECT statement that generated it and its underlying query meet cursor
+updatability requirements, as detailed below. The FOR UPDATE clause can be used 
+to ensure a compilation check that the SELECT statement meets the requiremments 
+of a updatable cursors, or to limit the columns that can be updated.   
+<div class="note"><span class="notetitle">Note: </span>The ORDER BY clause
+allows you to order the results of the SELECT. Without the ORDER BY clause,
+the results are returned in random order.</div>
+</div>
+ </div>
+
+<div class="section" id="rrefsqlj41360__sqlj15384"><a name="rrefsqlj41360__sqlj15384"><!-- --></a><h2 class="sectiontitle">Requirements for updatable cursors and updatable
+ResultSets</h2>
+<div class="p">Only simple, single-table SELECT cursors 
+can be updatable. The SELECT statement for updatable ResultSets
+has the same syntax as the SELECT statement for updatable cursors. To generate
+updatable cursors:   <ul>
+<li>The SELECT statement must not include an ORDER BY clause.</li>
+
+<li>The underlying <em>Query</em> must be a <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a>.</em></li>
+
+<li>The <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a></em> in
+the underlying Query must not include:   <ul>
+<li>DISTINCT</li>
+
+<li>Aggregates</li>
+
+<li>GROUP BY clause</li>
+
+<li>HAVING clause</li>
+
+<li>ORDER BY clause</li>
+
+</ul>
+</li>
+
+<li>The FROM clause in the underlying <em>Query</em> must not have:   <ul>
+<li>more than one table in its FROM clause</li>
+
+<li>anything other than one table name</li>
+
+<li><em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a>s</em></li>
+
+<li>subqueries</li>
+
+</ul>
+</li>
+
+<li>If the underlying <em>Query</em> has a WHERE clause, the WHERE clause must not
+have subqueries.</li>
+
+</ul>
+</div>
+ 
+<div class="note"><span class="notetitle">Note: </span>Cursors are read-only by default. To produce an updatable 
+cursor besides meeting the requirements listed above, the concurrency mode for 
+the ResultSet must be <samp class="codeph">ResultSet.CONCUR_UPDATABLE</samp> or the SELECT 
+statement must have FOR UPDATE in the FOR clause 
+(see <a href="rrefsqlj31783.html#rrefsqlj31783">FOR UPDATE clause</a>).</div>
+
+<p>There is no SQL language statement to <em>assign</em> a name to
+a cursor. Instead, one can use the JDBC API to assign names to cursors or retrieve
+system-generated names. For more information, see "Naming or accessing the
+name of a cursor" in the
+<cite><span><em>Derby Developer's Guide</em></span></cite>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Statement dependency system</h2> <p>The SELECT depends
+on all the tables and views named in the query and the conglomerates (units
+of storage such as heaps and indexes) chosen for access paths on those tables.
+CREATE INDEX does not invalidate a prepared SELECT statement. A DROP INDEX
+statement invalidates a prepared SELECT statement if the index is an access
+path in the statement. If the SELECT includes views, it also depends on the
+dictionary objects on which the view itself depends (see <a href="rrefsqlj15446.html#rrefsqlj15446">CREATE VIEW statement</a>).</p>
+ <p>Any
+prepared UPDATE WHERE CURRENT or DELETE WHERE CURRENT statement against a
+cursor of a SELECT depends on the SELECT. Removing a SELECT through a <em>java.sql.Statement.close </em>request
+invalidates the UPDATE WHERE CURRENT or DELETE WHERE CURRENT.</p>
+ <p>The SELECT
+depends on all aliases used in the query. Dropping an alias invalidates a
+prepared SELECT statement if the statement uses the alias.</p>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj39374.html" title="">Statements</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+    将一些单元测试用例绑定并一起运行。定义suite test是在xml文件中，参见如下文件，表示将TestNG1和TestNG2一起执行。
+    这也可以用于解决如何决定一个测试类中各测试方法调用顺序的问题，可以指定某一个方法依赖于另一个方法的预先执行。
+
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >   
+    <suite name="My test suite">   
+      <test name="testing">   
+        <classes>   
+           <class name="TestNG1" />   
+           <class name="TestNG2" />   
+        </classes>   
+      </test>   
+    </suite>   
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Groups
+testNG可以将各个method存放在不同的group里面，然后运行的时候可以指定要运行的group。Group指定的方式如下：
+    
+@Test(groups = { "fast", "unit", "database" })
+    public void rowShouldBeInserted() {
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <groups>
+    <run>
+      <include name="t1"/>
+    </run>
+    </groups>
+    <classes>
+      <class name="com.testNg.NewTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <groups>
+    <run>
+      <include name="t1"/>
+    </run>
+    </groups>
+    <classes>
+      <class name="com.testNg.NewTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

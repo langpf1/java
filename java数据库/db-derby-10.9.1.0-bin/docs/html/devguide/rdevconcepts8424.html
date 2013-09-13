@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Scope of locks" />
+<meta name="abstract" content="The amount of data locked by a statement can vary." />
+<meta name="description" content="The amount of data locked by a statement can vary." />
+<meta content="locks, table-level, row-level, range, table-level locks, row-level locks, range locks, isolation levels, REPEATABLE_READ, READ_COMMITTED, SERIALIZABLE, READ_UNCOMMITTED, transactions" name="DC.subject" />
+<meta content="locks, table-level, row-level, range, table-level locks, row-level locks, range locks, isolation levels, REPEATABLE_READ, READ_COMMITTED, SERIALIZABLE, READ_UNCOMMITTED, transactions" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts15366.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts842279.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts842304.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts842385.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevconcepts2462.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts842613.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts36402.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rdevconcepts8424" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Scope of locks</title>
+</head>
+<body id="rdevconcepts8424"><a name="rdevconcepts8424"><!-- --></a>
+
+
+<h1 class="topictitle1">Scope of locks</h1>
+
+
+
+<div><p>The amount of data locked by a statement can vary.</p>
+
+<div class="section"><h2 class="sectiontitle">Table locks</h2><p>A statement can lock the <em>entire table</em>.</p>
+<p>Table-level
+locking systems always lock entire tables.</p>
+<p>Row-level locking systems
+can lock entire tables if the WHERE clause of a statement cannot use an index.
+For example, UPDATES that cannot use an index lock the entire table.</p>
+<p>Row-level
+locking systems can lock entire tables if a high number of single-row locks
+would be less efficient than a single table-level lock. Choosing table-level
+locking instead of row-level locking for performance reasons is called <em>lock
+escalation</em>. For more information about this topic, see "About the system's
+selection of lock granularity" and "Transaction-based lock escalation" in
+<span><em>Tuning Derby</em></span>.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Single-row locks</h2><p>A statement can lock only <em>a
+single row</em> at a time.</p>
+<div class="p">For row-level locking systems:<ul>
+<li>For TRANSACTION_REPEATABLE_READ isolation, the locks are released at the
+end of the transaction.</li>
+
+<li>For TRANSACTION_READ_COMMITTED isolation, <span>Derby</span> locks
+rows only as the application steps through the rows in the result. The current
+row is locked. The row lock is released when the application goes to the next
+row.</li>
+
+<li>For TRANSACTION_SERIALIZABLE isolation, however, <span>Derby</span> locks
+the whole set before the application begins stepping through.</li>
+
+<li>For TRANSACTION_READ_UNCOMMITTED, no row locks are requested.</li>
+
+</ul>
+ </div>
+<p><span>Derby</span> locks
+single rows for INSERT statements, holding each row until the transaction
+is committed. If there is an index associated with the table, the previous
+key is also locked.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Range locks</h2><p>A statement can lock <em>a range of rows</em> (range
+lock).</p>
+<div class="p">For row-level locking systems: <ul>
+<li>For <em>any</em> isolation level, <span>Derby</span> locks <em>all
+the rows in the result</em> plus an entire range of rows for updates or deletes.</li>
+
+<li>For the TRANSACTION_SERIALIZABLE isolation level, <span>Derby</span> locks
+all the rows in the result plus an entire range of rows in the table for SELECTs
+to prevent nonrepeatable reads and phantoms.</li>
+
+</ul>
+</div>
+<p>For example, if a SELECT statement specifies rows in the <em>Employee</em> table
+where the <em>salary</em> is BETWEEN two values, the system can lock more than
+just the actual rows it returns in the result. It also must lock the entire <em>range</em> of
+rows between those two values to prevent another transaction from inserting,
+deleting, or updating a row within that range.</p>
+<p>An index must be available
+for a range lock. If one is not available, <span>Derby</span> locks
+the entire table.</p>
+
+<p>The following table summarizes the types and scopes of locking.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table shows the behavior of table-level locking and row-level locking for each transaction level." frame="border" border="1" rules="all"><caption>Table 1. Types and scopes of locking</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="60%" id="N101BD">Transaction Isolation Level</th>
+
+<th valign="bottom" width="20%" id="N101C4">Table-Level Locking</th>
+
+<th valign="bottom" width="20%" id="N101CB">Row-Level Locking</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="60%" headers="N101BD">Connection.TRANSACTION_READ_UNCOMMITTED (SQL: UR)</td>
+
+<td valign="top" width="20%" headers="N101C4">For SELECT statements, table-level locking is never requested
+using this isolation level. For other statements, same as for TRANSACTION_READ_COMMITTED.</td>
+
+<td valign="top" width="20%" headers="N101CB">SELECT statements get no locks. For other statements, same
+as for TRANSACTION_READ_COMMITTED.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N101BD">Connection.TRANSACTION_READ_COMMITTED (SQL: CS) </td>
+
+<td valign="top" width="20%" headers="N101C4">SELECT statements get a shared lock on the entire table.
+The locks are released when the user closes the <em>ResultSet</em>. Other statements
+get exclusive locks on the entire table, which are released when the transaction
+commits.</td>
+
+<td valign="top" width="20%" headers="N101CB">SELECTs lock and release single rows as the user steps
+through the <em>ResultSet</em>. UPDATEs and DELETEs get exclusive locks on a
+range of rows. INSERT statements get exclusive locks on single rows (and sometimes
+on the preceding rows).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N101BD">Connection.TRANSACTION_REPEATABLE_READ (SQL: RS)</td>
+
+<td valign="top" width="20%" headers="N101C4">Same as for TRANSACTION_SERIALIZABLE</td>
+
+<td valign="top" width="20%" headers="N101CB">SELECT statements get shared locks on the rows that satisfy
+the WHERE clause (but do not prevent inserts into this range). UPDATEs and
+DELETEs get exclusive locks on a range of rows. INSERT statements get exclusive
+locks on single rows (and sometimes on the preceding rows).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N101BD">Connection.TRANSACTION_SERIALIZABLE (SQL: RR)</td>
+
+<td valign="top" width="20%" headers="N101C4">SELECT statements get a shared lock on the entire table.
+Other statements get exclusive locks on the entire table, which are released
+when the transaction commits.</td>
+
+<td valign="top" width="20%" headers="N101CB">SELECT statements get shared locks on a range of rows.
+UPDATE and DELETE statements get exclusive locks on a range of rows. INSERT
+statements get exclusive locks on single rows (and sometimes on the preceding
+rows).</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts36402.html" title="There are several types of locks available in Derby systems, including exclusive, shared, and update locks.">Types and scope of locks in Derby systems</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevconcepts15366.html" title="Derby provides four transaction isolation levels. Setting the transaction isolation level for a connection allows a user to specify how severely the user's transaction should be isolated from other transactions.">Isolation levels and concurrency</a></div>
+<div><a href="cdevconcepts842279.html" title="When a statement modifies data, its transaction holds an exclusive lock on data that prevents other transactions from accessing the data.">Exclusive locks</a></div>
+<div><a href="cdevconcepts842304.html" title="When a statement reads data without making any modifications, its transaction obtains a shared lock on the data.">Shared locks</a></div>
+<div><a href="cdevconcepts842385.html" title="When a user-defined update cursor (created with the FOR UPDATE clause or by using concurrency mode ResultSet.CONCUR_UPDATABLE) reads data, its transaction obtains an update lock on the data.">Update locks</a></div>
+<div><a href="cdevconcepts842613.html" title="In addition to the locks already described, foreign key lookups require briefly held shared locks on the referenced table (row or table, depending on the configuration).">Notes on locking</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rdevconcepts2462.html" title="The following table shows the compatibility between lock types. &quot;Yes&quot; means that the lock types are compatible, while &quot;No&quot; means that they are incompatible.">Lock compatibility</a></div>
+</div>
+</div>
+
+</body>
+</html>

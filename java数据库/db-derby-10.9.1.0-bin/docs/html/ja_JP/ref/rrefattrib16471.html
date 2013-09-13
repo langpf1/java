@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="shutdown=true属性" />
+<meta content="shutdown=true database connection URL attribute" name="DC.subject" />
+<meta content="shutdown=true database connection URL attribute" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib24612.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefattrib16471" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>shutdown=true属性</title>
+</head>
+<body id="rrefattrib16471"><a name="rrefattrib16471"><!-- --></a>
+
+
+<h1 class="topictitle1">shutdown=true属性</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">機能</h2> 
+<p><em>databaseName</em>が指定されている場合、そのデータベースを終了します。(終了してから、そのデータベースに再接続すると、データベースが再起動されます。)
+認証とSQL認証の両方が有効なデータベースでは、<a href="rrefattrib26867.html#rrefattrib26867">データベース所有者</a>だけがデータベースの終了を行えます。より詳細な情報は<span><em>Derby Developer's Guide</em></span>の「ユーザ認証を有効にする」と「SQL標準認証モードを設定する」を参照してください。</p>
+
+<p><em>databaseName</em>を指定しなかった場合に限り、<span>Derby</span>のシステム全体が終了します。</p>
+ 
+<p>単体のデータベースを終了させた場合、<span>Derby</span>は該当データベースで終了時のチェックポイント処理を行ないます。</p>
+ 
+<p>システム全体を終了させた場合、<span>Derby</span>は全データベースで終了時のチェックポイント処理を行い、JDBCドライバの登録抹消を行い、JVMが終了する前にJVM内でシステムを終了します。終了が成功すると、必ず<em>SQLException</em>が挙がります。これは<span>Derby</span>が終了して、接続が既にないことを表すものです。
+<span>Derby</span>の終了後、ドライバを読み込みなおせば、もう一度起動することができます。<span>Derby</span>の再起動に関する詳細な情報は、<cite><span><em>Derby Developer's Guide</em></span></cite>の第1章にある、「システムの終了」を参照してください。</p>
+ 
+<p><em>チェックポイントの処理</em>とは、次回の接続で復元処理を行う必要が無いように、全ての記録とトランザクションの情報をディスクに書き込むことです。</p>
+ 
+<div class="p">アプリケーションで全システムの終了が行われるのは、組み込みモードのときだけです。<div class="note"><span class="notetitle">注: </span>属性に<em>shutdown=true</em>を指定して<em>DriverManager</em>へ要求を行うと、常に例外が挙がります。</div>
+</div>
+ </div>
+
+<div class="example"> <pre><strong><span>-- 全システムを終了する。</span>
+jdbc:derby:;shutdown=true
+<span>-- salesDBを終了する。(認証が無効である場合)</span>
+jdbc:derby:salesDB;shutdown=true</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefattrib24612.html" title="Derbyでは、データベース接続URLに属性を指定する、 JDBCの機能を利用できます。">データベース接続URLに属性を指定する。</a></div>
+</div>
+</div>
+
+</body>
+</html>

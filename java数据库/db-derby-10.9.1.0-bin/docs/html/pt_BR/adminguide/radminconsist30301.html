@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="A função SYSCS_CHECK_TABLE" />
+<meta content="org.apache.derby.database. ConsistencyChecker.checkTable" name="DC.subject" />
+<meta content="org.apache.derby.database. ConsistencyChecker.checkTable" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminconsist01.html" />
+<meta scheme="URI" name="DC.Relation" content="radminconsist38781.html" />
+<meta scheme="URI" name="DC.Relation" content="radminconsist24642.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminconsist30301" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>A função SYSCS_CHECK_TABLE</title>
+</head>
+<body id="radminconsist30301"><a name="radminconsist30301"><!-- --></a>
+
+
+<h1 class="topictitle1">A função SYSCS_CHECK_TABLE</h1>
+
+
+<div>
+<div class="section">
+<div class="p">A função SYSCS_UTIL.SYSCS_CHECK_TABLE() verifica a consistência de uma
+tabela do <span>Derby</span>.
+Em particular, a função <em>SYSCS_UTIL.SYSCS_CHECK_TABLE</em> verifica as
+seguintes condições:<ul>
+<li>Se a tabela base está consistente internamente;</li>
+
+<li>Se a tabela base e todos os seus índices associados contêm o mesmo número
+de linhas;</li>
+
+<li>Se o valor e localização das linhas de cada índice correspondem aos
+da tabela base;</li>
+
+<li>Se todos os índices BTREE estão consistentes internamente.</li>
+
+</ul>
+
+Esta função é executada como uma declaração SQL, conforme mostrado a seguir:</div>
+
+</div>
+
+<div class="example">
+<pre>VALUES SYSCS_UTIL.SYSCS_CHECK_TABLE(
+    <em>nome-do-esquema</em>, <em>nome-da-tabela</em>)</pre>
+
+onde <em>nome-do-esquema</em> e <em>nome-da-tabela</em> são expressões que
+resultam em um tipo de dado cadeia de caracteres.
+Se o nome do esquema ou da tabela for criado como um identificador não
+delimitado, seus nomes deverão ser informados com todas as letras em maiúsculo.
+Por exemplo:
+<pre>VALUES SYSCS_UTIL.SYSCS_CHECK_TABLE('APP', 'CIDADES')</pre>
+
+</div>
+
+<div class="section">
+<p>A função SYSCS_UTIL.SYSCS_CHECK_TABLE retorna um SMALLINT.
+Se a tabela estiver consistente (ou se for executada para uma visão),
+a função SYSCS_UTIL.SYSCS_CHECK_TABLE retornará um valor diferente de zero.
+Caso contrário, esta função lançará uma exceção na primeira inconsistência
+encontrada.</p>
+
+</div>
+
+<div class="section">
+<p>Para uma tabela consistente, é mostrado o seguinte resultado:</p>
+
+</div>
+
+<div class="example">
+<pre>1
+-----
+1
+
+1 row selected</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminconsist01.html" title="Caso ocorra uma falha do equipamento ou do sistema operacional, pode ser utilizada a função SYSCS_UTIL.SYSCS_CHECK_TABLE para verificar se o banco de dados ainda permanece consistente.">Verificação da consistência do banco de dados</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="radminconsist38781.html" title="Esta seção fornece exemplos de mensagens de erro que a função SYSCS_UTIL.SYSCS_CHECK_TABLE() pode retornar.">Exemplos de mensagem de erro de SYSCS_CHECK_TABLE</a></div>
+<div><a href="radminconsist24642.html" title="">Exemplos de comandos SYSCS_CHECK_TABLE</a></div>
+</div>
+</div>
+
+</body>
+</html>

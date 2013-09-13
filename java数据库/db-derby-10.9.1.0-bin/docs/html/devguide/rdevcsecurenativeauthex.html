@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="NATIVE authentication and SQL authorization example" />
+<meta name="abstract" content="This example consists of the program NativeAuthenticationExample.java, which shows how to use Derby's NATIVE user authentication and SQL authorization with either the embedded or the client driver." />
+<meta name="description" content="This example consists of the program NativeAuthenticationExample.java, which shows how to use Derby's NATIVE user authentication and SQL authorization with either the embedded or the client driver." />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure51876.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rdevcsecurenativeauthex" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>NATIVE authentication and SQL authorization example</title>
+</head>
+<body id="rdevcsecurenativeauthex"><a name="rdevcsecurenativeauthex"><!-- --></a>
+
+
+<h1 class="topictitle1">NATIVE authentication and SQL authorization example</h1>
+
+
+
+<div><p>This example consists of the program
+<samp class="codeph">NativeAuthenticationExample.java</samp>, which shows how to use
+<span>Derby</span>'s NATIVE user
+authentication and SQL authorization with either the embedded or the client
+driver.</p>
+
+<div class="section">
+<div class="note"><span class="notetitle">Note: </span>It is strongly recommended that, in addition to using
+<span>Derby</span>'s NATIVE
+authentication mechanism, LDAP, or a user-defined class for authentication, 
+production systems protect network connections with SSL/TLS.</div>
+
+<p>See <a href="cdevcsecurenativeauth.html#cdevcsecurenativeauth">Using NATIVE authentication</a>
+for information on NATIVE authentication. See
+<a href="cdevcsecure36595.html#cdevcsecure36595">User authorizations</a> for more
+information on using SQL authorization, which allows you to use ANSI SQL
+Standard GRANT and REVOKE statements.
+</p>
+
+<p>The program does the following:</p>
+
+<ol>
+<li>Uses a system property to set the authentication provider to
+<samp class="codeph">NATIVE:nativeAuthDB:LOCAL</samp>, meaning that
+<samp class="codeph">nativeAuthDB</samp> is the credentials database and that all user
+credentials are stored there.</li>
+
+<li>If you are running the program using the client driver, starts the Network
+Server.</li>
+
+<li>Creates a database named <samp class="codeph">nativeAuthDB</samp> as the user
+<samp class="codeph">sysadm</samp>, who is therefore the database owner. Only the database
+owner has the right to set and read database properties.</li>
+
+<li>Calls the <samp class="codeph">SYSCS_UTIL.SYSCS_CREATE_USER</samp> system procedure
+to create several users: <samp class="codeph">noacc</samp>, <samp class="codeph">guest</samp>, and
+<samp class="codeph">sqlsam</samp>. The user <samp class="codeph">sysadm</samp> has already been
+created automatically.</li>
+
+<li>Creates the roles <samp class="codeph">adder</samp> and <samp class="codeph">viewer</samp>.</li>
+
+<li>Grants the role <samp class="codeph">adder</samp> to <samp class="codeph">sqlsam</samp>, and 
+grants the role <samp class="codeph">viewer</samp> to <samp class="codeph">guest</samp>.</li>
+
+<li>Creates a table, <samp class="codeph">accessibletbl</samp>, and inserts a value into
+it.</li>
+
+<li>Grants SELECT and INSERT privileges on <samp class="codeph">accessibletbl</samp> to
+<samp class="codeph">adder</samp>.</li>
+
+<li>Tries to connect to the database without supplying credentials, and fails,
+as expected.</li>
+
+<li>Connects to the database as a user who has not been granted any
+privileges. The connection succeeds, but the user does not attempt to perform
+any operations, since no operations would be permitted.</li>
+
+<li>Connects to the database as <samp class="codeph">guest</samp>, who has the role
+<samp class="codeph">viewer</samp>.</li>
+
+<li>Sets the current role to <samp class="codeph">viewer</samp>; the user succeeds in
+executing a SELECT statement on the table, but cannot execute an INSERT
+statement.</li>
+
+<li>Connects to the database as <samp class="codeph">sqlsam</samp>, who has the role
+<samp class="codeph">adder</samp>.</li>
+
+<li>Sets the current role to <samp class="codeph">adder</samp>; the user succeeds in
+executing both a SELECT and an INSERT statement, but is unable to execute a
+DELETE statement.</li>
+
+<li>Using the connection of the database owner <samp class="codeph">sysadm</samp>, deletes
+the table, the two roles, and the three users created previously.</li>
+
+<li>If you are running the program using the client driver, shuts down the
+Network Server.</li>
+
+<li>Closes the connection and shuts down 
+<span>Derby</span>, using the database
+owner's credentials.</li>
+
+</ol>
+
+<p>The instructions for compiling and running the program are in the comment
+at the beginning of the program. <samp class="codeph">DERBY_LIB</samp> is the directory
+that contains the <span>Derby</span> jar
+files, typically <samp class="codeph">DERBY_HOME/lib</samp>.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Source code for <samp class="codeph">NativeAuthenticationExample.java</samp></h2>
+<pre>// does not use derby.properties
+
+import java.io.PrintWriter;
+import java.sql.*;
+
+import org.apache.derby.drda.NetworkServerControl;
+
+/*
+ * &lt;p&gt;
+ * This program showcases how SQL authorization is automatically turned
+ * on when you run with NATIVE authentication. You can run this program 
+ * either embedded or client server.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * Here's how you compile the program:
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;
+ * javac -cp ${DERBY_LIB}/derbynet.jar NativeAuthenticationExample.java
+ * &lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * Here's how you run the program embedded:
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;
+ * java -cp ${DERBY_LIB}/derby.jar:. NativeAuthenticationExample embedded
+ * &lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * Here's how you run the program client/server:
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;
+ * java -cp \
+ *  ${DERBY_LIB}/derby.jar:${DERBY_LIB}/derbynet.jar:${DERBY_LIB}/derbyclient.jar:. \
+ *  NativeAuthenticationExample client
+ * &lt;/pre&gt;
+ */
+public class NativeAuthenticationExample
+{
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  CONSTANTS
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    private static  final   String  DB_NAME="nativeAuthDB";
+
+    // stored as SYSADM
+    private static  final   String  DB_OWNER="sysadm"; 
+    private static  final   String  DB_OWNER_PASSWORD="shh123ihtybb87m";
+
+    private static  final   String  USER_WITHOUT_ROLE="NOACC";
+    private static  final   String  
+                                  USER_WITHOUT_ROLE_PASSWORD="ajaxj3x9";
+
+    private static  final   String  READER="GUEST";
+    private static  final   String  READER_PASSWORD="java5w6x";
+
+    private static  final   String  WRITER="SQLSAM";
+    private static  final   String  WRITER_PASSWORD="light8q9bulb";
+
+    private static  final   String  EMBEDDED = "embedded";
+    private static  final   String  CLIENT = "client";
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  STATE
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    private boolean _runningEmbedded;
+    private NetworkServerControl    _server;
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  ENTRY POINT
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    public static void main( String... args )
+    {
+        NativeAuthenticationExample demo = parseArgs( args );
+
+        if ( demo !=  null ) 
+        { 
+            demo.execute(); 
+        }
+        else 
+        { 
+            println( "Bad command line args." ); 
+        }
+    }
+    
+    private static NativeAuthenticationExample parseArgs( String... args )
+    {
+        if ( (args == null) || (args.length != 1) ) 
+        { 
+            return null; 
+        }
+
+        String  mode = args[ 0 ];
+
+        if ( EMBEDDED.equals( mode ) ) 
+        { 
+            return new NativeAuthenticationExample( true ); 
+        }
+        else if ( CLIENT.equals( mode ) ) 
+        { 
+            return new NativeAuthenticationExample( false ); 
+        }
+        else 
+        { 
+            return null; 
+        }
+    }
+    
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  CONSTRUCTOR
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    private NativeAuthenticationExample( boolean runningEmbedded )
+    {
+        _runningEmbedded = runningEmbedded;
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  FEATURE SHOWCASE
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /** 
+     * Run all of the experiments 
+     */
+    private void    execute()
+    {
+        try
+        {
+            String  authenticationProvider = 
+                                          "NATIVE:" + DB_NAME + ":LOCAL";
+            
+            // this turns on NATIVE authentication as well as 
+            // SQL authorization
+            println( "Setting authentication provider to " + 
+                authenticationProvider );
+            System.setProperty(  "derby.authentication.provider", 
+                authenticationProvider );
+
+            if ( !_runningEmbedded ) 
+            { 
+                startServer(); 
+            }
+            
+            Connection  dboConn = createDatabase();
+
+            createUsers( dboConn );
+            createRoles( dboConn );
+            createTable( dboConn );
+
+            tryToConnectWithoutCredentials();   //should fail
+
+            // a valid user can connect even if they haven't been 
+            // assigned any roles
+            getConnection( USER_WITHOUT_ROLE, 
+                           USER_WITHOUT_ROLE_PASSWORD );
+
+            verifyReaderPrivileges();
+            verifyWriterPrivileges();
+
+            println( "Using database owner connection again" );
+
+            dropTable( dboConn );
+            dropRoles( dboConn );
+            dropUsers( dboConn );
+            
+            cleanUpAndShutDown();
+            
+        } catch (Exception e) 
+        { 
+            errorPrintAndExit( e ); 
+        }
+    }
+
+    /**
+     * Create more users. Note that the credentials for the database
+     * owner were stored in the database automatically when the 
+     * database was created.
+     */
+    public void createUsers( Connection conn ) 
+        throws SQLException
+    {
+        println( "Storing some sample users in the database." );
+
+        PreparedStatement   ps = prepare
+            ( conn, "call syscs_util.syscs_create_user( ?, ? )" );
+
+        createUser( ps, USER_WITHOUT_ROLE, USER_WITHOUT_ROLE_PASSWORD );
+        createUser( ps, READER, READER_PASSWORD );
+        createUser( ps, WRITER, WRITER_PASSWORD );
+
+        ps.close();
+    }
+    
+    private void    createUser( PreparedStatement ps, String userName, 
+            String password )
+        throws SQLException
+    {
+        println( "Creating user " + userName );
+        ps.setString( 1, userName );
+        ps.setString( 2, password );
+        ps.execute();
+    }
+
+    /** 
+     * Create roles and grant them privileges. 
+     */
+    private void    createRoles( Connection conn )
+        throws SQLException
+    {
+        println( "Creating roles and granting privileges to them..." );
+        
+        execute( conn, "CREATE ROLE adder" );
+        execute( conn, "CREATE ROLE viewer" );
+        
+        execute( conn, "GRANT adder TO " + WRITER );
+        execute( conn, "GRANT viewer TO " + READER );
+    }
+
+    /** 
+     * Create and populate a table and grant privileges related to it. 
+     */
+    private void    createTable( Connection conn )
+        throws SQLException
+    {
+        println("Creating table accessibletbl...");
+        execute( conn, 
+                 "CREATE TABLE accessibletbl(textcol VARCHAR(6))" );
+        execute( conn, "INSERT INTO accessibletbl VALUES('hello')" );
+
+        println( "Granting select/insert privileges to adder..." );
+        execute( conn, 
+                 "GRANT SELECT, INSERT ON accessibletbl TO adder" );
+
+        println( "Granting select privileges to viewer" );
+        execute( conn, "GRANT SELECT ON accessibletbl TO viewer" );
+    }
+
+    /**
+     * Drop users except for database owner.
+     */
+    public void dropUsers( Connection conn ) 
+        throws SQLException
+    {
+        println( "Dropping sample users from the database..." );
+
+        PreparedStatement   ps = prepare
+            ( conn, "call syscs_util.syscs_drop_user( ? )" );
+
+        dropUser( ps, USER_WITHOUT_ROLE );
+        dropUser( ps, READER );
+        dropUser( ps, WRITER );
+
+        ps.close();
+    }
+    
+    private void    dropUser( PreparedStatement ps, String userName )
+        throws SQLException
+    {
+        println( "Dropping user " + userName );
+        ps.setString( 1, userName );
+        ps.execute();
+    }
+
+    /** 
+     * Drop roles. 
+     */
+    private void    dropRoles( Connection conn )
+        throws SQLException
+    {
+        println( "Dropping roles..." );
+        
+        execute( conn, "DROP ROLE adder" );
+        execute( conn, "DROP ROLE viewer" );
+    }
+
+    /** 
+     * Drop the table. 
+     */
+    private void    dropTable( Connection conn )
+        throws SQLException
+    {
+        execute( conn, "DROP TABLE accessibletbl" );
+    }
+
+    /**
+     * Try to connect without supplying credentials 
+     */
+    private void    tryToConnectWithoutCredentials()
+        throws Exception
+    {
+        println( "Trying to connect without supplying credentials..." );
+
+        try {
+            getConnection( null, null );
+            println( "ERROR: Unexpectedly connected to database " + 
+                     DB_NAME );
+            cleanUpAndShutDown();
+        } catch (SQLException e) 
+        {
+            if ( e.getSQLState().equals("08004") )
+            {
+                println
+                    (
+                     "As expected, could not get a connection without " +
+                     "supplying credentials."
+                     );
+            } else
+            {
+                errorPrintAndExit( e );
+            }
+        }
+    }
+
+    /** 
+     * Verify that the READER user can select but not insert 
+     */
+    private void    verifyReaderPrivileges()
+        throws Exception
+    {
+        Connection  readerConn = getConnection( READER, 
+                                                READER_PASSWORD );
+
+        println( "Setting role to VIEWER" );
+        execute( readerConn, "SET ROLE VIEWER" );
+
+        readRow( readerConn );    // should succeed
+            
+        try {
+            writeRow( readerConn );
+            println( "ERROR: Unexpectedly allowed to insert into table" );
+            cleanUpAndShutDown();
+        } catch (SQLException e) 
+        {
+            if ( e.getSQLState().equals("42500") ) 
+            { 
+                println( "As expected, failed to insert row." ); 
+            }
+            else 
+            { 
+                errorPrintAndExit(e); 
+            }
+        }
+
+        readerConn.close();
+    }
+
+    /** 
+     * Verify that the WRITER can read and write but not delete 
+     */
+    private void    verifyWriterPrivileges()
+        throws Exception
+    {
+        Connection  writerConn = getConnection( WRITER, 
+                                                WRITER_PASSWORD );
+
+        // set role to ADDER
+        println( "Setting role to ADDER" );
+        execute( writerConn, "SET ROLE ADDER" );
+
+        // should succeed
+        readRow( writerConn );
+        writeRow( writerConn );
+            
+        try {
+            deleteRow( writerConn );    // should fail
+        
+            println( "ERROR: Unexpectedly allowed to DELETE." );
+            cleanUpAndShutDown();
+        } catch (SQLException e) 
+        {
+            if ( e.getSQLState().equals("42500") ) 
+            {
+                println( "As expected, failed to delete rows." ); 
+            }
+            else 
+            { 
+                errorPrintAndExit(e); 
+            }
+        }
+
+        writerConn.close();
+    }
+    
+    private void    readRow( Connection conn ) throws SQLException
+    {
+        PreparedStatement   ps = prepare
+            ( conn, "SELECT * FROM sysadm.accessibletbl" );
+        ResultSet   rs = ps.executeQuery();
+        while( rs.next() )
+        {
+            println
+                ( "Value of sysadm.accessibletbl/textcol = " + 
+                    rs.getString( 1 ) );
+        }
+        rs.close();
+        ps.close();
+    }
+    
+    private void    writeRow( Connection conn ) throws SQLException
+    {
+        execute( conn, 
+                 "INSERT INTO sysadm.accessibletbl VALUES('guest')" );
+    }
+    
+    private void    deleteRow( Connection conn ) throws SQLException
+    {
+        execute( conn, "DELETE FROM sysadm.accessibletbl" );
+    }
+    
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  SQL HELPERS
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /** 
+     * Execute a statement 
+     */
+    private void    execute( Connection conn, String text )
+        throws SQLException
+    {
+        PreparedStatement   ps = prepare( conn, text );
+
+        ps.execute();
+        ps.close();
+    }
+
+    /** 
+     * Prepare a statement 
+     */
+    private PreparedStatement   prepare( Connection conn, String text )
+        throws SQLException
+    {
+        println( "    Preparing: " + text );
+        return conn.prepareStatement( text );
+    }
+    
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  CONNECTION MANAGEMENT
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /** 
+     * Create the database 
+     */
+    private Connection  createDatabase()
+        throws SQLException
+    {
+        String  connectionURL = getConnectionURL
+            ( DB_NAME, DB_OWNER, DB_OWNER_PASSWORD, true, false );
+
+        println( "Creating database via this URL: " + connectionURL );
+
+        return DriverManager.getConnection( connectionURL );
+    }
+    
+    /** 
+     * Shut down the engine and exit. 
+     */
+    private void cleanUpAndShutDown()
+        throws Exception
+    {
+        // Shut down the server before the engine. this is so that
+        // we can authenticate the shutdown credentials in the
+        // booted database.
+        if ( _server != null )
+        { 
+            stopServer(); 
+        }
+
+        // the engine should only be brought down locally
+        _runningEmbedded = true;
+        shutdownEngine();
+        
+        System.exit(1);
+    }
+    
+    private void    shutdownEngine()
+    {
+        String shutdownURL = getConnectionURL
+            ( null, DB_OWNER, DB_OWNER_PASSWORD, false, true );
+
+        try 
+        {
+            println( "Shutting down engine via this URL: " + 
+                     shutdownURL );
+            DriverManager.getConnection(  shutdownURL );
+        } catch (SQLException se) 
+        {
+            if ( se.getSQLState().equals("XJ015") ) 
+            { 
+                println( "Derby engine shut down normally" ); 
+            }
+            else 
+            { 
+                printSQLException( se ); 
+            }
+        }
+    }
+    
+    /** 
+     * Get a connection to the database 
+     */
+    private Connection  getConnection( String userName, String password )
+        throws SQLException
+    {
+        String  connectionURL = getConnectionURL
+            ( DB_NAME, userName, password, false, false );
+
+        println( "Getting connection via this URL: " + connectionURL );
+
+        return DriverManager.getConnection( connectionURL );
+    }
+    
+    private String  getConnectionURL( String dbName, String userName, 
+        String password, boolean createDB, boolean shutdownDB )
+    {
+        String  connectionURL = _runningEmbedded ?
+            "jdbc:derby:" : 
+            "jdbc:derby://localhost:1527/";
+
+        if ( dbName != null ) 
+        { 
+            connectionURL = connectionURL + DB_NAME; 
+        }
+        if ( userName != null ) 
+        { 
+            connectionURL = connectionURL + ";user=" + userName; 
+        }
+        if ( password != null) 
+        { 
+            connectionURL = connectionURL + ";password=" + password;
+        }
+        if ( createDB ) 
+        { 
+            connectionURL = connectionURL + ";create=true"; 
+        }
+        if ( shutdownDB ) 
+        { 
+            connectionURL = connectionURL + ";shutdown=true"; 
+        }
+
+        return connectionURL;
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  SERVER MANAGEMENT
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /** 
+     * Start the Derby server 
+     */
+    private void    startServer()
+        throws Exception
+    {
+        _server = new NetworkServerControl( DB_OWNER, 
+                                            DB_OWNER_PASSWORD );
+
+        println( "Starting the Derby server..." );
+        _server.start( new PrintWriter( System.out ) );
+
+        // pause to let the server come up
+        Thread.sleep( 5000L );
+    }
+
+    /** 
+     * Shut down the Derby server 
+     */
+    private void    stopServer()
+        throws Exception
+    {
+        println( "Stopping the Derby server..." );
+        _server.shutdown();
+
+        // pause to let the server come down
+        Thread.sleep( 5000L );
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  DIAGNOSTIC PRINTING
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /** 
+     * Report exceptions and exit. 
+     */
+    private void errorPrintAndExit( Throwable e )
+    {
+        if ( e instanceof SQLException ) 
+        { 
+            printSQLException((SQLException) e); 
+        }
+        else
+        {
+            println("A non-SQL error occurred.");
+            e.printStackTrace();
+        }
+        
+        System.exit(1);
+    }
+
+    /** 
+     * Print a list of SQLExceptions. 
+     */
+    private void printSQLException( SQLException sqle )
+    {
+        while (sqle != null)
+        {
+            println("\n---SQLException Caught---\n");
+            println("    SQLState:   " + (sqle).getSQLState());
+            println("    Severity: " + (sqle).getErrorCode());
+            println("    Message:  " + (sqle).getMessage());
+
+            sqle.printStackTrace();
+
+            sqle = sqle.getNextException();
+        }
+    }
+
+    /** 
+     * Print a diagnostic line to the console 
+     */
+    private static  void    println( String text ) 
+    { 
+        System.out.println( text ); 
+    }
+}</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure51876.html" title="This section provides examples that show user authentication and authorization in Derby in either a client/server environment or in an embedded environment.">User authentication and authorization examples</a></div>
+</div>
+</div>
+
+</body>
+</html>

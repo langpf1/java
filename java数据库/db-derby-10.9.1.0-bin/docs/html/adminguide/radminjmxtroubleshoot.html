@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Troubleshooting JMX connection issues" />
+<meta content="Java Management Extensions (JMX) technology, JMX, using a security policy" name="DC.subject" />
+<meta content="Java Management Extensions (JMX) technology, JMX, using a security policy" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminjmxoverview.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxintro.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenabledisable.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxjconsole.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxcode.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminjmxtroubleshoot" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Troubleshooting JMX connection issues</title>
+</head>
+<body id="radminjmxtroubleshoot"><a name="radminjmxtroubleshoot"><!-- --></a>
+
+
+<h1 class="topictitle1">Troubleshooting JMX connection issues</h1>
+
+
+<div>
+<div class="section">
+<p>If you experience problems connecting remotely to an MBean server using JMX
+(as described in <a href="radminjmxjconsole.html#radminjmxjconsole">Using JConsole to access the Derby MBeans</a>
+and <a href="radminjmxcode.html#radminjmxcode">Using custom Java code to access the Derby MBeans</a>), it may be helpful to
+obtain some tracing information. The JMX implementation in the Oracle JDK uses
+the <samp class="codeph">java.util.logging</samp> API to log JMX traces. For example, in
+order to trace SSL connection issues, set the system property
+<samp class="codeph">java.util.logging.config.file</samp> as shown in the following:</p>
+
+<pre><strong>java -Djava.util.logging.config.file=logging.properties MyJmxClient</strong></pre>
+
+<p>With JConsole, a separate logging window will appear if you specify the
+following option when you start JConsole (see
+<a href="radminjmxjconsole.html#radminjmxjconsole">Using JConsole to access the Derby MBeans</a>), as long as the
+<samp class="codeph">logging.properties</samp> file is found:</p>
+
+<pre>-J-Djava.util.logging.config.file=logging.properties</pre>
+
+<p>The <samp class="codeph">logging.properties</samp> file should specify log handlers and
+logging levels, as in the following example:</p>
+
+<pre>handlers = java.util.logging.ConsoleHandler
+.level = INFO
+
+java.util.logging.ConsoleHandler.level=FINEST
+java.util.logging.ConsoleHandler.formatter=java.util.logging.SimpleFormatter
+
+ // Level FINEST is suitable for diagnosing SSL-related JMX remote
+ //  connection issues.
+javax.management.level=FINEST
+javax.management.remote.level=FINEST</pre>
+
+<p>The blog entry <a href="https://blogs.oracle.com/jmxetc/entry/troubleshooting_connection_problems_in_jconsole" target="_blank">https://blogs.oracle.com/jmxetc/entry/troubleshooting_connection_problems_in_jconsole</a>
+provides additional hints and tips.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminjmxoverview.html" title="">Using Java Management Extensions (JMX) technology</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminjmxintro.html" title="">Introduction to the Derby MBeans</a></div>
+<div><a href="radminjmxenabledisable.html" title="">Enabling and disabling JMX</a></div>
+<div><a href="radminjmxjconsole.html" title="">Using JConsole to access the Derby MBeans</a></div>
+<div><a href="radminjmxcode.html" title="">Using custom Java code to access the Derby MBeans</a></div>
+</div>
+</div>
+
+</body>
+</html>

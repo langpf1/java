@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="User authorizations" />
+<meta name="abstract" content="When you specify user authorizations, Derby verifies that a user has been granted permission to access a system, database, object, or SQL action." />
+<meta name="description" content="When you specify user authorizations, Derby verifies that a user has been granted permission to access a system, database, object, or SQL action." />
+<meta content="user authorizations, overview, authorizations, users, overview, properties, derby.database.defaultConnectionMode, derby.database.sqlAuthorization, derby.database.fullAccessUsers, derby.database.readOnlyAccessUsers, derby.database.defaultConnectionMode property, description, derby.database.sqlAuthorization property, derby.database.fullAccessUsers property, derby.database.readOnlyAccessUsers property, changing properties" name="DC.subject" />
+<meta content="user authorizations, overview, authorizations, users, overview, properties, derby.database.defaultConnectionMode, derby.database.sqlAuthorization, derby.database.fullAccessUsers, derby.database.readOnlyAccessUsers, derby.database.defaultConnectionMode property, description, derby.database.sqlAuthorization property, derby.database.fullAccessUsers property, derby.database.readOnlyAccessUsers property, changing properties" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure12392.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevcsecure82556.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevcsecure81850.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure42374.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure37241.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure24366.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure90988.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure10983.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcbabejdfj.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure24458.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecuree.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure866060.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure865818.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure865880.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevcsecure36595" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>User authorizations</title>
+</head>
+<body id="cdevcsecure36595"><a name="cdevcsecure36595"><!-- --></a>
+
+
+<h1 class="topictitle1">User authorizations</h1>
+
+
+
+<div><p>When you specify user authorizations, <span>Derby</span> verifies
+that a user has been granted permission to access a system, database, object,
+or SQL action. </p>
+
+<p>There are two types of user authorization in
+<span>Derby</span>, connection
+authorization and SQL authorization:</p>
+
+<ul>
+<li><dfn class="term">Connection authorization</dfn> specifies the coarse-grained access
+that users have to connect to a system or database.</li>
+
+<li><dfn class="term">SQL authorization</dfn> controls the fine-grained permissions that
+users have on database objects or for SQL actions.</li>
+
+</ul>
+
+<p>You can set the user authorization properties in
+<span>Derby</span> as system-level
+properties or database-level properties.</p>
+
+<p>Set system-level user authorizations when you are developing applications,
+or when you want to specify a secure default authorization for all users to
+connect to all of the databases in the system.</p>
+
+<div class="attention"><span class="attentiontitle">Attention: </span>If you use NATIVE authentication, fine-grained SQL
+authorization is automatically enabled, and by default, all users enjoy full
+coarse-grained access to the database. In this situation, fine-grained SQL
+authorization cannot be turned off. However, you can still adjust coarse-grained
+access to the database.</div>
+
+<div class="section"><h2 class="sectiontitle">User authorization properties</h2>
+<p>There are several properties that you can set to control database-level
+user authorizations. Some of the properties are general properties that set the
+access mode for all users. Other properties are user specific properties that
+set the type of access for specific user IDs.</p>
+
+<div class="p">The following properties affect authorization:<ul>
+<li>The <samp class="codeph">derby.database.sqlAuthorization</samp> property enables
+SQL standard authorization. Use the <samp class="codeph">derby.database.sqlAuthorization</samp> property
+to specify if object owners can grant and revoke permission for users to perform
+SQL actions on database objects. The default setting for the <samp class="codeph">derby.database.sqlAuthorization</samp> property
+is <var class="varname">FALSE</var>. When the <samp class="codeph">derby.database.sqlAuthorization</samp> property
+is set to <var class="varname">TRUE</var>, object owners can use the GRANT and REVOKE
+SQL statements to set the user permissions for specific database objects or
+for specific SQL actions.</li>
+
+<li>The <samp class="codeph">derby.database.defaultConnectionMode</samp> property controls
+the default coarse-grained access mode. This property specifies the
+default connection access that users have when they connect to the database. If
+you do not explicitly set the
+<samp class="codeph">derby.database.defaultConnectionMode</samp> property, the default
+coarse-grained connection authorization for a database is
+<var class="varname">fullAccess</var>, which is read-write access.</li>
+
+<li>The <samp class="codeph">derby.database.fullAccessUsers</samp> and
+<samp class="codeph">derby.database.readOnlyAccessUsers</samp> properties
+are additional coarse-grained access properties. These properties can be used to
+specify the user IDs that have read-write access and read-only access to a
+database.</li>
+
+</ul>
+</div>
+
+<p>If you do not specify the coarse-grained user authorizations for a specific
+user ID, that user ID inherits the database's default coarse-grained connection
+authorization.</p>
+
+<div class="tip"><span class="tiptitle">Tip: </span>If you set the <samp class="codeph">derby.database.defaultConnectionMode</samp> property
+to <var class="varname">noAccess</var> or <var class="varname">readOnlyAccess</var>, you should
+allow at least one user read-write access. Otherwise, depending on the default
+connection authorization you specify, you will configure the database so that
+it cannot be accessed or changed.</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">How user authorization properties work together</h2>
+<div class="p">The <samp class="codeph">derby.database.defaultConnectionMode</samp> property
+and the <samp class="codeph">derby.database.sqlAuthorization</samp> property work together.
+The default settings for these properties allow anyone to access and drop
+the database objects that you create. You can change the default access mode
+by specifying different settings for these properties.<ul>
+<li>When the <samp class="codeph">derby.database.sqlAuthorization</samp> property is
+<var class="varname">FALSE</var>,
+the ability to read from or write to database objects is determined by the
+setting for the <samp class="codeph">derby.database.defaultConnectionMode</samp> property.
+If the <samp class="codeph">derby.database.defaultConnectionMode</samp> property is set
+to <var class="varname">readOnlyAccess</var>, users can access all of the database
+objects but they cannot update or drop the objects. </li>
+
+<li>When the <samp class="codeph">derby.database.sqlAuthorization</samp> property is 
+<var class="varname">TRUE</var>,
+the ability to read from or write to database objects is further restricted
+to the owner of the database objects. The owner must grant permission for
+others to access the database objects. No one but the owner of an object or
+the
+<a href="cdevcsecureDbOwner.html#cdevcsecureDbOwner">database owner</a>
+can drop the object. </li>
+
+<li>The coarse-grained access mode specified for the
+<samp class="codeph">derby.database.defaultConnectionMode</samp> property
+supplements the permissions that are granted by the owner of a database object.
+For example, if a user is granted INSERT privileges on a table but the user
+only has read-only connection authorization, the user cannot insert data into
+the table.</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Changes to connection authorization settings</h2>
+<p>Connection
+authorization properties are fixed for the duration of a connection. If you
+change the connection authorization properties during a connection, those
+changes are not in affect until you establish a new connection.</p>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cdevcsecure866060.html">Setting the SQL standard authorization mode</a></strong><br />
+If you use NATIVE authentication, SQL standard authorization is automatically enabled. Otherwise, use the derby.database.sqlAuthorization property to enable SQL standard authorization.</li>
+<li class="ulchildlink"><strong><a href="cdevcsecure865818.html">Setting the default connection access mode</a></strong><br />
+You can use the derby.database.defaultConnectionMode property to specify the default type of access that users have when they connect to the database.</li>
+<li class="ulchildlink"><strong><a href="cdevcsecure865880.html">Setting access for individual users</a></strong><br />
+You can use the derby.database.fullAccessUsers and derby.database.readOnlyAccessUsers properties to specify the user IDs that have read-write access and read-only access to a database.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecuree.html" title="Derby can be deployed in a number of ways and in a number of different environments. The security needs of the Derby system are also diverse.">Derby and security</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecure12392.html" title="In most cases, you enable Derby's security features through the use of properties. It is important to understand the best way of setting properties for your environment.">Configuring security for your environment</a></div>
+<div><a href="cdevcsecure42374.html" title="Derby provides support for user authentication and user authorization. User authentication determines whether a user is a valid user. It establishes the user's identity. User authorization determines what operations a user's established identity can perform. You are strongly urged to implement both authentication and authorization on any multi-user database used in production.">Working with user authentication</a></div>
+<div><a href="cdevcsecure37241.html" title="User names within the Derby system are known as authorization identifiers. The authorization identifier is a string that represents the name of the user, if one was provided in the connection request.">Users and authorization identifiers</a></div>
+<div><a href="cdevcsecure24366.html" title="Derby provides a way for you to encrypt your data on disk.">Encrypting databases on disk</a></div>
+<div><a href="cdevcsecure90988.html" title="In a Java SE environment, Derby can detect digital signatures on jar files. When attempting to load a class from a signed jar file stored in the database, Derby will verify the validity of the signature.">Signed jar files</a></div>
+<div><a href="cdevcsecure10983.html" title="The Derby security model has some basic limitations.">Notes on the Derby security features</a></div>
+<div><a href="cdevcbabejdfj.html" title="When running within an application or application server with a Java security manager enabled, Derby must be granted certain permissions to execute and access database files.">Running Derby under a security manager</a></div>
+<div><a href="cdevcsecure24458.html" title="When working with both user authentication and user authorization, you need to understand how user names are treated by each system.">Authorization identifiers, user authentication, and user authorization</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevcsecure82556.html" title="This procedure requires a system with multiple databases and some administrative resources.">Configuring security in a client/server environment</a></div>
+<div><a href="tdevcsecure81850.html" title="In an embedded environment, typically there is only one database per system and there are no administrative resources to protect databases.">Configuring security in an embedded environment</a></div>
+</div>
+</div>
+
+</body>
+</html>

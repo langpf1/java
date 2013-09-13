@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Instrução CREATE PROCEDURE" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefcreateprocedurestatement" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Instrução CREATE PROCEDURE</title>
+</head>
+<body id="rrefcreateprocedurestatement"><a name="rrefcreateprocedurestatement"><!-- --></a>
+
+
+<h1 class="topictitle1">Instrução CREATE PROCEDURE</h1>
+
+<div>
+<div class="section">
+<p>A instrução CREATE PROCEDURE permite criar procedimentos armazenados
+em Java, que podem ser chamados utilizando a instrução CALL PROCEDURE.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>CREATE PROCEDURE <em><a href="rrefcreateprocedurestatement.html#rrefcreateprocedurestatement__rrefcrproprocedurename">nome-do-procedimento</a></em> ( [ <a href="rrefcreateprocedurestatement.html#rrefcreateprocedurestatement__rrefcrproprocedureparameter">parâmetro-do-procedimento</a>
+   [, <a href="rrefcreateprocedurestatement.html#rrefcreateprocedurestatement__rrefcrproprocedureparameter">parâmetro-do-procedimento</a>] ] * )
+[ <a href="rrefcreateprocedurestatement.html#rrefcreateprocedurestatement__rrefcrproprocedureelement">elemento-do-procedimento</a> ] *</strong></pre>
+</div>
+
+<div class="example" id="rrefcreateprocedurestatement__rrefcrproprocedurename"><a name="rrefcreateprocedurestatement__rrefcrproprocedurename"><!-- --></a><h2 class="sectiontitle">nome-do-procedimento</h2>
+
+<pre><strong>[ <em><a href="rrefschemaname.html#rrefschemaname">nome-do-esquema</a>.</em> ] <em><a href="crefsqlj34834.html#crefsqlj34834">IdentificadorSQL92</a></em></strong>
+</pre>
+
+</div>
+
+<div class="section">
+<p>Se o nome-do-esquema não for fornecido, o esquema corrente será o esquema
+padrão.
+Se for especificado um nome de procedimento qualificado, o nome do esquema não
+poderá começar por SYS.</p>
+
+</div>
+
+<div class="example" id="rrefcreateprocedurestatement__rrefcrproprocedureparameter"><a name="rrefcreateprocedurestatement__rrefcrproprocedureparameter"><!-- --></a><h2 class="sectiontitle">parâmetro-do-procedimento</h2>
+
+<pre><strong>[ { IN | OUT | INOUT } ] [ nome-do-parâmetro ] <em>tipo-de-dado</em></strong></pre>
+
+</div>
+
+<div class="section">
+<p>O valor padrão para o parâmetro é IN. O nome-do-parâmetro deve ser
+único no procedimento.</p>
+
+<p>A sintaxe do <em>tipo-de-dado</em> está descrita em
+<a href="crefsqlj31068.html#crefsqlj31068">Tipos de dado</a>.</p>
+
+<div class="note"><span class="notetitle">Nota: </span>Os tipos-de-dado longos, como LONG VARCHAR, LONG VARCHAR FOR BIT DATA,
+CLOB e BLOB, não podem ser usados como parâmetros nas instruções
+CREATE PROCEDURE.</div>
+
+</div>
+
+<div class="example" id="rrefcreateprocedurestatement__rrefcrproprocedureelement"><a name="rrefcreateprocedurestatement__rrefcrproprocedureelement"><!-- --></a><h2 class="sectiontitle">elemento-do-procedimento</h2>
+
+<pre><strong> {
+| [ DYNAMIC ] RESULT SETS <em><a href="rrefsqlj10696.html#rrefsqlj10696">INTEGER</a></em>
+| LANGUAGE { JAVA }
+| EXTERNAL NAME <em>cadeia-de-caracteres</em>
+| PARAMETER STYLE JAVA
+| { NO SQL | MODIFIES SQL DATA | CONTAINS SQL | READS SQL DATA }
+ }
+</strong>
+</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">DYNAMIC RESULT SETS <em>integer</em></h2>
+
+<p>Indica o limite superior estimado de conjuntos de resultados retornados
+pelo procedimento.
+O padrão é sem (zero) conjuntos de resultados dinâmicos.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">LANGUAGE</h2>
+
+<p><strong>JAVA</strong> - o gerenciador de banco de dados chama o procedimento como um
+método estático público de uma classe Java.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">EXTERNAL NAME <em>cadeia-de-caracteres</em></h2>
+
+<div class="p">A <em>cadeia-de-caracteres</em> descreve o método Java a ser chamado quando o
+procedimento for executado, e possui a seguinte forma:
+<pre>nome_da_classe.nome_do_método</pre>
+
+O nome externo não pode conter espaços.</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">PARAMETER STYLE</h2>
+
+<p><strong>JAVA</strong> - O procedimento utiliza uma convenção de passagem de parâmetros
+em conformidade com a linguagem Java e com a especificação de rotinas SQL.
+Os parâmetros INOUT e OUT são passados como matrizes de uma única entrada para
+facilitar o retorno de valores.
+Os conjuntos de resultados são retornados através de parâmetros adicionais para
+um método Java do tipo java.sql.ResultSet [] que são passados como matrizes de
+uma única entrada.</p>
+
+<p>O <span>Derby</span>
+não suporta tipos de coluna longos (por exemplo, LONG VARCHAR, BLOB, etc.).
+Ocasiona erro tentar utilizar um destes tipos de coluna longos.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">NO SQL, CONTAINS SQL, READS SQL DATA, MODIFIES SQL DATA </h2>
+
+<p>Indica se o procedimento armazenado emite instruções SQL e, se o fizer,
+de que tipo.</p>
+
+<dl>
+
+<dt class="dlterm">CONTAINS SQL</dt>
+
+<dd>Indica que podem ser executadas pelo procedimento armazenado instruções SQL
+que não lêem nem modificam dados SQL. As instruções não suportadas por qualquer
+procedimento armazenado retornam um erro diferente.
+O valor padrão é MODIFIES SQL DATA.</dd>
+
+
+<dt class="dlterm">NO SQL</dt>
+
+<dd>Indica que o procedimento armazenado não pode executar nenhuma instrução SQL.</dd>
+
+
+<dt class="dlterm">READS SQL DATA</dt>
+
+<dd>Indica que podem ser incluídas no procedimento armazenado algumas instruções
+SQL que não modificam dados SQL.
+As instruções não suportadas por qualquer procedimento armazenado retornam um
+erro diferente.</dd>
+
+
+<dt class="dlterm">MODIFIES SQL DATA</dt>
+
+<dd>Indica que o procedimento armazenado pode executar qualquer instrução SQL,
+exceto as instruções não suportadas por procedimentos armazenados.</dd>
+
+</dl>
+</div>
+
+<div class="section">
+<div class="p">Os elementos do procedimento podem estar em qualquer ordem, mas cada tipo de
+elemento pode aparecer somente uma única vez.
+A definição do procedimento deve conter os seguintes elementos:
+<ul>
+<li><strong>LANGUAGE</strong></li>
+
+<li><strong>PARAMETER STYLE</strong></li>
+
+<li><strong>EXTERNAL NAME</strong></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Exemplo</h2>
+
+<pre><strong>CREATE PROCEDURE VENDAS.RENDIMENTO_TOTAL(IN V_MÊS INTEGER,
+IN V_ANO INTEGER, OUT TOTAL DECIMAL(10,2))
+PARAMETER STYLE JAVA READS SQL DATA LANGUAGE JAVA EXTERNAL NAME
+'com.acme.vendas.calculaRendimentoPorMes'</strong>
+</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj95081.html" title="">Instruções CREATE</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="A instrução CREATE FUNCTION permite criar funções Java que podem ser utilizadas em expressões.">Instrução CREATE FUNCTION</a></div>
+<div><a href="rrefsqlj20937.html" title="">Instrução CREATE INDEX</a></div>
+<div><a href="rrefsqlj31580.html" title="">Instrução CREATE SCHEMA</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">Instrução CREATE SYNONYM</a></div>
+<div><a href="rrefsqlj24513.html" title="">Instrução CREATE TABLE</a></div>
+<div><a href="rrefsqlj43125.html" title="">Instrução CREATE TRIGGER</a></div>
+<div><a href="rrefsqlj15446.html" title="">Instrução CREATE VIEW</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Derby JDBC database connection URL" />
+<meta name="abstract" content="A Java application using the JDBC API establishes a connection to a database by obtaining a Connection object." />
+<meta name="description" content="A Java application using the JDBC API establishes a connection to a database by obtaining a Connection object." />
+<meta content="Database connection URL, description, features common to embedded and client/server versions" name="DC.subject" />
+<meta content="Database connection URL, description, features common to embedded and client/server versions" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp40653.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp27610.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp21955.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp34964.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp51654.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp34964.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts36881.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevadvjdbc32436.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp39409.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdvlp17453" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Derby JDBC database connection URL</title>
+</head>
+<body id="cdevdvlp17453"><a name="cdevdvlp17453"><!-- --></a>
+
+
+<h1 class="topictitle1">Derby JDBC database connection URL</h1>
+
+
+
+<div><p>A Java application using the JDBC API establishes a connection
+to a database by obtaining a <em>Connection</em> object.</p>
+
+<p>The standard way to obtain a <samp class="codeph"><em>Connection</em></samp> object
+is to call the method <samp class="codeph"><em>DriverManager.getConnection</em></samp>,
+which takes a String containing a connection URL (uniform resource locator).
+A JDBC connection URL provides a way of identifying a database. It also allows
+you to perform a number of high-level tasks, such as creating a database or
+shutting down the system.</p>
+
+<p>An application in an embedded environment uses a different connection URL
+from that used by applications using the <span>Derby</span> Network
+Server in a client/server environment. See the <cite><span><em>Derby Server and Administration Guide</em></span></cite> for
+more information on the Network Server. </p>
+
+<p>However, all versions of the connection URL (which you can use for tasks
+besides connecting to a database) have common features:</p>
+
+<ul>
+<li>you can specify the name of the database you want to connect to</li>
+
+<li>you can specify a number of attributes and values that allow you to accomplish
+tasks. For more information about what you can specify with the <span>Derby</span> connection
+URL, see <a href="rdevdvlp22102.html#rdevdvlp22102">Database connection examples</a>.</li>
+
+</ul>
+
+<p>The connection URL syntax is as follows:</p>
+
+<pre>jdbc:derby:[subsubprotocol:][<em>databaseName</em>][;<em>attribute</em>=<em>value</em>]*</pre>
+
+<p><em>Subsubprotocol</em>, which is not typically specified, determines
+how <span>Derby</span> looks for a database:
+in a directory, in memory, in a class path, or in a jar file. <em>Subsubprotocol</em> is one of
+the following:</p>
+
+<ul>
+<li><em>directory</em>: The default, which need not be specified explicitly. The
+database is in the file system, and the path is either relative to the system
+directory or absolute.</li>
+
+<li><em>memory</em>: Databases exist only in main memory and are not written to
+disk. An in-memory database may be useful when there is no need to persist the
+database -- for example, in some testing situations.</li>
+
+<li><em>classpath</em>: Databases are treated as read-only databases, relative to
+the <em>classpath</em> directory. See
+<a href="cdevdvlp91854.html#cdevdvlp91854">Accessing databases from the classpath</a> for details.</li>
+
+<li><em>jar</em>: Databases are treated as read-only databases. <em>DatabaseNames</em> might
+require a leading slash, because you specify them "relative" to the jar file.
+See <a href="cdevdvlp24155.html#cdevdvlp24155">Accessing databases from a jar or zip file</a> for details.
+<p><em>jar</em> requires an additional element immediately before the
+database name:</p>
+
+<pre>(<em>pathToArchive</em>)</pre>
+
+<p><em>pathToArchive</em> is the path to the jar or zip file that holds
+the database.</p>
+</li>
+
+</ul>
+
+<p>For detailed reference about connection URL attributes and values, see 
+"Setting attributes for the database connection URL" in the
+<span><em>Derby Reference Manual</em></span>.
+</p>
+
+<p>The following example shows the use of the connection URL:</p>
+
+<pre>Connection conn = DriverManager.getConnection("jdbc:derby:sample");</pre>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp39409.html" title="This section explains how to use and configure Derby in an embedded environment.">Derby embedded basics</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp40653.html" title="Derby consists of both the database engine and an embedded JDBC driver. Applications use JDBC to interact with a database. Applications running on JDK 5 or earlier must load the driver in order to work with the database.">Derby JDBC driver</a></div>
+<div><a href="cdevdvlp27610.html" title="A Derby database exists within a system.">Derby system</a></div>
+<div><a href="cdevdvlp21955.html" title="A Derby database contains dictionary objects such as tables, columns, indexes, and jar files. A Derby database can also store its own configuration information.">A Derby database</a></div>
+<div><a href="cdevdvlp34964.html" title="You connect to a database using a form of the Derby connection URL as an argument to the DriverManager.getConnection call.">Connecting to databases</a></div>
+<div><a href="cdevdvlp51654.html" title="You specify attributes on the Derby connection URL.">Working with the database connection URL attributes</a></div>
+<div><a href="cdevconcepts36881.html" title="A Connection object represents a connection with a database.">Connections</a></div>
+<div><a href="cdevadvjdbc32436.html" title="When you use an integrated development environment (IDE) to develop an embedded Derby application, you might need to run Derby within a server framework.">Using Derby with IDEs</a></div>
+</div>
+</div>
+
+</body>
+</html>

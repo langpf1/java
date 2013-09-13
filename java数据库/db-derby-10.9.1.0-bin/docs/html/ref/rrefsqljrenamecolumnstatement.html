@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="RENAME COLUMN statement" />
+<meta name="abstract" content="Use the RENAME COLUMN statement to rename a column in a table." />
+<meta name="description" content="Use the RENAME COLUMN statement to rename a column in a table." />
+<meta content="RENAME COLUMN statement, RENAME COLUMN, SQL statements, renaming, columns" name="DC.subject" />
+<meta content="RENAME COLUMN statement, RENAME COLUMN, SQL statements, renaming, columns" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqljrenamestatements.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj95598.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljrenametablestatement.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljcolumnstatements" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>RENAME COLUMN statement </title>
+</head>
+<body id="rrefsqljcolumnstatements"><a name="rrefsqljcolumnstatements"><!-- --></a>
+
+
+    <h1 class="topictitle1">RENAME COLUMN statement </h1>
+
+
+
+<div><p>Use the RENAME COLUMN statement to rename a column in a table.</p>
+
+<div class="section"> <p>The RENAME COLUMN statement allows you to rename an existing 
+column in an existing table in any schema
+(except the schema <em>SYS</em>). </p>
+<p>To rename a column, you must either
+be the database owner or the table owner.</p>
+
+<p>Other types of table alterations are possible;
+see <a href="rrefsqlj81859.html#rrefsqlj81859">ALTER TABLE statement</a>
+for more information.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+    <pre><strong>RENAME COLUMN <em><a href="rreftablename.html">table-Name</a></em>.<em><a href="rrefsimplecolumnname.html">simple-Column-Name</a></em> TO <em><a href="rrefsimplecolumnname.html">simple-Column-Name</a></em></strong></pre>
+
+</div>
+
+<div class="example" id="rrefsqljcolumnstatements__renamecolumnexamples"><a name="rrefsqljcolumnstatements__renamecolumnexamples"><!-- --></a><h2 class="sectiontitle">Examples</h2>
+
+<div class="p">To rename the <em>manager</em> column in table <em>employee</em> to
+<em>supervisor</em>, use the following syntax:
+<pre><strong>RENAME COLUMN EMPLOYEE.MANAGER TO SUPERVISOR</strong></pre>
+
+</div>
+
+<div class="p">You can combine ALTER TABLE and RENAME COLUMN to modify a column's data
+type. To change column <em>c1</em> of table <em>t</em> to the
+new data type <em>NEWTYPE</em>:
+<pre><strong>
+    ALTER TABLE t ADD COLUMN c1_newtype NEWTYPE
+    UPDATE t SET c1_newtype = c1
+    ALTER TABLE t DROP COLUMN c1
+    RENAME COLUMN t.c1_newtype TO c1
+</strong></pre>
+</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Usage notes</h2>
+<div class="restriction"><span class="restrictiontitle">Restriction: </span>If a view, trigger, check constraint, foreign key
+constraint, or <em>generation-clause</em> of a generated column references the
+column, an attempt to rename it will generate an error.</div>
+
+<div class="restriction"><span class="restrictiontitle">Restriction: </span>The RENAME COLUMN statement
+is not allowed if there are any open cursors that reference the column that
+is being altered.</div>
+
+<div class="note"><span class="notetitle">Note: </span>If there is an index
+defined on the column, the column can still be renamed; the index is
+automatically updated to refer to the column by its new name</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqljrenamestatements.html" title="">RENAME statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqlj95598.html" title="">RENAME INDEX statement</a></div>
+<div><a href="rrefsqljrenametablestatement.html" title="">RENAME TABLE statement</a></div>
+</div>
+</div>
+
+</body>
+</html>

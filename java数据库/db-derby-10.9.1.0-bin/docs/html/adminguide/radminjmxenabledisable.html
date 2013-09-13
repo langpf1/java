@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Enabling and disabling JMX" />
+<meta content="Java Management Extensions (JMX) technology, JMX, enabling and disabling" name="DC.subject" />
+<meta content="Java Management Extensions (JMX) technology, JMX, enabling and disabling" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminjmxoverview.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxintro.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxjconsole.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxcode.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxtroubleshoot.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablenoauth.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepwd.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepwdssl.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablesimpleauth.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepolicy.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxdisable.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminjmxenabledisable" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Enabling and disabling JMX</title>
+</head>
+<body id="radminjmxenabledisable"><a name="radminjmxenabledisable"><!-- --></a>
+
+
+<h1 class="topictitle1">Enabling and disabling JMX</h1>
+
+
+<div>
+<div class="section">
+<p>You can use JMX management and monitoring both locally and remotely. The
+term <dfn class="term">local</dfn> means <em>on the same host (machine)</em> and <em>running
+as the same user</em>. For example, this means that local JMX access is possible
+only if the JVM you want to access is running on the same host and as the same
+user as the user who is running a JMX client such as JConsole (or a different user
+with sufficient file system permissions). In order to allow other users to access
+the JVM, or to allow access from other hosts, remote JMX must be enabled.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Local JMX access</h2>
+<p>If you are using a Java SE 6 or later JVM, local JMX management and
+monitoring are most likely enabled by default.</p>
+
+<p>Some JVMs, for example Java SE 5 JVMs, do not enable local JMX management by
+default. Refer to the documentation for your JVM for details. A common way to
+enable local JMX access on these JVMs is to include the
+<samp class="codeph">-Dcom.sun.management.jmxremote</samp> option on the command line when
+you start the JVM.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Remote JMX access</h2>
+<p>Remote JMX management and monitoring is a powerful Java feature, allowing you
+to monitor a specific JVM from a remote location. Enabling remote JMX requires
+explicit actions by the JVM administrator, since it may involve exposing
+sensitive information about your system.</p>
+
+<p>The most common way to enable remote JMX access to your JVM is to specify a
+TCP/IP port number and some basic security settings when you start the JVM. The
+security settings commonly include authentication and SSL (Secure Socket
+Layer). <span>Derby</span> attempts to use
+the JVM's built-in platform MBean server. For a list of current command line
+options (system properties) and their meanings, refer to the table in the
+<cite>Java SE Monitoring and Management Guide</cite> at <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/management/agent.html#gdeum" target="_blank">http://docs.oracle.com/javase/7/docs/technotes/guides/management/agent.html#gdeum
+</a>.</p>
+
+<p>The following topics describe ways to enable and disable remote JMX
+access.</p>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="radminjmxenablenoauth.html">Enabling remote JMX with no authentication or SSL</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="radminjmxenablepwd.html">Enabling remote JMX with password authentication only</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="radminjmxenablepwdssl.html">Enabling remote JMX with password authentication and SSL</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="radminjmxenablesimpleauth.html">Simple authorization using an access file</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="radminjmxenablepolicy.html">Fine-grained authorization using a security policy</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="radminjmxdisable.html">Disabling access to MBeans</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminjmxoverview.html" title="">Using Java Management Extensions (JMX) technology</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminjmxintro.html" title="">Introduction to the Derby MBeans</a></div>
+<div><a href="radminjmxjconsole.html" title="">Using JConsole to access the Derby MBeans</a></div>
+<div><a href="radminjmxcode.html" title="">Using custom Java code to access the Derby MBeans</a></div>
+<div><a href="radminjmxtroubleshoot.html" title="">Troubleshooting JMX connection issues</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="The result offset and fetch first clauses" />
+<meta content="result offset clause, fetch first clause" name="DC.subject" />
+<meta content="result offset clause, fetch first clause" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljoffsetfetch" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>The result offset and fetch first clauses</title>
+</head>
+<body id="rrefsqljoffsetfetch"><a name="rrefsqljoffsetfetch"><!-- --></a>
+
+
+
+<h1 class="topictitle1">The result offset and fetch first clauses</h1>
+
+
+
+
+<div>
+<div class="section"> 
+  <p> The <em>result offset clause</em> provides a way to skip the N
+    first rows in a result set before starting to return any
+    rows. The <em>fetch first clause</em>, which can be combined with
+    the <em>result offset clause</em> if desired, limits the number of rows
+    returned in the result set. The <em>fetch first clause</em> can
+    sometimes be useful for retrieving only a few rows from an
+    otherwise large result set, usually in combination with an ORDER BY
+    clause. The use of this clause can give efficiency benefits. In
+    addition, it can make programming the application simpler.
+  </p>
+ 
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+   
+  <pre><strong>OFFSET { <em>integer-literal</em> | ? } {ROW | ROWS}
+    </strong></pre>
+ 
+
+  <pre><strong>FETCH { FIRST | NEXT } [<em>integer-literal</em> | ? ] {ROW | ROWS} ONLY
+    </strong></pre>
+ 
+<p>
+ROW is synonymous with ROWS and FIRST is synonymous with NEXT.
+</p>
+
+
+<p>
+For the <em>result offset clause</em>, the value of the integer literal (or the
+dynamic parameter <samp class="codeph">?</samp>) must be equal to
+0 (default if the clause is not given), or positive. If it is larger
+than the number of rows in the underlying result set, no rows are
+returned.
+</p>
+
+
+<p>
+For the <em>fetch first clause</em>, the value of the literal (or the dynamic
+parameter <samp class="codeph">?</samp>) must be 1 or
+higher. The literal can be omitted, in which case it defaults to 1. If
+the clause is omitted entirely, all rows (or those rows remaining if
+a <em>result offset clause</em> is also given) will be returned.
+</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2>
+  <pre><strong>-- Fetch the first row of T
+SELECT * FROM T FETCH FIRST ROW ONLY
+
+-- Sort T using column I, then fetch rows 11 through 20 of the sorted
+--   rows (inclusive)
+SELECT * FROM T ORDER BY I OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY
+
+-- Skip the first 100 rows of T
+-- If the table has fewer than 101 records, an empty result set is
+--   returned
+SELECT * FROM T OFFSET 100 ROWS
+
+-- Use of ORDER BY and FETCH FIRST in a subquery
+SELECT DISTINCT A.ORIG_AIRPORT, B.FLIGHT_ID FROM 
+   (SELECT FLIGHT_ID, ORIG_AIRPORT 
+       FROM FLIGHTS 
+       ORDER BY ORIG_AIRPORT DESC 
+       FETCH FIRST 40 ROWS ONLY) 
+    AS A, FLIGHTAVAILABILITY AS B 
+   WHERE A.FLIGHT_ID = B.FLIGHT_ID
+
+JDBC (using a dynamic parameter):
+PreparedStatement p = 
+    con.prepareStatement("SELECT * FROM T ORDER BY I OFFSET ? ROWS");
+p.setInt(1, 100);
+ResultSet rs = p.executeQuery();
+</strong></pre>
+
+<div class="note"><span class="notetitle">Note: </span>
+Make sure to specify the ORDER BY clause if you
+expect to retrieve a sorted result set.
+If you do not use an ORDER BY clause, the result set that is retrieved will
+typically have the order in which the records were inserted.</div>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefclauses.html" title="">SQL clauses</a></div>
+</div>
+</div>
+
+</body>
+</html>

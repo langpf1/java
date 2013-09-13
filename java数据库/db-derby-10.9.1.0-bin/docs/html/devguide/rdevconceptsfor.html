@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Forward only updatable result sets" />
+<meta name="abstract" content="A forward only updatable result set maintains a cursor which can only move in one direction (forward), and also update rows." />
+<meta name="description" content="A forward only updatable result set maintains a cursor which can only move in one direction (forward), and also update rows." />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts28351.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rdevconceptsfor" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Forward only updatable result sets</title>
+</head>
+<body id="rdevconceptsfor"><a name="rdevconceptsfor"><!-- --></a>
+
+
+<h1 class="topictitle1">Forward only updatable result sets</h1>
+
+
+
+<div><p>A forward only updatable result set maintains a cursor
+which can only move in one direction (forward), and also update rows.
+</p>
+
+<div class="section">
+<div class="p">To create a forward only updatable result set, the
+statement has to be created with concurrency mode
+<samp class="codeph">ResultSet.CONCUR_UPDATABLE</samp> and type
+<samp class="codeph">ResultSet.TYPE_FORWARD_ONLY</samp>. 
+<div class="note"><span class="notetitle">Note: </span> The default type is
+<samp class="codeph">ResultSet.TYPE_FORWARD_ONLY</samp>.</div>
+
+</div>
+
+
+<p>Example of using <samp class="codeph">ResultSet.updateXXX() +
+ResultSet.updateRow()</samp> to update a row: </p>
+
+
+<pre>
+  Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, 
+                                        ResultSet.CONCUR_UPDATABLE);
+  ResultSet uprs = stmt.executeQuery(
+    "SELECT FIRSTNAME, LASTNAME, WORKDEPT, BONUS " +
+    "FROM EMPLOYEE");
+
+  while (uprs.next()) {
+      int newBonus = uprs.getInt("BONUS") + 100;
+      uprs.updateInt("BONUS", newBonus);
+      uprs.updateRow();
+  }
+</pre>
+
+
+<p>Example of using <samp class="codeph">ResultSet.deleteRow()</samp> to delete a row: </p>
+
+
+<pre>
+  Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, 
+                                        ResultSet.CONCUR_UPDATABLE);
+  ResultSet uprs = stmt.executeQuery(
+    "SELECT FIRSTNAME, LASTNAME, WORKDEPT, BONUS " +
+    "FROM EMPLOYEE");
+
+  while (uprs.next()) {
+      if (uprs.getInt("WORKDEPT")==300) {
+         uprs.deleteRow();
+      }
+  }
+</pre>
+
+
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Visibility of changes </h2>
+
+
+<ul>
+<li>After an update or delete is made on a forward only result set,
+the result set's cursor is no longer on the row just updated or
+deleted, but immediately before the next row in the result set (it is
+necessary to move to the next row before any further row operations
+are allowed). This means that changes made by
+<samp class="codeph">ResultSet.updateRow()</samp> and
+<samp class="codeph">ResultSet.deleteRow()</samp> are never visible.  
+</li>
+
+<li>If a row has been inserted, i.e using
+<samp class="codeph">ResultSet.insertRow()</samp> it may be visible in a forward
+only result set.</li>
+
+</ul>
+
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Conflicting operations</h2>
+
+<p> The current row of the result set cannot be changed by other
+transactions, since it will be locked with an update lock. 
+Result sets held open after a commit have to move to the next row
+before allowing any operations on it. </p>
+
+
+Some conflicts may prevent the result set from doing updates/deletes:
+<ul>
+<li>If the current row is deleted by a statement in the same transaction, calls to
+<samp class="codeph">ResultSet.updateRow()</samp> will cause an exception, since
+the cursor is no longer positioned on a valid row. </li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts28351.html" title="Updatable result sets in Derby can be updated by using result set update methods (updateRow(),deleteRow() and insertRow()), or by using positioned update or delete queries.">Updatable result sets</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Referência do JDBC" />
+<meta content="API do JDBC, Implementation do Derby" name="DC.subject" />
+<meta content="API do JDBC, Implementation do Derby" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc25142.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32052.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34565.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34954.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27734.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc40794.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc29874.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc23502.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc38274.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc16643.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc30469.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20377.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc96386.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc80004.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc77156.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc59162.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc99392.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc52637.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc66688.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc71949.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlconnection30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcdatabasemetadata30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcparametermetadata30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlpreparedstatement30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlsavepoint.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlstatement30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="crefjdbc12657" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Referência do JDBC</title>
+</head>
+<body id="crefjdbc12657"><a name="crefjdbc12657"><!-- --></a>
+
+
+<h1 class="topictitle1">Referência do JDBC</h1>
+
+
+<div>
+<p>O <span>Derby</span> vem com um
+driver de JDBC nativo.
+Isto torna a API do JDBC a única API para trabalhar com os bancos de dados do
+<span>Derby</span>.
+O <em>driver</em> é um <em>driver</em> de protocolo nativo totalmente Java
+(tipo número quatro, entre os tipos definidos pela Sun).</p>
+
+<p>Este capítulo fornece informações de referência sobre a implementação da
+API do JDBC do <span>Derby</span>, e
+documenta sua conformidade com as APIs 2.0 e 3.0 do JDBC.</p>
+
+<p>Consulte o <cite><span><em>Guia do Desenvolvedor do Derby</em></span></cite>
+para obter instruções orientadas a tarefa sobre como trabalhar com este driver.
+</p>
+
+<p>Este <em>driver</em> de JDBC implementa a interface padrão de JDBC definida
+pela Sun.
+Ao ser chamado a partir de um aplicativo executando na mesma JVM do
+<span>Derby</span>, o <em>driver</em> de
+JDBC suporta conexões com o banco de dados do
+<span>Derby</span> no modo incorporado
+(embedded).
+Não é requerido nenhum transporte de rede para acessar o banco de dados.
+No modo cliente/servidor, o aplicativo cliente envia as requisições JDBC para o
+servidor JDBC através da rede; o servidor, por sua vez, que executa na mesma
+JVM do <span>Derby</span>, envia
+requisições para o <span>Derby</span>
+através do <em>driver</em> de JDBC incorporado.</p>
+
+<p>
+A implementação de JDBC do
+<span>Derby</span>
+fornece acesso aos bancos de dados do
+<span>Derby</span>,
+e fornece todas as interfaces JDBC requeridas.
+Os aspectos não implementados do <em>driver</em> de JDBC retornam uma
+<em>SQLException</em> com uma mensagem declarando
+"Funcionalidade não implementada", e <em>SQLState</em> igual a XJZZZ.
+As partes não implementadas são de funcionalidades não suportadas pelo
+<span>Derby</span>.
+</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="crefjdbc25142.html">Classes, interfaces e métodos java.sql do núcleo do JDBC</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc32052.html">java.sql.Driver</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc34565.html">java.sql.DriverManager.getConnection</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc34954.html">java.sql.Driver.getPropertyInfo</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc27734.html">java.sql.Connection</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc15905.html">java.sql.DatabaseMetaData</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc40794.html">java.sql.Statement</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc29874.html">java.sql.PreparedStatement</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc20485.html">java.sql.CallableStatement</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc23502.html">java.sql.ResultSet</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc38274.html">java.sql.ResultSetMetaData</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc16643.html">java.sql.SQLException</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc30469.html">java.sql.SQLWarning</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc20377.html">Mapeamento de java.sql.Types em tipos SQL</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc96386.html">java.sql.Blob e java.sql.Clob</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc80004.html">java.sql.Connection</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc77156.html">java.sql.ResultSet</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc59162.html">java.sql.Statement</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc99392.html">java.sql.PreparedStatement</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc52637.html">java.sql.CallableStatement</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc66688.html">java.sql.DatabaseMetaData</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc71949.html">java.sql.ResultSetMetaData</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc87220.html">java.sql.BatchUpdateException</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcjsr169.html">Pacote JDBC para Connected Device Configuration/Foundation Profile (JSR169)</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc32593.html">Funcionalidades apenas do JDBC 3.0</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcjavasqlconnection30.html">java.sql.Connection</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcdatabasemetadata30.html">java.sql.DatabaseMetaData</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcparametermetadata30.html">java.sql.ParameterMetaData</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcjavasqlpreparedstatement30.html">java.sql.PreparedStatement</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcjavasqlsavepoint.html">java.sql.Savepoint</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcjavasqlstatement30.html">java.sql.Statement</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc1020262.html">Sintaxe de escape do JDBC</a></strong><br />
+</li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="JDBC escape syntax" />
+<meta content="JDBC escape syntax, Escape syntax (JDBC)" name="DC.subject" />
+<meta content="JDBC escape syntax, Escape syntax (JDBC)" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32052.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34565.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27734.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc40794.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc29874.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc23502.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc38274.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc16643.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc30469.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlsavepoint.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20377.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_1summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc70824.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc28456.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbclimit.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc88908.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc37244.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc12124.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcescapedate.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc41784.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc1020262" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>JDBC escape syntax </title>
+</head>
+<body id="rrefjdbc1020262"><a name="rrefjdbc1020262"><!-- --></a>
+
+
+<h1 class="topictitle1">JDBC escape syntax </h1>
+
+
+<div>
+<div class="section"><p>JDBC provides a way of smoothing out some of the differences in
+the way different DBMS vendors implement SQL. This is called escape syntax.
+Escape syntax signals that the JDBC driver, which is provided by a particular
+vendor, scans for any escape syntax and converts it into the code that the
+particular database understands. This makes escape syntax DBMS-independent.</p>
+</div>
+
+<div class="section"><p>A JDBC escape clause begins and ends with curly braces. A keyword
+always follows the opening curly brace:</p>
+</div>
+
+<div class="example"> <pre><strong>{<strong><em>keyword</em></strong> }</strong></pre>
+</div>
+
+<div class="section"><div class="p"><span>Derby</span> supports
+the following JDBC escape keywords, which are case-insensitive:   <ul>
+<li><em><a href="rrefjdbc70824.html#rrefjdbc70824">JDBC escape keyword for call statements</a></em>   <p>The escape keyword
+for use in <em>CallableStatements</em>.</p>
+</li>
+
+<li><em><a href="rrefjdbc28456.html#rrefjdbc28456">JDBC escape syntax for LIKE clauses</a></em>   <p>The keyword
+for specifying escape characters for LIKE clauses.</p>
+</li>
+
+<li><em><a href="rrefjdbclimit.html#rrefjdbclimit">JDBC escape syntax for limit/offset clauses</a></em>   <p>The
+escape keywords for specifying limit/offset clauses.</p>
+</li>
+
+<li><em><a href="rrefjdbc88908.html#rrefjdbc88908">JDBC escape syntax for fn keyword</a></em>   <p>The escape keyword
+for scalar functions.</p>
+</li>
+
+<li><em><a href="rrefjdbc37244.html#rrefjdbc37244">JDBC escape syntax for outer joins</a></em>   <p>The escape keyword
+for outer joins.</p>
+</li>
+
+<li><em><a href="rrefjdbc12124.html#rrefjdbc12124">JDBC escape syntax for time formats</a></em>   <p>The escape keyword
+for time formats.</p>
+</li>
+
+<li><em><a href="rrefjdbcescapedate.html#rrefjdbcescapedate">JDBC escape syntax for date formats</a></em>   <p>The escape keyword
+for date formats.</p>
+</li>
+
+<li><em><a href="rrefjdbc41784.html#rrefjdbc41784">JDBC escape syntax for timestamp formats</a></em>   <p>The escape keyword
+for timestamp formats.</p>
+</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><div class="p">Other JDBC escape keywords are not supported.   <div class="note"><span class="notetitle">Note: </span><span>Derby</span> returns
+the SQL unchanged in the <em>Connection.nativeSQL</em> call, since the escape
+syntax is native to SQL. In addition, it is unnecessary to call <em>Statement.setEscapeProcessing</em> for
+this reason.</div>
+</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefjdbc70824.html">JDBC escape keyword for call statements</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc28456.html">JDBC escape syntax for LIKE clauses</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbclimit.html">JDBC escape syntax for limit/offset clauses</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc88908.html">JDBC escape syntax for fn keyword</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc37244.html">JDBC escape syntax for outer joins</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc12124.html">JDBC escape syntax for time formats</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcescapedate.html">JDBC escape syntax for date formats</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc41784.html">JDBC escape syntax for timestamp formats</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefjdbc12657.html" title="Derby comes with a built-in JDBC driver.">JDBC reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjdbc32052.html" title="">java.sql.Driver interface</a></div>
+<div><a href="rrefjdbc34565.html" title="">java.sql.DriverManager.getConnection method</a></div>
+<div><a href="rrefjdbc27734.html" title="">java.sql.Connection interface</a></div>
+<div><a href="rrefjdbc15905.html" title="">java.sql.DatabaseMetaData interface</a></div>
+<div><a href="rrefjdbc40794.html" title="">java.sql.Statement interface</a></div>
+<div><a href="rrefjdbc20485.html" title="">java.sql.CallableStatement interface</a></div>
+<div><a href="rrefjdbc29874.html" title="">java.sql.PreparedStatement interface</a></div>
+<div><a href="rrefjdbc23502.html" title="">java.sql.ResultSet interface</a></div>
+<div><a href="rrefjdbc38274.html" title="">java.sql.ResultSetMetaData interface</a></div>
+<div><a href="rrefjdbc16643.html" title="">java.sql.SQLException class</a></div>
+<div><a href="rrefjdbc30469.html" title="">java.sql.SQLWarning class</a></div>
+<div><a href="rrefjdbcjavasqlsavepoint.html" title="">java.sql.Savepoint interface</a></div>
+<div><a href="rrefjdbc20377.html" title="In Derby, the java.sql.Types are mapped to SQL data types">Mapping of java.sql.Types to SQL types</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">JDBC Package for Connected Device Configuration/Foundation Profile (JSR 169)</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0 and 4.1 features</a></div>
+<div><a href="rrefjdbc4_1summary.html" title="">JDBC 4.1-only features</a></div>
+</div>
+</div>
+
+</body>
+</html>

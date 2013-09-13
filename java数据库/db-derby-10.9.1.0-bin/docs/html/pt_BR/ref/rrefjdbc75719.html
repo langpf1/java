@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CallableStatement e parâmetros INOUT" />
+<meta content="java.sql.CallableStatement, e parâmetros INOUT" name="DC.subject" />
+<meta content="java.sql.CallableStatement, e parâmetros INOUT" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjavcallstatout.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc75719" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CallableStatement e parâmetros INOUT</title>
+</head>
+<body id="rrefjdbc75719"><a name="rrefjdbc75719"><!-- --></a>
+
+
+<h1 class="topictitle1">CallableStatement e parâmetros INOUT</h1>
+
+
+<div>
+<div class="section">
+<p>Os parâmetros INOUT são mapeados em uma <em>matriz</em> do tipo do parâmetro
+no Java (O método deve receber uma matriz como seu parâmetro).
+Isto está em conformidade com as recomendações do padrão SQL.</p>
+
+</div>
+
+<div class="section">
+<div class="p">Dado o seguinte exemplo:
+<pre><strong>CallableStatement call = conn.prepareCall(
+    "{CALL dobreMeuInteiro(?)}");
+<span>// para os parâmetros INOUT, é boa prática registrar
+// o parâmetro de saída antes de definir o valor de entrada</span>
+call.registerOutParameter(1, Types.INTEGER);
+call.setInt(1,10);
+call.execute();
+int retval = call.getInt(1);</strong>
+</pre>
+
+</div>
+
+</div>
+
+<div class="section">
+<div class="p">O método <em>doubleIt</em> deve receber uma matriz unidimensional de
+<samp class="codeph">inteiros</samp>.
+Abaixo está um código fonte de amostra para este método:
+<pre><strong>public static void dobreMeuInteiro(int[] i) {
+    i[0] *=2;
+    <span>/* O <span>Derby</span>  retorna o primeiro elemento da matriz. */</span>
+}</strong>
+</pre>
+
+<div class="note"><span class="notetitle">Nota: </span>O valor retornado <em>não</em> é empacotado em uma matriz, mesmo que o
+parâmetro para o método seja.</div>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="Tabela 1. Correspondência de tipo do parâmetro INOUT" frame="border" border="1" rules="all"><caption>Tabela 1. Correspondência de tipo do parâmetro INOUT</caption>
+
+
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="39.39393939393939%" id="N100D7">Tipo do JDBC</th>
+
+<th align="left" valign="bottom" width="27.27272727272727%" id="N100E0">Tipo da matriz para o parâmetro do método</th>
+
+<th align="left" valign="bottom" width="33.33333333333333%" id="N100E9">Valor e tipo retornado</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">BIGINT</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">long[]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">long</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">BINARY</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">byte[][]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">byte[]</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">BIT</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">boolean[]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">boolean</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">DATE</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0"><em>java.sql.Date[]</em></td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9"><em>java.sql.Date</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">DOUBLE</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">double[]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">double</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">FLOAT</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">double[]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">double</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">INTEGER</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">int[]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">int</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">LONGVARBINARY</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">byte[][]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">byte[]</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">REAL</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">float[]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">float</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">SMALLINT</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">short[]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">short</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">TIME</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0"><em>java.sql.Time[]</em></td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9"><em>java.sql.Time</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">TIMESTAMP</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0"><em>java.sql.Timestamp[]</em></td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9"><em>java.sql.Timestamp</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">VARBINARY</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0">byte[][]</td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9">byte[]</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">OTHER</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0"><em>seuTipo[]</em></td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9"><em>seuTipo</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="39.39393939393939%" headers="N100D7">JAVA_OBJECT (válido apenas nos ambientes Java2/JDBC 2.0)</td>
+
+<td valign="top" width="27.27272727272727%" headers="N100E0"><em>seuTipo[]</em></td>
+
+<td valign="top" width="33.33333333333333%" headers="N100E9"><em>seuTipo</em></td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+<p>Deve ser registrado o tipo de dado de saída do parâmetro antes de executar
+a chamada.
+Para os parâmetros INOUT, é boa prática registrar o parâmetro de saída antes
+de definir seu valor de entrada.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefjdbc20485.html" title="">java.sql.CallableStatement</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefjavcallstatout.html" title="">CallableStatement e parâmetros OUT</a></div>
+</div>
+</div>
+
+</body>
+</html>

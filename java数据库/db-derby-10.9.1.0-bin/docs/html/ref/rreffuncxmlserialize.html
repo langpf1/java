@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="XMLSERIALIZE operator" />
+<meta name="abstract" content="XMLSERIALIZE is a SQL/XML operator that you can use to convert an XML type to a character type. There is no other way to convert the type of a Derby XML value." />
+<meta name="description" content="XMLSERIALIZE is a SQL/XML operator that you can use to convert an XML type to a character type. There is no other way to convert the type of a Derby XML value." />
+<meta content="XMLSERIALIZE operator, operators, XMLSERIALIZE, XML, operators, XMLSERIALIZE" name="DC.subject" />
+<meta content="XMLSERIALIZE operator, operators, XMLSERIALIZE, XML, operators, XMLSERIALIZE" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreffuncxmlserialize" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>XMLSERIALIZE operator</title>
+</head>
+<body id="rreffuncxmlserialize"><a name="rreffuncxmlserialize"><!-- --></a>
+
+
+<h1 class="topictitle1">XMLSERIALIZE operator</h1>
+
+
+
+<div><p>XMLSERIALIZE is a SQL/XML operator that you can use to convert
+an XML type to a character type. There is no other way to convert the type
+of a <span>Derby</span> XML value.</p>
+
+<div class="section"> <div class="attention"><span class="attentiontitle">Attention: </span>Serialization is performed based on the SQL/XML
+serialization rules. These rules, combined with the fact that <span>Derby</span> supports
+only a subset of the XMLSERIALIZE syntax, dictate that the results of an XMLSERIALIZE
+operation are not guaranteed to be in-tact copies of the original XML text.
+For example, assume that <samp class="codeph">[xString]</samp> is a textual representation
+of a well-formed XML document.  You issue the following statements:<pre>INSERT INTO <var class="varname">x_table</var> (<var class="varname">id</var>, <var class="varname">xcol</var>)
+    VALUES (3, XMLPARSE(DOCUMENT '<var class="varname">[xString]</var>' PRESERVE WHITESPACE));
+
+SELECT id, XMLSERIALIZE(<var class="varname">xcol</var> AS VARCHAR(100))
+    FROM <var class="varname">x_table</var> WHERE id = 3;
+</pre>
+<p>There is no guarantee that the result of the XMLSERIALIZE operator
+will be identical to the original <samp class="codeph">[xString]</samp> representation.
+Certain transformations can occur as part of XMLSERIALIZE processing, and
+those transformations are defined in the SQL/XML specification.  In some cases
+the result of XMLSERIALIZE might actually be the same as the original textual
+representation, but that is not guaranteed. </p>
+<p>When an XMLSERIALIZE operator
+is specified as part of the top-level result set for a query, the result can
+be accessed from JDBC by using whatever JDBC getXXX methods are allowed on
+the <samp class="codeph">string-data-type</samp> argument that is included in the XMLSERIALIZE
+syntax.  If you attempt to select the contents of an XML value from a top-level
+result set without using the XMLSERIALIZE operator, <span>Derby</span> throws
+an error. <span>Derby</span> does not
+implicitly serialize XML values.</p>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>XMLSERIALIZE ( <var class="varname">xml-value-expression</var> AS <var class="varname">string-data-type</var> )</strong></pre>
+<dl>
+<dt class="dlterm"><samp class="codeph">xml-value-expression</samp></dt>
+
+<dd>Can be any Derby XML value, including an XML result sequence generated
+by the XMLQUERY operator. The <samp class="codeph">xml-value-expression</samp> argument
+cannot be a parameter.  <p />
+</dd>
+
+
+<dt class="dlterm"><samp class="codeph">string-data-type</samp></dt>
+
+<dd>Must be a SQL character string type, such as CHAR, VARCHAR, LONG VARCHAR,
+or CLOB.  If you specify a type that is not a valid character string type, <span>Derby</span> throws an error.</dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Examples</h2><div class="p">In the <samp class="codeph">x_table</samp> table,
+to display the contents of the <samp class="codeph">xcol</samp> XML column, use this
+statement:<pre>SELECT ID, 
+    XMLSERIALIZE(
+    <var class="varname">xcol</var> AS CLOB) 
+FROM <var class="varname">x_table</var></pre>
+To retrieve the results from JDBC,
+you can use the JDBC getCharacterStream() or getString() method.</div>
+<div class="p">To
+display the results of an XMLQUERY operation, use the following statement:<pre>SELECT ID, 
+    XMLSERIALIZE(
+        XMLQUERY('<var class="varname">//student[@age&gt;20]</var>' 
+           PASSING BY REF <var class="varname">xcol</var> EMPTY ON EMPTY)
+    AS VARCHAR(50))
+FROM <var class="varname">x_table</var></pre>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Usage note</h2><p><span>Derby</span> requires
+that a JAXP parser (such as Apache Xerces) and Apache Xalan are listed
+in the Java classpath for the XML functions to work.  If either the JAXP parser
+or Xalan is missing from the classpath, attempts to use the XMLSERIALIZE operator
+will result in an error. In some situations, you may need to take steps to place
+the parser and Xalan in your classpath. See "XML data types and operators" in
+the <span><em>Derby Developer's Guide</em></span> for details.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

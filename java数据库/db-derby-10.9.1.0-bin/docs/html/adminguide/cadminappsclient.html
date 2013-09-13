@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Accessing the Network Server by using the network client driver" />
+<meta name="abstract" content="When connecting to the Network Server, your application needs to load a driver and connection URL that is specific to the Network Server. In addition, you must specify a user name and password if you are using authentication." />
+<meta name="description" content="When connecting to the Network Server, your application needs to load a driver and connection URL that is specific to the Network Server. In addition, you must specify a user name and password if you are using authentication." />
+<meta content="Network client driver" name="DC.subject" />
+<meta content="Network client driver" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps59125.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsthenetworkserverandjvms.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappschangingyourclasspath.html" />
+<meta scheme="URI" name="DC.Relation" content="tadmincbdjhhfd.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigshuttingdownthenetworkserver.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigsysteminformation.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminnsdatasources.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps811478.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsusingthederbytoolswiththene.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappssettingportnumbers.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsclientsecurity.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsclienttracing.html" />
+<meta scheme="URI" name="DC.Relation" content="radminappsclientxmp.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminappsclient" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Accessing the Network Server by using the network client driver</title>
+</head>
+<body id="cadminappsclient"><a name="cadminappsclient"><!-- --></a>
+
+
+<h1 class="topictitle1">Accessing the Network Server by using the network client driver</h1>
+
+
+
+<div><p>When connecting to the Network Server, your application needs to
+load a driver and connection URL that is specific to the Network Server. In
+addition, you must specify a user name and password if you are using authentication.</p>
+
+<div class="p">The driver that you need to access the Network Server is: <pre>org.apache.derby.jdbc.ClientDriver</pre>
+</div>
+
+<div class="p">The syntax of the URL that is required to access the Network Server is:<pre>jdbc:derby://&lt;<em>server</em>&gt;[:&lt;<em>port</em>&gt;]/
+&lt;<em>databaseName</em>&gt;[;&lt;URL attribute&gt;=&lt;value&gt; [;...]]
+</pre>
+where the <samp class="codeph">&lt;URL attribute&gt;</samp> is either a <span>Derby</span> embedded or network
+client attribute.</div>
+
+<p>To access an in-memory database using the Network Server, the syntax is:</p>
+
+<pre>jdbc:derby://&lt;<em>server</em>&gt;[:&lt;<em>port</em>&gt;]/memory:
+&lt;<em>databaseName</em>&gt;[;&lt;URL attribute&gt;=&lt;value&gt; [;...]]
+</pre>
+
+<p>For more information, see "Using in-memory databases" in the
+<span><em>Derby Developer's Guide</em></span>.</p>
+
+<p>
+For both driver and DataSource access, the database name (including path), 
+user, password  and other attribute values must consist of
+characters that can be converted to UTF-8.  The total byte length of the 
+database name plus attributes when converted to UTF-8 must not exceed 255 
+bytes; keep in mind that in UTF-8, a character may occupy from 1 to 4 bytes.
+You may be able to work around this restriction for long paths or 
+paths that include multibyte characters by setting the 
+<samp class="codeph">derby.system.home</samp> system property when starting the Network 
+Server and accessing the database with a relative path that is shorter and 
+does not include multibyte characters.</p>
+
+<p>The following table shows standard JDBC DataSource properties.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the standard JDBC DataSource properties, providing the data type, description, URL attribute, and additional information for each property." frame="border" border="1" rules="all"><caption>Table 1. Standard JDBC DataSource properties</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="23%" id="N100F6">Property</th>
+
+<th valign="bottom" width="10%" id="N100FD">Type</th>
+
+<th valign="bottom" width="21%" id="N10104">Description</th>
+
+<th valign="bottom" width="16%" id="N1010B">URL Attribute</th>
+
+<th valign="bottom" width="30%" id="N10112">Notes</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="23%" headers="N100F6">databaseName</td>
+
+<td valign="top" width="10%" headers="N100FD">String</td>
+
+<td valign="top" width="21%" headers="N10104">The name of the database. This property is required.</td>
+
+<td valign="top" width="16%" headers="N1010B">None</td>
+
+<td valign="top" width="30%" headers="N10112">This property is also available using EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23%" headers="N100F6">dataSourceName</td>
+
+<td valign="top" width="10%" headers="N100FD">String</td>
+
+<td valign="top" width="21%" headers="N10104">The data source name.</td>
+
+<td valign="top" width="16%" headers="N1010B">None</td>
+
+<td valign="top" width="30%" headers="N10112">This property is also available using EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23%" headers="N100F6">description</td>
+
+<td valign="top" width="10%" headers="N100FD">String</td>
+
+<td valign="top" width="21%" headers="N10104">A description of the data source.</td>
+
+<td valign="top" width="16%" headers="N1010B">None</td>
+
+<td valign="top" width="30%" headers="N10112">This property is also available using EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23%" headers="N100F6">user</td>
+
+<td valign="top" width="10%" headers="N100FD">String</td>
+
+<td valign="top" width="21%" headers="N10104">The user's account name.</td>
+
+<td valign="top" width="16%" headers="N1010B"><em>user</em></td>
+
+<td valign="top" width="30%" headers="N10112">Default is APP. This property is also available using
+EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23%" headers="N100F6">password</td>
+
+<td valign="top" width="10%" headers="N100FD">String</td>
+
+<td valign="top" width="21%" headers="N10104">The user's database password.</td>
+
+<td valign="top" width="16%" headers="N1010B"><em>password</em></td>
+
+<td valign="top" width="30%" headers="N10112">This property is also available using EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23%" headers="N100F6">serverName</td>
+
+<td valign="top" width="10%" headers="N100FD">String</td>
+
+<td valign="top" width="21%" headers="N10104">The host name or TCP/IP address where the server is
+listening for requests.</td>
+
+<td valign="top" width="16%" headers="N1010B">None</td>
+
+<td valign="top" width="30%" headers="N10112">Default is "localhost".</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23%" headers="N100F6">portNumber</td>
+
+<td valign="top" width="10%" headers="N100FD">Integer</td>
+
+<td valign="top" width="21%" headers="N10104">The port number where the server is listening for requests.</td>
+
+<td valign="top" width="16%" headers="N1010B">None</td>
+
+<td valign="top" width="30%" headers="N10112">Default is "1527".</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>The following table shows client-specific JDBC DataSource properties.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the client-specific JDBC DataSource properties, providing the data type, description, URL attribute, and additional information for each property." frame="border" border="1" rules="all"><caption>Table 2. Client-specific DataSource properties</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="23.711340206185564%" id="N1029C">Property</th>
+
+<th valign="bottom" width="10.309278350515463%" id="N102A3">Type</th>
+
+<th valign="bottom" width="21.649484536082475%" id="N102AA">Description</th>
+
+<th valign="bottom" width="25.773195876288657%" id="N102B1">URL Attribute</th>
+
+<th valign="bottom" width="18.556701030927837%" id="N102B8">Notes</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="23.711340206185564%" headers="N1029C">traceFile</td>
+
+<td valign="top" width="10.309278350515463%" headers="N102A3">String</td>
+
+<td valign="top" width="21.649484536082475%" headers="N102AA">The filename for tracing output. Setting this property
+turns on tracing. See <a href="cadminappsclienttracing.html#cadminappsclienttracing">Network client tracing</a>.</td>
+
+<td valign="top" width="25.773195876288657%" headers="N102B1"><em>traceFile</em></td>
+
+<td valign="top" width="18.556701030927837%" headers="N102B8">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.711340206185564%" headers="N1029C">traceDirectory</td>
+
+<td valign="top" width="10.309278350515463%" headers="N102A3">String</td>
+
+<td valign="top" width="21.649484536082475%" headers="N102AA">The directory for the tracing output. Each connection
+will send output to a separate file. Setting this property turns on tracing.
+See <a href="cadminappsclienttracing.html#cadminappsclienttracing">Network client tracing</a>.</td>
+
+<td valign="top" width="25.773195876288657%" headers="N102B1"><em>traceDirectory</em></td>
+
+<td valign="top" width="18.556701030927837%" headers="N102B8">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.711340206185564%" headers="N1029C">traceLevel</td>
+
+<td valign="top" width="10.309278350515463%" headers="N102A3">Integer</td>
+
+<td valign="top" width="21.649484536082475%" headers="N102AA">The level of client tracing if <em>traceFile</em> or <em>traceDirectory</em> are
+set.</td>
+
+<td valign="top" width="25.773195876288657%" headers="N102B1"><em>traceLevel</em></td>
+
+<td valign="top" width="18.556701030927837%" headers="N102B8">The default is TRACE_ALL.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.711340206185564%" headers="N1029C">traceFileAppend</td>
+
+<td valign="top" width="10.309278350515463%" headers="N102A3">Boolean</td>
+
+<td valign="top" width="21.649484536082475%" headers="N102AA">Value is true if tracing output should append to the
+existing trace file.</td>
+
+<td valign="top" width="25.773195876288657%" headers="N102B1"><em>traceFileAppend</em></td>
+
+<td valign="top" width="18.556701030927837%" headers="N102B8">The default is false.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.711340206185564%" headers="N1029C">securityMechanism</td>
+
+<td valign="top" width="10.309278350515463%" headers="N102A3">Integer</td>
+
+<td valign="top" width="21.649484536082475%" headers="N102AA">The security mechanism. See <a href="cadminappsclientsecurity.html#cadminappsclientsecurity">Network client security</a>.</td>
+
+<td valign="top" width="25.773195876288657%" headers="N102B1"><em>securityMechanism</em></td>
+
+<td valign="top" width="18.556701030927837%" headers="N102B8">The default is USER_ONLY _SECURITY.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.711340206185564%" headers="N1029C">retrieveMessageText</td>
+
+<td valign="top" width="10.309278350515463%" headers="N102A3">Boolean</td>
+
+<td valign="top" width="21.649484536082475%" headers="N102AA">Retrieve message text from the server. A stored procedure
+is called to retrieve the message text with each <em>SQLException</em> and might
+start a new unit of work. Set this property to false if you do not want the
+performance impact or when starting new units of work.</td>
+
+<td valign="top" width="25.773195876288657%" headers="N102B1"><em>retrieveMessageText</em></td>
+
+<td valign="top" width="18.556701030927837%" headers="N102B8">The default is true.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.711340206185564%" headers="N1029C">ssl</td>
+
+<td valign="top" width="10.309278350515463%" headers="N102A3">String</td>
+
+<td valign="top" width="21.649484536082475%" headers="N102AA">The SSL mode for the client connection. See <a href="cadminssl.html#cadminssl">Network encryption and authentication with SSL/TLS</a></td>
+
+<td valign="top" width="25.773195876288657%" headers="N102B1"><em>ssl</em></td>
+
+<td valign="top" width="18.556701030927837%" headers="N102B8">The default is <samp class="codeph">off</samp>.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>The following table shows server-specific JDBC DataSource properties.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the server-specific JDBC DataSource properties, providing the data type, description, URL attribute, and additional information for each property." frame="border" border="1" rules="all"><caption>Table 3. Server-specific DataSource properties</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="23%" id="N1048D">Property</th>
+
+<th valign="bottom" width="10%" id="N10494">Type</th>
+
+<th valign="bottom" width="21%" id="N1049B">Description</th>
+
+<th valign="bottom" width="16%" id="N104A2">URL Attribute</th>
+
+<th valign="bottom" width="30%" id="N104A9">Notes</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="23%" headers="N1048D">connectionAttributes</td>
+
+<td valign="top" width="10%" headers="N10494">String</td>
+
+<td valign="top" width="21%" headers="N1049B">Set to the list of <span>Derby</span> embedded
+connection attributes separated by semicolons.</td>
+
+<td valign="top" width="16%" headers="N104A2">Various</td>
+
+<td valign="top" width="30%" headers="N104A9">This property is also available using EmbeddedDataSource.
+See the <span><em>Derby Reference Manual</em></span> for more information
+about the various connection attributes.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23%" headers="N1048D">createDatabase</td>
+
+<td valign="top" width="10%" headers="N10494">String</td>
+
+<td valign="top" width="21%" headers="N1049B">If set to "create", create the database specified with databaseName property.</td>
+
+<td valign="top" width="16%" headers="N104A2"><em>create</em></td>
+
+<td valign="top" width="30%" headers="N104A9">This property is also available using EmbeddedDataSource.
+See the <span><em>Derby Reference Manual</em></span> for more information.
+Similar to setting connectionAttribute to "create=true". Only "create" is allowed, other values equate to null. The result of conflicting settings of createDatabase, shutdownDatabase and connectionAttributes is undefined.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23%" headers="N1048D">shutdownDatabase</td>
+
+<td valign="top" width="10%" headers="N10494">String</td>
+
+<td valign="top" width="21%" headers="N1049B">If set to "shutdown", shutdown the database specified with databaseName property.</td>
+
+<td valign="top" width="16%" headers="N104A2"><em>shutdown</em></td>
+
+<td valign="top" width="30%" headers="N104A9">This property is also available using EmbeddedDataSource.
+See the <span><em>Derby Reference Manual</em></span> for more information.
+Similar to setting connectionAttribute to "shutdown=true". Only "shutdown" is allowed, other values equate to null. The result of conflicting settings of createDatabase, shutdownDatabase and connectionAttributes is undefined.
+If authentication <strong>and</strong> sqlAuthorization are both enabled, database shutdown is restricted to the database owner.
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>Note that <em>setAttributesAsPassword</em>, which is available for the embedded
+DataSource, is not available for the client DataSource.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cadminappsclientsecurity.html">Network client security</a></strong><br />
+The Derby Network Client allows you to select a security mechanism by specifying a value for the securityMechanism property.</li>
+<li class="ulchildlink"><strong><a href="cadminappsclienttracing.html">Network client tracing</a></strong><br />
+The Derby Network client provides a tracing facility to collect JDBC trace information and view protocol flows.</li>
+<li class="ulchildlink"><strong><a href="radminappsclientxmp.html">Network client driver examples</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminapps59125.html" title="">Using the Network Server with preexisting Derby applications</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminappsthenetworkserverandjvms.html" title="">The Network Server and JVMs</a></div>
+<div><a href="cadminnsdatasources.html" title="The Network Server supports the Derby Network Client driver DataSource classes org.apache.derby.jdbc.ClientDataSource and org.apache.derby.jdbc.ClientConnectionPoolDataSource on all supported Java SE platforms.">Accessing the Network Server by using a DataSource object</a></div>
+<div><a href="cadminapps811478.html" title="">XA and the Network Server</a></div>
+<div><a href="cadminappsusingthederbytoolswiththene.html" title="">Using the Derby tools with the Network Server</a></div>
+<div><a href="cadminapps.html" title="">Differences between running Derby in embedded mode and using the Network Server</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminappschangingyourclasspath.html" title="">Installing required jar files and adding them to the classpath</a></div>
+<div><a href="tadmincbdjhhfd.html" title="To start the Network Server, you can invoke a script, a jar file, or a class.">Starting the Network Server</a></div>
+<div><a href="tadminconfigshuttingdownthenetworkserver.html" title="To shut down a Network Server, you can invoke a script, a jar file, or a class.">Shutting down the Network Server</a></div>
+<div><a href="tadminconfigsysteminformation.html" title="">Obtaining system information</a></div>
+<div><a href="tadminappssettingportnumbers.html" title="">Setting port numbers</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="What is an index?" />
+<meta content="Indexes, definition, when they are useful" name="DC.subject" />
+<meta content="Indexes, definition, when they are useful" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz30217.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz39106.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz30768.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz41314.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz22900.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz856914.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunoptimz33368" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>What is an index?</title>
+</head>
+<body id="ctunoptimz33368"><a name="ctunoptimz33368"><!-- --></a>
+
+
+<h1 class="topictitle1">What is an index?</h1>
+
+
+<div>
+<p>An index is a database structure that provides quick lookup of data in
+a column or columns of a table.</p>
+
+<div class="p">For example, a <em>Flights</em> table in a <em>travelDB</em> database has three indexes:  
+<ul>
+<li>An index on the <em>orig_airport</em> column (called <em>OrigIndex</em>)</li>
+
+<li>An index on the <em>dest_airport</em> column (called <em>DestIndex</em>)</li>
+
+<li>An index enforcing the <em>primary key</em> constraint
+on the <em>flight_id</em> and <em>segment_number</em> columns (which has a system-generated name)</li>
+
+</ul>
+</div>
+
+<p>This means there are three separate structures that provide shortcuts into
+the <em>Flights</em> table. Let's look at one of those
+structures, <em>OrigIndex</em>.</p>
+
+<div class="p"><em>OrigIndex</em> stores every value in the <em>orig_airport</em> column, plus information on how to retrieve the entire corresponding
+row for each value.   
+<ul>
+<li>For every row in <em>Flights</em>, there is an entry in <em>OrigIndex</em> that includes the value of the <em>orig_airport</em> column and the address of the row itself. The entries are
+stored in ascending order by the <em>orig_airport</em> values.</li>
+
+</ul>
+</div>
+
+<div class="p">When an index includes more than one column, the first column is the main
+one by which the entries are ordered. For example, the index on (<em>flight_id</em>, <em>segment_number</em>) is ordered first by <em>flight_id</em>. If there is more than one <em>flight_id</em> of the same value, those entries are then ordered by <em>segment_number</em>. An excerpt from the entries in the index might look like
+this:  
+<pre>'AA1111' 1
+'AA1111' 2
+'AA1112' 1
+'AA1113' 1
+'AA1113' 2</pre>
+</div>
+
+<p>Indexes are helpful only sometimes. This particular index is useful when
+a statement's WHERE clause is looking for rows for which the value of <em>orig_airport</em> is some specific value or range of values.
+SELECTs, UPDATEs, and DELETEs can all have WHERE clauses.</p>
+
+<div class="p">For example, <em>OrigIndex</em> is helpful for statements
+such as the following:  
+<pre><strong>SELECT *
+FROM Flights
+WHERE orig_airport = 'SFO'
+
+SELECT *
+FROM Flights
+WHERE orig_airport &lt; 'BBB'
+
+SELECT *
+FROM Flights
+WHERE orig_airport &gt;= 'MMM'</strong></pre>
+</div>
+
+<div class="p"><em>DestIndex</em> is helpful for statements such as the
+following:  
+<pre><strong>SELECT *
+FROM Flights
+WHERE dest_airport = 'SCL'</strong></pre>
+</div>
+
+<div class="p">The primary key index (on <em>flight_id</em> and <em>segment_number</em>) is helpful for statements such as the following:  
+<pre><strong>SELECT *
+FROM Flights
+WHERE flight_id = 'AA1111'
+
+SELECT *
+FROM Flights
+WHERE flight_id BETWEEN 'AA1111' AND 'AA1115'
+
+SELECT *
+FROM FlightAvailability AS fa, Flights AS fts
+WHERE flight_date &gt; CURRENT_DATE
+AND fts.flight_id = fa.flight_id
+AND fts.segment_number = fa.segment_number</strong></pre>
+</div>
+
+<p>The next section discusses why the indexes are helpful for these statements
+but not for others.</p>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctunoptimz30217.html" title="">Index use and access paths</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctunoptimz39106.html" title="">What's optimizable?</a></div>
+<div><a href="ctunoptimz30768.html" title="">Covering indexes</a></div>
+<div><a href="ctunoptimz41314.html" title="">Useful indexes can use qualifiers</a></div>
+<div><a href="ctunoptimz22900.html" title="">When a table scan Is better</a></div>
+<div><a href="ctunoptimz856914.html" title="">Indexes have a cost for inserts, updates, and deletes</a></div>
+</div>
+</div>
+
+</body>
+</html>

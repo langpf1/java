@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="TIME function" />
+<meta name="abstract" content="The TIME function returns a time from a value." />
+<meta name="description" content="The TIME function returns a time from a value." />
+<meta content="TIME function" name="DC.subject" />
+<meta content="TIME function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreftimefunc" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>TIME function</title>
+</head>
+<body id="rreftimefunc"><a name="rreftimefunc"><!-- --></a>
+
+
+<h1 class="topictitle1">TIME function</h1>
+
+
+
+<div><p>The TIME function returns a time from a value.</p>
+
+<div class="section"> <p>The argument must be a time, timestamp, or a valid string representation
+of a time or timestamp that is not a CLOB, LONG VARCHAR, or XML value. The
+result of the function is a time. If the argument can be null, the result
+can be null; if the argument is null, the result is the null value. </p>
+ <div class="p">The
+other rules depend on the data type of the argument specified:  <ul>
+<li>If the argument is a time: The result is that time.</li>
+
+<li>If the argument is a timestamp: The result is the time part of the timestamp.</li>
+
+<li>If the argument is a string: The result is the time represented by the
+string.</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>TIME ( <em>expression</em> )</strong></pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre><strong>values time(current_timestamp)</strong></pre>
+ <p>If
+the current time is 5:03 PM, the value returned is <samp class="codeph">17:03:00</samp>.</p>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

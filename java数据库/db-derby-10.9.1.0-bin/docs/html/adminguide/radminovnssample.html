@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="The NsSample sample program" />
+<meta name="abstract" content="The NsSample demonstration program is a simple JDBC application that interacts with the Network Server." />
+<meta name="description" content="The NsSample demonstration program is a simple JDBC application that interacts with the Network Server." />
+<meta content="Network Server, NsSample sample program" name="DC.subject" />
+<meta content="Network Server, NsSample sample program" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="radminsampleprograms.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminovntsrvsample.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminovnsrundemo.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminovnssample" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>The NsSample sample program</title>
+</head>
+<body id="radminovnssample"><a name="radminovnssample"><!-- --></a>
+
+
+<h1 class="topictitle1">The NsSample sample program</h1>
+
+
+
+<div><p>The <em>NsSample</em> demonstration program is a simple JDBC application
+that interacts with the Network Server.</p>
+
+<div class="section"><div class="p">The <em>NsSample</em> program performs the following tasks: <ul>
+<li>Starts the Network Server. </li>
+
+<li>Checks that the Network Server is running.</li>
+
+<li>Loads the Network Client driver. (Note that this step is not
+necessary if you are running the client on JDK 1.6 or higher. In that
+environment, the network client driver loads automatically.)</li>
+
+<li>Creates the <em>NsSampledb</em> database if not already created. </li>
+
+<li>Checks to see if the schema is already created, and if not, creates the
+schema which includes the SAMPLETBL table and corresponding indexes. </li>
+
+<li>Connects to the database.</li>
+
+<li>Loads the schema by inserting data. </li>
+
+<li>Starts client threads to perform database related operations. </li>
+
+<li>Has each of the clients perform DML operations (select, insert, delete,
+update) using JDBC calls. For example, one client thread establishes an embedded
+connection to perform database operations, while another client thread establishes
+a client connection to the Network Server to perform database operations. </li>
+
+<li>Waits for the client threads to finish the tasks. </li>
+
+<li>Shuts down the Network Server at the end of the demonstration.</li>
+
+</ul>
+</div>
+<div class="p">You must install the following files in the <samp class="codeph">%<span>DERBY_HOME</span>%\demo\nserverdemo\</samp> directory before you can run the sample program: <ul>
+<li><span class="filepath">NsSample.java</span> <p>This is the entry point into the
+sample program. The program starts up two client threads. The first client
+establishes an embedded connection to perform database operations, and the
+second client establishes a client connection to the Network Server to perform
+database operations.</p>
+<p>You can change the following constants to modify
+the sample program:</p>
+<dl>
+<dt class="dlterm">NUM_ROWS</dt>
+
+<dd>The number of rows that must be initially loaded into the schema.</dd>
+
+
+<dt class="dlterm">ITERATIONS</dt>
+
+<dd>The number of iterations for which each client thread does database related
+work.</dd>
+
+
+<dt class="dlterm">NUM_CLIENT_THREADS</dt>
+
+<dd>The number of clients that you want to run the program against.</dd>
+
+
+<dt class="dlterm">NETWORKSERVER_PORT</dt>
+
+<dd>The port on which the Network Server is running.</dd>
+
+</dl>
+</li>
+
+<li><span class="filepath">NsSampleClientThread.java</span> <div class="p">This file contains two
+Java classes:  <ul>
+<li>The NsSampleClientThread class extends Thread and instantiates a NsSampleWork
+instance. </li>
+
+<li>The NsSampleWork class contains everything that is required to perform
+DML operations using JDBC calls. The <em>doWork</em> method in the NsSampleWork
+class represents all the work done as part of this sample program. </li>
+
+</ul>
+</div>
+</li>
+
+<li><span class="filepath">NetworkServerUtil.java</span>  <p>This file contains helper
+methods to start the Network Server and to shutdown the server.</p>
+</li>
+
+</ul>
+The compiled class files for the NsSample program are:<ul>
+<li><span class="filepath">NsSample.class</span> </li>
+
+<li><span class="filepath">NsSampleClientThread.class</span> </li>
+
+<li><span class="filepath">NsSampleWork.class</span> </li>
+
+<li><span class="filepath">NetworkServerUtil.class</span> </li>
+
+</ul>
+</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="tadminovnsrundemo.html">Running the NsSample sample program</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="radminsampleprograms.html" title="">Derby Network Server sample programs</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminovntsrvsample.html" title="This Derby Network Server sample program demonstrates how to obtain an embedded connection and client connections to the same database by using the Network Server. This program shows how to use either the DriverManager or a DataSource to obtain client connections.">Network Server sample programs for embedded and client connections</a></div>
+</div>
+</div>
+
+</body>
+</html>

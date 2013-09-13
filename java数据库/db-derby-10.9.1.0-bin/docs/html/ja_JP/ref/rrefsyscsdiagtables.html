@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_DIAG 診断表および関数" />
+<meta name="abstract" content="Derbyにはシステム表式が用意されており、データベースの状態やデータベースへの接続の診断情報を取得できます。" />
+<meta name="description" content="Derbyにはシステム表式が用意されており、データベースの状態やデータベースへの接続の診断情報を取得できます。" />
+<meta content="diagnostic table functions, SYSCS_DIAG.ERROR_LOG_READER, SYSCS_DIAG.ERROR_LOG_READER diagnostic table function, diagnostic tables, SYSCS_DIAG.ERROR_MESSAGES, SYSCS_DIAG.ERROR_MESSAGES diagnostic table, diagnostic table functions, SYSCS_DIAG.LOCK_TABLE, SYSCS_DIAG.LOCK_TABLE diagnostic table, SYSCS_DIAG.SPACE_TABLE, SYSCS_DIAG.SPACE_TABLE diagnostic table function, diagnostic tables, SYSCS_DIAG.STATEMENT_CACHE, SYSCS_DIAG.STATEMENT_CACHE diagnostic table, SYSCS_DIAG.STATEMENT_DURATION, SYSCS_DIAG.STATEMENT_DURATION diagnostic table functions, SYSCS_DIAG.TRANSACTION_TABLE, SYSCS_DIAG.TRANSACTION_TABLE diagnostic table" name="DC.subject" />
+<meta content="diagnostic table functions, SYSCS_DIAG.ERROR_LOG_READER, SYSCS_DIAG.ERROR_LOG_READER diagnostic table function, diagnostic tables, SYSCS_DIAG.ERROR_MESSAGES, SYSCS_DIAG.ERROR_MESSAGES diagnostic table, diagnostic table functions, SYSCS_DIAG.LOCK_TABLE, SYSCS_DIAG.LOCK_TABLE diagnostic table, SYSCS_DIAG.SPACE_TABLE, SYSCS_DIAG.SPACE_TABLE diagnostic table function, diagnostic tables, SYSCS_DIAG.STATEMENT_CACHE, SYSCS_DIAG.STATEMENT_CACHE diagnostic table, SYSCS_DIAG.STATEMENT_DURATION, SYSCS_DIAG.STATEMENT_DURATION diagnostic table functions, SYSCS_DIAG.TRANSACTION_TABLE, SYSCS_DIAG.TRANSACTION_TABLE diagnostic table" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsyscsdialgtables" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_DIAG 診断表および関数</title>
+</head>
+<body id="rrefsyscsdialgtables"><a name="rrefsyscsdialgtables"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_DIAG 診断表および関数</h1>
+
+
+
+<div><p><span>Derby</span>にはシステム表式が用意されており、データベースの状態やデータベースへの接続の診断情報を取得できます。</p>
+
+<div class="section"> <div class="p"><span>Derby</span>には二種類の診断表式があります。<dl>
+
+<dt class="dlterm">診断表</dt>
+
+<dd><span>Derby</span>の一般的な表と同様なものです。
+表名を置くことができる場所ならどこにでも診断表の名前をおけます。</dd>
+
+
+<dt class="dlterm">診断表関数</dt>
+
+<dd><span>Derby</span>の一般的な関数と同様なものです。診断表関数には関数に応じて、0あるいはそれ以上の引数を取ることができます。SQLに定義された表関数の構文に基づき、これらの関数を使う必要があります。</dd>
+
+</dl>
+ </div>
+
+<p>以下の表には<span>Derby</span>の診断表式の名称と種類を記します。</p>
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. Derbyのシステム診断表式" frame="border" border="1" rules="all"><caption>表 1. <span>Derby</span>のシステム診断表式</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="50.505050505050505%" id="N1011C">診断表式</th>
+
+<th valign="bottom" width="49.494949494949495%" id="N10123">式の種類</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="50.505050505050505%" headers="N1011C">SYSCS_DIAG.ERROR_LOG_READER</td>
+
+<td valign="top" width="49.494949494949495%" headers="N10123">表関数</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50.505050505050505%" headers="N1011C">SYSCS_DIAG.ERROR_MESSAGES</td>
+
+<td valign="top" width="49.494949494949495%" headers="N10123">表</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50.505050505050505%" headers="N1011C">SYSCS_DIAG.LOCK_TABLE</td>
+
+<td valign="top" width="49.494949494949495%" headers="N10123">表</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50.505050505050505%" headers="N1011C">SYSCS_DIAG.SPACE_TABLE</td>
+
+<td valign="top" width="49.494949494949495%" headers="N10123">表関数</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50.505050505050505%" headers="N1011C">SYSCS_DIAG.STATEMENT_CACHE</td>
+
+<td valign="top" width="49.494949494949495%" headers="N10123">表</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50.505050505050505%" headers="N1011C">SYSCS_DIAG.STATEMENT_DURATION</td>
+
+<td valign="top" width="49.494949494949495%" headers="N10123">表関数</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50.505050505050505%" headers="N1011C">SYSCS_DIAG.TRANSACTION_TABLE </td>
+
+<td valign="top" width="49.494949494949495%" headers="N10123">表</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+<div class="p"><div class="restriction"><span class="restrictiontitle">制約事項: </span>DDLや圧縮の手続きにて診断表を参照した場合、<span>Derby</span>は例外を返します。</div>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.ERROR_LOG_READER 診断表関数</h2>
+<p>SYSCS_DIAG.ERROR_LOG_READER診断表関数からは、<span class="filepath">derby.log</span>ファイルや指定した任意のログファイルにある全てのSQL文が得られます。</p>
+
+<p>この診断表関数を使うことで、活動中のトランザクションおよび任意の時点のトランザクションを知ることができます。たとえばデッドロックやロックの時間切れが発生した場合、エラーログからタイムスタンプ(timestampConstant)を見つけることができます。</p>
+
+<p>SYSCS_DIAG.ERROR_LOG_READER診断表関数を使うには、SQL表関数の構文に基づく必要があります。</p>
+
+<div class="p">例を挙げます。:<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.ERROR_LOG_READER()) 
+    AS T1</pre>
+
+ここでT1はユーザが指定した表の名前で、これは任意の識別子です。</div>
+
+<p>SYSCS_DIAG.ERROR_LOG_READER診断表関数には、随意で指定する引数としてログファイルの名前を与えることができます。ログファイルの名前を指定する場合、ファイル名はJavaで文字列とみなせる式でなければなりません。</p>
+
+<div class="p">For example:<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.ERROR_LOG_READER('myderbyerrors.log')) 
+    AS T1</pre>
+</div>
+
+<div class="p"><div class="tip"><span class="tiptitle">ヒント: </span> 既定では<span>Derby</span>のログファイルには起動、終了、エラーメッセージしかありません。
+より詳細な情報を<span>Derby</span>のログファイルに出力する方法は、<cite><span><em>Tuning Derby</em></span>ガイド</cite>の<span class="parmname">derby.stream.error.logSeverityLevel</span>属性と、<span class="parmname">derby.language.logStatementText</span>属性を読んでください。</div>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.ERROR_MESSAGES 診断表</h2>
+<p>SYSCS_DIAG.ERROR_MESSAGES診断表には、全てのSQLState、地域に対応したエラーメッセージ、
+<span>Derby</span>データベースでの例外深刻度が記述されます。
+文にて直接にSYSCS_DIAG.ERROR_MESSAGES診断表を参照することができます。</p>
+
+<div class="p">例を挙げます。<pre>SELECT * FROM SYSCS_DIAG.ERROR_MESSAGES</pre>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.LOCK_TABLE 診断表</h2>
+<p>SYSCS_DIAG.LOCK_TABLE診断表には、現在時点の<span>Derby</span>データベースの全ロックが記述されます。
+SYSCS_DIAG.LOCK_TABLE診断表は文にて直接参照することができます。</p>
+
+<div class="p">例を挙げます。<pre>SELECT * FROM SYSCS_DIAG.LOCK_TABLE</pre>
+</div>
+
+<p>SYSCS_DIAG.LOCK_TABLE診断表が文にて参照される場合、表のロックのスナップショットが撮られます。
+このスナップショットは診断表を参照しても、アプリケーションの通常処理時間や処理の流れに影響が出ないように用意されるものです。
+このスナップショットが撮られる時、ロックが状態遷移中である可能性があります。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.SPACE_TABLE 診断表関数</h2>
+<p>SYSCS_DIAG.SPACE_TABLE診断表関数では、指定した表とその索引が利用している領域を表示できます。
+この診断表関数により表や索引を圧縮することで、どれだけ領域を節約できるか知ることができます。</p>
+
+<p>SYSCS_DIAG.SPACE_TABLE診断表関数を使うには、SQL表関数の構文に従う必要があります。
+この診断表関数は二つの引数をとります。<span class="parmname">スキーマ名</span>と<span class="parmname">表名</span>です。
+<span class="parmname">表名</span>は必須です。<span class="parmname">スキーマ名</span>を指定しなかった場合、現在のスキーマが適用されます。</p>
+
+<div class="p">たとえば以下の問い合わせでは、データベースにある全ユーザ表と索引の利用する領域を返します。<pre>SELECT T2.*
+    FROM 
+        SYS.SYSTABLES systabs,
+        TABLE (SYSCS_DIAG.SPACE_TABLE(systabs.tablename)) AS T2
+    WHERE systabs.tabletype = 'T'</pre>
+
+ここでT2はユーザ指定の表名で、任意の識別子を指定できます。</div>
+
+<p><span class="parmname">スキーマ名</span>と<span class="parmname">表名</span>は、何れもJavaの文字列型とみなされる式でなければなりません。
+<span class="parmname">スキーマ名</span>と<span class="parmname">表名</span>がデリミトされない識別子であった場合、名前は大文字で指定しなければなりません。</p>
+
+<div class="p">例を挙げます。<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.SPACE_TABLE('MYSCHEMA', 'MYTABLE')) 
+    AS T2</pre>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.STATEMENT_CACHE 診断表</h2>
+<p>SYSCS_DIAG.STATEMENT_CACHE診断表にはSQL文キャッシュの内容が記述されます。
+SYSCS_DIAG.STATEMENT_CACHE診断表は文から直接参照できます。</p>
+
+<div class="p">例を挙げます。<pre>SELECT * FROM SYSCS_DIAG.STATEMENT_CACHE</pre>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.STATEMENT_DURATION 診断表関数</h2>
+<p>SYSCS_DIAG.STATEMENT_DURATION診断表関数を使って、<span class="filepath">derby.log</span>ファイルや指定したログファイルにあるSQL文の<dfn class="term">実行時間</dfn>を知ることができます。</p>
+
+<p>この診断関数を使うことで、アプリケーションのJDBCコードのどこにボトルネックがあるかの、手がかりを得ることができます。</p>
+
+<p>SYSCS_DIAG.STATEMENT_DURATION診断表関数を使うには、SQLの表関数構文に基づく必要があります。</p>
+
+<div class="p">例を挙げます。<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.STATEMENT_DURATION()) 
+    AS T1</pre>
+
+ここでT1はユーザが指定した表名で、任意の識別子を指定できます。</div>
+
+<div class="restriction"><span class="restrictiontitle">制約事項: </span>この表では、個々のトランザクションIDにおける最後の文毎に、行が対応していません。トランザクションによる情報の変更があった場合、トランザクションIDはコミットやロールバンクの前後で値が変わります。</div>
+
+<p>SYSCS_DIAG.STATEMENT_DURATION診断表関数には随意の引数としてログファイルを指定できます。
+ログファイル名を指定した場合、ファイル名はJavaの文字列とみなせる式でなければなりません。</p>
+
+<div class="p">例を挙げます。<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.STATEMENT_DURATION('somederby.log')) 
+    AS T1</pre>
+</div>
+
+<div class="p"><div class="tip"><span class="tiptitle">ヒント: </span> 既定では<span>Derby</span>のログファイルには起動、終了、エラーメッセージだけが出力されます。
+より詳細な情報を<span>Derby</span>のログファイルに出力する方法は、<cite><span><em>Tuning Derby</em></span>ガイド</cite>の<span class="parmname">derby.stream.error.logSeverityLevel</span>属性と、<span class="parmname">derby.language.logStatementText</span>属性を読んでください。
+それ以外の情報もあれば、SYSCS_DIAG.STATEMENT_DURATION診断表関数で問い合わせ可能です。</div>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.TRANSACTION_TABLE  診断表</h2>
+<p>SYSCS_DIAG.TRANSACTION_TABLE診断表には現在データベースに存在する全トランザクションが記述されます。SYSCS_DIAG.TRANSACTION_TABLE診断表は文から直接参照できます。</p>
+
+<div class="p">例を挙げます。<pre>SELECT * FROM SYSCS_DIAG.TRANSACTION_TABLE</pre>
+</div>
+
+<p>文にてSYSCS_DIAG.TRANSACTION_TABLE診断表が参照されると、トランザクション表のスナップショットが撮られます。スナップショットは診断表を参照しても、アプリケーションの通常処理時間や処理の流れに影響が出ないよう用意されます。トランザクションはスナップショットの作成時に状態遷移中である場合もあります。</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlbuiltinsystemfunctions.html" title="">組込みシステム関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="TIMESTAMP関数" />
+<meta name="abstract" content="TIMESTAMP関数はタイムスタンプを、値あるいは値の対から返します。" />
+<meta name="description" content="TIMESTAMP関数はタイムスタンプを、値あるいは値の対から返します。" />
+<meta content="functions, TIMESTAMP, TIMESTAMP function" name="DC.subject" />
+<meta content="functions, TIMESTAMP, TIMESTAMP function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreftimestampfunc" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>TIMESTAMP関数</title>
+</head>
+<body id="rreftimestampfunc"><a name="rreftimestampfunc"><!-- --></a>
+
+
+<h1 class="topictitle1">TIMESTAMP関数</h1>
+
+
+
+<div><p>TIMESTAMP関数はタイムスタンプを、値あるいは値の対から返します。</p>
+
+<div class="section"> <div class="p">引数にとることができる値は、二つ目の引数があるかどうかで決まります。<ul>
+<li>もし引数が一つである場合は、引数は、タイムスタンプか、CLOB・LONG VARCHAR・XML以外のタイムスタンプを有効に表す14文字の文字列である必要があります。14文字の文字列は、有効な日付および時刻を10進数で<em>yyyyxxddhhmmss</em>という書式で表す必要があります。ここで、<em>yyyy</em>は年、<em>xx</em>は月、<em>dd</em>は日、<em>hh</em>は時、<em>mm</em>は分、<em>ss</em>は秒です。</li>
+
+<li>もし両方の引数が指定された場合は、最初の引数は日付あるいは日付を有効に表す文字列で、二つ目の引数は時刻あるいは時刻を有効に表す文字列です。</li>
+
+</ul>
+二つ目の引数があるか否かで次の規則が決まります。<ul>
+<li>もし両方の引数が指定された場合、結果は最初の引数で指定された日付と、二つ目の引数で指定された時刻のタイムスタンプです。なお、タイムスタンプのマイクロ秒の部分は0となります。</li>
+
+<li>もし引数が一つで、それがタイムスタンプであった場合、結果はそのタイムスタンプです。</li>
+
+<li>もし引数が一つで、それが文字列であった場合、結果はその文字列で与えられたタイムスタンプです。14文字の文字列により指定されないマイクロ秒の部分は0となります。</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre>TIMESTAMP ( <em>式</em> [, <em>式</em> ] )</pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">例</h2><div class="p"><samp class="codeph">records_table</samp>という表の二つ目の列には(1998-12-25のような)日付が格納されて、三つ目の列には(17:12:30のような)時刻が格納されます。
+例示する文でタイムスタンプを返すことができます。<pre>SELECT TIMESTAMP(col2, col3) FROM records_table</pre>
+</div>
+
+<div class="p">次の節は<samp class="codeph">1998-12-25-17:12:30.0</samp>を返します。<pre>VALUES TIMESTAMP('1998-12-25', '17.12.30'); 
+1 
+-------------------------- 
+1998-12-25 17:12:30.0 
+</pre>
+</div>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

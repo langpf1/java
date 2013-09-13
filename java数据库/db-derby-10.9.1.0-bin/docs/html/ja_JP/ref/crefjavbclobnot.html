@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="java.sql.Blobとjava.sql.Clobの対応に関する但し書き" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc96386.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="crefjavbclobnot" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>java.sql.Blobとjava.sql.Clobの対応に関する但し書き</title>
+</head>
+<body id="crefjavbclobnot"><a name="crefjavbclobnot"><!-- --></a>
+
+
+<h1 class="topictitle1">java.sql.Blobとjava.sql.Clobの対応に関する但し書き</h1>
+
+<div>
+<p><span>Derby</span>のロック機構(共有ロック)にて、<em>java.sql.Blob</em>や<em>java.sql.Clob</em>が指し示すデータベース上の情報の更新や削除は防がれています。
+しかしながら、<span>Derby</span>の即時ロックの機構は、<em>java.sql.Blob</em>や<em>java.sql.Clob</em>に対応する列が守られていない瞬間の存在を許すことがあります。
+引き続く<em>getBlob/getClob</em>および<em>java.sql.Blob</em>/<em>java.sql.Clob</em>の呼び出しは未定義な振る舞いを起こす可能性があります。</p>
+
+<p>さらに<em>java.sql.Blob</em>/<em>java.sql.Clob</em>を持つトランザクションが、(他のトランザクションに対して)、対応行を更新することを防ぐ機構はありません。(この問題は<em>getXXXStream</em>メソッドにも存在しています。)
+<em>java.sql.Blob</em>/<em>java.sql.Clob</em>が開いていており、アプリケーションプログラムにて対応する情報の更新が妨げられた場合、失敗したことにより予期せぬ振る舞いが起きる可能性があります。</p>
+
+<div class="p"><em>ResultSet getXXX</em>メソッドのうち以下の何れかに該当するメソッドは、それらを同一のカラムに対して複数回呼び出してははなりません。<ul>
+<li><em>getBlob</em></li>
+
+<li><em>getClob</em></li>
+
+<li><em>getAsciiStream</em></li>
+
+<li><em>getBinaryStream</em></li>
+
+<li><em>getUnicodeStream</em></li>
+
+</ul>
+</div>
+
+<div class="p">これ等のメソッドは同一の対応するストリームを共有します。これらのメソッドを複数回呼び出すことにより、予期せぬ振る舞いを起こす可能性があります。
+例を挙げます。
+<pre><strong>ResultSet rs = s.executeQuery("SELECT text FROM CLOBS WHERE i = 1");
+while (rs.next()) {
+    aclob=rs.getClob(1);
+    ip = rs.getAsciiStream(1);
+}</strong></pre>
+</div>
+
+<p>サイズの大きな列の情報を扱うストリームはスレッドセーフではありません。従って、もしユーザが複数のスレッドを作成して、それらスレッドからストリームにアクセスした場合、未定義の動作を起こします。</p>
+
+<p>Clobにはロケールによる振る舞いの違いがありません。</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefjdbc96386.html" title="">java.sql.Blobインターフェイスとjava.sql.Clobインターフェイスの対応</a></div>
+</div>
+</div>
+
+</body>
+</html>

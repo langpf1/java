@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="encryptionKey=key attribute" />
+<meta content="encryptionKey=key attribute, encrypting databases, encryption key, databases, attributes, encryption key, attributes, encryptionKey" name="DC.subject" />
+<meta content="encryptionKey=key attribute, encrypting databases, encryption key, databases, attributes, encryption key, attributes, encryptionKey" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib24612.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefattribencryptkey" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>encryptionKey=key attribute</title>
+</head>
+<body id="rrefattribencryptkey"><a name="rrefattribencryptkey"><!-- --></a>
+
+
+<h1 class="topictitle1">encryptionKey=key attribute</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">Function</h2><div class="p">Specifies the external key to use to: <ul>
+<li>Encrypt a new database</li>
+
+<li>Configure an existing unencrypted database for encryption</li>
+
+<li>Boot an existing encrypted database</li>
+
+</ul>
+Your application must provide the encryption key.</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Combining with other attributes</h2><p>When creating a
+new database, you must combine the <em>encryptionKey</em> attribute with the <em>create=true</em> and <em>dataEncryption=true</em> attributes. </p>
+<p>When
+you configure an existing unencrypted database for encryption, the <em>encryptionKey</em> attribute
+must be combined with the <em>dataEncryption=true</em> attribute.
+For an existing, unencrypted database for which authentication
+and SQL authorization are both
+enabled, only the 
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a>
+can perform encryption. 
+Please see "Enabling user authentication"
+and "Setting the SQL standard authorization mode"
+in the 
+<span><em>Derby Developer's Guide</em></span>
+for more information.
+</p>
+<p>When
+booting an existing encrypted database, you must also specify the <em>encryptionAlgorithm</em> attribute
+if the algorithm that was used when the database was created is not the default
+algorithm. </p>
+<p>The default encryption algorithm used by <span>Derby</span> is
+DES/CBC/NoPadding.</p>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2><p><strong>Example of a JDBC URL that creates a
+new encrypted database:</strong></p>
+<pre>jdbc:derby:newDB;create=true;dataEncryption=true;
+   encryptionAlgorithm=DES/CBC/NoPadding;encryptionKey=6162636465666768</pre>
+<div class="p"><strong>Example
+of a JDBC URL that configures an existing unencrypted database for encryption:</strong><pre>jdbc:derby:salesdb;dataEncryption=true;encryptionKey=6162636465666768
+</pre>
+</div>
+<div class="p"><strong>Example of a JDBC URL that boots an encrypted database:</strong><pre>jdbc:derby:encryptedDB;encryptionKey=6162636465666768</pre>
+</div>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefattrib24612.html" title="Derby allows you to supply a list of attributes to its database connection URL, which is a JDBC feature.">Setting attributes for the database connection URL</a></div>
+</div>
+</div>
+
+</body>
+</html>

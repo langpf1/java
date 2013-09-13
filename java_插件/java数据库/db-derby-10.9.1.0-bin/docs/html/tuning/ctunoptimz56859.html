@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Cost-based ORDER BY sort avoidance" />
+<meta content="ORDER BY, cost-based avoidance of" name="DC.subject" />
+<meta content="ORDER BY, cost-based avoidance of" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz27036.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunoptimz56859" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Cost-based ORDER BY sort avoidance</title>
+</head>
+<body id="ctunoptimz56859"><a name="ctunoptimz56859"><!-- --></a>
+
+
+<h1 class="topictitle1">Cost-based ORDER BY sort avoidance</h1>
+
+
+<div>
+<p>Usually, sorting requires an extra step to put the data into the right
+order. This extra step can be avoided for data that are already in the right
+order. For example, if a single-table query has an ORDER BY on a single column,
+and there is an index on that column, sorting can be avoided if <span>Derby</span> uses
+the index as the access path.</p>
+
+<div class="p">Where possible, <span>Derby</span>'s query compiler transforms an SQL statement
+internally into one that avoids this extra step. For information about internal
+transformations, see <a href="ctuntransform16033.html#ctuntransform16033">Sort avoidance</a>. This
+transformation, if it occurs, happens before optimization. After any such
+transformations are made, the optimizer can do its part to help avoid a separate
+sorting step by choosing an already sorted access path. It compares the cost
+of using that path with the cost of sorting. <span>Derby</span> does this for statements
+that use an ORDER BY clause in the following situations:  
+<ul>
+<li>The statements involve tables with indexes that are in the correct order.</li>
+
+<li>The statements involve scans of unique indexes that are guaranteed to
+return only one row per scan.</li>
+
+</ul>
+</div>
+
+<p>ORDER BY specifies a priority of ordering of columns in a result set. For
+example, ORDER BY X, Y means that column <em>X</em> has a more
+significant ordering than column <em>Y</em>.</p>
+
+<div class="p">The situations that allow <span>Derby</span> to avoid a separate
+ordering step for statements with ORDER BY clauses are:  
+<ul>
+<li>Index scans, which provide the correct order.  
+<pre><strong><span>-- covering index</span>
+SELECT flight_id FROM Flights ORDER BY flight_id</strong></pre>
+</li>
+
+<li>The rows from a table when fetched through an index scan.  
+<pre><strong><span>-- if <span>Derby</span>  uses the index on orig_airport
+-- to access the data, it can avoid the sort
+-- required by the final ORDER BY</span>
+SELECT orig_airport, miles
+FROM FLIGHTS
+WHERE orig_airport &lt; 'DDD'
+ORDER BY orig_airport</strong></pre>
+</li>
+
+<li>The rows from a join when ordered by the indexed column or columns in
+the outer table.  
+<pre><strong><strong><span>-- if <span>Derby</span>  chooses Cities as the outer table, it
+-- can avoid a separate sorting step</span></strong>
+SELECT * FROM cities, countries
+WHERE cities.country_ISO_code = countries.country_ISO_code
+AND cities.country_ISO_code &lt; 'DD'
+ORDER BY cities.country_ISO_code</strong></pre>
+</li>
+
+<li>Result sets that are guaranteed to return a single row. They are ordered
+on <em>all</em> of their columns (for example, if there are
+equality conditions on all the columns in a unique index, all the columns
+returned for that table can be considered ordered, with any priority of ordering
+of the columns).  
+<pre><strong><span>-- query will only return one row, so that row is
+-- "in order" for ANY column</span>
+SELECT miles
+FROM Flights
+WHERE flight_id = 'US1381' AND segment_number = 2
+ORDER BY miles</strong></pre>
+</li>
+
+<li>Any column in a result set that has an equality comparison with a constant.
+The column is considered ordered with no priority to its ordering.   
+<pre><strong><span>-- The comparison of segment_number
+-- to a constant means that it is always correctly
+-- ordered. Using the index on (flight_id, segment_number)
+-- as the access path means
+-- that the ordering will be correct for the ORDER BY
+-- clause in this query. The same thing would be true if
+-- flight_id were compared to a constant instead.</span>
+SELECT segment_number, flight_id
+FROM Flights
+WHERE segment_number=2
+ORDER BY segment_number, flight_id</strong></pre>
+
+<div class="p">And because of transitive
+closure, this means that even more complex statements can avoid sorting. For
+example:  
+<pre><strong><span>-- transitive closure means that <span>Derby</span>  will
+-- add this clause:
+-- AND countries.country_ISO_code = 'CL', which means
+-- that the ordering column is now compared to a constant,
+-- and sorting can be avoided.</span>
+SELECT * FROM cities, countries
+WHERE cities.country_ISO_code = 'CL'
+AND cities.country_ISO_code = countries.country_ISO_code
+ORDER BY countries.country_ISO_code</strong></pre>
+</div>
+
+<p>For more information
+about transitive closure and other statement transformations, see <a href="ctuntransform13966.html#ctuntransform13966">Internal language transformations</a>.</p>
+</li>
+
+</ul>
+</div>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctunoptimz27036.html" title="">About the optimizer's choice of sort avoidance</a></div>
+</div>
+</div>
+
+</body>
+</html>

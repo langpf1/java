@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using the backup procedures to perform an online backup" />
+<meta name="abstract" content="Use the SYSCS_UTIL.SYSCS_BACKUP_DATABASE procedure or one of the other system backup procedures to perform an online backup of a database to a specified location." />
+<meta name="description" content="Use the SYSCS_UTIL.SYSCS_BACKUP_DATABASE procedure or one of the other system backup procedures to perform an online backup of a database to a specified location." />
+<meta content="Backup procedure, SYSCS_BACKUP_DATABASE() system procedure" name="DC.subject" />
+<meta content="Backup procedure, SYSCS_BACKUP_DATABASE() system procedure" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup63476.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup75469.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminhubbkup01" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using the backup procedures to perform an online backup</title>
+</head>
+<body id="cadminhubbkup01"><a name="cadminhubbkup01"><!-- --></a>
+
+
+<h1 class="topictitle1">Using the backup procedures to perform an online backup</h1>
+
+
+
+<div><p>Use the SYSCS_UTIL.SYSCS_BACKUP_DATABASE procedure or one of the
+other system backup procedures to perform an
+online backup of a database to a specified location.</p>
+
+<p>The backup procedures are as follows:</p>
+
+<ul>
+<li>SYSCS_UTIL.SYSCS_BACKUP_DATABASE</li>
+
+<li>SYSCS_UTIL.SYSCS_BACKUP_DATABASE_NOWAIT</li>
+
+<li>SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE</li>
+
+<li>SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE_NOWAIT </li>
+
+</ul>
+
+<p>Use the SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE
+procedure if you want to make it possible to perform a roll-forward recovery of
+a damaged database. See
+<a href="cadminrollforward.html#cadminrollforward">Roll-forward recovery</a> for details.</p>
+
+<p>The NOWAIT versions of the procedures do not wait for transactions
+in progress with unlogged operations to complete before proceeding with the
+backup; instead, they return an error immediately.</p>
+
+<p>See the <span><em>Derby Reference Manual</em></span> for details about these
+system procedures.</p>
+
+<p>The SYSCS_UTIL.SYSCS_BACKUP_DATABASE procedure takes a string argument
+that represents the location in which to back up the database. Typically,
+you provide the full path to the backup directory. (Relative paths are interpreted
+as relative to the current directory, not to the derby.system.home directory.)</p>
+
+<p>For example, to specify a backup location of <span class="filepath">c:/mybackups/2012-04-01</span> for
+a database that is currently open, use the following statement (forward slashes
+are used as path separators in SQL commands):</p>
+
+<pre><strong>CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE('c:/mybackups/2012-04-01')</strong></pre>
+
+<p>The SYSCS_UTIL.SYSCS_BACKUP_DATABASE procedure puts the database
+into a state in which it can be safely copied. The procedure then copies the
+entire original database directory (including data files, online transaction log
+files, and jar files) to the specified backup directory. Files that are not
+within the original database directory (for example, <em>derby.properties</em>)
+are <em>not</em> copied. With the exception of a few cases mentioned in 
+<a href="cadminhubbkup01.html#cadminhubbkup01__hubbkupunlogged">Unlogged Operations</a>,
+the procedure does not block concurrent transactions at any time.</p>
+
+<p>The following example shows how to back up a database to a directory with
+a name that reflects the current date:</p>
+
+<pre>public static void backUpDatabase(Connection conn)throws SQLException
+{
+<strong>// Get today's date as a string:</strong>
+java.text.SimpleDateFormat todaysDate = 
+   new java.text.SimpleDateFormat("yyyy-MM-dd");
+String backupdirectory = "c:/mybackups/" +
+   todaysDate.format((java.util.Calendar.getInstance()).getTime());
+
+CallableStatement cs = conn.prepareCall("CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE(?)"); 
+cs.setString(1, backupdirectory);
+cs.execute(); 
+cs.close();
+System.out.println("backed up database to "+backupdirectory);
+}</pre>
+
+<p>For a database that was backed up on 2012-04-01, the previous commands
+copy the current database to a directory of the same name in <em>c:/mybackups/2012-04-01</em>.</p>
+
+<p>Uncommitted transactions do not appear in the backed-up database.</p>
+
+<div class="note"><span class="notetitle">Note: </span>Do not back up different databases with the same name to the same backup
+directory. If a database of the same name already exists in the backup directory,
+it is assumed to be an older version and is overwritten.</div>
+
+<div class="section" id="cadminhubbkup01__hubbkupunlogged"><a name="cadminhubbkup01__hubbkupunlogged"><!-- --></a><h2 class="sectiontitle">Unlogged Operations</h2>
+<p>
+For some operations, Derby does not log because it can keep the database
+consistent without logging the data.
+</p>
+
+<p>The SYSCS_UTIL.SYSCS_BACKUP_DATABASE procedure will issue an error if there
+are any unlogged operations in the same transaction as the backup procedure.</p>
+
+<p>If any unlogged operations are in progress in other transactions in the
+system when the backup starts, this procedure will block until those transactions
+are complete before performing the backup.</p>
+
+<p>Derby automatically converts unlogged operations to logged mode if they
+are started while the backup is in progress (except operations that maintain
+application jar files in the database). Procedures to install, replace, and
+remove jar files in a database are blocked while the backup is in progress.</p>
+
+<p>If you do not want backup to block until unlogged operations in other transactions
+are complete, use the SYSCS_UTIL.SYSCS_BACKUP_DATABASE_NOWAIT procedure. 
+This procedure issues an error immediately at the start of the backup if there
+are any transactions in progress with unlogged operations, instead of waiting
+for those transactions to complete.</p>
+
+<div class="p">Unlogged operations include:
+<ol>
+<li>Index creation.
+<p>
+Only CREATE INDEX is logged, not all the data inserts into the
+index. The reason inserts into the index are not logged is:
+if there is a failure , it will just drop the index.
+</p>
+<p>
+If you create an index when the backup is in progress, it will be
+slower because it has to be logged.
+</p>
+<p>
+Foreign Keys , Primary Keys create backing indexes. Adding those keys
+to an existing table with data will also run slower.
+</p>
+</li>
+
+<li>Import to an empty table or replacing all the data in a table.
+<p>
+In this case also, data inserts into table are not logged. Internally,
+Derby creates a new table for the import and changes the catalogs to
+point to the new table and drops the original table when import
+completes.
+</p>
+<p>
+If you perform such an import operation when backup is in progress ,
+it will be slower because data is logged.
+</p>
+</li>
+
+</ol>
+
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminhubbkup63476.html" title="Use online backups to back up a database while it is running, without blocking transactions.">Online backups</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminhubbkup75469.html" title="">Using operating system commands with the freeze and unfreeze system procedures to perform an online backup</a></div>
+</div>
+</div>
+
+</body>
+</html>

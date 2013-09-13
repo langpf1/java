@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="encryptionKey=key属性" />
+<meta content="encryptionKey=key attribute, encrypting databases, encryption key, databases, attributes, encryption key, attributes, encryptionKey" name="DC.subject" />
+<meta content="encryptionKey=key attribute, encrypting databases, encryption key, databases, attributes, encryption key, attributes, encryptionKey" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib24612.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefattribencryptkey" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>encryptionKey=key属性</title>
+</head>
+<body id="rrefattribencryptkey"><a name="rrefattribencryptkey"><!-- --></a>
+
+
+<h1 class="topictitle1">encryptionKey=key属性</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">機能</h2>
+<div class="p">以下の目的で利用する外部の鍵を指定します。 <ul>
+<li>新規データベースの暗号化</li>
+
+<li>既存の暗号化されていないデータベースの暗号化設定</li>
+
+<li>既存の暗号化されたデータベースの起動</li>
+
+</ul>
+アプリケーションは暗号化キーを指定する必要があります。</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">他の属性との組み合わせ</h2>
+<p>新規データベース作成の場合、<em>encryptionKey</em>は<em>create=true</em>と<em>dataEncryption=true</em>と組み合わせなければなりません。</p>
+
+<p>既存の暗号化されていないデータベースの暗号化設定の場合、<em>encryptionKey</em>属性は<em>dataEncryption=true</em>と組み合わせなければなりません。
+認証とSQL認証の両方が有効な暗号化されていないデータベースの場合、<a href="rrefattrib26867.html#rrefattrib26867">データベース所有者</a>だけが暗号化を行えます。詳細な情報は<span><em>Derby Developer's Guide</em></span>の、「ユーザ認証を有効にする」と「SQL標準認証モードを設定する」を参照してください。
+</p>
+
+<p>既存の暗号化されたデータベースを起動する場合、もしデータベースの作成時に指定したアルゴリズムが既定のものと違うのであれば、<em>encryptionAlgorithm</em>を指定しなければなりません。</p>
+
+<p><span>Derby</span>の既定の暗号化アルゴリズムは、DES/CBC/NoPaddingです。</p>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">例</h2><p><strong>新規の暗号化されたデータベースを作成するJDBC URLの例:</strong></p>
+<pre>jdbc:derby:newDB;create=true;dataEncryption=true;
+   encryptionAlgorithm=DES/CBC/NoPadding;encryptionKey=6162636465666768</pre>
+
+<div class="p"><strong>既存の暗号化されていないデータベースに暗号化設定を行うJDBC URLの例:</strong><pre>jdbc:derby:salesdb;dataEncryption=true;encryptionKey=6162636465666768
+</pre>
+</div>
+<div class="p"><strong>暗号化されたデータベースを起動するJDBC URLの例:</strong><pre>jdbc:derby:encryptedDB;encryptionKey=6162636465666768</pre>
+</div>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefattrib24612.html" title="Derbyでは、データベース接続URLに属性を指定する、 JDBCの機能を利用できます。">データベース接続URLに属性を指定する。</a></div>
+</div>
+</div>
+
+</body>
+</html>

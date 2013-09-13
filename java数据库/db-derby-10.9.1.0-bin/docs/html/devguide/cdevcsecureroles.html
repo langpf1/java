@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using SQL roles" />
+<meta name="abstract" content="When the SQL standard authorization mode is enabled, object owners can use the SQL roles facility to administer privileges." />
+<meta name="description" content="When the SQL standard authorization mode is enabled, object owners can use the SQL roles facility to administer privileges." />
+<meta content="access control system, SQL2003, SQL standard authorization mode, SQL roles, using" name="DC.subject" />
+<meta content="access control system, SQL2003, SQL standard authorization mode, SQL roles, using" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure866060.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecuregrantrevokeaccess.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecureprivileges.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecuresqlauthupgrade.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevcsecuresqlauthexceptions.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevcsecureroles" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using SQL roles</title>
+</head>
+<body id="cdevcsecureroles"><a name="cdevcsecureroles"><!-- --></a>
+
+
+<h1 class="topictitle1">Using SQL roles</h1>
+
+
+
+<div><p>When the SQL standard authorization mode is enabled, object owners
+can use the SQL roles facility to administer privileges.</p>
+
+<p>SQL roles are useful for administering privileges when a database has many
+users. Roles provide a more powerful way to grant privileges to users' sessions
+than to grant privileges to each user of the database, which easily becomes
+tedious and error-prone when many users are involved. Roles do not in and of
+themselves give better database security, but used correctly, they facilitate
+better security. Only the
+<a href="cdevcsecureDbOwner.html#cdevcsecureDbOwner">database owner</a>
+can create, grant, revoke, and drop roles. However, object owners can grant and
+revoke privileges for those objects to and from roles, as well as to and from
+individual users and PUBLIC (all users).</p>
+
+<div class="note"><span class="notetitle">Note: </span><span>Derby</span> implements a
+subset of SQL roles. The fact that only the database owner can create, grant,
+revoke, and drop roles is an implementation restriction.</div>
+
+<div class="section" id="cdevcsecureroles__rolecreategrant"><a name="cdevcsecureroles__rolecreategrant"><!-- --></a><h2 class="sectiontitle">Creating and granting roles</h2>
+<p>Roles are available only when SQL authorization mode is enabled (that is,
+when the property <samp class="codeph">derby.database.sqlAuthorization</samp> is set to
+<samp class="codeph">TRUE</samp>).</p>
+
+<p>Old databases must be (hard) upgraded to at least Release 10.5 before roles
+can be used.</p>
+
+<p>If SQL authorization mode is enabled, the database owner can use the
+CREATE ROLE statement to create roles. The database owner can then use the GRANT
+statement to grant a role to one or more users, to PUBLIC, or to another role.
+</p>
+
+<p>A role A <em>contains</em> another role B if role B is granted to role A, or is
+contained in a role C granted to role A. Privileges granted to a contained role
+are inherited by the containing roles. So the set of privileges identified by
+role A is the union of the privileges granted to role A and the privileges
+granted to any contained roles of role A.</p>
+
+<p>For example, suppose the database owner issued the following statements:</p>
+
+<pre>  create role reader;
+  create role updater;
+  create role taskLeaderA;
+  create role taskLeaderB;
+  create role projectLeader;
+  grant reader to updater;
+  grant updater to taskLeaderA;
+  grant updater to taskLeaderB;
+  grant taskLeaderA to projectLeader;
+  grant taskLeaderB to projectLeader;
+</pre>
+
+<p>The roles would then have the following containment relationships:</p>
+
+<ul>
+<li>The <samp class="codeph">projectLeader</samp> role contains the
+<samp class="codeph">taskLeaderA</samp> and <samp class="codeph">taskLeaderB</samp> roles.</li>
+
+<li>The <samp class="codeph">taskLeaderA</samp> and <samp class="codeph">taskLeaderB</samp> roles both
+contain the <samp class="codeph">updater</samp> role.</li>
+
+<li>The <samp class="codeph">updater</samp> role contains the <samp class="codeph">reader</samp>
+role.</li>
+
+</ul>
+
+<p>In this case, the <samp class="codeph">projectLeader</samp> role contains all the other
+roles and has all their privileges. If the database owner then revokes
+<samp class="codeph">updater</samp> from <samp class="codeph">taskLeaderA</samp>,
+<samp class="codeph">projectLeader</samp> still contains that role through
+<samp class="codeph">taskLeaderB</samp>.</p>
+
+<p>The SYSCS_DIAG.CONTAINED_ROLES diagnostic table function can be used to
+determine the set of contained roles for a role.</p>
+
+<p>Cycles are not permitted in role grants. That is, if a role contains another
+role, you cannot grant the container role to the contained role. For example,
+the following statement would not be permitted:</p>
+
+<pre>grant projectLeader to updater;</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Setting roles</h2>
+<p>When a user first connects to
+<span>Derby</span>, no role is set, and
+the CURRENT_ROLE function returns null. During a session, the user can call the
+SET ROLE statement to set the current role for that session. The role can be
+any role that has been granted to the session's current user or to PUBLIC. To
+unset the current role, call SET ROLE with an argument of NONE. At any time
+during a session, there is always a current user, but there is a current role
+only if SET ROLE has been called with an argument other than NONE. If a current
+role is not set, the session has only the privileges granted to the user
+directly or to PUBLIC.</p>
+
+<p>For example, if the database owner created and granted the roles shown in the
+previous session, a user would have to issue a SET ROLE statement to have them
+take effect. Suppose a user issued the following statement:</p>
+
+<pre>SET ROLE taskLeaderA;</pre>
+
+<p>Assuming that the database owner had granted the <samp class="codeph">taskLeaderA</samp>
+role to the user, the user would be allowed to set the role as shown and would
+have all the privileges granted to the <samp class="codeph">taskLeaderA</samp>,
+<samp class="codeph">updater</samp>, and <samp class="codeph">reader</samp> roles.</p>
+
+<p>To retrieve the current role identifier in SQL, call the CURRENT_ROLE
+function.</p>
+
+<p>Within stored procedures and functions that contain SQL, the
+  current role depends on whether the routine executes with invoker's
+  rights or with definer's rights, as specified by the EXTERNAL SECURITY clause in
+  the CREATE FUNCTION or CREATE PROCEDURE statements in
+  the <span><em>Derby Reference Manual</em></span>. During execution,
+  the current user and current role are kept on an authorization stack
+  which is pushed during a stored routine call.
+</p>
+
+
+<p>Within routines that execute with invoker's rights, the following
+applies: initially, inside a nested connection, the current role is
+set to that of the calling context. So is the current user. Such
+routines may set any role granted to the invoker or to PUBLIC.</p>
+
+
+<p>Within routines that execute with definer's rights, the following
+applies: initially, inside a nested connection, the current role is
+NULL, and the current user is that of the definer. Such routines may
+set any role granted to the definer or to PUBLIC.
+</p>
+
+<p>
+Upon return from the stored procedure or function, the authorization
+stack is popped, so the current role of the calling context is not
+affected by any setting of the role inside the called procedure or
+function.  If the stored procedure opens more than one nested
+connection, these all share the same (stacked) current role (and user)
+state. Any dynamic result set passed out of a stored procedure sees
+the current role (or user) of the nested context.
+</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Granting privileges to roles</h2>
+<p>Once a role has been created, both the database owner and the object owner
+can grant privileges on tables and routines to that role. You can grant the same
+privileges to roles that you can grant to users. Granting a privilege to a role
+implicitly grants privileges to all roles that contain that role. For example,
+if you grant delete privileges on a table to <samp class="codeph">updater</samp>, every
+user in the <samp class="codeph">updater</samp>, <samp class="codeph">taskLeaderA</samp>,
+<samp class="codeph">taskLeaderB</samp>, and <samp class="codeph">projectLeader</samp> role will also
+have delete privileges on that table, but users in the <samp class="codeph">reader</samp>
+role will not.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Revoking privileges from a role</h2>
+<p>Either the database owner or the object owner can revoke privileges from a
+role.</p>
+
+<p>When a privilege is revoked from a role A, that privilege is no longer held
+by role A, unless A otherwise inherits that privilege from a contained role.</p>
+
+<p>If a privilege to an object is revoked from role A, a session will lose that
+privilege if it has a current role set to A or a role that contains A, unless
+one or more of the following is true:</p>
+
+<ul>
+<li>The privilege is granted directly to the current user</li>
+
+<li>The privilege is granted to PUBLIC</li>
+
+<li>The privilege is also granted to another role B in the current role's set of
+contained roles</li>
+
+<li>The session's current user is the database owner or the object owner</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Revoking roles</h2>
+<p>The database owner can use the REVOKE statement to revoke a role from a user,
+from PUBLIC, or from another role.</p>
+
+<p>When a role is revoked from a user, that session can no longer keep that
+role, nor can it take on that role in a SET ROLE statement, unless the role is
+also granted to PUBLIC. If that role is the current role of an existing session,
+the current privileges of the session lose any extra privileges obtained through
+setting that role.</p>
+
+<p>The default drop behavior is CASCADE. Therefore, all persistent objects
+(constraints, views and triggers) that rely on that role are dropped. Although
+there may be other ways of fulfilling that privilege at the time of the revoke,
+any dependent objects are still dropped. This is an implementation limitation.
+Any prepared statement that is potentially affected will be checked again on the
+next execute. A result set that depends on a role will remain open even if that
+role is revoked from a user.</p>
+
+<p>When a role is revoked from a role, the default drop behavior is also
+CASCADE. Suppose you revoke role A from role B. Revoking the role will have the
+effect of revoking all additional applicable privileges obtained through A from
+B. Roles that contain B will also lose those privileges, unless A is still
+contained in some other role C granted to B, or the privileges come through some
+other role. See
+<a href="cdevcsecureroles.html#cdevcsecureroles__rolecreategrant">Creating and granting roles</a>
+for an example.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Dropping roles</h2>
+<p>Only the database owner can drop a role. To drop a role, use the DROP ROLE
+statement.</p>
+
+<p>Dropping a role effectively revokes all grants of this role to users and
+other roles.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Further information</h2>
+<div class="p">For details on the following statements, functions, and system table related
+to roles, see the <span><em>Derby Reference Manual</em></span>.
+<ul>
+<li>CREATE ROLE statement</li>
+
+<li>SET ROLE statement</li>
+
+<li>DROP ROLE statement</li>
+
+<li>GRANT statement</li>
+
+<li>REVOKE statement</li>
+
+<li>CURRENT_ROLE function</li>
+
+<li>SYSCS_DIAG.CONTAINED_ROLES table function</li>
+
+<li>SYSROLES system table</li>
+
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure866060.html" title="If you use NATIVE authentication, SQL standard authorization is automatically enabled. Otherwise, use the derby.database.sqlAuthorization property to enable SQL standard authorization.">Setting the SQL standard authorization mode</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecuregrantrevokeaccess.html" title="When the SQL standard authorization mode is enabled, object owners can use the GRANT and REVOKE SQL statements to set the user privileges for specific database objects or for specific SQL actions. They can also use roles to administer privileges.">Using SQL standard authorization</a></div>
+<div><a href="cdevcsecureprivileges.html" title="Views, triggers, and constraints operate with the privileges of the owner of the view, trigger, or constraint.">Privileges on views, triggers, and constraints</a></div>
+<div><a href="cdevcsecuresqlauthupgrade.html" title="An old, unprotected database can be shielded with authentication and SQL authorization later on.">Upgrading an old database to use SQL standard authorization</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rdevcsecuresqlauthexceptions.html" title="SQL exceptions are returned when errors occur with SQL authorization.">SQL standard authorization exceptions</a></div>
+</div>
+</div>
+
+</body>
+</html>

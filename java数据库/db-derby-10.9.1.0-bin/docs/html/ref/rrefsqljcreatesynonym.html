@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE SYNONYM statement" />
+<meta content="CREATE SYNONYM statement, Synonyms, creating" name="DC.subject" />
+<meta content="CREATE SYNONYM statement, Synonyms, creating" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreaterole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatetype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljcreatesynonym" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE SYNONYM statement</title>
+</head>
+<body id="rrefsqljcreatesynonym"><a name="rrefsqljcreatesynonym"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE SYNONYM statement</h1>
+
+
+<div>
+<div class="section"><p>Use the CREATE SYNONYM statement to provide an alternate name
+for a table or a view that is present in the same schema or another schema.
+You can also create synonyms for other synonyms, resulting in nested synonyms.
+A synonym can be used instead of the original qualified table or view name
+in SELECT, INSERT, UPDATE, DELETE or LOCK TABLE statements. You can create
+a synonym for a table or a view that doesn't exist, but the target table or
+view must be present before the synonym can be used.</p>
+<p>Synonyms share
+the same namespace as tables or views. You cannot create a synonym with the
+same name as a table that already exists in the same schema. Similarly, you
+cannot create a table or view with a name that matches a synonym already present.</p>
+<p>A
+synonym can be defined for a table/view that does not exist when you create
+the synonym. If the table or view doesn't exist, you will receive a warning
+message (SQLSTATE  01522). The referenced object must be present when you
+use a synonym in a DML statement.</p>
+<p>You can create a nested synonym (a
+synonym for another synonym), but any attempt to create a synonym that results
+in a circular reference will return an error message (SQLSTATE 42916).</p>
+<p>Synonyms cannot be defined in system schemas. All schemas starting with 'SYS' are considered system schemas and are reserved by <span>Derby</span>.</p>
+<p>A synonym cannot
+be defined on a temporary table. Attempting to define a synonym on a temporary
+table will return an error message (SQLSTATE XCL51).</p>
+</div>
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>CREATE SYNONYM <a href="rrefsynonymname.html#rrefsynonymname">synonym-Name</a> FOR { <a href="rrefviewname.html#rrefviewname">view-Name</a> | <a href="rreftablename.html#rreftablename">table-Name</a> }</strong></pre>
+The <a href="rrefsynonymname.html#rrefsynonymname">synonym-Name</a> in the statement represents
+the synonym name you are giving the target table or view, while the <a href="rrefviewname.html#rrefviewname">view-Name</a> or <a href="rreftablename.html#rreftablename">table-Name</a> represents
+the original name of the target table or view.</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre><strong>CREATE SYNONYM SAMP.T1 FOR SAMP.TABLEWITHLONGNAME</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="The CREATE FUNCTION statement allows you to create Java functions, which you can then use in an expression.">CREATE FUNCTION statement</a></div>
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX statement</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE statement</a></div>
+<div><a href="rrefcreaterole.html" title="">CREATE ROLE statement</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA statement</a></div>
+<div><a href="rrefsqljcreatesequence.html" title="">CREATE SEQUENCE statement</a></div>
+<div><a href="rrefsqlj24513.html" title="">CREATE TABLE statement</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER statement</a></div>
+<div><a href="rrefsqljcreatetype.html" title="">CREATE TYPE statement</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW statement</a></div>
+</div>
+</div>
+
+</body>
+</html>

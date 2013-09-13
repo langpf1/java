@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="DELETE statement" />
+<meta content="DELETE statement, Read-write VTIs, and DELETES" name="DC.subject" />
+<meta content="DELETE statement, Read-write VTIs, and DELETES" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj35981" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>DELETE statement</title>
+</head>
+<body id="rrefsqlj35981"><a name="rrefsqlj35981"><!-- --></a>
+
+
+<h1 class="topictitle1">DELETE statement</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>{
+    DELETE FROM <em><a href="rreftablename.html#rreftablename">table-Name</a></em> [[AS] <em><a href="rrefcorrelationname.html#rrefcorrelationname">correlation-Name</a></em>]
+        [<em><a href="rrefsqlj33602.html#rrefsqlj33602">WHERE clause</a></em>] |
+    DELETE FROM table-Name <em><a href="rrefsqlj15309.html#rrefsqlj15309">WHERE CURRENT OF clause</a></em>
+}</strong></pre>
+</div>
+
+<div class="section"><p>The first syntactical form, called a searched delete, removes
+all rows identified by the table name and WHERE clause.</p>
+</div>
+
+<div class="section"><p>The second syntactical form, called a positioned delete, deletes
+the current row of an open, updatable cursor. For more information
+about updatable cursors, see <a href="rrefsqlj41360.html#rrefsqlj41360">SELECT statement</a>.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Examples</h2> <pre><strong>DELETE FROM SAMP.IN_TRAY
+
+stmt.executeUpdate("DELETE FROM SAMP.IN_TRAY WHERE CURRENT OF " +
+	resultSet.getCursorName());</strong></pre>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Statement dependency system</h2>
+<p>A searched delete statement depends on the table being updated,
+all of its conglomerates (units of storage such as heaps or indexes), and
+any other table named in the WHERE clause. A CREATE or DROP INDEX statement
+for the target table of a prepared searched delete statement invalidates the
+prepared searched delete statement.</p>
+</div>
+
+<div class="section"><p>The positioned delete statement depends on the cursor and any
+tables the cursor references. You can compile a positioned delete even if
+the cursor has not been opened yet. However, removing the open cursor with
+the JDBC <em>close</em> method invalidates the positioned delete.</p>
+</div>
+
+<div class="section"><p>A CREATE or DROP INDEX statement for the target table of a prepared
+positioned delete invalidates the prepared positioned delete statement.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj39374.html" title="">Statements</a></div>
+</div>
+</div>
+
+</body>
+</html>

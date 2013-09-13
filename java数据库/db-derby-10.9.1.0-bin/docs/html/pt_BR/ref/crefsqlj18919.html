@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Identificadores SQL" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj1003454.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj34834.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcolumnname.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcorrelationname.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefnewtablename.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefschemaname.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsimplecolumnname.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsynonymname.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftablename.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefviewname.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefindexname.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefconstraintname.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcursorname.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftriggername.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefrauthid.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="crefsqlj18919" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Identificadores SQL</title>
+</head>
+<body id="crefsqlj18919"><a name="crefsqlj18919"><!-- --></a>
+
+
+<h1 class="topictitle1">Identificadores SQL</h1>
+
+<div>
+<p>
+
+
+O <em>identificador</em> é a representação dentro da linguagem de itens criados
+pelos usuários, em oposição às palavras chave e comandos da linguagem.
+
+Alguns identificadores representam <em>objetos do dicionário</em>,
+que são objetos criados pelo usuário (como tabelas, visões, índices, colunas
+e restrições), que são armazenados no banco de dados.
+São chamados de objetos do dicionário porque o
+<span>Derby</span>
+armazena as informações sobre estes objetos nas tabelas do sistema, algumas
+vezes chamado de dicionário de dados.
+O padrão SQL também define maneiras de criar aliases para estes objetos
+em certas instruções.</p>
+
+<p>
+
+Cada tipo de identificador deve estar em conformidade com um conjunto diferente
+de regras.
+Os identificadores que representam objetos do dicionário devem estar em
+conformidade com as regras de identificador do SQL-92, sendo portanto chamados
+de <em><a href="crefsqlj34834.html#crefsqlj34834">IdentificadorSQL92</a></em>.
+</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="crefsqlj1003454.html">Regras para identificadores SQL92</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="crefsqlj34834.html">IdentificadorSQL92</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefcolumnname.html">nome-da-coluna</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefcorrelationname.html">nome-da-correlação</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefnewtablename.html">novo-nome-da-tabela</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefschemaname.html">nome-do-esquema</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsimplecolumnname.html">nome-de-coluna-simples</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsynonymname.html">nome-do-sinônimo</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rreftablename.html">nome-da-tabela</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefviewname.html">nome-da-visão</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefindexname.html">nome-do-índice</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefconstraintname.html">nome-da-restrição</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefcursorname.html">nome-do-cursor</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rreftriggername.html">nome-do-gatilho</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefrauthid.html">identificador-de-autorização</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj23296.html" title="">Referência da linguagem SQL</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="crefsqlj39374.html" title="">Instruções</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">Funções do sistema nativas</a></div>
+<div><a href="crefsqlbuiltinsystemprocedures.html" title="">Procedimentos do sistema nativos</a></div>
+<div><a href="crefsqlj31068.html" title="">Tipos de dado</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefsqlj28468.html" title="">Letras maiúsculas e caracteres especiais</a></div>
+<div><a href="rrefsqlj29026.html" title="">Funções nativas</a></div>
+<div><a href="rrefsqlj19433.html" title="">Expressões SQL</a></div>
+</div>
+</div>
+
+</body>
+</html>

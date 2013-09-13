@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Agregações (funções de conjunto)" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj33923" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Agregações (funções de conjunto)</title>
+</head>
+<body id="rrefsqlj33923"><a name="rrefsqlj33923"><!-- --></a>
+
+
+<h1 class="topictitle1">Agregações (funções de conjunto)</h1>
+
+<div>
+<div class="section">
+<p>Esta seção descreve as agregações (também descritas como <em>funções de
+conjunto</em> no ANSI SQL-92 e como <em>funções de coluna</em> em algumas
+literaturas sobre banco de dados).
+As agregações fornecem meios de avaliar uma expressão para um conjunto de
+linhas.
+Enquanto as outras funções nativas operam sobre uma única expressão, as
+funções de agregação operam sobre conjuntos de valores reduzindo-os a um
+único valor escalar.
+As agregações nativas podem calcular o valor mínimo, o valor máximo, a soma
+e a média de uma expressão com relação a um conjunto de valores, assim como
+contar linhas.
+Também podem ser criadas agregações do usuário para executar outras funções
+de conjunto, como calcular o desvio padrão.</p>
+
+</div>
+
+<div class="section">
+<div class="p">
+As agregações nativas podem operar nos tipos de dado mostrados em
+<a href="rrefsqlj33923.html#rrefsqlj33923__sqlj92398">Tipos de dado permitidos pelas agregações nativas</a>.
+
+<div class="tablenoborder"><a name="rrefsqlj33923__sqlj92398"><!-- --></a><table cellspacing="0" cellpadding="4" summary="Tabela 1. Tipos de dado permitidos pelas agregações nativas" id="rrefsqlj33923__sqlj92398" frame="border" border="1" rules="all"><caption>Tabela 1. Tipos de dado permitidos pelas agregações nativas</caption>
+
+
+
+<thead align="left">
+<tr>
+<th valign="top" width="33.33333333333333%" id="N10083">&nbsp;</th>
+
+<th align="left" valign="bottom" width="33.33333333333333%" id="N10089">Todos os tipos</th>
+
+<th align="left" valign="bottom" width="33.33333333333333%" id="N10092">Tipos de dado numéricos nativos</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N10083">COUNT</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10089">X</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10092">X</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N10083">MIN</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10089">&nbsp;</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10092">X</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N10083">MAX</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10089">&nbsp;</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10092">X</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N10083">AVG</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10089">&nbsp;</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10092">X</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N10083">SUM</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10089">&nbsp;</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10092">X</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+<div class="p">
+As agregações são permitidas apenas:
+<ul>
+<li>No <em>ItemSeleção</em> da
+<em><a href="rrefselectexpression.html#rrefselectexpression">ExpressãoSeleção</a>.</em></li>
+
+<li>Na <a href="rrefsqlj14854.html#rrefsqlj14854">Cláusula HAVING</a>.</li>
+
+<li>Na <a href="rrefsqlj13658.html#rrefsqlj13658">Cláusula ORDER BY</a>
+(utilizando um nome aliás) se a agregação aparecer no resultado do bloco de
+consulta relevante.
+Ou seja, é permitido um aliás para uma agregação na
+<a href="rrefsqlj13658.html#rrefsqlj13658">Cláusula ORDER BY</a> se,
+e somente se, a agregação aparecer no <em>ItemSeleção</em> da
+<em><a href="rrefselectexpression.html#rrefselectexpression">ExpressãoSeleção</a>.</em></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section">
+<div class="p">Todas as expressões nos <em>ItensSelecionados</em> da
+<em><a href="rrefselectexpression.html#rrefselectexpression">ExpressãoSeleção</a></em>
+devem ser agregações ou colunas agrupadas (consulte a
+<a href="rrefsqlj32654.html#rrefsqlj32654">Cláusula GROUP BY</a>)
+(O mesmo é verdade se houver uma cláusula HAVING sem uma cláusula GROUP BY).
+Isto se deve ao fato do <em>ResultSet</em> da
+<em><a href="rrefselectexpression.html#rrefselectexpression">ExpressãoSeleção</a></em>
+dever ser um escalar (valor único) ou um vetor (vários valores), mas não a uma
+mistura dos dois (as agregações têm como resultado um valor escalar, e a
+referência a uma coluna pode ter como resultado um vetor).
+Por exemplo, a consulta a seguir mistura valor escalar e vetor e, portanto,
+não é válida:
+<pre><strong><span>-- inválido</span>
+SELECT MIN(TEMPO_VÔO), ID_VÔO
+FROM VÔOS</strong>
+</pre>
+
+</div>
+
+</div>
+
+<div class="section">
+<div class="p">Não são permitidas agregações em referências externas (correlações).
+Isto significa que se a subconsulta contiver uma agregação, esta agregação
+não poderá avaliar uma expressão que inclua uma referência a uma coluna do bloco
+de consulta externo.
+Por exemplo, a seguinte consulta não é válida porque SUM opera sobre uma
+coluna da consulta externa:
+<pre><strong>SELECT c1
+FROM t1
+GROUP BY c1
+HAVING c2 &gt;
+    (SELECT t2.x
+    FROM t2
+    WHERE t2.y = SUM(t1.c3)) </strong>
+</pre>
+
+</div>
+
+</div>
+
+<div class="section">
+<p>O cursor declarado em um <em>ResultSet</em> que inclui uma agregação no
+bloco de consulta externo não é atualizável.</p>
+
+</div>
+
+<div class="section">
+<div class="p">Esta seção inclui as seguintes agregações:
+<ul>
+<li><a href="rrefsqlj32693.html#rrefsqlj32693">AVG</a></li>
+
+<li><a href="rrefsqlj38716.html#rrefsqlj38716">COUNT</a></li>
+
+<li><a href="rrefsqlj27781.html#rrefsqlj27781">MAX</a></li>
+
+<li><a href="rrefsqlj33520.html#rrefsqlj33520">MIN</a></li>
+
+<li><a href="rrefsqlj13083.html#rrefsqlj13083">SUM</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefsqlj29026.html" title="">Funções nativas</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="DROP ROLE statement" />
+<meta content="DROP ROLE statement, SQL statements, DROP ROLE, roles, dropping" name="DC.subject" />
+<meta content="DROP ROLE statement, SQL statements, DROP ROLE, roles, dropping" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreaterole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsetrole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcurrentrole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssysroles.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj80721.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdropfunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj59893.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdropprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31648.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljdropsequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljdropsynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj34148.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj42082.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljdroptype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj61102.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefdroprole" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>DROP ROLE statement</title>
+</head>
+<body id="rrefdroprole"><a name="rrefdroprole"><!-- --></a>
+
+
+<h1 class="topictitle1">DROP ROLE statement</h1>
+
+
+<div>
+<div class="section">
+<p>The DROP ROLE statement allows you to drop an SQL role.</p>
+
+<p>Only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can drop
+a role.</p>
+
+<p>For more information on roles, see "Using SQL roles" in the
+<span><em>Derby Developer's Guide</em></span>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> 
+<pre>
+<strong>DROP ROLE <em><a href="rrefrolename.html#rrefrolename">roleName</a></em></strong>
+</pre>
+
+</div>
+
+<div class="section">
+<p>Dropping a role has the effect of removing the role from the database
+dictionary. This means that no session user can henceforth set that role (see
+<a href="rrefsetrole.html#rrefsetrole">SET ROLE statement</a>), and any existing sessions
+that have that role as the current role (see
+<a href="rrefcurrentrole.html#rrefcurrentrole">CURRENT_ROLE function</a>) will now have a NULL
+CURRENT_ROLE. Dropping a role also has the effect of revoking that role from any
+user and role it has been granted to. See
+<a href="rrefsqljrevoke.html#rrefsqljrevoke">REVOKE statement</a> for information on how
+revoking a role may impact any dependent objects.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre><strong>DROP ROLE reader;</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj80721.html" title="">DROP statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefdropfunctionstatement.html" title="">DROP FUNCTION statement</a></div>
+<div><a href="rrefsqlj59893.html" title="">DROP INDEX statement</a></div>
+<div><a href="rrefdropprocedurestatement.html" title="">DROP PROCEDURE statement</a></div>
+<div><a href="rrefsqlj31648.html" title="">DROP SCHEMA statement</a></div>
+<div><a href="rrefsqljdropsequence.html" title="">DROP SEQUENCE statement</a></div>
+<div><a href="rrefsqljdropsynonym.html" title="">DROP SYNONYM statement</a></div>
+<div><a href="rrefsqlj34148.html" title="">DROP TABLE statement</a></div>
+<div><a href="rrefsqlj42082.html" title="">DROP TRIGGER statement</a></div>
+<div><a href="rrefsqljdroptype.html" title="">DROP TYPE statement</a></div>
+<div><a href="rrefsqlj61102.html" title="">DROP VIEW statement</a></div>
+<div><a href="rrefcreaterole.html" title="">CREATE ROLE statement</a></div>
+<div><a href="rrefsetrole.html" title="">SET ROLE statement</a></div>
+<div><a href="rrefcurrentrole.html" title="">CURRENT_ROLE function</a></div>
+<div><a href="rrefsistabssysroles.html" title="The SYSROLES table stores the roles in the database.">SYSROLES system table</a></div>
+</div>
+</div>
+
+</body>
+</html>

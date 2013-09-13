@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Database owner" />
+<meta name="abstract" content="The term database owner refers to the current authorization identifier when the database is created, that is, the user creating the database. If you use NATIVE authentication, or if you manually enable or plan to enable SQL authorization, controlling the identity of the database owner becomes important." />
+<meta name="description" content="The term database owner refers to the current authorization identifier when the database is created, that is, the user creating the database. If you use NATIVE authentication, or if you manually enable or plan to enable SQL authorization, controlling the identity of the database owner becomes important." />
+<meta content="database owner, database owner, powers, permissions" name="DC.subject" />
+<meta content="database owner, database owner, powers, permissions" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure24458.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure865580.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevcsecure622.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure37241.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevcsecureDbOwner" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Database owner
+</title>
+</head>
+<body id="cdevcsecureDbOwner"><a name="cdevcsecureDbOwner"><!-- --></a>
+
+
+<h1 class="topictitle1">Database owner
+</h1>
+
+
+
+
+
+<div><p>
+  The term <em>database owner</em> refers to the current authorization
+  identifier when the database is created, that is, the user creating
+  the database. If you use NATIVE authentication, or if you manually enable
+  or plan to enable SQL authorization,
+  controlling the identity of the database owner becomes important.
+</p>
+
+  <p>
+    When a database is created, the database owner of that database
+    gets implicitly set to the authorization identifier used in the
+    connect operation which creates the database, for example by
+    supplying the URL attribute "user".  Note that this applies even
+    if authentication is not (yet) enabled.  In SQL, the built-in
+    functions USER and the equivalent CURRENT_USER return the current
+    authorization identifier.
+  </p>
+
+  <p>
+    If the database is created <em>without</em> supplying a user (only
+    possible if authentication is not enabled), the database owner
+    gets set to the default authorization identifier, "APP", which is
+    also the name of the default schema, see the section "SET
+    SCHEMA statement" in
+    the <cite><span><em>Derby Reference Manual</em></span></cite>.
+  </p>
+
+  <p>
+    The database owner has automatic SQL level permissions when
+    SQL authorization is enabled, see more about this
+    in <a href="cdevcsecure36595.html#cdevcsecure36595">User authorizations</a>.
+  </p>
+
+  <p>
+    To further enhance security, when <em>both</em>
+    <a href="cdevcsecure36127.html#cdevcsecure36127">authentication</a>
+    and SQL authorization are enabled for a
+    database, Derby restricts some special powers to the database
+    owner: only the database owner is allowed to
+    <a href="tdevdvlp40464.html#tdevdvlp40464">shut down</a>
+    the database, to
+    <a href="tdevcsecureunencrypteddb.html#tdevcsecureunencrypteddb">encrypt</a>
+    or
+    <a href="tdevcsecurenewkeyoverview.html#tdevcsecurenewkeyoverview">reencrypt</a>
+    the database or to perform a
+    <a href="tdevupgradedb.html#tdevupgradedb">full upgrade</a>
+    of it. These powers can not be delegated.
+  </p>
+
+  <div class="p">
+    <div class="attention"><span class="attentiontitle">Attention: </span>
+      There is currently no way of changing the database owner once
+      the database is created. This means that if you plan to run with
+      SQL authorization enabled, you should make sure to create the
+      database as the user you want to be the owner.
+    </div>
+
+  </div>
+
+  
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure37241.html" title="User names within the Derby system are known as authorization identifiers. The authorization identifier is a string that represents the name of the user, if one was provided in the connection request.">Users and authorization identifiers</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecure24458.html" title="When working with both user authentication and user authorization, you need to understand how user names are treated by each system.">Authorization identifiers, user authentication, and user authorization</a></div>
+<div><a href="cdevcsecure865580.html" title="User names can affect a user's default schema.">User names and schemas</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rdevcsecure622.html" title="Specifying an invalid authorization identifier in a database user authorization property raises an exception. Specifying an invalid authorization identifier in a connection request raises an exception.">Exceptions when using authorization identifiers</a></div>
+</div>
+</div>
+
+</body>
+</html>

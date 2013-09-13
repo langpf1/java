@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="REVOKE 文" />
+<meta name="abstract" content="REVOKE文を使って、指定したユーザあるいは全ユーザから、データベースの情報に対して操作を行う権限を剥奪することができます。" />
+<meta name="description" content="REVOKE文を使って、指定したユーザあるいは全ユーザから、データベースの情報に対して操作を行う権限を剥奪することができます。" />
+<meta content="REVOKE statement, syntax, SQL statements, REVOKE, REVOKE statement, limitations, privileges, tables and columns, revoking" name="DC.subject" />
+<meta content="REVOKE statement, syntax, SQL statements, REVOKE, REVOKE statement, limitations, privileges, tables and columns, revoking" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljgrant.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljgrant.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssyscolperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssystableperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssystableperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssyscolperms.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljrevoke" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>REVOKE 文 </title>
+</head>
+<body id="rrefsqljrevoke"><a name="rrefsqljrevoke"><!-- --></a>
+
+
+<h1 class="topictitle1">REVOKE 文 </h1>
+
+
+
+<div><p>REVOKE文を使って、指定したユーザあるいは全ユーザから、データベースの情報に対して操作を行う権限を剥奪することができます。</p>
+
+<div class="section"> <div class="p">剥奪できる権限には次の種類があります。<ul>
+<li>表から情報を削除する。</li>
+
+<li>表に情報を挿入する。</li>
+
+<li>表や表にある列の部分集合に対して、外部キー参照を作成する。</li>
+
+<li>表やビュー、表の列の部分集合から、情報を選択する。</li>
+
+<li>表にトリガを作成する</li>
+
+<li>表や表にある列の部分集合にある情報を更新する。</li>
+
+<li>関数や手続きなどのプログラムルーチンを実行する。</li>
+
+</ul>
+</div>
+<p>REVOKE文を発行する前に、<samp class="codeph">derby.database.sqlAuthorization</samp>属性が<samp class="codeph">true</samp>であることを確認してください。<samp class="codeph">derby.database.sqlAuthorization</samp>属性により、SQL認証が有効になります。</p>
+
+<p>情報の所有者か<a href="rrefattrib26867.html#rrefattrib26867">データベースの所有者</a>であれば、その情報への権限を剥奪する事ができます。</p>
+
+<p>REVOKE文の使い方は、表への権限を剥奪するのか、プログラムルーチンへの権限を剥奪するのかにより異なります。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">表の場合の使い方</h2>
+<pre><strong>REVOKE <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokeptype">権限タイプ</a></em> ON [ TABLE ] { <em><a href="rreftablename.html#rreftablename">表名</a></em> | <em><a href="rrefviewname.html#rrefviewname">ビュー名</a></em> } FROM <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokegrantees">権限を与えられていた人</a></em></strong></pre>
+<p>列の一覧を指定せずに権限を剥奪した場合、表の全ての列への権限が剥奪されます。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">プログラムルーチンの場合の使い方</h2><pre><strong>REVOKE EXECUTE ON { FUNCTION | PROCEDURE } <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokeroutinename">プログラムルーチンの指示子</a></em> FROM <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokegrantees">権限を与えられていた人</a> </em> RESTRICT</strong></pre>
+<p>プログラムルーチンにREVOKE文を使う場合、RESTRICT節が必要です。RESTRICT節は、実行権限がビューや表、制約からは剥奪されない一方で、ビューや表、制約の所有者からは剥奪されることを表します。</p>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokeptype"><a name="rrefsqljrevoke__revokeptype"><!-- --></a><h2 class="sectiontitle">権限タイプ</h2><pre><strong>ALL PRIVILEGES |
+  各種権限 </strong></pre>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokeprivlist"><a name="rrefsqljrevoke__revokeprivlist"><!-- --></a><h2 class="sectiontitle">各種権限</h2><pre><strong>  
+表権限 {, 表権限 }* </strong></pre>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revoketablepriv"><a name="rrefsqljrevoke__revoketablepriv"><!-- --></a><h2 class="sectiontitle">表権限</h2><pre><strong>  DELETE |
+  INSERT |
+  REFERENCES [<em>列一覧</em>] |
+  SELECT [<em>列一覧</em>] |
+  TRIGGER |
+  UPDATE [<em>列一覧</em>] </strong></pre>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokecollist"><a name="rrefsqljrevoke__revokecollist"><!-- --></a><h2 class="sectiontitle">列一覧</h2><pre><strong>  ( 列識別子 {, 列識別子}* ) </strong></pre>
+</div>
+<div class="section"><p>権限タイプのALL PRIVILEGESは、表への全ての権限をユーザから剥奪する時に使います。各種権限を指定して、表への一つ以上の権限を剥奪することもできます。</p>
+
+<p>DELETEの権限タイプは、表の行を削除する権限を剥奪するために使います。</p>
+
+<p>INSERTの権限タイプは、表に行を挿入する権限を剥奪するために使います。</p>
+
+<p>REFERENCESの権限タイプは、表への外部キー参照を作成する権限を剥奪するために使います。列一覧が指定された場合、その列群への外部キー参照を作成する権限だけが剥奪されます。</p>
+
+<p>SELECTの権限タイプは、表またはビューの情報を選択する権限を剥奪するときに使います。列一覧が指定された場合、その列群への権限だけが剥奪されます。列一覧が指定されなかった場合、表の全列に対して操作が有効です。</p>
+
+<p>TRIGGERの権限タイプは、表にトリガを作成する権限を剥奪するとめに使います。</p>
+
+<p>UPDATEの権限タイプは、表にUPDATE文を実行する権限を剥奪するために使います。列一覧が指定された場合、その列群への権限だけが剥奪されます。</p>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokegrantees"><a name="rrefsqljrevoke__revokegrantees"><!-- --></a><h2 class="sectiontitle">権限を与えられていた人</h2><pre><strong>{	<em>認証識別子</em> | PUBLIC } [,{ <em>authorization ID</em> | PUBLIC } ] *</strong></pre>
+
+<p>指定したユーザあるいは全ユーザから、権限の剥奪を行うことができます。全ユーザを指定するときは、PUBLICというキーワードを使います。PUBLICで剥奪される権限と、ユーザを指定して剥奪される権限は独立した物です。例を挙げましょう。表<samp class="codeph">t</samp>へのSELECT権限が、PUBLICと<samp class="codeph">harry</samp>という認証識別子の両方に与えられているとします。
+ここで、<samp class="codeph">harry</samp>という認証識別子からSELECT権限が剥奪されたとしても、<samp class="codeph">harry</samp>という認証識別子はPUBLIC権限を通して、表<samp class="codeph">t</samp>を操作可能です。</p>
+
+<div class="restriction"><span class="restrictiontitle">制約事項: </span>情報の所有者の権限を剥奪することはできません。</div>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokeroutinename"><a name="rrefsqljrevoke__revokeroutinename"><!-- --></a><h2 class="sectiontitle">プログラムルーチンの指示子</h2><pre><strong>  {
+		<em>qualified-name</em> [ signature ]
+  }</strong></pre>
+</div>
+
+<div class="section"><h2 class="sectiontitle">剥奪された権限に連なる依存関係</h2>
+<p>剥奪された権限に依存しているビューやトリガ、制約等は自動的に削除されます。このとき<span>Derby</span> は、剥奪された権限を他の権限で代替しようとしません。詳しくは、<span><em>Derby Developer's Guide</em></span>の"SQL standard authorization"を参照してください。</p>
+</div>
+
+
+
+<div class="section"><h2 class="sectiontitle">制限事項</h2><p>REVOKE文には次の制限事項があります。</p>
+
+<dl>
+<dt class="dlterm">表毎の権限に関連した権限</dt>
+
+<dd>表毎の権限に対応して、SYSTABLEPERMSシステム表に表IDと権限の付与先が記録されます。たとえば、<samp class="codeph">user2</samp>に、表<samp class="codeph">user1.t1</samp>のSELECTとDELETEの権限が付与された場合、SYSTABLEPERMS表には対応した行がひとつ追加されます。この行にのGRANTEE欄は<samp class="codeph">user2</samp>という値をとって、TABLEID欄は<samp class="codeph">user1.t1</samp>という値をとります。さらにSELECTPRIVとDELETEPRIVのそれぞれの欄の値はYをとります。それ以外の権限に対応した欄の値はNです。<p>権限を付与されたユーザが表へのいずれかの権限を必要とする情報をデータベースに作成すると、<span>Derby</span> のエンジンは、その情報がSYSTABLEPERMSにある特定の行へ依存していることを理解します。
+例えば、<samp class="codeph">user2</samp>が<samp class="codeph">SELECT * FROM
+user1.t1</samp>という文で<samp class="codeph">v1</samp>というビューを作成すると、ビューの<samp class="codeph">v1</samp>と、GRANTEE欄が<samp class="codeph">user2</samp>でTABLEID欄が<samp class="codeph">user1.t1</samp>であるSYSTABLEPERMSの行との間に、管理対象となる依存関係があるとプログラムは理解します。ここで、プログラムはビューが特定の行に依存していることを理解しますが、その行にある権限に対応した欄のうち、どの欄に依存しているのかは理解していません。</p>
+
+<p>そのせいで、表毎の権限を剥奪するREVOKE文が発行されると、その権限と同じ表IDとユーザの組み合わせを持つ権限に依存したデータベース上の情報は全て削除されてしまいます。例で説明すると、<samp class="codeph">user1</samp>が<samp class="codeph">user2</samp>から表<samp class="codeph">t1</samp>のDELETE権限を剥奪すると、SYSTABLEPERMS表のGRANTEE欄に<samp class="codeph">user2</samp>をとりTABLEID欄に<samp class="codeph">user1.t1</samp>をとる行がREVOKE文により更新されます。このとき依存関係の管理機能により、その行に記録されたDELETE権限には依存していないにもかかわらず、権限の剥奪による無効化のメッセージが<samp class="codeph">user2.v1</samp>にも送信されるので、このビューは削除されてしまいます。</p>
+</dd>
+
+
+<dt class="dlterm">列毎の権限に関連した制限</dt>
+
+<dd>SYSCOLPERMSシステム表の行毎に、権限の付与先と表IDの組み合わせに許可された権限をひとつだけ記録することができます。たとえば、<samp class="codeph">user2</samp>に表<samp class="codeph">user1.t1</samp>にあるc12とc13という列のSELECT権限が与えられた場合、SYSCOLPERMSには行がひとつ追加されます。この行はGRANTEE欄の値に<samp class="codeph">user2</samp>をとり、TABLEID欄の値に<samp class="codeph">user1.t1</samp>をとり、TYPE欄の値に<samp class="codeph">S</samp>をとり、COLUMNS欄の値には<samp class="codeph">c12, c13</samp>をとります。
+<p>表の列の集合に権限を付与されたユーザが、その権限に依存した情報をデータベースに作成した場合、<span>Derby</span>は、その情報とSYSCOLPERMS表の対応した行の間の依存関係を理解して管理下に起きます。例えば<samp class="codeph">user2</samp>が<samp class="codeph">SELECT c11 FROM user1.t1</samp>という文により、<samp class="codeph">v1</samp>という行を作成すると、プログラムはGRANTEE欄が<samp class="codeph">user2</samp>でTABLEID欄が<samp class="codeph">user1.t1</samp>、TYPE欄がSであるSYSCOLPERMS表の行に、<samp class="codeph">v1</samp>が依存することを理解して、その依存関係を管理下に置きます。このとき、プログラムはビューがSELECT権限に依存することは理解しますが、ビューがどのカラムに依存しているかは追跡しません。</p>
+
+<p>REVOKE文がカラムごとの権限に対して発行されると、その権限の権限付与先、テーブルID、権限の種類に依存したデータベース上の情報が削除されます。例で説明すると、<samp class="codeph">user1</samp>が<samp class="codeph">user2</samp>から、表<samp class="codeph">user1.t1</samp>の列<samp class="codeph">c12</samp>へのSELECT権限を剥奪すると、GRANTEE欄が<samp class="codeph">user2</samp>でTABLEIDが<samp class="codeph">user1.t1</samp>、TYPE欄がSのSYSCOLPERMSにある行が、REVOKE文により更新されます。このとき依存関係の管理機能により、<samp class="codeph">c12</samp> という列には依存していないにもかかわらず、権限の剥奪による無効化のメッセージが<samp class="codeph">user2.v1</samp>というビューにも送信されるので、このビューは削除されてしまいます。</p>
+</dd>
+
+</dl>
+</div>
+
+
+
+<div class="example"><h2 class="sectiontitle">権限剥奪の例</h2> <div class="p">表<samp class="codeph">t</samp>へのSELECT権限を、<samp class="codeph">maria</samp>と<samp class="codeph">harry</samp>という認証識別子から剥奪する場合、次のように文を書きます。<pre><strong>REVOKE SELECT ON TABLE t FROM maria,harry</strong> </pre>
+</div>
+
+
+<div class="p">表<samp class="codeph">t</samp>へのUPDATE、TRIGGER権限を<samp class="codeph">anita</samp>と<samp class="codeph">zhi</samp>という認証識別子から剥奪する場合、次のように文を書きます。<pre><strong>REVOKE UPDATE, TRIGGER ON TABLE t FROM anita,zhi</strong> </pre>
+</div>
+
+
+<div class="p">表<samp class="codeph">s.v</samp>へのSELECT権限を全ユーザから剥奪する場合、次のように文を書きます。<pre><strong>REVOKE SELECT ON TABLE s.v FROM PUBLIC</strong></pre>
+</div>
+
+
+<div class="p">表<samp class="codeph">s.v</samp>の<samp class="codeph">c1</samp>と<samp class="codeph">c2</samp>という列へのUPDATE権限を全てのユーザから剥奪する場合、次のように文を書きます。<pre><strong>REVOKE UPDATE (c1,c2) ON TABLE s.v FROM PUBLIC</strong></pre>
+</div>
+
+
+<p><samp class="codeph">p</samp>という手続きへのEXECUTE権限を、<samp class="codeph">george</samp>という認証識別子から剥奪する場合、次のように文を書きます。</p>
+<pre><strong>REVOKE EXECUTE ON PROCEDURE p FROM george RESTRICT</strong> </pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj39374.html" title="">文</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqljgrant.html" title="GRANT 文を使って、データベースにある情報の操作権限を、指定した一人あるいは全ユーザに与えることができます。">GRANT 文</a></div>
+<div><a href="rrefsistabssyscolperms.html" title="SYSCOLPERMS 表には権限が付与されている列の情報が記録されます。">SYSCOLPERMS システム表</a></div>
+<div><a href="rrefsistabssystableperms.html" title="SYSTABLEPERMS表には権限が付与されているテーブルの情報が記録されます。">SYSTABLEPERMS システム表</a></div>
+</div>
+</div>
+
+</body>
+</html>

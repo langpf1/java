@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Basic Network Server security policy" />
+<meta content="Network Server, basic policy" name="DC.subject" />
+<meta content="Network Server, basic policy" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="tadminnetservrun.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminnetservcustom.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminnetservopen.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tadminnetservbasic" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Basic Network Server security policy</title>
+</head>
+<body id="tadminnetservbasic"><a name="tadminnetservbasic"><!-- --></a>
+
+
+<h1 class="topictitle1">Basic Network Server security policy</h1>
+
+
+<div>
+<div class="section"> <p> If you boot the Network Server without specifying a security
+manager, the Network Server will install a default Java security manager enforcing
+a Basic policy. This happens if you boot the Network Server as your VM's entry
+point, e.g.: </p>
+  <pre>
+java org.apache.derby.drda.NetworkServerControl start ...
+</pre>
+  <p>Note that you should run your Network Server with user
+authentication and user authorization enabled. For details on how to enable user
+authentication, see "Working with user authentication" in the
+<span><em>Derby Developer's Guide</em></span>. For information on user
+authorization, see "Users and authorization identifiers" and "User
+authorizations" in the <span><em>Derby Developer's Guide</em></span>.</p>
+
+<p> Some
+of your application code may run as procedures and functions which you have
+declared using the CREATE PROCEDURE and CREATE FUNCTION statements. You will
+need to add privileged blocks to your declared procedures and functions if
+they perform sensitive operations such as file and network i/o, classloading,
+system property reading, etc.</p>
+  <p> If for some reason you do not want
+to run your client/server application under a security manager, you may override
+the Network Server's impulse to install a default policy. For details, see <a href="tadminnetservopen.html">Running the Network Server without a security policy</a>. </p>
+  <p> Note that the Network Server
+attempts to install a security manager only if you boot the server as the
+entry point of your VM. The Network Server will not attempt to install a security
+manager if you start the server from your application using the programmatic
+API described in the following section: <a href="tadminconfig814963.html">Starting the Network Server from a Java application</a>. </p>
+  <p> You
+will find a template security policy in the Derby distribution at <em>demo/templates/server.policy</em>.
+Most likely, you will want to customize this policy. For example, probably
+you will want to restrict the server's liberal file i/o permissions which
+let the server backup/restore and export/import to or from any location in the local file system.
+For details on how to customize the Template policy, please see <a href="tadminnetservcustom.html">Customizing the Network Server's security policy</a>.
+The following example is a copy of the Basic policy: </p>
+
+<pre>//
+// This template policy file gives examples of how to configure the
+// permissions needed to run a Derby network server with the Java
+// Security manager.
+//
+grant codeBase "${derby.install.url}derby.jar"
+{
+//
+// These permissions are needed for everyday, embedded Derby usage.
+//
+  permission java.lang.RuntimePermission "createClassLoader";
+  permission java.util.PropertyPermission "derby.*", "read";
+  permission java.util.PropertyPermission "user.dir", "read";
+  permission java.util.PropertyPermission "derby.storage.jvmInstanceId", 
+      "write"; 
+  // The next two properties are used to determine if the VM is 32 or 64
+  // bit.
+  permission java.util.PropertyPermission "sun.arch.data.model", "read";
+  permission java.util.PropertyPermission "os.arch", "read";
+  permission java.io.FilePermission "${derby.system.home}","read";
+  permission java.io.FilePermission "${derby.system.home}${/}-", 
+      "read,write,delete";
+
+//
+// This permission lets a DBA reload the policy file while the server
+// is still running. The policy file is reloaded by invoking the
+// SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY() system procedure.
+//
+  permission java.security.SecurityPermission "getPolicy";
+
+//
+// This permission lets you backup and restore databases
+// to and from arbitrary locations in your file system.
+//
+// This permission also lets you import/export data to and from
+// arbitrary locations in your file system.
+//
+// You may want to restrict this access to specific directories.
+//
+  permission java.io.FilePermission "&lt;&lt;ALL FILES&gt;&gt;",
+      "read,write,delete";
+
+
+//
+// Permissions needed for JMX based management and monitoring, which is
+// only available for JVMs supporting "platform management", that is
+// Java SE 5.0 or better.
+//
+// Allows this code to create an MBeanServer:
+//
+  permission javax.management.MBeanServerPermission "createMBeanServer";
+//
+// Allows access to Derby's built-in MBeans, within the domain
+// org.apache.derby.
+// Derby must be allowed to register and unregister these MBeans.
+// It is possible to allow access only to specific MBeans, attributes or 
+// operations. To fine tune this permission, see the javadoc of 
+// javax.management.MBeanPermission or the JMX Instrumentation and Agent 
+// Specification. 
+//
+  permission javax.management.MBeanPermission 
+      "org.apache.derby.*#[org.apache.derby:*]",
+      "registerMBean,unregisterMBean";
+//
+// Trusts Derby code to be a source of MBeans and to register these in
+// the MBean server.
+//
+  permission javax.management.MBeanTrustPermission "register";
+
+  // getProtectionDomain is an optional permission needed for printing
+  // classpath information to derby.log
+  permission java.lang.RuntimePermission "getProtectionDomain";
+
+  //
+  // The following permission must be granted for
+  // Connection.abort(Executor) to work. Note that this permission
+  // must also be granted to outer (application) code domains.
+  //
+  permission java.sql.SQLPermission "callAbort";
+};
+
+grant codeBase "${derby.install.url}derbynet.jar"
+{
+//
+// This permission lets the Network Server manage connections from
+// clients.
+//
+
+// Accept connections from any host. Derby is listening to the host
+// interface specified via the -h option to "NetworkServerControl
+// start" on the command line, via the address parameter to the
+// org.apache.derby.drda.NetworkServerControl constructor in the API
+// or via the property derby.drda.host; the default is localhost.
+// You may want to restrict allowed hosts, e.g. to hosts in a specific
+// subdomain, e.g. "*.example.com".
+
+  permission java.net.SocketPermission "*", "accept"; 
+
+//
+// Needed for server tracing.
+//
+  permission java.io.FilePermission "${derby.drda.traceDirectory}${/}-",
+      "read,write,delete";
+
+//
+// JMX: Uncomment this permission to allow the ping operation of the 
+//      NetworkServerMBean to connect to the Network Server.
+//permission java.net.SocketPermission "*", "connect,resolve";
+
+
+//
+// Needed by sysinfo. The file permission is needed to
+// check the existence of jars on the classpath. You can
+// limit this permission to just the locations which hold
+// your jar files.
+//
+// In this template file, this block of permissions is granted
+// to derbynet.jar under the assumption that derbynet.jar is
+// the first jar file in your classpath which contains the
+// sysinfo classes. If that is not the case, then you will want
+// to grant this block of permissions to the first jar file
+// in your classpath which contains the sysinfo classes.
+// Those classes are bundled into the following Derby
+// jar files:
+//
+//    derbynet.jar
+//    derby.jar
+//    derbyclient.jar
+//    derbytools.jar
+//
+  permission java.util.PropertyPermission "user.*", "read";
+  permission java.util.PropertyPermission "java.home", "read";
+  permission java.util.PropertyPermission "java.class.path", "read";
+  permission java.util.PropertyPermission "java.runtime.version", "read";
+  permission java.util.PropertyPermission "java.fullversion", "read";
+  permission java.lang.RuntimePermission "getProtectionDomain";
+  permission java.io.FilePermission "&lt;&lt;ALL FILES&gt;&gt;", "read";
+  permission java.io.FilePermission "java.runtime.version", "read";
+  permission java.io.FilePermission "java.fullversion", "read";
+};</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="tadminnetservrun.html" title="">Running the Network Server under the security manager</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminnetservcustom.html" title="">Customizing the Network Server's security policy</a></div>
+<div><a href="tadminnetservopen.html" title="">Running the Network Server without a security policy</a></div>
+</div>
+</div>
+
+</body>
+</html>

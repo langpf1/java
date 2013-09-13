@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="ATAN2 function" />
+<meta name="abstract" content="The ATAN2 function returns the arctangent, in radians, of the quotient of the two arguments." />
+<meta name="description" content="The ATAN2 function returns the arctangent, in radians, of the quotient of the two arguments." />
+<meta content="ATAN2 function, functions, ATAN2" name="DC.subject" />
+<meta content="ATAN2 function, functions, ATAN2" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreffuncatan2" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>ATAN2 function</title>
+</head>
+<body id="rreffuncatan2"><a name="rreffuncatan2"><!-- --></a>
+
+
+<h1 class="topictitle1">ATAN2 function</h1>
+
+
+
+<div><p>The ATAN2 function returns the arctangent, in radians, of the
+quotient of the two arguments.</p>
+
+<div class="section">
+<p>Upon successful completion, the function returns the arc tangent of
+<em>y</em>/<em>x</em> in the range -<em>pi</em> to <em>pi</em> radians, where <em>y</em>
+is the first argument and <em>x</em> is the second argument. The specified numbers
+must be <a href="rrefsqljdoubleprecision.html#rrefsqljdoubleprecision">DOUBLE
+PRECISION</a> numbers.</p>
+
+<ul>
+<li>If either argument is NULL, the result of the function is NULL.</li>
+
+<li>If the first argument is zero and the second argument is positive, the
+result of the function is zero.</li>
+
+<li>If the first argument is zero and the second argument is negative, the
+result of the function is the double value closest to <em>pi</em>.</li>
+
+<li>If the first argument is positive and the second argument is zero, the
+result is the double value closest to <em>pi</em>/2.</li>
+
+<li>If the first argument is negative and the second argument is zero, the
+result is the double value closest to -<em>pi</em>/2.</li>
+
+</ul>
+
+<p>The data type of the returned value is a DOUBLE PRECISION number.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>ATAN2 ( <var class="varname">y</var>, <var class="varname">x</var> )</strong>
+</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

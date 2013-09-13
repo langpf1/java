@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Expressões SQL" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1080779.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj23075.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj19433" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Expressões SQL</title>
+</head>
+<body id="rrefsqlj19433"><a name="rrefsqlj19433"><!-- --></a>
+
+
+<h1 class="topictitle1">Expressões SQL</h1>
+
+<div>
+<div class="section">
+<p>A sintaxe de muitas instruções e expressões inclui o termo <em>Expressão</em>,
+ou um termo para um tipo específico de expressão como <em>SubconsultaTabela</em>.
+Dentro das instruções, são permitidas expressões nestes pontos especificados.
+Alguns locais permitem apenas um tipo específico de expressão, ou uma expressão
+com uma propriedade específica.
+A <a href="rrefsqlj19433.html#rrefsqlj19433__sqlj18370">Tabela de Expressões</a> lista todas
+as expressões SQL possíveis, e indica onde são permitidas.</p>
+
+</div>
+
+<div class="section">
+<div class="p">Quando não é especificado o contrário, é permitida uma expressão em qualquer
+lugar onde aparece <em>Expressão</em> na sintaxe.
+Isto inclui:
+<ul>
+<li><em><a href="rrefselectexpression.html#rrefselectexpression">ExpressãoSeleção</a></em></li>
+
+<li><a href="rrefsqlj26498.html#rrefsqlj26498">Instrução UPDATE</a> (porção SET)</li>
+
+<li><a href="rrefsqlj11277.html#rrefsqlj11277">VALUES Expressão</a></li>
+
+<li><a href="rrefsqlj33602.html#rrefsqlj33602">Cláusula WHERE</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section">
+<div class="p">Obviamente, muitas outras instruções incluem estes elementos como blocos de
+construção e, portanto, permitem expressões como parte destes elementos.
+
+<div class="tablenoborder"><a name="rrefsqlj19433__sqlj18370"><!-- --></a><table cellspacing="0" cellpadding="4" summary="Tabela 1. Tabela de Expressões" id="rrefsqlj19433__sqlj18370" frame="border" border="1" rules="all"><caption>Tabela 1. Tabela de Expressões</caption>
+
+
+
+<thead align="left">
+<tr>
+<th valign="top" width="5%" id="N100C2">&nbsp;</th>
+
+<th align="left" valign="bottom" width="43%" id="N100C8">Tipo da expressão</th>
+
+<th align="left" valign="bottom" width="52%" id="N100D1">Explicação</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"><em>Expressões gerais</em></td>
+
+<td valign="top" width="52%" headers="N100D1">Todas as expressões que podem resultar em um valor de qualquer tipo.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>
+
+Referência a coluna</p>
+
+<p>Permitida na
+<em><a href="rrefselectexpression.html#rrefselectexpression">ExpressãoSeleção</a></em>,
+na instrução UPDATE e na cláusula WHERE das instruções de manipulação de dados.</p>
+
+</td>
+
+<td valign="top" width="52%" headers="N100D1">O <em><a href="rrefcolumnname.html#rrefcolumnname">nome-da-coluna</a></em>
+que faz referência ao valor da coluna tornado visível para a expressão que
+contém a referência a coluna.
+<p>O <em>nome-da-coluna</em> deve ser qualificado pelo nome da tabela ou pelo
+nome da correlação se houver ambiguidade.</p>
+
+<p>O qualificador do
+<em><a href="rrefcolumnname.html#rrefcolumnname">nome-da-coluna</a></em>
+deve ser o nome da correlação, se for atribuído nome de correlação à
+tabela na <a href="rrefsqlj21583.html#rrefsqlj21583">Cláusula FROM</a>.
+O nome da tabela não é mais visível como qualificador para <em>nome-da-coluna</em>
+após a tabela ter recebido um aliás pelo nome da correlação.</p>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"><p>Constante</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">A maioria dos tipos de dado nativos normalmente possuem
+constantes associadas aos mesmos
+(conforme mostrado em <a href="crefsqlj31068.html#crefsqlj31068">Tipos de dado</a>).
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>NULL</p>
+
+<p>Permitido nas expressões CAST, na lista de valores do INSERT, e na
+cláusula SET do UPDATE.
+Utilizado na expressão CAST o nulo recebe um tipo de dado específico.</p>
+
+</td>
+
+<td valign="top" width="52%" headers="N100D1">NULL é uma constante sem tipo que representa um valor
+desconhecido.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>
+Parâmetro dinâmico</p>
+
+<p>Permitido em qualquer lugar na expressão onde o tipo de dado pode ser
+facilmente deduzido.
+Consulte <a href="crefsqlj29911.html#crefsqlj29911">Parâmetros dinâmicos</a>.</p>
+
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Parâmetro dinâmico é o parâmetro de uma instrução SQL
+para o qual não é especificado valor quando a instrução é criada.
+Em vez disto, a instrução possui um ponto de interrogação (?) marcando a
+posição de cada um dos parâmetros dinâmicos.
+Consulte <a href="crefsqlj29911.html#crefsqlj29911">Parâmetros dinâmicos</a>.
+<p>Os parâmetros dinâmicos são permitidos apenas em instruções preparadas.
+Devem ser especificados valores para os mesmos antes da instrução preparada
+ser executada.
+Os valores especificados devem corresponder aos tipos esperados.</p>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"><p>Expressão CAST</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Permite especificar o tipo de dado de NULL ou de um parâmetro
+dinâmico, ou converter um valor para outro tipo de dado.
+Consulte <a href="rrefsqlj33562.html#rrefsqlj33562">CAST</a>.
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"><p>
+Subconsulta escalar</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Uma subconsulta que retorna uma única linha com uma única
+coluna.
+Consulte <em><a href="rrefscalarsubquery.html#rrefscalarsubquery">SubconsultaEscalar</a>.</em>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"><p>
+Subconsulta tabela</p>
+
+<p>Permitida como <em>ExpressãoTabela</em> na cláusula FROM, e com EXISTS, IN e
+comparações quantificadas.</p>
+
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Uma subconsulta que retorna mais de uma coluna e mais de uma
+linha.
+Consulte
+<em><a href="rreftablesubquery.html#rreftablesubquery">SubconsultaTabela</a>.</em>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>
+Expressão condicional</p>
+
+</td>
+
+<td valign="top" width="52%" headers="N100D1">A expressão condicional escolhe a expressão a ser
+avaliada baseado em um teste booleano.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"><em>Expressões booleanas</em></td>
+
+<td valign="top" width="52%" headers="N100D1">Expressões que resultam em valores booleanos.
+A maioria das expressões gerais podem resultar em valores booleanos.
+<p>Geralmente as expressões booleanas usadas na cláusula WHERE são feitas de
+operandos operados por operadores SQL.
+Consulte <a href="rrefsqlj23075.html#rrefsqlj23075__sqlj34517">Operadores booleanos SQL</a>.</p>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"><em>
+<span />
+Expressões numéricas</em>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Expressões que resultam em valores numéricos.
+A maioria das expressões gerais podem resultar em valores numéricos.
+<p>Os valores numéricos possuem um dos seguintes tipos de dado:</p>
+
+<p>SMALLINT, INTEGER, BIGINT, REAL, DOUBLE PRECISION, DECIMAL.</p>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>
+
+Expressões +, -, *, /, e + - unários</p>
+
+</td>
+
+<td valign="top" width="52%" headers="N100D1">+ -, *, /, e + - unários
+<p>Avaliam a operação matemática esperada nos operandos.
+Se os dois operandos forem do mesmo tipo, o tipo do resultado não será
+promovido, e portanto o operador de divisão em operandos inteiros resulta
+em um inteiro que é o truncamento do resultado numérico real.
+Quando são misturados tipos de dado diferentes, estes são promovidos conforme
+descrito em <a href="crefsqlj31068.html#crefsqlj31068">Tipos de dado</a>.</p>
+
+<p>O + unário é um não-operador (ou seja, +4 é o mesmo que 4).
+O - unário é o mesmo que multiplicar o valor por -1, mudando efetivamente o
+sinal.</p>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"> <p>AVG</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Retorna a média de um conjunto de valores numéricos.
+<a href="rrefsqlj32693.html#rrefsqlj32693">AVG</a></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"> <p>SUM</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Retorna a soma de um conjunto de valores numéricos.
+<a href="rrefsqlj13083.html#rrefsqlj13083">SUM</a></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"> <p>LENGTH</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Retorna o número de caracteres em uma cadeia de caracteres
+ou de bits.
+Consulte <a href="rrefsqlj16762.html#rrefsqlj16762">LENGTH</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"> <p>LOWER</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Consulte <a href="rrefsqlj42049.html#rrefsqlj42049">LCASE ou LOWER</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"> <p>COUNT</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Retorna o contagem de um conjunto de valores.
+Consulte <a href="rrefsqlj38716.html#rrefsqlj38716">COUNT</a> e
+<a href="rrefsqlj66113.html#rrefsqlj66113">COUNT(*)</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<em><span />
+Expressões de caractere</em></td>
+
+<td valign="top" width="52%" headers="N100D1">Expressões que resultam em um valor CHAR ou VARCHAR.
+A maioria das expressões gerais podem resultar em um valor CHAR ou VARCHAR.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>
+Um valor CHAR ou VARCHAR que utiliza curingas.</p>
+
+<p>Usadas no padrão do LIKE.</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Os caracteres curinga % e _ transformam a cadeia de
+caracteres em um padrão com relação ao qual o operador LIKE pode procurar por
+uma correspondência.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"> <p>
+Expressão de concatenação</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Em uma operação de concatenação, o operador de concatenação,
+"||", concatena seu operando à direita ao seu operando à esquerda.
+Opera em cadeias de caracteres e de bits.
+Consulte <a href="rrefsqlj40899.html#rrefsqlj40899">Concatenação</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"> <p>Funções de cadeia nativas</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">As funções de cadeia nativas atuam em uma cadeia e retornam
+uma cadeia.
+Consulte <a href="rrefsqlj97870.html#rrefsqlj97870">LTRIM</a>,
+<a href="rrefsqlj42049.html#rrefsqlj42049">LCASE ou LOWER</a>,
+<a href="rrefsqlj32613.html#rrefsqlj32613">RTRIM</a>,
+<a href="rrefsqlj93082.html#rrefsqlj93082">SUBSTR</a>
+e <a href="rrefsqlj29930.html#rrefsqlj29930.dita">UCASE ou UPPER</a></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"> <p>Funções USER</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">As funções USER retornam informações sobre o usuário corrente
+na forma de uma cadeia de caracteres.
+Consulte <a href="rrefsqlj42324.html#rrefsqlj42324">CURRENT_USER</a>,
+<a href="rrefsqlj25228.html#rrefsqlj25228">SESSION_USER</a>,
+e <a href="rrefsqlj42476.html#rrefsqlj42476">USER</a></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8"><em><span />
+Expressões de data e hora</em></td>
+
+<td valign="top" width="52%" headers="N100D1">Uma expressão data/hora resulta em um valor do tipo
+DATE, TIME, ou TIMESTAMP.
+A maioria das expressões gerais podem resultar em um valor data/hora.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>
+CURRENT_DATE</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Retorna a data corrente.
+Consulte <a href="rrefsqlj34177.html#rrefsqlj34177">CURRENT_DATE</a>.
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>
+CURRENT_TIME</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Retorna a hora corrente.
+Consulte <a href="rrefsqlj33772.html#rrefsqlj33772">CURRENT_TIME</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="5%" headers="N100C2">&nbsp;</td>
+
+<td valign="top" width="43%" headers="N100C8">
+<p>
+CURRENT_TIMESTAMP</p>
+</td>
+
+<td valign="top" width="52%" headers="N100D1">Retorna o carimbo do tempo corrente.
+Consulte <a href="rrefsqlj15866.html#rrefsqlj15866">CURRENT_TIMESTAMP</a>.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlj1080779.html">Precedência das expressões</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj23075.html">Expressão booleana</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="crefsqlj29911.html">Parâmetros dinâmicos</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj23296.html" title="">Referência da linguagem SQL</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="crefsqlj18919.html" title="">Identificadores SQL</a></div>
+<div><a href="crefsqlj39374.html" title="">Instruções</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">Funções do sistema nativas</a></div>
+<div><a href="crefsqlbuiltinsystemprocedures.html" title="">Procedimentos do sistema nativos</a></div>
+<div><a href="crefsqlj31068.html" title="">Tipos de dado</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefsqlj28468.html" title="">Letras maiúsculas e caracteres especiais</a></div>
+<div><a href="rrefsqlj29026.html" title="">Funções nativas</a></div>
+</div>
+</div>
+
+</body>
+</html>

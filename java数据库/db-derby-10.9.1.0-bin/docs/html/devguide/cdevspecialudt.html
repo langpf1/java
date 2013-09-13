@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Programming user-defined types" />
+<meta name="abstract" content="Derby allows you to create user-defined types. A user-defined type is a serializable Java class whose instances are stored in columns. The class must implement the java.io.Serializable interface, and it must be declared to Derby by means of a CREATE TYPE statement." />
+<meta name="description" content="Derby allows you to create user-defined types. A user-defined type is a serializable Java class whose instances are stored in columns. The class must implement the java.io.Serializable interface, and it must be declared to Derby by means of a CREATE TYPE statement." />
+<meta content="types, user-defined, user-defined types, programming" name="DC.subject" />
+<meta content="types, user-defined, user-defined types, programming" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevspecial.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevspecialudt" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Programming user-defined types</title>
+</head>
+<body id="cdevspecialudt"><a name="cdevspecialudt"><!-- --></a>
+
+
+<h1 class="topictitle1">Programming user-defined types</h1>
+
+
+
+<div><p><span>Derby</span> allows
+you to create user-defined types. A user-defined type is a serializable Java
+class whose instances are stored in columns. The class must implement the
+<em>java.io.Serializable</em> interface, and it must be declared to
+<span>Derby</span> by means of a
+CREATE TYPE statement.</p>
+
+<div class="section">
+
+<p>The key to designing a good user-defined type is to remember that data
+evolves over time, just like code. A good user-defined type has version
+information built into it. This allows the user-defined data to upgrade itself
+as the application changes. For this reason, it is a good idea for a
+user-defined type to implement <em>java.io.Externalizable</em> and not just
+<em>java.io.Serializable</em>. Although the SQL standard allows a Java class to
+implement only <em>java.io.Serializable</em>, this is bad practice for the
+following reasons:</p>
+
+<ul>
+<li><strong>Recompilation</strong> - If the second version of your application is
+compiled on a different platform from the first version, then your serialized
+objects may fail to deserialize. This problem and a possible workaround are
+discussed in the "Version Control" section near the end of this
+<a href="http://java.sun.com/developer/technicalArticles/Programming/serialization/" target="_blank">Serialization Primer</a> and in the last paragraph of the
+header comment for <em>java.io.Serializable</em>.</li>
+
+<li><strong>Evolution</strong> - Your tools for evolving a class which simply implements
+<em>java.io.Serializable</em> are very limited.</li>
+
+</ul>
+
+<p>Fortunately, it is easy to write a version-aware UDT which implements
+<em>java.io.Serializable</em> and can evolve itself over time. For example, here
+is the first version of such a class:</p>
+
+<pre>
+package com.example.types;
+
+import java.io.*;
+import java.math.*;
+
+public class Price implements Externalizable
+{
+    // initial version id
+    private static final int FIRST_VERSION = 0;
+
+    public String currencyCode;
+    public BigDecimal amount;
+
+    // zero-arg constructor needed by Externalizable machinery
+    public Price() {}
+
+    public Price( String currencyCode, BigDecimal amount )
+    {
+        this.currencyCode = currencyCode;
+        this.amount = amount;
+    }
+
+    // Externalizable implementation
+    public void writeExternal(ObjectOutput out) throws IOException
+    {
+        // first write the version id
+        out.writeInt( FIRST_VERSION );
+
+        // now write the state
+        out.writeObject( currencyCode );
+        out.writeObject( amount );
+    }
+    
+    public void readExternal(ObjectInput in) 
+        throws IOException, ClassNotFoundException
+    {
+        // read the version id
+        int oldVersion = in.readInt();
+        if ( oldVersion &lt; FIRST_VERSION ) { 
+            throw new IOException( "Corrupt data stream." ); 
+        }
+        if ( oldVersion &gt; FIRST_VERSION ) { 
+            throw new IOException( "Can't deserialize from the future." );
+        }
+
+        currencyCode = (String) in.readObject();
+        amount = (BigDecimal) in.readObject();
+    }
+}</pre>
+
+<p>After this, it is easy to write a second version of the user-defined type
+which adds a new field. When old versions of <samp class="codeph">Price</samp> values are
+read from the database, they upgrade themselves on the fly. Changes are shown
+in <strong>bold</strong>:</p>
+
+<pre>
+package com.example.types;
+
+import java.io.*;
+import java.math.*;
+<strong>import java.sql.*;</strong>
+
+public class Price implements Externalizable
+{
+    // initial version id
+    private static final int FIRST_VERSION = 0;
+    <strong>private static final int TIMESTAMPED_VERSION = FIRST_VERSION + 1;</strong>
+
+    <strong>private static final Timestamp DEFAULT_TIMESTAMP = new Timestamp( 0L );</strong>
+
+    public String currencyCode;
+    public BigDecimal amount;
+    <strong>public Timestamp timeInstant;</strong>
+
+    // 0-arg constructor needed by Externalizable machinery
+    public Price() {}
+
+    public Price( String currencyCode, BigDecimal amount<strong>, 
+                  Timestamp timeInstant</strong> )
+    {
+        this.currencyCode = currencyCode;
+        this.amount = amount;
+        <strong>this.timeInstant = timeInstant;</strong>
+    }
+
+    // Externalizable implementation
+    public void writeExternal(ObjectOutput out) throws IOException
+    {
+        // first write the version id
+        out.writeInt( <strong>TIMESTAMPED_VERSION</strong> );
+
+        // now write the state
+        out.writeObject( currencyCode );
+        out.writeObject( amount );
+        <strong>out.writeObject( timeInstant );</strong>
+    }
+      
+    public void readExternal(ObjectInput in) 
+        throws IOException, ClassNotFoundException
+    {
+        // read the version id
+        int oldVersion = in.readInt();
+        if ( oldVersion &lt; FIRST_VERSION ) { 
+            throw new IOException( "Corrupt data stream." ); 
+        }
+        if ( oldVersion &gt; <strong>TIMESTAMPED_VERSION</strong> ) {
+            throw new IOException( "Can't deserialize from the future." ); 
+        }
+
+        currencyCode = (String) in.readObject();
+        amount = (BigDecimal) in.readObject();
+
+        <strong>if ( oldVersion &gt;= TIMESTAMPED_VERSION ) {
+            timeInstant = (Timestamp) in.readObject(); 
+        }
+        else { 
+            timeInstant = DEFAULT_TIMESTAMP;</strong> 
+        }
+    }
+}</pre>
+
+<p>An application needs to keep its code in sync across all tiers. This is true
+for all Java code which runs both in the client and in the server. This is true
+for functions and procedures which run in multiple tiers. It is also true for
+user-defined types which run in multiple tiers. The programmer should code
+defensively for the case when the client and server are running different
+versions of the application code. In particular, the programmer should write
+defensive serialization logic for user-defined types so that the application
+gracefully handles client/server version mismatches.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevspecial.html" title="This section discusses special programming for Derby.">Derby server-side programming</a></div>
+</div>
+</div>
+
+</body>
+</html>

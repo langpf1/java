@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE TABLE statement" />
+<meta content="CREATE TABLE statement, CREATE TABLE, SQL statements, tables, creating" name="DC.subject" />
+<meta content="CREATE TABLE statement, CREATE TABLE, SQL statements, tables, creating" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreaterole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatetype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj30540.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj37836.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljgenerationclause.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj24513" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE TABLE statement</title>
+</head>
+<body id="rrefsqlj24513"><a name="rrefsqlj24513"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE TABLE statement</h1>
+
+
+<div>
+<div class="section"> <p>A CREATE TABLE statement creates a table. Tables contain columns
+and constraints, rules to which data must conform. Table-level constraints
+specify a column or columns. Columns have a data type and can specify column
+constraints (column-level constraints).</p>
+<div class="p">The table owner and the 
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a>
+automatically gain the following privileges on the table and are able
+to grant these privileges to other users:<ul>
+<li>INSERT</li>
+
+<li>SELECT</li>
+
+<li>REFERENCES</li>
+
+<li>TRIGGER</li>
+
+<li>UPDATE</li>
+
+</ul>
+These privileges cannot be revoked from the table and database owners.</div>
+<p>For
+information about constraints, see <a href="rrefsqlj13590.html#rrefsqlj13590">CONSTRAINT clause</a>.</p>
+<p>You
+can specify a default value for a column. A default value is the value to
+be inserted into a column if no other value is specified. If not explicitly
+specified, the default value of a column is NULL. See <a href="rrefsqlj30540.html#rrefsqlj30540__sqlj64478">Column default</a>.</p>
+<p>You
+can specify storage properties such as page size for a table by calling the <samp class="codeph">SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY</samp> system
+procedure.</p>
+<p>If a qualified table name is specified, the schema name cannot
+begin with <em>SYS</em>.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+    <p>There are two different variants of the CREATE TABLE statement,
+        depending on whether you are specifying the column definitions and
+        constraints, or whether you are modeling the columns after the
+        results of a query expression:</p>
+
+    <pre><strong>CREATE TABLE <em><a href="rreftablename.html#rreftablename">table-Name</a></em></strong>
+  {
+      ( {<em><a href="rrefsqlj30540.html#rrefsqlj30540">column-definition</a></em> | <em><a href="rrefsqlj42154.html#rrefsqlj42154">Table-level constraint</a></em>}
+      [ , {<em><a href="rrefsqlj30540.html#rrefsqlj30540">column-definition</a></em> | <em><a href="rrefsqlj42154.html#rrefsqlj42154">Table-level constraint</a></em>} ] * )
+  |
+      [ ( <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">column-name</a></em> [ , <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">column-name</a></em> ] * ) ]
+      <strong>AS</strong> <em>query-expression</em>
+      <strong>WITH NO DATA</strong>
+   }
+</pre>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2><pre><strong>CREATE TABLE HOTELAVAILABILITY
+     (HOTEL_ID INT NOT NULL, BOOKING_DATE DATE NOT NULL,
+	ROOMS_TAKEN INT DEFAULT 0, PRIMARY KEY (HOTEL_ID, BOOKING_DATE));
+<span>-- the table-level primary key definition allows you to
+-- include two columns in the primary key definition</span>
+PRIMARY KEY (hotel_id, booking_date))
+<span>-- assign an identity column attribute to an INTEGER
+-- column, and also define a primary key constraint
+-- on the column</span>
+CREATE TABLE PEOPLE
+	(PERSON_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY
+	CONSTRAINT PEOPLE_PK PRIMARY KEY, PERSON VARCHAR(26));
+<span>-- assign an identity column attribute to a SMALLINT
+-- column with an initial value of 5 and an increment value
+-- of 5.</span>
+CREATE TABLE GROUPS
+	(GROUP_ID SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY 
+	(START WITH 5, INCREMENT BY 5), ADDRESS VARCHAR(100), PHONE VARCHAR(15));</strong></pre>
+<div class="note"><span class="notetitle">Note: </span>For
+more examples of CREATE TABLE statements using the various constraints, see <a href="rrefsqlj13590.html#rrefsqlj13590">CONSTRAINT clause</a>.</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">CREATE TABLE ... AS ... </h2>
+    <p>With the alternate form of the CREATE TABLE statement, the column
+        names and/or the column data types can be specified by providing
+        a query. The columns in the query result are used as a model for
+        creating the columns in the new table.</p>
+
+<p>If no column names are specified for the new table, then all the columns
+    in the result of the query expression are used to create same-named
+    columns in the new table, of the corresponding data type(s).
+    If one or more column names are specified
+    for the new table, then the same number of columns must be present in
+    the result of the query expression; the data types of those columns are
+    used for the corresponding columns of the new table.</p>
+
+<p>The WITH NO DATA clause specifies that the data rows which result
+    from evaluating the query expression are not used; only the names and
+    data types of the columns in the query result are used. The
+    WITH NO DATA clause <strong>must</strong> be specified; in a future release,
+    Derby may be modified to allow the WITH DATA clause to be provided,
+    which would indicate that the results of the query expression should
+    be inserted into the newly-created table. In the current release, however,
+    only the WITH NO DATA form of the statement is accepted.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+    <pre><strong>
+<span>-- create a new table using all the columns and data types 
+-- from an existing table:</span>
+CREATE TABLE T3 AS SELECT * FROM T1 WITH NO DATA;
+<span>-- create a new table, providing new names for the columns, but
+-- using the data types from the columns of an existing table:</span>
+CREATE TABLE T3 (A,B,C,D,E) AS SELECT * FROM T1 WITH NO DATA;
+<span>-- create a new table, providing new names for the columns,
+-- using the data types from the indicated columns of an existing table:</span>
+CREATE TABLE T3 (A,B,C) AS SELECT V,DP,I FROM T1 WITH NO DATA;
+<span>-- This example shows that the columns in the result of the
+-- query expression may be unnamed expressions, but their data
+-- types can still be used to provide the data types for the
+-- corresponding named columns in the newly-created table:</span>
+CREATE TABLE T3 (X,Y) AS SELECT 2*I,2.0*F FROM T1 WITH NO DATA;
+</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlj30540.html">column-definition</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj37836.html">generated-column-spec</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqljgenerationclause.html">generation-clause</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="The CREATE FUNCTION statement allows you to create Java functions, which you can then use in an expression.">CREATE FUNCTION statement</a></div>
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX statement</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE statement</a></div>
+<div><a href="rrefcreaterole.html" title="">CREATE ROLE statement</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA statement</a></div>
+<div><a href="rrefsqljcreatesequence.html" title="">CREATE SEQUENCE statement</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">CREATE SYNONYM statement</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER statement</a></div>
+<div><a href="rrefsqljcreatetype.html" title="">CREATE TYPE statement</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW statement</a></div>
+</div>
+</div>
+
+</body>
+</html>

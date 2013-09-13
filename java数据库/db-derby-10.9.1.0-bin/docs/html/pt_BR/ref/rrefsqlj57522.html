@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="RIGHT OUTER JOIN" />
+<meta content="Expressão RIGHT OUTER JOIN" name="DC.subject" />
+<meta content="Expressão RIGHT OUTER JOIN" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj22771.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj81859.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj80721.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqljrenamestatements.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj35312.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcallprocedure.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj13590.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdeclaretemptable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj35981.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31783.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj21583.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj32654.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj14854.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj35034.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj40774.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj18922.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj40506.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj13658.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj21571.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefscalarsubquery.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefselectexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj41360.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftableexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftablesubquery.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj26498.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj11277.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj33602.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15309.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj57522" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>RIGHT OUTER JOIN</title>
+</head>
+<body id="rrefsqlj57522"><a name="rrefsqlj57522"><!-- --></a>
+
+
+<h1 class="topictitle1">RIGHT OUTER JOIN</h1>
+
+
+<div>
+<div class="section">
+<p>RIGHT OUTER JOIN é uma
+<a href="rrefsqlj29840.html#rrefsqlj29840">Operação JOIN</a>
+que permite especificar a cláusula de junção.
+Preserva as linhas sem correspondência da segunda tabela (direita),
+juntando-as com uma linha nula na forma da primeira tabela (esquerda).
+(A LEFT OUTER JOIN B) é equivalente a (B RIGHT OUTER JOIN A),
+com as colunas em uma ordem diferente.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong><em><a href="rreftableexpression.html#rreftableexpression">ExpressãoTabela</a></em> RIGHT [ OUTER ] JOIN <em><a href="rreftableexpression.html#rreftableexpression">ExpressãoTabela</a></em>
+{
+    ON <em>ExpressãoBooleana</em>
+    }</strong>
+</pre>
+
+<p>O escopo das expressões na cláusula ON inclui as tabelas correntes, e as
+tabelas nos blocos de consulta externos ao SELECT corrente.
+A cláusula ON pode fazer referência a tabelas que não estão sendo juntadas,
+e não é obrigada a fazer referência a nenhuma das tabelas sendo juntadas
+(embora tipicamente o faça).</p>
+
+</div>
+
+<div class="example">
+<pre><strong><span>-- obter todos os países e cidades correspondentes,
+-- incluindo os países sem nenhuma cidade</span>
+SELECT NOME_CIDADE, CIDADES.PAÍS
+FROM CIDADES RIGHT OUTER JOIN PAÍSES
+     ON CIDADES.COD_ISO_PAÍS = PAÍSES.COD_ISO_PAÍS;
+
+<span>-- obter todos países da África e as cidades correspondentes,
+-- incluindo os países sem cidades</span>
+SELECT NOME_CIDADE, CIDADES.PAÍS
+FROM CIDADES RIGHT OUTER JOIN PAÍSES
+     ON CIDADES.COD_ISO_PAÍS = PAÍSES.COD_ISO_PAÍS;
+WHERE PAÍSES.REGIÃO = 'África';
+
+<span>-- uso da sintaxe sinônimo, RIGHT JOIN, para obter exatamente
+-- os mesmos resultados do exemplo acima</span>
+SELECT NOME_CIDADE, CIDADES.PAÍS
+FROM CIDADES RIGHT JOIN PAÍSES
+     ON CIDADES.COD_ISO_PAÍS = PAÍSES.COD_ISO_PAÍS
+WHERE PAÍSES.REGIÃO = 'África';
+
+<span>-- a ExpressãoTabela pode ser uma OperaçãoJunção. Portanto,
+-- podem haver várias operações de junção na cláusula FROM</span>
+-- Listar todos os números e último nome dos empregados,
+-- juntamente com os números e último nome de seus gerentes
+SELECT E.NUM_EMP, E.ÚLTIMO_NOME, M.NUM_EMP, M.ÚLTIMO_NOME
+FROM EMPREGADOS E RIGHT OUTER JOIN
+     DEPARTAMENTOS RIGHT OUTER JOIN EMPREGADOS M
+     ON NUM_GER = M.NUM_EMP
+     ON E.DEP_TRAB = NUM_DEP;</strong>
+</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj39374.html" title="">Instruções</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="crefsqlj22771.html" title="">Interação com o sistema de dependências</a></div>
+<div><a href="crefsqlj95081.html" title="">Instruções CREATE</a></div>
+<div><a href="crefsqlj80721.html" title="">Instruções DROP</a></div>
+<div><a href="crefsqljrenamestatements.html" title="">Instruções RENAME</a></div>
+<div><a href="crefsqlj35312.html" title="">Instruções SET</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefsqlj81859.html" title="">Instrução ALTER TABLE</a></div>
+<div><a href="rrefcallprocedure.html" title="">CALL (PROCEDIMENTO)</a></div>
+<div><a href="rrefsqlj13590.html" title="">Cláusula CONSTRAINT</a></div>
+<div><a href="rrefdeclaretemptable.html" title="">Instrução DECLARE GLOBAL TEMPORARY TABLE</a></div>
+<div><a href="rrefsqlj35981.html" title="">Instrução DELETE</a></div>
+<div><a href="rrefsqlj31783.html" title="">Cláusula FOR UPDATE</a></div>
+<div><a href="rrefsqlj21583.html" title="">Cláusula FROM</a></div>
+<div><a href="rrefsqlj32654.html" title="">Cláusula GROUP BY</a></div>
+<div><a href="rrefsqlj14854.html" title="">Cláusula HAVING</a></div>
+<div><a href="rrefsqlj35034.html" title="">INNER JOIN</a></div>
+<div><a href="rrefsqlj40774.html" title="">Instrução INSERT</a></div>
+<div><a href="rrefsqlj29840.html" title="">Operação JOIN</a></div>
+<div><a href="rrefsqlj18922.html" title="">LEFT OUTER JOIN</a></div>
+<div><a href="rrefsqlj40506.html" title="">Instrução LOCK TABLE</a></div>
+<div><a href="rrefsqlj13658.html" title="">Cláusula ORDER BY</a></div>
+<div><a href="rrefsqlj21571.html" title="">Consulta</a></div>
+<div><a href="rrefscalarsubquery.html" title="">SubconsultaEscalar</a></div>
+<div><a href="rrefselectexpression.html" title="">ExpressãoSeleção</a></div>
+<div><a href="rrefsqlj41360.html" title="">Instrução SELECT</a></div>
+<div><a href="rreftableexpression.html" title="">ExpressãoTabela</a></div>
+<div><a href="rreftablesubquery.html" title="">SubconsultaTabela</a></div>
+<div><a href="rrefsqlj26498.html" title="">Instrução UPDATE</a></div>
+<div><a href="rrefsqlj11277.html" title="">VALUES Expressão</a></div>
+<div><a href="rrefsqlj33602.html" title="">Cláusula WHERE</a></div>
+<div><a href="rrefsqlj15309.html" title="">Cláusula WHERE CURRENT OF</a></div>
+</div>
+</div>
+
+</body>
+</html>

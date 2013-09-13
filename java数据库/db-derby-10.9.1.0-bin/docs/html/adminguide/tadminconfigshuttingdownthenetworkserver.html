@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Shutting down the Network Server" />
+<meta name="abstract" content="To shut down a Network Server, you can invoke a script, a jar file, or a class." />
+<meta name="description" content="To shut down a Network Server, you can invoke a script, a jar file, or a class." />
+<meta content="Shutting down Network Server, from scripts, Network Server, shutting down" name="DC.subject" />
+<meta content="Shutting down Network Server, from scripts, Network Server, shutting down" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps59125.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsthenetworkserverandjvms.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappschangingyourclasspath.html" />
+<meta scheme="URI" name="DC.Relation" content="tadmincbdjhhfd.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigsysteminformation.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsclient.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminnsdatasources.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps811478.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsusingthederbytoolswiththene.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappssettingportnumbers.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfig815333.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfig815357.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tadminconfigshuttingdownthenetworkserver" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Shutting down the Network Server</title>
+</head>
+<body id="tadminconfigshuttingdownthenetworkserver"><a name="tadminconfigshuttingdownthenetworkserver"><!-- --></a>
+
+
+<h1 class="topictitle1">Shutting down the Network Server</h1>
+
+
+
+<div><p>To shut down a Network Server, you can invoke a script, a jar
+file, or a class.</p>
+
+<div class="section">
+<p>The scripts to shut down a Network Server are located in the
+<samp class="codeph">$<span>DERBY_HOME</span>/bin</samp>
+directory.</p>
+
+<div class="important"><span class="importanttitle">Important: </span>If user authentication is enabled, you must specify a
+valid <span>Derby</span> user name
+and password; if the user authentication check fails, you'll see an
+authentication error and the running server remains intact. Note that <span>Derby</span> does not yet restrict
+the shutdown privilege to specific users: the server can be shut down by
+any user on the server machine who presents valid credentials.</div>
+
+</div>
+
+<ul>
+<li class="stepexpand"><span>To shut down the Network Server by using the scripts provided
+for Windows systems, use:</span> 
+<pre><strong><kbd class="userinput">stopNetworkServer.bat [-h <var class="varname">hostname</var>] [-p <var class="varname">portnumber</var>] [-user <var class="varname">username</var>] [-password <var class="varname">password</var>]</kbd></strong>
+</pre>
+
+</li>
+
+<li class="stepexpand"><span>To shut down the Network Server by using the scripts provided
+for UNIX systems, use:</span> 
+<pre><strong><kbd class="userinput">stopNetworkServer [-h <var class="varname">hostname</var>] [-p <var class="varname">portnumber</var>] [-user <var class="varname">username</var>] [-password <var class="varname">password</var>]</kbd></strong>
+</pre>
+
+</li>
+
+</ul>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="tadminconfig815333.html">Shutting down by using the command line</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="tadminconfig815357.html">Shutting down by using the API</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminapps59125.html" title="">Using the Network Server with preexisting Derby applications</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminappsthenetworkserverandjvms.html" title="">The Network Server and JVMs</a></div>
+<div><a href="cadminappsclient.html" title="When connecting to the Network Server, your application needs to load a driver and connection URL that is specific to the Network Server. In addition, you must specify a user name and password if you are using authentication.">Accessing the Network Server by using the network client driver</a></div>
+<div><a href="cadminnsdatasources.html" title="The Network Server supports the Derby Network Client driver DataSource classes org.apache.derby.jdbc.ClientDataSource and org.apache.derby.jdbc.ClientConnectionPoolDataSource on all supported Java SE platforms.">Accessing the Network Server by using a DataSource object</a></div>
+<div><a href="cadminapps811478.html" title="">XA and the Network Server</a></div>
+<div><a href="cadminappsusingthederbytoolswiththene.html" title="">Using the Derby tools with the Network Server</a></div>
+<div><a href="cadminapps.html" title="">Differences between running Derby in embedded mode and using the Network Server</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminappschangingyourclasspath.html" title="">Installing required jar files and adding them to the classpath</a></div>
+<div><a href="tadmincbdjhhfd.html" title="To start the Network Server, you can invoke a script, a jar file, or a class.">Starting the Network Server</a></div>
+<div><a href="tadminconfigsysteminformation.html" title="">Obtaining system information</a></div>
+<div><a href="tadminappssettingportnumbers.html" title="">Setting port numbers</a></div>
+</div>
+</div>
+
+</body>
+</html>

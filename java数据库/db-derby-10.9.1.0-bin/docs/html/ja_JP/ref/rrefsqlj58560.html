@@ -1,0 +1,2112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="データ型と、代入・比較・並び替え・順序付け" />
+<meta name="abstract" content="" />
+<meta name="description" content="" />
+<meta content="data types, assignments and comparisions" name="DC.subject" />
+<meta content="data types, assignments and comparisions" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj58560" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>データ型と、代入・比較・並び替え・順序付け</title>
+</head>
+<body id="rrefsqlj58560"><a name="rrefsqlj58560"><!-- --></a>
+
+
+<h1 class="topictitle1">データ型と、代入・比較・並び替え・順序付け</h1>
+
+
+
+<div><p />
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="この表ではDerbyにて代入の可能なデータ型の組み合わせを説明します。&quot;Y&quot;は代入できることを表します。" frame="border" border="1" rules="all"><caption>表 1. <span>Derby</span>にて可能な代入</caption>
+<thead align="left">
+<tr>
+<th valign="top" width="18.04123711340206%" id="N100DA">Types</th>
+
+<th valign="top" width="4.329896907216495%" id="N100E2"> <p>S<br />
+M<br />
+A<br />
+L<br />
+L<br />
+I<br />
+N<br />
+T</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N100F0"> <p>I<br />
+N<br />
+T<br />
+E<br />
+G<br />
+E<br />
+R</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N100FE"> <p>B<br />
+I<br />
+G<br />
+I<br />
+N<br />
+T</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N1010C"> <p>D<br />
+E<br />
+C<br />
+I<br />
+M<br />
+A<br />
+L</p>
+</th>
+
+<th valign="top" width="4.175257731958762%" id="N1011A"> <p>R<br />
+E<br />
+A<br />
+L</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N10128"> <p>D<br />
+O<br />
+U<br />
+B<br />
+L<br />
+E</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N10136"> <p>F<br />
+L<br />
+O<br />
+A<br />
+T</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N10144"> <p>C<br />
+H<br />
+A<br />
+R</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N10152"> <p>V<br />
+A<br />
+R<br />
+C<br />
+H<br />
+A<br />
+R</p>
+</th>
+
+<th valign="top" width="4.175257731958762%" id="N10160"> <p>L<br />
+O<br />
+N<br />
+G<br />
+<br />
+V<br />
+A<br />
+R<br />
+C<br />
+H<br />
+A<br />
+R</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N1016E"> <p>C<br />
+H<br />
+A<br />
+R<br />
+ <br />
+F<br />
+O<br />
+R<br />
+ <br />
+B<br />
+I<br />
+T<br />
+<br />
+D<br />
+A<br />
+T<br />
+A</p>
+</th>
+
+<th valign="top" width="4.484536082474227%" id="N1017C"> <p>V<br />
+A<br />
+R<br />
+C<br />
+H<br />
+A<br />
+R<br />
+ <br />
+F<br />
+O<br />
+R<br />
+ <br />
+B<br />
+I<br />
+T<br />
+<br />
+D<br />
+A<br />
+T<br />
+A</p>
+</th>
+
+<th valign="top" width="4.175257731958762%" id="N1018A"> <p>L<br />
+O<br />
+N<br />
+G<br />
+ <br />
+V<br />
+A<br />
+R<br />
+C<br />
+H<br />
+A<br />
+R<br />
+ <br />
+F<br />
+O<br />
+R<br />
+ <br />
+B<br />
+I<br />
+T<br />
+<br />
+D<br />
+A<br />
+T<br />
+A</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N10198"> <p>C<br />
+L<br />
+O<br />
+B</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N101A6"> <p>B<br />
+L<br />
+O<br />
+B</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N101B4"> <p>D<br />
+A<br />
+T<br />
+E</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N101C2"> <p>T<br />
+I<br />
+M<br />
+E</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N101D0"> <p>T<br />
+I<br />
+M<br />
+E<br />
+S<br />
+T<br />
+A<br />
+M<br />
+P</p>
+</th>
+
+<th valign="top" width="4.329896907216495%" id="N101DE"> <p>X<br />
+M<br />
+L</p>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">SMALL INT</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">INTEGER</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">BIGINT</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">DECIMAL</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">REAL</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">DOUBLE</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">FLOAT</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">CHAR</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">VARCHAR</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">LONG VARCHAR</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">CHAR FOR BIT DATA</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">Y</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">VARCHAR FOR BIT DATA</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">Y</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">LONG VARCHAR FOR BIT DATA</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">Y</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">CLOB</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">BLOB</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">DATE</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">TIME</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">TIME STAMP</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">Y</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">Y</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.04123711340206%" headers="N100DA">XML</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100E2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100F0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N100FE">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1010C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1011A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10128">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10136">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10144">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10152">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N10160">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N1016E">-</td>
+
+<td valign="top" width="4.484536082474227%" headers="N1017C">-</td>
+
+<td valign="top" width="4.175257731958762%" headers="N1018A">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N10198">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101A6">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101B4">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101C2">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101D0">-</td>
+
+<td valign="top" width="4.329896907216495%" headers="N101DE">Y</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="この表ではDerbyにて比較することのできる、データ型の組み合わせを示します。&#10;&quot;Y&quot;は比較が可能であることを表します。" frame="border" border="1" rules="all"><caption>表 2. Derbyにて可能な比較</caption>
+<thead align="left">
+<tr>
+<th valign="top" width="18.125323666494044%" id="N10D6A">Types</th>
+
+<th valign="top" width="4.298291040911445%" id="N10D72"> <p>S<br />
+M<br />
+A<br />
+L<br />
+L<br />
+I<br />
+N<br />
+T</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10D80"> <p>I<br />
+N<br />
+T<br />
+E<br />
+G<br />
+E<br />
+R</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10D8E"> <p>B<br />
+I<br />
+G<br />
+I<br />
+N<br />
+T</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10D9C"> <p>D<br />
+E<br />
+C<br />
+I<br />
+M<br />
+A<br />
+L</p>
+</th>
+
+<th valign="top" width="4.142931123770068%" id="N10DAA"> <p>R<br />
+E<br />
+A<br />
+L</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10DB8"> <p>D<br />
+O<br />
+U<br />
+B<br />
+L<br />
+E</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10DC6"> <p>F<br />
+L<br />
+O<br />
+A<br />
+T</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10DD4"> <p>C<br />
+H<br />
+A<br />
+R</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10DE2"> <p>V<br />
+A<br />
+R<br />
+C<br />
+H<br />
+A<br />
+R</p>
+</th>
+
+<th valign="top" width="4.142931123770068%" id="N10DF0"> <p>L<br />
+O<br />
+N<br />
+G<br />
+<br />
+V<br />
+A<br />
+R<br />
+C<br />
+H<br />
+A<br />
+R</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10DFE"> <p>C<br />
+H<br />
+A<br />
+R<br />
+ <br />
+F<br />
+O<br />
+R<br />
+ <br />
+B<br />
+I<br />
+T<br />
+<br />
+D<br />
+A<br />
+T<br />
+A</p>
+</th>
+
+<th valign="top" width="4.4536509580528225%" id="N10E0C"> <p>V<br />
+A<br />
+R<br />
+C<br />
+H<br />
+A<br />
+R<br />
+ <br />
+F<br />
+O<br />
+R<br />
+ <br />
+B<br />
+I<br />
+T<br />
+<br />
+D<br />
+A<br />
+T<br />
+A</p>
+</th>
+
+<th valign="top" width="4.142931123770068%" id="N10E1A"> <p>L<br />
+O<br />
+N<br />
+G<br />
+ <br />
+V<br />
+A<br />
+R<br />
+C<br />
+H<br />
+A<br />
+R<br />
+ <br />
+F<br />
+O<br />
+R<br />
+ <br />
+B<br />
+I<br />
+T<br />
+<br />
+D<br />
+A<br />
+T<br />
+A</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10E28"> <p>C<br />
+L<br />
+O<br />
+B</p>
+</th>
+
+<th valign="top" width="4.298291040911445%" id="N10E36"> <p>B<br />
+L<br />
+O<br />
+B</p>
+</th>
+
+<th valign="top" width="3.8839979285344386%" id="N10E44"> <p>D<br />
+A<br />
+T<br />
+E</p>
+</th>
+
+<th valign="top" width="4.6090108751942%" id="N10E52"> <p>T<br />
+I<br />
+M<br />
+E</p>
+</th>
+
+<th valign="top" width="4.6090108751942%" id="N10E60"> <p>T<br />
+I<br />
+M<br />
+E<br />
+S<br />
+T<br />
+A<br />
+M<br />
+P</p>
+</th>
+
+<th valign="top" width="4.6090108751942%" id="N10E6E"> <p>X<br />
+M<br />
+L</p>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">SMALL INT</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">INTEGER</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">BIGINT</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">DECIMAL</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">REAL</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">DOUBLE</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">FLOAT</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">CHAR</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">VARCHAR</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">LONG VARCHAR</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">CHAR FOR BIT DATA</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">Y</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">VARCHAR FOR BIT DATA</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">Y</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">LONG VARCHAR FOR BIT DATA</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">CLOB</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">BLOB</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">DATE</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">TIME</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">TIME STAMP</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">Y</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">Y</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">Y</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="18.125323666494044%" headers="N10D6A">XML</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D72">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D80">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D8E">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10D9C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DAA">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DB8">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DC6">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DD4">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DE2">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10DF0">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10DFE">-</td>
+
+<td valign="top" width="4.4536509580528225%" headers="N10E0C">-</td>
+
+<td valign="top" width="4.142931123770068%" headers="N10E1A">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E28">-</td>
+
+<td valign="top" width="4.298291040911445%" headers="N10E36">-</td>
+
+<td valign="top" width="3.8839979285344386%" headers="N10E44">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E52">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E60">-</td>
+
+<td valign="top" width="4.6090108751942%" headers="N10E6E">-</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj31068.html" title="">データ型</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="XMLEXISTS 演算子" />
+<meta name="abstract" content="XMLEXISTSは、SQLにてXMLを問い合わせるときに利用できるSQL/XML演算子です。" />
+<meta name="description" content="XMLEXISTSは、SQLにてXMLを問い合わせるときに利用できるSQL/XML演算子です。" />
+<meta content="XMLEXISTS operator, operators, XMLEXISTS, XML, operators, XMLEXISTS" name="DC.subject" />
+<meta content="XMLEXISTS operator, operators, XMLEXISTS, XML, operators, XMLEXISTS" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreffuncxmlexists" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>XMLEXISTS 演算子</title>
+</head>
+<body id="rreffuncxmlexists"><a name="rreffuncxmlexists"><!-- --></a>
+
+
+<h1 class="topictitle1">XMLEXISTS 演算子</h1>
+
+
+
+<div><p>XMLEXISTSは、SQLにてXMLを問い合わせるときに利用できるSQL/XML演算子です。</p>
+
+<div class="section"> <p>XMLEXISTS演算子は二つの引数を取ります。XML問合せ式と<span>Derby</span>XML値です。</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2><pre><strong>XMLEXISTS ( <var class="varname">xquery文字列リテラル</var>
+    PASSING BY REF <var class="varname">XML値式</var> [ BY REF ] )
+</strong></pre>
+<dl>
+<dt class="dlterm"><samp class="codeph">xquery文字列リテラル</samp></dt>
+
+<dd>文字列のリテラルとして与えられる必要があります。もし引数がパラメータであったり、リテラルでない式であったり、文字列でない(整数のような)リテラルであった場合、<span>Derby</span>はエラーを挙げます。
+<samp class="codeph">xquery文字列リテラル</samp>はApache XalanがサポートしているXPath式でなければなりません。<span>Derby</span>は、XML問合せ式を評価するとき常にApache Xalanを使います。XalanはXQueryを完全にサポートしないので、<span>Derby</span>もその制約を受けます。
+もしXalanが引数に与えられた問合せをコンパイルして実行できなかった場合、Xalanが挙げた例外を<span>Derby</span>は補足してSQLExceptionとして投げなおします。
+XPathおよびXQuery式の詳細については、次のウェブサイトを参照してください。<a href="http://www.w3.org/TR/xpath">http://www.w3.org/TR/xpath</a>および、<a href="http://www.w3.org/TR/xquery/">http://www.w3.org/TR/xquery/</a>
+</dd>
+
+
+<dt class="dlterm"><samp class="codeph">XML値式</samp></dt>
+
+<dd>XMLのデータ値かつ整形式のSQL/XML文書でなければなりません。
+<samp class="codeph">XML値式</samp>はパラメータであってはなりません。
+ <span>Derby</span>は暗黙の構文解析やXML値の型変換を行いません。従って、文字列やその他のデータタイプを使うとエラーが発生します。
+もし引数が<span>Derby</span> <a href="rreffuncxmlquery.html#rreffuncxmlquery">XMLQUERY演算子</a>によって返された並びであった場合、
+その並びが、一つの文書ノードであるノードの並びであった場合にのみ、その引数は許されます。
+そうではなければ、<span>Derby</span>はエラーを挙げます。</dd>
+
+
+<dt class="dlterm">BY REF</dt>
+
+<dd>省略可能なこのキーワードにて、<span>Derby</span>にて利用可能な引数渡しの方法が記述されます。
+BY REFは既定の引数渡しの方法なので、XMLEXISTS演算子はこのキーワードの有無にかかわらず同様に振舞います。引数渡しの方法の詳細については、SQL/XML仕様を参照してください。</dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">演算子の結果と他の演算子との組み合わせ</h2>
+<div class="p">XMLEXISTS演算子の結果は、<samp class="codeph">xquery文字列リテラル</samp>を<samp class="codeph">XML値式</samp>に対して評価した結果に基づく、SQL真偽値です。
+XMLEXISTS演算子が返す値は、<dl>
+
+<dt class="dlterm">UNKNOWN</dt>
+
+<dd><samp class="codeph">XML値式</samp>がnullであった場合です。</dd>
+
+
+<dt class="dlterm">TRUE</dt>
+
+<dd>問合せの式をxmlの値に対して評価して、空ではないノードや値の並びが返った場合です。</dd>
+
+
+<dt class="dlterm">FALSE</dt>
+
+<dd>問合せの式をxmlの値に対して評価して、空の並びが返った場合です。</dd>
+
+</dl>
+</div>
+
+<p>XMLEXISTS演算子は問合せが評価された結果を直接に返しません。問合せが評価された結果を直接に得たい場合、XMLQUERY演算子を使う必要があります。</p>
+
+<p>XMLEXISTS演算子の結果はSQLの真偽値なので、真偽型の関数を置くことができる場所なら何処でもXMLEXISTS演算子を使うことができます。たとえば、XMLEXISTS演算子を表定義のチェック制約に使うことや、WHERE節の述部に置くこともできます。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">例</h2>
+<div class="p"><samp class="codeph">x_table</samp>表にて、各行の<samp class="codeph">xcol</samp>というXMLの列に、<samp class="codeph">age</samp>属性が20の<samp class="codeph">student</samp>という要素があるかを知るには次のように書きます。<pre>SELECT id, XMLEXISTS('<var class="varname">//student[@age=20]</var>' PASSING BY REF <var class="varname">xcol</var>) 
+    FROM <var class="varname">x_table</var></pre>
+</div>
+
+
+<div class="p"><samp class="codeph">x_table</samp>表から、<samp class="codeph">xcol</samp>というXMLの列がnullでなく、その列の値に<samp class="codeph">/roster/student</samp>という要素を持つ、各行のIDを返すにはこの文を書きます。
+<pre>SELECT id FROM <var class="varname">x_table</var> WHERE XMLEXISTS('<var class="varname">/roster/student</var>' PASSING BY REF <var class="varname">xcol</var>)</pre>
+</div>
+
+
+<div class="p"><samp class="codeph">x_table</samp>という表にて、<samp class="codeph">xcol</samp>というXMLの列に挿入できるXMLの値を制限することもできます。この例では、<samp class="codeph">age</samp>属性が25より小さい<samp class="codeph">student</samp>要素を、少なくとも一つ持たなければならない、という制約を設けます。
+表を作るにはこのように書きます。<pre>CREATE TABLE <var class="varname">x_table</var> ( id INT, <var class="varname">xcol</var> XML CHECK (XMLEXISTS ('<var class="varname">//student[@age &lt; 25]</var>' PASSING BY REF <var class="varname">xcol</var>)) )</pre>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">使い方の覚書</h2><p><span>Derby</span>にてXMLの機能を使う場合、Apache XercesのようなJAXP parserとApache XalanがJavaのクラスパスに記述されている必要があります。
+JAXP parserあるいはXalanがクラスパスに記述されていなかった場合、XMLEXISTS演算子を利用するとエラーになります。</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

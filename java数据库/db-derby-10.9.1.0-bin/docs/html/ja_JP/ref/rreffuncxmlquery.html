@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="XMLQUERY演算子" />
+<meta name="abstract" content="XMLQUERYはSQLにてXMLの値を問い合わせることができるSQL/XML演算子です。" />
+<meta name="description" content="XMLQUERYはSQLにてXMLの値を問い合わせることができるSQL/XML演算子です。" />
+<meta content="XMLQUERY operator, operators, XMLQUERY, XML, operators, XMLQUERY" name="DC.subject" />
+<meta content="XMLQUERY operator, operators, XMLQUERY, XML, operators, XMLQUERY" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreffuncxmlquery" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>XMLQUERY演算子</title>
+</head>
+<body id="rreffuncxmlquery"><a name="rreffuncxmlquery"><!-- --></a>
+
+
+<h1 class="topictitle1">XMLQUERY演算子</h1>
+
+
+
+<div><p>XMLQUERYはSQLにてXMLの値を問い合わせることができるSQL/XML演算子です。</p>
+
+<div class="section"> <p>XMLQUERY演算子には二つの引数があります。片方はXML問合せ式で、もう一つは<span>Derby</span>XML値です。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2><pre><strong>XMLQUERY ( <var class="varname">xquery文字列リテラル</var>
+    PASSING BY REF <var class="varname">xml値式</var> 
+    [ RETURNING SEQUENCE [ BY REF ] ]
+    EMPTY ON EMPTY
+    )</strong></pre>
+<dl>
+<dt class="dlterm"><samp class="codeph">xquery文字列リテラル</samp></dt>
+
+<dd>文字列のリテラルが指定されなければなりません。もし引数にパラメータが与えられたり、リテラルではない式が与えられたり、文字列ではない(整数のような)リテラルが与えられた場合、<span>Derby</span>はエラーを挙げます。 
+引数の<samp class="codeph">xquery文字列リテラル</samp>は、Apache XalanがサポートするXPath式でなければなりません。<span>Derby</span>はどのようなXML問合せ式を評価するでもApache Xalanを利用します。XalanはXQueryを完全にサポートしないので、<span>Derby</span>も同様に完全にサポートしません。
+もしXalanが問合せのコンパイルや実行を行えなかった場合、<span>Derby</span>はXalanが挙げたエラーを補足して、SQLExceptionとして挙げなおします。
+XPathおよびXQuery式の詳細については、次のWebサイトを参照してください。<a href="http://www.w3.org/TR/xpath">http://www.w3.org/TR/xpath</a>と<a href="http://www.w3.org/TR/xquery/">http://www.w3.org/TR/xquery/</a></dd>
+
+
+<dt class="dlterm"><samp class="codeph">xml値式</samp></dt>
+
+<dd>これはXMLの値でなければならず、また整形式のSQL/XML文書でなければなりません。
+<samp class="codeph">xml値式</samp>はパラメータであってはなりません。
+<span>Derby</span>は暗黙の構文解析や、XML値への変換を行わないので、文字列やその他のデータ型を使うとエラーとなります。
+もし引数が<span>Derby</span>のXMLQUERY演算子により返る並びであった場合、もしその並びが一つの文書ノードであるノードからなる並びであれば、引数にとる事ができます。そうではなければ、<span>Derby</span>はエラーを挙げます。</dd>
+
+
+<dt class="dlterm">BY REF</dt>
+
+<dd>この省略可能なキーワードにより、<span>Derby</span>にて可能な引数渡しの仕組みが記述されます。BY REFは規定の引数渡しの仕組みなので、このキーワードのあるなしにかかわらず、XMLQUERY演算子は同様に振舞います。引数渡しの仕組みについてのより詳細な情報は、SQL/XML仕様を参照してください。</dd>
+
+
+<dt class="dlterm">RETURNING SEQUENCE</dt>
+
+<dd>省略可能なこのキーワードにより、<span>Derby</span>のXMLQUERY演算子にて唯一返すことのできるXMLの種類を記述します。SEQUENCEは既定の返却値の種類なので、このキーワードのあるなしにかかわらず、XMLQUERY演算子は同様に振舞います。他のXML返却値の種類についてのより詳細な情報は、SQL/XML仕様を参照してください。</dd>
+
+
+<dt class="dlterm">EMPTY ON EMPTY</dt>
+
+<dd>省略できないこのキーワードにより、XMLQUERY演算子の結果が空の並びであった時の振る舞いが記述されます。XMLQUERY演算子は空の並びをそのまま返します。XMLQUERY演算子はnull値に変換しません。空の並びは直列化されると空文字列になります。<span>Derby</span>は、空の並びを整形式のXML文書としません。</dd>
+
+</dl>
+
+<p>XMLQUERY演算子の結果は、XML型の値です。
+結果はXMLノードや値の並びを表します。文字列のような値は、結果の並びの一部となることができます。XMLQUERY演算子の結果は整形式のXML文書であることが保障されず、XML列にXMLQUERY演算子の結果を挿入できないことがあります。
+XML列に結果を記録するためには、その結果は唯一つの項目を持つ並びで、その項目が整形式の文書ノードでなければなりません。
+結果は<a href="rreffuncxmlserialize.html#rreffuncxmlserialize">XMLSERIALIZE 演算子</a>によって直列化することによってのみ見られるようにできます。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">例</h2>
+<div class="p"><samp class="codeph">x_table</samp>表にて、<samp class="codeph">xcol</samp>というXML列を検索して、age属性が20より大きいstudents要素を返すには次の文を書きます。
+<pre>SELECT ID,
+    XMLSERIALIZE(
+        XMLQUERY('<var class="varname">//student[@age&gt;20]</var>' PASSING BY REF <var class="varname">xcol</var> EMPTY ON EMPTY)
+    AS VARCHAR(50))
+FROM <var class="varname">x_table</var>
+
+</pre>
+この問合せでは、XMLQUERY演算子が実際に結果を返すか否かにかかわらず、結果には<samp class="codeph">x_table</samp>の全行毎に結果行があります。</div>
+
+<div class="p"><samp class="codeph">x_table</samp>表にて<samp class="codeph">xcol</samp>というXML列を検索して、BCという名前の生徒の年齢を返すには、次の文を書きます。<pre>SELECT ID, 
+    XMLSERIALIZE(
+        XMLQUERY('<var class="varname">string(//student[text() = "BC"]/@age</var>)' PASSING BY REF <var class="varname">xcol</var> EMPTY ON EMPTY)
+    AS VARCHAR(50))
+FROM <var class="varname">x_table</var>
+WHERE
+    XMLEXISTS('<var class="varname">//student[text() = "BC"]</var>' PASSING BY REF <var class="varname">xcol</var>)
+</pre>
+ この問合せでは結果には、<samp class="codeph">x_table</samp>中のBCという名前の生徒の行のみあります。</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">利用上の覚書</h2>
+<p><span>Derby</span>はXMLの機能を動作させるために、Apache XercesのようなJAXP構文解析器とApache XalanがJavaのクラスパスに記述されている必要があります。JAXP構文解析器、Xalanの何れかがクラスパスに記述されていない場合に、XMLQUERY演算子を利用しようとするとエラーが発生します。</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

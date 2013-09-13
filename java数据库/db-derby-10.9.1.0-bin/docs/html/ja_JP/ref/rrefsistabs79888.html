@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSTRIGGERSシステム表" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsistabs79888" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSTRIGGERSシステム表</title>
+</head>
+<body id="rrefsistabs79888"><a name="rrefsistabs79888"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSTRIGGERSシステム表</h1>
+
+<div>
+<div class="section"><div class="p">データベースのトリガを記述
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. " width="100%" frame="border" border="1" rules="all">
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="28.736581337737405%" id="N1005E">列名</th>
+
+<th align="left" valign="bottom" width="22.55367464905037%" id="N10067">型</th>
+
+<th align="left" valign="bottom" width="8.402146985962016%" id="N10070">長さ</th>
+
+<th align="left" valign="bottom" width="10.353014037985137%" id="N10079">空許容</th>
+
+<th align="left" valign="bottom" width="29.95458298926507%" id="N10082">内容</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">TRIGGERID</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">36</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">トリガの一意な識別子</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">TRIGGERNAME</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">VARCHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">128</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">トリガの名称</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">SCHEMAID</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">36</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">トリガのスキーマの識別子(<em>SYSSCHEMAS. SCHEMAID</em>を参照)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">CREATIONTIMESTAMP</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">TIMESTAMP</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">&nbsp;</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">トリガの作成された時。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">EVENT</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">1</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">'U'は更新、 'D'は削除、'I'は挿入を表す。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">FIRINGTIME</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">1</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">'B'は先、 'A'は後を表す。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">TYPE</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">1</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">'R'は行、'S'は文を表す。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">STATE</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">1</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">'E'は有効、'D'は無効を表す。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">TABLEID</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">36</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">不可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">トリガの定義された表の識別子。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">WHENSTMTID</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">36</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">WHEN節があるときのみ利用(現在はサポートしていない。)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">ACTIONSTMTID</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">CHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">36</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">トリガされるSQL文の、格納された準備済み文の識別子
+(<em>SYSSTATEMENTS. STMTID</em>を参照)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">REFERENCEDCOLUMNS</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">org.apache.derby.catalog. ReferencedColumns: このクラスは公開APIではない。</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">&nbsp;</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">UPDATEトリガが参照する列の記述子</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">TRIGGERDEFINITION</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">LONG VARCHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">&nbsp;</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">可</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">実行するSQL文のテキスト</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">REFERENCINGOLD</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">BOOLEAN</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">&nbsp;</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">true</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">whether or not the OLDREFERENCINGNAME, if non-null, refers
+to the OLD row or table</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">REFERENCINGNEW </td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">BOOLEAN</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">&nbsp;</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">真</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">もし空でなければ、NEWREFERENCINGNAMEが新しい行や表を参照するか否か。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">OLDREFERENCINGNAME</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">VARCHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">128</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">真</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">REFERENCING OLD AS節を利用した場合の仮名称</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.736581337737405%" headers="N1005E">NEWREFERENCINGNAME</td>
+
+<td valign="top" width="22.55367464905037%" headers="N10067">VARCHAR</td>
+
+<td valign="top" width="8.402146985962016%" headers="N10070">128</td>
+
+<td valign="top" width="10.353014037985137%" headers="N10079">真</td>
+
+<td valign="top" width="29.95458298926507%" headers="N10082">REFERENCING NEW AS節を利用した場合の仮名称</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+<div class="section"><p>トリガされるSQL文では、全てのSQL文がコンパイルされて<em>SYSSTATEMENTS</em>に格納されます。<em>ACTIONSTMTID</em>と<em>WHENSTMTID</em>は、<em>SYSSTATEMENTS.STMTID</em>を参照する外部キーです。トリガの文は常にトリガと同じスキーマに置かれます。</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Locking, concurrency, and isolation" />
+<meta name="abstract" content="This section discusses topics pertinent to multi-user systems, in which concurrency is important." />
+<meta name="description" content="This section discusses topics pertinent to multi-user systems, in which concurrency is important." />
+<meta content="Transaction isolation levels, Isolation levels, Locking, Concurrency" name="DC.subject" />
+<meta content="Transaction isolation levels, Isolation levels, Locking, Concurrency" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts38375.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts41275.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts34828.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts23499.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp22619.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts24927.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts10914.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts19524.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts15366.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts22300.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts23810.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts36402.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts28436.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevconcepts30291" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Locking, concurrency, and isolation</title>
+</head>
+<body id="cdevconcepts30291"><a name="cdevconcepts30291"><!-- --></a>
+
+
+<h1 class="topictitle1">Locking, concurrency, and isolation</h1>
+
+
+
+<div><p>This section discusses topics pertinent to multi-user systems,
+in which concurrency is important.</p>
+
+<p><span>Derby</span> is configured
+by default to work well for multi-user systems. For single-user systems, you
+might want to tune your system so that it uses fewer resources; see <a href="cdevconcepts23810.html#cdevconcepts23810">Lock granularity</a>.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cdevconcepts15366.html">Isolation levels and concurrency</a></strong><br />
+Derby provides four transaction isolation levels. Setting the transaction isolation level for a connection allows a user to specify how severely the user's transaction should be isolated from other transactions.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts22300.html">Configuring isolation levels</a></strong><br />
+If a connection does not specify its isolation level, it inherits the default isolation level for the Derby system. The default value is CS.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts23810.html">Lock granularity</a></strong><br />
+Derby can be configured for table-level locking. With table-level locking, when a transaction locks data in order to prevent any transaction anomalies, it always locks the entire table, not just those rows being accessed.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts36402.html">Types and scope of locks in Derby systems</a></strong><br />
+There are several types of locks available in Derby systems, including exclusive, shared, and update locks.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts28436.html">Deadlocks</a></strong><br />
+In a database, a deadlock is a situation in which two or more transactions are waiting for one another to give up locks.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts19524.html" title="This section looks at some advanced Derby application concepts.">Controlling Derby application behavior</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevconcepts38375.html" title="Session and transaction capabilities for SQL are handled through JDBC routines, not by SQL commands.">The JDBC connection and transaction model</a></div>
+<div><a href="cdevconcepts41275.html" title="A result set maintains a cursor, which points to its current row of data. It can be used to step through and process the rows one by one.">Result set and cursor mechanisms</a></div>
+<div><a href="cdevconcepts34828.html" title="This section discusses deploying Derby so that many connections can exist to a single database.">Working with multiple connections to a single database</a></div>
+<div><a href="cdevconcepts23499.html" title="JDBC allows you to share a single Connection among multiple threads.">Working with multiple threads sharing a single connection</a></div>
+<div><a href="cdevdvlp22619.html" title="As a rule, do not use Thread.interrupt() calls to signal possibly waiting threads that are also accessing a database, because Derby may catch the interrupt and close the connection to the database. Use wait and notify calls instead.">Working with database threads in an embedded environment</a></div>
+<div><a href="cdevconcepts24927.html" title="JDBC generates exceptions of the type java.sql.SQLException. If your application runs on JDK 1.6 or higher, the exceptions will be the refined subtypes of java.sql.SQLException introduced by JDBC4. To see the exceptions generated by Derby, retrieve and process the SQLExceptions in a catch block.">Working with Derby SQLExceptions in an application</a></div>
+<div><a href="cdevconcepts10914.html" title="Multi-user database access is possible if Derby is running inside a server framework.">Multi-user database access</a></div>
+</div>
+</div>
+
+</body>
+</html>

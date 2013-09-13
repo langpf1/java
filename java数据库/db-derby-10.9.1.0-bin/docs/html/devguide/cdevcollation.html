@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Character-based collation in Derby" />
+<meta name="abstract" content="A character set is a set of symbols and encodings. Character data types are represented as Unicode 2.0 sequences in Derby." />
+<meta name="description" content="A character set is a set of symbols and encodings. Character data types are represented as Unicode 2.0 sequences in Derby." />
+<meta content="collation, overview" name="DC.subject" />
+<meta content="collation, overview" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevin10613.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevcollation" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Character-based collation in Derby</title>
+</head>
+<body id="cdevcollation"><a name="cdevcollation"><!-- --></a>
+
+
+<h1 class="topictitle1">Character-based collation in <span>Derby</span></h1>
+
+
+
+<div><p>A character set is a set of symbols and encodings. Character data
+types are represented as Unicode 2.0 sequences in <span>Derby</span>. </p>
+
+<div class="section"><h2 class="sectiontitle">How collation works in <span>Derby</span></h2><p><span>Derby</span> supports a wide range
+of character sets and encodes all of the character sets by using the Unicode
+support provided by the java.lang.Character  class in the Java Virtual Machine
+(JVM) in which the <span>Derby</span> database
+runs. See the Java API documentation for the java.lang.Character class for
+the exact level of Unicode Standard that is supported.</p>
+<p>A collation is
+a set of rules for comparing characters in a character set.  In <span>Derby</span> the
+collation rules affect comparisons of the CHAR and VARCHAR data  types. Collation
+rules also affect how the LIKE Boolean operator processes the CHAR, VARCHAR,
+CLOB, and LONG VARCHAR data types.</p>
+<p>The default <span>Derby</span> collation
+rule is based on the binary Unicode values of the characters. So a character
+is greater than (&lt;), equal to (=), or less than (&gt;) another character based
+on the numeric comparison of the Unicode values. This rule allows for very
+efficient comparisons of character strings.</p>
+<div class="note"><span class="notetitle">Note: </span>When LIKE comparisons
+are used, <span>Derby</span> compares
+one character at a time for non-metacharacters. This is different than the
+way <span>Derby</span> processes = comparisons.
+The comparisons with the = operator compare the entire character string on
+left side of the = operator with the entire character string on the right
+side of the = operator. See the <a href="cdevcollation.html#cdevcollation__territorylike">Differences between LIKE and equal (=) comparisons</a> section
+below.</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Territory-based collation</h2><p><span>Derby</span> also
+supports the ability to define collation rules that are appropriate to a territory,
+and is referred to as <em><dfn class="term">territory-based collation</dfn></em>.  <span>Derby</span> supports the territories
+that Java supports.</p>
+<p>You can specifically set the territory of a database
+when you create the database. If you do not specify a territory, <span>Derby</span> uses
+the default territory of the JVM in which the database is created. Each JVM
+can support many territories that are independent from the default territory
+for the JVM. Collation support for these additional territories is provided
+through the <samp class="codeph">java.text.RuleBasedCollator</samp> class and the set
+of rules for these territories. Refer to the JVM specification for details
+of how these rules are used to provide territory specific collation. <span>Derby</span> currently
+supports only running those rules that can be loaded dynamically from the
+running JVM based on the territory attribute. Overrides to these rules by
+the user are not supported. </p>
+<p>The territory-based collation in <span>Derby</span> affects
+how the CHAR and VARCHAR data types are compared. Specifying territory-based
+collation also impacts how the LIKE Boolean operator processes CHAR, VARCHAR,
+CLOB, and LONG VARCHAR data. </p>
+<p>Territory-based collation does add extra
+processing overhead to all character-based comparison operations.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Database attributes that control collation</h2><p>When
+you create a <span>Derby</span> database,
+the attributes that you set determine the collation that is used with all
+of character data in the database. The following table shows some examples.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table shows how collation is controlled with various database creation attributes." frame="border" border="1" rules="all"><caption>Table 1. The create database attributes that control collation</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="70%" id="N10129">Example Create URLs</th>
+
+<th valign="bottom" width="30%" id="N10130">Collation Is Driven By</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="70%" headers="N10129">jdbc:derby:abcDB;create=true</td>
+
+<td valign="top" width="30%" headers="N10130">Unicode codepoint collation (UCS_BASIC), which is the
+default collation for <span>Derby</span> databases. </td>
+
+</tr>
+
+<tr>
+<td valign="top" width="70%" headers="N10129">jdbc:derby:abcDB;create=true;territory=es_MX</td>
+
+<td valign="top" width="30%" headers="N10130">Unicode codepoint collation (UCS_BASIC). The <samp class="codeph">collation</samp> attribute
+is not set.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="70%" headers="N10129">jdbc:derby:abcDB;create=true;collation=TERRITORY_BASED</td>
+
+<td valign="top" width="30%" headers="N10130">The territory of the JVM, since the <samp class="codeph">territory</samp> attribute
+is not set. <div class="tip"><span class="tiptitle">Tip: </span>To determine the territory of the JVM, run <samp class="codeph">Locale.getDefault()</samp>.</div>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="70%" headers="N10129">jdbc:derby:abcDB;create=true;territory=es_MX;collation=TERRITORY_BASED</td>
+
+<td valign="top" width="30%" headers="N10130">The <samp class="codeph">territory</samp> attribute.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Collation examples</h2><div class="p">With Unicode codepoint collation
+(UCS_BASIC), the numerical values of the Unicode encoding of the characters
+are used directly for ordering. For example, the FRUIT table contains the NAME
+column that uses the VARCHAR(20) data type. The contents of the NAME column
+are:<ul class="simple">
+<li>orange</li>
+
+<li>apple</li>
+
+<li>Banana</li>
+
+<li>Pineapple</li>
+
+<li>Grape</li>
+
+</ul>
+</div>
+<div class="p">UCS_BASIC collation sorts all lower case letters before upper
+case letters. The statement <samp class="codeph">SELECT * FROM FRUIT ORDER BY NAME</samp> returns: <ul class="simple">
+<li>apple</li>
+
+<li>orange</li>
+
+<li>Banana</li>
+
+<li>Grape</li>
+
+<li>Pineapple</li>
+
+</ul>
+</div>
+<div class="p">If the database is created with the territory attribute set to
+en_US (English language, United States country code), and the collation attribute
+set to TERRITORY_BASED, the results of the statement <samp class="codeph">SELECT * FROM
+FRUIT ORDER BY NAME</samp> returns: <ul class="simple">
+<li>apple</li>
+
+<li>Banana</li>
+
+<li>Grape</li>
+
+<li>orange</li>
+
+<li>Pineapple</li>
+
+</ul>
+</div>
+<div class="p">The collation set for the database also impacts comparison operators
+on character data types. For example, the statement <samp class="codeph">SELECT * FROM
+FRUIT WHERE NAME &gt; 'Banana' ORDER BY NAME</samp> returns: 
+<p>      UCS_BASIC collation       Territory-based collation<br />
+                Grape                                Grape<br />
+                Pineapple                           orange<br />
+                                                          Pineapple</p>
+</div>
+
+<p>For information on creating case-insensitive databases, see
+<a href="tdevdvlpcollation.html#tdevdvlpcollation">Creating a database with territory-based collation</a>.</p>
+
+</div>
+
+<div class="section" id="cdevcollation__territorylike"><a name="cdevcollation__territorylike"><!-- --></a><h2 class="sectiontitle">Differences between LIKE and equal (=)
+comparisons</h2><div class="p">When you use territory-based collation, the comparisons
+can return different results when you use the LIKE and equal
+(=) operators. For example, suppose that the <span>Derby</span> database
+is set to use a territory where the character 'z' has same collation elements
+as 'xy'. Consider the following two WHERE clauses: <ol>
+<li>WHERE 'zcb' = 'xycb'</li>
+
+<li>WHERE 'zcb' LIKE 'xy_b'</li>
+
+</ol>
+</div>
+<p>For WHERE clause 1, <span>Derby</span> returns
+TRUE because the collation elements for the entire string 'zcb' will match
+the collation elements of the entire string 'xycb'.  </p>
+<p>For WHERE clause
+2, <span>Derby</span> returns FALSE
+because collation element for character 'z' does not match the collation element
+for character 'x'. In addition, when metacharacter such as an underscore is
+used with the LIKE operator, the metacharacter counts for one character in
+the string value. A clause like WHERE 'xycb' LIKE '_cb' returns FALSE because
+'x' is compared to the metacharacter _ and 'y' does not match 'c'.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevin10613.html" title="Derby offers support for locales.">Localizing Derby</a></div>
+</div>
+</div>
+
+</body>
+</html>

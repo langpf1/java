@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE ROLE statement" />
+<meta content="CREATE ROLE statement, SQL statements, CREATE ROLE, roles, creating" name="DC.subject" />
+<meta content="CREATE ROLE statement, SQL statements, CREATE ROLE, roles, creating" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsetrole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdroprole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcurrentrole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssysroles.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatetype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefcreaterole" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE ROLE statement</title>
+</head>
+<body id="rrefcreaterole"><a name="rrefcreaterole"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE ROLE statement</h1>
+
+
+<div>
+<div class="section">
+<p>The CREATE ROLE statement allows you to create an SQL role.</p>
+
+<p>Only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can
+create a role.</p>
+
+<p>For more information on roles, see "Using SQL roles" in the
+<span><em>Derby Developer's Guide</em></span>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> 
+<pre>
+<strong>CREATE ROLE <em><a href="rrefrolename.html#rrefrolename">roleName</a></em>
+</strong></pre>
+
+</div>
+
+<div class="section">
+<p>Before you issue a CREATE ROLE statement, verify that the
+<em><a href="rrefpropersqlauth.html#rrefpropersqlauth">derby.database.sqlAuthorization</a></em>
+property is set to <samp class="codeph">TRUE</samp>. The
+<em>derby.database.sqlAuthorization</em> property enables SQL authorization mode.
+</p>
+
+<p>You cannot create a role name if there is a user by that name. An attempt
+to create a role name that conflicts with an existing user name raises the
+<em>SQLException</em> X0Y68.</p>
+
+<p>If user names are not controlled by the database owner (or administrator),
+it may be a good idea to use a naming convention for roles to reduce the
+possibility of collision with user names.</p>
+
+<p><span>Derby</span> tries to avoid name
+collision between user names and role names, but this is not always possible,
+because <span>Derby</span> has a
+pluggable authorization architecture. For example, an externally defined user
+may exist who has never yet connected to the database, created any schema
+objects, or been granted any privileges. If 
+<span>Derby</span> knows about a user
+name, it will forbid creating a role with that name.  Correspondingly, a user
+who has the same name as a role will not be allowed to connect.
+<span>Derby</span> built-in users are
+checked for collision when a role is created.</p>
+
+<p>A role name cannot start with the prefix SYS (after case normalization). The
+purpose of this restriction is to reserve a name space for system-defined roles
+at a later point. Use of the prefix SYS raises the <em>SQLException</em> 4293A.
+</p>
+
+<p>You cannot create a role with the name <samp class="codeph">PUBLIC</samp> (after case
+normalization). <samp class="codeph">PUBLIC</samp> is a reserved authorization identifier.
+An attempt to create a role with the name <samp class="codeph">PUBLIC</samp> raises
+<em>SQLException</em> 4251B.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example of creating a role</h2>
+<pre><strong>CREATE ROLE purchases_reader;</strong></pre>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples of invalid role names</h2>
+<pre><strong>CREATE ROLE public;   -- throws SQLException;
+CREATE ROLE "PUBLIC"; -- throws SQLException;
+CREATE ROLE sysrole;  -- throws SQLException;</strong></pre>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example of creating a role using a naming convention</h2>
+<p>The following example uses the convention of giving every role name the
+suffix <samp class="codeph">_role</samp>.</p>
+
+<pre><strong>CREATE ROLE purchases_reader_role;</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="The CREATE FUNCTION statement allows you to create Java functions, which you can then use in an expression.">CREATE FUNCTION statement</a></div>
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX statement</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE statement</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA statement</a></div>
+<div><a href="rrefsqljcreatesequence.html" title="">CREATE SEQUENCE statement</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">CREATE SYNONYM statement</a></div>
+<div><a href="rrefsqlj24513.html" title="">CREATE TABLE statement</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER statement</a></div>
+<div><a href="rrefsqljcreatetype.html" title="">CREATE TYPE statement</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW statement</a></div>
+<div><a href="rrefsetrole.html" title="">SET ROLE statement</a></div>
+<div><a href="rrefdroprole.html" title="">DROP ROLE statement</a></div>
+<div><a href="rrefcurrentrole.html" title="">CURRENT_ROLE function</a></div>
+<div><a href="rrefsistabssysroles.html" title="The SYSROLES table stores the roles in the database.">SYSROLES system table</a></div>
+</div>
+</div>
+
+</body>
+</html>

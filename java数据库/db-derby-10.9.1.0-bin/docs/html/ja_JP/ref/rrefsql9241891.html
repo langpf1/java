@@ -1,0 +1,1995 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="DerbyのサポートするSQL-92の機能" />
+<meta content="SQL-92, features supported by Derby, features not supported by Derby" name="DC.subject" />
+<meta content="SQL-92, features supported by Derby, features not supported by Derby" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefkeywords29722.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexcept16677.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsql9241891" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>DerbyのサポートするSQL-92の機能</title>
+</head>
+<body id="rrefsql9241891"><a name="rrefsql9241891"><!-- --></a>
+
+
+<h1 class="topictitle1">DerbyのサポートするSQL-92の機能</h1>
+
+
+<div>
+<div class="section"><div class="p"> SQL-92のサポートには4つのレベルがあります。   <ul>
+<li>SQL92E   <p>初歩的</p>
+</li>
+
+<li>SQL92T   <p>過渡的　FIPS 127-2という発行物にてNISTが定義</p>
+</li>
+
+<li>SQL92I   <p>中級</p>
+</li>
+
+<li>SQL92F   <p>完全</p>
+</li>
+
+</ul>
+  </div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">基本データ型</h2>
+<div class="p">次の表ではDerbyにて利用可能なSQL-92の基本データ型を示します。
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. 利用可能なSQL-92の機能: 基本データ型" width="100%" frame="border" border="1" rules="all"><caption>表 1. 利用可能なSQL-92の機能: 基本データ型</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N100AC">機能</th>
+
+<th valign="bottom" id="N100B3">定義する仕様</th>
+
+<th valign="bottom" id="N100BA"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N100AC">SMALLINT</td>
+
+<td valign="top" headers="N100B3">SQL92E</td>
+
+<td valign="top" headers="N100BA">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N100AC">INTEGER</td>
+
+<td valign="top" headers="N100B3">SQL92E</td>
+
+<td valign="top" headers="N100BA">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N100AC">DECIMAL(p,s)</td>
+
+<td valign="top" headers="N100B3">SQL92E</td>
+
+<td valign="top" headers="N100BA">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N100AC">NUMERIC(p,s)</td>
+
+<td valign="top" headers="N100B3">SQL92E</td>
+
+<td valign="top" headers="N100BA">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N100AC">REAL</td>
+
+<td valign="top" headers="N100B3">SQL92E</td>
+
+<td valign="top" headers="N100BA">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N100AC">FLOAT(p)</td>
+
+<td valign="top" headers="N100B3">SQL92E</td>
+
+<td valign="top" headers="N100BA">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N100AC">DOUBLE PRECISION</td>
+
+<td valign="top" headers="N100B3">SQL92E</td>
+
+<td valign="top" headers="N100BA">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N100AC">CHAR(n)</td>
+
+<td valign="top" headers="N100B3">SQL92E</td>
+
+<td valign="top" headers="N100BA">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">基本算術演算</h2>
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート:基本的な算術演算" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート:基本的な算術演算</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N101DC">機能</th>
+
+<th valign="bottom" id="N101E3">定義する仕様</th>
+
+<th valign="bottom" id="N101EA"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N101DC">+, *, -, /, unary +, unary -</td>
+
+<td valign="top" headers="N101E3">SQL92E</td>
+
+<td valign="top" headers="N101EA">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">基本的な比較</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート:基本的な比較" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート:基本的な比較</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N1024E">機能</th>
+
+<th valign="bottom" id="N10255">定義する仕様</th>
+
+<th valign="bottom" id="N1025C"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N1024E">&lt;, &gt;, &lt;= ,&gt;=, &lt;&gt;, =</td>
+
+<td valign="top" headers="N10255">SQL92E</td>
+
+<td valign="top" headers="N1025C">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">基本的な述語</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート:基本的な述語" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート:基本的な述語</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N102C0">機能</th>
+
+<th valign="bottom" id="N102C7">定義する仕様</th>
+
+<th valign="bottom" id="N102CE"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N102C0">BETWEEN, LIKE, NULL</td>
+
+<td valign="top" headers="N102C7">SQL92E</td>
+
+<td valign="top" headers="N102CE">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">定量的な述語</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート:定量的な述語" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート:定量的な述語</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10332">機能</th>
+
+<th valign="bottom" id="N10339">定義する仕様</th>
+
+<th valign="bottom" id="N10340"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10332">IN, ALL/SOME, EXISTS</td>
+
+<td valign="top" headers="N10339">SQL92E</td>
+
+<td valign="top" headers="N10340">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">スキーマの定義</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート:スキーマの定義" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート:スキーマの定義</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N103A4">機能</th>
+
+<th valign="bottom" id="N103AB">定義する仕様</th>
+
+<th valign="bottom" id="N103B2"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N103A4">表</td>
+
+<td valign="top" headers="N103AB">SQL92E</td>
+
+<td valign="top" headers="N103B2">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N103A4">ビュー</td>
+
+<td valign="top" headers="N103AB">SQL92E</td>
+
+<td valign="top" headers="N103B2">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N103A4">権限</td>
+
+<td valign="top" headers="N103AB">SQL92E</td>
+
+<td valign="top" headers="N103B2">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">列の属性</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート:列の属性" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート:列の属性</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N1044B">機能</th>
+
+<th valign="bottom" id="N10452">定義する仕様</th>
+
+<th valign="bottom" id="N10459"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N1044B">既定値</td>
+
+<td valign="top" headers="N10452">SQL92E</td>
+
+<td valign="top" headers="N10459">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N1044B">空値をとれるかの定義</td>
+
+<td valign="top" headers="N10452">SQL92E</td>
+
+<td valign="top" headers="N10459">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">制約(延期できない)</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 制約(延期できない)" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 制約(延期できない)</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N104D8">機能</th>
+
+<th valign="bottom" id="N104DF">定義する仕様</th>
+
+<th valign="bottom" id="N104E6"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N104D8">NOT NULL</td>
+
+<td valign="top" headers="N104DF">SQL92E</td>
+
+<td valign="top" headers="N104E6">Yes (SYSCONSTRAINTSには記録されない)</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N104D8">UNIQUE/PRIMARY KEY</td>
+
+<td valign="top" headers="N104DF">SQL92E</td>
+
+<td valign="top" headers="N104E6">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N104D8">FOREIGN KEY</td>
+
+<td valign="top" headers="N104DF">SQL92E</td>
+
+<td valign="top" headers="N104E6">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N104D8">CHECK</td>
+
+<td valign="top" headers="N104DF">SQL92E</td>
+
+<td valign="top" headers="N104E6">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N104D8">View WITH CHECK OPTION</td>
+
+<td valign="top" headers="N104DF">SQL92E</td>
+
+<td valign="top" headers="N104E6">No ビューの更新はできない</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">カーソル</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート:カーソル" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート:カーソル</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N105B5">機能</th>
+
+<th valign="bottom" id="N105BC">定義する仕様</th>
+
+<th valign="bottom" id="N105C3"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N105B5">DECLARE, OPEN, FETCH, CLOSE</td>
+
+<td valign="top" headers="N105BC">SQL92E</td>
+
+<td valign="top" headers="N105C3">Yes JDBCのメソッド呼び出しが該当</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N105B5">UPDATE, DELETE CURRENT</td>
+
+<td valign="top" headers="N105BC">SQL92E</td>
+
+<td valign="top" headers="N105C3">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">動的なSQL1</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 動的なSQL1" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 動的なSQL1</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10642">機能</th>
+
+<th valign="bottom" id="N10649">定義する仕様</th>
+
+<th valign="bottom" id="N10650"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10642">ALLOCATE / DEALLOCATE / GET / SET DESCRIPTOR</td>
+
+<td valign="top" headers="N10649">SQL92T</td>
+
+<td valign="top" headers="N10650">Yes JDBCのメソッド呼び出しにより実現</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10642">PREPARE / EXECUTE / EXECUTE IMMEDIATE</td>
+
+<td valign="top" headers="N10649">SQL92T</td>
+
+<td valign="top" headers="N10650">Yes JDBCのメソッド呼び出しにより実現</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10642">DECLARE, OPEN, FETCH, CLOSE, UPDATE, DELETE dynamic
+cursor</td>
+
+<td valign="top" headers="N10649">SQL92T</td>
+
+<td valign="top" headers="N10650">Yes JDBCのメソッド呼び出しにより実現</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10642">DESCRIBE output</td>
+
+<td valign="top" headers="N10649">SQL92T</td>
+
+<td valign="top" headers="N10650">JDBCにより実現</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">基本的な情報スキーマ</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート 基本的な情報スキーマ" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート 基本的な情報スキーマ</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10704">機能</th>
+
+<th valign="bottom" id="N1070B">定義する仕様</th>
+
+<th valign="bottom" id="N10712"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10704">TABLES</td>
+
+<td valign="top" headers="N1070B">SQL92T</td>
+
+<td valign="top" headers="N10712"><em>SYS.SYSTABLES, SYS.SYSVIEWS, SYS.SYSCOLUMNS</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10704">VIEWS</td>
+
+<td valign="top" headers="N1070B">SQL92T</td>
+
+<td valign="top" headers="N10712"><em>SYS.SYSTABLES, SYS.SYSVIEWS, SYS.SYSCOLUMNS</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10704">COLUMNS</td>
+
+<td valign="top" headers="N1070B">SQL92T</td>
+
+<td valign="top" headers="N10712"><em>SYS.SYSTABLES, SYS.SYSVIEWS, SYS.SYSCOLUMNS</em></td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">基本的なスキーマへの操作</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 基本的なスキーマへの操作" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 基本的なスキーマへの操作</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N107B8">機能</th>
+
+<th valign="bottom" id="N107BF">定義する仕様</th>
+
+<th valign="bottom" id="N107C6"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N107B8">CREATE / DROP TABLE</td>
+
+<td valign="top" headers="N107BF">SQL92T</td>
+
+<td valign="top" headers="N107C6">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N107B8">CREATE / DROP VIEW</td>
+
+<td valign="top" headers="N107BF">SQL92T</td>
+
+<td valign="top" headers="N107C6">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N107B8">GRANT / REVOKE</td>
+
+<td valign="top" headers="N107BF">SQL92T</td>
+
+<td valign="top" headers="N107C6">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N107B8">ALTER TABLE ADD COLUMN</td>
+
+<td valign="top" headers="N107BF">SQL92T</td>
+
+<td valign="top" headers="N107C6">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N107B8">ALTER TABLE DROP COLUMN</td>
+
+<td valign="top" headers="N107BF">SQL92T</td>
+
+<td valign="top" headers="N107C6">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">表の結合</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 表の結合" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 表の結合</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10896">機能</th>
+
+<th valign="bottom" id="N1089D">定義する仕様</th>
+
+<th valign="bottom" id="N108A4"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10896">INNER JOIN</td>
+
+<td valign="top" headers="N1089D">SQL92T</td>
+
+<td valign="top" headers="N108A4">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10896">natural join</td>
+
+<td valign="top" headers="N1089D">SQL92T</td>
+
+<td valign="top" headers="N108A4">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10896">LEFT, RIGHT OUTER JOIN</td>
+
+<td valign="top" headers="N1089D">SQL92T</td>
+
+<td valign="top" headers="N108A4">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10896">join condition</td>
+
+<td valign="top" headers="N1089D">SQL92T</td>
+
+<td valign="top" headers="N108A4">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10896">named columns join</td>
+
+<td valign="top" headers="N1089D">SQL92T</td>
+
+<td valign="top" headers="N108A4">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">日時のデータ型</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 日時のデータ型" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 日時のデータ型</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10974">機能</th>
+
+<th valign="bottom" id="N1097B">定義する仕様</th>
+
+<th valign="bottom" id="N10982"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10974">単純なDATE, TIME, TIMESTAMP, INTERVAL</td>
+
+<td valign="top" headers="N1097B">SQL92T</td>
+
+<td valign="top" headers="N10982">Yes ただしINTERVALは無い。</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10974">日時の定数</td>
+
+<td valign="top" headers="N1097B">SQL92T</td>
+
+<td valign="top" headers="N10982">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10974">日時の演算</td>
+
+<td valign="top" headers="N1097B">SQL92T</td>
+
+<td valign="top" headers="N10982">Yes Javaのメソッドにて可能</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10974">日時の比較</td>
+
+<td valign="top" headers="N1097B">SQL92T</td>
+
+<td valign="top" headers="N10982">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10974">述語: OVERLAPS</td>
+
+<td valign="top" headers="N1097B">SQL92T</td>
+
+<td valign="top" headers="N10982">Yes Javaのメソッドにて可能</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">VARCHAR データ型</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: VARCHAR" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: VARCHAR</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10A52">機能</th>
+
+<th valign="bottom" id="N10A59">定義する仕様</th>
+
+<th valign="bottom" id="N10A60"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10A52">LENGTH</td>
+
+<td valign="top" headers="N10A59">SQL92T</td>
+
+<td valign="top" headers="N10A60">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10A52">連結 (||)</td>
+
+<td valign="top" headers="N10A59">SQL92T</td>
+
+<td valign="top" headers="N10A60">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">トランザクションの分離</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: トランザクションの分離" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: トランザクションの分離</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10ADF">機能</th>
+
+<th valign="bottom" id="N10AE6">定義する仕様</th>
+
+<th valign="bottom" id="N10AED"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10ADF">READ WRITE / READ ONLY</td>
+
+<td valign="top" headers="N10AE6">SQL92T</td>
+
+<td valign="top" headers="N10AED">JDBCの利用、データベースの属性、記録媒体による</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10ADF">RU, RC, RR, SER</td>
+
+<td valign="top" headers="N10AE6">SQL92T</td>
+
+<td valign="top" headers="N10AED">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">ユーザ毎に複数スキーマを持つ</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: ユーザ毎に複数スキーマを持つ" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: ユーザ毎に複数スキーマを持つ</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10B6C">機能</th>
+
+<th valign="bottom" id="N10B73">定義する仕様</th>
+
+<th valign="bottom" id="N10B7A"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10B6C">SCHEMATA ビュー</td>
+
+<td valign="top" headers="N10B73">SQL92T</td>
+
+<td valign="top" headers="N10B7A"><em>SYS.SYSSCHEMAS</em></td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">権限表</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 権限表" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 権限表</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10BE2">機能</th>
+
+<th valign="bottom" id="N10BE9">定義する仕様</th>
+
+<th valign="bottom" id="N10BF0"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10BE2">TABLE_PRIVILEGES</td>
+
+<td valign="top" headers="N10BE9">SQL92T</td>
+
+<td valign="top" headers="N10BF0">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10BE2">COLUMNS_PRIVILEGES</td>
+
+<td valign="top" headers="N10BE9">SQL92T</td>
+
+<td valign="top" headers="N10BF0">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10BE2">USAGE_PRIVILEGES</td>
+
+<td valign="top" headers="N10BE9">SQL92T</td>
+
+<td valign="top" headers="N10BF0">No</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">表への操作</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 表への操作" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 表への操作</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10C8A">機能</th>
+
+<th valign="bottom" id="N10C91">定義する仕様</th>
+
+<th valign="bottom" id="N10C98"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10C8A">UNION relaxation</td>
+
+<td valign="top" headers="N10C91">SQL92I</td>
+
+<td valign="top" headers="N10C98">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10C8A">EXCEPT</td>
+
+<td valign="top" headers="N10C91">SQL92I</td>
+
+<td valign="top" headers="N10C98">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10C8A">INTERSECT</td>
+
+<td valign="top" headers="N10C91">SQL92I</td>
+
+<td valign="top" headers="N10C98">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10C8A">CORRESPONDING</td>
+
+<td valign="top" headers="N10C91">SQL92I</td>
+
+<td valign="top" headers="N10C98">No</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">スキーマの定義文</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: スキーマの定義文" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: スキーマの定義文</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10D4D">機能</th>
+
+<th valign="bottom" id="N10D54">定義する仕様</th>
+
+<th valign="bottom" id="N10D5B"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10D4D">CREATE SCHEMA</td>
+
+<td valign="top" headers="N10D54">SQL92I</td>
+
+<td valign="top" headers="N10D5B">部分的に実現</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">ユーザ認証</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: ユーザ認証" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: ユーザ認証</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10DBF">機能</th>
+
+<th valign="bottom" id="N10DC6">定義する仕様</th>
+
+<th valign="bottom" id="N10DCD"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10DBF">SET SESSION AUTHORIZATION</td>
+
+<td valign="top" headers="N10DC6">SQL92I</td>
+
+<td valign="top" headers="N10DCD">SET SCHEMAを使う</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10DBF">CURRENT_USER</td>
+
+<td valign="top" headers="N10DC6">SQL92I</td>
+
+<td valign="top" headers="N10DCD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10DBF">SESSION_USER</td>
+
+<td valign="top" headers="N10DC6">SQL92I</td>
+
+<td valign="top" headers="N10DCD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10DBF">SYSTEM_USER</td>
+
+<td valign="top" headers="N10DC6">SQL92I</td>
+
+<td valign="top" headers="N10DCD">No</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">表の制約</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート:表の制約" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート:表の制約</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10E82">機能</th>
+
+<th valign="bottom" id="N10E89">定義する仕様</th>
+
+<th valign="bottom" id="N10E90"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10E82">TABLE CONSTRAINTS</td>
+
+<td valign="top" headers="N10E89">SQL92I</td>
+
+<td valign="top" headers="N10E90"><em>SYS.SYSCONSTRAINTS</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10E82">REFERENTIAL CONSTRAINTS</td>
+
+<td valign="top" headers="N10E89">SQL92I</td>
+
+<td valign="top" headers="N10E90"><em>SYS.SYSFOREIGNKEYS</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10E82">CHECK CONSTRAINTS</td>
+
+<td valign="top" headers="N10E89">SQL92I</td>
+
+<td valign="top" headers="N10E90"><em>SYS.SYSCHECKS</em></td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">スキーマ情報の提供</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: スキーマ情報の提供" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: スキーマ情報の提供</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10F35">機能</th>
+
+<th valign="bottom" id="N10F3C">定義する仕様</th>
+
+<th valign="bottom" id="N10F43"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10F35">SQL_FEATURES</td>
+
+<td valign="top" headers="N10F3C">SQL92I/FIPS 127-2</td>
+
+<td valign="top" headers="N10F43">JDBCの<em>DatabaseMetaData</em>を利用</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N10F35">SQL_SIZING</td>
+
+<td valign="top" headers="N10F3C">SQL92I/FIPS 127-2</td>
+
+<td valign="top" headers="N10F43">JDBCの<em>DatabaseMetaData</em>を利用</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">日時の全機能</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 日時の全機能" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 日時の全機能</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N10FCD">機能</th>
+
+<th valign="bottom" id="N10FD4">定義する仕様</th>
+
+<th valign="bottom" id="N10FDB"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N10FCD">TIMEやTIMESTAMPの精度</td>
+
+<td valign="top" headers="N10FD4">SQL92F</td>
+
+<td valign="top" headers="N10FDB">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">全ての文字列処理</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 全ての文字列処理" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 全ての文字列処理</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N1103F">機能</th>
+
+<th valign="bottom" id="N11046">定義する仕様</th>
+
+<th valign="bottom" id="N1104D"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N1103F">POSITION式</td>
+
+<td valign="top" headers="N11046">SQL92F</td>
+
+<td valign="top" headers="N1104D">JavaのメソッドあるいはLOCATEを利用</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N1103F">UPPER/LOWER 関数</td>
+
+<td valign="top" headers="N11046">SQL92F</td>
+
+<td valign="top" headers="N1104D">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">様々</h2>
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. SQL-92の機能のサポート: 様々" frame="border" border="1" rules="all"><caption>表 1. SQL-92の機能のサポート: 様々</caption>
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" id="N110CB">機能</th>
+
+<th valign="bottom" id="N110D2">定義する仕様</th>
+
+<th valign="bottom" id="N110D9"><span>Derby</span></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" headers="N110CB">デリミトされた識別子</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">相互に関連した副問合せ</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">挿入・更新・削除文</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">結合</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Whereによる限定</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Group by</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Having</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">集約関数</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Order by</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">選択式</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Select *</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">SQLCODE</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">No SQL-92では推奨されない。</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">SQLSTATE</td>
+
+<td valign="top" headers="N110D2">SQL92E</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">ビューでのUNION、INTERSECTおよびEXCEPT</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">暗黙の数値型変換</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">暗黙の文字列型変換</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">診断情報の取得</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">JDBCの<em>SQLExceptions</em>を利用</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">グループへの処理</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">selectの選択項目一覧における限定された*</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">小文字の識別子</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">空値とすることのできる主キー</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">複数のモジュールサポート</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">No (JDBCの一部ではなく、必要ではない。)</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">参照性の削除処理</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">CASCADE、SET NULL、RESTRICTやNO ACTION</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">CAST関数</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">INSERT式</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">明示的な既定値</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">キーワードの緩和</td>
+
+<td valign="top" headers="N110D2">SQL92T</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Domainの定義</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">CASE式</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">部分的にサポート</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">合成された文字列の定数</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">連結が利用できる</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">LIKEの機能強化</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">UNIQUEの述語</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">表の利用情報</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9"><em>SYS.SYSDEPENDS</em> </td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">中間的な情報スキーマ</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">JDBCの<em>DatabaseMetaData</em>および<span>Derby</span>のシステム表が利用可</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">副プログラムのサポート</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">より機能が豊富なJDBCでは関係が無い。</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">中間的なSQLへのフラグ付け</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">スキーマの操作</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">長い識別子</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">両側への外部結合</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">タイムゾーンの指定</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">スクロール可能なカーソル</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">部分的 (JDBC2.0ではスクロール可能なinsensitiveなカーソル。)</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">中間的な集合関数のサポート</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">部分的に実現</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">文字セットの定義</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">Javaのロケールをサポート</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">文字セットへの名前付け</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">Javaのロケールをサポート</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">スカラー副問合せの値</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">拡張されたnull述部</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">制約の管理</td>
+
+<td valign="top" headers="N110D2">SQL92I</td>
+
+<td valign="top" headers="N110D9">Yes (ADD/DROP CONSTRAINT)</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">FOR BIT DATA 型</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Yes </td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Assertion 制約</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">一時表</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">DECLARE GLOBAL TEMPORARY TABLEで、部分的に実現。</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">完全な動的SQL</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">完全なvalues式</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">真の値判定</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">導出表をFROMにおける</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">アンダースコアを後につけることができる</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Indicatorデータ型</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">JDBCとは関連しない。</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">参照する名前の順番</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">完全なSQLのフラグ付け</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">行および表の構築子</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">カタログ名の限定子</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">単純表</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">CHECK制約での副問合せ</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No ただしJavaのメソッドで同等のことができる。</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Union join</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Collationやtranslation</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Javaのロケールが利用可能</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">参照性の更新処理</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">RESTRICTおよびNO ACTION。 トリガによりその他も可能。</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">ALTER domain</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">INSERT 列権限</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">参照性のMATCH型</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">ビューのCHECK制約の機能強化</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No、ビューは更新できない。</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">Session管理</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">JDBCを利用</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">接続管理</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">JDBCを利用</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">自己参照的な操作</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">insensitiveなカーソル</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">Yes JDBC 2.0を通して可能</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">完全な集合関数</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">部分的な実現</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">カタログへのフラグ付け</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">局所的な表への参照</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" headers="N110CB">カーソル全体の更新</td>
+
+<td valign="top" headers="N110D2">SQL92F</td>
+
+<td valign="top" headers="N110D9">No</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj23296.html" title="">SQL言語のリファレンス</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQLの識別子</a></div>
+<div><a href="crefsqlj39374.html" title="">文</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">組込みシステム関数</a></div>
+<div><a href="crefjdbc12657.html" title="Derbyは組み込みのJDBCドライバと共に提供されます。">JDBC リファレンス</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqlj28468.html" title="">大文字小文字と特殊文字</a></div>
+<div><a href="rrefclauses.html" title="">SQL 節</a></div>
+<div><a href="rrefsqlj19433.html" title="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。">SQL式</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN 演算</a></div>
+<div><a href="rrefqueries.html" title="">SQL 問い合わせ</a></div>
+<div><a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+<div><a href="rrefkeywords29722.html" title="">SQL予約語</a></div>
+<div><a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+<div><a href="rrefexcept16677.html" title="Derbyにて発生する全てのエラーは、JDBCからSQLExceptionとして挙がります。 もしユーザの定義した型から例外が挙がって、その例外がSQLExceptionでは無い場合、その例外はSQLExceptionにラップされています。 Derby固有のSQLExceptionは、SQLStateクラスに定義されたXで始まるコードを用います。標準に定義されたSQLStateの値は、対応する例外に対して返されます。">Derbyの例外メッセージとSQL state</a></div>
+<div><a href="rrefjdbc87220.html" title="">java.sql.BatchUpdateException クラス</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">Connected Device ConfigurationおよびFoundation Profile向けのJDBCパッケージ(JSR169)</a></div>
+<div><a href="rrefjdbc32593.html" title="">JDBC 3.0の機能</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0の機能</a></div>
+<div><a href="rrefjdbc1020262.html" title="">JDBCエスケープの構文</a></div>
+</div>
+</div>
+
+</body>
+</html>

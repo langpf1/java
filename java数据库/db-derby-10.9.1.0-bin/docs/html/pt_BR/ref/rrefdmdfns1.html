@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Funcionalidades de DatabaseMetaData não suportadas" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdmrs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefgpc1.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpgc1.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcrsrgpc1.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefdmdfns1" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Funcionalidades de DatabaseMetaData não suportadas</title>
+</head>
+<body id="rrefdmdfns1"><a name="rrefdmdfns1"><!-- --></a>
+
+
+<h1 class="topictitle1">Funcionalidades de DatabaseMetaData não suportadas</h1>
+
+<div>
+<div class="section">
+<div class="p">Na versão corrente, o
+<span>Derby</span>
+não fornece todas as funcionalidades de <em>DatabaseMetaData</em>.
+As seguintes requisições de JDBC resultam em conjuntos de resultados vazios,
+no formato requerido pela API do JDBC:
+<ul>
+<li><em>getColumnPrivileges</em></li>
+
+<li><em>getTablePrivileges</em></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section">
+<p>O <span>Derby</span>
+não implementa privilégios e, portanto, não possui informações para fornecer
+para estas chamadas.</p>
+
+</div>
+
+<div class="section">
+<div class="p"><em>getBestRowIdentifier</em> procura pelos identificadores nesta ordem:
+  <ul>
+<li>chave primária da tabela</li>
+
+<li>restrição de unicidade ou índice único na tabela</li>
+
+<li>todas as colunas da tabela</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section">
+<p>Devido a esta última escolha, sempre encontra um conjunto de colunas
+que identifica uma linha. Entretanto, havendo linhas duplicadas na tabela, a
+utilização de todas as colunas não identifica necessariamente uma única
+linha da tabela.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefjdbc15905.html" title="">java.sql.DatabaseMetaData</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefdmrs.html" title="">Conjuntos de resultados DatabaseMetaData</a></div>
+<div><a href="rrefgpc1.html" title="">getProcedureColumns</a></div>
+<div><a href="rrefpgc1.html" title="">Parâmetros para getProcedureColumns</a></div>
+<div><a href="rrefcrsrgpc1.html" title="">Colunas do ResultSet retornado por getProcedureColumns</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SQRT関数" />
+<meta content="SQRT function" name="DC.subject" />
+<meta content="SQRT function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj73147" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SQRT関数</title>
+</head>
+<body id="rrefsqlj73147"><a name="rrefsqlj73147"><!-- --></a>
+
+
+<h1 class="topictitle1">SQRT関数</h1>
+
+
+<div>
+<div class="section"> <p>浮動小数点数の平方根を返します。適用可能な組込みの型は、<a href="rrefsqlj14122.html#rrefsqlj14122">実数</a>、<a href="rrefsqlj27281.html#rrefsqlj27281">単精度浮動小数点数</a>、<a href="rrefsqljdoubleprecision.html#rrefsqljdoubleprecision">倍精度浮動小数点数</a>に限られます。
+SQRTが返す値のデータ型は、引数のデータ型と同じです。</p>
+ 
+<div class="note"><span class="notetitle">注: </span>他のデータ型についてSQRTを実行するには、浮動小数点数に変換する必要があります。</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2> <pre id="rrefsqlj73147__i1195048"><a name="rrefsqlj73147__i1195048"><!-- --></a><strong>SQRT(<em>浮動小数点数式</em>)</strong></pre>
+ </div>
+
+<div class="example"> <pre><strong>-- 負数の行があった場合、例外が発生します。
+VALUES SQRT(3421E+09)
+
+-- INTEGERの数を浮動小数点数に変換した後、平方根を求めます。
+SELECT SQRT(myDoubleColumn) FROM MyTable
+
+VALUES SQRT (CAST(25 AS FLOAT));</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Derby system" />
+<meta name="abstract" content="A Derby database exists within a system." />
+<meta name="description" content="A Derby database exists within a system." />
+<meta content="Derby system, System directory, System, description, derby.properties file, Properties, defined for system in derby.properties, Error log, derby.log" name="DC.subject" />
+<meta content="Derby system, System directory, System, description, derby.properties file, Properties, defined for system in derby.properties, Error log, derby.log" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp40653.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp17453.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp21955.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp34964.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp51654.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts36881.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp39409.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp96597.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp27715.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlp20349.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp13018.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp25889.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp39943.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp20458.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp19297.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdvlp27610" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Derby system</title>
+</head>
+<body id="cdevdvlp27610"><a name="cdevdvlp27610"><!-- --></a>
+
+
+<h1 class="topictitle1">Derby system</h1>
+
+
+
+<div><p>A <span>Derby</span> database
+exists within a <em>system</em>.</p>
+
+<p>A <span>Derby</span> system is a
+single instance of the <span>Derby</span> database
+engine and the environment in which it runs. It consists of a system directory,
+zero or more databases, and a system-wide configuration. The system directory
+contains any persistent system-wide configuration parameters, or properties,
+specific to that system in a properties file called <a href="cdevdvlp39943.html#cdevdvlp39943">derby.properties</a>.
+This file is not automatically created; you must create it yourself.</p>
+
+<p>The <span>Derby</span> system is
+not persistent; you must specify the location of the system directory at every
+startup.</p>
+
+<p>However, the <span>Derby</span> system
+and the system directory is an essential part of a running database or databases.
+Understanding the <span>Derby</span> system
+is essential to successful development and deployment of <span>Derby</span> applications.
+As the following figure shows,
+<span>Derby</span> databases live in a
+system, which includes system-wide properties, an error log, and one or more
+databases.</p>
+
+<div class="fignone" id="cdevdvlp27610__rdevdvlp17155"><a name="cdevdvlp27610__rdevdvlp17155"><!-- --></a><span class="figcap">Figure 1. Derby system</span>
+<br /><img src="system_os.gif" alt="This figure shows a Derby system that includes a database called Accounting and a database called Sales. The figure shows the derby.system.home system variable pointing to the databases and explains that this system variable tells Derby the name of your system directory. Additionally, this figure shows that the derby.properties file and the derby.log file are part of the Derby system." /><br />
+</div>
+
+<p>The system directory can also contain an error log file called <em>derby.log </em>(see <a href="cdevdvlp25889.html#cdevdvlp25889">The error log</a>).</p>
+
+<p>Each database within that system is contained in a subdirectory, which
+has the same name as the database (see <a href="cdevdvlp21955.html#cdevdvlp21955">A Derby database</a>).</p>
+
+<p>In addition, if you connect to a database outside the current system, it
+automatically becomes part of the current system.</p>
+
+<p>When you use the embedded driver,
+<span>Derby</span> database files and log
+files normally have whatever default permissions you specify for your file
+system. If you are running with Java SE 7 or later, however, you can enhance
+security by restricting file access to the user who creates the database. To do
+this, set the system property <em>derby.storage.useDefaultFilePermissions</em> to
+false. See the <span><em>Derby Reference Manual</em></span> for details.</p>
+
+<div class="p"><div class="note"><span class="notetitle">Note: </span>In-memory databases do not appear in the system directory.</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cdevdvlp96597.html">One Derby instance for each Java Virtual Machine (JVM)</a></strong><br />
+You could potentially have two instances of a Derby system running on the same machine at the same time. Each instance must run in a different Java Virtual Machine (JVM).</li>
+<li class="ulchildlink"><strong><a href="cdevdvlp27715.html">Booting databases</a></strong><br />
+The default configuration for Derby is to boot (or start) a database when an application first makes a connection to it. When Derby boots a database, it checks to see if recovery needs to be run on the database, so in some unusual cases booting can take some time.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlp20349.html">Shutting down the system</a></strong><br />
+In an embedded environment, when an application shuts down, it should first shut down Derby.</li>
+<li class="ulchildlink"><strong><a href="cdevdvlp13018.html">Defining the system directory</a></strong><br />
+You define the system directory when Derby starts up by specifying a Java system property called derby.system.home.</li>
+<li class="ulchildlink"><strong><a href="cdevdvlp25889.html">The error log</a></strong><br />
+Once you create or connect to a database within a system, Derby begins outputting information and error messages to the error log. Typically, Derby writes this information to a file called derby.log in the system directory.</li>
+<li class="ulchildlink"><strong><a href="cdevdvlp39943.html">derby.properties</a></strong><br />
+The text file derby.properties contains the definition of properties, or configuration parameters that are valid for the entire system.</li>
+<li class="ulchildlink"><strong><a href="cdevdvlp20458.html">Double-booting system behavior</a></strong><br />
+Derby prevents two instances of itself from booting the same database by using a file called db.lck inside the database directory.</li>
+<li class="ulchildlink"><strong><a href="cdevdvlp19297.html">Recommended practices</a></strong><br />
+When developing Derby applications, create a single directory to hold your database or databases.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp39409.html" title="This section explains how to use and configure Derby in an embedded environment.">Derby embedded basics</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp40653.html" title="Derby consists of both the database engine and an embedded JDBC driver. Applications use JDBC to interact with a database. Applications running on JDK 5 or earlier must load the driver in order to work with the database.">Derby JDBC driver</a></div>
+<div><a href="cdevdvlp17453.html" title="A Java application using the JDBC API establishes a connection to a database by obtaining a Connection object.">Derby JDBC database connection URL</a></div>
+<div><a href="cdevdvlp21955.html" title="A Derby database contains dictionary objects such as tables, columns, indexes, and jar files. A Derby database can also store its own configuration information.">A Derby database</a></div>
+<div><a href="cdevdvlp34964.html" title="You connect to a database using a form of the Derby connection URL as an argument to the DriverManager.getConnection call.">Connecting to databases</a></div>
+<div><a href="cdevdvlp51654.html" title="You specify attributes on the Derby connection URL.">Working with the database connection URL attributes</a></div>
+<div><a href="cdevconcepts36881.html" title="A Connection object represents a connection with a database.">Connections</a></div>
+</div>
+</div>
+
+</body>
+</html>

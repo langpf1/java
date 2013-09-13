@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="LOCATE function" />
+<meta content="LOCATE function" name="DC.subject" />
+<meta content="LOCATE function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj61998" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>LOCATE function</title>
+</head>
+<body id="rrefsqlj61998"><a name="rrefsqlj61998"><!-- --></a>
+
+
+<h1 class="topictitle1">LOCATE function</h1>
+
+
+<div>
+    <div class="section">
+        <p>The LOCATE function is used to search for a string within
+            another string. If the desired string is found,
+LOCATE returns the index at which it is found.
+If the desired string is not found, LOCATE returns 0. </p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre id="rrefsqlj61998__i1195050"><a name="rrefsqlj61998__i1195050"><!-- --></a><strong>LOCATE(<em>CharacterExpression</em>, <em>CharacterExpression</em> [, <em>StartPosition</em>] ) </strong>
+        </pre>
+
+        <div class="p">There are two required arguments to the LOCATE function,
+        and a third optional argument.
+        <ul>
+            <li>The first CharacterExpression specifies the string to
+                search <strong>for</strong>.</li>
+
+            <li>The second CharacterExpression specifies
+                the string <strong>in which</strong> to search.</li>
+
+            <li>The third argument is the startPosition, and specifies
+                the position in the second argument at which the search is
+                to start. If the third argument is not provided, the LOCATE
+                function starts its search at the beginning of the second
+                argument.</li>
+
+    </ul>
+</div>
+
+    <p>The return type for LOCATE is an integer. The LOCATE function
+        returns an integer indicating the index position within the
+        second argument at which the first argument was first located. Index
+        positions start with 1.
+        If the first argument is not found in the second argument, LOCATE
+        returns 0. If the first argument is an empty string (''), LOCATE
+        returns the value of the third argument (or 1 if it was not provided),
+        even if the second argument is also an empty string. If a NULL
+        value is passed for either of the CharacterExpression arguments,
+        NULL is returned.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2>
+<pre><strong><span>-- returns 2, since 'love' is found at index position 2:</span>
+VALUES LOCATE('love', 'clover')</strong></pre>
+
+<pre><strong><span>-- returns 0, since 'stove' is not found in 'clover':</span>
+VALUES LOCATE('stove', 'clover')</strong></pre>
+
+<pre><strong><span>-- returns 5 (note the start position is 4):</span>
+VALUES LOCATE('iss', 'Mississippi', 4)</strong></pre>
+
+<pre><strong><span>-- returns 1, because the empty string is a special case:</span>
+VALUES LOCATE('', 'ABC')</strong></pre>
+
+<pre><strong><span>-- returns 0, because 'AAA' is not found in '':</span>
+VALUES LOCATE('AAA', '')</strong></pre>
+
+<pre><strong><span>-- returns 3</span>
+VALUES LOCATE('', '', 3)</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

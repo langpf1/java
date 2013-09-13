@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE INDEX 文" />
+<meta content="CREATE INDEX statement, Descending indexes, Indexes, created in descending order, Backing indexes, created automatically to enforce primary key, unique, and foreign key constraints, automatic creation of for primary key, unique, and foreign key constraints, specifying page size for" name="DC.subject" />
+<meta content="CREATE INDEX statement, Descending indexes, Indexes, created in descending order, Backing indexes, created automatically to enforce primary key, unique, and foreign key constraints, automatic creation of for primary key, unique, and foreign key constraints, specifying page size for" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj20937" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE INDEX 文</title>
+</head>
+<body id="rrefsqlj20937"><a name="rrefsqlj20937"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE INDEX 文</h1>
+
+
+<div>
+<div class="section" id="rrefsqlj20937__i1013640"><a name="rrefsqlj20937__i1013640"><!-- --></a> <p id="rrefsqlj20937__sqlj31027"><a name="rrefsqlj20937__sqlj31027"><!-- --></a>CREATE INDEX文により表に索引を作成できます。
+索引は表のひとつ以上の列に作成できます。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2><pre><strong>CREATE [UNIQUE] INDEX <em><a href="rrefindexname.html#rrefindexname">索引名</a></em>
+ON <em><a href="rreftablename.html#rreftablename">表名</a></em> ( <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">単純列名</a></em> [ ASC | DESC ]
+    [ , <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">単純列名</a></em> [ ASC | DESC ]] * )</strong></pre>
+<p>The
+<span>Derby</span>にて索引に可能な列の最大数は16です。</p>
+<p>索引名は128文字を超えてはなりません。</p>
+<p>同じ列が単一のCREATE INDEX文に2つ以上あってはなりません。なお異なる索引であれば、同じ列をもってかまいません。</p>
+<p><span>Derby</span>は索引を使って、情報の操作を行う文の効率を向上します。(<cite><span><em>Tuning Derby</em></span></cite>を参照してください。)。 さらにUNIQUEの索引により、情報が整合性を保っているか検証する事ができます。</p>
+<p>索引名はスキーマにて一意です。(データベースシステムによっては、同じスキーマの異なるテーブルに同じ名前の索引を持つことができますが、<span>Derby</span>は違います。)
+索引と表の片方にスキーマ名が明示されて、もう片方に明示されなかった場合、索引と表は同じスキーマにあるものとされます。索引と表の両方にスキーマ名が明示されて、それぞれのスキーマ名が異なっていた場合、例外が発生します。表にも索引にもスキーマ名が明示されなかった場合、現在のスキーマが使われます。</p>
+
+<p>既定で<span>Derby</span>は索引をそれぞれの列に対して昇順で作成します。列名の後にASCと書いても既定の振る舞いと同じように動作します。
+列名の後にDESCと書くと、索引を作るときに<span>Derby</span>はその列を降順で扱います。
+降順を列に指定することで、昇順と降順が混ざった並び順あるいは降順の問い合わせや、索引のある列の最大値や最小値を選択する問い合わせが、効率よく実行されることを期待できます。</p>
+
+<p>限定された索引名を指定する場合、スキーマ名は<samp class="codeph">SYS</samp>で始まってはなりません。</p>
+ </div>
+
+<div class="section" id="rrefsqlj20937__sqlj27363"><a name="rrefsqlj20937__sqlj27363"><!-- --></a><h2 class="sectiontitle">索引と制約</h2><p>一意性・主キー・外部キー制約を作成すると、制約を適用または支援する索引が作成されます。(このような索引のことを支援索引と呼びます。)もし列や列の集合に、UNIQUEないしPRIMARY KEYの制約が存在している場合、それらの列に索引を作成することはできません。<span>Derby</span>は既にその索引をシステムが決めた名前で作成しています。制約を支援する索引にシステムが与えた名前は、索引の名前でシステム表に問い合わせれば、簡単に見つけることができるでしょう。
+既にUNIQUEの索引が存在している列の集合に、主キーまたは一意性制約を追加すると、同じ列の集合に複数の索引が造られることとなります。一つがもともとあったUNIQUEの制約でもう一つが、制約に併せて作成された支援索引です。</p>
+
+<p>FLIGHTS_PKという名前の制約を支援する索引を見つけるには次のようにします。</p>
+<pre><strong>SELECT CONGLOMERATENAME FROM SYS.SYSCONGLOMERATES,
+SYS.SYSCONSTRAINTS WHERE
+SYS.SYSCONGLOMERATES.TABLEID = SYSCONSTRAINTS.TABLEID 
+AND CONSTRAINTNAME = 'FLIGHTS_PK'</strong></pre>
+ </div>
+
+<div class="example"> <pre><strong>CREATE INDEX OrigIndex ON Flights(orig_airport);
+<strong>-- 金額は通常大きな値から小さな値の順で並べられるので、
+-- 索引を降順で作成します。</strong>
+CREATE INDEX PAY_DESC ON SAMP.EMPLOYEE (SALARY);
+<span>-- 索引をより大きいページサイズで作成します。</span>
+call SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.storage.pageSize','8192');
+CREATE INDEX IXSALE ON SAMP.SALES (SALES);
+call SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.storage.pageSize',NULL);
+</strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">ページサイズとキーサイズ</h2>
+<div class="note"><span class="notetitle">注: </span>索引にあるキーの列サイズの合計は、ページサイズの半分以下で無ければなりません。もし既存行に作成しようとしている索引のキー列の合計が索引のページサイズの半分より大きな行があるならば、索引の作成は失敗します。このエラーは索引を作成したとき、表の既存行が基準に合わないときのみ発生します。索引が作成された後は、基準のキーサイズを超えた行の挿入が失敗します。</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">文の依存</h2><p>SELECT、INSERT、UPDATE、UPDATE WHERE CURRENT、DELETEやDELETEの準備済み文は、その表がCREATE INDEX文の対象となった場合、索引の作成とともに無効になります。一方表について開いているカーソルは影響を受けません。</p>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj95081.html" title="">CREATE 文</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="CREATE FUNCTION文により、式で利用できるJava関数を作成できます。">CREATE FUNCTION 文</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE 文</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA 文</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">CREATE SYNONYM 文</a></div>
+<div><a href="rrefsqlj24513.html" title="">CREATE TABLE 文</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER 文</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW 文</a></div>
+</div>
+</div>
+
+</body>
+</html>

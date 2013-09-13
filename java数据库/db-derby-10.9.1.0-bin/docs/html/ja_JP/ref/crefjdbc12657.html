@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="JDBC リファレンス" />
+<meta name="abstract" content="Derbyは組み込みのJDBCドライバと共に提供されます。" />
+<meta name="description" content="Derbyは組み込みのJDBCドライバと共に提供されます。" />
+<meta content="JDBC API, Derby implementation of" name="DC.subject" />
+<meta content="JDBC API, Derby implementation of" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefkeywords29722.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsql9241891.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexcept16677.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc25142.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32052.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34565.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27734.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc40794.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc16643.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc29874.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc23502.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc38274.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc30469.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcrefsqlxml.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20377.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc2_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc80004.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc66688.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc99392.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc77156.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc71949.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc59162.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="crefjdbc12657" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>JDBC リファレンス</title>
+</head>
+<body id="crefjdbc12657"><a name="crefjdbc12657"><!-- --></a>
+
+
+<h1 class="topictitle1">JDBC リファレンス</h1>
+
+
+
+<div><p><span>Derby</span>は組み込みのJDBCドライバと共に提供されます。</p>
+
+<p>それによってJDBC APIが提供されます。これは<span>Derby</span>のデータベースを利用するための唯一つのAPIです。
+このドライバはJavaで実装された独自プロトコルのドライバです。(Sunによる定義に従えば、タイプ4です。)</p>
+
+<p>この節では<span>Derby</span>におけるJDBC APIの実装に関する情報を提供して、JDBC 2.0、3.0、4.0のAPIにどのように準拠しているかが書かれています。</p>
+
+<p>やりたい事に対するドライバの利用方法を知るには、<cite><span><em>Derby Developer's Guide</em></span></cite>を参照してください。</p>
+
+<p>このJDBCドライバはSunが定義する標準のJDBCインターフェイスを実装します。
+<span>Derby</span>と同じJVMにて実行されているアプリケーションから呼び出す場合、JDBCドライバは組み込みモードのデータベースへの接続をサポートします。
+データベースへのネットワークを介する通信は必要ありません。
+クライアント/サーバモードでは、クライアントはJDBCの要求をネットワーク越しにJDBCのサーバに送ります。一方でサーバは<span>Derby</span>と同じJVMにて動作しており、要求を組込みのJDBCドライバを介して<span>Derby</span>に送ります。</p>
+
+<p>
+<span>Derby</span>が提供するJDBCの実装は、<span>Derby</span>のデータベースへアクセスする機能を提供して、必要な全てのJDBCのインターフェイスを提供します。
+JDBCドライバにて実装されていない局面では、"Feature not implemented"で始まる文言およびXJZZZという<em>SQLState</em>の<em>SQLException</em>が返されます。
+これらの実装されていない局面は、<span>Derby</span>にて実装されていない機能に対応するものです。</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="crefjdbc25142.html">java.sqlにある、JDBCの主なクラス、 インターフェイス、メソッド</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc32052.html">java.sql.Driverインターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc34565.html">java.sql.DriverManager.getConnection メソッド</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc27734.html">java.sql.Connection インターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc15905.html">java.sql.DatabaseMetaData インターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc40794.html">java.sql.Statementインターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc20485.html">java.sql.CallableStatement インターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc16643.html">java.sql.SQLException クラス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc29874.html">java.sql.PreparedStatementインターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc23502.html">java.sql.ResultSet インターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc38274.html">java.sql.ResultSetMetaData インターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc30469.html">java.sql.SQLWarning クラス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbcrefsqlxml.html">java.sql.SQLXMLインターフェイス</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc20377.html">SQL型とjava.sql.Typesの対応</a></strong><br />
+Derbyにてjava.sql.TypesはSQLデータ型に対応付けされます。</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc2_0summary.html">JDBC 2.0 の機能</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc80004.html">java.sql.Connection インターフェイス: JDBC 2.0で利用可能なメソッド</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc66688.html">java.sql.DatabaseMetaData インターフェイス: 利用可能なJDBC 2.0のメソッド</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc99392.html">java.sql.PreparedStatementインターフェイス: JDBC2.0で提供されるメソッド</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc77156.html">java.sql.ResultSet</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc71949.html">java.sql.ResultSetMetaData インターフェイス: JDBC 2.0で利用可能なメソッド</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc59162.html">java.sql.Statement インターフェイス: 利用可能なJDBC 2.0のメソッド</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj23296.html" title="">SQL言語のリファレンス</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQLの識別子</a></div>
+<div><a href="crefsqlj39374.html" title="">文</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">組込みシステム関数</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqlj28468.html" title="">大文字小文字と特殊文字</a></div>
+<div><a href="rrefclauses.html" title="">SQL 節</a></div>
+<div><a href="rrefsqlj19433.html" title="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。">SQL式</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN 演算</a></div>
+<div><a href="rrefqueries.html" title="">SQL 問い合わせ</a></div>
+<div><a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+<div><a href="rrefkeywords29722.html" title="">SQL予約語</a></div>
+<div><a href="rrefsql9241891.html" title="">DerbyのサポートするSQL-92の機能</a></div>
+<div><a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+<div><a href="rrefexcept16677.html" title="Derbyにて発生する全てのエラーは、JDBCからSQLExceptionとして挙がります。 もしユーザの定義した型から例外が挙がって、その例外がSQLExceptionでは無い場合、その例外はSQLExceptionにラップされています。 Derby固有のSQLExceptionは、SQLStateクラスに定義されたXで始まるコードを用います。標準に定義されたSQLStateの値は、対応する例外に対して返されます。">Derbyの例外メッセージとSQL state</a></div>
+<div><a href="rrefjdbc87220.html" title="">java.sql.BatchUpdateException クラス</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">Connected Device ConfigurationおよびFoundation Profile向けのJDBCパッケージ(JSR169)</a></div>
+<div><a href="rrefjdbc32593.html" title="">JDBC 3.0の機能</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0の機能</a></div>
+<div><a href="rrefjdbc1020262.html" title="">JDBCエスケープの構文</a></div>
+</div>
+</div>
+
+</body>
+</html>

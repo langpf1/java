@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Embedded deployment application overview" />
+<meta name="abstract" content="In an embedded environment, Derby runs in the same JVM as the application." />
+<meta name="description" content="In an embedded environment, Derby runs in the same JVM as the application." />
+<meta content="embedded applications, deploying, embedded environments, single-user application, multi-user application server, overview" name="DC.subject" />
+<meta content="embedded applications, deploying, embedded environments, single-user application, multi-user application server, overview" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy855655.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy18639.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy38918.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdeploy855368" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Embedded deployment application overview</title>
+</head>
+<body id="cdevdeploy855368"><a name="cdevdeploy855368"><!-- --></a>
+
+
+<h1 class="topictitle1">Embedded deployment application overview</h1>
+
+
+
+<div><p>In an embedded environment, <span>Derby</span> runs
+in the same JVM as the application.</p>
+
+<p>The application can be a single-user application or a multi-user application
+server. In the latter case, <span>Derby</span> runs
+embedded in the user-provided server framework, and any client applications
+use user-provided connectivity or allow the application server to handle all
+database interaction.</p>
+
+<p>The following figure shows
+<span>Derby</span> embedded in a
+single-user Java application.</p>
+
+<div class="fignone" id="cdevdeploy855368__cdevdeploy31527"><a name="cdevdeploy855368__cdevdeploy31527"><!-- --></a><span class="figcap">Figure 1. <span>Derby</span> embedded
+in a single-user Java application</span>
+<br /><img src="embed_os.gif" alt="This figure shows the single-user application and the Derby database engine inside the Java Virtual Machine. The single-user application connects to the Derby database engine by using the JDBC API. The Derby database engine connects to the Derby database." /><br />
+</div>
+
+<p>The following figure shows
+<span>Derby</span> embedded in a
+multi-user Java application server.</p>
+
+<div class="fignone" id="cdevdeploy855368__cdevdeploy29107"><a name="cdevdeploy855368__cdevdeploy29107"><!-- --></a><span class="figcap">Figure 2. Derby embedded in a multi-user
+Java application server</span>
+<br /><img src="itserv_os.gif" alt="This figure shows multiple users connecting to the application server, which contains the application and the Derby database engine. The application connects to the Derby database engine. The Derby database engine connects to the Derby database." /><br />
+</div>
+
+<p>When a <span>Derby</span> database
+is embedded in a Java application, the database is dedicated to that single
+application. If you deploy more than one copy of the application, <em>each
+application has its own copy of the database and <span>Derby</span> software</em>.
+A <span>Derby</span> server framework
+can work in multi-threaded, multi-connection mode and can even connect to
+more than one database at a time. A server framework, such as the <span>Derby</span> Network
+Server, can be used to manage multiple connections and handle network capabilities.
+Some server framework solutions, such as WebSphere Application Server, provide
+additional features such as web services and connection pooling. However,
+only one server framework at a time can operate against a <span>Derby</span> database.</p>
+
+<p>The <span>Derby</span> application
+accesses an embedded <span>Derby</span> database
+through the JDBC API. To connect, an application makes a call to the local <span>Derby</span> JDBC driver. Accessing
+the JDBC driver automatically starts the embedded <span>Derby</span> software.
+The calling application is responsible for shutting down the embedded <span>Derby</span> database software. </p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdeploy38918.html" title="This section discusses deployment options and details.">Deployment issues</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdeploy855655.html" title="You can embed Derby in any Java application (single- or multi-user) by deploying the following packages.">Deploying Derby in an embedded environment</a></div>
+<div><a href="cdevdeploy18639.html" title="Database-wide properties are stored in the database and are simpler for deployment, while system-wide parameters might be easier for development.">Embedded systems and properties</a></div>
+</div>
+</div>
+
+</body>
+</html>

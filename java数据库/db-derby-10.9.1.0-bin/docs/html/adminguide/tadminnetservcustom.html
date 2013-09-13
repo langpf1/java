@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Customizing the Network Server's security policy" />
+<meta content="Network Server, custom policy" name="DC.subject" />
+<meta content="Network Server, custom policy" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="tadminnetservrun.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminnetservbasic.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminnetservopen.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tadminnetservcustom" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Customizing the Network Server's security policy</title>
+</head>
+<body id="tadminnetservcustom"><a name="tadminnetservcustom"><!-- --></a>
+
+
+<h1 class="topictitle1">Customizing the Network Server's security policy</h1>
+
+
+<div>
+<div class="section"> <p> The Network Server's Basic security policy is documented in
+the section <a href="tadminnetservbasic.html">Basic Network Server security policy</a>. Most likely, you
+will want to customize your own security policy. For example, you might want
+to restrict the server's liberal file i/o permissions which let the server
+backup/restore and export/import to or from any location in the local file system. Customizing
+the security policy is simple: </p>
+  <ul>
+<li>A template policy lives in the Derby distribution at <em>demo/templates/server.policy</em>.
+Copy the file from this location to your own file, say <em>myCustomized.policy</em>.
+All of the following edits take place in your custom file.</li>
+
+<li>Replace the <em>${derby.install.url}</em> variable with the location of
+the Derby jars in your local file system.</li>
+
+<li>Replace the <em>${derby.system.home}</em> variable with the location of
+your Derby system directory. Alternatively, rather than replacing this variable,
+you can simply set the value of the <em>derby.system.home</em> system property
+when you boot the server.</li>
+
+<li>You must grant <em>java.net.SocketPermission</em> to
+<samp class="codeph">derby.jar</samp> if you are using LDAP authentication, so
+that the Derby code is allowed to contact the LDAP server to perform
+the authentication.</li>
+
+<li>You may want to restrict the socket permission for <samp class="codeph">derbynet.jar</samp>,
+which by default accepts connections from any host (<samp class="codeph">"*"</samp>). 
+Note that the special wildcard address <samp class="codeph">"0.0.0.0"</samp> is not 
+understood by SocketPermission, even though Derby accepts this wildcard as 
+a valid value for accepting connections on all network interfaces (IPv4).</li>
+
+<li>Refine the file permissions needed by backup/restore, import/export, and
+the loading of application jars.</li>
+
+</ul>
+  <p>The following example is a copy of a sample, customized policy file: </p>
+ 
+ <pre>
+grant codeBase "file:/usr/local/share/sw/derby/lib/derby.jar"
+{
+//
+// These permissions are needed for everyday, embedded Derby usage.
+//
+  permission java.lang.RuntimePermission "createClassLoader";
+  permission java.util.PropertyPermission "derby.*", "read";
+  // The next two properties are used to determine if the VM is 32 or 64 bit.
+  permission java.util.PropertyPermission "sun.arch.data.model", "read";
+  permission java.util.PropertyPermission "os.arch", "read";
+  permission java.util.PropertyPermission "user.dir", "read";
+  permission java.io.FilePermission "/usr/local/shoppingCartApp/databases","read";
+  permission java.io.FilePermission "/usr/local/shoppingCartApp/databases/-", 
+      "read,write,delete";
+  permission java.util.PropertyPermission "derby.storage.jvmInstanceId", 
+      "write"; 
+
+//
+// This permission lets a DBA reload the policy file while the server
+// is still running. The policy file is reloaded by invoking the
+// SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY() system procedure.
+//
+  permission java.security.SecurityPermission "getPolicy";
+
+//
+// This permission lets you backup and restore databases
+// to and from a selected branch of the local file system:
+//
+  permission java.io.FilePermission "/usr/local/shoppingCartApp/backups/-", "read,write,delete";
+//
+// This permission lets you import data from
+// a selected branch of the local file system:
+//
+  permission java.io.FilePermission "/usr/local/shoppingCartApp/imports/-", "read";
+//
+// This permission lets you export data to
+// a selected branch of the local file system:
+//
+  permission java.io.FilePermission "/usr/local/shoppingCartApp/exports/-", "write";
+//
+// This permission lets you load your databases with jar files of
+// application code
+//
+  permission java.io.FilePermission "/usr/local/shoppingCartApp/lib/*", "read";
+
+// LDAP server on localhost using default LDAP port 389:
+  permission java.net.SocketPermission "localhost:389", "connect,resolve";  
+};
+
+grant codeBase "file:/usr/local/share/sw/derby/lib/derbynet.jar"
+{
+//
+// This permission lets the Network Server manage connections from clients
+// originating from the localhost, on any port.
+//
+  permission java.net.SocketPermission "localhost:0-", "accept"; 
+};
+</pre>
+  <p> After customizing the Basic policy, you may bring up the
+Network Server as follows: </p>
+  <pre>
+java -Djava.security.manager -Djava.security.policy=/usr/local/shoppingCartApp/lib/myCustomized.policy org.apache.derby.drda.NetworkServerControl start -h localhost
+</pre>
+  </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="tadminnetservrun.html" title="">Running the Network Server under the security manager</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminnetservbasic.html" title="">Basic Network Server security policy</a></div>
+<div><a href="tadminnetservopen.html" title="">Running the Network Server without a security policy</a></div>
+</div>
+</div>
+
+</body>
+</html>

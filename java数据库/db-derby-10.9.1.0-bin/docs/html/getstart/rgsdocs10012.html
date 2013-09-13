@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SQL syntax" />
+<meta name="abstract" content="SQL syntax is presented in modified BNF notation." />
+<meta name="description" content="SQL syntax is presented in modified BNF notation." />
+<meta scheme="URI" name="DC.Relation" content="rgsdocs37966.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rgsdocs10012" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SQL syntax</title>
+</head>
+<body id="rgsdocs10012"><a name="rgsdocs10012"><!-- --></a>
+
+
+<h1 class="topictitle1">SQL syntax</h1>
+
+
+<div><p>SQL syntax is presented in modified BNF notation.</p>
+
+<div class="section"><p>The meta-symbols of BNF are listed in the following table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the BNF meta-symbols used in SQL syntax examples and describes their meanings." frame="border" border="1" rules="all"><caption>Table 1. BNF meta-symbols</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="30%" id="N1005D">Symbol</th>
+
+<th valign="bottom" width="70%" id="N10064">Meaning</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="30%" headers="N1005D"><samp class="codeph">|</samp></td>
+
+<td valign="top" width="70%" headers="N10064">Or. Choose one of the items.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N1005D"><samp class="codeph">[ ]</samp></td>
+
+<td valign="top" width="70%" headers="N10064">Encloses optional items.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N1005D"><samp class="codeph">*</samp></td>
+
+<td valign="top" width="70%" headers="N10064">Flags items that you can repeat 0 or more times. Has a
+special meaning in some SQL statements.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N1005D"><samp class="codeph">{ }</samp></td>
+
+<td valign="top" width="70%" headers="N10064">Groups items so that they can be marked with one of the
+symbols <samp class="codeph">[ ]</samp>, <samp class="codeph">|</samp>, or <samp class="codeph">*</samp>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N1005D"><samp class="codeph">( )  . , </samp></td>
+
+<td valign="top" width="70%" headers="N10064">Other punctuation that is part of the syntax.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><div class="p">The following example shows how SQL syntax is presented:
+<pre><strong>CREATE [ UNIQUE ] INDEX <strong><em>IndexName</em></strong>
+  ON <strong><em>TableName</em></strong> ( <strong><em>SimpleColumnName</em></strong> [ , <strong><em>SimpleColumnName</em></strong> ] * ) </strong></pre>
+</div>
+</div>
+
+<div class="section"><div class="p">Command-line syntax for running Java programs and utilities (as
+well as examples) always begins with the command <em>java</em>: <pre>java org.apache.derby.tools.ij</pre>
+</div>
+</div>
+
+<div class="section"><p>This documentation attempts to be JVM neutral, but any command line examples or syntax using JVM specific references should be verified with your JVM documentation.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rgsdocs37966.html" title="This section describes the terminology, syntax, and typographical conventions of the Derby documentation.">Documentation conventions</a></div>
+</div>
+</div>
+
+</body>
+</html>

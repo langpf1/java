@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Accessing databases within a jar file using the classpath" />
+<meta name="abstract" content="Once an archive containing one or more Derby databases has been created it can be placed in the classpath. This allows access to a database from within an application without the application's knowing the path of the archive." />
+<meta name="description" content="Once an archive containing one or more Derby databases has been created it can be placed in the classpath. This allows access to a database from within an application without the application's knowing the path of the archive." />
+<meta content="Accessing read-only databases from classpath, Read-only databases, putting in classpath" name="DC.subject" />
+<meta content="Accessing read-only databases from classpath, Read-only databases, putting in classpath" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy15325.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tdevdeploy39856" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Accessing databases within a jar file using the classpath</title>
+</head>
+<body id="tdevdeploy39856"><a name="tdevdeploy39856"><!-- --></a>
+
+
+<h1 class="topictitle1">Accessing databases within a jar file using the classpath</h1>
+
+
+
+<div><p>Once an archive containing one or more <span>Derby</span> databases
+has been created it can be placed in the classpath. This allows access to
+a database from within an application without the application's knowing the
+path of the archive.</p>
+
+<div class="section"> <p>When jar or zip files are part of the classpath, you specify the
+<em>classpath</em> subsubprotocol instead of the <em>jar</em> subsubprotocol to
+connect to them.</p>
+<p>To access a database
+in a zip or jar file in the classpath:</p>
+</div>
+
+<ol>
+<li class="stepexpand"><span>Set the classpath to include the jar or zip file before starting
+up <span>Derby</span>:</span> <pre>CLASSPATH="C:\dbs.jar;%CLASSPATH%"</pre>
+
+</li>
+
+<li class="stepexpand"><span>Connect to a database within the jar or zip file with the
+following connection URL:</span> 
+<pre>jdbc:derby:classpath:<em>databasePathWithinArchive</em></pre>
+
+</li>
+
+</ol>
+
+<div class="section"><p>For example:</p>
+
+<pre>jdbc:derby:classpath:products/boiledfood</pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdeploy15325.html" title="You can create Derby databases for use on read-only media such as CD-ROMs.">Creating Derby databases for read-only use</a></div>
+</div>
+</div>
+
+</body>
+</html>

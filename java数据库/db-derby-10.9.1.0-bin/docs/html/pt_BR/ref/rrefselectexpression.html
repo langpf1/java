@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="ExpressãoSeleção" />
+<meta content="Expressão de seleção, DISTINCT clause, parte da ExpressãoSeleção, * como curinga no SQL SELECT" name="DC.subject" />
+<meta content="Expressão de seleção, DISTINCT clause, parte da ExpressãoSeleção, * como curinga no SQL SELECT" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj22771.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj81859.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj80721.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqljrenamestatements.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj35312.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcallprocedure.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj13590.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdeclaretemptable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj35981.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31783.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj21583.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj32654.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj14854.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj35034.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj40774.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj18922.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj40506.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj13658.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj21571.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj57522.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefscalarsubquery.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj41360.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftableexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftablesubquery.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj26498.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj11277.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj33602.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15309.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefselectexpression" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>ExpressãoSeleção</title>
+</head>
+<body id="rrefselectexpression"><a name="rrefselectexpression"><!-- --></a>
+
+
+<h1 class="topictitle1">ExpressãoSeleção</h1>
+
+
+<div>
+<div class="section">
+<p>A <em>ExpressãoSeleção</em> é a construção básica SELECT-FROM-WHERE utilizada
+para construir um valor tabela baseado na filtragem e projeção de valores
+de outras tabelas.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>SELECT [ DISTINCT | ALL ] <em>ItemSeleção</em> [ , <em>ItemSeleção </em>]*
+<em><a href="rrefsqlj21583.html#rrefsqlj21583">Cláusula FROM</a></em>
+[ <em><a href="rrefsqlj33602.html#rrefsqlj33602">Cláusula WHERE</a> </em>]
+[ <em><a href="rrefsqlj32654.html#rrefsqlj32654">Cláusula GROUP BY</a></em> ]
+[ <em><a href="rrefsqlj14854.html#rrefsqlj14854">Cláusula HAVING</a></em> ]</strong>
+</pre>
+ <p><strong>ItemSeleção:</strong></p>
+ <pre><strong>{
+    * |
+    { <em><a href="rreftablename.html#rreftablename">nome-da-tabela</a></em> | <em><a href="rrefcorrelationname.html#rrefcorrelationname">nome-da-correlação</a></em> } .* |
+    <em>Expressão</em> [AS <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">nome-de-coluna-simples</a> </em>]
+}</strong>
+</pre>
+
+<p>A cláusula SELECT contém uma lista de expressões e um quantificador opcional
+que é aplicado aos resultados da
+<a href="rrefsqlj21583.html#rrefsqlj21583">Cláusula FROM</a> e da
+<a href="rrefsqlj33602.html#rrefsqlj33602">Cláusula WHERE</a>.
+Se for especificado DISTINCT, somente será incluída no resultado uma cópia de
+qualquer valor linha.
+Os nulos são considerados duplicados entre si para as finalidades do DISTINCT.
+Se não for especificado um quantificador, ou se for especificado ALL, nenhuma
+linha será removida do resultado na aplicação da cláusula SELECT (ALL é o
+padrão).</p>
+
+<p>O <em>ItemSeleção</em> projeta um ou mais valores coluna de resultado
+na tabela resultado sendo construída na <em>ExpressãoSeleção</em>.</p>
+
+<p>O resultado da
+<a href="rrefsqlj21583.html#rrefsqlj21583">Cláusula FROM</a>
+é o produto cruzado dos itens do FROM.
+A <a href="rrefsqlj33602.html#rrefsqlj33602">Cláusula WHERE</a>
+pode qualificar ainda mais este resultado.</p>
+
+<p>A cláusula WHERE faz com que as linhas do resultado sejam filtradas com base
+em expressões booleanas.
+Somente as linhas para as quais a expressão booleana é avaliada como verdade
+são retornadas no resultado.</p>
+
+<p>A cláusula GROUP BY agrupa as linhas do resultado em subconjuntos que
+possuem valores correspondentes em uma ou mais colunas.
+As cláusulas GROUP BY são utilizadas normalmente com agregações.</p>
+
+<div class="p">Caso haja uma cláusula GROUP BY, a cláusula SELECT deverá conter
+<em>apenas</em> agregações ou colunas de agrupamento.
+Se for desejado incluir uma coluna não agrupada na cláusula SELECT, esta
+coluna deverá ser incluída em uma expressão de agregação. Por exemplo:
+<pre><strong>-- Listar o chefe de cada departamento,
+-- o número do departamento (DEP_TRAB),
+-- e o salário médio do departamento (SALÁRIO)
+-- para todos os departamentos na tabela EMPREGADOS.
+-- Organizar a tabela de resultado na ordem ascendente
+-- do salário médio do departamento
+SELECT DEP_TRAB, AVG(SALÁRIO)
+FROM EMPREGADOS
+GROUP BY DEP_TRAB
+ORDER BY 2;</strong>
+</pre>
+
+</div>
+
+<p>Se não houver uma cláusula GROUP BY, mas <em>ItemSeleção</em> contiver uma
+agregação que não esteja em uma subconsulta, a consulta será agrupada
+implicitamente.
+Toda a tabela se torna um único grupo.</p>
+
+<p>A cláusula HAVING restringe a tabela agrupada, especificando uma condição de
+procura (muito semelhante à cláusula WHERE) que pode fazer referência apenas às
+colunas de agrupamento ou agregações do escopo corrente.
+A cláusula HAVING é aplicada a cada grupo da tabela agrupada.
+Se a cláusula HAVING for avaliada como TRUE, a linha será retida para
+processamento adicional.
+Se a cláusula HAVING for avaliada como FALSE ou NULL, a linha será desprezada.
+Se houver uma cláusula HAVING mas não houver GROUP BY, a tabela será agrupada
+implicitamente em um grupo para toda a tabela.</p>
+
+<div class="p">O <span>Derby</span>
+processa a <em>ExpressãoSeleção</em> na seguinte ordem:
+<ul>
+<li>Cláusula FROM</li>
+
+<li>Cláusula WHERE</li>
+
+<li>GROUP BY (ou GROUP BY implícito)</li>
+
+<li>Cláusula HAVING</li>
+
+<li>Cláusula SELECT</li>
+
+</ul>
+
+</div>
+
+<p>O resultado da <em>ExpressãoSeleção</em> é sempre uma tabela.</p>
+
+<div class="p">Quando a consulta não possui uma cláusula FROM (quando está sendo construído
+um valor, e não obtendo dados de uma tabela), é utilizada a instrução VALUES,
+e não a <em>ExpressãoSeleção</em>.
+Por exemplo:   <pre><strong>VALUES CURRENT_TIMESTAMP</strong>
+</pre>
+
+</div>
+
+<p>Consulte
+<a href="rrefsqlj11277.html#rrefsqlj11277">Expressão VALUES</a>.</p>
+
+</div>
+
+<div class="section" id="rrefselectexpression__sqlj38441"><a name="rrefselectexpression__sqlj38441"><!-- --></a><h2 class="sectiontitle">O curinga *</h2>
+
+<p>O * é expandido como todas as colunas presentes nas tabelas da cláusula FROM
+associada.</p>
+
+<p><em><a href="rreftablename.html#rreftablename">nome-da-tabela</a>.*</em>
+e
+<em><a href="rrefcorrelationname.html#rrefcorrelationname">nome-da-correlação</a>.*</em>
+são expandidos como todas as colunas da tabela identificada.
+Esta tabela deve estar listada na cláusula FROM associada.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Atribuir nomes às colunas</h2>
+
+<p>Pode ser atribuído um nome a uma coluna do <em>ItemSeleção</em> utilizando a
+cláusula AS.
+Quando a <em>ExpressãoSeleção</em> aparece no operador UNION, INTERSECT ou EXCEPT,
+os nomes da primeira <em>ExpressãoSeleção</em> são usados como os nomes das
+colunas no resultado da operação.
+Se uma coluna do <em>ItemSeleção</em> não for uma expressão simples de
+<em>ReferênciaColuna</em>, ou não for dado um nome através da cláusula AS,
+será atribuído para a mesma um nome único gerado.</p>
+
+<div class="p">Estes nomes de colunas são úteis em vários casos:
+<ul>
+<li>São tornados disponíveis no <em>ResultSetMetaData</em> do JDBC.</li>
+
+<li>São utilizados como nomes das colunas na tabela resultante, quando a
+<em>ExpressãoSeleção</em> é utilizada como subconsulta de tabela na cláusula
+FROM.</li>
+
+<li>São utilizados na cláusula ORDER BY como nomes de coluna disponíveis
+para classificação.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="example">
+<pre><strong><span>-- este exemplo mostra SELECT-FROM-WHERE
+-- com uma cláusula ORDER BY
+-- e nome-da-correlação para as tabelas</span>
+SELECT CONSTRAINTNAME, COLUMNNAME
+FROM SYS.SYSTABLES t, SYS.SYSCOLUMNS col,
+SYS.SYSCONSTRAINTS cons, SYS.SYSCHECKS checks
+WHERE t.TABLENAME = 'VÔOS'
+AND t.TABLEID = col.REFERENCEID
+AND t.TABLEID = cons.TABLEID
+AND cons.CONSTRAINTID = checks.CONSTRAINTID
+ORDER BY CONSTRAINTNAME;
+
+<span>-- Este exemplo mostra a utilização da cláusula DISTINCT</span>
+SELECT DISTINCT NUM_ATIV
+FROM ATIV_EMP;
+
+<span>-- Este exemplo mostra como mudar o nome de uma expressão.
+-- Utilizando a tabela EMPREGADOS,
+-- listar o número do departamento (DEP_TRAB) e
+-- o maior salário do departamento (SALÁRIO) com nome mudado para BOSS
+-- para todos os departamentos cujo salário máximo seja menor que o
+-- salário médio de todos os outros departamentos.</span>
+SELECT DEP_TRAB AS DPT, MAX(SALÁRIO) AS BOSS
+FROM EMPREGADOS EMP_COR
+GROUP BY DEP_TRAB
+HAVING MAX(SALÁRIO) &lt; (SELECT AVG(SALÁRIO)
+                          FROM EMPREGADOS
+                          WHERE NOT DEP_TRAB = EMP_COR.DEP_TRAB)
+ORDER BY BOSS;</strong>
+</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj39374.html" title="">Instruções</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="crefsqlj22771.html" title="">Interação com o sistema de dependências</a></div>
+<div><a href="crefsqlj95081.html" title="">Instruções CREATE</a></div>
+<div><a href="crefsqlj80721.html" title="">Instruções DROP</a></div>
+<div><a href="crefsqljrenamestatements.html" title="">Instruções RENAME</a></div>
+<div><a href="crefsqlj35312.html" title="">Instruções SET</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefsqlj81859.html" title="">Instrução ALTER TABLE</a></div>
+<div><a href="rrefcallprocedure.html" title="">CALL (PROCEDIMENTO)</a></div>
+<div><a href="rrefsqlj13590.html" title="">Cláusula CONSTRAINT</a></div>
+<div><a href="rrefdeclaretemptable.html" title="">Instrução DECLARE GLOBAL TEMPORARY TABLE</a></div>
+<div><a href="rrefsqlj35981.html" title="">Instrução DELETE</a></div>
+<div><a href="rrefsqlj31783.html" title="">Cláusula FOR UPDATE</a></div>
+<div><a href="rrefsqlj21583.html" title="">Cláusula FROM</a></div>
+<div><a href="rrefsqlj32654.html" title="">Cláusula GROUP BY</a></div>
+<div><a href="rrefsqlj14854.html" title="">Cláusula HAVING</a></div>
+<div><a href="rrefsqlj35034.html" title="">INNER JOIN</a></div>
+<div><a href="rrefsqlj40774.html" title="">Instrução INSERT</a></div>
+<div><a href="rrefsqlj29840.html" title="">Operação JOIN</a></div>
+<div><a href="rrefsqlj18922.html" title="">LEFT OUTER JOIN</a></div>
+<div><a href="rrefsqlj40506.html" title="">Instrução LOCK TABLE</a></div>
+<div><a href="rrefsqlj13658.html" title="">Cláusula ORDER BY</a></div>
+<div><a href="rrefsqlj21571.html" title="">Consulta</a></div>
+<div><a href="rrefsqlj57522.html" title="">RIGHT OUTER JOIN</a></div>
+<div><a href="rrefscalarsubquery.html" title="">SubconsultaEscalar</a></div>
+<div><a href="rrefsqlj41360.html" title="">Instrução SELECT</a></div>
+<div><a href="rreftableexpression.html" title="">ExpressãoTabela</a></div>
+<div><a href="rreftablesubquery.html" title="">SubconsultaTabela</a></div>
+<div><a href="rrefsqlj26498.html" title="">Instrução UPDATE</a></div>
+<div><a href="rrefsqlj11277.html" title="">VALUES Expressão</a></div>
+<div><a href="rrefsqlj33602.html" title="">Cláusula WHERE</a></div>
+<div><a href="rrefsqlj15309.html" title="">Cláusula WHERE CURRENT OF</a></div>
+</div>
+</div>
+
+</body>
+</html>

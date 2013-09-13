@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<base target="contentwin" /><title>Server and Administration Guide</title>
+</head>
+<body>
+<ul>
+<li><a href="radmincopyright.html">Copyright</a></li>
+<li><a href="radminlicense.html">License</a></li>
+<li><a href="cadminpreface30074.html">About this guide</a>
+<ul>
+<li><a href="cadminpreface11181.html">Purpose of this guide</a></li>
+<li><a href="cadminpreface22460.html">Audience</a></li>
+<li><a href="cadminpreface23947.html">How this guide is organized</a></li>
+</ul>
+</li>
+<li><a href="cadminpartone.html">Part one: Derby Server Guide</a>
+<ul>
+<li><a href="cadminov11108.html">Derby in a multi-user environment</a>
+<ul>
+<li><a href="cadminov17524.html">Derby in a server framework</a>
+<ul>
+<li><a href="cadminov825125.html">Connectivity configurations</a></li>
+<li><a href="cadminov33597.html">Multiple-client features available in Derby</a>
+<ul>
+<li><a href="cadminov28261.html">Row-level locking</a></li>
+<li><a href="cadminov16172.html">Multiple concurrency levels</a></li>
+<li><a href="cadminov65220.html">Multi-connection and multi-threading</a></li>
+<li><a href="cadminov83312.html">Administrative tools</a></li>
+</ul>
+</li>
+<li><a href="cadminov825266.html">The Derby Network Server</a></li>
+<li><a href="cadminov825149.html">Embedded servers</a></li>
+<li><a href="cadminembeddedserver.html">How to start an embedded server from an application</a></li>
+<li><a href="radminembeddedserverex.html">Embedded server example</a></li>
+</ul>
+</li>
+<li><a href="cadminov38650.html">About this guide and the Network Server documentation</a></li>
+</ul>
+</li>
+<li><a href="cadminapps59125.html">Using the Network Server with preexisting Derby applications</a>
+<ul>
+<li><a href="cadminappsthenetworkserverandjvms.html">The Network Server and JVMs</a></li>
+<li><a href="tadminappschangingyourclasspath.html">Installing required jar files and adding them to the classpath</a></li>
+<li><a href="tadmincbdjhhfd.html">Starting the Network Server</a>
+<ul>
+<li><a href="tadminconfig814963.html">Starting the Network Server from a Java application</a></li>
+<li><a href="tadminconfigipx.html">Starting the Network Server on IPv6/IPv4 dual stack Windows machines</a></li>
+</ul>
+</li>
+<li><a href="tadminconfigshuttingdownthenetworkserver.html">Shutting down the Network Server</a>
+<ul>
+<li><a href="tadminconfig815333.html">Shutting down by using the command line</a></li>
+<li><a href="tadminconfig815357.html">Shutting down by using the API</a></li>
+</ul>
+</li>
+<li><a href="tadminconfigsysteminformation.html">Obtaining system information</a>
+<ul>
+<li><a href="tadminconfig815768.html">Obtaining system information by using the command line</a></li>
+<li><a href="tadminconfig815853.html">Obtaining system information by using the API</a>
+<ul>
+<li><a href="tadminappsruntimeinfo.html">Obtaining Network Server runtime information</a></li>
+<li><a href="tadminconfig815822.html">Obtaining Network Server properties by using the getCurrent Properties method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="cadminappsclient.html">Accessing the Network Server by using the network client driver</a>
+<ul>
+<li><a href="cadminappsclientsecurity.html">Network client security</a></li>
+<li><a href="cadminappsclienttracing.html">Network client tracing</a></li>
+<li><a href="radminappsclientxmp.html">Network client driver examples</a></li>
+</ul>
+</li>
+<li><a href="cadminnsdatasources.html">Accessing the Network Server by using a DataSource object</a>
+<ul>
+<li><a href="radminnsdatasourcexmp.html">DataSource access examples</a></li>
+</ul>
+</li>
+<li><a href="cadminapps811478.html">XA and the Network Server</a>
+<ul>
+<li><a href="cadminappsxawthdriver.html">Using XA with the network client driver</a></li>
+</ul>
+</li>
+<li><a href="cadminappsusingthederbytoolswiththene.html">Using the Derby tools with the Network Server</a>
+<ul>
+<li><a href="tadminapps811302.html">Using the Derby ij tool with the Network Server</a></li>
+<li><a href="tadminapps811345.html">Using the Derby dblook tool with the Network Server</a></li>
+</ul>
+</li>
+<li><a href="cadminapps.html">Differences between running Derby in embedded mode and using the Network Server</a>
+<ul>
+<li><a href="cadminappsclientdiffs.html">Differences between the embedded client and the network client driver</a></li>
+<li><a href="radminappsresultsetdiffs.html">Updatable result sets</a></li>
+<li><a href="radminapps811974.html">Error message differences</a></li>
+<li><a href="cadminapps49914.html">User authentication differences</a>
+<ul>
+<li><a href="cadminapps811631.html">Security mechanism options when user authentication is enabled on the Network Server</a></li>
+<li><a href="cadminapps811656.html">Security mechanism options when user authentication is disabled on the Network Server</a></li>
+<li><a href="cadminapps811695.html">Enabling the encrypted user ID and password security mechanism</a></li>
+</ul>
+</li>
+<li><a href="cadminappsjdbcdiffs.html">Differences in JDBC 3.0 methods</a></li>
+<li><a href="cadminappsdiffsreadonly.html">Differences using the Connection.setReadOnly method</a></li>
+</ul>
+</li>
+<li><a href="tadminappssettingportnumbers.html">Setting port numbers</a></li>
+</ul>
+</li>
+<li><a href="cadminconfig86869.html">Managing the Derby Network Server</a>
+<ul>
+<li><a href="cadminconfigoverview.html">Overview</a>
+<ul>
+<li><a href="tadminconfig813694.html">Using the NetworkServerControl API</a></li>
+</ul>
+</li>
+<li><a href="tadminconfigsettingnetwrokserverproperties.html">Setting Network Server properties</a>
+<ul>
+<li><a href="radmindrdahost.html">derby.drda.host property</a></li>
+<li><a href="radmindrdakeepalive.html">derby.drda.keepAlive property</a></li>
+<li><a href="radminconfigdb2jdrdalogconnections.html">derby.drda.logConnections property</a></li>
+<li><a href="radmindrdamaxthreads.html">derby.drda.maxThreads property</a></li>
+<li><a href="radmindrdaminthreads.html">derby.drda.minThreads property</a></li>
+<li><a href="radminconfigportnumber.html">derby.drda.portNumber property</a></li>
+<li><a href="radmindrdasecmechanism.html">derby.drda.securityMechanism property</a></li>
+<li><a href="radmindrdasslmode.html">derby.drda.sslMode property</a></li>
+<li><a href="radminconfigstartnetworkserver.html">derby.drda.startNetworkServer property</a></li>
+<li><a href="radmindrdaStreamOutBufferSize.html">derby.drda.streamOutBufferSize property</a></li>
+<li><a href="radmindrdatimeslice.html">derby.drda.timeSlice property</a></li>
+<li><a href="radminconfig.html">derby.drda.traceAll property</a></li>
+<li><a href="radminconfigdb2jdrdatracedirectory.html">derby.drda.traceDirectory property</a></li>
+</ul>
+</li>
+<li><a href="tadminconfigverifyingstartup.html">Verifying Startup</a></li>
+</ul>
+</li>
+<li><a href="cadminjmxoverview.html">Using Java Management Extensions (JMX) technology</a>
+<ul>
+<li><a href="radminjmxintro.html">Introduction to the Derby MBeans</a></li>
+<li><a href="radminjmxenabledisable.html">Enabling and disabling JMX</a>
+<ul>
+<li><a href="radminjmxenablenoauth.html">Enabling remote JMX with no authentication or SSL</a></li>
+<li><a href="radminjmxenablepwd.html">Enabling remote JMX with password authentication only</a></li>
+<li><a href="radminjmxenablepwdssl.html">Enabling remote JMX with password authentication and SSL</a></li>
+<li><a href="radminjmxenablesimpleauth.html">Simple authorization using an access file</a></li>
+<li><a href="radminjmxenablepolicy.html">Fine-grained authorization using a security policy</a></li>
+<li><a href="radminjmxdisable.html">Disabling access to MBeans</a></li>
+</ul>
+</li>
+<li><a href="radminjmxjconsole.html">Using JConsole to access the Derby MBeans</a></li>
+<li><a href="radminjmxcode.html">Using custom Java code to access the Derby MBeans</a></li>
+<li><a href="radminjmxtroubleshoot.html">Troubleshooting JMX connection issues</a></li>
+</ul>
+</li>
+<li><a href="cadminservlet98430.html">Managing the Derby Network Server remotely by using the servlet interface</a>
+<ul>
+<li><a href="radminservlet810694.html">Start-up page</a></li>
+<li><a href="radminservlet810717.html">Running page</a></li>
+<li><a href="radminservlet810796.html">Trace session page</a></li>
+<li><a href="radminservlet810822.html">Trace directory page</a></li>
+<li><a href="radminservlet810910.html">Set Network Server parameters</a></li>
+</ul>
+</li>
+<li><a href="cadminadvtops.html">Derby Network Server advanced topics</a>
+<ul>
+<li><a href="cadminnetservsecurity.html">Network Server security</a></li>
+<li><a href="cadminnetservfileperms.html">Controlling database file access</a></li>
+<li><a href="tadminnetservrun.html">Running the Network Server under the security manager</a>
+<ul>
+<li><a href="tadminnetservbasic.html">Basic Network Server security policy</a></li>
+<li><a href="tadminnetservcustom.html">Customizing the Network Server's security policy</a></li>
+<li><a href="tadminnetservopen.html">Running the Network Server without a security policy</a></li>
+</ul>
+</li>
+<li><a href="tadminnetservusrauth.html">Running the Network Server with User Authentication</a></li>
+<li><a href="cadminssl.html">Network encryption and authentication with SSL/TLS</a>
+<ul>
+<li><a href="cadminsslkeys.html">Key and certificate handling</a></li>
+<li><a href="cadminsslserver.html">Starting the server with SSL/TLS</a></li>
+<li><a href="cadminsslclient.html">Running the client with SSL/TLS</a></li>
+<li><a href="cadminssladmin.html">Other server commands</a></li>
+</ul>
+</li>
+<li><a href="tadminconfiguringthenetworkserver.html">Configuring the Network Server to handle connections</a></li>
+<li><a href="tadminlogfile.html">Controlling logging by using the log file</a></li>
+<li><a href="tadmintracefacility.html">Controlling tracing by using the trace facility</a>
+<ul>
+<li><a href="tadminadv804410.html">Turning on the trace facility</a></li>
+<li><a href="tadminadv804451.html">Turning off the trace facility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="radminsampleprograms.html">Derby Network Server sample programs</a>
+<ul>
+<li><a href="radminovnssample.html">The NsSample sample program</a>
+<ul>
+<li><a href="tadminovnsrundemo.html">Running the NsSample sample program</a></li>
+</ul>
+</li>
+<li><a href="cadminovntsrvsample.html">Network Server sample programs for embedded and client connections</a>
+<ul>
+<li><a href="cadminovsrvsmpprgm.html">Overview of the SimpleNetworkServerSample program</a></li>
+<li><a href="tadminovrunsrvprgm.html">Running the SimpleNetworkServerSample program</a></li>
+<li><a href="cadminovcliconnect.html">Connecting a client to the Network Server with the SimpleNetworkClientSample program</a></li>
+<li><a href="tadminovclirun.html">Running the SimpleNetworkClientSample program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="cadminparttwo.html">Part two: Derby Administration Guide</a>
+<ul>
+<li><a href="cadmindbintegrity.html">Maintaining database integrity</a></li>
+<li><a href="cadminconsist01.html">Checking database consistency</a>
+<ul>
+<li><a href="radminconsist30301.html">The SYSCS_CHECK_TABLE function</a></li>
+<li><a href="radminconsist38781.html">Sample SYSCS_CHECK_TABLE error messages</a></li>
+<li><a href="radminconsist24642.html">Sample SYSCS_CHECK_TABLE queries</a></li>
+</ul>
+</li>
+<li><a href="cadminhubbkup98797.html">Backing up and restoring databases</a>
+<ul>
+<li><a href="cadminbckupdb.html">Backing up a database</a>
+<ul>
+<li><a href="cadminhubbkup12677.html">Offline backups</a></li>
+<li><a href="cadminhubbkup63476.html">Online backups</a>
+<ul>
+<li><a href="cadminhubbkup01.html">Using the backup procedures to perform an online backup</a></li>
+<li><a href="cadminhubbkup75469.html">Using operating system commands with the freeze and unfreeze system procedures to perform an online backup</a></li>
+</ul>
+</li>
+<li><a href="cadminhubbkup67525.html">When the log is in a non-default location</a></li>
+<li><a href="cadminhubbkup21105.html">Backing up encrypted databases</a></li>
+</ul>
+</li>
+<li><a href="tadminhubbkup44.html">Restoring a database from a backup copy</a></li>
+<li><a href="tadmincrtdbbkup.html">Creating a database from a backup copy</a></li>
+<li><a href="cadminrollforward.html">Roll-forward recovery</a></li>
+</ul>
+</li>
+<li><a href="cadminimport16245.html">Importing and exporting data</a>
+<ul>
+<li><a href="cadminimport98264.html">Methods for running the import and export procedures</a></li>
+<li><a href="cadminimport27052.html">Bulk import and export requirements and considerations</a></li>
+<li><a href="cadminimportlobs.html">Bulk import and export of large objects</a></li>
+<li><a href="cadminimportdefaultformat.html">File format for input and output</a></li>
+<li><a href="tadminimporting.html">Importing data using the built-in procedures</a>
+<ul>
+<li><a href="radminimport64241.html">Parameters for the import procedures</a></li>
+<li><a href="cadminimportidentitycol.html">Import into tables that contain identity columns</a></li>
+</ul>
+</li>
+<li><a href="tadminexporting.html">Exporting data using the built-in procedures</a>
+<ul>
+<li><a href="radminexportarguments.html">Parameters for the export procedures</a></li>
+</ul>
+</li>
+<li><a href="radminimport91458.html">Examples of bulk import and export</a></li>
+<li><a href="cadminimportjdbc.html">Running import and export procedures from JDBC</a></li>
+<li><a href="cadminimportnulls.html">How the import and export procedures process NULL values</a></li>
+<li><a href="radminimportcodeset.html">CODESET values for import and export procedures</a></li>
+</ul>
+</li>
+<li><a href="cadminreplication.html">Replicating databases</a>
+<ul>
+<li><a href="cadminreplicstartrun.html">Starting and running replication</a></li>
+<li><a href="cadminreplicstop.html">Stopping replication</a></li>
+<li><a href="cadminreplicfailover.html">Forcing a failover</a></li>
+<li><a href="cadminreplicsecurity.html">Replication and security</a></li>
+<li><a href="cadminreplicfailures.html">Replication failure handling</a></li>
+</ul>
+</li>
+<li><a href="cadminlog98.html">Logging on a separate device</a>
+<ul>
+<li><a href="tadminlog800206.html">Using the logDevice=logDirectoryPath attribute</a></li>
+<li><a href="radminlog800241.html">Example of creating a log in a non-default location</a></li>
+<li><a href="radminlog800279.html">Example of moving a log manually</a></li>
+<li><a href="cadminlog800315.html">Issues for logging in a non-default location</a></li>
+</ul>
+</li>
+<li><a href="cadminlockvti42553.html">Obtaining locking information</a>
+<ul>
+<li><a href="cadminlockvti83889.html">Monitoring deadlocks</a></li>
+</ul>
+</li>
+<li><a href="cadminspace21579.html">Reclaiming unused space</a></li>
+</ul>
+</li>
+<li><a href="radmintrademderby.html">Trademarks</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Example of threads sharing a statement" />
+<meta name="abstract" content="This example shows what can happen if two threads try to share a single Statement." />
+<meta name="description" content="This example shows what can happen if two threads try to share a single Statement." />
+<meta content="Statements shared by threads, dangers of" name="DC.subject" />
+<meta content="Statements shared by threads, dangers of" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts89498.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts65864.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts23499.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rdevconcepts600" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Example of threads sharing a statement</title>
+</head>
+<body id="rdevconcepts600"><a name="rdevconcepts600"><!-- --></a>
+
+
+<h1 class="topictitle1">Example of threads sharing a statement</h1>
+
+
+
+<div><p>This example shows what can happen if two threads try to share
+a single<em> Statement</em>.</p>
+
+<div class="example"> <pre>PreparedStatement ps = conn.prepareStatement(
+    "UPDATE account SET balance =  balance + ? WHERE id = ?");
+<strong>/* now assume two threads T1,T2 are given this
+java.sql.PreparedStatement object </strong>and that the following events
+happen in the order shown (pseudojava code)*/
+T1 - ps.setBigDecimal(1, 100.00);
+T1 - ps.setLong(2, 1234);
+T2 -  ps.setBigDecimal(1, -500.00);
+<strong>// *** At this point the prepared statement has the parameters
+// -500.00 and 1234
+// T1 thinks it is adding 100.00 to account 1234 but actually
+// it is subtracting 500.00</strong>
+T1 - ps.executeUpdate();
+T2 - ps.setLong(2, 5678);
+<strong>// T2 executes the correct update</strong>
+ T2 - ps.executeUpdate();
+<strong>/* Also, the auto-commit mode of the connection can lead
+to some strange behavior.*/</strong></pre>
+</div>
+
+<div class="section"><p>If it is absolutely necessary, the application can get around
+this problem with Java synchronization.</p>
+</div>
+
+<div class="section"><p>If the threads each obtain their own <em>PreparedStatement</em> (with
+identical text), their <samp class="codeph"><em>setXXX</em></samp> calls do not interfere
+with each other. Moreover, <span>Derby</span> is
+able to share the same compiled query plan between the two statements; it
+needs to maintain only separate state information. However, there is the potential
+for confusion in regard to the timing of the <em>commit</em>, since a single <em>commit</em> commits
+all the statements in a transaction.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts23499.html" title="JDBC allows you to share a single Connection among multiple threads.">Working with multiple threads sharing a single connection</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevconcepts89498.html" title="Here is a review of the potential pitfalls of sharing a single Connection among multiple threads.">Pitfalls of sharing a connection among threads</a></div>
+<div><a href="cdevconcepts65864.html" title="You may be sharing a Connection among multiple threads because you have experienced poor concurrency using separate transactions.">Multi-thread programming tips</a></div>
+</div>
+</div>
+
+</body>
+</html>

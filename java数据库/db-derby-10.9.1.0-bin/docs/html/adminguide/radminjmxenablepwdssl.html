@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Enabling remote JMX with password authentication and SSL" />
+<meta content="Java Management Extensions (JMX) technology, JMX, enabling with password authentication and SSL" name="DC.subject" />
+<meta content="Java Management Extensions (JMX) technology, JMX, enabling with password authentication and SSL" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenabledisable.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablenoauth.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepwd.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablesimpleauth.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepolicy.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxdisable.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminjmxenablepwdssl" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Enabling remote JMX with password authentication and SSL</title>
+</head>
+<body id="radminjmxenablepwdssl"><a name="radminjmxenablepwdssl"><!-- --></a>
+
+
+<h1 class="topictitle1">Enabling remote JMX with password authentication and SSL</h1>
+
+
+<div>
+<div class="section">
+<p>This example shows how to start the Network Server as follows:</p>
+
+<ul>
+<li>Using Oracle JDK 6 or later</li>
+
+<li>Using a Java security manager and a custom policy file,
+<samp class="codeph">jmx.policy</samp></li>
+
+<li>Allowing connections from remote hosts (that is, on all IPv4 network
+interfaces) by specifying <samp class="codeph">-h 0.0.0.0</samp></li>
+
+<li>Using password authentication, as described in
+<a href="radminjmxenablepwd.html#radminjmxenablepwd">Enabling remote JMX with password authentication only</a>, using the
+<samp class="codeph">jmxremote.password</samp> file</li>
+
+<li>Using SSL (Secure Socket Layer) for the following:
+<ul>
+<li>Authenticating clients</li>
+
+<li>Encrypting all JMX-related network communication</li>
+
+<li>Protecting the RMI registry used by the MBean server</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+<p>This level of protection may or may not be adequate for you, but it is more
+secure than the previous examples.</p>
+
+<p>The command line appears on multiple lines to improve readability, but you
+would enter it as a single <samp class="codeph">java</samp> command.</p>
+
+<pre><strong>java -Dcom.sun.management.jmxremote.port=9999 
+-Dcom.sun.management.jmxremote.password.file=jmxremote.password 
+-Djavax.net.ssl.keyStore=/home/user/.keystore 
+-Djavax.net.ssl.keyStorePassword=myKeyStorePassword 
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=true 
+-Djavax.net.ssl.trustStore=/home/user/.truststore 
+-Djavax.net.ssl.trustStorePassword=myTrustStorePassword 
+-Dcom.sun.management.jmxremote.registry.ssl=true 
+-Djava.security.manager 
+-Djava.security.policy=jmx.policy 
+-jar lib/derbyrun.jar server start -h 0.0.0.0</strong></pre>
+
+<div class="p"><div class="note"><span class="notetitle">Note: </span>When password authentication is enabled and a Java Security Manager is
+installed, a number of JMX-related permissions need to be granted to trusted
+users in the security policy used. See
+<a href="radminjmxenablepolicy.html#radminjmxenablepolicy">Fine-grained authorization using a security policy</a> for
+details.</div>
+</div>
+
+<p>In the example above, system properties specify the keystore containing the
+server's key pair, the keystore password, the truststore containing the client
+certificates, and the truststore password. Setting up SSL keystores and
+truststores is partly described in
+<a href="cadminsslkeys.html#cadminsslkeys">Key and certificate handling</a>. Other topics in the
+section <a href="cadminssl.html#cadminssl">Network encryption and authentication with SSL/TLS</a> provide information on
+protecting database network traffic using SSL.</p>
+
+<p>When you configure SSL as described above, the following requirements
+apply:</p>
+
+<ul>
+<li>The password of the private key must be the same as the password of the
+keystore.</li>
+
+<li>If the keystore contains more than one key pair, the key pair you want to
+use must be listed first among all the keys in the keystore. Otherwise, you
+(or the clients) may see an exception with a message like the following:
+<pre>unable to find valid certification path to requested target</pre>
+
+</li>
+
+</ul>
+
+<p>The system property
+<samp class="codeph">com.sun.management.jmxremote.ssl.need.client.auth=true</samp>
+specifies that clients must use SSL to authenticate themselves. This property,
+as well as the truststore properties, may be removed if you do not want to
+authenticate clients using SSL. However, there may be security risks associated
+with using password authentication only.</p>
+
+<p>The system property
+<samp class="codeph">com.sun.management.jmxremote.registry.ssl=true</samp> was new in
+JDK 6 and aims at resolving security issues with the RMI registry used in
+relation with JMX. This property must be used in conjunction with
+<samp class="codeph">com.sun.management.jmxremote.ssl.need.client.auth=true</samp> in order
+to fully secure the RMI registry.</p>
+
+<p>If you use a Java SE 5 JDK, clients must provide an additional entry in the
+environment map passed to the <samp class="codeph">JMXConnector</samp> when enabling SSL
+protection of the registry:</p>
+
+<pre>env.put("com.sun.jndi.rmi.factory.socket", new SslRMIClientSocketFactory());</pre>
+
+<p>See <a href="radminjmxcode.html#radminjmxcode__connmbeanserver">Connecting to the MBean Server</a> for
+details.</p>
+
+<p>Clients must also specify and use proper keystores and/or truststores (the
+truststores must contain the server's SSL certificate).</p>
+
+<p>For more information about the system properties used above and potential
+security risks, see "Monitoring and Management Using JMX Technology" at
+<a href="http://docs.oracle.com/javase/7/docs/technotes/guides/management/agent.html" target="_blank">http://docs.oracle.com/javase/7/docs/technotes/guides/management/agent.html
+</a>.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="radminjmxenabledisable.html" title="">Enabling and disabling JMX</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminjmxenablenoauth.html" title="">Enabling remote JMX with no authentication or SSL</a></div>
+<div><a href="radminjmxenablepwd.html" title="">Enabling remote JMX with password authentication only</a></div>
+<div><a href="radminjmxenablesimpleauth.html" title="">Simple authorization using an access file</a></div>
+<div><a href="radminjmxenablepolicy.html" title="">Fine-grained authorization using a security policy</a></div>
+<div><a href="radminjmxdisable.html" title="">Disabling access to MBeans</a></div>
+</div>
+</div>
+
+</body>
+</html>

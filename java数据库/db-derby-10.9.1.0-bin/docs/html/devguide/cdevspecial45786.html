@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="User-defined SQLExceptions" />
+<meta name="abstract" content="When the execution of a database-side method raises an error, Derby wraps that exception in an SQLException with an SQLState of 38000." />
+<meta name="description" content="When the execution of a database-side method raises an error, Derby wraps that exception in an SQLException with an SQLState of 38000." />
+<meta content="SQLExceptions, user-defined (38001-38999)" name="DC.subject" />
+<meta content="SQLExceptions, user-defined (38001-38999)" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevspecial29620.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevspecial16181.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevspecial41728.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevspecial42117.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevspecial45786" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>User-defined SQLExceptions</title>
+</head>
+<body id="cdevspecial45786"><a name="cdevspecial45786"><!-- --></a>
+
+
+<h1 class="topictitle1">User-defined SQLExceptions</h1>
+
+
+
+<div><p>When the execution of a database-side method raises an error, <span>Derby</span> wraps that exception
+in an <em>SQLException</em> with an <samp class="codeph"><em>SQLState</em></samp> of 38000.</p>
+
+<p>You can avoid having <span>Derby</span> wrap
+the exception if:</p>
+
+<ul>
+<li>The exception is an <em>SQLException</em></li>
+
+<li>The range of the <em>SQLState</em> is 38001-38999</li>
+
+</ul>
+
+<p>(This conforms to the SQL99 standard.)</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevspecial42117.html" title="Methods invoked within an application are called application-side methods. Methods invoked within Derby are called database-side routines.">Programming database-side JDBC routines</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevspecial29620.html" title="Most database-side JDBC routines need to share the same transaction space as the statements that called them.">Database-side JDBC routines and nested connections</a></div>
+<div><a href="cdevspecial16181.html" title="A database-side JDBC routine can create a new connection instead of using a nested connection. Statements executed in the routine will be part of a different transaction, and so can issue commits and rollbacks.">Database-side JDBC routines using non-nested connections</a></div>
+<div><a href="cdevspecial41728.html" title="It is possible to code database-side routines, like application-side methods, to catch SQLExceptions. SQLExceptions that are caught within a routine are hidden from the calling application code.">Database-side JDBC routines and SQLExceptions</a></div>
+</div>
+</div>
+
+</body>
+</html>

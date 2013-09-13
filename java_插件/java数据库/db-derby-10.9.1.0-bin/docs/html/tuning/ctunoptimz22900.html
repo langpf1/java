@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="When a table scan Is better" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz30217.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz33368.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz39106.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz30768.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz41314.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz856914.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunoptimz22900" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>When a table scan Is better</title>
+</head>
+<body id="ctunoptimz22900"><a name="ctunoptimz22900"><!-- --></a>
+
+
+<h1 class="topictitle1">When a table scan Is better</h1>
+
+
+<div>
+<p>Sometimes a table scan is the most efficient way to access data, even if
+a potentially useful index is available. For example, if the statement returns
+virtually all the data in the table, it is more efficient to go straight to
+the table instead of looking values up in an index, because then <span>Derby</span> is
+able to avoid the intermediate step of retrieving the rows from the index
+lookup values.</p>
+
+<div class="p">For example:  
+<pre><strong>SELECT *
+FROM Flights
+WHERE dest_airport &lt; 'Z'</strong></pre>
+</div>
+
+<div class="p">In the <em>Flights </em>table, most of the airport codes
+begin with letters that are less than <em>Z</em>. Depending
+on the number of rows in the table, it is probably more efficient for <span>Derby</span> to
+go straight to the table to retrieve the appropriate rows. However, for the
+following query, <span>Derby</span> uses the index:  
+<pre><strong>SELECT *
+FROM Flights
+WHERE dest_airport &lt; 'B'</strong></pre>
+</div>
+
+<p>Only a few flights have airport codes that begin with a letter less than <em>B</em>.</p>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctunoptimz30217.html" title="">Index use and access paths</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctunoptimz33368.html" title="">What is an index?</a></div>
+<div><a href="ctunoptimz39106.html" title="">What's optimizable?</a></div>
+<div><a href="ctunoptimz30768.html" title="">Covering indexes</a></div>
+<div><a href="ctunoptimz41314.html" title="">Useful indexes can use qualifiers</a></div>
+<div><a href="ctunoptimz856914.html" title="">Indexes have a cost for inserts, updates, and deletes</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSROUTINEPERMS システム表" />
+<meta name="abstract" content="SYSROUTINEPERMS表にはルーチンへの権限が記録されています。" />
+<meta name="description" content="SYSROUTINEPERMS表にはルーチンへの権限が記録されています。" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsistabssysroutineperms" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSROUTINEPERMS システム表</title>
+</head>
+<body id="rrefsistabssysroutineperms"><a name="rrefsistabssysroutineperms"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSROUTINEPERMS システム表</h1>
+
+
+<div><p>SYSROUTINEPERMS表にはルーチンへの権限が記録されています。</p>
+
+<div class="section"><div class="p">それぞれのルーチンにはSYSROUTINEPERMS表にて、EXECUTE権限が指定されています。SYSROUTINEPERMS表のキーは以下のとおりです。<ul>
+<li>主キー (GRANTEE, ALIASID, GRANTOR)</li>
+
+<li>一意キー (ROUTINEPERMSID)</li>
+
+<li>外部キー (ALIASIDがSYS.SYSALIASESを参照する。)</li>
+
+</ul>
+ </div>
+<p>以下の表にてSYSTABLEPERMS表の各列について説明します。</p>
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. " width="100%" frame="border" border="1" rules="all">
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="27%" id="N10081">列名</th>
+
+<th align="left" valign="bottom" width="10%" id="N1008A">型</th>
+
+<th align="left" valign="bottom" width="11%" id="N10093">長さ</th>
+
+<th align="left" valign="bottom" width="14.000000000000002%" id="N1009C">空許容</th>
+
+<th align="left" valign="bottom" width="38%" id="N100A5">内容</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="27%" headers="N10081">ROUTINEPERMSID</td>
+
+<td valign="top" width="10%" headers="N1008A">CHAR</td>
+
+<td valign="top" width="11%" headers="N10093">36</td>
+
+<td valign="top" width="14.000000000000002%" headers="N1009C">不可</td>
+
+<td valign="top" width="38%" headers="N100A5">依存性管理機能にて、ビュー・トリガ・制約のルーチンのルーチンレベルの権限への依存性を追跡するために使われる。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N10081">GRANTEE</td>
+
+<td valign="top" width="10%" headers="N1008A">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N10093">30</td>
+
+<td valign="top" width="14.000000000000002%" headers="N1009C">不可</td>
+
+<td valign="top" width="38%" headers="N100A5">権限の付与されたユーザの認証識別子。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N10081">GRANTOR</td>
+
+<td valign="top" width="10%" headers="N1008A">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N10093">30</td>
+
+<td valign="top" width="14.000000000000002%" headers="N1009C">不可</td>
+
+<td valign="top" width="38%" headers="N100A5">権限を付与したユーザの認証識別子。権限は情報の所有者によってのみ付与される。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N10081">ALIASID</td>
+
+<td valign="top" width="10%" headers="N1008A">CHAR</td>
+
+<td valign="top" width="11%" headers="N10093">36</td>
+
+<td valign="top" width="14.000000000000002%" headers="N1009C">不可</td>
+
+<td valign="top" width="38%" headers="N100A5">必要な権限の識別子。もしPERMTYPEが'E'ならALIASIDはSYS.SYSALIASES表を参照する。そうでなければ、ALIASIDはSYS.SYSTABLES表を参照する。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N10081">GRANTOPTION</td>
+
+<td valign="top" width="10%" headers="N1008A">CHAR</td>
+
+<td valign="top" width="11%" headers="N10093">1</td>
+
+<td valign="top" width="14.000000000000002%" headers="N1009C">不可</td>
+
+<td valign="top" width="38%" headers="N100A5">GRANTEEがルーチンの所有者ならば指定する。有効な値はYあるいはN。</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+</div>
+</div>
+
+</body>
+</html>

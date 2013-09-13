@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using SignatureChecker" />
+<meta content="SignatureChecker, using" name="DC.subject" />
+<meta content="SignatureChecker, using" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctoolssigcheck.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctoolsusingsigcheck" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using SignatureChecker</title>
+</head>
+<body id="ctoolsusingsigcheck"><a name="ctoolsusingsigcheck"><!-- --></a>
+
+
+<h1 class="topictitle1">Using SignatureChecker</h1>
+
+
+<div>
+<p>Before you run the <samp class="codeph">SignatureChecker</samp> tool, make sure that
+your classpath contains the
+<span>Derby</span> jar files, including
+<em>derbytools.jar</em>.</p>
+
+<p>On a Java SE platform, run the <samp class="codeph">SignatureChecker</samp> tool as
+follows, where <em>connection-url-to-database</em> is the connection URL you would
+use in order to obtain a connection by calling
+<em>DriverManager.getConnection()</em>:</p>
+
+<pre>
+java org.apache.derby.tools.SignatureChecker <em>connection-url-to-database</em>
+</pre>
+
+<p>Alternatively, you can invoke the tool using <em>derbyrun.jar</em>. For
+example:</p>
+
+<pre>
+java -jar derbyrun.jar SignatureChecker "jdbc:derby:myDB"
+</pre>
+
+<p>On a Java ME platform, run the <samp class="codeph">SignatureChecker</samp> tool as
+follows, where <em>database-name</em> is the database name you would set by
+calling <em>EmbeddedSimpleDataSource.setDatabaseName()</em>:</p>
+
+<pre>
+java org.apache.derby.tools.SignatureChecker <em>database-name</em>
+</pre>
+
+<p>The tool examines every routine registered in the database and displays
+results like the following:</p>
+
+<pre>Found a matching method for: "APP"."DOINSERT"( )
+Found a matching method for: "APP"."DOINSERTANDCOMMIT"( )
+Found a matching method for: "APP"."APPENDFOOANDBAR"( VARCHAR )
+Unresolvable routine: "APP"."IDONTEXIST"( VARCHAR , INTEGER ).
+Detailed reason: No method was found that matched the method call
+ z.iDontExist(java.lang.String, int),
+tried all combinations of object and primitive types and any possible
+ type conversion for any parameters the method call may have.
+The method might exist but it is not public and/or static, or the
+ parameter types are not method invocation convertible.
+Found a matching method for: "APP"."RUNDDL"( VARCHAR )
+Unresolvable routine: "APP"."TABFUNCDOESNTEXIST"( VARCHAR , BIGINT ).
+Detailed reason: No method was found that matched the method call
+ org.apache.derbyTesting.functionTests.tests.lang.TableFunctionTest.
+ appendFooAndBar(java.lang.String, long),
+tried all combinations of object and primitive types and any possible
+ type conversion for any parameters the method call may have.
+The method might exist but it is not public and/or static, or the
+ parameter types are not method invocation convertible.
+</pre>
+
+<p>In the example above, the <samp class="codeph">SignatureChecker</samp> tool found
+matches for all routines except for the functions <em>app.iDontExist</em> and
+<em>app.tabFuncDoesntExist</em>. If the tool cannot find a match for one of your
+functions or procedures, it tells you what signature it expected to find. You
+need to adjust your application in one of the following ways:</p>
+
+<ul>
+<li><strong>Method:</strong> Change the signature of your Java method to match the
+signature suggested by the <samp class="codeph">SignatureChecker</samp> tool.</li>
+
+<li><strong>Routine:</strong> Drop and recreate your function or procedure so that its
+arguments and return type match your Java method according to the SQL Standard
+rules described in "Argument matching" in the
+<span><em>Derby Reference Manual</em></span>.</li>
+
+</ul>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolssigcheck.html" title="">SignatureChecker</a></div>
+</div>
+</div>
+
+</body>
+</html>

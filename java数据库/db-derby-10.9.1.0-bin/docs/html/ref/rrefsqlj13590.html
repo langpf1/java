@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CONSTRAINT clause" />
+<meta content="CONSTRAINT clause, Constraints, Storage properties, for indexes backing constraints, Backing indexes, specifying storage properties for, Tables, specifying page size for, specifying properties for" name="DC.subject" />
+<meta content="CONSTRAINT clause, Constraints, Storage properties, for indexes backing constraints, Backing indexes, specifying storage properties for, Tables, specifying page size for, specifying properties for" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj16095.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj42154.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj16357.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj91438.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj13590" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CONSTRAINT clause</title>
+</head>
+<body id="rrefsqlj13590"><a name="rrefsqlj13590"><!-- --></a>
+
+
+<h1 class="topictitle1">CONSTRAINT clause</h1>
+
+
+<div>
+<div class="section"> <p>A CONSTRAINT clause is an optional part of a <a href="rrefsqlj24513.html#rrefsqlj24513">CREATE TABLE statement</a> or <a href="rrefsqlj81859.html#rrefsqlj81859">ALTER TABLE statement</a>. A constraint is a rule to which data
+must conform. Constraint names are optional.</p>
+ <div class="p">A CONSTRAINT can be one
+of the following:   <ul>
+<li>a
+column-level constraint   <p>Column-level constraints refer to a single column
+in the table and do not specify a column name (except check constraints).
+They refer to the column that they follow.</p>
+</li>
+
+<li>a
+table-level constraint   <p>Table-level constraints refer to one or more columns
+in the table. Table-level constraints specify the names of the columns to
+which they apply. Table-level CHECK constraints can refer to 0 or more columns
+in the table.</p>
+</li>
+
+</ul>
+</div>
+ <div class="p">Column
+constraints include:   <ul>
+<li>NOT NULL   <p>Specifies that this column cannot hold NULL values (constraints
+of this type are not nameable).</p>
+</li>
+
+<li>PRIMARY KEY 
+ <p>Specifies the column that uniquely identifies a row in the table. The
+identified columns must be defined as NOT NULL. </p>
+ <div class="note"><span class="notetitle">Note: </span>If you attempt
+to add a primary key using ALTER TABLE and any of the columns included in
+the primary key contain null values, an error will be generated and the primary
+key will not be added. See <a href="rrefsqlj81859.html#rrefsqlj81859">ALTER TABLE statement</a> for
+more information.</div>
+</li>
+
+<li>UNIQUE   <p>Specifies that values in the column must be unique.</p>
+</li>
+
+<li>FOREIGN KEY   <p>Specifies that the values in the column must correspond
+to values in a referenced primary key or unique key column or that they are
+NULL.</p>
+</li>
+
+<li>CHECK   <p>Specifies rules for values in the column.</p>
+</li>
+
+</ul>
+</div>
+ <div class="p">Table constraints include:   <ul>
+<li>PRIMARY KEY <p>Specifies
+the column or columns that uniquely identify a row in the table. NULL values
+are not allowed.</p>
+</li>
+
+<li>UNIQUE   <p>Specifies that values in the columns must be unique.</p>
+</li>
+
+<li>FOREIGN KEY   <p>Specifies that the values in the columns must correspond
+to values in referenced primary key or unique columns or that they are NULL.</p>
+ <div class="note"><span class="notetitle">Note: </span>If
+the foreign key consists of multiple columns, and <em>any</em> column is NULL,
+the whole key is considered NULL. The insert is permitted no matter what is
+on the non-null columns.</div>
+</li>
+
+<li>CHECK   <p>Specifies a wide range of rules for values in the table.</p>
+</li>
+
+</ul>
+</div>
+ <p>Column constraints and table constraints
+have the same function; the difference is in where you specify them. Table
+constraints allow you to specify more than one column in a PRIMARY KEY, UNIQUE,
+CHECK, or FOREIGN KEY constraint definition. Column-level constraints (except
+for check constraints) refer to only one column.</p>
+
+<p>A constraint operates with the privileges of the owner of the constraint.
+See "Using SQL standard authorization" and "Privileges on views, triggers, and
+constraints" in the <span><em>Derby Developer's Guide</em></span> for
+details.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> </div>
+
+<div class="section"><h2 class="sectiontitle">Primary key constraints</h2> <p>A primary
+key defines the set of columns that uniquely identifies rows in a table.</p>
+ <p>When
+you create a primary key constraint, none of the columns included in the primary
+key can have NULL constraints; that is, they must not permit NULL values.</p>
+ <p>ALTER
+TABLE ADD PRIMARY KEY allows you to include existing columns in a primary
+key if they were first defined as NOT NULL. NULL values are not allowed. If
+the column(s) contain NULL values, the system will not add the primary key
+constraint. See <a href="rrefsqlj81859.html#rrefsqlj81859">ALTER TABLE statement</a> for more information.</p>
+ <p>A
+table can have at most one PRIMARY KEY constraint.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Unique constraints</h2><p>
+A UNIQUE constraint defines a set of columns that uniquely identify rows in a
+table only if all the key values are not NULL. If one or more key parts are
+NULL, duplicate keys are allowed. </p>
+
+<p>For example, if there is a UNIQUE constraint on <samp class="codeph">col1</samp> and
+<samp class="codeph">col2</samp> of a table, the combination of the values held by
+<samp class="codeph">col1</samp> and <samp class="codeph">col2</samp> will be unique as long
+as these values are not NULL. If one of <samp class="codeph">col1</samp> and
+<samp class="codeph">col2</samp> holds a NULL value, there can be another identical row in
+the table.</p>
+
+<p>A table can have multiple UNIQUE constraints.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Foreign key constraints</h2> <p>Foreign keys provide
+a way to enforce the referential integrity of a database. A foreign key is
+a column or group of columns within a table that references a key in some
+other table (or sometimes, though rarely, the same table). The foreign key
+must always include the columns of which the types exactly match those in
+the referenced primary key or unique constraint.</p>
+ <p>For a table-level
+foreign key constraint in which you specify the columns in the table that
+make up the constraint, you cannot use the same column more than once.</p>
+ <p>If
+there is a column list in the <em>ReferencesSpecification </em>(a list of columns
+in the referenced table), it must correspond either to a unique constraint
+or to a primary key constraint in the referenced table. The <em>ReferencesSpecification</em> can
+omit the column list for the referenced table if that table has a declared
+primary key.</p>
+ <p>If there is no column list in the <em>ReferencesSpecification </em>and
+the referenced table has no primary key, a statement exception is thrown.
+(This means that if the referenced table has only unique keys, you must include
+a column list in the <em>ReferencesSpecification.</em>)</p>
+ <div class="p">A foreign key
+constraint is satisfied if there is a matching value in the referenced unique
+or primary key column. If the foreign key consists of multiple columns, the
+foreign key value is considered NULL if any of its columns contains a NULL.
+  <div class="note"><span class="notetitle">Note: </span>It is possible for a foreign key consisting of multiple columns to
+allow one of the columns to contain a value for which there is no matching
+value in the referenced columns, per the SQL-92 standard. To avoid this situation,
+create NOT NULL constraints on all of the foreign key's columns.</div>
+</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Foreign key constraints and DML</h2> <p>When you insert
+into or update a table with an enabled foreign key constraint, <span>Derby</span> checks
+that the row does not violate the foreign key constraint by looking up the
+corresponding referenced key in the referenced table. If the constraint is
+not satisfied, <span>Derby</span> rejects
+the insert or update with a statement exception.</p>
+ <p>When you update or
+delete a row in a table with a referenced key (a primary or unique constraint
+referenced by a foreign key), <span>Derby</span> checks
+every foreign key constraint that references the key to make sure that the
+removal or modification of the row does not cause a constraint violation.
+If removal or modification of the row would cause a constraint violation,
+the update or delete is not permitted and <span>Derby</span> throws
+a statement exception.</p>
+ <p><span>Derby</span> performs
+constraint checks at the time the statement is executed, not when the transaction
+commits.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Backing indexes</h2> <p>UNIQUE,
+PRIMARY KEY, and FOREIGN KEY constraints generate indexes that enforce or
+"back" the constraint (and are sometimes called <em>backing indexes</em>).
+PRIMARY KEY constraints generate unique indexes. FOREIGN KEY constraints
+generate non-unique indexes. UNIQUE constraints generate unique indexes if
+all the columns are non-nullable, and they generate non-unique indexes if
+one or more columns are nullable. Therefore, if a column or set of columns has
+a UNIQUE, PRIMARY KEY, or FOREIGN KEY constraint on it, you do not need to
+create an index on those columns for performance. <span>Derby</span> has
+already created it for you. See <a href="rrefsqlj20937.html#rrefsqlj20937__sqlj27363">Indexes and constraints</a>.</p>
+
+<p>These indexes are
+available to the optimizer for query optimization (see <a href="rrefsqlj20937.html#rrefsqlj20937">CREATE INDEX statement</a>)
+and have system-generated names.</p>
+ <p>You cannot drop backing indexes with
+a DROP INDEX statement; you must drop the constraint or the table.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Check constraints</h2> <p>A
+check constraint can be used to specify a wide range of rules for the contents
+of a table. A search condition (which is a boolean expression) is specified
+for a check constraint. This search condition must be satisfied for all rows
+in the table. The search condition is applied to each row that is modified
+on an INSERT or UPDATE at the time of the row modification. The entire statement
+is aborted if any check constraint is violated.</p>
+ </div>
+
+<div class="section" id="rrefsqlj13590__sqlj57077"><a name="rrefsqlj13590__sqlj57077"><!-- --></a><h2 class="sectiontitle">Requirements for search condition</h2> <p>If
+a check constraint is specified as part of a column-definition, a column reference
+can only be made to the same column. Check constraints specified as part of
+a table definition can have column references identifying columns previously
+defined in the CREATE TABLE statement.</p>
+ <div class="p">The search condition must always
+return the same value if applied to the same values. Thus, it cannot contain
+any of the following:   <ul>
+<li>Dynamic parameters (?)</li>
+
+<li>Date/Time Functions (CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP)</li>
+
+<li>Subqueries</li>
+
+<li>User Functions (such as USER, SESSION_USER, CURRENT_USER)</li>
+
+</ul>
+</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Referential actions</h2> <p>You can specify
+an ON DELETE clause and/or an ON UPDATE clause, followed by the appropriate
+action (CASCADE, RESTRICT, SET NULL, or NO ACTION) when defining foreign keys.
+These clauses specify whether <span>Derby</span> should
+modify corresponding foreign key values or disallow the operation, to keep
+foreign key relationships intact when a primary key value is updated or deleted
+from a table.</p>
+ <p>You specify the update and delete rule of a referential
+constraint when you define the referential constraint.</p>
+ <p>The update rule
+applies when a row of either the parent or dependent table is updated. The
+choices are NO ACTION and RESTRICT. </p>
+ <p>When a value in a column of the
+parent table's primary key is updated and the update rule has been specified
+as RESTRICT, <span>Derby</span> checks
+dependent tables for foreign key constraints. If any row in a dependent table
+violates a foreign key constraint, the transaction is rolled back. </p>
+ <p>If
+the update rule is NO ACTION, <span>Derby</span> checks
+the dependent tables for foreign key constraints <em>after</em> all updates
+have been executed but <em>before</em> triggers have been executed. If any row
+in a dependent table violates a foreign key constraint, the statement is rejected.</p>
+ <p>When
+a value in a column of the dependent table is updated, and that value is part
+of a foreign key, NO ACTION is the implicit update rule. NO ACTION means that
+if a foreign key is updated with a non-null value, the update value must match
+a value in the parent table's primary key when the update statement is completed.
+If the update does not match a value in the parent table's primary key, the
+statement is rejected.</p>
+ <p>The delete rule applies when a row of the parent
+table is deleted and that row has dependents in the dependent table of the
+referential constraint. If rows of the dependent table are deleted, the delete
+operation on the parent table is said to be <em>propagated</em> to the dependent
+table. If the dependent table is also a parent table, the action specified
+applies, in turn, to its dependents. </p>
+ <p>The choices are NO ACTION, RESTRICT,
+CASCADE, or SET NULL. SET NULL can be specified only if some column of the
+foreign key allows null values.</p>
+ <p>If the delete rule is:</p>
+ <p>NO ACTION, <span>Derby</span> checks the dependent
+tables for foreign key constraints <em>after</em> all deletes have been executed
+but <em>before</em> triggers have been executed. If any row in a dependent table
+violates a foreign key constraint, the statement is rejected.</p>
+ <p>RESTRICT, <span>Derby</span> checks dependent tables
+for foreign key constraints. If any row in a dependent table violates a foreign
+key constraint, the transaction is rolled back.</p>
+ <p>CASCADE, the delete
+operation is propagated to the dependent table (and that table's dependents,
+if applicable).</p>
+ <p>SET NULL, each nullable column of the dependent table's
+foreign key is set to null. (Again, if the dependent table also has dependent
+tables, nullable columns in those tables' foreign keys are also set to null.)</p>
+ <p>Each
+referential constraint in which a table is a parent has its own delete rule;
+all applicable delete rules are used to determine the result of a delete operation.
+Thus, a row cannot be deleted if it has dependents in a referential constraint
+with a delete rule of RESTRICT or NO ACTION. Similarly, a row cannot be deleted
+if the deletion cascades to any of its descendants that are dependents in
+a referential constraint with the delete rule of RESTRICT or NO ACTION. </p>
+ <div class="p">Deleting
+a row from the parent table involves other tables. Any table involved in a
+delete operation on the parent table is said to be delete-connected to the
+parent table. The delete can affect rows of these tables in the following
+ways:   <ul>
+<li>If the delete rule is RESTRICT or NO ACTION, a dependent table is involved
+in the operation but is not affected by the operation. (That is, <span>Derby</span> checks
+the values within the table, but does not delete any values.) </li>
+
+<li>If the delete rule is SET NULL, a dependent table's rows can be updated
+when a row of the parent table is the object of a delete or propagated delete
+operation. </li>
+
+<li>If the delete rule is CASCADE, a dependent table's rows can be deleted
+when a parent table is the object of a delete. </li>
+
+<li>If the dependent table is also a parent table, the actions described in
+this list apply, in turn, to its dependents.</li>
+
+</ul>
+</div>
+ </div>
+
+<div class="example" id="rrefsqlj13590__sqljidx6080"><a name="rrefsqlj13590__sqljidx6080"><!-- --></a><h2 class="sectiontitle">Examples</h2> <pre><strong>-- column-level primary key constraint named OUT_TRAY_PK:
+CREATE TABLE SAMP.OUT_TRAY
+	(
+	SENT TIMESTAMP,
+	DESTINATION CHAR(8),
+	SUBJECT CHAR(64) NOT NULL CONSTRAINT OUT_TRAY_PK PRIMARY KEY,
+	NOTE_TEXT VARCHAR(3000) 
+   );
+
+-- the table-level primary key definition allows you to
+-- include two columns in the primary key definition:
+CREATE TABLE SAMP.SCHED 
+	(
+	CLASS_CODE CHAR(7) NOT NULL, 
+	DAY SMALLINT NOT NULL, 
+	STARTING TIME, 
+	ENDING TIME,
+	PRIMARY KEY (CLASS_CODE, DAY)
+	);
+
+-- Use a column-level constraint for an arithmetic check
+-- Use a table-level constraint
+-- to make sure that a employee's taxes does not 
+-- exceed the bonus
+CREATE TABLE SAMP.EMP 
+	(
+	EMPNO CHAR(6) NOT NULL CONSTRAINT EMP_PK PRIMARY KEY,
+	FIRSTNME CHAR(12) NOT NULL,
+	MIDINIT vARCHAR(12) NOT NULL,
+	LASTNAME VARCHAR(15) NOT NULL,
+	SALARY DECIMAL(9,2) CONSTRAINT SAL_CK CHECK (SALARY &gt;= 10000),
+	BONUS DECIMAL(9,2), 
+	TAX DECIMAL(9,2),
+	CONSTRAINT BONUS_CK CHECK (BONUS &gt; TAX)
+	);
+
+-- use a check constraint to allow only appropriate
+-- abbreviations for the meals
+CREATE TABLE FLIGHTS
+	(
+	FLIGHT_ID CHAR(6) NOT NULL ,
+	SEGMENT_NUMBER INTEGER NOT NULL ,
+	ORIG_AIRPORT CHAR(3),
+	DEPART_TIME TIME,
+	DEST_AIRPORT CHAR(3),
+	ARRIVE_TIME TIME,
+	MEAL CHAR(1) CONSTRAINT MEAL_CONSTRAINT 
+	CHECK (MEAL IN ('B', 'L', 'D', 'S')),
+	PRIMARY KEY (FLIGHT_ID, SEGMENT_NUMBER)
+	);
+
+CREATE TABLE METROPOLITAN
+	(
+	HOTEL_ID INT NOT NULL CONSTRAINT HOTELS_PK PRIMARY KEY,
+	HOTEL_NAME VARCHAR(40) NOT NULL,
+	CITY_ID INT CONSTRAINT METRO_FK REFERENCES CITIES
+	);
+
+-- create a table with a table-level primary key constraint
+-- and a table-level foreign key constraint 
+CREATE TABLE FLTAVAIL
+	(
+	FLIGHT_ID CHAR(6) NOT NULL, 
+	SEGMENT_NUMBER INT NOT NULL, 
+	FLIGHT_DATE DATE NOT NULL, 
+	ECONOMY_SEATS_TAKEN INT,
+	BUSINESS_SEATS_TAKEN INT,
+	FIRSTCLASS_SEATS_TAKEN INT, 
+	CONSTRAINT FLTAVAIL_PK PRIMARY KEY (FLIGHT_ID, SEGMENT_NUMBER), 
+	CONSTRAINT FLTS_FK
+	FOREIGN KEY (FLIGHT_ID, SEGMENT_NUMBER)
+	REFERENCES Flights (FLIGHT_ID, SEGMENT_NUMBER)
+	);
+<span>-- add a unique constraint to a column</span>
+ALTER TABLE SAMP.PROJECT 
+ADD CONSTRAINT P_UC UNIQUE (PROJNAME);
+
+-- create a table whose city_id column references the
+-- primary key in the Cities table
+-- using a column-level foreign key constraint  
+CREATE TABLE CONDOS
+	(
+	CONDO_ID INT NOT NULL CONSTRAINT hotels_PK PRIMARY KEY,
+	CONDO_NAME VARCHAR(40) NOT NULL,
+	CITY_ID INT CONSTRAINT city_foreign_key
+	REFERENCES Cities ON DELETE CASCADE ON UPDATE RESTRICT
+	);</strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Statement dependency system</h2> <p>INSERT
+and UPDATE statements depend on all constraints on the target table. DELETEs
+depend on unique, primary key, and foreign key constraints. These statements
+are invalidated if a constraint is added to or dropped from the target table.</p>
+ </div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlj16095.html">Column-level-constraint</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj42154.html">Table-level constraint</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj16357.html">References specification</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj91438.html">searchCondition</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefclauses.html" title="">SQL clauses</a></div>
+</div>
+</div>
+
+</body>
+</html>

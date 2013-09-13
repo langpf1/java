@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Derby properties" />
+<meta name="abstract" content="The Derby properties are used for configuring the system and database, as well as for diagnostics such as logging statements, and monitoring and tracing locks." />
+<meta name="description" content="The Derby properties are used for configuring the system and database, as well as for diagnostics such as logging statements, and monitoring and tracing locks." />
+<meta content="overview, Derby, properties" name="DC.subject" />
+<meta content="overview, Derby, properties" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper32213.html" />
+<meta scheme="URI" name="DC.Relation" content="crefproper51399.html" />
+<meta scheme="URI" name="DC.Relation" content="crefproperdynstat.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperbuiltinalgorithm.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperiterations.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropersaltlength.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperauthdn.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperauthpw.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper26978.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper37341.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpasswordmillis.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpasswordthreshold.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper13766.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper25581.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27467.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperclasspath.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper24846.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper81405.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper25025.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropernoautoboot.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper24390.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper39325.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropersqlauth.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper13217.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperxatrantimeout.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper43414.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper43517.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpreallocator.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperstatementcachesize.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper10607.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper23835.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper40346.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper98166.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper46141.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperlogbuffersize.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropermaxlogshippinginterval.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperminlogshippinginterval.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperverbose.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatsauto.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatslog.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatstrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27529.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperstormin.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper81359.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper28026.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper40688.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperrowlocking.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper34037.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperdefaultfileperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperextdiagsevlevel.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper33027.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper18151.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperlogboottrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper26985.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper35028.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperbootall.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperdurability.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper32066.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27355.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="crefproper22250" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Derby properties</title>
+</head>
+<body id="crefproper22250"><a name="crefproper22250"><!-- --></a>
+
+
+<h1 class="topictitle1">Derby properties</h1>
+
+
+
+<div><p>The <span>Derby</span> properties
+are used for configuring the system and database, as well as for diagnostics
+such as logging statements, and monitoring and tracing locks.</p>
+
+<p>The table later in this topic lists all the core
+<span>Derby</span> properties.</p>
+
+<p><span>Derby</span> also supports a
+number of properties that are specific to the Network Server. For information
+about these properties, see "Setting Network Server properties" in the
+<span><em>Derby Server and Administration Guide</em></span>.</p>
+
+<p>For information on how to set
+<span>Derby</span> properties, see
+"Setting Derby properties" in the
+<span><em>Derby Developer's Guide</em></span>.</p>
+
+<div class="note"><span class="notetitle">Note: </span>When
+setting properties that have boolean values, be sure to trim extra spaces
+around the word <em>true</em>. Extra spaces around the word <em>true</em> cause
+the property to be set to false, regardless of its previous setting.</div>
+
+<p>To disable or turn off a database-wide property setting, set its value to
+null. To determine the result of this action, recall that the search order for
+properties is as follows (as stated in "Precedence of properties" in the
+<span><em>Derby Developer's Guide</em></span>).</p>
+
+<ol>
+<li>System-wide properties set programmatically (as a command-line option
+to the JVM when starting the application or within application code); not
+consulted if <em><a href="rrefproper24390.html#rrefproper24390">derby.database.propertiesOnly</a></em> is
+set to true</li>
+
+<li>Database-wide properties</li>
+
+<li>System-wide properties set in the <em>derby.properties</em> file; not
+consulted if <em><a href="rrefproper24390.html#rrefproper24390">derby.database.propertiesOnly</a></em> is
+set to true</li>
+
+</ol>
+
+<p>Setting the database-wide property to null has the effect of removing the
+property from the list of database properties and restoring the system property
+setting from <em>derby.properties</em> if there is one. As always, if no value can
+be determined from the search, the built-in default applies.</p>
+
+<p>For example, the following code fragment turns off a previous database-wide
+setting of the <em><a href="rrefproper25025.html#rrefproper25025">derby.database.fullAccessUsers</a></em>
+property:</p>
+
+<pre>Statement s = conn.createStatement();
+s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+    "'derby.database.fullAccessUsers', null)");</pre>
+
+<p>If the property is a static one, the null setting does not take effect until
+you reboot the database. Moreover, the static property
+<em><a href="rrefpropersqlauth.html#rrefpropersqlauth">derby.database.sqlAuthorization</a></em> cannot be
+disabled after it has been enabled, even with a reboot.</p>
+
+<p>The following table summarizes
+the general <span>Derby</span> properties.
+In the Scope column of this table, S stands for system-wide, D stands for
+database-wide, and C indicates the value persists with newly created
+conglomerates.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For each Derby property, this table provides its scope and whether it is dynamic or static." frame="border" border="1" rules="all"><caption>Table 1. Derby properties</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="50%" id="N10153">Property</th>
+
+<th valign="bottom" width="12%" id="N1015A">Scope</th>
+
+<th valign="bottom" width="38%" id="N10161">Dynamic or Static</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperbuiltinalgorithm.html#rrefproperbuiltinalgorithm">derby.authentication.builtin.algorithm</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperiterations.html#rrefproperiterations">derby.authentication.builtin.iterations</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefpropersaltlength.html#rrefpropersaltlength">derby.authentication.builtin.saltLength</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperauthdn.html#rrefproperauthdn">derby.authentication.ldap.searchAuthDN</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperauthpw.html#rrefproperauthpw">derby.authentication.ldap.searchAuthPW</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper26978.html#rrefproper26978">derby.authentication.ldap.searchBase</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper37341.html#rrefproper37341">derby.authentication.ldap.searchFilter</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperpasswordmillis.html#rrefproperpasswordmillis">derby.authentication.native.passwordLifetimeMillis</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperpasswordthreshold.html#rrefproperpasswordthreshold">derby.authentication.native.passwordLifetimeThreshold</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper13766.html#rrefproper13766">derby.authentication.provider</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper25581.html#rrefproper25581">derby.authentication.server</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper27467.html#rrefproper27467">derby.connection.requireAuthentication</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperclasspath.html#rrefproperclasspath">derby.database.classpath</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper24846.html#rrefproper24846">derby.database.defaultConnectionMode</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">See the main page for this property for information
+about when changes to the property are dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper81405.html#rrefproper81405">derby.database.forceDatabaseLock</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper25025.html#rrefproper25025">derby.database.fullAccessUsers</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">See the main page for this property for information
+about when changes to the property are dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefpropernoautoboot.html#rrefpropernoautoboot">derby.database.noAutoBoot</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper24390.html#rrefproper24390">derby.database.propertiesOnly</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper39325.html#rrefproper39325">derby.database.readOnlyAccessUsers</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">See the main page for this property for information
+about when changes to the property are dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefpropersqlauth.html#rrefpropersqlauth">derby.database.sqlAuthorization</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper13217.html#rrefproper13217">derby.infolog.append</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperxatrantimeout.html#rrefproperxatrantimeout">derby.jdbc.xaTransactionTimeout</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper43414.html#rrefproper43414">derby.language.logQueryPlan</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper43517.html#rrefproper43517">derby.language.logStatementText</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperpreallocator.html#rrefproperpreallocator">derby.language.sequence.preallocator</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperstatementcachesize.html#rrefproperstatementcachesizer">derby.language.statementCacheSize</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper10607.html#rrefproper10607">derby.locks.deadlockTimeout</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper23835.html#rrefproper23835">derby.locks.deadlockTrace</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper40346.html#rrefproper40346">derby.locks.escalationThreshold</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper98166.html#rrefproper98166">derby.locks.monitor</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper46141.html#rrefproper46141">derby.locks.waitTimeout</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperlogbuffersize.html#rrefproperlogbuffersize">derby.replication.logBufferSize</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefpropermaxlogshippinginterval.html#rrefpropermaxlogshippinginterval">derby.replication.maxLogShippingInterval</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperminlogshippinginterval.html#rrefproperminlogshippinginterval">derby.replication.minLogShippingInterval</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperverbose.html#rrefproperverbose">derby.replication.verbose</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperindexstatsauto.html#rrefproperindexstatsauto">derby.storage.indexStats.auto</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperindexstatslog.html#rrefproperindexstatslog">derby.storage.indexStats.log</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperindexstatstrace.html#rrefproperindexstatstrace">derby.storage.indexStats.trace</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper27529.html#rrefproper27529">derby.storage.initialPages</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">C</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperstormin.html#rrefproperstormin">derby.storage.minimumRecordSize</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D, C</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper81359.html#rrefproper81359">derby.storage.pageCacheSize</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper28026.html#rrefproper28026">derby.storage.pageReservedSpace</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D, C</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper40688.html#rrefproper40688">derby.storage.pageSize</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D, C</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperrowlocking.html#rrefproperrowlocking">derby.storage.rowLocking</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper34037.html#rrefproper34037">derby.storage.tempDirectory</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperdefaultfileperms.html#rrefproperdefaultfileperms">derby.storage.useDefaultFilePermissions</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperextdiagsevlevel.html#rrefproperextdiagsevlevel">derby.stream.error.extendedDiagSeverityLevel</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper33027.html#rrefproper33027">derby.stream.error.field</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper18151.html#rrefproper18151">derby.stream.error.file</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperlogboottrace.html#rrefproperlogboottrace">derby.stream.error.logBootTrace</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper26985.html#rrefproper26985">derby.stream.error.logSeverityLevel</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper35028.html#rrefproper35028">derby.stream.error.method</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperbootall.html#rrefproperbootall">derby.system.bootAll</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproperdurability.html#rrefproperdurability">derby.system.durability</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper32066.html#rrefproper32066">derby.system.home</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S</td>
+
+<td valign="top" width="38%" headers="N10161">Static</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N10153"><em><a href="rrefproper27355.html#rrefproper27355">derby.user.UserName</a></em></td>
+
+<td valign="top" width="12%" headers="N1015A">S, D</td>
+
+<td valign="top" width="38%" headers="N10161">Dynamic</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>There are additional properties associated with the <span>Derby</span> tools.
+For more information about tool-specific properties, see the <span><em>Derby Tools and Utilities Guide</em></span>.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefproperbuiltinalgorithm.html">derby.authentication.builtin.algorithm</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperiterations.html">derby.authentication.builtin.iterations</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefpropersaltlength.html">derby.authentication.builtin.saltLength</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperauthdn.html">derby.authentication.ldap.searchAuthDN</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperauthpw.html">derby.authentication.ldap.searchAuthPW</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper26978.html">derby.authentication.ldap.searchBase</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper37341.html">derby.authentication.ldap.searchFilter</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperpasswordmillis.html">derby.authentication.native.passwordLifetimeMillis</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperpasswordthreshold.html">derby.authentication.native.passwordLifetimeThreshold</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper13766.html">derby.authentication.provider</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper25581.html">derby.authentication.server</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper27467.html">derby.connection.requireAuthentication</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperclasspath.html">derby.database.classpath</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper24846.html">derby.database.defaultConnectionMode</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper81405.html">derby.database.forceDatabaseLock</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper25025.html">derby.database.fullAccessUsers</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefpropernoautoboot.html">derby.database.noAutoBoot</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper24390.html">derby.database.propertiesOnly</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper39325.html">derby.database.readOnlyAccessUsers</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefpropersqlauth.html">derby.database.sqlAuthorization</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper13217.html">derby.infolog.append</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperxatrantimeout.html">derby.jdbc.xaTransactionTimeout</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper43414.html">derby.language.logQueryPlan</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper43517.html">derby.language.logStatementText</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperpreallocator.html">derby.language.sequence.preallocator</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperstatementcachesize.html">derby.language.statementCacheSize</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper10607.html">derby.locks.deadlockTimeout</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper23835.html">derby.locks.deadlockTrace</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper40346.html">derby.locks.escalationThreshold</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper98166.html">derby.locks.monitor</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper46141.html">derby.locks.waitTimeout</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperlogbuffersize.html">derby.replication.logBufferSize</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefpropermaxlogshippinginterval.html">derby.replication.maxLogShippingInterval</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperminlogshippinginterval.html">derby.replication.minLogShippingInterval</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperverbose.html">derby.replication.verbose</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperindexstatsauto.html">derby.storage.indexStats.auto</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperindexstatslog.html">derby.storage.indexStats.log</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperindexstatstrace.html">derby.storage.indexStats.trace</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper27529.html">derby.storage.initialPages</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperstormin.html">derby.storage.minimumRecordSize</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper81359.html">derby.storage.pageCacheSize</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper28026.html">derby.storage.pageReservedSpace</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper40688.html">derby.storage.pageSize</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperrowlocking.html">derby.storage.rowLocking</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper34037.html">derby.storage.tempDirectory</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperdefaultfileperms.html">derby.storage.useDefaultFilePermissions</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperextdiagsevlevel.html">derby.stream.error.extendedDiagSeverityLevel</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper33027.html">derby.stream.error.field</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper18151.html">derby.stream.error.file</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperlogboottrace.html">derby.stream.error.logBootTrace</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper26985.html">derby.stream.error.logSeverityLevel</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper35028.html">derby.stream.error.method</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperbootall.html">derby.system.bootAll</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproperdurability.html">derby.system.durability</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper32066.html">derby.system.home</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefproper27355.html">derby.user.UserName</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefproper32213.html" title="">Derby property reference</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="crefproper51399.html" title="">Scope of Derby properties</a></div>
+<div><a href="crefproperdynstat.html" title="">Dynamic and static properties</a></div>
+</div>
+</div>
+
+</body>
+</html>

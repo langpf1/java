@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_DIAG diagnostic tables and functions" />
+<meta name="abstract" content="Derby provides a set of system table expressions which you can use to obtain diagnostic information about the state of the database and about the database sessions." />
+<meta name="description" content="Derby provides a set of system table expressions which you can use to obtain diagnostic information about the state of the database and about the database sessions." />
+<meta content="diagnostic table functions, SYSCS_DIAG.ERROR_LOG_READER, SYSCS_DIAG.ERROR_LOG_READER diagnostic table function, diagnostic tables, SYSCS_DIAG.ERROR_MESSAGES, SYSCS_DIAG.ERROR_MESSAGES diagnostic table, diagnostic table functions, SYSCS_DIAG.LOCK_TABLE, SYSCS_DIAG.LOCK_TABLE diagnostic table, SYSCS_DIAG.SPACE_TABLE, SYSCS_DIAG.SPACE_TABLE diagnostic table function, diagnostic tables, SYSCS_DIAG.STATEMENT_CACHE, SYSCS_DIAG.STATEMENT_CACHE diagnostic table, SYSCS_DIAG.STATEMENT_DURATION, SYSCS_DIAG.STATEMENT_DURATION diagnostic table functions, SYSCS_DIAG.TRANSACTION_TABLE, SYSCS_DIAG.TRANSACTION_TABLE diagnostic table, SYSCS_DIAG.CONTAINED_ROLES diagnostic table function, SYSCS_DIAG.CONTAINED_ROLES" name="DC.subject" />
+<meta content="diagnostic table functions, SYSCS_DIAG.ERROR_LOG_READER, SYSCS_DIAG.ERROR_LOG_READER diagnostic table function, diagnostic tables, SYSCS_DIAG.ERROR_MESSAGES, SYSCS_DIAG.ERROR_MESSAGES diagnostic table, diagnostic table functions, SYSCS_DIAG.LOCK_TABLE, SYSCS_DIAG.LOCK_TABLE diagnostic table, SYSCS_DIAG.SPACE_TABLE, SYSCS_DIAG.SPACE_TABLE diagnostic table function, diagnostic tables, SYSCS_DIAG.STATEMENT_CACHE, SYSCS_DIAG.STATEMENT_CACHE diagnostic table, SYSCS_DIAG.STATEMENT_DURATION, SYSCS_DIAG.STATEMENT_DURATION diagnostic table functions, SYSCS_DIAG.TRANSACTION_TABLE, SYSCS_DIAG.TRANSACTION_TABLE diagnostic table, SYSCS_DIAG.CONTAINED_ROLES diagnostic table function, SYSCS_DIAG.CONTAINED_ROLES" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsyscsdialgtables" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_DIAG diagnostic tables and functions</title>
+</head>
+<body id="rrefsyscsdialgtables"><a name="rrefsyscsdialgtables"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_DIAG diagnostic tables and functions</h1>
+
+
+
+<div><p><span>Derby</span> provides
+a set of system table expressions which you can use to obtain diagnostic information
+about the state of the database and about the database sessions. </p>
+
+<div class="section"> <div class="p">There are two types of diagnostic table expressions in <span>Derby</span>:<dl>
+
+<dt class="dlterm">Diagnostic tables</dt>
+
+<dd>Tables that are like any other table in <span>Derby</span>.
+You can specify the diagnostic table name anywhere a normal table name is
+allowed.</dd>
+
+
+<dt class="dlterm">Diagnostic table functions</dt>
+
+<dd>Functions that are like any other function in <span>Derby</span>.
+Diagnostic table functions can accept zero or more arguments, depending on
+the table function that you use. You must use the SQL-defined table function
+syntax to access these functions.</dd>
+
+</dl>
+ </div>
+<p>The following table shows the types and names of the
+diagnostic table expressions in
+<span>Derby</span>.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the Derby diagnostic table expressions and their types (either table or table function)." frame="border" border="1" rules="all"><caption>Table 1. System diagnostic table expressions provided by
+<span>Derby</span></caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="60%" id="N1014E">Diagnostic Table Expression</th>
+
+<th valign="bottom" width="40%" id="N10155">Type of Expression</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="60%" headers="N1014E">SYSCS_DIAG.CONTAINED_ROLES</td>
+
+<td valign="top" width="40%" headers="N10155">Table function</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N1014E">SYSCS_DIAG.ERROR_LOG_READER</td>
+
+<td valign="top" width="40%" headers="N10155">Table function</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N1014E">SYSCS_DIAG.ERROR_MESSAGES</td>
+
+<td valign="top" width="40%" headers="N10155">Table</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N1014E">SYSCS_DIAG.LOCK_TABLE</td>
+
+<td valign="top" width="40%" headers="N10155">Table</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N1014E">SYSCS_DIAG.SPACE_TABLE</td>
+
+<td valign="top" width="40%" headers="N10155">Table function</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N1014E">SYSCS_DIAG.STATEMENT_CACHE</td>
+
+<td valign="top" width="40%" headers="N10155">Table</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N1014E">SYSCS_DIAG.STATEMENT_DURATION</td>
+
+<td valign="top" width="40%" headers="N10155">Table function</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N1014E">SYSCS_DIAG.TRANSACTION_TABLE </td>
+
+<td valign="top" width="40%" headers="N10155">Table</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+<div class="restriction"><span class="restrictiontitle">Restriction: </span>If you reference a diagnostic table in
+a DDL statement or a compression procedure, <span>Derby</span> returns
+an exception.</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.CONTAINED_ROLES diagnostic table function</h2>
+<p>The SYSCS_DIAG.CONTAINED_ROLES diagnostic table function returns all the
+    roles contained within the specified role. 
+    The argument that is passed to this table function should be the name
+    of the role, specified as a string in quotes, or the special keyword
+    CURRENT_ROLE, which indicates the current role in effect.
+    For a definition of role containment,
+see "Syntax for roles" in
+<a href="rrefsqljgrant.html#rrefsqljgrant__grantrolesyn">GRANT
+statement</a>.</p>
+
+<p>For example:</p>
+
+<pre>SELECT * FROM TABLE (SYSCS_DIAG.CONTAINED_ROLES('READER')) AS T1
+SELECT * FROM TABLE (SYSCS_DIAG.CONTAINED_ROLES(CURRENT_ROLE)) AS T2
+</pre>
+
+<p>All users can access this diagnostic table function, whether or not the
+database has authentication and SQL authorization enabled.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.ERROR_LOG_READER diagnostic table function</h2><p>The
+SYSCS_DIAG.ERROR_LOG_READER diagnostic table function contains all the useful
+SQL statements that are in the <span class="filepath">derby.log</span> file or a log
+file that you specify. </p>
+<p>One use of this diagnostic table function is
+to determine the active transactions and the SQL statements in those transactions
+at a given point in time. For example, if a deadlock or lock timeout occurred
+you can find the timestamp (timestampConstant) in the error log.</p>
+
+<p>For a database for which authentication and SQL authorization are both
+enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can
+access this diagnostic table function.</p>
+
+<p>To access the SYSCS_DIAG.ERROR_LOG_READER diagnostic table function, you must
+use the SQL table function syntax.</p>
+<div class="p">For example:<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.ERROR_LOG_READER()) 
+    AS T1</pre>
+where T1 is a user-specified table name that is any valid
+identifier.</div>
+<p>You can specify a log file name as an optional argument
+to the SYSCS_DIAG.ERROR_LOG_READER diagnostic table function. When you specify
+a log file name, the file name must be an expression whose data type maps
+to a Java string.</p>
+<div class="p">For example:<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.ERROR_LOG_READER('myderbyerrors.log')) 
+    AS T1</pre>
+</div>
+<div class="p"><div class="tip"><span class="tiptitle">Tip: </span> By default <span>Derby</span> log
+files contain only boot, shutdown, and error messages.
+See the
+<samp class="codeph"><a href="rrefproper26985.html#rrefproper26985">derby.stream.error.logSeverityLevel</a></samp>
+property and the
+<samp class="codeph"><a href="rrefproper43517.html#rrefproper43517">derby.language.logStatementText</a></samp>
+property for
+instructions on how to print more information to <span>Derby</span> log
+files. You can then query that information by using the SYSCS_DIAG.ERROR_LOG_READER
+diagnostic table function. </div>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.ERROR_MESSAGES diagnostic table</h2><p>The SYSCS_DIAG.ERROR_MESSAGES
+diagnostic table shows all of the SQLStates, locale-sensitive error messages,
+and exception severities for a <span>Derby</span> database.
+You can reference the SYSCS_DIAG.ERROR_MESSAGES diagnostic table directly
+in a statement.</p>
+<div class="p">For example:<pre>SELECT * FROM SYSCS_DIAG.ERROR_MESSAGES</pre>
+</div>
+
+<p>All users can access this diagnostic table, whether or not the database has
+authentication and SQL authorization enabled.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.LOCK_TABLE diagnostic table</h2><p>The SYSCS_DIAG.LOCK_TABLE
+diagnostic table shows all of the locks that are currently held in the <span>Derby</span> database.  You can reference
+the SYSCS_DIAG.LOCK_TABLE diagnostic table directly in a statement.</p>
+<div class="p">For
+example:<pre>SELECT * FROM SYSCS_DIAG.LOCK_TABLE</pre>
+</div>
+
+<p>All users can access this diagnostic table, whether or not the database has
+authentication and SQL authorization enabled.</p>
+<p>When
+the SYSCS_DIAG.LOCK_TABLE diagnostic table is referenced in a statement, a
+snapshot of the lock table is taken.  A snapshot is used so that referencing
+the diagnostic table does not alter the normal timing and flow of the application.
+It is possible that some locks will be in a transition state when the 
+snapshot is taken. </p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.SPACE_TABLE diagnostic table function</h2><p>The
+SYSCS_DIAG.SPACE_TABLE diagnostic table function shows the space usage of
+a particular table and its indexes. You can use this diagnostic table function
+to determine if space might be saved by compressing the table and indexes.</p>
+
+<p>All users can access this diagnostic table function, whether or not the
+database has authentication and SQL authorization enabled.</p>
+
+<p>To access the SYSCS_DIAG.SPACE_TABLE diagnostic table function, you must use
+the SQL table function syntax. This diagnostic table function takes two arguments,
+the <span class="parmname">schemaName</span> and the <span class="parmname">tableName</span>.
+The <span class="parmname">tableName</span> argument is required. If you do not specify
+the <span class="parmname">schemaName</span>, the current schema is used. </p>
+
+<p>The returned table has the columns shown in the following table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For each column returned by the SYSCS_DIAG.SPACE_TABLE function, this table provides its data type, its length in bytes, whether it is nullable, and a description of its contents." frame="border" border="1" rules="all"><caption>Table 2. Columns returned by the SYSCS_DIAG.SPACE_TABLE function</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="31%" id="N10389">Column Name</th>
+
+<th valign="bottom" width="17%" id="N10390">Type</th>
+
+<th valign="bottom" width="11%" id="N10397">Length</th>
+
+<th valign="bottom" width="12%" id="N1039E">Nullable</th>
+
+<th valign="bottom" width="28.999999999999996%" id="N103A5">Contents</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="31%" headers="N10389">CONGLOMERATENAME</td>
+
+<td valign="top" width="17%" headers="N10390">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N10397">128</td>
+
+<td valign="top" width="12%" headers="N1039E">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N103A5">The name of the conglomerate, which is either the table name or the index name. (Unlike the SYSCONGLOMERATES column of the same name, table ID's do not appear here).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10389">ISINDEX</td>
+
+<td valign="top" width="17%" headers="N10390">SMALLINT</td>
+
+<td valign="top" width="11%" headers="N10397">5</td>
+
+<td valign="top" width="12%" headers="N1039E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N103A5">Is not zero if the conglomerate is an index, 0 otherwise.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10389">NUMALLOCATEDPAGES</td>
+
+<td valign="top" width="17%" headers="N10390">BIGINT</td>
+
+<td valign="top" width="11%" headers="N10397">20</td>
+
+<td valign="top" width="12%" headers="N1039E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N103A5">The number of pages actively linked into the table. The total number of pages in the file is the sum of NUMALLOCATEDPAGES + NUMFREEPAGES.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10389">NUMFREEPAGES</td>
+
+<td valign="top" width="17%" headers="N10390">BIGINT</td>
+
+<td valign="top" width="11%" headers="N10397">20</td>
+
+<td valign="top" width="12%" headers="N1039E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N103A5">The number of free pages that belong to the table. When a new page is to be linked into the table the system will move a page from the NUMFREEPAGES list to the NUMALLOCATEDPAGES list. The total number of pages in the file is the sum of NUMALLOCATEDPAGES + NUMFREEPAGES.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10389">NUMUNFILLEDPAGES</td>
+
+<td valign="top" width="17%" headers="N10390">BIGINT</td>
+
+<td valign="top" width="11%" headers="N10397">20</td>
+
+<td valign="top" width="12%" headers="N1039E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N103A5">The number of unfilled pages that belong to the table. Unfilled pages are allocated pages that are not completely full. Note that the number of unfilled pages is an estimate and is not exact. Running the same query twice can give different results on this column.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10389">PAGESIZE</td>
+
+<td valign="top" width="17%" headers="N10390">INTEGER</td>
+
+<td valign="top" width="11%" headers="N10397">10</td>
+
+<td valign="top" width="12%" headers="N1039E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N103A5">The size of the page in bytes for that conglomerate.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10389">ESTIMSPACESAVING</td>
+
+<td valign="top" width="17%" headers="N10390">BIGINT</td>
+
+<td valign="top" width="11%" headers="N10397">20</td>
+
+<td valign="top" width="12%" headers="N1039E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N103A5">The estimated space which could possibly be saved by compressing the conglomerate, in bytes.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<div class="p">For
+example, use the following query to return the space usage for all of the
+user tables and indexes in the database: <pre>SELECT T2.*
+    FROM 
+        SYS.SYSTABLES systabs,
+        TABLE (SYSCS_DIAG.SPACE_TABLE(systabs.tablename)) AS T2
+    WHERE systabs.tabletype = 'T'</pre>
+where T2 is a user-specified
+table name that is any valid identifier. </div>
+<p>Both the <span class="parmname">schemaName</span> and
+the <span class="parmname">tableName</span> arguments must be expressions whose data
+types map to Java strings. If the <span class="parmname">schemaName</span> and the <span class="parmname">tableName</span> are
+non-delimited identifiers, you must specify the names in upper case.</p>
+<div class="p">For
+example: <pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.SPACE_TABLE('MYSCHEMA', 'MYTABLE')) 
+    AS T2</pre>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.STATEMENT_CACHE diagnostic table</h2><p>The
+SYSCS_DIAG.STATEMENT_CACHE diagnostic table shows the contents of the SQL
+statement cache. You can reference the SYSCS_DIAG.STATEMENT_CACHE diagnostic
+table directly in a statement.</p>
+<div class="p">For example:<pre>SELECT * FROM SYSCS_DIAG.STATEMENT_CACHE</pre>
+</div>
+
+<p>For a database for which authentication and SQL authorization are both
+enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can
+access this diagnostic table.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.STATEMENT_DURATION diagnostic table function</h2><p>You
+can use the SYSCS_DIAG.STATEMENT_DURATION diagnostic table function to analyze
+the <dfn class="term">execution duration</dfn> of the useful SQL statements in the <span class="filepath">derby.log</span> file
+or a log file that you specify. </p>
+<p>You can also use this diagnostic table
+function to get an indication of where the bottlenecks are in the JDBC code
+for an application.</p>
+
+<p>For a database for which authentication and SQL authorization are both
+enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can
+access this diagnostic table function.</p>
+
+<p>To access the SYSCS_DIAG.STATEMENT_DURATION diagnostic
+table function, you must use the SQL table function syntax.</p>
+<div class="p">For example:<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.STATEMENT_DURATION()) 
+    AS T1</pre>
+where T1 is a user-specified table name that is any valid
+identifier.</div>
+<div class="restriction"><span class="restrictiontitle">Restriction: </span>For each transaction ID, a row is
+not returned for the last statement with that transaction id. Transaction
+IDs change within a connection after a commit or rollback, if the transaction
+that just ended modified data.</div>
+<p>You can specify a log file name as
+an optional argument to the SYSCS_DIAG.STATEMENT_DURATION diagnostic table
+function. When you specify a log file name, the file name must be an expression
+whose data type maps to a Java string.</p>
+<div class="p">For example:<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.STATEMENT_DURATION('somederby.log')) 
+    AS T1</pre>
+</div>
+<div class="p"><div class="tip"><span class="tiptitle">Tip: </span> By default <span>Derby</span> log
+files contain only boot, shutdown, and error messages.
+See the
+<samp class="codeph"><a href="rrefproper26985.html#rrefproper26985">derby.stream.error.logSeverityLevel</a></samp>
+property and the
+<samp class="codeph"><a href="rrefproper43517.html#rrefproper43517">derby.language.logStatementText</a></samp>
+property for
+instructions on how to print more information to <span>Derby</span> log
+files. You can then query that information by using the SYSCS_DIAG.STATEMENT_DURATION
+diagnostic table function. </div>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">SYSCS_DIAG.TRANSACTION_TABLE  diagnostic table</h2><p>The
+SYSCS_DIAG.TRANSACTION_TABLE  diagnostic table shows all of the transactions
+that are currently in the database. You can reference the SYSCS_DIAG.TRANSACTION_TABLE
+ diagnostic table directly in a statement.</p>
+<div class="p">For example:<pre>SELECT * FROM SYSCS_DIAG.TRANSACTION_TABLE</pre>
+</div>
+<p>When
+the SYSCS_DIAG.TRANSACTION_TABLE  diagnostic table is referenced in a statement,
+a snapshot of the transaction table is taken.  A snapshot is used so that
+referencing the diagnostic table does not alter the normal timing and flow
+of the application.  It is possible that some transactions will be in a transition
+state when the snapshot is taken. </p>
+
+<p>For a database for which authentication and SQL authorization are both
+enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can
+access this diagnostic table.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj23296.html" title="">SQL language reference</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQL identifiers</a></div>
+<div><a href="crefsqlj39374.html" title="">Statements</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">Built-in system functions</a></div>
+<div><a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+<div><a href="crefsqlj31068.html" title="">Data types</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqlj28468.html" title="">Capitalization and special characters</a></div>
+<div><a href="rrefclauses.html" title="">SQL clauses</a></div>
+<div><a href="rrefsqlj19433.html" title="Syntax for many statements and expressions includes the term Expression, or a term for a specific kind of expression such as TableSubquery. Expressions are allowed in these specified places within statements.">SQL expressions</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN operations</a></div>
+<div><a href="rrefqueries.html" title="">SQL queries</a></div>
+<div><a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

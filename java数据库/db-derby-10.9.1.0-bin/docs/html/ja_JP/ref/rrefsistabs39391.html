@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCONGLOMERATES システム表" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsistabs39391" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCONGLOMERATES システム表</title>
+</head>
+<body id="rrefsistabs39391"><a name="rrefsistabs39391"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCONGLOMERATES システム表</h1>
+
+<div>
+<div class="section"><div class="p">現在のデータベースに存在するコングロマリットについて記述します。コングロマリットとは情報を記録する構造の単位であり、表あるいは索引に分類されます。
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. " width="100%" frame="border" border="1" rules="all">
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="31.313131313131315%" id="N1005E">列名</th>
+
+<th align="left" valign="bottom" width="22.22222222222222%" id="N10067">型</th>
+
+<th align="left" valign="bottom" width="11.11111111111111%" id="N10070">長さ</th>
+
+<th align="left" valign="bottom" width="12.121212121212121%" id="N10079">空許容</th>
+
+<th align="left" valign="bottom" width="23.232323232323232%" id="N10082">内容</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="31.313131313131315%" headers="N1005E">SCHEMAID</td>
+
+<td valign="top" width="22.22222222222222%" headers="N10067">CHAR</td>
+
+<td valign="top" width="11.11111111111111%" headers="N10070">36</td>
+
+<td valign="top" width="12.121212121212121%" headers="N10079">不可</td>
+
+<td valign="top" width="23.232323232323232%" headers="N10082">コングロマリットのスキーマ識別子</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31.313131313131315%" headers="N1005E">TABLEID</td>
+
+<td valign="top" width="22.22222222222222%" headers="N10067">CHAR</td>
+
+<td valign="top" width="11.11111111111111%" headers="N10070">36</td>
+
+<td valign="top" width="12.121212121212121%" headers="N10079">不可</td>
+
+<td valign="top" width="23.232323232323232%" headers="N10082">表の識別子(<em>SYSTABLES.TABLEID</em>と結合される。)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31.313131313131315%" headers="N1005E">CONGLOMERATENUMBER</td>
+
+<td valign="top" width="22.22222222222222%" headers="N10067">BIGINT</td>
+
+<td valign="top" width="11.11111111111111%" headers="N10070">8</td>
+
+<td valign="top" width="12.121212121212121%" headers="N10079">不可</td>
+
+<td valign="top" width="23.232323232323232%" headers="N10082">コングロマリット(ヒープあるいは索引)のコングロマリット識別子</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31.313131313131315%" headers="N1005E">CONGLOMERATENAME</td>
+
+<td valign="top" width="22.22222222222222%" headers="N10067">VARCHAR</td>
+
+<td valign="top" width="11.11111111111111%" headers="N10070">128</td>
+
+<td valign="top" width="12.121212121212121%" headers="N10079">可</td>
+
+<td valign="top" width="23.232323232323232%" headers="N10082">もし索引であれば索引名。そうではないなら表の識別子</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31.313131313131315%" headers="N1005E">ISINDEX</td>
+
+<td valign="top" width="22.22222222222222%" headers="N10067">BOOLEAN</td>
+
+<td valign="top" width="11.11111111111111%" headers="N10070">1</td>
+
+<td valign="top" width="12.121212121212121%" headers="N10079">不可</td>
+
+<td valign="top" width="23.232323232323232%" headers="N10082">索引か否か。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31.313131313131315%" headers="N1005E">DESCRIPTOR</td>
+
+<td valign="top" width="22.22222222222222%" headers="N10067"> <p>org.apache.derby.<br />
+catalog.IndexDescriptor:</p>
+ このクラスは公開されたAPIでは無い。</td>
+
+<td valign="top" width="11.11111111111111%" headers="N10070">&nbsp;</td>
+
+<td valign="top" width="12.121212121212121%" headers="N10079">可</td>
+
+<td valign="top" width="23.232323232323232%" headers="N10082">索引を記述するシステム型</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31.313131313131315%" headers="N1005E">ISCONSTRAINT</td>
+
+<td valign="top" width="22.22222222222222%" headers="N10067">BOOLEAN</td>
+
+<td valign="top" width="11.11111111111111%" headers="N10070">1</td>
+
+<td valign="top" width="12.121212121212121%" headers="N10079">可</td>
+
+<td valign="top" width="23.232323232323232%" headers="N10082">制約の為にシステムが自動的に出力したものか。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31.313131313131315%" headers="N1005E">CONGLOMERATEID</td>
+
+<td valign="top" width="22.22222222222222%" headers="N10067">CHAR</td>
+
+<td valign="top" width="11.11111111111111%" headers="N10070">36</td>
+
+<td valign="top" width="12.121212121212121%" headers="N10079">不可</td>
+
+<td valign="top" width="23.232323232323232%" headers="N10082">コングロマリットの一意な識別子</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+</div>
+</div>
+
+</body>
+</html>

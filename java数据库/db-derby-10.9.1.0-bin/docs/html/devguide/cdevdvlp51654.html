@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Working with the database connection URL attributes" />
+<meta name="abstract" content="You specify attributes on the Derby connection URL." />
+<meta name="description" content="You specify attributes on the Derby connection URL." />
+<meta content="Attributes to database connection URL, Attributes to database connection URL, setting" name="DC.subject" />
+<meta content="Attributes to database connection URL, Attributes to database connection URL, setting" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp40653.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp17453.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp27610.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp21955.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp34964.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp39409.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevdvlp847152.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlp40464.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlp39090.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlp12233.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlpcollation.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlp14496.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlpcreateencryptdbextkey.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlp40140.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlp36289.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdvlp51654" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Working with the database connection URL attributes</title>
+</head>
+<body id="cdevdvlp51654"><a name="cdevdvlp51654"><!-- --></a>
+
+
+<h1 class="topictitle1">Working with the database connection URL attributes</h1>
+
+
+
+<div><p>You specify attributes on the <span>Derby</span> connection
+URL.</p>
+
+<p>The examples in this section use the syntax of the connection URL for use
+in an embedded environment. You can also specify these same attributes and
+values on the client connection URL if you are using <span>Derby</span> as
+a database server. For more information, see the <cite><span><em>Derby Server and Administration Guide</em></span></cite>.</p>
+
+<p>You can also set these attributes by passing a <em>Properties</em> object
+along with a connection URL to <samp class="codeph"><em>DriverManager.getConnection</em></samp> when
+obtaining a connection; see <a href="tdevdvlp36289.html#tdevdvlp36289">Specifying attributes in a properties object</a>.
+If you specify any attributes both on the connection URL and in a
+<em>Properties</em> object, the attributes on the connection URL override the
+attributes in the <em>Properties</em> object.</p>
+
+<p>All attributes are optional. </p>
+
+<p>For complete information about the attributes, see "Setting attributes for
+the database connection URL" in the
+<span><em>Derby Reference Manual</em></span>.</p>
+
+<p>For detailed information about the connection URL syntax,
+see <a href="cdevdvlp17453.html#cdevdvlp17453">Derby JDBC database connection URL</a>.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rdevdvlp847152.html">Using the databaseName attribute</a></strong><br />
+You can use a databaseName attribute on a database connection URL to specify the name of the database to which you want to connect.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlp40464.html">Shutting down Derby or an individual database</a></strong><br />
+Applications in an embedded environment shut down the Derby system by specifying the shutdown=true attribute in the connection URL. To shut down the system, you do not specify a database name, and you do not ordinarily specify any other attribute.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlp39090.html">Creating and accessing a database</a></strong><br />
+You create a database by supplying a new database name in the connection URL and specifying create=true.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlp12233.html">Providing a user name and password</a></strong><br />
+When user authentication is enabled, an application must provide a user name and password. One way to do this is to use the user=userName and password=userPassword connection URL attributes.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlpcollation.html">Creating a database with territory-based collation</a></strong><br />
+By default, Derby uses Unicode codepoint collation. However, you can specify territory-based collation when you create the database.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlp14496.html">Encrypting a database when you create it</a></strong><br />
+If your environment is configured properly, you can create your database as an encrypted database (one in which the database is encrypted on disk). To do this, you use the dataEncryption=true attribute to turn on encryption and the bootPassword=key attribute or the encryptionKey attribute to specify a key for the encryption.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlpcreateencryptdbextkey.html">Creating an encrypted database with an external key</a></strong><br />
+You can create a database and encrypt the database with an external key.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlp40140.html">Booting an encrypted database</a></strong><br />
+You must specify several attributes in the URL when you boot an encrypted database. You must specify these attributes the first time that you connect to the database within a JVM session, or after you shut the database down within the same JVM session.</li>
+<li class="ulchildlink"><strong><a href="tdevdvlp36289.html">Specifying attributes in a properties object</a></strong><br />
+Instead of specifying attributes on the connection URL, you can specify attributes as properties in a Properties object that you pass as a second argument to the DriverManager.getConnection method.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp39409.html" title="This section explains how to use and configure Derby in an embedded environment.">Derby embedded basics</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp40653.html" title="Derby consists of both the database engine and an embedded JDBC driver. Applications use JDBC to interact with a database. Applications running on JDK 5 or earlier must load the driver in order to work with the database.">Derby JDBC driver</a></div>
+<div><a href="cdevdvlp17453.html" title="A Java application using the JDBC API establishes a connection to a database by obtaining a Connection object.">Derby JDBC database connection URL</a></div>
+<div><a href="cdevdvlp27610.html" title="A Derby database exists within a system.">Derby system</a></div>
+<div><a href="cdevdvlp21955.html" title="A Derby database contains dictionary objects such as tables, columns, indexes, and jar files. A Derby database can also store its own configuration information.">A Derby database</a></div>
+<div><a href="cdevdvlp34964.html" title="You connect to a database using a form of the Derby connection URL as an argument to the DriverManager.getConnection call.">Connecting to databases</a></div>
+</div>
+</div>
+
+</body>
+</html>

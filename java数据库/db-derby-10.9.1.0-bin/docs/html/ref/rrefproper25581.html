@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="derby.authentication.server" />
+<meta content="derby.authentication.server, LDAP, configuring" name="DC.subject" />
+<meta content="derby.authentication.server, LDAP, configuring" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefproper22250.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperbuiltinalgorithm.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperiterations.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropersaltlength.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperauthdn.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperauthpw.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper26978.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper37341.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpasswordmillis.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpasswordthreshold.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper13766.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27467.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperclasspath.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper24846.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper81405.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper25025.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropernoautoboot.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper24390.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper39325.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropersqlauth.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper13217.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperxatrantimeout.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper43414.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper43517.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpreallocator.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperstatementcachesize.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper10607.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper23835.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper40346.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper98166.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper46141.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperlogbuffersize.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropermaxlogshippinginterval.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperminlogshippinginterval.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperverbose.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatsauto.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatslog.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatstrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27529.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperstormin.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper81359.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper28026.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper40688.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperrowlocking.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper34037.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperdefaultfileperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperextdiagsevlevel.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper33027.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper18151.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperlogboottrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper26985.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper35028.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperbootall.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperdurability.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper32066.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27355.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefproper25581" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>derby.authentication.server</title>
+</head>
+<body id="rrefproper25581"><a name="rrefproper25581"><!-- --></a>
+
+
+<h1 class="topictitle1">derby.authentication.server</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">Function</h2>
+<p>Specifies the location of the external directory service that provides user
+authentication for the <span>Derby</span>
+system as defined with
+<em><a href="rrefproper13766.html#rrefproper13766">derby.authentication.provider</a></em>. For LDAP, specify
+the host name and port number.</p>
+
+<p>The server must be known on the network.</p>
+
+<p>For more information about external user authentication, see "External
+directory service" in the <span><em>Derby Developer's Guide</em></span>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Default</h2>
+<p>Not applicable. Note that if the protocol type is unspecified, it defaults to
+LDAP.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>derby.authentication.server=
+[{ ldap: | ldaps: | nisplus: }]
+[//]
+
+{
+<strong><em>    hostname</em></strong> [ :<strong><em>portnumber </em></strong>] |
+<strong><em>    nisServerName</em></strong>/<strong><em>nisDomain</em></strong>
+}</strong></pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre><strong><span>-- system-wide property
+##LDAP example</span>
+derby.authentication.server=godfrey:9090
+<span>##LDAP example</span>
+derby.authentication.server=ldap://godfrey:9090
+<span>##LDAP example</span>
+derby.authentication.server=//godfrey:9090
+<span>##LDAP over SSL example</span>
+derby.authentication.server=ldaps://godfrey:636/
+<span>-- database-wide property</span>
+CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(
+    'derby.authentication.server',
+    'godfrey:9090')</strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Dynamic or static</h2>
+<p>Static. For system-wide properties, you must reboot
+<span>Derby</span> for the change to take
+effect. For database-wide properties, you must reboot the database for the
+change to take effect.</p>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefproper22250.html" title="The Derby properties are used for configuring the system and database, as well as for diagnostics such as logging statements, and monitoring and tracing locks.">Derby properties</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefproperbuiltinalgorithm.html" title="">derby.authentication.builtin.algorithm</a></div>
+<div><a href="rrefproperiterations.html" title="">derby.authentication.builtin.iterations</a></div>
+<div><a href="rrefpropersaltlength.html" title="">derby.authentication.builtin.saltLength</a></div>
+<div><a href="rrefproperauthdn.html" title="">derby.authentication.ldap.searchAuthDN</a></div>
+<div><a href="rrefproperauthpw.html" title="">derby.authentication.ldap.searchAuthPW</a></div>
+<div><a href="rrefproper26978.html" title="">derby.authentication.ldap.searchBase</a></div>
+<div><a href="rrefproper37341.html" title="">derby.authentication.ldap.searchFilter</a></div>
+<div><a href="rrefproperpasswordmillis.html" title="">derby.authentication.native.passwordLifetimeMillis</a></div>
+<div><a href="rrefproperpasswordthreshold.html" title="">derby.authentication.native.passwordLifetimeThreshold</a></div>
+<div><a href="rrefproper13766.html" title="">derby.authentication.provider</a></div>
+<div><a href="rrefproper27467.html" title="">derby.connection.requireAuthentication</a></div>
+<div><a href="rrefproperclasspath.html" title="">derby.database.classpath</a></div>
+<div><a href="rrefproper24846.html" title="">derby.database.defaultConnectionMode</a></div>
+<div><a href="rrefproper81405.html" title="">derby.database.forceDatabaseLock</a></div>
+<div><a href="rrefproper25025.html" title="">derby.database.fullAccessUsers</a></div>
+<div><a href="rrefpropernoautoboot.html" title="">derby.database.noAutoBoot</a></div>
+<div><a href="rrefproper24390.html" title="">derby.database.propertiesOnly</a></div>
+<div><a href="rrefproper39325.html" title="">derby.database.readOnlyAccessUsers</a></div>
+<div><a href="rrefpropersqlauth.html" title="">derby.database.sqlAuthorization</a></div>
+<div><a href="rrefproper13217.html" title="">derby.infolog.append</a></div>
+<div><a href="rrefproperxatrantimeout.html" title="">derby.jdbc.xaTransactionTimeout</a></div>
+<div><a href="rrefproper43414.html" title="">derby.language.logQueryPlan</a></div>
+<div><a href="rrefproper43517.html" title="">derby.language.logStatementText</a></div>
+<div><a href="rrefproperpreallocator.html" title="">derby.language.sequence.preallocator</a></div>
+<div><a href="rrefproperstatementcachesize.html" title="">derby.language.statementCacheSize</a></div>
+<div><a href="rrefproper10607.html" title="">derby.locks.deadlockTimeout</a></div>
+<div><a href="rrefproper23835.html" title="">derby.locks.deadlockTrace</a></div>
+<div><a href="rrefproper40346.html" title="">derby.locks.escalationThreshold</a></div>
+<div><a href="rrefproper98166.html" title="">derby.locks.monitor</a></div>
+<div><a href="rrefproper46141.html" title="">derby.locks.waitTimeout</a></div>
+<div><a href="rrefproperlogbuffersize.html" title="">derby.replication.logBufferSize</a></div>
+<div><a href="rrefpropermaxlogshippinginterval.html" title="">derby.replication.maxLogShippingInterval</a></div>
+<div><a href="rrefproperminlogshippinginterval.html" title="">derby.replication.minLogShippingInterval</a></div>
+<div><a href="rrefproperverbose.html" title="">derby.replication.verbose</a></div>
+<div><a href="rrefproperindexstatsauto.html" title="">derby.storage.indexStats.auto</a></div>
+<div><a href="rrefproperindexstatslog.html" title="">derby.storage.indexStats.log</a></div>
+<div><a href="rrefproperindexstatstrace.html" title="">derby.storage.indexStats.trace</a></div>
+<div><a href="rrefproper27529.html" title="">derby.storage.initialPages</a></div>
+<div><a href="rrefproperstormin.html" title="">derby.storage.minimumRecordSize</a></div>
+<div><a href="rrefproper81359.html" title="">derby.storage.pageCacheSize</a></div>
+<div><a href="rrefproper28026.html" title="">derby.storage.pageReservedSpace</a></div>
+<div><a href="rrefproper40688.html" title="">derby.storage.pageSize</a></div>
+<div><a href="rrefproperrowlocking.html" title="">derby.storage.rowLocking</a></div>
+<div><a href="rrefproper34037.html" title="">derby.storage.tempDirectory</a></div>
+<div><a href="rrefproperdefaultfileperms.html" title="">derby.storage.useDefaultFilePermissions</a></div>
+<div><a href="rrefproperextdiagsevlevel.html" title="">derby.stream.error.extendedDiagSeverityLevel</a></div>
+<div><a href="rrefproper33027.html" title="">derby.stream.error.field</a></div>
+<div><a href="rrefproper18151.html" title="">derby.stream.error.file</a></div>
+<div><a href="rrefproperlogboottrace.html" title="">derby.stream.error.logBootTrace</a></div>
+<div><a href="rrefproper26985.html" title="">derby.stream.error.logSeverityLevel</a></div>
+<div><a href="rrefproper35028.html" title="">derby.stream.error.method</a></div>
+<div><a href="rrefproperbootall.html" title="">derby.system.bootAll</a></div>
+<div><a href="rrefproperdurability.html" title="">derby.system.durability</a></div>
+<div><a href="rrefproper32066.html" title="">derby.system.home</a></div>
+<div><a href="rrefproper27355.html" title="">derby.user.UserName</a></div>
+</div>
+</div>
+
+</body>
+</html>

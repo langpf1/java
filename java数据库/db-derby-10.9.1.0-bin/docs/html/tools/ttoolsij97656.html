@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Connecting to a Derby database" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsij32837.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsdrvrnmeurl.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ttoolsij97656" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Connecting to a Derby database</title>
+</head>
+<body id="ttoolsij97656"><a name="ttoolsij97656"><!-- --></a>
+
+
+<h1 class="topictitle1">Connecting to a Derby database</h1>
+
+<div>
+<div class="section"> <p>To connect to a <span>Derby</span> database,
+you need to perform the following steps: </p>
+ </div>
+
+<ol>
+<li><span>Start the JVM</span></li>
+
+<li><span>Load the appropriate driver.</span></li>
+
+<li><span>Create a connection by providing a valid database connection URL.</span>
+</li>
+
+</ol>
+
+<div class="example"><div class="p">When using ij interactively to connect to a  <span>Derby</span> database
+connection information is generally supplied on the full database connection
+URL. ij automatically loads the appropriate driver based on the syntax of
+the URL. The following example shows how to connect in this manner by using
+the <strong>Connect</strong> command and the embedded driver: <pre>D:&gt;java org.apache.derby.tools.ij
+ij version <span>10.9</span>
+ij&gt; connect 'jdbc:derby:sample';
+ij&gt;</pre>
+If the URL entered contains Network Client information the <strong>Connect</strong> command
+loads the Network Client driver:<pre>D:&gt;java org.apache.derby.tools.ij
+ij version <span>10.9</span>
+ij&gt; connect 'jdbc:derby://localhost:1527/sample';
+ij&gt;</pre>
+<div class="note"><span class="notetitle">Note: </span>In these and subsequent examples the databases were
+created in the <dfn class="term">derby.system.home</dfn> directory. For more information
+on the System Directory see the <span><em>Derby Developer's Guide</em></span>.</div>
+</div>
+<p>ij
+provides alternate methods of specifying part or all of a connection URL (e.g.
+the <a href="rtoolsijpropref35032.html#rtoolsijpropref35032">ij.protocol</a>, <a href="rtoolsijpropref28146.html#rtoolsijpropref28146">ij.database</a>,
+or <a href="rtoolsijpropref10135.html#rtoolsijpropref10135">ij.connection.connectionName</a> properties).
+These properties are often used when a script is being used and the path to
+the database or the driver name is not known until runtime. The properties
+can also to used to shorten the amount of information that must be provided
+with the connection URL. The following are some examples of different ways
+to supply the connection information: </p>
+<ul>
+<li>Supplying full connection information on the command line<div class="p">Specifying
+one of the following properties along with a valid connection URL on the ij
+command line starts ij with the connection already active. This is often used
+when running a SQL script so the database name or path can be specified at
+runtime.<ul>
+<li> <a href="rtoolsijpropref28146.html#rtoolsijpropref28146">ij.database</a> -
+opens a connection using the URL provided</li>
+
+<li><a href="rtoolsijpropref10135.html#rtoolsijpropref10135">ij.connection.<em>connectionName</em></a> -
+Used to open one or more connections. The property can appear multiple times
+on the command line with different <em>connectionName</em>s and the same or
+different URLs.</li>
+
+</ul>
+This example shows how to create the database <em>myTours</em> and run
+the script <em>ToursDB_schema.sql</em> by specifying the database URL using
+the <a href="rtoolsijpropref28146.html#rtoolsijpropref28146">ij.database</a> property.<pre>C:\&gt;<strong>java -Dij.database=jdbc:derby:myTours;create=true 
+     org.apache.derby.tools.ij 
+    %DERBY_HOME%\demo\programs\toursdb\ToursDB_schema.sql</strong>
+ij version <span>10.9</span>
+CONNECTION0* -  jdbc:derby:myTours
+* = current connection
+ij&gt; -- Licensed to the Apache Software Foundation (ASF) under one or more
+-- contributor license agreements.  See the NOTICE file distributed with
+     <strong><em>...output removed...</em></strong>
+ij&gt; CREATE TRIGGER TRIG2 AFTER DELETE ON FLIGHTS FOR EACH STATEMENT MODE DB2SQL
+INSERT INTO FLIGHTS_HISTORY (STATUS) VALUES ('INSERTED FROM TRIG2');
+0 rows inserted/updated/deleted
+ij&gt;</pre>
+</div>
+</li>
+
+<li>Defining a Protocol and using a "short form"  URL   <p>A default URL protocol
+and subprotocol can be specified by setting the property <a href="rtoolsijpropref35032.html#rtoolsijpropref35032">ij.protocol</a> or
+using the ij <a href="rtoolsijcomref27997.html#rtoolsijcomref27997">Protocol</a> command.
+This allows a connection to be made by specifying only the database name.
+This "short form" of the database connection URL defaults the protocol (For
+more information, see <a href="ctoolsijtools16011.html#ctoolsijtools16011__ctoolsabtproto">About Protocols</a>).</p>
+<p>This
+example uses the ij <a href="rtoolsijcomref27997.html#rtoolsijcomref27997">Protocol</a> command
+and a "short form" connection URL:</p>
+<pre>D:&gt;<strong>java org.apache.derby.tools.ij</strong>
+ij version <span>10.9</span>
+ij&gt;<strong> protocol 'jdbc:derby:';</strong>
+ij&gt; <strong>connect 'sample';</strong>
+ij&gt;
+</pre>
+</li>
+
+<li>Specifying an alternate Driver  <p>If you are using the drivers supplied
+by <span>Derby</span>, you can specify
+the driver names listed in <a href="rtoolsijtools16879.html#rtoolsijtools16879">JDBC drivers overview</a>.
+However, the <span>Derby</span> drivers
+are implicitly loaded when a supported protocol is used so specifying them
+is probably redundant. Specifying a driver is required when ij is used with
+other JDBC drivers to connect to non-<span>Derby</span> databases.
+To use drivers supplied by other vendors explicitly specify the driver one
+of three ways</p>
+<ul>
+<li>with an ij property <a href="rtoolsijpropref41073.html#rtoolsijpropref41073">ij.Driver</a></li>
+
+<li>using the JVM system property <samp class="codeph">jdbc.drivers</samp></li>
+
+<li>using the ij <a href="rtoolsijcomref39042.html#rtoolsijcomref39042">Driver</a> command</li>
+
+</ul>
+This example specifies the driver using the ij <a href="rtoolsijcomref39042.html#rtoolsijcomref39042">Driver</a> command<pre>D:&gt;<strong>java org.apache.derby.tools.ij</strong>
+ij version <span>10.9</span>
+ij&gt; <strong>driver 'sun.jdbc.odbc.JdbcOdbcDriver';</strong>
+ij&gt; <strong>connect 'jdbc:odbc:myOdbcDataSource';</strong>
+ij&gt;</pre>
+</li>
+
+</ul>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rtoolsdrvrnmeurl.html">The ij Driver name and connection URL</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsij32837.html" title="">Getting started with ij</a></div>
+</div>
+</div>
+
+</body>
+</html>

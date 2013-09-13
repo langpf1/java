@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="MINUTE 関数" />
+<meta name="abstract" content="MINUTE関数は値の分の部分を返します。" />
+<meta name="description" content="MINUTE関数は値の分の部分を返します。" />
+<meta content="MINUTE function" name="DC.subject" />
+<meta content="MINUTE function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefminutefunc" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>MINUTE 関数</title>
+</head>
+<body id="rrefminutefunc"><a name="rrefminutefunc"><!-- --></a>
+
+
+<h1 class="topictitle1">MINUTE 関数</h1>
+
+
+
+<div><p>MINUTE関数は値の分の部分を返します。</p>
+
+<div class="section"> <p> 引数は時、タイムスタンプあるいはCLOB・LONG VARCHAR・XML以外の、時・タイムスタンプを表す有効な文字列でなければなりません。
+返り値は0から59の間の数です。引数にはnullをとることができ、その場合は返り値はnullをとることができます。もし引数がnullなら、返り値はnullです。
+</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2> <pre><strong>MINUTE ( <em>式</em> )</strong></pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">例</h2>  
+<p>「flights」表から、「departure_time」が6:00より6:30AMの間である全ての行を選択する。</p>
+
+<pre><strong>SELECT * FROM flights WHERE HOUR(departure_time) = 6 and MINUTE(departure_time) &lt; 31;</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Multiple rows" />
+<meta name="abstract" content="Derby supports the complete SQL-92 VALUES clause; this is very handy in several cases." />
+<meta name="description" content="Derby supports the complete SQL-92 VALUES clause; this is very handy in several cases." />
+<meta content="Multiple rows VALUES clause" name="DC.subject" />
+<meta content="Multiple rows VALUES clause" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevtricks807365.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevtricks807400.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevtricks13019.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevtricks807337" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Multiple rows</title>
+</head>
+<body id="cdevtricks807337"><a name="cdevtricks807337"><!-- --></a>
+
+
+<h1 class="topictitle1">Multiple rows</h1>
+
+
+
+<div><p><span>Derby</span> supports
+the complete SQL-92 VALUES clause; this is very handy in several cases.</p>
+
+<p>The first useful case is that it can be used to insert multiple rows:</p>
+
+<pre><strong>INSERT INTO OneColumnTable VALUES 1,2,3,4,5,6,7,8
+
+INSERT INTO TwoColumnTable VALUES
+    (1, 'first row'),
+    (2, 'second row'),
+    (3, 'third row')</strong></pre>
+
+<p>Dynamic parameters reduce the number of times execute requests are sent
+across:</p>
+
+<pre>ij&gt; -- send 5 rows at a time:
+ij&gt; <strong>PREPARE p1 AS 'INSERT INTO ThreeColumnTable VALUES 
+(?,?,?), (?,?,?), (?,?,?), (?,?,?), (?,?,?)';</strong>
+ij&gt; <strong>EXECUTE p1 USING 'VALUES (''1st'',1,1,''2nd'',2,2,''3rd'',
+3,3,''4th'',4,4,''5th'',5,5)';</strong></pre>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevtricks13019.html" title="This section contains some tips to use with the VALUES clause.">Tricks of the VALUES clause</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevtricks807365.html" title="Multiple-row VALUES tables are useful in mapping column values to desired return values in queries.">Mapping column values to return values</a></div>
+<div><a href="cdevtricks807400.html" title="You may need Derby to create &quot;empty&quot; queries in existing applications for filling in bits of functionality that Derby does not supply.">Creating empty queries</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Bulk import and export requirements and considerations" />
+<meta name="abstract" content="There are requirements and limitations that you must consider before you use the Derby import and export procedures." />
+<meta name="description" content="There are requirements and limitations that you must consider before you use the Derby import and export procedures." />
+<meta content="bulk import and export, requirements, import procedures, limitations, export procedures, system procedures, import and export, requirements" name="DC.subject" />
+<meta content="bulk import and export, requirements, import procedures, limitations, export procedures, system procedures, import and export, requirements" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="tadminimporting.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminexporting.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport16245.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport98264.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportlobs.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportdefaultformat.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminimporting.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminexporting.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimport91458.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportjdbc.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportnulls.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimportcodeset.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminimport27052" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Bulk import and export requirements and considerations</title>
+</head>
+<body id="cadminimport27052"><a name="cadminimport27052"><!-- --></a>
+
+
+<h1 class="topictitle1">Bulk import and export requirements and considerations</h1>
+
+
+
+<div><p>There are requirements and limitations that you must consider before
+you use the <span>Derby</span> import
+and export procedures.</p>
+
+<dl>
+<dt class="dlterm">Database transactions</dt>
+
+<dd>You should issue either a COMMIT or ROLLBACK statement to complete all
+transactions and release all table-level locks before you invoke an import
+or export procedure. <span>Derby</span>
+issues a COMMIT or a ROLLBACK statement after each import and export procedure
+is run.<div class="note"><span class="notetitle">Note: </span>Imports are transactional. If an error occurs during bulk import,
+all changes are rolled back.</div>
+</dd>
+
+
+<dt class="dlterm">Database connections</dt>
+
+<dd>To invoke a <span>Derby</span> import
+or export procedure, you must be connected to the database into which the
+data is imported or from which the data is exported. Other user applications
+that access the table with a separate connection do not need to disconnect.</dd>
+
+
+<dt class="dlterm">Classpath</dt>
+
+<dd>You must have the <span class="filepath">derbytools.jar</span> file in your classpath
+before you can use the import or export procedures from
+<samp class="codeph">ij</samp>.</dd>
+
+
+<dt class="dlterm">The table must exist</dt>
+
+<dd>To import data into a table, the table must already exist in
+<span>Derby</span>. The table does not
+have to be empty. If the table is not empty, bulk import performs single row
+inserts, which result in slower performance.</dd>
+
+
+<dt class="dlterm">Create indexes, keys, and unique constraints before you import</dt>
+
+<dd>To avoid a separate step, create the indexes, keys (primary and foreign),
+and unique constraints on tables before you import data. However, if your
+memory and disk space resources are limited, you can build the indexes and
+primary keys after importing data.</dd>
+
+
+<dt class="dlterm">Data types</dt>
+
+<dd><span>Derby</span> implicitly converts
+the strings to the data type of the receiving column. If any of the implicit
+conversions fail, the whole import is aborted. For example, "3+7" cannot be
+converted into an integer. An export that encounters a runtime error stops.
+<div class="note"><span class="notetitle">Note: </span>You cannot import or export the XML data type.</div>
+</dd>
+
+
+<dt class="dlterm">Locking during import</dt>
+
+<dd>Import procedures use the same isolation level as the connection in which
+they are executed to insert data into tables. During import, the entire table
+is exclusively locked irrespective of the isolation level.</dd>
+
+
+<dt class="dlterm">Locking during export</dt>
+
+<dd>Export procedures use the same isolation level as the connection in which
+they are executed to fetch data from tables.</dd>
+
+
+<dt class="dlterm">Import behavior on tables with triggers</dt>
+
+<dd>The import procedures enable INSERT triggers when data is appended to the
+table. The REPLACE parameter is not allowed when triggers are enabled on the
+table.</dd>
+
+
+<dt class="dlterm">Restrictions on the REPLACE parameter</dt>
+
+<dd>If you import data into a table that already contains data, you can either
+replace or append to the existing data. You can use the REPLACE parameter
+on tables that have dependent tables. The replaced data must maintain
+referential integrity; otherwise, the import operation will be rolled back. You
+cannot use the REPLACE parameter if the table has triggers enabled.</dd>
+
+
+<dt class="dlterm">Restrictions on tables</dt>
+
+<dd>You cannot use import procedures to import data into a system table or a
+declared temporary table.</dd>
+
+</dl>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminimport16245.html" title="You can import and export large amounts of data between files and the Derby database. Instead of having to use INSERT and SELECT statements, you can use Derby system procedures to import data directly from files into tables and to export data from tables into files.">Importing and exporting data</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminimport98264.html" title="You can run the import and export procedures from within an SQL statement using ij or any Java application.">Methods for running the import and export procedures</a></div>
+<div><a href="cadminimportlobs.html" title="You can import and export large objects (LOBs) using the Derby system procedures.">Bulk import and export of large objects</a></div>
+<div><a href="cadminimportdefaultformat.html" title="There are specific requirements for the format of the input and output files when you import and export data.">File format for input and output</a></div>
+<div><a href="cadminimportjdbc.html" title="You can run import and export procedures from a JDBC program.">Running import and export procedures from JDBC</a></div>
+<div><a href="cadminimportnulls.html" title="In a delimited file, a NULL value is exported as an empty field.">How the import and export procedures process NULL values</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminimporting.html" title="You can use the Derby import procedures to import all of the data from a table or query, or to import LOB data separately from the other data.">Importing data using the built-in procedures</a></div>
+<div><a href="tadminexporting.html" title="You can use the Derby export procedures to export all of the data from table or query, or to export LOB data separately from the other data.">Exporting data using the built-in procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminimport91458.html" title="All of the examples in this section are run using the ij utility.">Examples of bulk import and export</a></div>
+<div><a href="radminimportcodeset.html" title="Import and export procedures accept arguments to specify codeset values. You can specify the codeset (character encoding) for import and export procedures to override the system default.">CODESET values for import and export procedures</a></div>
+</div>
+</div>
+
+</body>
+</html>

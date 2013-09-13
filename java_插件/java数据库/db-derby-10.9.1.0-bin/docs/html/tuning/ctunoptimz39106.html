@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="What's optimizable?" />
+<meta content="Statements, when they are optimizable" name="DC.subject" />
+<meta content="Statements, when they are optimizable" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz30217.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz33368.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz30768.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz41314.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz22900.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz856914.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz24840.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz1004264.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz1004373.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunoptimz39106" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>What's optimizable?</title>
+</head>
+<body id="ctunoptimz39106"><a name="ctunoptimz39106"><!-- --></a>
+
+
+<h1 class="topictitle1">What's optimizable?</h1>
+
+
+<div>
+<p>As you learned in the previous section, <span>Derby</span> might be able to use
+an index on a column to find data more quickly. If <span>Derby</span> can use an
+index for a statement, that statement is said to be <em>optimizable</em>. The statements shown in the preceding section allow <span>Derby</span> to
+use the index because their WHERE clauses provide start and stop conditions.
+That is, they tell <span>Derby</span> the point at which to begin its scan of the
+index and where to end the scan.</p>
+
+<p>For example, a statement with a WHERE clause looking for rows for which
+the <em>orig_airport</em> value is less than <em>BBB</em> means that <span>Derby</span> must begin the scan at the beginning of the
+index; it can end the scan at <em>BBB</em>. This means that
+it avoids scanning the index for most of the entries.</p>
+
+<div class="p">An index scan that uses start or stop conditions is called a <em>matching index scan</em>.  
+<div class="note"><span class="notetitle">Note: </span>A WHERE clause can have more than
+one part. Parts are linked with the word <em>AND</em> or <em>OR</em>. Each part is called a <em>predicate</em>. WHERE clauses with predicates joined by OR are not optimizable. WHERE
+clauses with predicates joined by AND are optimizable if <em>at least one</em> of the predicates is optimizable. For example:  
+<pre><strong>SELECT * FROM Flights
+WHERE flight_id = 'AA1111' AND
+segment_number &lt;&gt; 2</strong></pre>
+</div>
+</div>
+
+<div class="p">In this example, the first predicate is optimizable; the second predicate
+is not. Therefore, the statement is optimizable.  
+<div class="note"><span class="notetitle">Note: </span>In a few
+cases, a WHERE clause with predicates joined by OR can be transformed into
+an optimizable statement. See <a href="rtuntransform590.html#rtuntransform590">OR transformations</a>.</div>
+</div>
+
+</div>
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="ctunoptimz24840.html">Directly optimizable predicates</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="ctunoptimz1004264.html">Indirectly optimizable predicates</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="ctunoptimz1004373.html">Joins</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctunoptimz30217.html" title="">Index use and access paths</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctunoptimz33368.html" title="">What is an index?</a></div>
+<div><a href="ctunoptimz30768.html" title="">Covering indexes</a></div>
+<div><a href="ctunoptimz41314.html" title="">Useful indexes can use qualifiers</a></div>
+<div><a href="ctunoptimz22900.html" title="">When a table scan Is better</a></div>
+<div><a href="ctunoptimz856914.html" title="">Indexes have a cost for inserts, updates, and deletes</a></div>
+</div>
+</div>
+
+</body>
+</html>

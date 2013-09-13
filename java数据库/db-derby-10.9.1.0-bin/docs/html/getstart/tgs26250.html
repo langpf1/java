@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Manually setting the CLASSPATH environment variable" />
+<meta name="abstract" content="You can set the CLASSPATH environment variable in the operating system either temporarily, permanently, or at run time when you start your Java application and the JVM." />
+<meta name="description" content="You can set the CLASSPATH environment variable in the operating system either temporarily, permanently, or at run time when you start your Java application and the JVM." />
+<meta content="classpath, setting, environment variables, CLASSPATH, scripts, setEmbeddedCP, setNetworkServerCP, setNetworkClientCP" name="DC.subject" />
+<meta content="classpath, setting, environment variables, CLASSPATH, scripts, setEmbeddedCP, setNetworkServerCP, setNetworkClientCP" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="tgssetupenvironment.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tgs26250" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Manually setting the CLASSPATH environment variable</title>
+</head>
+<body id="tgs26250"><a name="tgs26250"><!-- --></a>
+
+
+<h1 class="topictitle1">Manually setting the CLASSPATH environment variable</h1>
+
+
+
+<div><p>You can set the CLASSPATH environment variable in the operating
+system either temporarily, permanently, or at run time when you start your
+Java application and the JVM. </p>
+
+<div class="section"><p>The classpath is a list of the class libraries that are needed
+by the JVM and other Java applications to run your program. There are scripts
+that are included with <span>Derby</span> that
+can set up the classpath to run the <span>Derby</span> tools. </p>
+<p>If
+you want to call the <span>Derby</span> tools
+directly using Java and not using the scripts, you must manually set the CLASSPATH
+environment variable.</p>
+<p>In most development environments, it is best to
+temporarily set the CLASSPATH environment variable in the command line shell
+where you are entering commands.</p>
+<div class="p"> <span>Derby</span> provides
+several scripts in the <span>DERBY_HOME</span><span class="filepath">/bin</span> directory
+to help you set your classpath quickly. These scripts are: <dl>
+<dt class="dlterm">setEmbeddedCP</dt>
+
+<dd>Use the <span class="cmdname">setEmbeddedCP</span> script to set the classpath when
+the database engine is used in embedded mode. This script adds the <span class="filepath">derby.jar</span> and <span class="filepath">derbytools.jar</span> files
+to the classpath. </dd>
+
+
+<dt class="dlterm">setNetworkServerCP</dt>
+
+<dd>Use the <span class="cmdname">setNetworkServerCP</span> script to set the classpath
+when you want to start the network server. This script adds the <span class="filepath">derbynet.jar</span> file
+to the classpath. </dd>
+
+
+<dt class="dlterm">setNetworkClientCP</dt>
+
+<dd>Use the <span class="cmdname">setNetworkClientCP</span> script to set the classpath
+when you want to access databases using the network client. This script adds
+the <span class="filepath">derbyclient.jar</span> and <span class="filepath">derbytools.jar</span> files
+to the classpath. </dd>
+
+</dl>
+</div>
+<p>To set the classpath temporarily, run the script that
+is appropriate for your environment every time that you open a new command
+window.</p>
+
+<p>
+    Note that these scripts behave slightly differently on UNIX systems
+    and on Windows systems. On Windows systems, running the script in your
+    command shell will set the environment variables for your shell.
+</p>
+
+<p>On UNIX systems, you need to use the "dot" or "source"
+    command to ensure that the script
+    is run in the calling shell's environment. Otherwise, when a script
+    is run, it launches a new shell for that script.
+    The CLASSPATH is set within that shell.
+    Once the script is complete, that
+    shell exits and you are returned to your shell.
+    The CLASSPATH is changed only for the shell that the script was
+    running in.
+    The CLASSPATH in your shell is unchanged. 
+</p>
+
+<p>
+    The UNIX shell scripts are known to run successfully in the Bash shell,
+    and you may need to modify them slightly if you are using a
+    different UNIX shell.
+</p>
+
+<div class="p">
+    Here are examples of running the scripts, then displaying
+    the classpath that the script sets:
+    <ul>
+        <li>On UNIX, using the "dot" command to invoke the script,
+            a sample session might be as follows:
+            <pre>
+sh-2.05b$ echo $CLASSPATH
+sh-2.05b$ DERBY_HOME=/derby/db-derby-10.X.Y.0-bin
+sh-2.05b$ . $DERBY_HOME/bin/setEmbeddedCP
+sh-2.05b$ echo $CLASSPATH
+/derby/db-derby-10.X.Y.0-bin/lib/derby.jar:/derby/db-derby-10.X.Y.0-bin/lib/derbytools.jar:
+sh-2.05b$ java org.apache.derby.tools.ij
+ij version 10.X
+ij&gt; quit;
+                </pre>
+
+        </li>
+
+        <li>On UNIX, using the "source" command to invoke the script,
+            a sample session might be as follows:
+            <pre>
+-bash-2.05b$ echo $CLASSPATH
+-bash-2.05b$ export DERBY_HOME=/derby/db-derby-10.X.Y.0-bin
+-bash-2.05b$ source $DERBY_HOME/bin/setEmbeddedCP
+                </pre>
+
+        </li>
+
+        <li>On Windows, a sample session might be as follows:
+            <pre>
+C:\derby\db-derby-10.X.Y.0-bin\bin&gt;echo %CLASSPATH%
+%CLASSPATH%
+C:\derby\db-derby-10.X.Y.0-bin\bin&gt;set DERBY_HOME=C:\derby\db-derby-10.X.Y.0-bin
+C:\derby\db-derby-10.X.Y.0-bin\bin&gt;setEmbeddedCP.bat
+C:\derby\db-derby-10.X.Y.0-bin\bin&gt;echo %CLASSPATH%
+C:\derby\DB-DERBY-10.X.Y.0-bin\lib\derby.jar;C:\derby\DB-DERBY-10.X.Y.0-bin\lib\derbytools.jar;
+C:\derby\db-derby-10.X.Y.0-bin\bin&gt;java org.apache.derby.tools.ij
+ij version 10.X
+ij&gt; quit;
+        </pre>
+</li>
+
+</ul>
+
+</div>
+</div>
+
+<div class="section">For more information on running the <samp class="codeph">ij</samp> and <samp class="codeph">sysinfo</samp> utilities,
+see the <cite><span><em>Derby Tools and Utilities Guide</em></span></cite></div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="tgssetupenvironment.html" title="Derby includes several scripts that run the Derby tools and utilities. How you run those scripts depends on the configuration that you want to use to access the Derby database and tools.">Setting up your environment</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefaltertablecompress.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproceduresinplacecompress.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsetstatstimingproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsetdbpropproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rreffreezedbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefunfreezedbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcheckpointdbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportdataproc.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj38831" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS</title>
+</head>
+<body id="rrefsqlj38831"><a name="rrefsqlj38831"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS</h1>
+
+<div>
+<div class="section">
+<p>O procedimento do sistema
+<samp class="codeph">SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS()</samp>
+torna as estatísticas em tempo de execução da conexão ligadas ou desligadas.
+Por padrão, as estatísticas em tempo de execução estão desligadas.
+Quando o atributo <samp class="codeph">runtimestatistics</samp> está ligado, o
+<span>Derby</span>
+mantém informações sobre o plano de execução de cada instrução executada
+pela conexão (exceto COMMIT), até que este atributo seja desligado.
+Para desligar o atributo <samp class="codeph">runtimestatistics</samp>, este procedimento
+deve ser chamado com um argumento igual a zero.
+Para ligar o atributo <samp class="codeph">runtimestatistics</samp>, este procedimento
+deve ser chamado com um argumento diferente de zero.</p>
+
+</div>
+
+<div class="section">
+<p>Nas instruções que não retornam linhas, o objeto é criado quando todo o
+processamento interno está completo, antes de retornar para o programa cliente.
+Nas instruções que retornam linhas, o objeto é criado quando a primeira chamada
+a <samp class="codeph">next()</samp> retorna zero linhas, ou se for encontrada uma
+chamada a <samp class="codeph">close()</samp>, o que ocorrer primeiro.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre>SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS(IN SMALLINT ENABLE)</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Exemplo</h2>
+
+<pre>-- estabelecer a conexão
+-- ligar RUNTIMESTATISTIC para a conexão:
+<strong>CALL SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS(1);</strong>
+-- executar uma consulta complexa
+-- caminhar pelo conjunto de resultados
+-- acessar as informações de estatísticas em tempo de execução:
+<strong>CALL SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS(0);</strong>
+</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Procedimentos do sistema nativos</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefaltertablecompress.html" title="">SYSCS_UTIL.SYSCS_COMPRESS_TABLE</a></div>
+<div><a href="rrefproceduresinplacecompress.html" title="">SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE</a></div>
+<div><a href="rrefsetstatstimingproc.html" title="">SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING</a></div>
+<div><a href="rrefsetdbpropproc.html" title="">SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY</a></div>
+<div><a href="rreffreezedbproc.html" title="">SYSCS_UTIL.SYSCS_FREEZE_DATABASE</a></div>
+<div><a href="rrefunfreezedbproc.html" title="">SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE</a></div>
+<div><a href="rrefcheckpointdbproc.html" title="">SYSCS_UTIL.SYSCS_CHECKPOINT_DATABASE</a></div>
+<div><a href="rrefbackupdbproc.html" title="">SYSCS_UTIL.SYSCS_BACKUP_DATABASE</a></div>
+<div><a href="rrefexportproc.html" title="">SYSCS_UTIL.SYSCS_EXPORT_TABLE</a></div>
+<div><a href="rrefexportselectionproc.html" title="">SYSCS_UTIL.SYSCS_EXPORT_QUERY</a></div>
+<div><a href="rrefimportproc.html" title="">SYSCS_UTIL.SYSCS_IMPORT_TABLE</a></div>
+<div><a href="rrefimportdataproc.html" title="">SYSCS_UTIL.SYSCS_IMPORT_DATA</a></div>
+</div>
+</div>
+
+</body>
+</html>

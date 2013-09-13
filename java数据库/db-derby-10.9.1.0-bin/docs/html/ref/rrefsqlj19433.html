@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SQL expressions" />
+<meta name="abstract" content="Syntax for many statements and expressions includes the term Expression, or a term for a specific kind of expression such as TableSubquery. Expressions are allowed in these specified places within statements." />
+<meta name="description" content="Syntax for many statements and expressions includes the term Expression, or a term for a specific kind of expression such as TableSubquery. Expressions are allowed in these specified places within statements." />
+<meta content="SQL expressions, column reference, constant, SQL expressions, NULL, dynamic parameter, CAST, scalar subquery, table subquery, conditional, numeric, character, string with wildcards, concatenation function, CURRENT_DATE function, CURRENT_TIME function, CURRENT_TIMESTAMP function, mathematical (+ -, *, /, unary + and - ), LENGTH function, expressions, dynamic parameter, scalar subquery, string with wildcards, concatenation function, CURRENT_DATE function, CURRENT_TIME function, CURRENT_TIMESTAMP function, mathematical (+ -, *, /, unary + and - ), LENGTH function" name="DC.subject" />
+<meta content="SQL expressions, column reference, constant, SQL expressions, NULL, dynamic parameter, CAST, scalar subquery, table subquery, conditional, numeric, character, string with wildcards, concatenation function, CURRENT_DATE function, CURRENT_TIME function, CURRENT_TIMESTAMP function, mathematical (+ -, *, /, unary + and - ), LENGTH function, expressions, dynamic parameter, scalar subquery, string with wildcards, concatenation function, CURRENT_DATE function, CURRENT_TIME function, CURRENT_TIMESTAMP function, mathematical (+ -, *, /, unary + and - ), LENGTH function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagtables.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefselectexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftableexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljnextvaluefor.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj11277.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1080779.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj23075.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcase.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj19433" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SQL expressions</title>
+</head>
+<body id="rrefsqlj19433"><a name="rrefsqlj19433"><!-- --></a>
+
+
+<h1 class="topictitle1">SQL expressions</h1>
+
+
+
+<div><p>Syntax for many statements and expressions includes the term <dfn class="term">Expression</dfn>,
+or a term for a specific kind of expression such as <var class="varname">TableSubquery</var>.
+Expressions are allowed in these specified places within statements. </p>
+
+<div class="section"><div class="p">Some locations allow only a specific type of expression or one
+with a specific property. If not otherwise specified, an expression is permitted
+anywhere the word <em>Expression</em> appears in the syntax. This includes:
+  <ul>
+<li><a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a></li>
+
+<li><em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a></em></li>
+
+<li><a href="rrefsqlj26498.html#rrefsqlj26498">UPDATE statement</a> (SET
+portion)</li>
+
+<li><a href="rrefsqlj11277.html#rrefsqlj11277">VALUES Expression</a></li>
+
+<li><a href="rrefsqlj33602.html#rrefsqlj33602">WHERE clause</a></li>
+
+</ul>
+</div>
+<p>Of course, many other statements include these elements as building
+blocks, and so allow expressions as part of these elements. </p>
+<p>The following
+tables list all the possible SQL expressions and indicate where the expressions
+are allowed.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">General expressions</h2>
+<p>General expressions are expressions that might result in a value of any type.
+The following table lists the types of general expressions.</p>
+
+
+<div class="tablenoborder"><a name="rrefsqlj19433__sqlj18370"><!-- --></a><table cellspacing="0" cellpadding="4" summary="This table lists and describes the types of general SQL expressions." id="rrefsqlj19433__sqlj18370" frame="border" border="1" rules="all"><caption>Table 1. General expressions</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="33.33333333333333%" id="N1023E">Expression Type</th>
+
+<th valign="bottom" width="66.66666666666666%" id="N10245">Explanation</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1023E"> Column reference  </td>
+
+<td valign="top" width="66.66666666666666%" headers="N10245">A <a href="rrefcolumnname.html#rrefcolumnname"><var class="varname">column-Name</var></a> that
+references the value of the column made visible to the expression containing
+the Column reference.   <p>You must qualify the <var class="varname">column-Name</var> by
+the table name or correlation name if it is ambiguous.</p>
+  <p>The qualifier
+of a <var class="varname">column-Name</var> must be the correlation name, if a correlation
+name is given to a table that is in a <a href="rrefsqlj21583.html#rrefsqlj21583">FROM
+clause</a>. The table name is no longer visible as a <em>column-Name</em> qualifier
+once it has been aliased by a correlation name.</p>
+<p>Allowed in <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a>s</em>,
+UPDATE statements, and the WHERE clauses of data manipulation statements.</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1023E"> Constant</td>
+
+<td valign="top" width="66.66666666666666%" headers="N10245">Most built-in data types typically have constants associated
+with them (as shown in <a href="crefsqlj31068.html#crefsqlj31068">Data types</a>). </td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1023E"> NULL  </td>
+
+<td valign="top" width="66.66666666666666%" headers="N10245">NULL is an untyped constant representing the unknown value.<p>Allowed
+in CAST expressions or in INSERT VALUES lists and UPDATE SET clauses. Using
+it in a CAST expression gives it a specific data type.</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1023E"> Dynamic parameter  </td>
+
+<td valign="top" width="66.66666666666666%" headers="N10245">A dynamic parameter is a parameter to an SQL statement
+for which the value is not specified when the statement is created. Instead,
+the statement has a question mark (?) as a placeholder for each dynamic parameter.
+See <a href="crefsqlj29911.html#crefsqlj29911">Dynamic parameters</a>.   <p>Dynamic parameters
+are permitted only in prepared statements. You must specify values for them
+before the prepared statement is executed. The values specified must match
+the types expected.</p>
+<p>Allowed anywhere in an expression where the data
+type can be easily deduced. See <a href="crefsqlj29911.html#crefsqlj29911">Dynamic parameters</a>.</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1023E"> CAST expression</td>
+
+<td valign="top" width="66.66666666666666%" headers="N10245">Lets you specify the type of NULL or of a dynamic parameter
+or convert a value to another type. See <a href="rrefsqlj33562.html#rrefsqlj33562">CAST function</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1023E">Scalar subquery</td>
+
+<td valign="top" width="66.66666666666666%" headers="N10245">Subquery that returns a single row with a single column.
+See <em><a href="rrefscalarsubquery.html#rrefscalarsubquery">ScalarSubquery</a>.</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1023E"> Table subquery </td>
+
+<td valign="top" width="66.66666666666666%" headers="N10245">Subquery that returns more than one column and more than
+one row. See <em><a href="rreftablesubquery.html#rreftablesubquery">TableSubquery</a>.</em><p>Allowed
+as a tableExpression in a FROM clause and with EXISTS, IN, and quantified
+comparisons.</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1023E"> Conditional expression</td>
+
+<td valign="top" width="66.66666666666666%" headers="N10245">A conditional expression chooses an expression to evaluate
+based on a boolean test. Conditional expressions include the
+<a href="rrefcase.html#rrefcase">CASE expression</a>, the
+<a href="rrefcasenullif.html#rrefcasenullif">NULLIF function</a>, and the
+<a href="rreffunccoalesce.html#rreffunccoalesce">COALESCE function</a>.
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Boolean expressions</h2>
+<p>Boolean expressions are expressions that result in boolean values. Most
+general expressions can result in boolean values. Boolean expressions commonly
+used in a WHERE clause are made of operands operated on by SQL operators (see
+<a href="rrefsqlj23075.html#rrefsqlj23075__sqlj34517">SQL Boolean operators</a> for a table
+of SQL operators).</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Numeric expressions</h2>
+<p>Numeric expressions are expressions that result in numeric values. Most of
+the general expressions can result in numeric values. Numeric values have one
+of the following types:</p>
+
+<ul>
+<li>BIGINT</li>
+
+<li>DECIMAL</li>
+
+<li>DOUBLE PRECISION</li>
+
+<li>INTEGER</li>
+
+<li>REAL</li>
+
+<li>SMALLINT</li>
+
+</ul>
+
+<p>The following table lists the types of numeric expressions.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists and describes the types of numeric SQL expressions." frame="border" border="1" rules="all"><caption>Table 1. Numeric expressions</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="40%" id="N10423">Expression Type</th>
+
+<th valign="bottom" width="60%" id="N1042A">Explanation</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="40%" headers="N10423"> +, -, *, /, unary + and - expressions</td>
+
+<td valign="top" width="60%" headers="N1042A">Evaluate the expected math operation on the operands. If
+both operands are the same type, the result type is not promoted, so the division
+operator on integers results in an integer that is the truncation of the actual
+numeric result. When types are mixed, they are promoted as described in <a href="crefsqlj31068.html#crefsqlj31068">Data types</a>.  <p>Unary + is a noop (i.e.,
++4 is the same as 4). Unary - is the same as multiplying the value by -1,
+effectively changing its sign.</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10423"> AVG</td>
+
+<td valign="top" width="60%" headers="N1042A">Returns the average of a set of numeric values. <a href="rrefsqlj32693.html#rrefsqlj32693">AVG function</a></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10423"> SUM</td>
+
+<td valign="top" width="60%" headers="N1042A">Returns the sum of a set of numeric values. <a href="rrefsqlj13083.html#rrefsqlj13083">SUM function</a></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10423"> LENGTH</td>
+
+<td valign="top" width="60%" headers="N1042A">Returns the number of characters in a character or bit
+string. See <a href="rrefsqlj16762.html#rrefsqlj16762">LENGTH function</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10423"> LOWER</td>
+
+<td valign="top" width="60%" headers="N1042A">See <a href="rrefsqlj42049.html#rrefsqlj42049">LCASE or LOWER function</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10423"> COUNT</td>
+
+<td valign="top" width="60%" headers="N1042A">Returns the count of a set of values. See <a href="rrefsqlj38716.html#rrefsqlj38716">COUNT function</a>, <a href="rrefsqlj66113.html#rrefsqlj66113">COUNT(*) function</a>.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Character expressions</h2>
+<p>Character expressions are expressions that result in a CHAR or VARCHAR value.
+Most general expressions can result in a CHAR or VARCHAR value. The following
+table lists the types of character expressions.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists and describes the types of character SQL  expressions." frame="border" border="1" rules="all"><caption>Table 1. Character expressions</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="40%" id="N10533">Expression Type</th>
+
+<th valign="bottom" width="60%" id="N1053A">Explanation</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="40%" headers="N10533"> A CHAR or VARCHAR value that uses wildcards. </td>
+
+<td valign="top" width="60%" headers="N1053A">The wildcards % and _ make a character string a pattern
+against which the LIKE operator can look for a match.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10533"> Concatenation expression</td>
+
+<td valign="top" width="60%" headers="N1053A">In a concatenation expression, the concatenation operator,
+"||", concatenates its right operand to the end of its left operand. Operates
+on character and bit strings. See <a href="rrefsqlj40899.html#rrefsqlj40899">Concatenation operator</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10533"> Built-in string functions</td>
+
+<td valign="top" width="60%" headers="N1053A">The built-in string functions act on a String and return
+a string. See <a href="rrefsqlj97870.html#rrefsqlj97870">LTRIM function</a>, <a href="rrefsqlj42049.html#rrefsqlj42049">LCASE or LOWER function</a>, <a href="rrefsqlj32613.html#rrefsqlj32613">RTRIM function</a>, <a href="rreftrimfunc.html#rreftrimfunc">TRIM function</a>, <a href="rrefsqlj93082.html#rrefsqlj93082">SUBSTR function</a>, and <a href="rrefsqlj29930.html#rrefsqlj29930">UCASE or UPPER function</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="40%" headers="N10533"> USER functions</td>
+
+<td valign="top" width="60%" headers="N1053A">User functions return information about the current user
+as a String. See <a href="rrefsqlj42324.html#rrefsqlj42324">CURRENT_USER function</a>, <a href="rrefsqlj25228.html#rrefsqlj25228">SESSION_USER function</a>, and <a href="rrefsqlj42476.html#rrefsqlj42476">.</a></td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Date and time expressions</h2><p>A date or time expression
+results in a DATE, TIME, or TIMESTAMP value. Most of the general expressions
+can result in a date or time value. The following table lists the types of date
+and time expressions.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists and describes the types of date and time SQL expressions." frame="border" border="1" rules="all"><caption>Table 1. Date and time expressions</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="37.5%" id="N1062D">Expression Type</th>
+
+<th valign="bottom" width="62.5%" id="N10634">Explanation</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="37.5%" headers="N1062D"> CURRENT_DATE</td>
+
+<td valign="top" width="62.5%" headers="N10634">Returns the current date. See <a href="rrefsqlj34177.html#rrefsqlj34177">CURRENT_DATE function</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="37.5%" headers="N1062D"> CURRENT_TIME</td>
+
+<td valign="top" width="62.5%" headers="N10634">Returns the current time. See <a href="rrefsqlj33772.html#rrefsqlj33772">CURRENT_TIME function</a>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="37.5%" headers="N1062D"> CURRENT_TIMESTAMP</td>
+
+<td valign="top" width="62.5%" headers="N10634">Returns the current timestamp. See <a href="rrefsqlj15866.html#rrefsqlj15866">CURRENT_TIMESTAMP function</a>.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefselectexpression.html">SelectExpression</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rreftableexpression.html">TableExpression</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqljnextvaluefor.html">NEXT VALUE FOR expression</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj11277.html">VALUES expression</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj1080779.html">Expression precedence</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj23075.html">Boolean expressions</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefcase.html">CASE expression</a></strong><br />
+The CASE expression can be used for conditional expressions in Derby.</li>
+<li class="ulchildlink"><strong><a href="crefsqlj29911.html">Dynamic parameters</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj23296.html" title="">SQL language reference</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQL identifiers</a></div>
+<div><a href="crefsqlj39374.html" title="">Statements</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">Built-in system functions</a></div>
+<div><a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+<div><a href="crefsqlj31068.html" title="">Data types</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqlj28468.html" title="">Capitalization and special characters</a></div>
+<div><a href="rrefclauses.html" title="">SQL clauses</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN operations</a></div>
+<div><a href="rrefqueries.html" title="">SQL queries</a></div>
+<div><a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+<div><a href="rrefsyscsdiagtables.html" title="Derby provides a set of system table expressions which you can use to obtain diagnostic information about the state of the database and about the database sessions.">SYSCS_DIAG diagnostic tables and functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

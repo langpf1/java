@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Query" />
+<meta content="UNION, UNION ALL" name="DC.subject" />
+<meta content="UNION, UNION ALL" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj21571" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Query</title>
+</head>
+<body id="rrefsqlj21571"><a name="rrefsqlj21571"><!-- --></a>
+
+
+<h1 class="topictitle1">Query</h1>
+
+
+<div>
+<div class="section"> <p>A query creates a virtual table based on existing tables or constants
+built into tables.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>{
+    ( <em>Query</em> 
+         [ <em><a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a></em> ]
+         [ <em><a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">result offset clause</a></em> ]
+         [ <em><a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">fetch first clause</a></em> ]
+    ) |
+    <em>Query</em> INTERSECT [ ALL | DISTINCT ] <em>Query</em> |
+    <em>Query</em> EXCEPT [ ALL | DISTINCT ] <em>Query</em> |
+    <em>Query</em> UNION [ ALL | DISTINCT ] <em>Query</em> |
+    <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a></em> | <em><a href="rrefsqlj11277.html#rrefsqlj11277">VALUES Expression</a></em>
+}</strong></pre>
+<p>You can arbitrarily put parentheses around queries, or
+use the parentheses to control the order of evaluation of the INTERSECT, EXCEPT,
+or UNION operations. These operations are evaluated from left to right when
+no parentheses are present, with the exception of INTERSECT operations, which
+would be evaluated before any UNION or EXCEPT operations.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Duplicates in UNION, INTERSECT, and EXCEPT ALL results</h2><p>The
+ALL and DISTINCT keywords determine whether duplicates are eliminated from
+the result of the operation. If you specify the DISTINCT keyword, then the
+result will have no duplicate rows. If you specify the ALL keyword, then there
+may be duplicates in the result, depending on whether there were duplicates
+in the input.  DISTINCT is the default, so if you don't specify ALL or DISTINCT,
+the duplicates will be eliminated.  For example, UNION builds an intermediate <em>ResultSet</em> with
+all of the rows from both queries and eliminates the duplicate rows before
+returning the remaining rows. UNION ALL returns all rows from both queries
+as the result.</p>
+<div class="p"> Depending on which operation is specified, if the number
+of copies of a row in the left table is L and the number of copies of that
+row in the right table is R, then the number of duplicates of that particular
+row that the output table contains (assuming the ALL keyword is specified)
+is:<ul>
+<li>UNION: ( L + R ).</li>
+
+<li>EXCEPT: the maximum of ( L - R ) and 0 (zero).</li>
+
+<li>INTERSECT: the minimum of L and R.</li>
+
+</ul>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2><pre><strong><span>-- a Select expression </span>
+SELECT *
+FROM ORG
+
+<span>-- a subquery </span>
+SELECT *
+FROM (SELECT CLASS_CODE FROM CL_SCHED) AS CS
+
+-- a subquery
+SELECT *
+FROM (SELECT CLASS_CODE FROM CL_SCHED) AS CS (CLASS_CODE)
+
+<span>-- a UNION
+-- returns all rows from columns DEPTNUMB and MANAGER 
+-- in table ORG
+-- and (1,2) and (3,4)
+-- DEPTNUMB and MANAGER are smallint columns</span>
+SELECT DEPTNUMB, MANAGER 
+FROM ORG
+UNION ALL
+VALUES (1,2), (3,4)
+
+<span>-- a values expression</span>
+VALUES (1,2,3)
+
+<span>-- Use of ORDER BY and FETCH FIRST in a subquery</span>
+SELECT DISTINCT A.ORIG_AIRPORT, B.FLIGHT_ID FROM 
+   (SELECT FLIGHT_ID, ORIG_AIRPORT 
+       FROM FLIGHTS 
+       ORDER BY ORIG_AIRPORT DESC 
+       FETCH FIRST 40 ROWS ONLY) 
+    AS A, FLIGHTAVAILABILITY AS B 
+   WHERE A.FLIGHT_ID = B.FLIGHT_ID</strong>
+   
+<strong>-- List the employee numbers (EMPNO) of all employees in the EMPLOYEE 
+-- table whose department number (WORKDEPT) either begins with 'E' or 
+-- who are assigned to projects in the EMP_ACT table 
+-- whose project number (PROJNO) equals 'MA2100', 'MA2110', or 'MA2112'
+SELECT EMPNO
+     FROM EMPLOYEE
+     WHERE WORKDEPT LIKE 'E%'
+  UNION
+  SELECT EMPNO
+     FROM EMP_ACT
+     WHERE PROJNO IN('MA2100', 'MA2110', 'MA2112')</strong>
+<strong>-- Make the same query as in the previous example
+-- and "tag" the rows from the EMPLOYEE table with 'emp' and 
+-- the rows from the EMP_ACT table with 'emp_act'. 
+-- Unlike the result from the previous example, 
+-- this query may return the same EMPNO more than once, 
+-- identifying which table it came from by the associated "tag"
+SELECT EMPNO, 'emp'
+     FROM EMPLOYEE
+     WHERE WORKDEPT LIKE 'E%'
+  UNION
+  SELECT EMPNO, 'emp_act' FROM EMP_ACT
+     WHERE PROJNO IN('MA2100', 'MA2110', 'MA2112')</strong>
+<strong>-- Make the same query as in the previous example, 
+-- only use UNION ALL so that no duplicate rows are eliminated
+SELECT EMPNO
+      FROM EMPLOYEE
+      WHERE WORKDEPT LIKE 'E%'
+  UNION ALL
+  SELECT EMPNO
+     FROM EMP_ACT
+     WHERE PROJNO IN('MA2100', 'MA2110', 'MA2112')</strong>
+<strong>-- Make the same query as in the previous example, 
+-- only include an additional two employees currently not in any table
+-- and tag these rows as "new"
+ SELECT EMPNO, 'emp'
+     FROM EMPLOYEE
+     WHERE WORKDEPT LIKE 'E%'
+  UNION
+  SELECT EMPNO, 'emp_act'
+     FROM EMP_ACT
+     WHERE PROJNO IN('MA2100', 'MA2110', 'MA2112')
+  UNION
+     VALUES ('NEWAAA', 'new'), ('NEWBBB', 'new')</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefqueries.html" title="">SQL queries</a></div>
+</div>
+</div>
+
+</body>
+</html>

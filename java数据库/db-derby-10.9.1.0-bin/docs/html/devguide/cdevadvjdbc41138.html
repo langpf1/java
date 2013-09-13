@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Offering connection choices to the user" />
+<meta name="abstract" content="JDBC's java.sql.Driver.getPropertyInfo method allows a generic GUI tool to determine the properties for which it should prompt a user in order to get enough information to connect to a database. Depending on the values the user has supplied so far, additional values might become necessary. It might be necessary to iterate though several calls to getPropertyInfo." />
+<meta name="description" content="JDBC's java.sql.Driver.getPropertyInfo method allows a generic GUI tool to determine the properties for which it should prompt a user in order to get enough information to connect to a database. Depending on the values the user has supplied so far, additional values might become necessary. It might be necessary to iterate though several calls to getPropertyInfo." />
+<meta content="java.sql.Driver.getPropertyInfo, Available databases, list of provided by databaseName attribute" name="DC.subject" />
+<meta content="java.sql.Driver.getPropertyInfo, Available databases, list of provided by databaseName attribute" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp42173.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevadvjdbc32436.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevdvlp22102.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevadvjdbc35053.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevadvjdbc034.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevadvjdbc41138" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Offering connection choices to the user</title>
+</head>
+<body id="cdevadvjdbc41138"><a name="cdevadvjdbc41138"><!-- --></a>
+
+
+<h1 class="topictitle1">Offering connection choices to the user</h1>
+
+
+
+<div><p>JDBC's <em>java.sql.Driver.getPropertyInfo</em> method allows a generic
+GUI tool to determine the properties for which it should prompt a user in
+order to get enough information to connect to a database. Depending on the
+values the user has supplied so far, additional values might become necessary.
+It might be necessary to iterate though several calls to <em>getPropertyInfo</em>.</p>
+
+<p>If no more properties are necessary, the call returns an array of zero
+length.</p>
+
+<p>In a <span>Derby</span> system, do
+not use the method against an instance of <em>org.apache.derby.jdbc.EmbeddedDriver</em>.
+Instead, request the JDBC driver from the driver manager:</p>
+
+<pre>java.sql.DriverManager.getDriver(
+    "jdbc:derby:").getPropertyInfo(<em>URL</em>, <em>Prop</em>)</pre>
+
+<p>In a <span>Derby</span> system, the
+properties returned in the <em>DriverPropertyInfo</em> object are connection
+URL attributes, including a list of booted databases in a system (the <em>databaseName</em> attribute).</p>
+
+<p>Databases in a system are not automatically booted until you connect with
+them. You can configure your system to retain the former behavior, in which
+case the steps described in this section will continue to work. See "<em>derby.system.bootAll</em>" in
+the <span><em>Derby Reference Manual</em></span>.</p>
+
+<p><em>getPropertyInfo</em> requires a connection URL and a <em>Properties</em> object
+as parameters. Typically, what you pass are values that you will use in a
+future call to <em>java.sql.DriverManager.getConnection</em> when
+you actually connect to the database.</p>
+
+<p>A call to <em>getPropertyInfo</em> with parameters that contain sufficient
+information to connect successfully returns an array of zero length. (Receiving
+this zero-length array does not <em>guarantee</em> that the <em>getConnection</em> call
+will succeed, because something else could go wrong.)</p>
+
+<p>Repeat calls to <em>getPropertyInfo</em> until it returns a zero-length array
+or none of the properties remaining are desired.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rdevadvjdbc034.html">The DriverPropertyInfo Array</a></strong><br />
+When a non-zero-length array is returned by getPropertyInfo, each element is a DriverPropertyInfo object representing a connection URL attribute that has not already been specified. Only those that make sense in the current context are returned.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevadvjdbc35053.html" title="Applications such as database tools are designed to work with databases whose schemas and contents are unknown in advance. This section discusses a few topics useful for such applications.">Developing tools and using Derby with an IDE</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp42173.html" title="You create new databases and access existing ones by specifying attributes to the Derby connection URL.">Creating, dropping, and backing up databases</a></div>
+<div><a href="cdevadvjdbc32436.html" title="When you use an integrated development environment (IDE) to develop an embedded Derby application, you might need to run Derby within a server framework.">Using Derby with IDEs</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rdevdvlp22102.html" title="The examples in this section use the syntax of the connection URL for use in an embedded environment.">Database connection examples</a></div>
+</div>
+</div>
+
+</body>
+</html>

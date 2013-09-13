@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Enable database class loading with a property" />
+<meta name="abstract" content="Once you have added one or more jar files to a database, you must set the database jar classpath by including the jar file or files in the derby.database.classpath property to enable Derby to load classes from the jar files." />
+<meta name="description" content="Once you have added one or more jar files to a database, you must set the database jar classpath by including the jar file or files in the derby.database.classpath property to enable Derby to load classes from the jar files." />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy17604.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure90988.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy856753.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy23812.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy12748.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdeploy21645" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Enable database class loading with a property</title>
+</head>
+<body id="cdevdeploy21645"><a name="cdevdeploy21645"><!-- --></a>
+
+
+<h1 class="topictitle1">Enable database class loading with a property</h1>
+
+
+
+<div><p>Once you have added one or more jar files to a database, you must
+set the database jar classpath by including the jar file or files in the <em>derby.database.classpath</em> property
+to enable <span>Derby</span> to load
+classes from the jar files.</p>
+
+<p>This property, which behaves like a classpath, specifies the jar files
+to be searched for classes and resources and the order in which they are searched.
+If <span>Derby</span> does not find
+a needed class stored in the database, it can retrieve the class from the
+user's classpath. (<span>Derby</span> first
+looks in the user's classpath before looking in the database.)</p>
+
+<ul>
+<li>Separate jar files with a colon (<samp class="codeph">:</samp>).</li>
+
+<li>Use fully qualified identifiers for the jar files (schema name and jar
+name).</li>
+
+<li>Set the property as a database-level property for the database.</li>
+
+</ul>
+
+<p>Example:</p>
+
+<pre><strong>CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(
+    'derby.database.classpath',
+    'APP.ToursLogic:APP.ACCOUNTINGLOGIC')</strong></pre>
+
+<p>See "<em>derby.database.classpath</em>" in the
+<span><em>Derby Reference Manual</em></span> for more information about the
+property.</p>
+
+<div class="note"><span class="notetitle">Note: </span><span>Derby</span>'s class loader
+looks first in the user's classpath for any needed classes, and then in the
+database. To ensure class loading with the database class loader, remove classes
+from the classpath.</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdeploy856753.html" title="You store application classes and resources by storing one or more jar files in the database. Then your application can access classes loaded by Derby from the jar file and does not need to be coded in a particular way. The only difference is the way in which you invoke the application.">Class loading overview</a></div>
+<div class="previouslink"><strong>Previous topic:</strong> <a href="cdevdeploy23812.html" title="Use a set of procedures to install, replace, and remove jar files in a database. When you install a jar file in a database, you give it a Derby jar name, which is an SQL92Identifier.">Add the jar file or files to the database</a></div>
+<div class="nextlink"><strong>Next topic:</strong> <a href="cdevdeploy12748.html" title="In your applications, you load the classes either by indirectly referencing them in the code or by directly using java.lang.Class.forName.">Code your applications</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdeploy17604.html" title="When you store jar files in a single database and make those jar files available to that database, it is possible to make changes to jar files or to change the database jar &quot;classpath&quot; dynamically (without having to reboot).">Dynamic changes to jar files or to the database jar classpath</a></div>
+<div><a href="cdevcsecure90988.html" title="In a Java SE environment, Derby can detect digital signatures on jar files. When attempting to load a class from a signed jar file stored in the database, Derby will verify the validity of the signature.">Signed jar files</a></div>
+</div>
+</div>
+
+</body>
+</html>

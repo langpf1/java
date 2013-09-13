@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Simple IN predicate transformations" />
+<meta name="abstract" content="" />
+<meta name="description" content="" />
+<meta content="IN transformations, Internal transformation of statements, IN predicates, IN predicate transformations, probe predicate" name="DC.subject" />
+<meta content="IN transformations, Internal transformation of statements, IN predicates, IN predicate transformations, probe predicate" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctuntransform35783.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform139.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform208.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform866214.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform590.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtuntransform582" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Simple IN predicate transformations</title>
+</head>
+<body id="rtuntransform582"><a name="rtuntransform582"><!-- --></a>
+
+
+<h1 class="topictitle1">Simple IN predicate transformations</h1>
+
+
+
+<div><p />
+
+<div class="section"><p>A <dfn class="term">simple</dfn> IN list predicate is a predicate where the
+left operand is a <a href="ctuntransform13966.html#ctuntransform13966__rtuntransform13785">simple
+column reference</a> and the IN list is composed entirely of constants
+or parameter markers. The following are examples of simple IN predicates:</p>
+<pre>    orig_airport IN ('ABQ', 'AKL', 'DSM')
+
+    orig_airport IN (?, ?, ?)
+
+    orig_airport IN ('ABQ', ?, ?, 'YYZ') </pre>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Probe predicates</h2><p><span>Derby</span> transforms
+each IN list predicate into an equality predicate whose right operand is a
+parameter marker that is created internally. This internal equality predicate
+is called a <dfn class="term">probe predicate</dfn>. Each of the above examples of simple
+IN predicates is transformed into the following probe predicate:</p>
+<pre>    orig_airport = ?</pre>
+<p>Probe
+predicates are treated differently than normal equality predicates. Probe
+predicates are processed in a special way during query optimization and execution. </p>
+<p>During
+optimization, <span>Derby</span> analyzes
+the probe predicate to determine if the probe predicate is useful for limiting
+the number of rows retrieved from disk. For a probe predicate to be useful,
+both of the following requirements must be true:</p>
+<ol>
+<li>There must be an index defined on the table that the column reference
+belongs to, and the column reference must be the first column in the index.
+In the example above, <samp class="codeph">orig_airport</samp> is the column reference.</li>
+
+<li>The estimated cost of an access path that uses the probe predicate and
+one of the corresponding indexes must be less than the estimated cost of any
+other access paths calculated by the optimizer.  Typically, this means that
+the number of values in the IN list is significantly fewer than the number
+of rows in the table that the column reference belongs to.</li>
+
+</ol>
+<p>If both of these requirements are met, <span>Derby</span> will
+use the probe predicate at query execution to <em>probe</em> the underlying
+index for values in the IN list. In other words, the right operand of the
+probe predicate (the parameter) becomes a place-holder into which <span>Derby</span> plugs
+the different values from the IN list. Then for each value, <span>Derby</span> reads
+the matching rows from the index.</p>
+<p>If either of the two requirements
+is not satisfied, <span>Derby</span> discards
+the internal probe predicate and executes the query using the original IN
+list predicate.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Examples</h2><p>The following query is submitted to <span>Derby</span>:</p>
+<pre>SELECT flights.orig_airport, cities.city_name 
+    FROM flights, cities
+    WHERE flights.orig_airport IN ('ABQ', 'DSM', 'YYZ')
+        AND flights.orig_airport = cities.airport   </pre>
+<p>The Derby
+optimizer transforms this query internally into:     </p>
+<pre>SELECT flights.orig_airport, cities.city_name
+    FROM flights, cities
+    WHERE flights.orig_airport = ?
+        AND flights.orig_airport = cities.airport   </pre>
+<p>In this
+transformed query <samp class="codeph">flights.orig_airport = ?</samp> is an internal
+probe predicate.</p>
+<p>There is an index on the <samp class="codeph">org_airport</samp> column
+in the <samp class="codeph">flights</samp> table. If the estimated cost of probing that
+index for the three values (ABQ, DSM, YYZ) is less than the cost of accessing
+the <samp class="codeph">flights</samp> table in some other way, <span>Derby</span> will
+perform probing on the index at query execution. This approach ensures that <span>Derby</span> reads only the necessary
+rows from the <span>Derby</span> table.</p>
+<p>At
+a higher level, the approach by <span>Derby</span> to
+use index probing for IN lists is an internal way of evaluating the transformed
+predicate multiple times. The predicate is evaluated one time for each value
+in the IN list.</p>
+<div class="p">From a JDBC perspective, <span>Derby</span> is
+logically (but not actually) performing the following statements and then
+combining the three result sets (rs1, rs2, and rs3) : <pre>PreparedStatement ps = conn.prepareStatement(
+    "select flights.orig_airport, cities.city_name " +
+    "from flights, cities " +
+    "where flights.orig_airport = ? " +
+        "and flights.orig_airport = cities.airport ");
+
+ps.setString(1, "ABQ");
+rs1 = ps.executeQuery();
+
+ps.setString(1, "DSM");
+rs2 = ps.executeQuery();
+
+ps.setString(1, "YYZ");
+rs3 = ps.executeQuery();
+
+</pre>
+</div>
+<p>From an SQL perspective, <span>Derby</span> is
+logically (but not actually) performing the following statement:</p>
+<pre>SELECT flights.orig_airport, cities.city_name
+    FROM flights, cities
+    WHERE flights.orig_airport = 'ABQ'
+        AND flights.orig_airport = cities.airport
+
+UNION ALL
+
+SELECT flights.orig_airport, cities.city_name
+    FROM flights, cities
+    WHERE flights.orig_airport = 'DSM'
+        AND flights.orig_airport = cities.airport
+
+UNION ALL
+
+SELECT flights.orig_airport, cities.city_name
+    FROM flights, cities
+    WHERE flights.orig_airport = 'YYZ'
+        AND flights.orig_airport = cities.airport
+    </pre>
+<p>In the above SQL example, for each subquery the equality
+predicate limits the number of rows read from the <samp class="codeph">flights</samp> table
+so that the process avoids having to read unnecessary rows from disk. </p>
+<p>The
+larger the <samp class="codeph">flights</samp> table, the more time <span>Derby</span> will
+save by probing the index for the relatively few IN list values. </p>
+<p>By
+using probe predicates, regardless of how large the base table is, <span>Derby</span> only
+has to probe the index a maximum of N times, where N is the size of the IN
+list. If N is significantly less than the number of rows in the table, or
+is significantly less than the number of rows between the minimum value and
+the maximum value in the IN list, selective probing ensures that <span>Derby</span> does
+not spend time reading unnecessary rows from disk.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctuntransform35783.html" title="">Predicate transformations</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtuntransform139.html" title="">BETWEEN transformations</a></div>
+<div><a href="rtuntransform208.html" title="">LIKE transformations</a></div>
+<div><a href="rtuntransform866214.html" title="">NOT IN predicate transformations</a></div>
+<div><a href="rtuntransform590.html" title="">OR transformations</a></div>
+</div>
+</div>
+
+</body>
+</html>

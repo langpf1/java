@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Starting ij" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsij34525.html" />
+<meta scheme="URI" name="DC.Relation" content="ttoolsijcreatedatabase.html" />
+<meta scheme="URI" name="DC.Relation" content="ttoolsij30600.html" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsij32837.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ttoolsij11815" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Starting ij</title>
+</head>
+<body id="ttoolsij11815"><a name="ttoolsij11815"><!-- --></a>
+
+
+<h1 class="topictitle1">Starting ij</h1>
+
+<div>
+<div class="section"> <p><span>Derby</span> provides
+batch and shell scripts for users in Windows and UNIX environments that can
+be used to start ij. By calling the appropriate script you will start ij and
+be able to connect with a simple command. The scripts are
+found in the <samp class="codeph">bin</samp> directory of your <span>Derby</span>
+installation. You can also customize the ij scripts to suit your environment.</p>
+<p> If you are using <span>Derby</span> as
+a client/server environment, start the Network Server before connecting to the 
+<span>Derby</span> database. (See
+"Starting the Network Server" in the
+<span><em>Derby Server and Administration Guide</em></span> for details.) You can start
+ij by running the ij scripts for your environment. Follow the instructions in
+"Setting up your environment" in
+<span><em>Getting Started with Derby</em></span> to set the 
+<samp class="codeph"><span>DERBY_HOME</span></samp> 
+and <samp class="codeph">JAVA_HOME</samp> environment variables and to add
+<samp class="codeph"><span>DERBY_HOME</span>/bin</samp>
+to your path. Then use the following command:</p>
+<pre><strong><kbd class="userinput">ij [-p <var class="varname">propertyFile</var>] [<var class="varname">inputFile</var>]</kbd></strong></pre>
+</div>
+
+<div class="example">Alternatively, set the 
+<samp class="codeph"><span>DERBY_HOME</span></samp>
+environment variable, then use one of these commands:
+<pre>(UNIX) <strong><kbd class="userinput">java [<var class="varname">options</var>] -jar $DERBY_HOME/lib/derbyrun.jar ij
+    [-p <var class="varname">propertyFile</var>] [<var class="varname">inputFile</var>]</kbd></strong></pre>
+
+<pre>(Windows) <strong><kbd class="userinput">java [<var class="varname">options</var>] -jar %DERBY_HOME%\lib\derbyrun.jar ij
+    [-p <var class="varname">propertyFile</var>] [<var class="varname">inputFile</var>]</kbd></strong></pre>
+
+<pre><strong><kbd class="userinput">java [<var class="varname">options</var>] org.apache.derby.tools.ij 
+    [-p <var class="varname">propertyFile</var>] [<var class="varname">inputFile</var>]</kbd></strong></pre>
+
+<p>If you use the last form of the command, be sure that <samp class="codeph">derbyrun.jar</samp> is in your
+classpath (for pre-10.2 distributions <samp class="codeph">derbytools.jar</samp> and usually <samp class="codeph">derby.jar</samp>
+were required in the classpath).</p>
+
+<p>If you need to use other classes in addition to <samp class="codeph">derbyrun.jar</samp>, 
+you cannot use the <samp class="codeph">-cp</samp> argument or the CLASSPATH 
+environment variable to set CLASSPATH variables when you are using the
+<samp class="codeph">-jar</samp> argument to start the <samp class="codeph">ij</samp> tool. 
+If you want to run the <samp class="codeph">ij</samp> tool with a custom classpath, 
+you cannot use the <samp class="codeph">-jar</samp> argument. Instead, you have to 
+use the full class name to start the <samp class="codeph">ij</samp> tool 
+(<samp class="codeph">java org.apache.derby.tools.ij</samp>). </p>
+
+<p>The command line items are:</p>
+    <ul>
+<li id="ttoolsij11815__rtoolsij42358"><a name="ttoolsij11815__rtoolsij42358"><!-- --></a><strong><kbd class="userinput">java</kbd></strong>   <p>Start the JVM. </p>
+</li>
+
+<li id="ttoolsij11815__rtoolsij26546"><a name="ttoolsij11815__rtoolsij26546"><!-- --></a><strong><kbd class="userinput"><var class="varname">options</var></kbd></strong>   <p>The options that the JVM uses. You can
+use the -D option to set ij properties (see <a href="ttoolsij30600.html#ttoolsij30600">Starting ij using properties</a>)
+or system properties, such as <span>Derby</span> properties. </p>
+</li>
+
+<li id="ttoolsij11815__rtoolsij40855"><a name="ttoolsij11815__rtoolsij40855"><!-- --></a><strong><kbd class="userinput"><var class="varname">propertyFile</var></kbd></strong>   <p>A file you can use to set ij properties
+(instead of the -D option). The property file should be in the format created
+by the java.tools.Properties.save methods, which is the same format as the
+derby.properties file.</p>
+</li>
+
+<li id="ttoolsij11815__rtoolsij39639"><a name="ttoolsij11815__rtoolsij39639"><!-- --></a><strong><kbd class="userinput"><var class="varname">inputFile</var></kbd></strong>   <p>A file from which to read commands.
+The ij tool exits at the end of the file or an exit command. Using an input
+file causes ij to print out the commands as it runs them. If you reroute standard
+input, ij does not print out the commands. If you do not supply an input file,
+ij reads from the standard input.</p>
+</li>
+
+</ul>
+</div>
+
+<div class="section"><p>For detailed information about ij commands, see <a href="rtoolsijcomref25570.html#rtoolsijcomref25570">ij commands and errors reference</a>.
+ </p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsij34525.html" title="ij is Derby's interactive JDBC scripting tool. It is a simple utility for running scripts or interactive queries against a Derby database.">Using ij</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctoolsij32837.html" title="">Getting started with ij</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="ttoolsijcreatedatabase.html" title="">Creating a database using ij</a></div>
+<div><a href="ttoolsij30600.html" title="">Starting ij using properties</a></div>
+</div>
+</div>
+
+</body>
+</html>

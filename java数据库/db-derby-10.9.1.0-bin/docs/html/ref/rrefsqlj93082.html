@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SUBSTR function" />
+<meta content="functions, SUBSTR, SUBSTR function" name="DC.subject" />
+<meta content="functions, SUBSTR, SUBSTR function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj93082" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SUBSTR function</title>
+</head>
+<body id="rrefsqlj93082"><a name="rrefsqlj93082"><!-- --></a>
+
+
+<h1 class="topictitle1">SUBSTR function</h1>
+
+
+<div>
+<div class="section"> <p>The SUBSTR function acts on a character string expression or
+a bit string expression. The type of the result is a <a href="rrefsqlj41207.html#rrefsqlj41207">VARCHAR</a> in
+the first case and <a href="rrefsqlj32714.html#rrefsqlj32714">VARCHAR FOR
+BIT DATA</a> in the second case. The length of the result is the maximum
+length of the source type.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre>SUBSTR({ <em>CharacterExpression</em> },
+   <em>StartPosition</em> [, <em>LengthOfString</em> ] )</pre>
+<p>The parameter <em>startPosition</em> and
+the optional parameter <em>lengthOfString</em> are both integer expressions.
+The first character or bit has a <em>startPosition</em> of 1. If you specify
+0, <span>Derby</span> assumes that you
+mean 1.</p>
+<p>The parameter <em>characterExpression</em> is a CHAR, VARCHAR,
+or LONG VARCHAR data type or any built-in type that is implicitly converted
+to a string (except a bit expression).</p>
+<p>For character expressions, the <em>startPosition</em> and <em>lengthOfString</em> parameters
+refer to characters. For bit expressions, the <em>startPosition</em> and <em>lengthOfString</em> parameters
+refer to bits. </p>
+<p>If the <em>startPosition</em> is positive, it refers to
+position from the start of the source expression (counting the first character
+as 1). The <em>startPosition</em> cannot be a negative number. </p>
+<p>If the <em>lengthOfString</em> is
+not specified, SUBSTR returns the substring of the expression from the <em>startPosition</em> to
+the end of the source expression. If <em>lengthOfString</em> is specified, SUBSTR
+returns a VARCHAR or VARBIT of length <em>lengthOfString</em> starting at the <em>startPosition</em>.
+The SUBSTR function returns an error if you specify a negative number for
+the parameter <em>lengthOfString</em>.</p>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2><div class="p">To return a substring of the word <samp class="codeph">hello</samp>,
+starting at the second character and continuing until the end of the word,
+use the following clause:<pre>VALUES SUBSTR('hello', 2)</pre>
+The
+result is '<samp class="codeph">ello</samp>'.</div>
+<div class="p">To return a substring of the word <samp class="codeph">hello</samp>,
+starting at the first character and continuing for two characters, use the
+following clause:<pre>VALUES SUBSTR('hello',1,2)</pre>
+The result
+is '<samp class="codeph">he</samp>'.</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

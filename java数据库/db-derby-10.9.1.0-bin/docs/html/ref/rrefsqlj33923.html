@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Aggregates (set functions)" />
+<meta content="Aggregates, and data types, requirements for" name="DC.subject" />
+<meta content="Aggregates, and data types, requirements for" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj33923" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Aggregates (set functions)</title>
+</head>
+<body id="rrefsqlj33923"><a name="rrefsqlj33923"><!-- --></a>
+
+
+<h1 class="topictitle1">Aggregates (set functions)</h1>
+
+
+<div>
+<div class="section"><p>This section describes aggregates (also described as <em>set functions</em> in
+ANSI SQL-92 and as <em>column functions</em> in some database literature). They
+provide a means of evaluating an expression over a set of rows. Whereas the
+other built-in functions operate on a single expression, aggregates operate
+on a set of values and reduce them to a single scalar value. Built-in aggregates
+can calculate the minimum, maximum, sum, count, and average of an expression
+over a set of values as well as count rows.</p>
+</div>
+
+<div class="section"><p>The built-in aggregates can operate on the data types shown in
+the following table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the data types that are valid for each of the built-in aggregates." frame="border" border="1" rules="all"><caption>Table 1. Permitted data types for built-in aggregates</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="33%" id="N10093">Function Name</th>
+
+<th valign="bottom" width="67%" id="N1009A">Permitted Data Types</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="33%" headers="N10093">COUNT</td>
+
+<td valign="top" width="67%" headers="N1009A">All types</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33%" headers="N10093">MIN</td>
+
+<td valign="top" width="67%" headers="N1009A">Numeric built-in data types</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33%" headers="N10093">MAX</td>
+
+<td valign="top" width="67%" headers="N1009A">Numeric built-in data types</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33%" headers="N10093">AVG</td>
+
+<td valign="top" width="67%" headers="N1009A">Numeric built-in data types</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33%" headers="N10093">SUM</td>
+
+<td valign="top" width="67%" headers="N1009A">Numeric built-in data types</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><div class="p">Aggregates are permitted only in the following:   <ul>
+<li>A <em>SelectItem</em> in a <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a>.</em></li>
+
+<li>A <a href="rrefsqlj14854.html#rrefsqlj14854">HAVING clause</a>.</li>
+
+<li>An <a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a> (using an alias
+name) if the aggregate appears in the result of the relevant query block.
+That is, an alias for an aggregate is permitted in an <a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a> if
+and only if the aggregate appears in a <em>SelectItem</em> in a <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a>.</em></li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><div class="p">All expressions in <em>SelectItems</em> in the <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a></em> must
+be either aggregates or grouped columns (see <a href="rrefsqlj32654.html#rrefsqlj32654">GROUP BY clause</a>).
+(The same is true if there is a HAVING clause without a GROUP BY clause.)
+This is because the <em>ResultSet</em> of a <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a></em> must
+be either a scalar (single value) or a vector (multiple values), but not a
+mixture of both. (Aggregates evaluate to a scalar value, and the reference
+to a column can evaluate to a vector.) For example, the following query mixes
+scalar and vector values and thus is not valid:   <pre><strong><span>-- not valid</span>
+SELECT MIN(flying_time), flight_id
+FROM Flights</strong></pre>
+</div>
+</div>
+
+<div class="section"><div class="p">Aggregates are not allowed on outer references (correlations).
+This means that if a subquery contains an aggregate, that aggregate cannot
+evaluate an expression that includes a reference to a column in the outer
+query block. For example, the following query is not valid because SUM operates
+on a column from the outer query:   <pre><strong>SELECT c1
+FROM t1
+GROUP BY c1
+HAVING c2 &gt;
+    (SELECT t2.x
+    FROM t2
+    WHERE t2.y = SUM(t1.c3)) </strong></pre>
+</div>
+</div>
+
+<div class="section"><p>A cursor declared on a <em>ResultSet</em> that includes an aggregate
+in the outer query block is not updatable.</p>
+</div>
+
+<div class="section"><div class="p"><span>Derby</span> supports
+the following aggregates:<ul>
+<li><a href="rrefsqlj32693.html#rrefsqlj32693">AVG function</a></li>
+
+<li><a href="rrefsqlj38716.html#rrefsqlj38716">COUNT function</a></li>
+
+<li><a href="rrefsqlj27781.html#rrefsqlj27781">MAX function</a></li>
+
+<li><a href="rrefsqlj33520.html#rrefsqlj33520">MIN function</a></li>
+
+<li><a href="rrefsqlj13083.html#rrefsqlj13083">SUM function</a></li>
+
+</ul>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

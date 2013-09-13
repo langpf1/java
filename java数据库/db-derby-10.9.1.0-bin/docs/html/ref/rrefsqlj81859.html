@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="ALTER TABLE statement" />
+<meta content="ALTER TABLE statement, Compressing tables, Tables, altering, compressing, Columns, adding, Constraints, dropping, Defaults, Adding Columns, Adding Constraints, Dropping Constraints, setting, changing lock granularity for, Data types, modifying" name="DC.subject" />
+<meta content="ALTER TABLE statement, Compressing tables, Tables, altering, compressing, Columns, adding, Constraints, dropping, Defaults, Adding Columns, Adding Constraints, Dropping Constraints, setting, changing lock granularity for, Data types, modifying" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj81859" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>ALTER TABLE statement</title>
+</head>
+<body id="rrefsqlj81859"><a name="rrefsqlj81859"><!-- --></a>
+
+
+<h1 class="topictitle1">ALTER TABLE statement</h1>
+
+
+<div>
+<div class="section"><div class="p">The ALTER TABLE statement allows you to:   <ul>
+<li>add a column to a table</li>
+
+<li>add a constraint to a table</li>
+
+<li>drop a column from a table</li>
+
+<li>drop an existing constraint from a table</li>
+
+<li>increase the width of a VARCHAR or VARCHAR FOR BIT DATA column</li>
+
+<li>override row-level locking for the table (or drop the override)</li>
+
+<li>change the increment value and start value of the identity column</li>
+
+<li>change the nullability constraint for a column</li>
+
+<li>change the default value for a column</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>ALTER TABLE <em><a href="rreftablename.html#rreftablename">table-Name</a></em>
+{
+    ADD COLUMN <em><a href="rrefsqlj81859.html#rrefsqlj81859__rrefaltercolumndef">column-definition</a></em> |
+    ADD <em><a href="rrefsqlj13590.html#rrefsqlj13590">CONSTRAINT clause</a></em> |
+    DROP [ COLUMN ] column-name [ CASCADE | RESTRICT ]
+    DROP { PRIMARY KEY | FOREIGN KEY constraint-name | UNIQUE 
+	 constraint-name | CHECK constraint-name | CONSTRAINT constraint-name }
+    ALTER [ COLUMN ] <em><a href="rrefsqlj81859.html#rrefsqlj81859__rrefsqlj37860">column-alteration</a></em> |
+    LOCKSIZE { ROW | TABLE }
+}</strong></pre>
+</div>
+
+<div class="example" id="rrefsqlj81859__rrefaltercolumndef"><a name="rrefsqlj81859__rrefaltercolumndef"><!-- --></a><h2 class="sectiontitle">column-definition</h2> <pre><strong><em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">Simple-column-Name</a></em> [ <em>DataType</em> ]
+[ <em><a href="rrefsqlj16095.html#rrefsqlj16095">Column-level-constraint</a></em> ]*
+[ [ WITH ] DEFAULT <var class="varname">DefaultConstantExpression</var>
+  | <em><a href="rrefsqljgenerationclause.html#rrefsqljgenerationclause">generation-clause</a></em>
+]</strong></pre>
+
+<p>The syntax for the <em>column-definition</em> for a new column is a subset of
+the syntax for a column in a
+<a href="rrefsqlj24513.html#rrefsqlj24513">CREATE TABLE statement</a>.</p>
+
+<p>The syntax of <em>DataType</em> is described in
+<a href="crefsqlj31068.html#crefsqlj31068">Data types</a>. The <em>DataType</em> can
+be omitted only if you specify a <em>generation-clause</em>. If you omit the
+<em>DataType</em>, the type of the generated column is the type of the
+<em>generation-clause</em>. If you specify both a <em>DataType</em> and a
+<em>generation-clause</em>, the type of the <em>generation-clause</em> must be
+assignable to <em>DataType</em>.</p>
+
+<p>For details on <var class="varname">DefaultConstantExpression</var>, see 
+<a href="rrefsqlj30540.html#sqlj64478">Column default</a>.</p>
+</div>
+
+<div class="example" id="rrefsqlj81859__rrefsqlj37860"><a name="rrefsqlj81859__rrefsqlj37860"><!-- --></a><h2 class="sectiontitle">column-alteration</h2><pre><strong><em>column-Name</em> SET DATA TYPE VARCHAR(integer) |
+<em>column-Name</em> SET DATA TYPE VARCHAR FOR BIT DATA(integer) |
+<em>column-name</em> SET INCREMENT BY integer-constant |
+<em>column-name</em> RESTART WITH integer-constant |
+<em>column-name</em> [ NOT ] NULL |
+<em>column-name</em> [ WITH | SET ] DEFAULT default-value |
+<em>column-name</em> DROP DEFAULT</strong> </pre>
+</div>
+
+<div class="section"><p>In the column-alteration, SET INCREMENT BY integer-constant, specifies
+the interval between consecutive values of the identity column. The next value
+to be generated for the identity column will be determined from the last assigned
+value with the increment applied. The column must already be defined with
+the IDENTITY attribute.</p>
+<div class="p">RESTART WITH integer-constant specifies the
+next value to be generated for the identity column. RESTART WITH is useful
+for a table that has an identity column that was defined as GENERATED BY DEFAULT
+and that has a unique key defined on that identity column. Because GENERATED
+BY DEFAULT allows both manual inserts and system generated values, it is possible
+that manually inserted values can conflict with system generated values. To
+work around such conflicts, use the RESTART WITH syntax to specify the next
+value that will be generated for the identity column. Consider the following
+example, which involves a combination of automatically generated data and
+manually inserted data:<pre><strong>CREATE TABLE tauto(i INT GENERATED BY DEFAULT AS IDENTITY, k INT)
+CREATE UNIQUE INDEX tautoInd ON tauto(i)
+INSERT INTO tauto(k) values 1,2</strong></pre>
+</div>
+<div class="p">The system will automatically
+generate values for the identity column. But now you need to manually insert
+some data into the identity column:<pre><strong>INSERT INTO tauto VALUES (3,3)
+INSERT INTO tauto VALUES (4,4)
+INSERT INTO tauto VALUES (5,5)</strong></pre>
+</div>
+<div class="p">The identity column has
+used values 1 through 5 at this point. If you now want the system to generate
+a value, the system will generate a 3, which will result in a unique key exception
+because the value 3 has already been manually inserted. To compensate for
+the manual inserts, issue an ALTER TABLE statement for the identity column
+with RESTART WITH 6:<pre><strong>ALTER TABLE tauto ALTER COLUMN i RESTART WITH 6</strong></pre>
+</div>
+<p>ALTER
+TABLE does not affect any view that references the table being altered. This
+includes views that have an "*" in their SELECT list. You must drop and re-create
+those views if you wish them to return the new columns.</p>
+
+<p><span>Derby</span> raises an error if
+you try to change the <em>DataType</em> of a generated column to a type which is
+not assignable from the type of the <em>generation-clause</em>.
+<span>Derby</span> also raises an error if
+you try to add a DEFAULT clause to a generated column.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Adding columns</h2><p>The syntax for the <em><a href="rrefsqlj81859.html#rrefsqlj81859__rrefaltercolumndef">column-definition</a></em> for a new column is almost the same as for a column in a CREATE TABLE
+statement. This syntax allows a column constraint to be placed on the new column within
+the ALTER TABLE ADD COLUMN statement. However, a column with a NOT NULL constraint
+can be added to an existing table if you give a default value; otherwise,
+an exception is thrown when the ALTER TABLE statement is executed. </p>
+<p>Just
+as in CREATE TABLE, if the column definition includes a primary
+key constraint, the column cannot contain null values, so the NOT NULL attribute
+must also be specified (SQLSTATE 42831).</p>
+<div class="note"><span class="notetitle">Note: </span>If a table has an UPDATE
+trigger without an explicit column list, adding a column to that table in
+effect adds that column to the implicit update column list upon which the
+trigger is defined, and all references to transition variables are invalidated
+so that they pick up the new column.</div>
+
+<p>If you add a generated column to a table, 
+<span>Derby</span> computes the generated
+values for all existing rows in the table.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Adding constraints</h2><div class="p">ALTER TABLE ADD CONSTRAINT adds
+a table-level constraint to an existing table. Any supported table-level constraint
+type can be added via ALTER TABLE. The following limitations exist on adding
+a constraint to an existing table:   <ul>
+<li>When adding a foreign key or check constraint to an existing table, <span>Derby</span> checks the table to make
+sure existing rows satisfy the constraint. If any row is invalid, <span>Derby</span> throws
+a statement exception and the constraint is not added.</li>
+
+<li>All columns included in a primary key must contain non null data and be
+unique.   <p>ALTER TABLE ADD UNIQUE or PRIMARY KEY provide a shorthand method
+of defining a primary key composed of a single column. If PRIMARY KEY is specified
+in the definition of column C, the effect is the same as if the PRIMARY KEY(C)
+clause were specified as a separate clause. The column cannot contain null
+values, so the NOT NULL attribute must also be specified.</p>
+</li>
+
+</ul>
+</div>
+<p>For information on the syntax of constraints, see <a href="rrefsqlj13590.html#rrefsqlj13590">CONSTRAINT clause</a>.
+Use the syntax for table-level constraint when adding a constraint with the
+ADD TABLE ADD CONSTRAINT syntax.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Dropping columns</h2><p>ALTER TABLE DROP COLUMN
+allows you to drop a column from a table.</p>
+
+<p>
+The keyword COLUMN is optional.</p>
+
+<p>The keywords CASCADE and RESTRICT are also optional.
+If you specify neither CASCADE nor RESTRICT, the default is CASCADE.</p>
+
+<p>
+If you specify RESTRICT, then the column drop will be rejected if it
+would cause a dependent schema object to become invalid.</p>
+
+<p>
+If you specify CASCADE, then the column drop should
+additionally drop other schema objects which have become invalid.</p>
+
+<p>
+The schema objects which can cause a DROP COLUMN RESTRICT to be rejected
+include: views, triggers, primary key constraints, foreign key constraints,
+unique key constraints, check constraints, and column privileges. If one of
+these types of objects depends on the column being dropped, DROP COLUMN
+RESTRICT will reject the statement.</p>
+
+<p>
+<span>Derby</span> also raises an error if
+you specify RESTRICT when you drop a column referenced by the
+<em>generation-clause</em> of a generated column. However, if you specify CASCADE,
+the generated column is also dropped with CASCADE semantics.</p>
+
+<p>
+You may not drop the last (only) column in a table.</p>
+
+<p>
+CASCADE/RESTRICT doesn't consider whether the column being dropped is used
+in any indexes. When a column is dropped, it is removed from any indexes
+which contain it. If that column was the only column in the index, the
+entire index is dropped.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Dropping constraints</h2><p>ALTER TABLE DROP CONSTRAINT
+drops a constraint on an existing table. To drop an unnamed constraint, you
+must specify the generated constraint name stored in <em>SYS.SYSCONSTRAINTS</em> as
+a delimited identifier.</p>
+<p>Dropping a primary key, unique, or foreign key
+constraint drops the physical index that enforces the constraint (also known
+as a <em>backing index</em>).</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Modifying columns</h2><div class="p">The <em><a href="rrefsqlj81859.html#rrefsqlj81859__rrefsqlj37860">column-alteration</a></em> allows
+you to alter the named column in the following ways:   <ul>
+<li>Increasing the width of an existing VARCHAR or VARCHAR FOR BIT DATA column. CHARACTER VARYING
+or CHAR VARYING can be used as synonyms for the VARCHAR keyword. <p>To increase
+the width of a column of these types, specify the data type and new size after
+the column name.</p>
+<p>You are not allowed to decrease the width or to change
+the data type. You are not allowed to increase the width of a column that
+is part of a primary or unique key referenced by a foreign key constraint
+or that is part of a foreign key constraint.</p>
+</li>
+
+<li>Specifying the interval between consecutive values of the identity column.<p>To
+set an interval between consecutive values of the identity column, specify
+the integer-constant. You must previously define the column with the IDENTITY
+attribute (SQLSTATE 42837). If there are existing rows in the table, the values
+in the column for which the SET INCREMENT default was added do not change.</p>
+</li>
+
+<li>Modifying the nullability constraint of a column.
+    <p>You can add the NOT NULL constraint to an existing column. To do so
+        there must not be existing NULL values for the column in the table.</p>
+
+    <p>You can remove the NOT NULL constraint from an existing column. To do
+        so the column must not be used in a PRIMARY KEY constraint.</p>
+</li>
+
+<li>Changing the default value for a column.
+<p>You can use DEFAULT default-value to change a column default. To disable a
+previously set default, use DROP DEFAULT (alternatively, you can specify NULL as
+the default-value).</p>
+</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Setting defaults</h2><p>You can specify a default value
+for a new column. A default value is the value that is inserted into a column
+if no other value is specified. If not explicitly specified, the default value
+of a column is NULL. If you add a default to a new column, existing rows in
+the table gain the default value in the new column.</p>
+<p>For more information
+about defaults, see <a href="rrefsqlj24513.html#rrefsqlj24513">CREATE TABLE statement</a>.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Changing the lock granularity for the table</h2><p>The
+LOCKSIZE clause allows you to override row-level locking for the specific
+table, if your system uses the default setting of row-level locking. (If your
+system is set for table-level locking, you cannot change the locking granularity
+to row-level locking, although <span>Derby</span> allows
+you to use the LOCKSIZE clause in such a situation without throwing an exception.)
+To override row-level locking for the specific table, set locking for the
+table to TABLE. If you created the table with table-level locking granularity,
+you can change locking back to ROW with the LOCKSIZE clause in the ALTER TABLE
+STATEMENT. For information about why this is sometimes useful, see <cite><span><em>Tuning Derby</em></span></cite>.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Examples</h2><pre><strong><span>-- Add a new column with a column-level constraint
+-- to an existing table
+-- An exception will be thrown if the table
+-- contains any rows
+-- since the newcol will be initialized to NULL
+-- in all existing rows in the table</span>
+ALTER TABLE CITIES ADD COLUMN REGION VARCHAR(26)
+CONSTRAINT NEW_CONSTRAINT CHECK (REGION IS NOT NULL);
+
+<span>-- Add a new unique constraint to an existing table
+-- An exception will be thrown if duplicate keys are found</span>
+ALTER TABLE SAMP.DEPARTMENT
+ADD CONSTRAINT NEW_UNIQUE UNIQUE (DEPTNO);
+
+<span>-- add a new foreign key constraint to the
+-- Cities table. Each row in Cities is checked
+-- to make sure it satisfied the constraints.
+-- if any rows don't satisfy the constraint, the
+-- constraint is not added</span>
+ALTER TABLE CITIES ADD CONSTRAINT COUNTRY_FK
+Foreign Key (COUNTRY) REFERENCES COUNTRIES (COUNTRY);
+
+<span>-- Add a primary key constraint to a table
+-- First, create a new table</span>
+CREATE TABLE ACTIVITIES (CITY_ID INT NOT NULL,
+SEASON CHAR(2), ACTIVITY VARCHAR(32) NOT NULL);
+<span>-- You will not be able to add this constraint if the
+-- columns you are including in the primary key have
+-- null data or duplicate values.</span>
+ALTER TABLE Activities ADD PRIMARY KEY (city_id, activity);
+
+<span>-- Drop the city_id column if there are no dependent objects:</span>
+ALTER TABLE Cities DROP COLUMN city_id RESTRICT;
+<span>-- Drop the city_id column, also dropping all dependent objects:</span>
+ALTER TABLE Cities DROP COLUMN city_id CASCADE;
+
+<span>-- Drop a primary key constraint from the CITIES table
+</span>
+ALTER TABLE Cities DROP CONSTRAINT Cities_PK;
+<span>-- Drop a foreign key constraint from the CITIES table</span>
+ALTER TABLE Cities DROP CONSTRAINT COUNTRIES_FK;
+<span>-- add a DEPTNO column with a default value of 1</span>
+ALTER TABLE SAMP.EMP_ACT ADD COLUMN DEPTNO INT DEFAULT 1;
+<span>-- increase the width of a VARCHAR column</span>
+ALTER TABLE SAMP.EMP_PHOTO ALTER PHOTO_FORMAT SET DATA TYPE VARCHAR(30);
+<span>-- change the lock granularity of a table</span>
+ALTER TABLE SAMP.SALES LOCKSIZE TABLE;
+
+<span>-- Remove the NOT NULL constraint from the MANAGER column</span>
+ALTER TABLE Employees ALTER COLUMN Manager NULL;
+<span>-- Add the NOT NULL constraint to the SSN column</span>
+ALTER TABLE Employees ALTER COLUMN ssn NOT NULL;
+
+<span>-- Change the default value for the SALARY column</span>
+ALTER TABLE Employees ALTER COLUMN Salary DEFAULT 1000.0
+ALTER TABLE Employees ALTER COLUMN Salary DROP DEFAULT
+</strong></pre>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Results</h2><p>An ALTER TABLE statement causes all statements
+that are dependent on the table being altered to be recompiled before their
+next execution. ALTER TABLE is not allowed if there are any open cursors that
+reference the table being altered.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj39374.html" title="">Statements</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE SEQUENCE statement" />
+<meta content="CREATE SEQUENCE statement, SQL statements, CREATE SEQUENCE, sequence generators, creating" name="DC.subject" />
+<meta content="CREATE SEQUENCE statement, SQL statements, CREATE SEQUENCE, sequence generators, creating" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscspeeksequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljdropsequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscspeeksequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssyssequences.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpreallocator.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljdropsequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssyssequences.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpreallocator.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreaterole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatetype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljcreatesequence" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE SEQUENCE statement</title>
+</head>
+<body id="rrefsqljcreatesequence"><a name="rrefsqljcreatesequence"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE SEQUENCE statement</h1>
+
+
+<div>
+<div class="section"><p>The CREATE SEQUENCE statement creates a sequence generator, which is
+a mechanism for generating exact numeric values, one at a time.</p>
+
+<p>The owner of the schema where the sequence generator lives automatically
+gains the USAGE privilege on the sequence generator, and can grant this
+privilege to other users and roles. Only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> and the
+owner of the sequence generator can grant these USAGE privileges. The USAGE
+privilege cannot be revoked from the schema owner. See 
+<a href="rrefsqljgrant.html#rrefsqljgrant">GRANT statement</a> and
+<a href="rrefsqljrevoke.html#rrefsqljrevoke">REVOKE statement</a> for more information.
+</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>CREATE SEQUENCE [ <em><a href="rrefschemaname.html#rrefschemaname">schemaName</a>.</em> ] <em><a href="crefsqlj34834.html#crefsqlj34834">SQL92Identifier</a></em> [ <em><a href="rrefsqljcreatesequence.html#rrefsqljcreatesequence__rrefsqljcrseqsequenceelement">sequenceElement</a></em> ]*</strong></pre>
+
+<p>The sequence name is composed of an optional <em>schemaName</em> and a
+<em>SQL92Identifier</em>. If a <em>schemaName</em> is not provided, the current
+schema is the default schema. If a qualified sequence name is specified, the
+schema name cannot begin with SYS.</p>
+</div>
+
+<div class="section" id="rrefsqljcreatesequence__rrefsqljcrseqsequenceelement"><a name="rrefsqljcreatesequence__rrefsqljcrseqsequenceelement"><!-- --></a><h2 class="sectiontitle">sequenceElement</h2>
+<pre><strong>{
+  AS <em>dataType</em> 
+  | START WITH <em>signedInteger</em> 
+  | INCREMENT BY <em>signedInteger</em> 
+  | MAXVALUE <em>signedInteger</em> | NO MAXVALUE 
+  | MINVALUE <em>signedInteger</em> | NO MINVALUE 
+  | CYCLE | NO CYCLE 
+}</strong></pre>
+
+<p>If specified, the <em>dataType</em> must be an integer type (SMALLINT, INT, or
+BIGINT). If not specified, the default data type is INT.</p>
+
+<p>If specified, the INCREMENT value is a non-zero number which fits in a
+<em>DataType</em> value. If not specified, the INCREMENT defaults to 1. INCREMENT
+is the step by which the sequence generator advances. If INCREMENT is positive,
+the sequence numbers get larger over time. If INCREMENT is negative, the
+sequence numbers get smaller.</p>
+
+<p>If specified, MINVALUE must be an integer which fits in a <em>DataType</em>
+value. If MINVALUE is not specified, or if NO MINVALUE is specified, MINVALUE
+defaults to the smallest negative number which fits in a <em>DataType</em> value.
+</p>
+
+<p>If specified, MAXVALUE may not be greater than the largest positive integer
+that fits in a <em>DataType</em> value. If MAXVALUE is not specified, or if
+NO MAXVALUE is specified, MAXVALUE defaults to the largest positive integer
+which fits in a <em>DataType</em> value. MAXVALUE must be greater than MINVALUE.
+</p>
+
+<p>The START WITH clause specifies the initial value of the sequence generator.
+This value must fall between MINVALUE and MAXVALUE. If the START WITH clause is
+not specified, the initial value defaults to be:</p>
+
+<ul><li>MINVALUE if INCREMENT is positive</li>
+
+<li>MAXVALUE if INCREMENT is negative</li>
+</ul>
+
+<p>The CYCLE clause controls what happens when the sequence generator exhausts
+its range and wraps around. If CYCLE is specified, the wraparound behavior is to
+reinitialize the sequence generator to its START value. If NO CYCLE is
+specified, <span>Derby</span> throws an
+exception when the generator wraps around. The default behavior is NO CYCLE.</p>
+
+<p>To retrieve the next value from a sequence generator, use a
+<a href="rrefsqljnextvaluefor.html#rrefsqljnextvaluefor">NEXT VALUE FOR
+expression</a>.
+</p>
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Performance</h2>
+
+<p>
+To boost performance and concurrency,
+<span>Derby</span>
+preallocates ranges of upcoming values for sequences. The lengths of these ranges
+can be configured by adjusting the value of the
+<a href="rrefproperpreallocator.html#rrefproperpreallocator">derby.language.sequence.preallocator</a>
+property.
+</p>
+
+</div>
+
+
+<div class="example"><h2 class="sectiontitle">Examples</h2>
+<p>The following statement creates a sequence generator of type INT, with a
+start value of -2147483648 (the smallest INT value). The value increases by 1,
+and the last legal value is the largest possible INT. If NEXT VALUE FOR is
+invoked on the generator again,
+<span>Derby</span> throws an exception.
+</p>
+
+<pre><strong>CREATE SEQUENCE order_id;</strong></pre>
+
+<p>The following statement creates a sequence of type BIGINT with a start value
+of 3,000,000,000. The value increases by 1, and the last legal value is the
+largest possible BIGINT. If NEXT VALUE FOR is invoked on the generator again,
+<span>Derby</span> throws an exception.
+</p>
+
+<pre><strong>CREATE SEQUENCE order_entry_id
+AS BIGINT
+START WITH 3000000000;</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="The CREATE FUNCTION statement allows you to create Java functions, which you can then use in an expression.">CREATE FUNCTION statement</a></div>
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX statement</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE statement</a></div>
+<div><a href="rrefcreaterole.html" title="">CREATE ROLE statement</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA statement</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">CREATE SYNONYM statement</a></div>
+<div><a href="rrefsqlj24513.html" title="">CREATE TABLE statement</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER statement</a></div>
+<div><a href="rrefsqljcreatetype.html" title="">CREATE TYPE statement</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW statement</a></div>
+<div><a href="rrefsyscspeeksequence.html" title="">SYSCS_UTIL.SYSCS_PEEK_AT_SEQUENCE system function</a></div>
+<div><a href="rrefsqljdropsequence.html" title="">DROP SEQUENCE statement</a></div>
+<div><a href="rrefsistabssyssequences.html" title="The SYSSEQUENCES table describes the sequence generators in the database.">SYSSEQUENCES system table</a></div>
+<div><a href="rrefproperpreallocator.html" title="">derby.language.sequence.preallocator</a></div>
+</div>
+</div>
+
+</body>
+</html>

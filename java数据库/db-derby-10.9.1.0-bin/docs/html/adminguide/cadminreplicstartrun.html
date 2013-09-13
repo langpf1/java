@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Starting and running replication" />
+<meta content="replicating databases, starting and running, database replication" name="DC.subject" />
+<meta content="replicating databases, starting and running, database replication" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplication.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplicstop.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplicfailover.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplicsecurity.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplicfailures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminreplicstartrun" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Starting and running replication</title>
+</head>
+<body id="cadminreplicstartrun"><a name="cadminreplicstartrun"><!-- --></a>
+
+
+<h1 class="topictitle1">Starting and running replication</h1>
+
+
+<div>
+<p>Each replicated database is replicated from a master to a slave version of
+that database. Initially there is no replication; a master database must be
+created before it can be replicated. The database may, of course, be empty when
+replication starts. On the other hand, replication does not need to be specified
+immediately after the database is created; it can be initiated at any time after
+the database is created.
+</p>
+
+<p>Before you start replication, you must shut down the master database and then
+copy the database to the slave location. Follow these
+steps to start replication:
+</p>
+
+<ol>
+<li>Make sure that the database on the master system is shut down cleanly.</li>
+
+<li>Copy the database to the slave location.</li>
+
+<li>Start slave replication mode on the Derby instance that is acting
+as the slave for the database. To start slave replication, use the
+<em>startSlave=true</em> attribute and, optionally, the <em>slaveHost=hostname</em>
+and <em>slavePort=portValue</em> attributes. For example, for a database named
+<samp class="codeph">wombat</samp>, you might use the following connection URL:
+<pre>
+jdbc:derby:wombat;startSlave=true
+</pre>
+</li>
+
+<li>Start master replication mode on the Derby instance that is acting as the
+master for the database. To start replication, connect to the database on the
+master system using the <em>startMaster=true</em> attribute in conjunction with
+the <em>slaveHost=hostname</em> attribute (and, optionally, the
+<em>slavePort=portValue</em> attribute). For example, you might use the following
+connection URL:
+<pre>
+jdbc:derby:wombat;startMaster=true;slaveHost=myremotesystem
+</pre>
+
+A successful use of the <em>startMaster=true</em> attribute will also start the
+database.
+</li>
+
+</ol>
+
+<p>See the <span><em>Derby Reference Manual</em></span> for details about these
+attributes.</p>
+
+<p>After replication has been started, the slave
+is ready to receive logged operations from the master. The master can now
+continue to process transactions. From this point on, the master forwards all
+logged operations to the slave in chunks. The slave repeats
+these operations by applying the contents of the <span>Derby</span> transaction log, but does
+not process any other operations. Attempts to connect to the slave database are
+refused. In case of failure, the slave can recover to the state the master was
+in at the time the last chunk of the transaction log was sent.
+</p>
+
+<p> While replication is running, neither the slave or the master database is
+permitted to be shut down. Replication must be stopped before you can shut down
+either the slave or the master database. There is one exception to this rule:
+if the entire system is shut down, the peer that is shut down notifies the other
+replication peer that replication is stopped.</p>
+
+<p>If you install jar files on the master system while replication is running,
+the same jars are not automatically installed on the slave. But because the
+transaction log information sent to the slave system includes the jar file
+installation, the slave database has a record of the jar files, even though they
+are not actually there. Therefore, you must install the jar files on the former
+slave after a failover by calling either <samp class="codeph">SQLJ.remove_jar</samp>
+followed by <samp class="codeph">SQLJ.install_jar</samp>, or
+<samp class="codeph">SQLJ.replace_jar</samp>. (For information on installing jar files, see
+"Loading classes from a database" in the 
+<span><em>Derby Developer's Guide</em></span> and
+"System procedures for storing jar files in a database" in the
+<span><em>Derby Reference Manual</em></span>.)</p>
+
+<p>If the jar files must be available to clients immediately after a failover,
+you must stop replication and then start replication over again from the
+beginning, so that the slave database will have the same jar files as the
+master.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminreplication.html" title="Replication is an important feature of a robust database management system. In Derby, you start database replication by using connection URL attributes.">Replicating databases</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminreplicstop.html" title="">Stopping replication</a></div>
+<div><a href="cadminreplicfailover.html" title="">Forcing a failover</a></div>
+<div><a href="cadminreplicsecurity.html" title="">Replication and security</a></div>
+<div><a href="cadminreplicfailures.html" title="">Replication failure handling</a></div>
+</div>
+</div>
+
+</body>
+</html>

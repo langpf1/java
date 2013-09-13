@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Activity 2: Run SQL using the client driver" />
+<meta name="abstract" content="This activity uses Derby within a client/server configuration by using the Network Server. The ij tool is the client application that connects to the Derby Network Server. In this activity, you create a database called seconddb and run some basic SQL statements." />
+<meta name="description" content="This activity uses Derby within a client/server configuration by using the Network Server. The ij tool is the client application that connects to the Derby Network Server. In this activity, you create a database called seconddb and run some basic SQL statements." />
+<meta content="Network Server, Client driver, tutorial, client driver" name="DC.subject" />
+<meta content="Network Server, Client driver, tutorial, client driver" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cgstutorialintro.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tgsactivity2" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Activity 2: Run SQL using the client driver</title>
+</head>
+<body id="tgsactivity2"><a name="tgsactivity2"><!-- --></a>
+
+
+<h1 class="topictitle1">Activity 2: Run SQL using the client driver</h1>
+
+
+
+<div><p>This activity uses <span>Derby</span> within
+a client/server configuration by using the Network Server. The <samp class="codeph">ij</samp> tool
+is the client application that connects to the <span>Derby</span> Network
+Server. In this activity, you create a database called <samp class="codeph">seconddb</samp> and
+run some basic SQL statements.</p>
+
+<div class="p">This activity assumes that you know how to open a command shell and
+change to the <samp class="codeph">DERBYTUTOR</samp> directory.  </div>
+
+<div class="section"><p>You use two command windows (referred to as Shell-1 and Shell-2)
+in this activity. You use Shell-1 to start the <span>Derby</span> Network
+Server and display Network Server messages. You use Shell-2 to establish a
+client connection to the Network Server using <samp class="codeph">ij</samp> and then
+perform some basic SQL operations.</p>
+</div>
+
+<ol>
+<li class="stepexpand"><span>Open a command window (Shell-1) and change to the <samp class="codeph">DERBYTUTOR</samp> directory.</span>
+</li>
+
+<li class="stepexpand"><span>Start the Network Server, as shown in the following table.</span> 
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the commands to start the Network Server on UNIX and Windows systems." frame="border" border="1" rules="all"><caption>Table 1. Command to start the Network Server</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N100D4">Operating System</th>
+
+<th valign="bottom" width="75%" id="N100DB">Command</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N100D4">UNIX (Korn Shell)</td>
+
+<td valign="top" width="75%" headers="N100DB"><pre><strong><kbd class="userinput">java -jar $DERBY_HOME/lib/derbyrun.jar server start</kbd></strong>
+<tt class="sysout">Wed Mar 02 17:25:26 EST 2011 : Security manager
+ installed using the Basic server security policy.
+Wed Mar 02 17:25:27 EST 2011 : Apache Derby
+ Network Server - 10.8.0.0 - (1076370) started and
+ ready to accept connections on port 1527</tt></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N100D4">Windows</td>
+
+<td valign="top" width="75%" headers="N100DB"><pre><strong><kbd class="userinput">java -jar %DERBY_HOME%\lib\derbyrun.jar server start</kbd></strong>
+<tt class="sysout">Wed Mar 02 17:25:26 EST 2011 : Security manager
+ installed using the Basic server security policy.
+Wed Mar 02 17:25:27 EST 2011 : Apache Derby
+ Network Server - 10.8.0.0 - (1076370) started and
+ ready to accept connections on port 1527</tt></pre>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+ A Network Server startup message appears
+in the Shell-1 command  window.</li>
+
+<li class="stepexpand"><span>Open another command window (Shell-2). Change to the <samp class="codeph">DERBYTUTOR</samp> directory.</span>
+</li>
+
+<li class="stepexpand"><span>Start <samp class="codeph">ij</samp>.</span> <div class="p">If you included the
+<samp class="codeph">DERBY_HOME/bin</samp> directory in your PATH environment variable,
+type: <pre>ij</pre>
+ Otherwise, you can use the
+<samp class="codeph">java</samp> command to start the <samp class="codeph">ij</samp> tool, as shown in
+the following table.</div>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the commands to start the ij tool on UNIX and Windows systems." frame="border" border="1" rules="all"><caption>Table 2. Command to start the <samp class="codeph">ij</samp> tool</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N101C3">Operating System</th>
+
+<th valign="bottom" width="75%" id="N101CA">Command</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N101C3">UNIX (Korn Shell)</td>
+
+<td valign="top" width="75%" headers="N101CA"><pre><strong><kbd class="userinput">java -jar $DERBY_HOME/lib/derbyrun.jar ij</kbd></strong>
+<tt class="sysout">ij version 10.9</tt></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N101C3">Windows</td>
+
+<td valign="top" width="75%" headers="N101CA"><pre><strong><kbd class="userinput">java -jar %DERBY_HOME%\lib\derbyrun.jar ij</kbd></strong>
+<tt class="sysout">ij version 10.9</tt></pre>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+ You will enter all subsequent commands
+from the network client, so you will type the commands in the Shell-2 command
+window.</li>
+
+<li class="stepexpand"><span>Create and open a connection to the database using the client driver.</span>
+ <pre><strong><kbd class="userinput">CONNECT 'jdbc:derby://localhost:1527/seconddb;create=true';
+</kbd></strong></pre>
+<div class="remember"><span class="remembertitle">Remember: </span>A client connection URL
+contains a hostname and a port number. For example: <samp class="codeph">//localhost:1527/</samp></div>
+ 
+</li>
+
+<li class="stepexpand"><span>Create a table with two columns (ID and NAME) using the following
+SQL statement:</span> <pre><strong><kbd class="userinput">CREATE TABLE SECONDTABLE
+    (ID INT PRIMARY KEY,
+    NAME VARCHAR(14));</kbd></strong>
+<tt class="sysout">0 rows inserted/updated/deleted
+</tt></pre>
+</li>
+
+<li class="stepexpand"><span>Insert three records into the table.</span> <pre><strong><kbd class="userinput">INSERT INTO SECONDTABLE VALUES 
+    (100,'ONE HUNDRED'),(200,'TWO HUNDRED'),(300,'THREE HUNDRED');</kbd></strong>
+<tt class="sysout">3 rows inserted/updated/deleted
+</tt></pre>
+</li>
+
+<li class="stepexpand"><span>Select all of the records in the table.</span> <pre><strong><kbd class="userinput">SELECT * FROM SECONDTABLE;</kbd></strong>
+<tt class="sysout">ID         |NAME
+------------------------
+100        |ONE HUNDRED
+200        |TWO HUNDRED
+300        |THREE HUNDRED
+
+3 rows selected</tt></pre>
+</li>
+
+<li class="stepexpand"><span>Select a subset of records from the table by specifying a <samp class="codeph">WHERE</samp> clause.</span>
+ <pre><strong><kbd class="userinput">SELECT * FROM SECONDTABLE WHERE ID=200;</kbd></strong>
+<tt class="sysout">ID         |NAME
+------------------------
+200        |TWO HUNDRED
+
+1 row selected</tt></pre>
+</li>
+
+<li class="stepexpand"><span>Exit <samp class="codeph">ij</samp>.</span> <pre><strong><kbd class="userinput">exit;</kbd></strong></pre>
+
+</li>
+
+<li class="stepexpand"><span>Shut down the  <span>Derby</span> Network
+Server, as shown in the following table.</span> 
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the commands to shut down the Network Server on UNIX and Windows systems." frame="border" border="1" rules="all"><caption>Table 3. Command to shut down the Network Server</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N10353">Operating System</th>
+
+<th valign="bottom" width="75%" id="N1035A">Command</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N10353">UNIX (Korn Shell)</td>
+
+<td valign="top" width="75%" headers="N1035A"><pre><strong><kbd class="userinput">java -jar $DERBY_HOME/lib/derbyrun.jar server shutdown</kbd></strong>
+<tt class="sysout">Wed Mar 02 17:29:44 EST 2011 : Apache Derby
+ Network Server - 10.8.0.0 - (1076370) shutdown</tt></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10353">Windows</td>
+
+<td valign="top" width="75%" headers="N1035A"><pre><strong><kbd class="userinput">java -jar %DERBY_HOME%\lib\derbyrun.jar server shutdown</kbd></strong>
+<tt class="sysout">Wed Mar 02 17:29:44 EST 2011 : Apache Derby
+ Network Server - 10.8.0.0 - (1076370) shutdown</tt></pre>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+ The server shutdown confirmation appears
+in both command windows.</li>
+
+</ol>
+
+<div class="section"><strong>Activity notes</strong> <p>The client connection URL contains network
+information (hostname and portnumber) not found in the URL for an embedded
+connection. This information tells the client driver the location of the Network
+Server. The client driver sends requests to and receives responses from the
+Network Server.</p>
+<p>In this activity the <span>Derby</span> database
+engine is embedded in the Network Server and returns data to the  <samp class="codeph">ij</samp> client
+(a client/server configuration). In contrast, establishing a connection using
+an embedded URL (one without  <samp class="codeph">//localhost:1527/</samp>) would have
+caused the  <span>Derby</span> engine
+to be embedded  in the <samp class="codeph">ij</samp> application (an embedded configuration).</p>
+
+<p>In
+this configuration, multiple client programs can connect to the Network Server
+and access the database simultaneously. (This activity does not demonstrate
+this capability.)</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cgstutorialintro.html" title="To help you get up and running with Derby as quickly as possible, this self-study guide highlights some of the more important features of Derby.">Self-study tutorial for users new to Derby</a></div>
+</div>
+</div>
+
+</body>
+</html>

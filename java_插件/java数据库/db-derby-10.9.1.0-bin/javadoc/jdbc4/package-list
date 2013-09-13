@@ -1,0 +1,9 @@
+org.apache.derby.authentication
+org.apache.derby.catalog
+org.apache.derby.drda
+org.apache.derby.jdbc
+org.apache.derby.mbeans
+org.apache.derby.mbeans.drda
+org.apache.derby.security
+org.apache.derby.tools
+org.apache.derby.vti

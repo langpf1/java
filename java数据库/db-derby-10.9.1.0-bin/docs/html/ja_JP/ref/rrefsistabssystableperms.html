@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSTABLEPERMS システム表" />
+<meta name="abstract" content="SYSTABLEPERMS表には権限が付与されているテーブルの情報が記録されます。" />
+<meta name="description" content="SYSTABLEPERMS表には権限が付与されているテーブルの情報が記録されます。" />
+<meta content="system tables, SYSTABLEPERMS, permissions, SYSTABLEPERMS system table" name="DC.subject" />
+<meta content="system tables, SYSTABLEPERMS, permissions, SYSTABLEPERMS system table" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljrevoke.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljgrant.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljrevoke.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsistabssystableperms" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSTABLEPERMS システム表</title>
+</head>
+<body id="rrefsistabssystableperms"><a name="rrefsistabssystableperms"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSTABLEPERMS システム表</h1>
+
+
+
+<div><p>
+SYSTABLEPERMS表には権限が付与されているテーブルの情報が記録されます。</p>
+
+<div class="section"><div class="p">全ての権限について、GRANTEE, TABLEID, GRANTORの組み合わせごとに、SYSTABLEPERMS表に行が一行あります。SYSTABLEPERMS表のキーは以下のとおりです。<ul>
+<li>主キー (GRANTEE, TABLEID, GRANTOR)</li>
+
+<li>一意キー (TABLEPERMSID)</li>
+
+<li>外部キー (TABLEID references SYS.SYSTABLES)</li>
+
+</ul>
+ </div>
+<p>次にSYSTABLEPERMS表にある各列の情報を記します。</p>
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. " width="100%" frame="border" border="1" rules="all">
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="27%" id="N100AB">列名</th>
+
+<th align="left" valign="bottom" width="10%" id="N100B4">型</th>
+
+<th align="left" valign="bottom" width="11%" id="N100BD">長さ</th>
+
+<th align="left" valign="bottom" width="14.000000000000002%" id="N100C6">Null可</th>
+
+<th align="left" valign="bottom" width="38%" id="N100CF">内容</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="27%" headers="N100AB">TABLEPERMSID</td>
+
+<td valign="top" width="10%" headers="N100B4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">36</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">依存関係管理機能において、ビューやトリガ、制約の、テーブル単位の権限への依存を処理するために使います。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">GRANTEE</td>
+
+<td valign="top" width="10%" headers="N100B4">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">30</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">権限が与えられたユーザの認証識別子です。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">GRANTOR</td>
+
+<td valign="top" width="10%" headers="N100B4">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">30</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">権限を与えたユーザの認証識別子です。データベース上の情報の所有者だけが権限を与えることができます。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">TABLEID</td>
+
+<td valign="top" width="10%" headers="N100B4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">36</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">権限が与えられたテーブルの一意な識別子です。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">SELECTPRIV</td>
+
+<td valign="top" width="10%" headers="N100B4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">1</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">SELECT権限が与えられているかをあらわします。有効な値は、'y'(付与されたものではない権限を持つ)
+'Y'(付与された権限を持つ)
+'N'(権限を持たない)です。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">DELETEPRIV</td>
+
+<td valign="top" width="10%" headers="N100B4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">1</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">DELETE権限が与えられているかをあらわします。
+有効な値は、'y'(付与されたものではない権限を持つ)
+'Y'(付与された権限を持つ)
+'N'(権限を持たない)です。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">INSERTPRIV</td>
+
+<td valign="top" width="10%" headers="N100B4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">1</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">INSERT権限が与えられているかをあらわします。
+有効な値は、'y'(付与されたものではない権限を持つ)
+'Y'(付与された権限を持つ)
+'N'(権限を持たない)です。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">UPDATEPRIV</td>
+
+<td valign="top" width="10%" headers="N100B4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">1</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">UPDATE権限が与えられているかをあらわします。
+有効な値は、'y'(付与されたものではない権限を持つ)
+'Y'(付与された権限を持つ)
+'N'(権限を持たない)です。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">REFERENCEPRIV</td>
+
+<td valign="top" width="10%" headers="N100B4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">1</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">REFERENCE権限が与えられているかをあらわします。
+有効な値は、'y'(付与されたものではない権限を持つ)
+'Y'(付与された権限を持つ)
+'N'(権限を持たない)です。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="27%" headers="N100AB">TRIGGERPRIV</td>
+
+<td valign="top" width="10%" headers="N100B4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BD">1</td>
+
+<td valign="top" width="14.000000000000002%" headers="N100C6">不可</td>
+
+<td valign="top" width="38%" headers="N100CF">TRIGGER権限が与えられているかをあらわします。有効な値は、'y'(付与されたものではない権限を持つ)
+'Y'(付与された権限を持つ)
+'N'(権限を持たない)です。</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqljrevoke.html" title="REVOKE文を使って、指定したユーザあるいは全ユーザから、データベースの情報に対して操作を行う権限を剥奪することができます。">REVOKE 文</a></div>
+<div><a href="rrefsqljgrant.html" title="GRANT 文を使って、データベースにある情報の操作権限を、指定した一人あるいは全ユーザに与えることができます。">GRANT 文</a></div>
+</div>
+</div>
+
+</body>
+</html>

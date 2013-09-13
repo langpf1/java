@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="REVOKE statement" />
+<meta name="abstract" content="Use the REVOKE statement to remove privileges from a specific user or role, or from all users, to perform actions on database objects. You can also use the REVOKE statement to revoke a role from a user, from PUBLIC, or from another role." />
+<meta name="description" content="Use the REVOKE statement to remove privileges from a specific user or role, or from all users, to perform actions on database objects. You can also use the REVOKE statement to revoke a role from a user, from PUBLIC, or from another role." />
+<meta content="REVOKE statement, syntax, SQL statements, REVOKE, REVOKE statement, limitations, privileges, tables and columns, revoking" name="DC.subject" />
+<meta content="REVOKE statement, syntax, SQL statements, REVOKE, REVOKE statement, limitations, privileges, tables and columns, revoking" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljgrant.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljgrant.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssyscolperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssystableperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssystableperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssyscolperms.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljrevoke" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>REVOKE statement </title>
+</head>
+<body id="rrefsqljrevoke"><a name="rrefsqljrevoke"><!-- --></a>
+
+
+<h1 class="topictitle1">REVOKE statement </h1>
+
+
+
+<div><p>Use the REVOKE statement to remove privileges from a specific
+user or role, or from all users, to perform actions on database objects. You can
+also use the REVOKE statement to revoke a role from a user, from PUBLIC, or from
+another role.</p>
+
+<div class="section"> <div class="p">The following types of privileges can be revoked:<ul>
+<li>Delete data from a specific table.</li>
+
+<li>Insert data into a specific table.</li>
+
+<li>Create a foreign key reference to the named table or to a subset of columns
+from a table.</li>
+
+<li>Select data from a table, view, or a subset of columns in a table.</li>
+
+<li>Create a trigger on a table.</li>
+
+<li>Update data in a table or in a subset of columns in a table.</li>
+
+<li>Run a specified routine (function or procedure).</li>
+
+<li>Use a sequence generator or a user-defined type.</li>
+
+</ul>
+</div>
+<p>The
+<samp class="codeph"><a href="rrefpropersqlauth.html#rrefpropersqlauth">derby.database.sqlAuthorization</a></samp>
+property must be set to <samp class="codeph">true</samp> before you can use the GRANT
+statement or the REVOKE statement. The
+<samp class="codeph">derby.database.sqlAuthorization</samp> property
+enables SQL Authorization mode.</p>
+<p>You can revoke privileges for an
+object if you are the owner of the object or the  <a href="rrefattrib26867.html#rrefattrib26867">database
+owner</a>.</p>
+<p>The syntax that you use for the REVOKE statement depends
+on whether you are revoking privileges to a schema object or revoking a
+role.</p>
+
+<p>For more information on using the REVOKE statement, see "Using SQL standard
+authorization" in the <span><em>Derby Developer's Guide</em></span>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax for tables</h2><pre><strong>REVOKE <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokeprivtype">privilege-type</a></em> ON [ TABLE ] { <em><a href="rreftablename.html#rreftablename">table-Name</a></em> | <em><a href="rrefviewname.html#rrefviewname">view-Name</a></em> } FROM <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokegrantees">grantees</a></em></strong></pre>
+<p>Revoking a privilege without specifying a column list revokes
+the privilege for all of the columns in the table. </p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax for routines</h2><pre><strong>REVOKE EXECUTE ON { FUNCTION | PROCEDURE } <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokeroutinename">routine-designator</a></em> FROM <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokegrantees">grantees</a> </em> RESTRICT</strong></pre>
+<p>You
+must use the RESTRICT clause on REVOKE statements for routines. The RESTRICT
+clause specifies that the EXECUTE privilege cannot be revoked if the specified
+routine is used in a view, trigger, or constraint, and the privilege is being
+revoked from the owner of the view, trigger, or constraint.</p>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokesequencesyn"><a name="rrefsqljrevoke__revokesequencesyn"><!-- --></a><h2 class="sectiontitle">Syntax for sequence generators</h2>
+<pre><strong>REVOKE USAGE ON SEQUENCE [ <em><a href="rrefschemaname.html#rrefschemaname">schemaName</a>.</em> ] <em><a href="crefsqlj34834.html#crefsqlj34834">SQL92Identifier</a></em> FROM <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokegrantees">grantees</a></em> RESTRICT</strong></pre>
+
+<p>In order to use a sequence generator, you must have the USAGE privilege on
+it. This privilege can be revoked from users and roles. Only RESTRICTed revokes
+are allowed. This means that the REVOKE statement cannot make a view, trigger,
+or constraint unusable by its owner. The USAGE privilege cannot be revoked from
+the schema owner. See
+<a href="rrefsqljcreatesequence.html#rrefsqljcreatesequence">CREATE SEQUENCE statement</a> for more
+information.</p>
+
+<p>The sequence name is composed of an optional <em>schemaName</em> and a
+<em>SQL92Identifier</em>. If a <em>schemaName</em> is not provided, the current
+schema is the default schema. If a qualified sequence name is specified, the
+schema name cannot begin with SYS.</p>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revoketypesyn"><a name="rrefsqljrevoke__revoketypesyn"><!-- --></a><h2 class="sectiontitle">Syntax for user-defined types</h2>
+<pre><strong>REVOKE USAGE ON TYPE  [ <em><a href="rrefschemaname.html#rrefschemaname">schemaName</a>.</em> ] <em><a href="crefsqlj34834.html#crefsqlj34834">SQL92Identifier</a></em> FROM <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokegrantees">grantees</a></em> RESTRICT</strong></pre>
+
+<p>In order to use a user-defined type, you must have the USAGE privilege on
+it. This privilege can be revoked from users and roles. Only RESTRICTed revokes
+are allowed. This means that the REVOKE statement cannot make a view, trigger,
+or constraint unusable by its owner. The USAGE privilege cannot be revoked from
+the schema owner. See
+<a href="rrefsqljcreatetype.html#rrefsqljcreatetype">CREATE TYPE statement</a> for more
+information.</p>
+
+<p>The type name is composed of an optional <em>schemaName</em> and a
+<em>SQL92Identifier</em>. If a <em>schemaName</em> is not provided, the current
+schema is the default schema. If a qualified type name is specified, the schema
+name cannot begin with SYS.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax for roles</h2>
+<pre><strong>REVOKE <em><a href="rrefrolename.html#rrefrolename">roleName</a></em> [ {, <em><a href="rrefrolename.html#rrefrolename">roleName</a></em> }* ] FROM <em><a href="rrefsqljrevoke.html#rrefsqljrevoke__revokegrantees">grantees</a></em></strong></pre>
+
+<p>Only the <a href="rrefattrib26867.html#rrefattrib26867">database
+owner</a> can revoke a role.</p>
+
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokeprivtype"><a name="rrefsqljrevoke__revokeprivtype"><!-- --></a><h2 class="sectiontitle">privilege-types</h2><pre><strong>  ALL PRIVILEGES |
+  privilege-list </strong></pre>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokeprivlist"><a name="rrefsqljrevoke__revokeprivlist"><!-- --></a><h2 class="sectiontitle">privilege-list</h2><pre><strong>  table-privilege {, table-privilege }* </strong></pre>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revoketablepriv"><a name="rrefsqljrevoke__revoketablepriv"><!-- --></a><h2 class="sectiontitle">table-privilege</h2><pre><strong>  DELETE |
+  INSERT |
+  REFERENCES [<em>column list</em>] |
+  SELECT [<em>column list</em>] |
+  TRIGGER |
+  UPDATE [<em>column list</em>] </strong></pre>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokecollist"><a name="rrefsqljrevoke__revokecollist"><!-- --></a><h2 class="sectiontitle">column list</h2><pre><strong>  ( column-identifier {, column-identifier}* ) </strong></pre>
+</div>
+
+<div class="section"><p>Use the ALL PRIVILEGES privilege type to revoke all of the privileges
+from the user or role for the specified table. You can also revoke one or more table
+privileges by specifying a privilege-list.</p>
+<p>Use the DELETE privilege
+type to revoke permission to delete rows from the specified table.</p>
+<p>Use
+the INSERT privilege type to revoke permission to insert rows into the specified
+table.</p>
+<p>Use the REFERENCES privilege type to revoke permission to create
+a foreign key reference to the specified table. If a column list is specified
+with the REFERENCES privilege, the permission is revoked on only the foreign
+key reference to the specified columns.</p>
+<p>Use the SELECT privilege type
+to revoke permission to perform SELECT statements on a table or view. If a
+column list is specified with the SELECT privilege, the permission is revoked
+on only those columns. If no column list is specified, then the privilege
+is valid on all of the columns in the table.</p>
+<p>Use the TRIGGER privilege
+type to revoke permission to create a trigger on the specified table.</p>
+<p>Use
+the UPDATE privilege type to revoke permission to use the UPDATE statement
+on the specified table. If a column list is specified, the privilege is revoked
+only on the specified columns.</p>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokegrantees"><a name="rrefsqljrevoke__revokegrantees"><!-- --></a><h2 class="sectiontitle">grantees</h2>
+<pre><strong>{ <em><a href="rrefrauthid.html#rrefrauthid">AuthorizationIdentifier</a></em> | <em><a href="rrefrolename.html#rrefrolename">roleName</a></em> | PUBLIC } 
+[,{ <em><a href="rrefrauthid.html#rrefrauthid">AuthorizationIdentifier</a></em> | <em><a href="rrefrolename.html#rrefrolename">roleName</a></em> | PUBLIC } ] *</strong></pre>
+<p>You can revoke the privileges from specific users or roles or from
+all users. Use the keyword PUBLIC to specify all users. The privileges revoked
+from PUBLIC and from individual users or roles are independent privileges. For example,
+a SELECT privilege on table <samp class="codeph">t</samp> is granted to both PUBLIC and
+to the authorization ID <samp class="codeph">harry</samp>. The SELECT privilege is later
+revoked from the authorization ID <samp class="codeph">harry</samp>, but the authorization
+ID <samp class="codeph">harry</samp> can access the table <samp class="codeph">t</samp> through
+the PUBLIC privilege.</p>
+
+<p>You can revoke a role from a role, from a user, or from PUBLIC.</p>
+
+<div class="restriction"><span class="restrictiontitle">Restriction: </span>You cannot revoke the privileges
+of the owner of an object.</div>
+</div>
+
+<div class="section" id="rrefsqljrevoke__revokeroutinename"><a name="rrefsqljrevoke__revokeroutinename"><!-- --></a><h2 class="sectiontitle">routine-designator</h2><pre><strong>  {
+   <em>qualified-name</em> [ signature ]
+  }</strong></pre>
+</div>
+
+<div class="section" id="rrefsqljrevoke__rrefsqljrevseqsequencename"><a name="rrefsqljrevoke__rrefsqljrevseqsequencename"><!-- --></a><h2 class="sectiontitle">sequenceName</h2>
+<pre><strong>[ <em><a href="rrefschemaname.html#rrefschemaname">schemaName</a>.</em> ] <em><a href="crefsqlj34834.html#crefsqlj34834">SQL92Identifier</a></em></strong></pre>
+
+<p>If <em>schemaName</em> is not provided, the current schema is the default
+schema. If a qualified sequence name is specified, the schema name cannot
+begin with SYS.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Prepared statements and open result sets/cursors</h2>
+  
+  <p>
+    Checking for privileges happens at statement execution time, so
+    prepared statements are still usable after a revoke action. If
+    sufficient privileges are still available for the session,
+    prepared statements will be executed, and for queries, a result
+    set will be returned.
+  </p>
+
+  <p> Once a result set has been returned to the application (by
+    executing a prepared statement or by direct execution), it
+    will remain accessible even if privileges or roles are revoked in
+    a way that would cause another execution of the same statement to
+    fail.
+  </p>
+
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Cascading object dependencies</h2><p>For views, triggers,
+and constraints, if the privilege on which the object depends on is revoked,
+the object is automatically dropped. <span>Derby</span> does
+not try to determine if you have other privileges that can replace the privileges
+that are being revoked. For more information, see "Using SQL standard
+authorization" and "Privileges on views, triggers, and constraints" in the
+<span><em>Derby Developer's Guide</em></span>.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Limitations</h2><p>The following limitations apply to the
+REVOKE statement:</p>
+<dl>
+<dt class="dlterm">Table-level privileges</dt>
+
+<dd>All of the table-level privilege types for a specified grantee and table
+ID are stored in one row in the SYSTABLEPERMS system table. For example, when <samp class="codeph">user2</samp> is
+granted the SELECT and DELETE privileges on table <samp class="codeph">user1.t1</samp>,
+a row is added to the SYSTABLEPERMS table. The GRANTEE field contains <samp class="codeph">user2</samp> and
+the TABLEID contains <samp class="codeph">user1.t1</samp>. The SELECTPRIV and DELETEPRIV
+fields are set to Y. The remaining privilege type fields are set to N.<p>When
+a grantee creates an object that relies on one of the privilege types, the <span>Derby</span> engine tracks the dependency
+of the object on the specific row in the SYSTABLEPERMS table. For example, <samp class="codeph">user2</samp> creates
+the view <samp class="codeph">v1</samp> by using the statement <samp class="codeph">SELECT * FROM
+user1.t1</samp>, the dependency manager tracks the dependency of view <samp class="codeph">v1</samp> on
+the row in SYSTABLEPERMS for GRANTEE(<samp class="codeph">user2</samp>), TABLEID(<samp class="codeph">user1.t1</samp>).
+The dependency manager knows only that the view is dependent on a privilege
+type in that specific row, but does not track exactly which privilege type
+the view is dependent on.</p>
+<p>When a REVOKE statement for a table-level
+privilege is issued for a grantee and table ID, all of the objects that are
+dependent on the grantee and table ID are dropped. For example, if <samp class="codeph">user1</samp> revokes
+the DELETE privilege on table <samp class="codeph">t1</samp> from <samp class="codeph">user2</samp>,
+the row in SYSTABLEPERMS for GRANTEE(<samp class="codeph">user2</samp>), TABLEID(<samp class="codeph">user1.t1</samp>)
+is modified by the REVOKE statement. The dependency manager sends a revoke
+invalidation message to the view <samp class="codeph">user2.v1</samp> and the view is
+dropped even though the view is not dependent on the DELETE privilege for
+GRANTEE(<samp class="codeph">user2</samp>), TABLEID(<samp class="codeph">user1.t1</samp>).</p>
+</dd>
+
+
+<dt class="dlterm">Column-level privileges</dt>
+
+<dd>Only one type of privilege for a specified grantee and table ID are stored
+in one row in the SYSCOLPERMS system table. For example, when <samp class="codeph">user2</samp> is
+granted the SELECT privilege on table <samp class="codeph">user1.t1</samp> for columns
+c12 and c13, a row is added to the SYSCOLPERMS. The GRANTEE field contains <samp class="codeph">user2</samp>,
+the TABLEID contains <samp class="codeph">user1.t1</samp>, the TYPE field contains <samp class="codeph">S</samp>,
+and the COLUMNS field contains <samp class="codeph">c12, c13</samp>.<p>When a grantee
+creates an object that relies on the privilege type and the subset of columns
+in a table ID, the <span>Derby</span> engine
+tracks the dependency of the object on the specific row in the SYSCOLPERMS
+table. For example, <samp class="codeph">user2</samp> creates the view <samp class="codeph">v1</samp> by
+using the statement <samp class="codeph">SELECT c11 FROM user1.t1</samp>, the dependency
+manager tracks the dependency of view <samp class="codeph">v1</samp> on the row in SYSCOLPERMS
+for GRANTEE(<samp class="codeph">user2</samp>), TABLEID(<samp class="codeph">user1.t1</samp>), TYPE(S).
+The dependency manager knows that the view is dependent on the SELECT privilege
+type, but does not track exactly which columns the view is dependent on.</p>
+<p>When
+a REVOKE statement for a column-level privilege is issued for a grantee, table
+ID, and type, all of the objects that are dependent on the grantee, table
+ID, and type are dropped. For example, if <samp class="codeph">user1</samp> revokes the
+SELECT privilege on column <samp class="codeph">c12</samp> on table <samp class="codeph">user1.t1</samp> from <samp class="codeph">user2</samp>,
+the row in SYSCOLPERMS for GRANTEE(<samp class="codeph">user2</samp>), TABLEID(<samp class="codeph">user1.t1</samp>),
+TYPE(S) is modified by the REVOKE statement. The dependency manager sends
+a revoke invalidation message to the view <samp class="codeph">user2.v1</samp> and the
+view is dropped even though the view is not dependent on the column <samp class="codeph">c12</samp> for
+GRANTEE(<samp class="codeph">user2</samp>), TABLEID(<samp class="codeph">user1.t1</samp>), TYPE(S).</p>
+</dd>
+
+
+
+<dt class="dlterm">Roles</dt>
+
+<dd><span>Derby</span> tracks any
+dependencies on the definer's current role for views, constraints, and triggers.
+If privileges were obtainable only via the current role when the object in
+question was defined, that object depends on the current role. The object will
+be dropped if the role is revoked from the defining user or from PUBLIC, as the
+case may be. Also, if a contained role of the current role in such cases is
+revoked, dependent objects will be dropped. Note that dropping may be too
+pessimistic. This is because
+<span>Derby</span> does not currently make
+an attempt to recheck if the necessary privileges are still available in such
+cases.</dd>
+</dl>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Revoke examples</h2> <div class="p">To revoke the SELECT privilege
+on table <samp class="codeph">t</samp> from the authorization IDs <samp class="codeph">maria</samp> and <samp class="codeph">harry</samp>,
+use the following syntax:<pre><strong>REVOKE SELECT ON TABLE t FROM maria,harry</strong> </pre>
+</div>
+<div class="p">To
+revoke the UPDATE and TRIGGER privileges on table <samp class="codeph">t</samp> from
+the authorization IDs <samp class="codeph">anita</samp> and <samp class="codeph">zhi</samp>, use
+the following syntax:<pre><strong>REVOKE UPDATE, TRIGGER ON TABLE t FROM anita,zhi</strong> </pre>
+</div>
+<div class="p">To
+revoke the SELECT privilege on table <samp class="codeph">s.v</samp> from all users,
+use the following syntax:<pre><strong>REVOKE SELECT ON TABLE s.v FROM PUBLIC</strong></pre>
+</div>
+<div class="p">To
+revoke the UPDATE privilege on columns <samp class="codeph">c1</samp> and <samp class="codeph">c2</samp> of
+table <samp class="codeph">s.v</samp> from all users, use the following syntax:<pre><strong>REVOKE UPDATE (c1,c2) ON TABLE s.v FROM PUBLIC</strong></pre>
+</div>
+<p>To revoke the EXECUTE privilege on procedure <samp class="codeph">p</samp> from the
+authorization ID <samp class="codeph">george</samp>, use the following syntax:</p>
+<pre><strong>REVOKE EXECUTE ON PROCEDURE p FROM george RESTRICT</strong> </pre>
+
+<p>To revoke the role <samp class="codeph">purchases_reader_role</samp> from the
+authorization IDs <samp class="codeph">george</samp> and <samp class="codeph">maria</samp>, use the
+following syntax:</p>
+
+<pre><strong>REVOKE purchases_reader_role FROM george,maria</strong></pre>
+
+<p>To revoke the SELECT privilege on table <samp class="codeph">t</samp> from the role
+<samp class="codeph">purchases_reader_role</samp>, use the following syntax:</p>
+
+<pre><strong>REVOKE SELECT ON TABLE t FROM purchases_reader_role</strong></pre>
+
+<p>To revoke the USAGE privilege on the sequence generator
+<samp class="codeph">order_id</samp> from the role <samp class="codeph">sales_role</samp>, use the
+following syntax:</p>
+
+<pre><strong>REVOKE USAGE ON SEQUENCE order_id FROM sales_role;</strong></pre>
+
+<p>To revoke the USAGE privilege on the user-defined type
+<samp class="codeph">price</samp> from the role <samp class="codeph">finance_role</samp>, use the
+following syntax:</p>
+
+<pre><strong>REVOKE USAGE ON TYPE price FROM finance_role;</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj39374.html" title="">Statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqljgrant.html" title="Use the GRANT statement to give privileges to a specific user or role, or to all users, to perform actions on database objects. You can also use the GRANT statement to grant a role to a user, to PUBLIC, or to another role.">GRANT statement</a></div>
+<div><a href="rrefsistabssyscolperms.html" title="The SYSCOLPERMS table stores the column permissions that have been granted but not revoked.">SYSCOLPERMS system table</a></div>
+<div><a href="rrefsistabssystableperms.html" title="The SYSTABLEPERMS table stores the table permissions that have been granted but not revoked.">SYSTABLEPERMS system table</a></div>
+</div>
+</div>
+
+</body>
+</html>

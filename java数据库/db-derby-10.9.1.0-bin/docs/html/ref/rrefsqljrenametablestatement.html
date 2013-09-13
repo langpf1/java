@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="RENAME TABLE statement" />
+<meta content="RENAME TABLE statement, RENAME TABLE, SQL statements, renaming, tables" name="DC.subject" />
+<meta content="RENAME TABLE statement, RENAME TABLE, SQL statements, renaming, tables" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqljrenamestatements.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljrenamecolumnstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj95598.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljrenamestatements" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>RENAME TABLE statement </title>
+</head>
+<body id="rrefsqljrenamestatements"><a name="rrefsqljrenamestatements"><!-- --></a>
+
+
+<h1 class="topictitle1">RENAME TABLE statement </h1>
+
+
+<div>
+<div class="section"> <p>RENAME TABLE allows you to rename an existing table in any schema
+(except the schema <em>SYS</em>). </p>
+<p>To rename a table, you must either
+be the 
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a>
+or the table owner.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>RENAME TABLE <em>table-Name</em> TO <em><a href="rrefnewtablename.html#rrefnewtablename">new-Table-Name</a></em></strong></pre>
+ <p>If
+there is a view or foreign key that references the table, attempts to rename
+it will generate an error. In addition, if there are any check constraints
+or triggers on the table, attempts to rename it will also generate an error.</p>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre><strong>RENAME TABLE SAMP.EMP_ACT TO EMPLOYEE_ACT</strong></pre>
+
+<p>See <a href="rrefsqlj81859.html#rrefsqlj81859">ALTER TABLE statement</a> for more information.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Statement dependency system</h2>
+<p>The RENAME TABLE statement
+is not allowed if there are any open cursors that reference the table that
+is being altered.</p>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqljrenamestatements.html" title="">RENAME statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqljrenamecolumnstatement.html" title="Use the RENAME COLUMN statement to rename a column in a table.">RENAME COLUMN statement</a></div>
+<div><a href="rrefsqlj95598.html" title="">RENAME INDEX statement</a></div>
+</div>
+</div>
+
+</body>
+</html>

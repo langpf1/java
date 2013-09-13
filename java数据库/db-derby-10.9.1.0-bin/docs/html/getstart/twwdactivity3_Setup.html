@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Activity 3: Run a JDBC program using the embedded driver" />
+<meta name="abstract" content="This activity loads the Derby database engine using a simple Java JDBC program." />
+<meta name="description" content="This activity loads the Derby database engine using a simple Java JDBC program." />
+<meta content="WwdEmbedded.java program, running, CLASSPATH environment variable" name="DC.subject" />
+<meta content="WwdEmbedded.java program, running, CLASSPATH environment variable" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cgstutorialintro.html" />
+<meta scheme="URI" name="DC.Relation" content="rwwdactivity3.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tgsactivity3_Setup" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Activity 3: Run a JDBC program using the embedded driver</title>
+</head>
+<body id="tgsactivity3_Setup"><a name="tgsactivity3_Setup"><!-- --></a>
+
+
+<h1 class="topictitle1">Activity 3: Run a JDBC program using the embedded driver</h1>
+
+
+
+<div><p>This activity loads the <span>Derby</span> database
+engine using a simple Java JDBC program. </p>
+
+<div class="p">This activity assumes that you have opened a command window and navigated
+to the <samp class="codeph">DERBYTUTOR</samp> directory.</div>
+
+<div class="section">JDBC is the Java Database Connectivity API and is also the native
+API for <span>Derby</span>. The program
+uses the embedded driver to create the <samp class="codeph">jdbcDemoDB</samp> database
+(if the database does not exist) and then connect to the database. You can
+then populate a table within the database with text. The program demonstrates
+some basic JDBC processing along with related error handling.  <p>The Java
+compiler and runtime use the classpath, specified by the <samp class="codeph">CLASSPATH</samp> environment
+variable, to locate the binary files  (jar files and class files) that are
+needed to run  <span>Derby</span> and
+other Java  applications. Before performing this activity, you need to set
+the classpath and compile the <samp class="codeph">WwdEmbedded.java</samp> program.</p>
+</div>
+
+<ol>
+<li class="stepexpand"><span>Copy the program files into the <samp class="codeph">DERBYTUTOR</samp> directory
+and set the <samp class="codeph">CLASSPATH</samp> environment variable, as shown in the
+following table.</span> 
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the commands to copy the program files into the DERBYTUTOR directory and set the CLASSPATH environment variable on UNIX and Windows systems." frame="border" border="1" rules="all"><caption>Table 1. Commands to copy the program files and set the <samp class="codeph">CLASSPATH</samp>
+environment variable</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N100DD">Operating System</th>
+
+<th valign="bottom" width="75%" id="N100E4">Command</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N100DD">UNIX (Korn Shell)</td>
+
+<td valign="top" width="75%" headers="N100E4"><pre><strong><kbd class="userinput">cp $DERBY_HOME/demo/programs/workingwithderby/* .
+
+export CLASSPATH=$DERBY_HOME/lib/derby.jar:.</kbd></strong></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N100DD">Windows</td>
+
+<td valign="top" width="75%" headers="N100E4"><pre><strong><kbd class="userinput">copy %DERBY_HOME%\demo\programs\workingwithderby\* .
+
+set CLASSPATH=%DERBY_HOME%\lib\derby.jar;.</kbd></strong></pre>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<div class="important"><span class="importanttitle">Important: </span>Include the dot (<samp class="codeph">.</samp>)
+at the end of each command so that your current working directory is included
+in the classpath and the files are copied to the correct location. </div>
+
+</li>
+
+<li class="stepexpand"><span>Compile the program source files.</span>
+  The sample program is contained in two source files:
+<samp class="codeph">WwdEmbedded.java</samp> and <samp class="codeph">WwdUtils.java</samp>.
+Issue the following command to compile both at the same time:
+ 
+<pre><strong><kbd class="userinput">javac WwdEmbedded.java WwdUtils.java</kbd></strong></pre>
+
+<div class="important"><span class="importanttitle">Important: </span>A command prompt appears if the compilation
+is successful. The binary files <samp class="codeph">WwdEmbedded.class</samp> and
+<samp class="codeph">WwdUtils.class</samp> are created.
+If an error message appears, verify that the JDK is properly installed.</div>
+ 
+</li>
+
+<li class="stepexpand"><span>Run the program.</span> The <a href="rwwdactivity3.html#rwwdactivity3"><samp class="codeph">WwdEmbedded.java</samp> program</a> populates
+a table with wish-list items. The program prompts you for text input (up to
+32 characters), stores the text input in a database table, and then lists
+the items stored in the table. The program continues to ask for wish-list
+items until the you type the command <samp class="codeph">exit</samp> or a problem is
+encountered. Some basic information on program progress is displayed at the
+beginning and the end of  the program.  <pre><strong><kbd class="userinput">java WwdEmbedded</kbd></strong>
+<tt class="sysout">org.apache.derby.jdbc.EmbeddedDriver loaded.
+Connected to database jdbcDemoDB
+ . . . . creating table WISH_LIST
+Enter wish-list item (enter exit to end):</tt>
+<strong><kbd class="userinput">a peppermint stick</kbd></strong>
+<tt class="sysout">  __________________________________________________
+On 2011-03-02 17:41:52.531 I wished for a peppermint stick
+  __________________________________________________
+Enter wish-list item (enter exit to end):</tt>
+<strong><kbd class="userinput">a long vacation</kbd></strong>
+<tt class="sysout">  __________________________________________________
+On 2011-03-02 17:41:52.531 I wished for a peppermint stick
+On 2011-03-02 17:42:03.248 I wished for a long vacation
+  __________________________________________________
+Enter wish-list item (enter exit to end):</tt>
+<strong><kbd class="userinput">exit</kbd></strong>
+<tt class="sysout">Closed connection
+Database shut down normally
+Getting Started With Derby JDBC program ending.</tt></pre>
+
+</li>
+
+</ol>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rwwdactivity3.html">The WwdEmbedded program</a></strong><br />
+This section describes the WwdEmbedded.java program, highlighting details specific to accessing a Derby database from a JDBC program.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cgstutorialintro.html" title="To help you get up and running with Derby as quickly as possible, this self-study guide highlights some of the more important features of Derby.">Self-study tutorial for users new to Derby</a></div>
+</div>
+</div>
+
+</body>
+</html>

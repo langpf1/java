@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CONSTRAINT 節" />
+<meta content="CONSTRAINT clause, Constraints, Storage properties, for indexes backing constraints, Backing indexes, specifying storage properties for, Tables, specifying page size for, specifying properties for" name="DC.subject" />
+<meta content="CONSTRAINT clause, Constraints, Storage properties, for indexes backing constraints, Backing indexes, specifying storage properties for, Tables, specifying page size for, specifying properties for" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj16095.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj42154.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj16357.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj91438.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj13590" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CONSTRAINT 節</title>
+</head>
+<body id="rrefsqlj13590"><a name="rrefsqlj13590"><!-- --></a>
+
+
+<h1 class="topictitle1">CONSTRAINT 節</h1>
+
+
+<div>
+<div class="section"> <p>CONSTRAINT節は、<a href="rrefsqlj24513.html#rrefsqlj24513">CREATE TABLE 文</a>や<a href="rrefsqlj81859.html#rrefsqlj81859">ALTER TABLE 文</a>に任意に記述できる構造です。制約とはデータが従わなければならない規則です。制約には必要に応じて名前を与えることができます。</p>
+ 
+<div class="p">制約は以下のいずれかです。<ul>
+<li>列レベルの制約<p>列レベルの制約は表にある単一の列を参照します。列名を指定するわけではなりません。(ただしチェック制約は除きます。)この制約は対象の列を参照しています。</p>
+</li>
+
+<li>表レベルの制約   <p>表レベルの制約は表にある一つあるいはそれ以上の列を参照します。表レベルの制約は適用する列の名前を参照します。表レベルのチェック制約は0以上の列を参照します。</p>
+</li>
+
+</ul>
+</div>
+ 
+<div class="p">列制約には以下があります。
+<ul>
+<li>NOT NULL   <p>この列の値はNULLにできないことを指定します。(この種類の制約には名前を与えることができません。)</p>
+</li>
+
+<li>PRIMARY KEY 
+ <p>列により表中の行が一意に識別されることを指定します。列の値はNOT NULLと定義されなければなりません。</p>
+ 
+<div class="note"><span class="notetitle">注: </span>ALTER TABLEにより主キーを追加しようとして、空の値を持つ列をその主キーに含めようとした場合、エラーとなって主キーは追加されません。より詳細な情報は、<a href="rrefsqlj81859.html#rrefsqlj81859">ALTER TABLE 文</a>を参照してください。</div>
+</li>
+
+<li>UNIQUE   <p>列の値が一意でなければならないと指定します。NULLの値は不可です。</p>
+</li>
+
+<li>FOREIGN KEY   <p>列の値が、参照先の主キー、一意キーあるいはNULLでなければならないことを指定します。</p>
+</li>
+
+<li>CHECK   <p>列の値の規則を指定します。</p>
+</li>
+
+</ul>
+</div>
+ <div class="p">
+表制約には以下があります。<ul>
+<li>PRIMARY KEY 
+<p>
+一つ以上の列により表の行が一意に識別されることを表します。NULLの値は不可です。</p>
+</li>
+
+<li>UNIQUE   <p>列群の値が一意であると指定します。列はNOT NULLと定義されなければなりません。</p>
+</li>
+
+<li>FOREIGN KEY   <p>列群の値が参照先の主キー、一意列あるいはNULLでなければならないことを指定します。</p>
+ 
+<div class="note"><span class="notetitle">注: </span>外部キーが複数の列から構成されている場合、<em>何れかの</em>列がNULLであるならキーはNULLと見なされます。NULLでない列にどのような値があっても、挿入することができます。</div>
+</li>
+
+<li>CHECK   <p>表の値に適用される様々な規則を指定します。</p>
+</li>
+
+</ul>
+</div>
+ <p>
+列制約と表制約は同じ機能を持ちますが、何に対して指定できるかが違います。表制約では一つ以上の列に対して、PRIMARY KEY、UNIQUE、CHECK、FOREIGN KEY制約を定義できます。列レベルの制約では(チェック制約を除いて)、一つの列への参照しか定義できません。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2> </div>
+
+<div class="section"><h2 class="sectiontitle">主キーと一意性制約</h2> 
+<p>
+主キーでは表の行を一意に指定する列の集合が定義されます。</p>
+ 
+<p>主キー制約を定義しした場合、主キーに含まれる何れの列の値もNULLであってはなりません。つまり何れの列もNULL値をとることができなくなります。</p>
+ 
+<p>あらかじめNOT NULLと定義されているなら、既存の列をALTER
+TABLE ADD PRIMARY KEY という文で主キーに加えることができます。NULLの値は不可です。もし列にNULL値があれば、システムは主キー制約の追加を行いません。詳細な情報は<a href="rrefsqlj81859.html#rrefsqlj81859">ALTER TABLE 文</a>を参照してください。</p>
+ 
+<p>表にはPRIMARY KEY制約を一つまでしか定義できません。しかし複数のUNIQUE制約を定義することはできます。</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">外部キー制約</h2> <p>
+外部キー制約により、データベースの参照整合性を強制することができます。外部キーとは他の表のキーを参照する列あるいは列群です。(時によってはあまり多いことではありませんが、同じ表を参照することもあります。)外部キーは参照先の主キー制約・外部キー制約に一致するデータ型を持つ列を持たなければなりません。</p>
+ 
+<p>表レベルの外部キー制約では、表の列を指定して制約を定義します。このとき同じ列を一回より多く使うことはできません。</p>
+ 
+<p><em>参照定義</em>(参照される表の列の一覧です。)に列が定義される場合、それは参照先の表にある一意性制約あるいは主キー制約に対応していなければなりません。
+もし表に一意性制約があるなら、<em>参照定義</em>では列の一覧を省くことができます。</p>
+ 
+<p>もし<em>参照定義</em>にて列の一覧が指定されておらず、参照先の表に主キーも定義されていないならば、例外が挙がります。(この例外は、もし参照先の表に一意性制約しかないならば、その列の一覧を<em>参照定義</em>に含めなければならない、という意味です。)</p>
+ 
+<div class="p">参照先の一意性制約あるいは主キー制約に一致する値があれば、外部キー制約は守られているものとされます。もし外部キー制約が複数の列で定義されており、いずれかの列がNULLであるなら、外部キーの値はNULLとみなされます。
+  <div class="note"><span class="notetitle">注: </span>SQL-92標準にて言及があるように、複数の列で定義された外部キー制約では、制約された列が参照先の列にない値をとることが可能な場合があります。この状況を回避するために外部キーの全列にはNOT NULL制約を定義するべきです。</div>
+</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">外部キー制約とDML</h2> 
+<p>有効になっている外部キー制約が定義された表に挿入や更新が行われるとき、<span>Derby</span>はその行が外部キー制約を破っていないか知るために、参照先の表で対応する参照キーの値を調査します。
+もし制約が守られていなければ、<span>Derby</span>は例外を挙げて、挿入ないし更新を却下します。</p>
+ 
+<p>参照されたキー(外部キーにより参照される、主キー制約あるいは一意制約)のある表の行を、更新または削除した場合、<span>Derby</span>はそのキーを参照するすべての外部キー制約を調べて、行の削除や変更が制約違反を引き起こさないか調査します。
+もし行への削除や変更が制約違反を引き起こすのであれば、変更や削除は許可されず<span>Derby</span>は例外を挙げます。</p>
+ 
+<p><span>Derby</span>が制約のチェックを行うのは文が実行される時です。トランザクションがコミットされる時ではありません。</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">支援する索引</h2> <p>
+UNIQUE、PRIMARY KEY、FOREIGN KEYの各制約は制約を強制あるいは支援するための索引を生成します。(これは<em>支援索引</em>と呼ばれることがあります。)
+UNIQUE制約とPRIMARY KEY制約は一意索引を生成します。FOREIGN KEY索引は非一意な索引を作成んします。したがって、列や列の集合にUNIQUE制約やPRIMARY KEY制約、FOREIGN KEY索引が定義されている場合は、パフォーマンス向上のための索引をそれらの列に作成する必要はありません。<span>Derby</span>が代わりに作成してくれています。<a href="rrefsqlj20937.html#rrefsqlj20937__sqlj27363">索引と制約</a>も参照してください。</p>
+
+<p>問い合わせを最適化される時にオプティマイザはこれらの索引を利用できます。(<a href="rrefsqlj20937.html#rrefsqlj20937">CREATE INDEX 文</a>を参照してください。)またこれらの索引はシステムが自動的に生成した名前を持ちます。</p>
+ <p>支援索引はDROP INDEX文では破棄できません。制約を破棄するか、表を破棄する必要があります。</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">チェック制約</h2> <p>
+チェック制約は表の内容に関する様々な規則を指定するために利用することができます。チェック制約には(真偽式で記述される)検索条件を指定できます。表中の全行について、この検索条件は満たされていなければなりません。INSERTやUPDATEにより行が変更される時、検索条件は変更される行に対して適用されます。何れかのチェック制約に違反すると、文全体が中断されます。</p>
+ </div>
+
+<div class="section" id="rrefsqlj13590__sqlj57077"><a name="rrefsqlj13590__sqlj57077"><!-- --></a><h2 class="sectiontitle">検索条件の要件</h2> 
+<p>チェック制約が列定義の一部として指定された場合、制約は同じ列のみ参照できます。
+表の定義の一部として指定されたチェック制約は、CREATE TABLE文にて先立って定義された列を参照することができます。</p>
+ 
+<div class="p">検索条件は同じ値に適用された場合、常に同じ値を返す必要があります。したがって、以下のいずれも検索条件には置くことができません。<ul>
+<li>動的なパラメータ (?)</li>
+
+<li>日時関数 (CURRENT_DATE、CURRENT_TIME、CURRENT_TIMESTAMP)</li>
+
+<li>副問い合わせ</li>
+
+<li>ユーザー関数 (例えばUSER、SESSION_USER、CURRENT_USER)</li>
+
+</ul>
+</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">参照先に従う動作</h2> <p>
+外部キーの定義にて、動作(CASCADE、RESTRICT、SET NULLおよびNO ACTION)が適切に書かれたON DELETE節や/とON UPDATE節を記述できます。
+これらの節は、表の主キーが更新ないし削除されたときに、外部キーの関係が損なわれないように、対応する外部キーを変更したり、操作を拒絶したりする事を記述します。</p>
+ 
+<p>参照性の制約の定義を行うとき、併せて更新または削除の規則を定義できます。</p>
+ 
+<p>更新の規則は、親あるいは依存する表の行が更新されたときに適用されます。指定できるのは、NO ACTIONあるいはRESTRICTです。</p>
+ 
+<p>親表の主キーの値が更新され、更新の規則がRESTRICTであった場合、<span>Derby</span>は依存する表の外部キー制約を調べます。もし依存表の何れかの行が外部キー制約違反となるなら、トランザクションは巻き戻されます。</p>
+ 
+<p>もし更新の規則がNO ACTIONであったなら、<span>Derby</span>は更新が全て終わった<em>後</em>からトリガが実行される<em>前</em>に、依存する表の外部キー制約をチェックします。もし何れかの行が外部キー制約違反であるなら、文の実行は却下されます。</p>
+ 
+<p>依存する表にある列の値が変更され、その値が外部キーの一部であった場合、更新の規則は暗黙裡にNO ACTIONとなります。NO ACTIONであるということは、外部キーが空ではない値に更新された時、更新後の値は親表の主キーと一致しなければならないことを意味します。もし親表の主キーと一致しないのであれば、文は却下されます。</p>
+ 
+<p>削除の規則は親表の行が削除され、その行に依存する行が参照性制約の依存表にある場合に適用されます。このとき依存表の行も削除されることがあり、これを親表の削除が依存表に<em>伝播した</em>といいます。もし依存表が親表でもあるならば、今度はそこに定義された動作がその依存表に適用されます。</p>
+ 
+<p>指定できる値は、NO ACTION、RESTRICT、CASCADE、それとSET NULLです。SET NULLは外部キーの何れかの列がnullの値を持つことができる場合のみ指定できます。</p>
+ 
+<p>もし削除の規則が、</p>
+ <p>NO ACTIONなら<span>Derby</span>は依存表の外部キー制約を、削除が全て終わった<em>後</em>からトリガが実行される<em>前</em>にチェックします。もし依存表の何れかの行が外部キー制約に違反するなら文は却下されます。</p>
+ 
+<p>RESTRICTなら、<span>Derby</span>は依存表の外部制約を調べ、依存表の何れかの行が外部キー制約に違反する場合、トランザクションを巻き戻します。</p>
+ 
+<p>CASCADEなら、削除が依存表に伝播されます。(適用可能な伝播先の依存表にも伝播します。)</p>
+ 
+<p>SET NULLなら、依存表の外部キーにて空にできる列の値が空になります。(この場合も、依存表に依存する表にある外部キーの空にできる列の値は空になります。)</p>
+ 
+<p>表を親とする参照性の制約には、個々の削除の規則があります。そして適用される全ての削除の規則によって、削除処理の結果が決まります。
+したがって依存先がRESTRICTやNO ACTIONの参照性制約をもつなら、行は削除できません。
+同様に削除が伝播してゆく場合でも、伝播先の依存行の参照性制約にて削除の規則がRESTRICTやNO ACTIONで定義されていれば、行を削除できません。</p>
+ 
+<div class="p">親の表から行を削除すると、ほかの表への影響があります。親表の削除により影響を受けるすべての表を、親表と削除の関係があるといいます。削除によりこれらの表の行に対して次のような影響が及びます。
+<ul>
+<li>もし削除の規則がRESTRICTあるいはNO ACTIONであれば、依存表は処理に関連しますが、処理の影響は受けません。(つまり<span>Derby</span>は表の値を検証しますが、削除はしません。) </li>
+
+<li>もし削除の規則がSET NULLであれば、親表の行が削除されたり、削除が伝播された場合、依存表の行の値は更新の対象となります。</li>
+
+<li>もし削除の規則がCASCADEであれば、親表にて削除が行われた場合、依存表の行も削除されます。</li>
+
+<li>もし依存表が親表でもある場合、ここに書かれた処理が今度はその依存表に行われます。</li>
+
+</ul>
+</div>
+ </div>
+
+<div class="example" id="rrefsqlj13590__sqljidx6080"><a name="rrefsqlj13590__sqljidx6080"><!-- --></a><h2 class="sectiontitle">例</h2> 
+<pre><strong>-- OUT_TRAY_PKという名前の列レベルの主キー制約:
+CREATE TABLE SAMP.OUT_TRAY
+	(
+	SENT TIMESTAMP,
+	DESTINATION CHAR(8),
+	SUBJECT CHAR(64) NOT NULL CONSTRAINT OUT_TRAY_PK PRIMARY KEY,
+	NOTE_TEXT VARCHAR(3000) 
+   );
+
+-- 表レベルの主キー制約では二つの列を
+-- キーの定義に記述できます。
+CREATE TABLE SAMP.SCHED 
+	(
+	CLASS_CODE CHAR(7) NOT NULL, 
+	DAY SMALLINT NOT NULL, 
+	STARTING TIME, 
+	ENDING TIME,
+	PRIMARY KEY (CLASS_CODE, DAY)
+	);
+
+-- 列レベルの制約を算術チェックのために使います。
+-- 表レベルの制約を従業員への税金が賞与を超えないようにするため
+-- 使います。
+CREATE TABLE SAMP.EMP 
+	(
+	EMPNO CHAR(6) NOT NULL CONSTRAINT EMP_PK PRIMARY KEY,
+	FIRSTNME CHAR(12) NOT NULL,
+	MIDINIT vARCHAR(12) NOT NULL,
+	LASTNAME VARCHAR(15) NOT NULL,
+	SALARY DECIMAL(9,2) CONSTRAINT SAL_CK CHECK (SALARY &gt;= 10000),
+	BONUS DECIMAL(9,2), 
+	TAX DECIMAL(9,2),
+	CONSTRAINT BONUS_CK CHECK (BONUS &gt; TAX)
+	);
+
+-- MEAL列が適切な略字のみとるよう、チェック制約を使います。
+CREATE TABLE FLIGHTS
+	(
+	FLIGHT_ID CHAR(6) NOT NULL ,
+	SEGMENT_NUMBER INTEGER NOT NULL ,
+	ORIG_AIRPORT CHAR(3),
+	DEPART_TIME TIME,
+	DEST_AIRPORT CHAR(3),
+	ARRIVE_TIME TIME,
+	MEAL CHAR(1) CONSTRAINT MEAL_CONSTRAINT 
+	CHECK (MEAL IN ('B', 'L', 'D', 'S')),
+	PRIMARY KEY (FLIGHT_ID, SEGMENT_NUMBER)
+	);
+
+CREATE TABLE METROPOLITAN
+	(
+	HOTEL_ID INT NOT NULL CONSTRAINT HOTELS_PK PRIMARY KEY,
+	HOTEL_NAME VARCHAR(40) NOT NULL,
+	CITY_ID INT CONSTRAINT METRO_FK REFERENCES CITIES
+	);
+
+-- 表レベルの主キー制約と表レベルの外部キー制約を指定して、
+-- 表を作成します。
+CREATE TABLE FLTAVAIL
+	(
+	FLIGHT_ID CHAR(6) NOT NULL, 
+	SEGMENT_NUMBER INT NOT NULL, 
+	FLIGHT_DATE DATE NOT NULL, 
+	ECONOMY_SEATS_TAKEN INT,
+	BUSINESS_SEATS_TAKEN INT,
+	FIRSTCLASS_SEATS_TAKEN INT, 
+	CONSTRAINT FLTAVAIL_PK PRIMARY KEY (FLIGHT_ID, SEGMENT_NUMBER), 
+	CONSTRAINT FLTS_FK
+	FOREIGN KEY (FLIGHT_ID, SEGMENT_NUMBER)
+	REFERENCES Flights (FLIGHT_ID, SEGMENT_NUMBER)
+	);
+<span>-- 列に一意性制約を加える。</span>
+ALTER TABLE SAMP.PROJECT 
+ADD CONSTRAINT P_UC UNIQUE (PROJNAME);
+
+-- 列レベルの外部キー制約を利用して、
+-- city_id列がCities表の主キーを参照する表を作成する。
+CREATE TABLE CONDOS
+	(
+	CONDO_ID INT NOT NULL CONSTRAINT hotels_PK PRIMARY KEY,
+	CONDO_NAME VARCHAR(40) NOT NULL,
+	CITY_ID INT CONSTRAINT city_foreign_key
+	REFERENCES Cities ON DELETE CASCADE ON UPDATE RESTRICT
+	);</strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">文の依存追跡システム</h2> 
+<p>INSERT文やUPDATE文は対象表にある全制約の影響を受けます。
+DELETE文は一意性制約・主キー制約・外部キー制約の影響を受けます。
+対象表にこれらの制約が追加されたり削除されたりした場合、これらの文は無効となります。</p>
+ </div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlj16095.html">列毎の制約</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj42154.html">表ごとの制約</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj16357.html">参照定義</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj91438.html">検索条件</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefclauses.html" title="">SQL 節</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CHAR data type" />
+<meta content="CHAR data type" name="DC.subject" />
+<meta content="CHAR data type" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj13733" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CHAR data type</title>
+</head>
+<body id="rrefsqlj13733"><a name="rrefsqlj13733"><!-- --></a>
+
+
+<h1 class="topictitle1">CHAR data type</h1>
+
+
+<div>
+<div class="section"> <p>CHAR provides for fixed-length storage of strings.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>CHAR[ACTER] [(<em>length</em>)] </strong></pre>
+ <p><em>length</em> is
+an unsigned integer literal designating the length in bytes. The default
+<em>length</em> for a CHAR is 1, and the maximum size of <em>length</em> is 254.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Corresponding compile-time Java type</h2> <p><em>java.lang.String</em></p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">JDBC metadata type (java.sql.Types)</h2> <p>CHAR</p>
+ <p><span>Derby</span> inserts spaces to pad
+a string value shorter than the expected length. <span>Derby</span> truncates
+spaces from a string value longer than the expected length. Characters other
+than spaces cause an exception to be raised. When <a href="rrefsqlj23075.html#rrefsqlj23075">comparison boolean operators</a>
+are applied to CHARs, the shorter string is padded with spaces to the length
+of the longer string.</p>
+ <p>When CHARs and VARCHARs are mixed in expressions,
+the shorter value is padded with spaces to the length of the longer value.</p>
+ <p>The
+type of a string constant is CHAR.</p>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2> <pre><strong><span>-- within a string constant use two single quotation marks
+-- to represent a single quotation mark or apostrophe </span>
+VALUES 'hello this is Joe''s string'</strong></pre>
+ 
+<pre><strong>-- create a table with a CHAR field
+CREATE TABLE STATUS (
+    STATUSCODE CHAR(2) NOT NULL
+        CONSTRAINT PK_STATUS PRIMARY KEY,
+    STATUSDESC VARCHAR(40) NOT NULL
+);
+</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj31068.html" title="">Data types</a></div>
+</div>
+</div>
+
+</body>
+</html>

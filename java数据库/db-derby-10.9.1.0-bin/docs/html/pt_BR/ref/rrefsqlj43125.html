@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Instrução CREATE TRIGGER" />
+<meta content="Instrução CREATE TRIGGER, Gatilhos, criação, definição ao disparar, e eventos do banco de dados, e cláusula de referência, referência a valores antigos e novos, gatilhos de instrução versus gatilhos de linha, a instrução-SQL-engatilhada, ordem de execução, e recursividade" name="DC.subject" />
+<meta content="Instrução CREATE TRIGGER, Gatilhos, criação, definição ao disparar, e eventos do banco de dados, e cláusula de referência, referência a valores antigos e novos, gatilhos de instrução versus gatilhos de linha, a instrução-SQL-engatilhada, ordem de execução, e recursividade" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj89752.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj43125" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Instrução CREATE TRIGGER</title>
+</head>
+<body id="rrefsqlj43125"><a name="rrefsqlj43125"><!-- --></a>
+
+
+<h1 class="topictitle1">Instrução CREATE TRIGGER</h1>
+
+
+<div>
+<div class="section">
+<p>O gatilho define um conjunto de ações a serem executadas quando ocorre um
+evento de banco de dados em uma determinada tabela.
+O <em>evento de banco de dados</em> é uma operação de exclusão, inserção ou de
+atualização.
+Por exemplo, se for definido um gatilho para exclusão em uma determinada
+tabela, a ação do gatilho ocorre sempre que se remove uma ou mais linhas da
+tabela.</p>
+
+<p>Junto com as restrições, os gatilhos podem ajudar a impor regras de
+integridade com ações como exclusões ou atualizações em cascata.
+Os gatilhos também podem realizar várias funções como emitir alertas, atualizar
+outras tabelas, enviar e-mail, e outras ações úteis.</p>
+
+<p>Pode ser definido qualquer número de gatilhos para uma única tabela,
+inclusive vários gatilhos para a mesma tabela para o mesmo evento.</p>
+
+<p>Pode ser criado gatilho em qualquer esquema, exceto os começados por
+<em>SYS</em>.
+O gatilho não precisa residir no mesmo esquema da tabela para a qual é
+definido.</p>
+
+<p>Se for especificado um nome de gatilho qualificado, o nome do esquema não
+poderá começar por <em>SYS</em>.</p>
+
+</div>
+
+<div class="section" id="rrefsqlj43125__syn001"><a name="rrefsqlj43125__syn001"><!-- --></a><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>CREATE TRIGGER <em><a href="rreftriggername.html#rreftriggername">nome-do-gatilho</a></em>
+{ AFTER | NO CASCADE BEFORE }
+{ INSERT | DELETE | UPDATE } [ OF <em>nome-da-coluna</em> [, <em><a href="rrefcolumnname.html#rrefcolumnname">nome-da-coluna</a></em>]* ]
+ON <em><a href="rreftablename.html#rreftablename">nome-da-tabela</a></em>
+[ <em><a href="rrefsqlj89752.html#rrefsqlj89752">CláusulaReferência</a></em> ]
+FOR EACH { ROW | STATEMENT } MODE DB2SQL
+<em><a href="rrefsqlj43125.html#rrefsqlj43125__i1149821">Instrução-SQL-engatilhada</a></em></strong>
+</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Antes ou depois: quando os gatilhos disparam</h2>
+
+<div class="p">Os gatilhos são definidos para <em>BEFORE</em> (antes) ou <em>AFTER</em> (depois).
+<ul>
+<li>Os gatilhos <em>BEFORE</em> disparam antes das modificações da instrução
+serem aplicadas, e antes de qualquer restrição ser aplicada.
+Os gatilhos para antes podem ser tanto de linha quanto de instrução
+(consulte <a href="rrefsqlj43125.html#rrefsqlj43125__sqlj54276">Gatilhos de instrução versus gatilhos de linha</a>).</li>
+
+<li>Os gatilhos <em>AFTER</em> disparam após todas as restrições terem sido
+satisfeitas, e após todas as alterações terem sido aplicadas à tabela de destino.
+Os gatilhos <em>AFTER</em> podem ser tanto de linha quanto de instrução
+(consulte <a href="rrefsqlj43125.html#rrefsqlj43125__sqlj54276">Gatilhos de instrução versus gatilhos de linha</a>).</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Inserção, exclusão e atualização: o que faz o gatilho disparar</h2>
+
+<div class="p">O gatilho é disparado por um dos seguintes eventos do banco de dados,
+dependendo de como foi definido
+(consulte <a href="rrefsqlj43125.html#rrefsqlj43125__syn001">Sintaxe</a> acima):
+<ul>
+<li>INSERT</li>
+
+<li>UPDATE</li>
+
+<li>DELETE</li>
+
+</ul>
+
+</div>
+
+<p>Pode ser definido qualquer número de gatilhos para um determinado evento
+em uma determinada tabela.
+No caso de gatilho para atualização podem ser especificadas as colunas.</p>
+
+</div>
+
+<div class="section" id="rrefsqlj43125__sqlj67748"><a name="rrefsqlj43125__sqlj67748"><!-- --></a><h2 class="sectiontitle">Referência a valores antigos e novos:
+a cláusula de referência</h2>
+
+<p>Muitas instruções-SQL-engatilhadas necessitam fazer referência aos dados que
+estão sendo alterados no momento pelo evento de banco de dados que causou o
+disparo do gatilho.
+A instrução-SQL-engatilhada pode necessitar fazer referência aos valores novos
+(pós-alteração ou "após").</p>
+
+<p>O <span>Derby</span>
+fornece várias maneiras para fazer referência aos dados que estão sendo
+alterados no momento pelo evento do banco de dados que fez o gatilho disparar.
+Os dados alterados podem ser referenciados pela instrução-SQL-engatilhada
+utilizando <em>variáveis de transição</em> ou <em>tabelas de transição</em>.
+A cláusula de referência permite o fornecimento do nome da correlação ou aliás
+para estas variáveis de transição especificando
+OLD/NEW AS <em>nome-da-correlação</em>.</p>
+
+<div class="p">Por exemplo, se for adicionada a seguinte cláusula à definição do gatilho:
+<pre><strong>REFERENCING OLD AS LINHA_APAGADA</strong>
+</pre>
+
+</div>
+
+<div class="p">pode-se então fazer referência a este nome de correlação na
+instrução-SQL-engatilhada:
+<pre><strong>DELETE FROM DISPONIBILIDADE_HOTEL WHERE ID_HOTEL = LINHA_APAGADA.ID_HOTEL</strong></pre>
+
+</div>
+
+<div class="p">As variáveis de transição OLD e NEW são mapeadas a um
+<em>java.sql.ResultSet</em> de uma única linha.
+<div class="note"><span class="notetitle">Nota: </span>Somente os gatilhos de linha
+(consulte <a href="rrefsqlj43125.html#rrefsqlj43125__sqlj54276">Gatilhos de instrução versus gatilhos de linha</a>)
+podem utilizar variáveis de transição.
+Os gatilhos de linha para INSERT não podem fazer referência à linha antiga.
+Os gatilhos de linha para DELETE não podem fazer referência à linha nova.
+</div>
+
+</div>
+
+<p>Para os gatilhos de instrução, as <em>tabelas</em> de transição servem como
+identificador de tabela para a instrução-SQL-engatilhada ou para a qualificação
+do gatilho.
+A cláusula de referência permite fornecer um nome de correlação ou aliás para
+estas tabelas de transição especificando
+OLD_TABLE/NEW_TABLE AS nome-da-correlação</p>
+
+<div class="p">Por exemplo:
+<pre><strong>REFERENCING OLD_TABLE AS HOTÉIS_EXCLUÍDOS</strong>
+</pre>
+
+</div>
+
+<div class="p">permite utilizar este novo identificador (<em>HOTÉIS_EXCLUÍDOS</em>) na
+instrução-SQL-engatilhada:
+<pre><strong>DELETE FROM DISPONIBILIDADE_HOTEL WHERE ID_HOTEL IN
+(SELECT ID_HOTEL FROM HOTÉIS_EXCLUÍDOS)</strong>
+</pre>
+
+</div>
+
+<div class="p">As tabelas de transição antiga e nova são mapeadas a um
+<em>java.sql.ResultSet</em> com cardinalidade equivalente ao número de linhas
+afetadas pelo evento do gatilho.
+<div class="note"><span class="notetitle">Nota: </span>Somente os gatilhos de instrução
+(consulte <a href="rrefsqlj43125.html#rrefsqlj43125__sqlj54276">Gatilhos de instrução versus gatilhos de linha</a>)
+podem utilizar tabelas de transição.
+Os gatilhos para a instrução INSERT não podem fazer referência à tabela OLD.
+Os gatilhos para a instrução DELETE não podem fazer referência à tabela NEW.
+</div>
+
+</div>
+
+<p>A cláusula REFERENCING pode designar apenas uma correlação ou
+identificador para novo, e apenas uma correlação ou identificador para antigo.
+Os gatilhos de linha não podem designar um identificador para a tabela de
+transição, e os gatilhos de instrução não podem designar uma correlação
+para as variáveis de transição.</p>
+
+</div>
+
+<div class="section" id="rrefsqlj43125__sqlj54276"><a name="rrefsqlj43125__sqlj54276"><!-- --></a><h2 class="sectiontitle">Gatilhos de instrução versus gatilhos de linha</h2>
+
+<div class="p">Deve ser especificado se o gatilho é um <em>gatilho de instrução</em> ou um
+<em>gatilho de linha</em>:
+<ul>
+<li><em>gatilho de instrução</em>
+<p>O gatilho de instrução dispara uma vez por evento de gatilho,
+independentemente de alguma linha ser modificada pelo evento de inserção,
+atualização ou exclusão.</p>
+
+</li>
+
+<li><em>gatilho de linha</em>
+<p>O gatilho de linha dispara uma vez para cada linha afetada pelo evento de
+gatilho.
+Se nenhuma linha for afetada, o gatilho não vai disparar.</p>
+
+</li>
+
+</ul>
+
+<div class="note"><span class="notetitle">Nota: </span>Uma atualização que define o valor da coluna como o valor originalmente
+contido (por exemplo, UPDATE T SET C = C) faz com que o gatilho de linha dispare,
+embora o valor da coluna seja o mesmo que era antes do evento de gatilho.</div>
+
+</div>
+
+</div>
+
+<div class="section" id="rrefsqlj43125__i1149821"><a name="rrefsqlj43125__i1149821"><!-- --></a><h2 class="sectiontitle">
+Instrução-SQL-engatilhada</h2>
+
+<div class="p">A ação definida pelo gatilho é chamada de instrução-SQL-engatilhada
+(na <a href="rrefsqlj43125.html#rrefsqlj43125__syn001">Sintaxe</a> acima,
+veja a última linha).
+Possui as seguintes limitações:
+<ul>
+<li>Não pode conter parâmetros dinâmicos (?).</li>
+
+<li>Não pode criar, alterar ou remover a tabela para a qual o gatilho
+está definido.</li>
+
+<li>Não pode adicionar ou remover um índice na tabela para a qual o gatilho
+está definido.</li>
+
+<li>Não pode adicionar ou remover um gatilho na tabela para a qual o gatilho
+está definido.</li>
+
+<li>Não pode efetivar ou desfazer a transação corrente, ou mudar o nível de
+isolamento.</li>
+
+<li>Não pode executar a instrução CALL.</li>
+
+<li>Os gatilhos para antes não podem possuir instruções INSERT, UPDATE ou DELETE
+como sua ação.</li>
+
+</ul>
+
+</div>
+
+<p>A instrução-SQL-engatilhada pode fazer referência a outros objetos do
+banco de dados além da tabela para a qual o gatilho é declarado.
+Se algum destes objetos for removido, o gatilho será invalidado.
+Se na próxima execução a recompilação do gatilho não for bem-sucedida, a chamada
+lançará uma exceção e a instrução que causou o disparo será desfeita.</p>
+
+<p>Para obter mais informações sobre instrução-SQL-engatilhada deve ser
+consultado o <cite><span><em>Guia do Desenvolvedor do Derby</em></span></cite>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Ordem de execução</h2>
+
+<div class="p">Quando ocorre um evento de banco de dados que dispara um gatilho, o
+<span>Derby</span>
+realiza ações nesta ordem:
+<ul>
+<li>Dispara os gatilhos <em>NO CASCADE BEFORE</em>.</li>
+
+<li>Realiza a verificação das restrições (verifica chave primária, chave única
+e chave estrangeira).</li>
+
+<li>Realiza a inserção, atualização ou exclusão.</li>
+
+<li>Dispara os gatilhos <em>AFTER</em>.</li>
+
+</ul>
+
+</div>
+
+<p>Quando são definidos vários gatilhos para o mesmo evento de banco de dados,
+para a mesma tabela, e para o mesmo instante (antes ou depois), os gatilhos
+são disparados na ordem em que foram criados.</p>
+
+</div>
+
+<div class="example">
+<pre><strong><span>-- Instruções e gatilhos:
+</span>
+CREATE TRIGGER T1 NO CASCADE BEFORE UPDATE ON X
+  FOR EACH ROW MODE DB2SQL
+  values app.notifyEmail('Jerry', 'A tabela x está para ser atualizada');
+
+CREATE TRIGGER EXCLUI_VÔOS
+  AFTER DELETE ON VÔOS
+  REFERENCING OLD_TABLE AS VÔOS_EXCLUÍDOS
+  FOR EACH STATEMENT MODE DB2SQL
+  DELETE FROM VÔOS_DISPONIBILIDADE WHERE ID_VÔO IN
+  (SELECT ID_VÔO FROM VÔOS_EXCLUÍDOS);
+
+CREATE TRIGGER EXCLUI_VÔOS3
+  AFTER DELETE ON VÔOS
+  REFERENCING OLD AS OLD
+  FOR EACH ROW MODE DB2SQL
+  DELETE FROM VÔOS_DISPONIBILIDADE WHERE ID_VÔO = OLD.ID_VÔO;
+</strong>
+</pre>
+
+<div class="note"><span class="notetitle">Nota: </span>Podem ser encontrados mais exemplos no
+<cite><span><em>Guia do Desenvolvedor do Derby</em></span></cite>.</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Recursividade de gatilho</h2>
+
+<p>A profundidade de recursividade máxima de gatilho é 16.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Informações relacionadas</h2>
+
+<div class="p">As funções de sistema especiais que retornam informação sobre a hora
+corrente ou o usuário corrente são avaliadas quando o gatilho dispara, e não
+quando o gatilho é criado.
+Estas funções incluem:
+<ul>
+<li><a href="rrefsqlj34177.html#rrefsqlj34177">CURRENT_DATE</a></li>
+
+<li><a href="rrefsqlj33772.html#rrefsqlj33772">CURRENT_TIME</a></li>
+
+<li><a href="rrefsqlj15866.html#rrefsqlj15866">CURRENT_TIMESTAMP</a></li>
+
+<li><a href="rrefsqlj42324.html#rrefsqlj42324">CURRENT_USER</a></li>
+
+<li><a href="rrefsqlj25228.html#rrefsqlj25228">SESSION_USER</a></li>
+
+<li><a href="rrefsqlj42476.html#rrefsqlj42476">USER</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlj89752.html">CláusulaReferência</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj95081.html" title="">Instruções CREATE</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="A instrução CREATE FUNCTION permite criar funções Java que podem ser utilizadas em expressões.">Instrução CREATE FUNCTION</a></div>
+<div><a href="rrefsqlj20937.html" title="">Instrução CREATE INDEX</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">Instrução CREATE PROCEDURE</a></div>
+<div><a href="rrefsqlj31580.html" title="">Instrução CREATE SCHEMA</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">Instrução CREATE SYNONYM</a></div>
+<div><a href="rrefsqlj24513.html" title="">Instrução CREATE TABLE</a></div>
+<div><a href="rrefsqlj15446.html" title="">Instrução CREATE VIEW</a></div>
+</div>
+</div>
+
+</body>
+</html>

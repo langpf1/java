@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Utilização do Network Server com aplicativos Derby pré-existentes" />
+<meta scheme="URI" name="DC.Relation" content="cadminpartone.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminov11108.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminconfig86869.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminservlet98430.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminadvtops.html" />
+<meta scheme="URI" name="DC.Relation" content="radminsampleprograms.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsthenetworkserverandjvms.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappschangingyourclasspath.html" />
+<meta scheme="URI" name="DC.Relation" content="tadmincbdjhhfd.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigshuttingdownthenetworkserver.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigsysteminformation.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsclient.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminnsdatasources.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps811478.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsusingthederbytoolswiththene.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappssettingportnumbers.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminapps59125" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Utilização do Network Server com aplicativos Derby pré-existentes</title>
+</head>
+<body id="cadminapps59125"><a name="cadminapps59125"><!-- --></a>
+
+
+<h1 class="topictitle1">Utilização do Network Server com aplicativos Derby pré-existentes</h1>
+
+
+<div>
+<p>Os aplicativos Java, que atualmente executam usando o
+<span>Derby</span> no modo incorporado,
+precisam ser modificados para trabalhar com o <em>Network Server</em> do
+<span>Derby</span>.
+Os tópicos desta seção discutem estas modificações.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cadminappsthenetworkserverandjvms.html">O Network Server e as JVMs</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="tadminappschangingyourclasspath.html">Instalação dos arquivos jar requeridos e adições ao caminho de classes</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="tadmincbdjhhfd.html">Inicialização do Network Server</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="tadminconfigshuttingdownthenetworkserver.html">Parar o Network Server</a></strong><br />
+Se a autenticação de usuário estiver desabilitada, o banco de dados Derby irá parar normalmente quando o Network Server for parado. Se a autenticação de usuário estiver habilitada, o banco de dados deverá ser parado explicitamente antes de parar o Network Server, especificando um nome e senha de usuário do Derby válidos.</li>
+<li class="ulchildlink"><strong><a href="tadminconfigsysteminformation.html">Obtenção de informações do sistema</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="cadminappsclient.html">Acesso ao Network Server utilizando o driver cliente da rede</a></strong><br />
+Para se conectar ao Network Server, o aplicativo precisa carregar o driver e a URL de conexão específica para o Network Server. Além disso, caso esteja sendo utilizado autenticação, deverá ser especificado nome de usuário e senha.</li>
+<li class="ulchildlink"><strong><a href="cadminnsdatasources.html">Acesso ao Network Server utilizando DataSource</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="cadminapps811478.html">XA e o Network Server</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="cadminappsusingthederbytoolswiththene.html">Utilização das ferramentas do Derby com o Network Server</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="cadminapps.html">Diferenças entre executar o Derby no modo incorporado e utilizando o Network Server</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="tadminappssettingportnumbers.html">Definição do número da porta</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminpartone.html" title="">Parte 1: Guia do servidor Derby</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="cadminov11108.html" title="">O Derby em um ambiente multiusuário</a></div>
+<div><a href="cadminconfig86869.html" title="O Network Server do Derby pode executar como um servidor autônomo, com o Derby como uma parte incorporada do aplicativo.">Gerenciamento do Network Server do Derby</a></div>
+<div><a href="cadminservlet98430.html" title="Pode ser utilizada a interface servlet para gerenciar o Network Server remotamente. Para utilizar a interface servlet, a servlet deverá estar registrada no servidor Web, e o servidor Web deverá ter conhecimento de derby.system.home.">Gerenciamento remoto do Network Server do Derby utilizando a interface servlet</a></div>
+<div><a href="cadminadvtops.html" title="">Tópicos avançados do Network Server do Derby</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="radminsampleprograms.html" title="">Programas exemplo para o Network Server do Derby</a></div>
+</div>
+</div>
+
+</body>
+</html>

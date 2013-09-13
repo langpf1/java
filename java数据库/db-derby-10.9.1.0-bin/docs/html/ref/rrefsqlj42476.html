@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="USER function" />
+<meta content="USER function" name="DC.subject" />
+<meta content="USER function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj42476" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>USER function</title>
+</head>
+<body id="rrefsqlj42476"><a name="rrefsqlj42476"><!-- --></a>
+
+
+<h1 class="topictitle1">USER function</h1>
+
+
+<div>
+<div class="section"> <p>When used outside stored routines, USER,
+<a href="rrefsqlj42324.html#rrefsqlj42324">CURRENT_USER</a>, and 
+<a href="rrefsqlj25228.html#rrefsqlj25228">SESSION_USER</a> all
+return the authorization identifier of the user that created the SQL
+session.</p>
+
+<p>SESSION_USER also always returns this value when used within stored
+routines.</p>
+
+<p>If used within a stored routine created with EXTERNAL SECURITY DEFINER,
+however, USER and CURRENT_USER return the authorization identifier of the user
+that owns the schema of the routine. This is usually the creating user,
+although the database owner could be the creator as well.</p>
+
+<p>For information about definer's and invoker's rights, see
+<a href="rrefcreateprocedurestatement.html#rrefcreateprocedurestatement">CREATE PROCEDURE statement</a>
+or
+<a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement">CREATE FUNCTION statement</a>.
+</p>
+  
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>USER</strong></pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre><strong>VALUES USER</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

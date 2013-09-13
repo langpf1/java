@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<base target="contentwin" /><title>Reference Manual</title>
+</head>
+<body>
+<ul>
+<li><a href="rrefcopyright.html">Copyright</a></li>
+<li><a href="rreflicense.html">License</a></li>
+<li><a href="crefmpref1002477.html">About this guide</a>
+<ul>
+<li><a href="crefmpref11181.html">Purpose of this document</a></li>
+<li><a href="crefmpref23223.html">Audience</a></li>
+<li><a href="crefmpref23947.html">How this guide is organized</a></li>
+</ul>
+</li>
+<li><a href="crefsqlj23296.html">SQL language reference</a>
+<ul>
+<li><a href="rrefsqlj28468.html">Capitalization and special characters</a></li>
+<li><a href="crefsqlj18919.html">SQL identifiers</a>
+<ul>
+<li><a href="crefsqlj1003454.html">Rules for SQL92 identifiers</a></li>
+<li><a href="crefsqlj34834.html">SQL92Identifier</a>
+<ul>
+<li><a href="crefsqlj1004091.html">Qualifying dictionary objects</a></li>
+</ul>
+</li>
+<li><a href="rrefcolumnname.html">column-Name</a></li>
+<li><a href="rrefcorrelationname.html">correlation-Name</a></li>
+<li><a href="rrefnewtablename.html">new-table-Name</a></li>
+<li><a href="rrefschemaname.html">schemaName</a></li>
+<li><a href="rrefsimplecolumnname.html">Simple-column-Name</a></li>
+<li><a href="rrefsynonymname.html">synonym-Name</a></li>
+<li><a href="rreftablename.html">table-Name</a></li>
+<li><a href="rrefviewname.html">view-Name</a></li>
+<li><a href="rrefindexname.html">index-Name</a></li>
+<li><a href="rrefconstraintname.html">constraint-Name</a></li>
+<li><a href="rrefcursorname.html">cursor-Name</a></li>
+<li><a href="rreftriggername.html">TriggerName</a></li>
+<li><a href="rrefrauthid.html">AuthorizationIdentifier</a></li>
+<li><a href="rrefrolename.html">RoleName</a></li>
+</ul>
+</li>
+<li><a href="crefsqlj39374.html">Statements</a>
+<ul>
+<li><a href="crefsqlj22771.html">Interaction with the dependency system</a></li>
+<li><a href="rrefsqlj81859.html">ALTER TABLE statement</a></li>
+<li><a href="rrefcallprocedure.html">CALL (PROCEDURE) statement</a></li>
+<li><a href="crefsqlj95081.html">CREATE statements</a>
+<ul>
+<li><a href="rrefcreatefunctionstatement.html">CREATE FUNCTION statement</a></li>
+<li><a href="rrefsqlj20937.html">CREATE INDEX statement</a></li>
+<li><a href="rrefcreateprocedurestatement.html">CREATE PROCEDURE statement</a></li>
+<li><a href="rrefcreaterole.html">CREATE ROLE statement</a></li>
+<li><a href="rrefsqlj31580.html">CREATE SCHEMA statement</a></li>
+<li><a href="rrefsqljcreatesequence.html">CREATE SEQUENCE statement</a></li>
+<li><a href="rrefsqljcreatesynonym.html">CREATE SYNONYM statement</a></li>
+<li><a href="rrefsqlj24513.html">CREATE TABLE statement</a></li>
+<li><a href="rrefsqlj43125.html">CREATE TRIGGER statement</a></li>
+<li><a href="rrefsqljcreatetype.html">CREATE TYPE statement</a></li>
+<li><a href="rrefsqlj15446.html">CREATE VIEW statement</a></li>
+</ul>
+</li>
+<li><a href="rrefdeclaretemptable.html">DECLARE GLOBAL TEMPORARY TABLE statement</a></li>
+<li><a href="rrefsqlj35981.html">DELETE statement</a></li>
+<li><a href="crefsqlj80721.html">DROP statements</a>
+<ul>
+<li><a href="rrefdropfunctionstatement.html">DROP FUNCTION statement</a></li>
+<li><a href="rrefsqlj59893.html">DROP INDEX statement</a></li>
+<li><a href="rrefdropprocedurestatement.html">DROP PROCEDURE statement</a></li>
+<li><a href="rrefdroprole.html">DROP ROLE statement</a></li>
+<li><a href="rrefsqlj31648.html">DROP SCHEMA statement</a></li>
+<li><a href="rrefsqljdropsequence.html">DROP SEQUENCE statement</a></li>
+<li><a href="rrefsqljdropsynonym.html">DROP SYNONYM statement</a></li>
+<li><a href="rrefsqlj34148.html">DROP TABLE statement</a></li>
+<li><a href="rrefsqlj42082.html">DROP TRIGGER statement</a></li>
+<li><a href="rrefsqljdroptype.html">DROP TYPE statement</a></li>
+<li><a href="rrefsqlj61102.html">DROP VIEW statement</a></li>
+</ul>
+</li>
+<li><a href="rrefsqljgrant.html">GRANT statement</a></li>
+<li><a href="rrefsqlj40774.html">INSERT statement</a></li>
+<li><a href="rrefsqlj40506.html">LOCK TABLE statement</a></li>
+<li><a href="crefsqljrenamestatements.html">RENAME statements</a>
+<ul>
+<li><a href="rrefsqljrenamecolumnstatement.html">RENAME COLUMN statement</a></li>
+<li><a href="rrefsqlj95598.html">RENAME INDEX statement</a></li>
+<li><a href="rrefsqljrenametablestatement.html">RENAME TABLE statement</a></li>
+</ul>
+</li>
+<li><a href="rrefsqljrevoke.html">REVOKE statement</a></li>
+<li><a href="rrefsqlj41360.html">SELECT statement</a></li>
+<li><a href="crefsqlj35312.html">SET statements</a>
+<ul>
+<li><a href="rrefsqlj41180.html">SET ISOLATION statement</a></li>
+<li><a href="rrefsetrole.html">SET ROLE statement</a></li>
+<li><a href="rrefsqlj32268.html">SET SCHEMA statement</a></li>
+</ul>
+</li>
+<li><a href="rrefsqljtruncatetable.html">TRUNCATE TABLE statement</a></li>
+<li><a href="rrefsqlj26498.html">UPDATE statement</a></li>
+</ul>
+</li>
+<li><a href="rrefclauses.html">SQL clauses</a>
+<ul>
+<li><a href="rrefsqlj13590.html">CONSTRAINT clause</a>
+<ul>
+<li><a href="rrefsqlj16095.html">Column-level-constraint</a></li>
+<li><a href="rrefsqlj42154.html">Table-level constraint</a></li>
+<li><a href="rrefsqlj16357.html">References specification</a></li>
+<li><a href="rrefsqlj91438.html">searchCondition</a></li>
+</ul>
+</li>
+<li><a href="rrefsqlj31783.html">FOR UPDATE clause</a></li>
+<li><a href="rrefsqlj21583.html">FROM clause</a></li>
+<li><a href="rrefsqlj32654.html">GROUP BY clause</a></li>
+<li><a href="rrefsqlj14854.html">HAVING clause</a></li>
+<li><a href="rrefsqlj13658.html">ORDER BY clause</a></li>
+<li><a href="rrefsqljoffsetfetch.html">The result offset and fetch first clauses</a></li>
+<li><a href="rrefsqljusing.html">USING clause</a></li>
+<li><a href="rrefsqlj33602.html">WHERE clause</a></li>
+<li><a href="rrefsqlj15309.html">WHERE CURRENT OF clause</a></li>
+</ul>
+</li>
+<li><a href="rrefsqlj19433.html">SQL expressions</a>
+<ul>
+<li><a href="rrefselectexpression.html">SelectExpression</a></li>
+<li><a href="rreftableexpression.html">TableExpression</a>
+<ul>
+<li><a href="rrefsqlj33215.html">TableViewOrFunctionExpression</a>
+<ul>
+<li><a href="rrefsqljtfinvoke.html">TableFunctionInvocation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rrefsqljnextvaluefor.html">NEXT VALUE FOR expression</a></li>
+<li><a href="rrefsqlj11277.html">VALUES expression</a></li>
+<li><a href="rrefsqlj1080779.html">Expression precedence</a></li>
+<li><a href="rrefsqlj23075.html">Boolean expressions</a></li>
+<li><a href="rrefcase.html">CASE expression</a></li>
+<li><a href="crefsqlj29911.html">Dynamic parameters</a>
+<ul>
+<li><a href="rrefsqlj1082953.html">Dynamic parameters example</a></li>
+<li><a href="rrefsqlj1083019.html">Where dynamic parameters are allowed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rrefsqlj29840.html">JOIN operations</a>
+<ul>
+<li><a href="rrefsqlj35034.html">INNER JOIN operation</a></li>
+<li><a href="rrefsqlj18922.html">LEFT OUTER JOIN operation</a></li>
+<li><a href="rrefsqlj57522.html">RIGHT OUTER JOIN operation</a></li>
+<li><a href="rrefsqljcrossjoin.html">CROSS JOIN operation</a></li>
+<li><a href="rrefsqljnaturaljoin.html">NATURAL JOIN operation</a></li>
+</ul>
+</li>
+<li><a href="rrefqueries.html">SQL queries</a>
+<ul>
+<li><a href="rrefsqlj21571.html">Query</a></li>
+<li><a href="rrefscalarsubquery.html">ScalarSubquery</a></li>
+<li><a href="rreftablesubquery.html">TableSubquery</a></li>
+</ul>
+</li>
+<li><a href="rrefsqlj29026.html">Built-in functions</a>
+<ul>
+<li><a href="rrefsqlj55788.html">Standard built-in functions</a></li>
+<li><a href="rrefsqlj33923.html">Aggregates (set functions)</a></li>
+<li><a href="rrefsqlj98067.html">ABS or ABSVAL function</a></li>
+<li><a href="rreffuncacos.html">ACOS function</a></li>
+<li><a href="rreffuncasin.html">ASIN function</a></li>
+<li><a href="rreffuncatan.html">ATAN function</a></li>
+<li><a href="rreffuncatan2.html">ATAN2 function</a></li>
+<li><a href="rrefsqlj32693.html">AVG function</a></li>
+<li><a href="rrefbuiltbigint.html">BIGINT function</a></li>
+<li><a href="rrefsqlj33562.html">CAST function</a></li>
+<li><a href="rreffuncceil.html">CEIL or CEILING function</a></li>
+<li><a href="rrefbuiltchar.html">CHAR function</a></li>
+<li><a href="rreffunccoalesce.html">COALESCE function</a></li>
+<li><a href="rrefsqlj40899.html">Concatenation operator</a></li>
+<li><a href="rreffunccos.html">COS function</a></li>
+<li><a href="rreffunccosh.html">COSH function</a></li>
+<li><a href="rreffunccot.html">COT function</a></li>
+<li><a href="rrefsqlj38716.html">COUNT function</a></li>
+<li><a href="rrefsqlj66113.html">COUNT(*) function</a></li>
+<li><a href="rrefsqljcurrentdate.html">CURRENT DATE function</a></li>
+<li><a href="rrefsqlj34177.html">CURRENT_DATE function</a></li>
+<li><a href="rrefcurrentisolation.html">CURRENT ISOLATION function</a></li>
+<li><a href="rrefcurrentrole.html">CURRENT_ROLE function</a></li>
+<li><a href="rrefsqljcurrentschema.html">CURRENT SCHEMA function</a></li>
+<li><a href="rrefsqlj1055824.html">CURRENT TIME function</a></li>
+<li><a href="rrefsqlj33772.html">CURRENT_TIME function</a></li>
+<li><a href="rrefsqljcurrenttimestamp.html">CURRENT TIMESTAMP function</a></li>
+<li><a href="rrefsqlj15866.html">CURRENT_TIMESTAMP function</a></li>
+<li><a href="rrefsqlj42324.html">CURRENT_USER function</a></li>
+<li><a href="rrefdatefunc.html">DATE function</a></li>
+<li><a href="rrefdayfunc.html">DAY function</a></li>
+<li><a href="rreffuncdegrees.html">DEGREES function</a></li>
+<li><a href="rrefbuiltdouble.html">DOUBLE function</a></li>
+<li><a href="rreffuncexp.html">EXP function</a></li>
+<li><a href="rreffuncfloor.html">FLOOR function</a></li>
+<li><a href="rrefhourfunc.html">HOUR function</a></li>
+<li><a href="rrefidentityvallocal.html">IDENTITY_VAL_LOCAL function</a></li>
+<li><a href="rrefbuiltinteger.html">INTEGER function</a></li>
+<li><a href="rrefsqlj42049.html">LCASE or LOWER function</a></li>
+<li><a href="rrefsqlj16762.html">LENGTH function</a></li>
+<li><a href="rreffunclog.html">LN or LOG function</a></li>
+<li><a href="rreffunclog10.html">LOG10 function</a></li>
+<li><a href="rrefsqlj61998.html">LOCATE function</a></li>
+<li><a href="rrefsqlj97870.html">LTRIM function</a></li>
+<li><a href="rrefsqlj27781.html">MAX function</a></li>
+<li><a href="rrefsqlj33520.html">MIN function</a></li>
+<li><a href="rrefminutefunc.html">MINUTE function</a></li>
+<li><a href="rrefsqljmod.html">MOD function</a></li>
+<li><a href="rrefmonthfunc.html">MONTH function</a></li>
+<li><a href="rrefcasenullif.html">NULLIF function</a></li>
+<li><a href="rreffuncpi.html">PI function</a></li>
+<li><a href="rreffuncradians.html">RADIANS function</a></li>
+<li><a href="rreffuncrandom.html">RANDOM function</a></li>
+<li><a href="rreffuncrand.html">RAND function</a></li>
+<li><a href="rreffuncrownumber.html">ROW_NUMBER function</a></li>
+<li><a href="rrefsqlj32613.html">RTRIM function</a></li>
+<li><a href="rrefsecondfunc.html">SECOND function</a></li>
+<li><a href="rrefsqlj25228.html">SESSION_USER function</a></li>
+<li><a href="rreffuncsign.html">SIGN function</a></li>
+<li><a href="rreffuncsin.html">SIN function</a></li>
+<li><a href="rreffuncsinh.html">SINH function</a></li>
+<li><a href="rrefbuiltsmallint.html">SMALLINT function</a></li>
+<li><a href="rrefsqlj73147.html">SQRT function</a></li>
+<li><a href="rrefsqlj93082.html">SUBSTR function</a></li>
+<li><a href="rrefsqlj13083.html">SUM function</a></li>
+<li><a href="rreffunctan.html">TAN function</a></li>
+<li><a href="rreffunctanh.html">TANH function</a></li>
+<li><a href="rreftimefunc.html">TIME function</a></li>
+<li><a href="rreftimestampfunc.html">TIMESTAMP function</a></li>
+<li><a href="rreftrimfunc.html">TRIM function</a></li>
+<li><a href="rrefsqlj29930.html">UCASE or UPPER function</a></li>
+<li><a href="rrefsqlj42476.html">USER function</a></li>
+<li><a href="rrefbuiltvarchar.html">VARCHAR function</a></li>
+<li><a href="rreffuncxmlexists.html">XMLEXISTS operator</a></li>
+<li><a href="rreffuncxmlparse.html">XMLPARSE operator</a></li>
+<li><a href="rreffuncxmlquery.html">XMLQUERY operator</a></li>
+<li><a href="rreffuncxmlserialize.html">XMLSERIALIZE operator</a></li>
+<li><a href="rrefyearfunc.html">YEAR function</a></li>
+</ul>
+</li>
+<li><a href="crefsqlbuiltinsystemfunctions.html">Built-in system functions</a>
+<ul>
+<li><a href="rrefsyscschecktablefunc.html">SYSCS_UTIL.SYSCS_CHECK_TABLE system function</a></li>
+<li><a href="rrefgetdbpropfunc.html">SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY system function</a></li>
+<li><a href="rrefsyscsruntimestatsfunc.html">SYSCS_UTIL.SYSCS_GET_RUNTIMESTATISTICS system function</a></li>
+<li><a href="rrefgetuseraccess.html">SYSCS_UTIL.SYSCS_GET_USER_ACCESS system function</a></li>
+<li><a href="rref_syscs_get_xplain_mode.html">SYSCS_UTIL.SYSCS_GET_XPLAIN_MODE system function</a></li>
+<li><a href="rref_syscs_get_xplain_schema.html">SYSCS_UTIL.SYSCS_GET_XPLAIN_SCHEMA system function</a></li>
+<li><a href="rrefsyscspeeksequence.html">SYSCS_UTIL.SYSCS_PEEK_AT_SEQUENCE system function</a></li>
+</ul>
+</li>
+<li><a href="crefsqlbuiltinsystemprocedures.html">Built-in system procedures</a>
+<ul>
+<li><a href="rrefbackupdbproc.html">SYSCS_UTIL.SYSCS_BACKUP_DATABASE system procedure</a></li>
+<li><a href="rrefbackupdbenablelogproc.html">SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE system procedure</a></li>
+<li><a href="rrefbackupdbenablelognowaitproc.html">SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE_NOWAIT system procedure</a></li>
+<li><a href="rrefbackupdbnowaitproc.html">SYSCS_UTIL.SYSCS_BACKUP_DATABASE_NOWAIT system procedure</a></li>
+<li><a href="rrefcheckpointdbproc.html">SYSCS_UTIL.SYSCS_CHECKPOINT_DATABASE system procedure</a></li>
+<li><a href="rrefaltertablecompress.html">SYSCS_UTIL.SYSCS_COMPRESS_TABLE system procedure</a></li>
+<li><a href="rrefnativecreateuserproc.html">SYSCS_UTIL.SYSCS_CREATE_USER system procedure</a></li>
+<li><a href="rrefdisablelogproc.html">SYSCS_UTIL.SYSCS_DISABLE_LOG_ARCHIVE_MODE system procedure</a></li>
+<li><a href="rrefdropstatsproc.html">SYSCS_UTIL.SYSCS_DROP_STATISTICS system procedure</a></li>
+<li><a href="rrefnativedropuserproc.html">SYSCS_UTIL.SYSCS_DROP_USER system procedure</a></li>
+<li><a href="rrefemptystmtcache.html">SYSCS_UTIL.SYSCS_EMPTY_STATEMENT_CACHE system procedure</a></li>
+<li><a href="rrefexportselectionproc.html">SYSCS_UTIL.SYSCS_EXPORT_QUERY system procedure</a></li>
+<li><a href="rrefexportselectionproclobs.html">SYSCS_UTIL.SYSCS_EXPORT_QUERY_LOBS_TO_EXTFILE system procedure</a></li>
+<li><a href="rrefexportproc.html">SYSCS_UTIL.SYSCS_EXPORT_TABLE system procedure</a></li>
+<li><a href="rrefexportproctablelobs.html">SYSCS_UTIL.SYSCS_EXPORT_TABLE_LOBS_TO_EXTFILE system procedure</a></li>
+<li><a href="rreffreezedbproc.html">SYSCS_UTIL.SYSCS_FREEZE_DATABASE system procedure</a></li>
+<li><a href="rrefimportdataproc.html">SYSCS_UTIL.SYSCS_IMPORT_DATA system procedure</a></li>
+<li><a href="rrefimportdataproclobs.html">SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE system procedure</a></li>
+<li><a href="rrefimportproc.html">SYSCS_UTIL.SYSCS_IMPORT_TABLE system procedure</a></li>
+<li><a href="rrefimporttableproclobs.html">SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE system procedure</a></li>
+<li><a href="rrefproceduresinplacecompress.html">SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE system procedure</a></li>
+<li><a href="rrefnativemodifypasswordproc.html">SYSCS_UTIL.SYSCS_MODIFY_PASSWORD system procedure</a></li>
+<li><a href="rrefreloadpolicyproc.html">SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY system procedure</a></li>
+<li><a href="rrefnativeresetpasswordproc.html">SYSCS_UTIL.SYSCS_RESET_PASSWORD system procedure</a></li>
+<li><a href="rrefsetdbpropproc.html">SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY system procedure</a></li>
+<li><a href="rrefsqlj38831.html">SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS system procedure</a></li>
+<li><a href="rrefsetstatstimingproc.html">SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING system procedure</a></li>
+<li><a href="rrefsetuseraccess.html">SYSCS_UTIL.SYSCS_SET_USER_ACCESS system procedure</a></li>
+<li><a href="rref_syscs_set_xplain_mode.html">SYSCS_UTIL.SYSCS_SET_XPLAIN_MODE system procedure</a></li>
+<li><a href="rref_syscs_set_xplain_schema.html">SYSCS_UTIL.SYSCS_SET_XPLAIN_SCHEMA system procedure</a></li>
+<li><a href="rrefunfreezedbproc.html">SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE system procedure</a></li>
+<li><a href="rrefupdatestatsproc.html">SYSCS_UTIL.SYSCS_UPDATE_STATISTICS system procedure</a></li>
+<li><a href="crefstorejardb.html">System procedures for storing jar files in a database</a>
+<ul>
+<li><a href="rrefstorejarinstall.html">SQLJ.INSTALL_JAR system procedure</a></li>
+<li><a href="rrefstorejarremove.html">SQLJ.REMOVE_JAR system procedure</a></li>
+<li><a href="rrefstorejarreplace.html">SQLJ.REPLACE_JAR system procedure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rrefsyscsdiagtables.html">SYSCS_DIAG diagnostic tables and functions</a></li>
+<li><a href="crefsqlj31068.html">Data types</a>
+<ul>
+<li><a href="crefsqlj21305.html">Built-In type overview</a></li>
+<li><a href="crefsqlj41507.html">Numeric types</a>
+<ul>
+<li><a href="crefsqlj28138.html">Numeric type overview</a></li>
+<li><a href="rrefsqlj27767.html">Numeric type promotion in expressions</a></li>
+<li><a href="rrefsqlj20204.html">Storing values of one numeric data type in columns of another numeric data type</a></li>
+<li><a href="rrefsqlj36146.html">Scale for decimal arithmetic</a></li>
+</ul>
+</li>
+<li><a href="rrefsqlj58560.html">Data type assignments and comparison, sorting, and ordering</a></li>
+<li><a href="rrefsqlj30435.html">BIGINT data type</a></li>
+<li><a href="rrefblob.html">BLOB data type</a></li>
+<li><a href="rrefsqljBoolean.html">BOOLEAN data type</a></li>
+<li><a href="rrefsqlj13733.html">CHAR data type</a></li>
+<li><a href="rrefsqlj57924.html">CHAR FOR BIT DATA data type</a></li>
+<li><a href="rrefclob.html">CLOB data type</a></li>
+<li><a href="rrefsqlj18730.html">DATE data type</a></li>
+<li><a href="rrefsqlj15260.html">DECIMAL data type</a></li>
+<li><a href="rrefsqlj42002.html">DOUBLE data type</a></li>
+<li><a href="rrefsqljdoubleprecision.html">DOUBLE PRECISION data type</a></li>
+<li><a href="rrefsqlj27281.html">FLOAT data type</a></li>
+<li><a href="rrefsqlj10696.html">INTEGER data type</a></li>
+<li><a href="rrefsqlj15147.html">LONG VARCHAR data type</a></li>
+<li><a href="rrefsqlj30118.html">LONG VARCHAR FOR BIT DATA data type</a></li>
+<li><a href="rrefsqlj12362.html">NUMERIC data type</a></li>
+<li><a href="rrefsqlj14122.html">REAL data type</a></li>
+<li><a href="rrefsqlj16221.html">SMALLINT data type</a></li>
+<li><a href="rrefsqlj21908.html">TIME data type</a></li>
+<li><a href="rrefsqlj27620.html">TIMESTAMP data type</a></li>
+<li><a href="rrefsqljudt.html">User-defined types</a></li>
+<li><a href="rrefsqlj41207.html">VARCHAR data type</a></li>
+<li><a href="rrefsqlj32714.html">VARCHAR FOR BIT DATA data type</a></li>
+<li><a href="rrefsqljtypexml.html">XML data type</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rrefsqljargmatching.html">Argument matching</a></li>
+<li><a href="rrefkeywords29722.html">SQL reserved words</a></li>
+<li><a href="rrefsql9241891.html">Derby support for SQL-92 features</a></li>
+<li><a href="rrefsistabs38369.html">Derby system tables</a>
+<ul>
+<li><a href="rrefsistabs28114.html">SYSALIASES system table</a></li>
+<li><a href="rrefsistabs26665.html">SYSCHECKS system table</a></li>
+<li><a href="rrefsistabssyscolperms.html">SYSCOLPERMS system table</a></li>
+<li><a href="rrefsistabs22441.html">SYSCOLUMNS system table</a></li>
+<li><a href="rrefsistabs39391.html">SYSCONGLOMERATES system table</a></li>
+<li><a href="rrefsistabs23241.html">SYSCONSTRAINTS system table</a></li>
+<li><a href="rrefsistabs12813.html">SYSDEPENDS system table</a></li>
+<li><a href="rrefsistabs40972.html">SYSFILES system table</a></li>
+<li><a href="rrefsistabs13420.html">SYSFOREIGNKEYS system table</a></li>
+<li><a href="rrefsistabs33921.html">SYSKEYS system table</a></li>
+<li><a href="rrefsistabssysperms.html">SYSPERMS system table</a></li>
+<li><a href="rrefsistabssysroles.html">SYSROLES system table</a></li>
+<li><a href="rrefsistabssysroutineperms.html">SYSROUTINEPERMS system table</a></li>
+<li><a href="rrefsistabs12085.html">SYSSCHEMAS system table</a></li>
+<li><a href="rrefsistabssyssequences.html">SYSSEQUENCES system table</a></li>
+<li><a href="rrefsistabs33768.html">SYSSTATEMENTS system table</a></li>
+<li><a href="rrefsistabslilanguageitemsysstatistics.html">SYSSTATISTICS system table</a></li>
+<li><a href="rrefsistabssystableperms.html">SYSTABLEPERMS system table</a></li>
+<li><a href="rrefsistabs24269.html">SYSTABLES system table</a></li>
+<li><a href="rrefsistabs79888.html">SYSTRIGGERS system table</a></li>
+<li><a href="rrefsistabssysusers.html">SYSUSERS system table</a></li>
+<li><a href="rrefsistabs24045.html">SYSVIEWS system table</a></li>
+</ul>
+</li>
+<li><a href="rref_xplain_tables.html">XPLAIN style tables</a>
+<ul>
+<li><a href="rrefsysxplain_statements.html">SYSXPLAIN_STATEMENTS system table</a></li>
+<li><a href="rrefsysxplain_statement_timings.html">SYSXPLAIN_STATEMENT_TIMINGS system table</a></li>
+<li><a href="rrefsysxplain_resultsets.html">SYSXPLAIN_RESULTSETS system table</a></li>
+<li><a href="rrefsysxplain_resultset_timings.html">SYSXPLAIN_RESULTSET_TIMINGS system table</a></li>
+<li><a href="rrefsysxplain_scan_props.html">SYSXPLAIN_SCAN_PROPS system table</a></li>
+<li><a href="rrefsysxplain_sort_props.html">SYSXPLAIN_SORT_PROPS system table</a></li>
+</ul>
+</li>
+<li><a href="rrefexcept16677.html">Derby exception messages and SQL states</a>
+<ul>
+<li><a href="rrefexcept71493.html">SQL error messages and exceptions</a></li>
+</ul>
+</li>
+<li><a href="crefjdbc12657.html">JDBC reference</a>
+<ul>
+<li><a href="rrefjdbc32052.html">java.sql.Driver interface</a>
+<ul>
+<li><a href="rrefjdbc34954.html">java.sql.Driver.getPropertyInfo method</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc34565.html">java.sql.DriverManager.getConnection method</a>
+<ul>
+<li><a href="rrefjdbc27433.html">Derby database connection URL syntax</a></li>
+<li><a href="rrefjdbc37352.html">Syntax of database connection URLs for applications with embedded databases</a></li>
+<li><a href="crefjavgcasyn.html">Additional SQL syntax</a></li>
+<li><a href="rrefjdbc10889.html">Attributes of the Derby database connection URL</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc27734.html">java.sql.Connection interface</a>
+<ul>
+<li><a href="rrefjavcsti.html">java.sql.Connection.setTransactionIsolation method</a></li>
+<li><a href="rrefjavcsro.html">java.sql.Connection.setReadOnly method</a></li>
+<li><a href="rrefjavciro.html">java.sql.Connection.isReadOnly method</a></li>
+<li><a href="crefjavccns.html">Connection functionality not supported</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc15905.html">java.sql.DatabaseMetaData interface</a>
+<ul>
+<li><a href="rrefdmrs.html">DatabaseMetaData result sets</a></li>
+<li><a href="rrefgpc1.html">java.sql.DatabaseMetaData.getProcedureColumns method</a></li>
+<li><a href="rrefpgc1.html">Parameters to getProcedureColumns</a></li>
+<li><a href="rrefcrsrgpc1.html">Columns in the ResultSet returned by getProcedureColumns</a></li>
+<li><a href="rrefdmdfns1.html">java.sql.DatabaseMetaData.getBestRowIdentifier method</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc40794.html">java.sql.Statement interface</a>
+<ul>
+<li><a href="rrefso2.html">ResultSet objects</a></li>
+<li><a href="crefjavstateautogen.html">Autogenerated keys</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc20485.html">java.sql.CallableStatement interface</a>
+<ul>
+<li><a href="rrefjavcallstatout.html">CallableStatements and OUT Parameters</a></li>
+<li><a href="rrefjdbc75719.html">CallableStatements and INOUT parameters</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc29874.html">java.sql.PreparedStatement interface</a>
+<ul>
+<li><a href="rrefjavsqlprst.html">Prepared statements and streaming columns</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc23502.html">java.sql.ResultSet interface</a>
+<ul>
+<li><a href="rrefjavsqlrssc.html">ResultSets and streaming columns</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc38274.html">java.sql.ResultSetMetaData interface</a></li>
+<li><a href="rrefjdbc16643.html">java.sql.SQLException class</a></li>
+<li><a href="rrefjdbc30469.html">java.sql.SQLWarning class</a></li>
+<li><a href="rrefjdbcjavasqlsavepoint.html">java.sql.Savepoint interface</a></li>
+<li><a href="rrefjdbc20377.html">Mapping of java.sql.Types to SQL types</a>
+<ul>
+<li><a href="rrefjdbc96386.html">Mapping of java.sql.Blob and java.sql.Clob interfaces</a>
+<ul>
+<li><a href="crefjavbclobnot.html">Notes on mapping of java.sql.Blob and java.sql.Clob interfaces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rrefjdbcjsr169.html">JDBC Package for Connected Device Configuration/Foundation Profile (JSR 169)</a></li>
+<li><a href="rrefjdbc4_0summary.html">JDBC 4.0 and 4.1 features</a>
+<ul>
+<li><a href="rrefjdbc4_0sqlexception.html">Refined subclasses of SQLException</a></li>
+<li><a href="rrefjdbc4_0connection.html">java.sql.Connection interface: JDBC 4.0 features</a></li>
+<li><a href="rrefjdbc4_0databaseMetaData.html">java.sql.DatabaseMetaData interface: JDBC 4.0 features</a></li>
+<li><a href="rrefjdbc4_0statement.html">java.sql.Statement interface: JDBC 4.0 features</a></li>
+<li><a href="rrefjdbc4_0dataSource.html">javax.sql.DataSource interface: JDBC 4.0 features</a></li>
+<li><a href="rrefjdbcrefsqlxml.html">java.sql.SQLXML interface</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc4_1summary.html">JDBC 4.1-only features</a>
+<ul>
+<li><a href="rrefjdbc4_1connection.html">java.sql.Connection interface: JDBC 4.1 features</a></li>
+</ul>
+</li>
+<li><a href="rrefjdbc1020262.html">JDBC escape syntax</a>
+<ul>
+<li><a href="rrefjdbc70824.html">JDBC escape keyword for call statements</a></li>
+<li><a href="rrefjdbc28456.html">JDBC escape syntax for LIKE clauses</a></li>
+<li><a href="rrefjdbclimit.html">JDBC escape syntax for limit/offset clauses</a></li>
+<li><a href="rrefjdbc88908.html">JDBC escape syntax for fn keyword</a></li>
+<li><a href="rrefjdbc37244.html">JDBC escape syntax for outer joins</a></li>
+<li><a href="rrefjdbc12124.html">JDBC escape syntax for time formats</a></li>
+<li><a href="rrefjdbcescapedate.html">JDBC escape syntax for date formats</a></li>
+<li><a href="rrefjdbc41784.html">JDBC escape syntax for timestamp formats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rrefattrib24612.html">Setting attributes for the database connection URL</a>
+<ul>
+<li><a href="rrefattrib42100.html">bootPassword=key attribute</a></li>
+<li><a href="rrefattribcollation.html">collation=collation attribute</a></li>
+<li><a href="rrefattrib26867.html">create=true attribute</a></li>
+<li><a href="rrefcreatefrom.html">createFrom=path attribute</a></li>
+<li><a href="rrefattrib17246.html">databaseName=nameofDatabase attribute</a></li>
+<li><a href="rrefattrib15290.html">dataEncryption=true attribute</a></li>
+<li><a href="rrefattribderegister.html">deregister=false attribute</a></li>
+<li><a href="rrefattribdrop.html">drop=true attribute</a></li>
+<li><a href="rrefattribencryptkey.html">encryptionKey=key attribute</a></li>
+<li><a href="rrefattrib88843.html">encryptionProvider=providerName attribute</a></li>
+<li><a href="rrefattrib60346.html">encryptionAlgorithm=algorithm attribute</a></li>
+<li><a href="rrefattribfailover.html">failover=true attribute</a></li>
+<li><a href="rrefattrib72457.html">logDevice=logDirectoryPath attribute</a></li>
+<li><a href="rrefattribnewencryptkey.html">newEncryptionKey=key attribute</a></li>
+<li><a href="rrefattribnewbootpw.html">newBootPassword=newPassword attribute</a></li>
+<li><a href="rrefattrib42686.html">password=userPassword attribute</a></li>
+<li><a href="rrefrestorefrom.html">restoreFrom=path attribute</a></li>
+<li><a href="rrefattribretrievemsgtext.html">retrieveMessageText=false attribute</a></li>
+<li><a href="rrefrollforward.html">rollForwardRecoveryFrom=path attribute</a></li>
+<li><a href="rrefattribsecmech.html">securityMechanism=value attribute</a></li>
+<li><a href="rrefattrib16471.html">shutdown=true attribute</a></li>
+<li><a href="rrefattribslavehost.html">slaveHost=hostname attribute</a></li>
+<li><a href="rrefattribslaveport.html">slavePort=portValue attribute</a></li>
+<li><a href="rrefattribssl.html">ssl=sslMode attribute</a></li>
+<li><a href="rrefattribstartmaster.html">startMaster=true attribute</a></li>
+<li><a href="rrefattribstartslave.html">startSlave=true attribute</a></li>
+<li><a href="rrefattribstopmaster.html">stopMaster=true attribute</a></li>
+<li><a href="rrefattribstopslave.html">stopSlave=true attribute</a></li>
+<li><a href="rrefattrib56769.html">territory=ll_CC attribute</a></li>
+<li><a href="rrefattribtracedirectory.html">traceDirectory=path attribute</a></li>
+<li><a href="rrefattribtracefile.html">traceFile=path attribute</a></li>
+<li><a href="rrefattribtracefileappend.html">traceFileAppend=true attribute</a></li>
+<li><a href="rrefattribtracelevel.html">traceLevel=value attribute</a></li>
+<li><a href="rrefattribupgrade.html">upgrade=true attribute</a></li>
+<li><a href="rrefattrib10035.html">user=userName attribute</a></li>
+<li><a href="rrefattrib34183.html">Creating a connection without specifying attributes</a></li>
+</ul>
+</li>
+<li><a href="rrefproper32213.html">Derby property reference</a>
+<ul>
+<li><a href="crefproper51399.html">Scope of Derby properties</a></li>
+<li><a href="crefproperdynstat.html">Dynamic and static properties</a></li>
+<li><a href="crefproper22250.html">Derby properties</a>
+<ul>
+<li><a href="rrefproperbuiltinalgorithm.html">derby.authentication.builtin.algorithm</a></li>
+<li><a href="rrefproperiterations.html">derby.authentication.builtin.iterations</a></li>
+<li><a href="rrefpropersaltlength.html">derby.authentication.builtin.saltLength</a></li>
+<li><a href="rrefproperauthdn.html">derby.authentication.ldap.searchAuthDN</a></li>
+<li><a href="rrefproperauthpw.html">derby.authentication.ldap.searchAuthPW</a></li>
+<li><a href="rrefproper26978.html">derby.authentication.ldap.searchBase</a></li>
+<li><a href="rrefproper37341.html">derby.authentication.ldap.searchFilter</a></li>
+<li><a href="rrefproperpasswordmillis.html">derby.authentication.native.passwordLifetimeMillis</a></li>
+<li><a href="rrefproperpasswordthreshold.html">derby.authentication.native.passwordLifetimeThreshold</a></li>
+<li><a href="rrefproper13766.html">derby.authentication.provider</a></li>
+<li><a href="rrefproper25581.html">derby.authentication.server</a></li>
+<li><a href="rrefproper27467.html">derby.connection.requireAuthentication</a></li>
+<li><a href="rrefproperclasspath.html">derby.database.classpath</a></li>
+<li><a href="rrefproper24846.html">derby.database.defaultConnectionMode</a></li>
+<li><a href="rrefproper81405.html">derby.database.forceDatabaseLock</a></li>
+<li><a href="rrefproper25025.html">derby.database.fullAccessUsers</a></li>
+<li><a href="rrefpropernoautoboot.html">derby.database.noAutoBoot</a></li>
+<li><a href="rrefproper24390.html">derby.database.propertiesOnly</a></li>
+<li><a href="rrefproper39325.html">derby.database.readOnlyAccessUsers</a></li>
+<li><a href="rrefpropersqlauth.html">derby.database.sqlAuthorization</a></li>
+<li><a href="rrefproper13217.html">derby.infolog.append</a></li>
+<li><a href="rrefproperxatrantimeout.html">derby.jdbc.xaTransactionTimeout</a></li>
+<li><a href="rrefproper43414.html">derby.language.logQueryPlan</a></li>
+<li><a href="rrefproper43517.html">derby.language.logStatementText</a></li>
+<li><a href="rrefproperpreallocator.html">derby.language.sequence.preallocator</a></li>
+<li><a href="rrefproperstatementcachesize.html">derby.language.statementCacheSize</a></li>
+<li><a href="rrefproper10607.html">derby.locks.deadlockTimeout</a></li>
+<li><a href="rrefproper23835.html">derby.locks.deadlockTrace</a></li>
+<li><a href="rrefproper40346.html">derby.locks.escalationThreshold</a></li>
+<li><a href="rrefproper98166.html">derby.locks.monitor</a></li>
+<li><a href="rrefproper46141.html">derby.locks.waitTimeout</a></li>
+<li><a href="rrefproperlogbuffersize.html">derby.replication.logBufferSize</a></li>
+<li><a href="rrefpropermaxlogshippinginterval.html">derby.replication.maxLogShippingInterval</a></li>
+<li><a href="rrefproperminlogshippinginterval.html">derby.replication.minLogShippingInterval</a></li>
+<li><a href="rrefproperverbose.html">derby.replication.verbose</a></li>
+<li><a href="rrefproperindexstatsauto.html">derby.storage.indexStats.auto</a></li>
+<li><a href="rrefproperindexstatslog.html">derby.storage.indexStats.log</a></li>
+<li><a href="rrefproperindexstatstrace.html">derby.storage.indexStats.trace</a></li>
+<li><a href="rrefproper27529.html">derby.storage.initialPages</a></li>
+<li><a href="rrefproperstormin.html">derby.storage.minimumRecordSize</a></li>
+<li><a href="rrefproper81359.html">derby.storage.pageCacheSize</a></li>
+<li><a href="rrefproper28026.html">derby.storage.pageReservedSpace</a></li>
+<li><a href="rrefproper40688.html">derby.storage.pageSize</a></li>
+<li><a href="rrefproperrowlocking.html">derby.storage.rowLocking</a></li>
+<li><a href="rrefproper34037.html">derby.storage.tempDirectory</a></li>
+<li><a href="rrefproperdefaultfileperms.html">derby.storage.useDefaultFilePermissions</a></li>
+<li><a href="rrefproperextdiagsevlevel.html">derby.stream.error.extendedDiagSeverityLevel</a></li>
+<li><a href="rrefproper33027.html">derby.stream.error.field</a></li>
+<li><a href="rrefproper18151.html">derby.stream.error.file</a></li>
+<li><a href="rrefproperlogboottrace.html">derby.stream.error.logBootTrace</a></li>
+<li><a href="rrefproper26985.html">derby.stream.error.logSeverityLevel</a></li>
+<li><a href="rrefproper35028.html">derby.stream.error.method</a></li>
+<li><a href="rrefproperbootall.html">derby.system.bootAll</a></li>
+<li><a href="rrefproperdurability.html">derby.system.durability</a></li>
+<li><a href="rrefproper32066.html">derby.system.home</a></li>
+<li><a href="rrefproper27355.html">derby.user.UserName</a>
+<ul>
+<li><a href="rrefpropercachedn.html">Caching user DNs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rrefjta16677.html">Java EE Compliance: Java Transaction API and javax.sql Interfaces</a>
+<ul>
+<li><a href="rrefjta51021.html">The JTA API</a>
+<ul>
+<li><a href="rrefjta1003392.html">Notes on Product Behavior</a>
+<ul>
+<li><a href="rrefjta1003415.html">Recovered Global Transactions</a></li>
+<li><a href="rrefjta1003463.html">XAConnections, user names and passwords</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rrefjta18596.html">javax.sql: JDBC Interfaces</a></li>
+</ul>
+</li>
+<li><a href="rrefapi10613.html">Derby API</a>
+<ul>
+<li><a href="rrefapi24806.html">Stand-alone tools and utilities</a></li>
+<li><a href="rrefapi19690.html">JDBC implementation classes</a>
+<ul>
+<li><a href="rrefapi33761.html">JDBC driver</a></li>
+<li><a href="rrefapi1003363.html">Data Source Classes</a></li>
+</ul>
+</li>
+<li><a href="rrefapi1005026.html">Miscellaneous utilities and interfaces</a></li>
+</ul>
+</li>
+<li><a href="rrefsqlj75638.html">Supported territories</a></li>
+<li><a href="rreflimits.html">Derby limitations</a>
+<ul>
+<li><a href="rrefdbmlimits.html">Limitations for database values</a></li>
+<li><a href="rrefdttlimits.html">DATE, TIME, and TIMESTAMP limitations</a></li>
+<li><a href="rrefidlengthlimits.html">Limitations on identifier length</a></li>
+<li><a href="rrefnumericlimits.html">Numeric limitations</a></li>
+<li><a href="rrefstringlimits.html">String limitations</a></li>
+<li><a href="rreflimitsxml.html">XML limitations</a></li>
+</ul>
+</li>
+<li><a href="rreftrademderby.html">Trademarks</a></li>
+</ul>
+</body>
+</html>

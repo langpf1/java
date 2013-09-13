@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="FROM 節" />
+<meta content="FROM clause" name="DC.subject" />
+<meta content="FROM clause" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj21583" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>FROM 節</title>
+</head>
+<body id="rrefsqlj21583"><a name="rrefsqlj21583"><!-- --></a>
+
+
+<h1 class="topictitle1">FROM 節</h1>
+
+
+<div>
+<div class="section"> 
+<p>FROM節は<em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a></em>に必要です。この節により、問い合わせ文にある他節の式にて、利用可能な列のある表を参照します。</p>
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">構文</h2> <pre><strong>FROM 表式 [ , 表式 ] *</strong></pre>
+ </div>
+
+<div class="example"> <pre><strong>SELECT Cities.city_id
+FROM Cities
+WHERE city_id &lt; 5
+<span>-- 他種の表式</span>
+SELECT TABLENAME, ISINDEX 
+FROM SYS.SYSTABLES T, SYS.SYSCONGLOMERATES C
+WHERE T.TABLEID = C.TABLEID
+ORDER BY TABLENAME, ISINDEX
+<span>-- 結合順を指定する</span>
+SELECT *
+FROM Flights, FlightAvailability
+WHERE FlightAvailability.flight_id = Flights.flight_id
+AND FlightAvailability.segment_number = Flights.segment_number
+AND Flights.flight_id &lt; 'AA1115'
+<span>-- 表式は結合式とすることができます。
+--したがって、FROM句には複数の結合式を置く事ができます。</span>
+SELECT COUNTRIES.COUNTRY, CITIES.CITY_NAME, FLIGHTS.DEST_AIRPORT
+FROM COUNTRIES LEFT OUTER JOIN CITIES
+ON COUNTRIES.COUNTRY_ISO_CODE = CITIES.COUNTRY_ISO_CODE
+LEFT OUTER JOIN FLIGHTS
+ON Cities.AIRPORT = FLIGHTS.DEST_AIRPORT</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefclauses.html" title="">SQL 節</a></div>
+</div>
+</div>
+
+</body>
+</html>

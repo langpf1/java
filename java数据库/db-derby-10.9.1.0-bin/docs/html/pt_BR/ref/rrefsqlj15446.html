@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Instrução CREATE VIEW" />
+<meta content="Instrução CREATE VIEW, Visões, criação" name="DC.subject" />
+<meta content="Instrução CREATE VIEW, Visões, criação" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj15446" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Instrução CREATE VIEW</title>
+</head>
+<body id="rrefsqlj15446"><a name="rrefsqlj15446"><!-- --></a>
+
+
+<h1 class="topictitle1">Instrução CREATE VIEW</h1>
+
+
+<div>
+<div class="section">
+<p>As visões são tabelas virtuais formadas por uma consulta.
+A visão é um objeto do dicionário que pode ser utilizado, até ser removido.</p>
+
+<p>As visões não são atualizáveis.</p>
+
+<p>Se for especificado um nome de visão qualificado, o nome do esquema não
+poderá começar por <em>SYS</em>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>CREATE VIEW <em><a href="rrefviewname.html#rrefviewname">nome-da-visão</a></em>
+    [ ( <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">nome-de-coluna-simples</a></em> [, <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">nome-de-coluna-simples</a></em>] * ) ]
+AS <em><a href="rrefsqlj21571.html#rrefsqlj21571">Consulta</a></em> </strong>
+</pre>
+
+<p>A definição da visão pode conter uma lista de colunas da visão, opcional,
+para atribuir nomes explícitos às colunas da visão.
+Se não houver uma lista de colunas, a visão herdará os nomes de coluna da
+consulta subjacente.
+Todas as colunas da visão devem possuir nomes únicos.</p>
+
+</div>
+
+<div class="example">
+<pre><strong>CREATE VIEW SAMP.V1 (COL_SUM, COL_DIFF)
+        AS SELECT COMISS + BÔNUS, COMISS - BÔNUS
+        FROM SAMP.EMPREGADOS;
+
+CREATE VIEW SAMP.V_EMP_CURR (CURRICULUM)
+        AS VALUES 'Delores M. Quintana', 'Heather A. Nicholls', 'Bruce Adamson';
+
+CREATE VIEW SAMP.PROJ_COMBO
+        (NUM_PROJ, PROJ_DATA_FIM, PROJ_EQUIPE, PROJ_CHEFE)
+        AS SELECT NUM_PROJ, PROJ_DATA_FIM, PROJ_EQUIPE, PROJ_CHEFE
+        FROM SAMP.PROJETO
+        UNION ALL
+        SELECT NUM_PROJ, EMSTDATE, EMPTIME, NUM_EMP
+        FROM SAMP.ATIV_EMP
+        WHERE NUM_EMP IS NOT NULL;</strong>
+</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sistema de dependência de instrução</h2>
+
+<div class="p">As definições das visões são dependentes das tabelas e visões referenciadas
+na definição da visão.
+As instruções de DML (linguagem de manipulação de dados) que contêm referência
+a visões dependem destas visões, assim como dos objetos nas definições das
+visões dos quais as visões dependem.
+As instruções que fazem referência à visão dependem dos índices que as visões
+utilizam; o índice utilizado pela visão pode mudar de uma instrução para outra,
+baseado em como a consulta é otimizada.
+Por exemplo, dado:   <pre><strong>CREATE TABLE T1 (C1 DOUBLE PRECISION);
+
+CREATE FUNCTION SIN (DATA DOUBLE)
+        RETURNS DOUBLE EXTERNAL NAME 'java.lang.Math.sin'
+        LANGUAGE JAVA PARAMETER STYLE JAVA;
+
+CREATE VIEW V1 (C1) AS SELECT SIN(C1) FROM T1;</strong>
+</pre>
+
+</div>
+
+<div class="p">então a instrução a seguir:
+<pre><strong>SELECT * FROM V1</strong></pre>
+
+</div>
+
+<p>é dependente da visão <em>V1</em>, da tabela <em>T1</em>, e da função escalar
+externa <em>SIN</em>.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj95081.html" title="">Instruções CREATE</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="A instrução CREATE FUNCTION permite criar funções Java que podem ser utilizadas em expressões.">Instrução CREATE FUNCTION</a></div>
+<div><a href="rrefsqlj20937.html" title="">Instrução CREATE INDEX</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">Instrução CREATE PROCEDURE</a></div>
+<div><a href="rrefsqlj31580.html" title="">Instrução CREATE SCHEMA</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">Instrução CREATE SYNONYM</a></div>
+<div><a href="rrefsqlj24513.html" title="">Instrução CREATE TABLE</a></div>
+<div><a href="rrefsqlj43125.html" title="">Instrução CREATE TRIGGER</a></div>
+</div>
+</div>
+
+</body>
+</html>

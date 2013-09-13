@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="真偽式" />
+<meta content="Boolean expressions, Boolean operators, part of WHERE clause, AND boolean operator, OR boolean operator, NOT boolean operator, Comparison boolean operators, IS NULL boolean operator, IS NOT NULL boolean operator, LIKE boolean operator, LIKE, escape character for, BETWEEN boolean operator, IN boolean operator, EXISTS boolean operator, Quantified comparison boolean operator" name="DC.subject" />
+<meta content="Boolean expressions, Boolean operators, part of WHERE clause, AND boolean operator, OR boolean operator, NOT boolean operator, Comparison boolean operators, IS NULL boolean operator, IS NOT NULL boolean operator, LIKE boolean operator, LIKE, escape character for, BETWEEN boolean operator, IN boolean operator, EXISTS boolean operator, Quantified comparison boolean operator" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefselectexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftableexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj11277.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1080779.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj23075" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>真偽式</title>
+</head>
+<body id="rrefsqlj23075"><a name="rrefsqlj23075"><!-- --></a>
+
+
+<h1 class="topictitle1">真偽式</h1>
+
+
+<div>
+<div class="section"><p>真偽式はWHERE節やチェック制約に置くことができます。
+チェック制約に置く真偽式には、ここで記述されていない制限があります。
+詳細は<a href="rrefsqlj13590.html#rrefsqlj13590">CONSTRAINT 節</a>を参照してください。
+WHERE節に置く真偽式の構文は柔軟なものとなっています。具体的な例は、<a href="rrefsqlj33602.html#rrefsqlj33602">WHERE節</a>を参照してください。
+</p>
+</div>
+
+<div class="section"><div class="p">真偽式にはブーリアン演算子を一つ以上置くことができます。
+この演算子は<a href="rrefsqlj23075.html#rrefsqlj23075__sqlj34517">SQL のブーリアン演算子</a>に一覧されています。   
+
+<div class="tablenoborder"><a name="rrefsqlj23075__sqlj34517"><!-- --></a><table cellspacing="0" cellpadding="4" summary="表 1. SQL のブーリアン演算子" id="rrefsqlj23075__sqlj34517" width="100%" frame="border" border="1" rules="all"><caption>表 1. SQL のブーリアン演算子</caption>
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="24.242424242424242%" id="N100DB">演算子</th>
+
+<th align="left" valign="bottom" width="45.45454545454545%" id="N100E4">説明と例</th>
+
+<th align="left" valign="bottom" width="30.303030303030305%" id="N100ED">構文</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="24.242424242424242%" headers="N100DB">AND, OR, NOT</td>
+
+<td valign="top" width="45.45454545454545%" headers="N100E4">オペランドにとる真偽式を評価します。   <pre><strong>(orig_airport = 'SFO') OR
+    (dest_airport = 'GRU')
+<span>    -- 真を返す。</span></strong></pre>
+</td>
+
+<td valign="top" width="30.303030303030305%" headers="N100ED"> <pre><strong>{
+<strong><em>  式</em></strong> AND
+<strong><em>    式</em></strong>|
+<strong><em>  式</em></strong> OR
+<strong><em>    式</em></strong> |
+  NOT <strong><em>式</em></strong>
+}</strong></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24.242424242424242%" headers="N100DB">比較演算子</td>
+
+<td valign="top" width="45.45454545454545%" headers="N100E4">&lt;, =, &gt;, &lt;=, &gt;=, &lt;&gt; は、全ての組み込みの型に適用することができます。   <pre><strong>DATE('1998-02-26') &lt;
+    DATE('1998-03-01')
+<span>-- 真を返す。</span></strong></pre>
+</td>
+
+<td valign="top" width="30.303030303030305%" headers="N100ED"> <pre><strong><strong><em>式</em></strong>
+{
+  &lt; |
+  = |
+  &gt; |
+  &lt;= |
+  &gt;= |
+  &lt;&gt;
+}
+<strong><em>式</em></strong></strong></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24.242424242424242%" headers="N100DB">IS NULL, IS NOT NULL</td>
+
+<td valign="top" width="45.45454545454545%" headers="N100E4">式の結果が空かそうでないかを判定します。
+  <pre><strong>WHERE MiddleName IS NULL</strong></pre>
+</td>
+
+<td valign="top" width="30.303030303030305%" headers="N100ED"> <pre><strong><strong><em>式</em></strong> IS [ NOT ]
+  NULL</strong></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24.242424242424242%" headers="N100DB">LIKE</td>
+
+<td valign="top" width="45.45454545454545%" headers="N100E4">文字式が文字パターンと一致するかを判定します。文字パターンには一つ以上のワイルドカードが含まれます。
+  <p>%は最初の文字式にて、該当する位置の任意の文字数(0文字以上)の文字列に一致します。</p>
+  
+<p>_は文字式にて、該当する位置の一文字に一致します。</p>
+  
+<div class="p">それ以外の文字は、文字式にて該当する位置の同じ文字に一致します。<pre><strong>city LIKE 'Sant_'</strong></pre>
+</div>
+  
+<div class="p">%や_をワイルドカードではない文字とするには、ESCAPE節で指定するエスケープ文字を使って文字をエスケープします。
+<pre><strong>SELECT a FROM tabA WHERE a 
+LIKE '%=_' ESCAPE '='</strong></pre>
+</div>
+
+<div class="note"><span class="notetitle">注: </span>
+LIKEによる比較では<span>Derby</span>は、個々の文字を非メタ文字と比較します。これは<span>Derby</span>が=による比較のとき行う処理とは違います。=による比較では左辺の文字列全体が、=演算子の右辺の文字列全体と比較されます。より詳細な情報については、<span><em>Derby Developer's Guide</em></span>の<strong><span>Derby</span>における文字の照合</strong>を参照してください。</div>
+
+</td>
+
+<td valign="top" width="30.303030303030305%" headers="N100ED"> <pre><strong><strong><em>文字式</em></strong>
+  [ NOT ] LIKE
+<strong><em>  ワイルドカードのある文字式</em></strong>
+  [ ESCAPE
+
+'<strong><em>エスケープ文字</em></strong>']</strong></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24.242424242424242%" headers="N100DB">BETWEEN</td>
+
+<td valign="top" width="45.45454545454545%" headers="N100E4">最初のオペランドが二つ目と三つ目のオペランドの間の値であるかを判定します。二つ目のオペランドは三つ目のオペランドより小さな値でなければなりません。
+この演算子は&lt;=と&gt;=が適用できる型に対してのみ適用できます。
+<pre><strong>WHERE booking_date BETWEEN
+    DATE('1998-02-26') AND
+    DATE('1998-03-01')</strong></pre>
+</td>
+
+<td valign="top" width="30.303030303030305%" headers="N100ED"> <pre><strong><strong><em>式</em></strong> [ NOT ]
+BETWEEN <strong><em>式</em></strong>
+  AND <strong><em>式</em></strong></strong></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24.242424242424242%" headers="N100DB">IN</td>
+
+<td valign="top" width="45.45454545454545%" headers="N100E4">表副問合せや値の並びに作用します。左辺の式の値が表副問合せや値の並びに含まれるならば、真を返します。なお、表副問合せは複数行を返してかまいませんが、列は一つでなければなりません。<pre><strong>WHERE booking_date NOT IN
+    (SELECT booking_date FROM
+HotelBookings WHERE rooms_available = 0)</strong></pre>
+</td>
+
+<td valign="top" width="30.303030303030305%" headers="N100ED"> <pre><strong>{
+<strong><em> 式</em></strong> [ NOT ]
+    IN
+    <strong><em><a href="rreftablesubquery.html#rreftablesubquery">表副問合せ</a></em></strong> |
+<strong><em>  式</em></strong> [ NOT ]
+    IN ( <strong><em>式</em></strong>
+    [, <strong><em>式</em></strong> ]* )
+}</strong></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24.242424242424242%" headers="N100DB">EXISTS</td>
+
+<td valign="top" width="45.45454545454545%" headers="N100E4">表副問合せに作用して、その表副問合せが行を返すならば真を返し、行が返らないならば偽を返します。表副問合せは複数の列(*を使った場合に限ります。)や行を返すことができます。<pre><strong>WHERE EXISTS
+  (SELECT *
+  FROM Flights
+  WHERE dest_airport = 'SFO'
+  AND orig_airport = 'GRU')</strong></pre>
+</td>
+
+<td valign="top" width="30.303030303030305%" headers="N100ED"> <pre><strong>[NOT] EXISTS <strong><em><a href="rreftablesubquery.html#rreftablesubquery">表副問合せ</a></em></strong></strong></pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24.242424242424242%" headers="N100DB">定量比較</td>
+
+<td valign="top" width="45.45454545454545%" headers="N100E4">定量比較はALL、ANY、SOMEの何れかが適用された比較演算子
+(&lt;,=, &gt;, &lt;=, &gt;=, &lt;&gt;)となります。
+<p>
+これは表副問合せに作用します。表副問合せは複数の行を返すことができますが、単一の列しか返せません。</p>
+  
+<div class="p">ALLが指定された場合、表副問合せが返す全ての値に対して、比較の結果が真でなければなりません。ANYないしSOMEが指定された場合、表副問合せが返す何れかの値に対して、比較の結果が真である必要があります。ANYとSOMEは同じ意味です。
+  <pre><strong>WHERE normal_rate &lt; ALL
+(SELECT budget/550 FROM Groups) </strong></pre>
+</div>
+</td>
+
+<td valign="top" width="30.303030303030305%" headers="N100ED"> <pre><strong><strong><em>式</em></strong>
+  比較演算子
+  {
+    ALL |
+    ANY |
+    SOME
+  }
+  <strong><em><a href="rreftablesubquery.html#rreftablesubquery">表副問合せ</a></em></strong></strong></pre>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj19433.html" title="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。">SQL式</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj29911.html" title="">動的パラメータ</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefselectexpression.html" title="">選択式</a></div>
+<div><a href="rreftableexpression.html" title="">TableExpression</a></div>
+<div><a href="rrefsqlj11277.html" title="">VALUES式</a></div>
+<div><a href="rrefsqlj1080779.html" title="">式に関する優先順位</a></div>
+</div>
+</div>
+
+</body>
+</html>

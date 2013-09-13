@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SQL予約語" />
+<meta content="reserved words, keywords" name="DC.subject" />
+<meta content="reserved words, keywords" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsql9241891.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexcept16677.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefkeywords29722" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SQL予約語</title>
+</head>
+<body id="rrefkeywords29722"><a name="rrefkeywords29722"><!-- --></a>
+
+
+<h1 class="topictitle1">SQL予約語</h1>
+
+
+<div>
+<div class="section"><div class="p">この章では<span>Derby</span>の全予約語を一覧で示します。これにはSQL-92にて定められたものも含めます。
+これらのキーワードを二重引用符(")で囲むことなく識別子として利用した場合、<span>Derby</span>はエラーを返します。
+詳細は<a href="crefsqlj1003454.html#crefsqlj1003454">SQL92識別子の規則</a>を参照してください。<ul class="simple">
+<li>ADD</li>
+
+<li>ALL</li>
+
+<li>ALLOCATE</li>
+
+<li>ALTER</li>
+
+<li>AND</li>
+
+<li>ANY</li>
+
+<li>ARE</li>
+
+<li>AS</li>
+
+<li>ASC</li>
+
+<li>ASSERTION</li>
+
+<li>AT</li>
+
+<li>AUTHORIZATION</li>
+
+<li>AVG</li>
+
+<li>BEGIN</li>
+
+<li>BETWEEN</li>
+
+<li>BIGINT</li>
+
+<li>BIT</li>
+
+<li>BOOLEAN</li>
+
+<li>BOTH</li>
+
+<li>BY</li>
+
+<li>CALL</li>
+
+<li>CASCADE</li>
+
+<li>CASCADED</li>
+
+<li>CASE</li>
+
+<li>CAST</li>
+
+<li>CHAR</li>
+
+<li>CHARACTER</li>
+
+<li>CHECK</li>
+
+<li>CLOSE</li>
+
+<li>COALESCE</li>
+
+<li>COLLATE</li>
+
+<li>COLLATION</li>
+
+<li>COLUMN</li>
+
+<li>COMMIT</li>
+
+<li>CONNECT</li>
+
+<li>CONNECTION</li>
+
+<li>CONSTRAINT</li>
+
+<li>CONSTRAINTS</li>
+
+<li>CONTINUE</li>
+
+<li>CONVERT</li>
+
+<li>CORRESPONDING</li>
+
+<li>CREATE</li>
+
+<li>CURRENT</li>
+
+<li>CURRENT_DATE</li>
+
+<li>CURRENT_TIME</li>
+
+<li>CURRENT_TIMESTAMP</li>
+
+<li>CURRENT_USER</li>
+
+<li>CURSOR</li>
+
+<li>DEALLOCATE</li>
+
+<li>DEC</li>
+
+<li>DECIMAL</li>
+
+<li>DECLARE</li>
+
+<li>DEFAULT</li>
+
+<li>DEFERRABLE</li>
+
+<li>DEFERRED</li>
+
+<li>DELETE</li>
+
+<li>DESC</li>
+
+<li>DESCRIBE</li>
+
+<li>DIAGNOSTICS</li>
+
+<li>DISCONNECT</li>
+
+<li>DISTINCT</li>
+
+<li>DOUBLE</li>
+
+<li>DROP</li>
+
+<li>ELSE</li>
+
+<li>END</li>
+
+<li>END-EXEC</li>
+
+<li>ESCAPE</li>
+
+<li>EXCEPT</li>
+
+<li>EXCEPTION</li>
+
+<li>EXEC</li>
+
+<li>EXECUTE</li>
+
+<li>EXISTS</li>
+
+<li>EXPLAIN</li>
+
+<li>EXTERNAL</li>
+
+<li>FALSE</li>
+
+<li>FETCH</li>
+
+<li>FIRST</li>
+
+<li>FLOAT</li>
+
+<li>FOR</li>
+
+<li>FOREIGN</li>
+
+<li>FOUND</li>
+
+<li>FROM</li>
+
+<li>FULL</li>
+
+<li>FUNCTION</li>
+
+<li>GET</li>
+
+<li>GETCURRENTCONNECTION</li>
+
+<li>GLOBAL</li>
+
+<li>GO</li>
+
+<li>GOTO</li>
+
+<li>GRANT</li>
+
+<li>GROUP</li>
+
+<li>HAVING</li>
+
+<li>HOUR</li>
+
+<li>IDENTITY</li>
+
+<li>IMMEDIATE</li>
+
+<li>IN</li>
+
+<li>INDICATOR</li>
+
+<li>INITIALLY</li>
+
+<li>INNER</li>
+
+<li>INOUT</li>
+
+<li>INPUT</li>
+
+<li>INSENSITIVE</li>
+
+<li>INSERT</li>
+
+<li>INT</li>
+
+<li>INTEGER</li>
+
+<li>INTERSECT</li>
+
+<li>INTO</li>
+
+<li>IS</li>
+
+<li>ISOLATION</li>
+
+<li>JOIN</li>
+
+<li>KEY</li>
+
+<li>LAST</li>
+
+<li>LEFT</li>
+
+<li>LIKE</li>
+
+<li>LOWER</li>
+
+<li>LTRIM</li>
+
+<li>MATCH</li>
+
+<li>MAX</li>
+
+<li>MIN</li>
+
+<li>MINUTE</li>
+
+<li>NATIONAL</li>
+
+<li>NATURAL</li>
+
+<li>NCHAR</li>
+
+<li>NVARCHAR</li>
+
+<li>NEXT</li>
+
+<li>NO</li>
+
+<li>NOT</li>
+
+<li>NULL</li>
+
+<li>NULLIF</li>
+
+<li>NUMERIC</li>
+
+<li>OF</li>
+
+<li>ON</li>
+
+<li>ONLY</li>
+
+<li>OPEN</li>
+
+<li>OPTION</li>
+
+<li>OR</li>
+
+<li>ORDER</li>
+
+<li>OUTER</li>
+
+<li>OUTPUT</li>
+
+<li>OVERLAPS</li>
+
+<li>PAD</li>
+
+<li>PARTIAL</li>
+
+<li>PREPARE</li>
+
+<li>PRESERVE</li>
+
+<li>PRIMARY</li>
+
+<li>PRIOR</li>
+
+<li>PRIVILEGES</li>
+
+<li>PROCEDURE</li>
+
+<li>PUBLIC</li>
+
+<li>READ</li>
+
+<li>REAL</li>
+
+<li>REFERENCES</li>
+
+<li>RELATIVE</li>
+
+<li>RESTRICT</li>
+
+<li>REVOKE</li>
+
+<li>RIGHT</li>
+
+<li>ROLLBACK</li>
+
+<li>ROWS</li>
+
+<li>RTRIM</li>
+
+<li>SCHEMA</li>
+
+<li>SCROLL</li>
+
+<li>SECOND</li>
+
+<li>SELECT</li>
+
+<li>SESSION_USER</li>
+
+<li>SET</li>
+
+<li>SMALLINT</li>
+
+<li>SOME</li>
+
+<li>SPACE</li>
+
+<li>SQL</li>
+
+<li>SQLCODE</li>
+
+<li>SQLERROR</li>
+
+<li>SQLSTATE</li>
+
+<li>SUBSTR</li>
+
+<li>SUBSTRING</li>
+
+<li>SUM</li>
+
+<li>SYSTEM_USER</li>
+
+<li>TABLE</li>
+
+<li>TEMPORARY</li>
+
+<li>TIMEZONE_HOUR</li>
+
+<li>TIMEZONE_MINUTE</li>
+
+<li>TO</li>
+
+<li>TRANSACTION</li>
+
+<li>TRANSLATE</li>
+
+<li>TRANSLATION</li>
+
+<li>TRIM</li>
+
+<li>TRUE</li>
+
+<li>UNION</li>
+
+<li>UNIQUE</li>
+
+<li>UNKNOWN</li>
+
+<li>UPDATE</li>
+
+<li>UPPER</li>
+
+<li>USER</li>
+
+<li>USING</li>
+
+<li>VALUES</li>
+
+<li>VARCHAR</li>
+
+<li>VARYING</li>
+
+<li>VIEW</li>
+
+<li>WHENEVER</li>
+
+<li>WHERE</li>
+
+<li>WITH</li>
+
+<li>WORK</li>
+
+<li>WRITE</li>
+
+<li>XML</li>
+
+<li>XMLEXISTS</li>
+
+<li>XMLPARSE</li>
+
+<li>XMLQUERY</li>
+
+<li>XMLSERIALIZE</li>
+
+<li>YEAR</li>
+
+</ul>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj23296.html" title="">SQL言語のリファレンス</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQLの識別子</a></div>
+<div><a href="crefsqlj39374.html" title="">文</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">組込みシステム関数</a></div>
+<div><a href="crefjdbc12657.html" title="Derbyは組み込みのJDBCドライバと共に提供されます。">JDBC リファレンス</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqlj28468.html" title="">大文字小文字と特殊文字</a></div>
+<div><a href="rrefclauses.html" title="">SQL 節</a></div>
+<div><a href="rrefsqlj19433.html" title="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。">SQL式</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN 演算</a></div>
+<div><a href="rrefqueries.html" title="">SQL 問い合わせ</a></div>
+<div><a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+<div><a href="rrefsql9241891.html" title="">DerbyのサポートするSQL-92の機能</a></div>
+<div><a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+<div><a href="rrefexcept16677.html" title="Derbyにて発生する全てのエラーは、JDBCからSQLExceptionとして挙がります。 もしユーザの定義した型から例外が挙がって、その例外がSQLExceptionでは無い場合、その例外はSQLExceptionにラップされています。 Derby固有のSQLExceptionは、SQLStateクラスに定義されたXで始まるコードを用います。標準に定義されたSQLStateの値は、対応する例外に対して返されます。">Derbyの例外メッセージとSQL state</a></div>
+<div><a href="rrefjdbc87220.html" title="">java.sql.BatchUpdateException クラス</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">Connected Device ConfigurationおよびFoundation Profile向けのJDBCパッケージ(JSR169)</a></div>
+<div><a href="rrefjdbc32593.html" title="">JDBC 3.0の機能</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0の機能</a></div>
+<div><a href="rrefjdbc1020262.html" title="">JDBCエスケープの構文</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="XMLEXISTS operator" />
+<meta name="abstract" content="XMLEXISTS is an SQL/XML operator that you can use to query XML values in SQL." />
+<meta name="description" content="XMLEXISTS is an SQL/XML operator that you can use to query XML values in SQL." />
+<meta content="XMLEXISTS operator, operators, XMLEXISTS, XML, operators, XMLEXISTS" name="DC.subject" />
+<meta content="XMLEXISTS operator, operators, XMLEXISTS, XML, operators, XMLEXISTS" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreffuncxmlexists" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>XMLEXISTS operator</title>
+</head>
+<body id="rreffuncxmlexists"><a name="rreffuncxmlexists"><!-- --></a>
+
+
+<h1 class="topictitle1">XMLEXISTS operator</h1>
+
+
+
+<div><p>XMLEXISTS is an SQL/XML operator that you can use to query XML
+values in SQL.</p>
+
+<div class="section"> <p>The XMLEXISTS operator has two arguments, an XML query expression
+and a <span>Derby</span> XML value.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>XMLEXISTS ( <var class="varname">xquery-string-literal</var>
+    PASSING BY REF <var class="varname">xml-value-expression</var> [ BY REF ] )
+</strong></pre>
+<dl>
+<dt class="dlterm"><samp class="codeph">xquery-string-literal</samp></dt>
+
+<dd>Must be specified as a string literal. If this argument is specified as
+a parameter, an expression that is not a literal, or a literal that is not
+a string (for example an integer), <span>Derby</span> throws
+an error. The <samp class="codeph">xquery-string-literal</samp> argument must also be
+an XPath expression that is supported by Apache Xalan. <span>Derby</span> uses
+Apache Xalan to evaluate all XML query expressions. Because Xalan does not
+support full XQuery, neither does <span>Derby</span>.
+ If Xalan is unable to compile or execute the query argument, <span>Derby</span> catches
+the error that is thrown by Xalan and throws the error as a SQLException.
+For more on XPath and XQuery expressions, see these Web sites: <a href="http://www.w3.org/TR/xpath">http://www.w3.org/TR/xpath</a> and <a href="http://www.w3.org/TR/xquery/">http://www.w3.org/TR/xquery/</a>.</dd>
+
+
+<dt class="dlterm"><samp class="codeph">xml-value-expression</samp></dt>
+
+<dd>Must be an XML data value and must constitute a well-formed SQL/XML document.
+The <samp class="codeph">xml-value-expression</samp> argument cannot be a parameter.
+ <span>Derby</span> does not perform
+implicit parsing nor casting of XML values, so use of strings or any other
+data type results in an error.  If the argument is a sequence that is returned
+by the <span>Derby</span> <a href="rreffuncxmlquery.html#rreffuncxmlquery">XMLQUERY operator</a>,
+the argument is accepted if it is a sequence of exactly one node that is a
+document node. Otherwise <span>Derby</span> throws
+an error.</dd>
+
+
+<dt class="dlterm">BY REF</dt>
+
+<dd>Optional keywords that describe the only value passing mechanism supported
+by <span>Derby</span>.  Since BY REF
+is also the default passing mechanism, the XMLEXISTS operator behaves the
+same whether the keywords are present or not. For more information on passing
+mechanisms, see the SQL/XML specification.</dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Operator results and combining with other operators</h2><div class="p">The
+result of the XMLEXISTS operator is a SQL boolean value that is based on the
+results from evaluating the <samp class="codeph">xquery-string-literal</samp> against
+the <samp class="codeph">xml-value-expression</samp>.  The XMLEXISTS operator returns:<dl>
+
+<dt class="dlterm">UNKNOWN</dt>
+
+<dd>When the <samp class="codeph">xml-value-expression</samp> is null.</dd>
+
+
+<dt class="dlterm">TRUE</dt>
+
+<dd>When the evaluation of the specified query expression against the specified
+xml-value returns a non-empty sequence of nodes or values.</dd>
+
+
+<dt class="dlterm">FALSE</dt>
+
+<dd>When evaluation of the specified query expression against the specified
+xml-value returns an empty sequence.</dd>
+
+</dl>
+</div>
+<p>The XMLEXISTS operator does not return the actual results
+from the evaluation of the query.  You must use the XMLQUERY operator to retrieve
+the actual results.</p>
+<p>Since the result of the XMLEXISTS operator is an
+SQL boolean data type, you can use the XMLEXISTS operator wherever a boolean
+function is allowed. For example, you can use the XMLEXISTS operator as a
+check constraint in a table declaration or as a predicate in a WHERE clause.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Examples</h2><div class="p">In the <samp class="codeph">x_table</samp> table,
+to determine if the <samp class="codeph">xcol</samp> XML column for each row has an element
+called <samp class="codeph">student</samp> with an <samp class="codeph">age</samp> attribute equal
+to 20, use this statement:<pre>SELECT id, XMLEXISTS('<var class="varname">//student[@age=20]</var>' PASSING BY REF <var class="varname">xcol</var>) 
+    FROM <var class="varname">x_table</var></pre>
+</div>
+<div class="p">In the <samp class="codeph">x_table</samp> table,
+to return the ID for every row whose <samp class="codeph">xcol</samp> XML column is non-null
+and contains the element <samp class="codeph">/roster/student</samp>, use this statement:<pre>SELECT id FROM <var class="varname">x_table</var> WHERE XMLEXISTS('<var class="varname">/roster/student</var>' PASSING BY REF <var class="varname">xcol</var>)</pre>
+</div>
+<div class="p">You
+can create the <samp class="codeph">x_table</samp> table with a check constraint that
+limits which XML values can be inserted into the <samp class="codeph">xcol</samp> XML
+column. In this example, the constraint is that the column has at least one <samp class="codeph">student</samp> element
+with an <samp class="codeph">age</samp> attribute with a value that is less than 25.
+To create the table, use this statement:<pre>CREATE TABLE <var class="varname">x_table</var> ( id INT, <var class="varname">xcol</var> XML CHECK (XMLEXISTS ('<var class="varname">//student[@age &lt; 25]</var>' PASSING BY REF <var class="varname">xcol</var>)) )</pre>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Usage note</h2><p><span>Derby</span> requires
+that a JAXP parser (such as Apache Xerces) and Apache Xalan are listed
+in the Java classpath for the XML functions to work.  If either the JAXP parser
+or Xalan is missing from the classpath, attempts to use the XMLEXISTS operator
+will result in an error. In some situations, you may need to take steps to place
+the parser and Xalan in your classpath. See "XML data types and operators" in
+the <span><em>Derby Developer's Guide</em></span> for details.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

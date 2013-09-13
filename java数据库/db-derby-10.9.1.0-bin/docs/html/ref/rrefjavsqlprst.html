@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Prepared statements and streaming columns" />
+<meta content="setXXXStream requests, Streaming columns, as IN parameters to prepared statement, setBinaryStream, setAsciiStream, setUnicodeStream, Unicode, setCharacterStream" name="DC.subject" />
+<meta content="setXXXStream requests, Streaming columns, as IN parameters to prepared statement, setBinaryStream, setAsciiStream, setUnicodeStream, Unicode, setCharacterStream" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc29874.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjavsqlprst" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Prepared statements and streaming columns </title>
+</head>
+<body id="rrefjavsqlprst"><a name="rrefjavsqlprst"><!-- --></a>
+
+
+<h1 class="topictitle1">Prepared statements and streaming columns </h1>
+
+
+<div>
+<div class="section"><p><em>setXXXStream</em> requests stream data between the application
+and the database.</p>
+</div>
+
+<div class="section"><div class="p">JDBC allows an IN parameter to be set to a Java input stream for
+passing in large amounts of data in smaller chunks. When the statement is
+run, the JDBC driver makes repeated calls to this input stream.
+<span>Derby</span> supports
+the following JDBC stream methods for <em>PreparedStatement</em> objects:
+  <ul>
+<li><em>setBinaryStream</em> <p>Use for streams that contain uninterpreted bytes</p>
+</li>
+
+<li><em>setAsciiStream</em>   <p>Use for streams that contain ASCII characters</p>
+</li>
+
+<li><em>setCharacterStream</em>   <p>Use for streams that contain characters</p>
+</li>
+
+</ul>
+</div>
+
+<div class="note"><span class="notetitle">Note: </span><span>Derby</span> does not support
+the <em>setNCharacterStream</em> method or the deprecated <em>setUnicodeStream</em>
+method.</div>
+
+<p>JDBC 3.0 requires that you specify the length of the
+stream, and <span>Derby</span> enforces
+this requirement if your application runs on JDK 5 or earlier. If your application
+runs on JDK 6 or later, <span>Derby</span>
+exposes a JDBC 4.0 implementation, which lets you use the streaming interfaces
+without having to specify the stream length.</p>
+
+<div class="p"><div class="note"><span class="notetitle">Note: </span>If you omit the length argument when the stream object is a LOB greater
+than a single page in size, performance will be impaired if you later retrieve
+the length of the LOB. However, if you are simply inserting or reading data,
+performance is unaffected.</div>
+</div>
+
+<p>The stream object passed to <em>setBinaryStream</em> and <em>setAsciiStream</em>
+can be either a standard Java stream object or the user's own subclass that
+implements the standard <em>java.io.InputStream</em> interface. The object passed
+to <em>setCharacterStream</em> must be a subclass of the abstract
+<em>java.io.Reader</em> class.</p>
+
+<p>According to the JDBC standard, streams can be stored only in columns with
+the data types shown in the following table. The word "Preferred" indicates the
+preferred target data type for the type of stream. See
+<a href="rrefjdbc20377.html#rrefjdbc20377__jdbc31241">Mapping of java.sql.Types to SQL types</a>.</p>
+
+
+<div class="tablenoborder"><a name="rrefjavsqlprst__jdbc25312"><!-- --></a><table cellspacing="0" cellpadding="4" summary="For each JDBC column data type, this table lists the corresponding Java data type (if any) and shows whether each of the stream types can be stored in columns of that type." id="rrefjavsqlprst__jdbc25312" frame="border" border="1" rules="all"><caption>Table 1. Streamable JDBC data types</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="24%" id="N10165">Column Data Type </th>
+
+<th valign="bottom" width="21%" id="N1016C">Corresponding Java Type</th>
+
+<th valign="bottom" width="18%" id="N10173">AsciiStream</th>
+
+<th valign="bottom" width="19%" id="N1017A">CharacterStream</th>
+
+<th valign="bottom" width="18%" id="N10181">BinaryStream</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="24%" headers="N10165">CLOB</td>
+
+<td valign="top" width="21%" headers="N1016C"><em>java.sql.Clob</em></td>
+
+<td valign="top" width="18%" headers="N10173">Yes</td>
+
+<td valign="top" width="19%" headers="N1017A">Yes</td>
+
+<td valign="top" width="18%" headers="N10181">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N10165">CHAR</td>
+
+<td valign="top" width="21%" headers="N1016C">None</td>
+
+<td valign="top" width="18%" headers="N10173">Yes</td>
+
+<td valign="top" width="19%" headers="N1017A">Yes</td>
+
+<td valign="top" width="18%" headers="N10181">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N10165">VARCHAR</td>
+
+<td valign="top" width="21%" headers="N1016C">None</td>
+
+<td valign="top" width="18%" headers="N10173">Yes</td>
+
+<td valign="top" width="19%" headers="N1017A">Yes</td>
+
+<td valign="top" width="18%" headers="N10181">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N10165">LONGVARCHAR</td>
+
+<td valign="top" width="21%" headers="N1016C">None</td>
+
+<td valign="top" width="18%" headers="N10173">Preferred</td>
+
+<td valign="top" width="19%" headers="N1017A">Preferred</td>
+
+<td valign="top" width="18%" headers="N10181">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N10165">BINARY</td>
+
+<td valign="top" width="21%" headers="N1016C">None</td>
+
+<td valign="top" width="18%" headers="N10173">Yes</td>
+
+<td valign="top" width="19%" headers="N1017A">Yes</td>
+
+<td valign="top" width="18%" headers="N10181">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N10165">BLOB</td>
+
+<td valign="top" width="21%" headers="N1016C"><em>java.sql.Blob</em></td>
+
+<td valign="top" width="18%" headers="N10173">Yes</td>
+
+<td valign="top" width="19%" headers="N1017A">Yes</td>
+
+<td valign="top" width="18%" headers="N10181">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N10165">VARBINARY</td>
+
+<td valign="top" width="21%" headers="N1016C">None</td>
+
+<td valign="top" width="18%" headers="N10173">Yes</td>
+
+<td valign="top" width="19%" headers="N1017A">Yes</td>
+
+<td valign="top" width="18%" headers="N10181">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N10165">LONGVARBINARY</td>
+
+<td valign="top" width="21%" headers="N1016C">None</td>
+
+<td valign="top" width="18%" headers="N10173">Yes</td>
+
+<td valign="top" width="19%" headers="N1017A">Yes</td>
+
+<td valign="top" width="18%" headers="N10181">Preferred</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<div class="note"><span class="notetitle">Note: </span>Streams cannot be stored in columns of the other built-in data types or
+columns of user-defined data types.</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2><p>The following code fragment shows how a user can
+store a streamed, ASCII-encoded <em>java.io.File</em> in a LONG VARCHAR column:</p>
+
+<pre>    Statement s = conn.createStatement();
+    s.executeUpdate("CREATE TABLE atable (a INT, b LONG VARCHAR)");
+    conn.commit();
+
+    java.io.File file = new java.io.File("derby.txt");
+    int fileLength = (int) file.length();
+
+    <strong>// create an input stream</strong>
+    java.io.InputStream fin = new java.io.FileInputStream(file);
+    PreparedStatement ps = conn.prepareStatement(
+        "INSERT INTO atable VALUES (?, ?)");
+    ps.setInt(1, 1);
+
+    <strong>// set the value of the input parameter to the input stream</strong>
+    ps.setAsciiStream(2, fin, fileLength);
+    ps.execute();
+    conn.commit();</pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc29874.html" title="">java.sql.PreparedStatement interface</a></div>
+</div>
+</div>
+
+</body>
+</html>

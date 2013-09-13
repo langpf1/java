@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Extended updatable result set example" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts30811.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevconcepts41704.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts28351.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rdevconcepts38274" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Extended updatable result set example</title>
+</head>
+<body id="rdevconcepts38274"><a name="rdevconcepts38274"><!-- --></a>
+
+
+<h1 class="topictitle1">Extended updatable result set example</h1>
+
+
+<div><div class="example">
+<pre>
+Connection conn = DriverManager.getConnection("jdbc:derby:sample");
+conn.setAutoCommit(false);
+
+<strong>// Create the statement with concurrency mode CONCUR_UPDATABLE</strong>
+<strong>// to allow result sets to be updatable</strong>
+Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, 
+                                      ResultSet.CONCUR_UPDATABLE,
+                                      ResultSet.CLOSE_CURSORS_AT_COMMIT);
+<strong>// Updatable statements have some requirements</strong>
+<strong>// for example, select must be on a single table</strong>
+ResultSet uprs = stmt.executeQuery(
+    "SELECT FIRSTNME, LASTNAME, WORKDEPT, BONUS " +
+    "FROM EMPLOYEE FOR UPDATE of BONUS"); // Only bonus can be updated
+
+String theDept="E21";
+
+while (uprs.next()) {
+    String firstnme = uprs.getString("FIRSTNME");
+    String lastName = uprs.getString("LASTNAME");
+    String workDept = uprs.getString("WORKDEPT");
+    BigDecimal bonus = uprs.getBigDecimal("BONUS");
+    if (workDept.equals(theDept)) {
+      <strong>  // if the current row meets our criteria,
+        // update the updatable column in the row</strong>
+        uprs.updateBigDecimal("BONUS", bonus.add(BigDecimal.valueOf(250L)));
+        uprs.updateRow();
+        System.out.println("Updating bonus for employee:" +
+                           firstnme + lastName);
+    } 
+}
+conn.commit(); // commit the transaction
+<strong>// close object </strong>
+uprs.close();
+stmt.close();
+<strong>// Close connection if the application does not need it any more</strong>
+conn.close();
+
+</pre>
+
+</div>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts28351.html" title="Updatable result sets in Derby can be updated by using result set update methods (updateRow(),deleteRow() and insertRow()), or by using positioned update or delete queries.">Updatable result sets</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevconcepts30811.html" title="Only specific SELECT statements- simple accesses of a single table-allow you to update or delete rows as you step through them.">Requirements for updatable result sets</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevconcepts41704.html" title="There is no SQL language command to assign a name to a cursor. You can use the JDBC setCursorName method to assign a name to a ResultSet that allows positioned updates and deletes.">Naming or accessing the name of a cursor</a></div>
+</div>
+</div>
+
+</body>
+</html>

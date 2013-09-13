@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Classes that pertain to resource managers" />
+<meta name="abstract" content="Derby provides two variants of each DataSource interface defined by the JDBC API." />
+<meta name="description" content="Derby provides two variants of each DataSource interface defined by the JDBC API." />
+<meta content="EmbeddedDataSource, EmbeddedDataSource40, EmbeddedConnectionPoolDataSource, EmbeddedConnectionPoolDataSource40, EmbeddedXADataSource, EmbeddedXADataSource40" name="DC.subject" />
+<meta content="EmbeddedDataSource, EmbeddedDataSource40, EmbeddedConnectionPoolDataSource, EmbeddedConnectionPoolDataSource40, EmbeddedXADataSource, EmbeddedXADataSource40" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevresman89722.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevresman92946.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevresman19524.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rdevresman79556" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Classes that pertain to resource managers</title>
+</head>
+<body id="rdevresman79556"><a name="rdevresman79556"><!-- --></a>
+
+
+<h1 class="topictitle1">Classes that pertain to resource managers</h1>
+
+
+
+<div><p>Derby provides two variants of each <em>DataSource</em> interface 
+defined by the JDBC API.</p>
+
+<div class="section">
+<p>
+Applications that run on the J2SE 1.4 or 1.5 platform <strong>must</strong> use the first 
+variant. Applications that run on the Java SE 6 platform can use either of the 
+two variants. However, the <em>DataSource</em> methods specific to the JDBC 4 API 
+are available only from the second variant (the one whose class name ends with "40").</p>
+
+<p>
+If an application is running on the Java SE 6 platform, all connection objects 
+returned from the <em>DataSource</em> will be JDBC 4 connection objects, 
+regardless of which <em>DataSource</em> variant is in use.</p>
+
+<p>
+The Derby implementation classes for the <em>DataSource</em> interfaces are as
+follows:</p>
+
+<ul>
+<li><em>org.apache.derby.jdbc.EmbeddedDataSource</em>
+and <em>org.apache.derby.jdbc.EmbeddedDataSource40</em> 
+<p>Implements the <em>javax.sql.DataSource</em> interface,
+which a JNDI server can reference. Typically this is the object that you work
+with as a <em>DataSource</em>.</p>
+</li>
+
+<li><em>org.apache.derby.jdbc.EmbeddedConnectionPoolDataSource</em>
+and <em>org.apache.derby.jdbc.EmbeddedConnectionPoolDataSource40</em>
+<p>Implements the <em>javax.sql.ConnectionPoolDataSource</em> interface.
+A factory for <em>PooledConnection</em> objects.</p>
+</li>
+
+<li><em>org.apache.derby.jdbc.EmbeddedXADataSource</em>
+and <em>org.apache.derby.jdbc.EmbeddedXADataSource40</em>
+<p><span>Derby</span>'s
+implementation of the <em>javax.sql.XADataSource</em> interface.</p>
+</li>
+
+</ul>
+
+<p>See the javadoc for each class for more information.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevresman19524.html" title="The Java Platform, Enterprise Edition (the Java EE platform) is a standard for development of enterprise applications based on reusable components in a multi-tier environment. In addition to the features of the Java Platform, Standard Edition (the Java SE platform), the Java EE platform adds support for Enterprise JavaBeans (EJB) technology, the Java Persistence API, JavaServer Faces technology, Java Servlet technology, JavaServer Pages (JSP) technology, and many more. The Java EE platform architecture is used to bring together existing technologies and enterprise applications in a single, manageable environment.">Using Derby as a Java EE resource manager</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevresman89722.html" title="Normally, you can simply work with the interfaces for javax.sql.DataSource, javax.sql.ConnectionPoolDataSource, and javax.sql.XADataSource, as shown in the following examples.">Getting a DataSource</a></div>
+<div><a href="cdevresman92946.html" title="If you need to shut down or create a database, it is easiest just to work with the Derby-specific implementations of interfaces, as shown in these examples.">Shutting down or creating a database</a></div>
+</div>
+</div>
+
+</body>
+</html>

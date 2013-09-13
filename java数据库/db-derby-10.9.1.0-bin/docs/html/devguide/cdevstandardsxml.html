@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="XML data types and operators" />
+<meta name="abstract" content="Derby supports the XML data type and a set of operators that work with the XML data type, but does not provide JDBC support for the XML data type. The XML data type and operators are based on a small subset of the SQL/XML specification." />
+<meta name="description" content="Derby supports the XML data type and a set of operators that work with the XML data type, but does not provide JDBC support for the XML data type. The XML data type and operators are based on a small subset of the SQL/XML specification." />
+<meta content="SQL standards, XML data types and operators, XML data types, SQL standard, XML data types, limitations" name="DC.subject" />
+<meta content="SQL standards, XML data types and operators, XML data types, SQL standard, XML data types, limitations" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevstandards806118.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevstandardsxml" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>XML data types and operators</title>
+</head>
+<body id="cdevstandardsxml"><a name="cdevstandardsxml"><!-- --></a>
+
+
+<h1 class="topictitle1">XML data types and operators</h1>
+
+
+
+<div><p><span>Derby</span> supports
+the XML data type and a set of operators that work with the XML data type,
+but does not provide JDBC support for the XML data type.
+The XML data type and operators are based on a small subset of the SQL/XML
+specification. </p>
+
+<p>The XML data type and operators are defined only in the SQL layer.</p>
+
+<p>There is no JDBC-side support for XML data types. It is not possible to
+bind directly into an XML value or to retrieve an XML value directly from
+a result set.  Instead, you must bind and retrieve the XML data as Java strings
+or character streams by explicitly specifying the appropriate XML operator
+as part of the SQL statements:</p>
+
+<ul>
+<li>Create a table with a XML data typed column. For example:
+     <pre>CREATE TABLE xml_data(xml_col XML);</pre>
+
+</li>
+
+<li>Use the XMLPARSE operator for binding data into XML values. For example:
+<pre>INSERT INTO xml_data(xml_col) 
+  VALUES(XMLPARSE(DOCUMENT ' &lt;name&gt; Derby &lt;/name&gt;' PRESERVE WHITESPACE));</pre>
+
+<div class="note"><span class="notetitle">Note: </span>You must insert the XML keywords DOCUMENT and PRESERVE WHITESPACE.
+Actual XML data should be inside single quotation marks, and
+values should be within the starting XML tag and the ending XML tag.</div>
+                 
+</li>
+
+<li>Use the XMLSERIALIZE operator to retrieve XML values from a result set.
+For example:
+<pre>SELECT XMLSERIALIZE(xml_col AS CLOB) FROM xml_data;</pre>
+ 
+<div class="note"><span class="notetitle">Note: </span>You can also specify <samp class="codeph">xml_col AS VARCHAR(25)</samp>.</div>
+    
+</li>
+
+<li>Use non-XML data retrieved from a non-XML column to create an XML fragment.
+For example: <pre>     SELECT '&lt;my_self&gt;' ||     
+     '&lt;name&gt;'|| my_name ||'&lt;/name&gt;' ||                 
+     '&lt;age&gt;'|| TRIM(CHAR(my_age)) ||'&lt;/age&gt;'||                 
+     '&lt;/my_self&gt;'                       
+     FROM my_non_xml_table;</pre>
+
+<div class="note"><span class="notetitle">Note: </span>This will result in XML fragments, which you must plug
+into an XML document.</div>
+
+</li>
+</ul>
+
+<p>Additionally, there is no JDBC metadata support for the XML data type.</p>
+
+<p>The XML data type is not allowed in any of the clauses or operations that
+are described in the section on expressions on LONG data types in 
+<a href="cdevstandards806118.html#cdevstandards806118">Derby and standards</a>.</p>
+
+<p>For the XML operators to work properly, <span>Derby</span> requires
+that a JAXP parser, such as Apache Xerces, and an implementation of
+the DOM Level 3 XPath specification, such as Apache Xalan, are
+included in the Java classpath. If either the parser or the XPath
+processor is missing from the classpath,
+<span>Derby</span> disallows any XML-related
+operations.  </p>
+
+<div class="section"><h2 class="sectiontitle">Classpath and version issues</h2>
+<p>Most Java Virtual Machines (JVMs) that are version 1.6 or later,
+have the required libraries embedded in the JVM. If you are using one
+of these JVMs, you may not need to add any classes to your classpath.
+</p>
+
+<p>
+If your JVM does not include the required libraries, you must add
+Apache Xalan, or some other library that implements the required
+functionality, to your classpath.
+</p>
+
+<p>
+Some JVMs include a version of Xalan that is not new enough. If your
+JVM comes with a too old version of Xalan, you may need to override
+the version of Xalan in the JVM with a
+newer version by using the Endorsed Standards Override Mechanism described at
+<a href="http://download.oracle.com/javase/1.4.2/docs/guide/standards/" target="_blank">http://download.oracle.com/javase/1.4.2/docs/guide/standards/</a>. To
+use this mechanism, download and install a binary distribution of Xalan from
+Apache and set the system property <samp class="codeph">java.endorsed.dirs</samp> to point
+to the Xalan installation directory.
+</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevstandards806118.html" title="Derby adheres to SQL99 or newer standards wherever possible. This section describes those features currently in Derby that are not standard; these features are currently being evaluated and might be removed in future releases.">Derby and standards</a></div>
+</div>
+</div>
+
+</body>
+</html>

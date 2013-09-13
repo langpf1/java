@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Utilização do procedimento de cópia de segurança para realizar cópia de segurança em linha" />
+<meta name="abstract" content="O procedimento SYSCS_UTIL.SYSCS_BACKUP_DATABASE é utilizado para criar a cópia de segurança do banco de dados em um local especificado." />
+<meta name="description" content="O procedimento SYSCS_UTIL.SYSCS_BACKUP_DATABASE é utilizado para criar a cópia de segurança do banco de dados em um local especificado." />
+<meta content="Procedimento de cópia de segurança, Procedimento do sistema SYSCS_BACKUP_DATABASE()" name="DC.subject" />
+<meta content="Procedimento de cópia de segurança, Procedimento do sistema SYSCS_BACKUP_DATABASE()" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup63476.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup75469.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminhubbkup01" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Utilização do procedimento de cópia de segurança para realizar cópia de segurança em linha</title>
+</head>
+<body id="cadminhubbkup01"><a name="cadminhubbkup01"><!-- --></a>
+
+
+<h1 class="topictitle1">Utilização do procedimento de cópia de segurança para realizar cópia de segurança em linha</h1>
+
+
+
+<div><p>O procedimento SYSCS_UTIL.SYSCS_BACKUP_DATABASE é utilizado para
+criar a cópia de segurança do banco de dados em um local especificado.</p>
+
+<p>O procedimento SYSCS_UTIL.SYSCS_BACKUP_DATABASE recebe como argumento uma
+cadeia de caracteres representando o local onde será armazenada a cópia de
+segurança do banco de dados.
+Normalmente é fornecido o caminho completo para o diretório de cópia de
+segurança (os caminhos relativos são interpretados como sendo relativos ao
+diretório corrente, e não ao diretório derby.system.home).</p>
+
+<p>Por exemplo, para especificar o local de cópia de segurança
+<span class="filepath">c:/minhascopias/2005-06-01</span> para um banco de dados que
+se encontra aberto no momento, deve ser utilizada a seguinte declaração
+(são utilizadas barras inclinadas para frente como separadores do caminho
+nos comandos SQL):</p>
+
+<pre><strong>CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE('c:/minhascopias/2005-06-01')</strong></pre>
+
+<p>O procedimento <em>SYSCS_UTIL.SYSCS_BACKUP_DATABASE()</em> coloca o banco de
+dados em um estado no qual este pode ser copiado com segurança, depois copia
+o diretório de banco de dados original por completo (incluindo os arquivos de
+dados, arquivos de <em>log</em> de transação em linha e os arquivos <em>jar</em>)
+para o diretório de cópia de segurança especificado.
+Os arquivos que não estão dentro do diretório de banco de dados original
+(por exemplo, <samp class="codeph">derby.properties</samp>) <em>não</em> são copiados.</p>
+
+<p>O exemplo a seguir mostra como fazer a cópia de segurança de um banco de
+dados em um diretório cujo nome reflete a data corrente:</p>
+
+<pre>public static void backUpDatabase(Connection conn)throws SQLException
+{
+<strong>// Obter a data de hoje como como uma cadeia de caracteres:</strong>
+java.text.SimpleDateFormat dataHoje =
+   new java.text.SimpleDateFormat("yyyy-MM-dd");
+String diretorioCopia = "c:/minhascopias/" +
+   dataHoje.format((java.util.Calendar.getInstance()).getTime());
+
+CallableStatement cs = conn.prepareCall("CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE(?)");
+cs.setString(1, diretorioCopia);
+cs.execute();
+cs.close();
+System.out.println("cópia de segurança colocada no diretório "+diretorioCopia);
+}</pre>
+
+<p>Para um banco de dados cuja cópia de segurança foi realizada em 2005-06-01,
+os comandos anteriores copiariam o banco de dados corrente para o diretório
+com o mesmo nome em <em>c:\minhascopias\2005-06-01</em>.</p>
+
+<p>As transações não efetivadas não aparecem na cópia de segurança do banco de
+dados.</p>
+
+<div class="note"><span class="notetitle">Nota: </span>Não devem ser feitas cópias de segurança de bancos de dados diferentes,
+mas com mesmo nome, no mesmo diretório de cópia de segurança.
+Se já existir um banco de dados com o mesmo nome no diretório de cópia de
+segurança, é assumido como sendo uma versão antiga e sobrescrito.</div>
+
+<p>O procedimento SYSCS_UTIL.SYSCS_BACKUP_DATABASE emitirá uma mensagem de erro
+se existirem operações não registradas (<em>unlogged</em>) na mesma
+transação do procedimento de cópia de segurança.</p>
+
+<p>Caso exista no sistema, quando a cópia de segurança iniciar, operações não
+registradas em andamento em outras transações, este procedimento ficará
+bloqueado até que estas transações completem, antes de realizar a cópia de
+segurança.</p>
+
+<p>O Derby converte, automaticamente, as operações não registradas para o modo
+registrado, quando estas são iniciadas quando a cópia de segurança está em
+andamento (exceto as operações que fazem manutenção de arquivos <em>jar</em> de
+aplicativos no banco de dados).
+Os procedimentos que instalam, substituem e removem arquivos <em>jar</em> no
+banco de dados são bloqueados quando a cópia de segurança está em andamento.</p>
+
+<p>Se não for desejado que a cópia de segurança fique bloqueada até que
+as operações não registradas em outras transações completem, deve ser
+utilizado o procedimento SYSCS_UTIL.SYSCS_BACKUP_DATABASE_NOWAIT.
+Esse procedimento emite um erro logo no início da cópia de segurança caso
+existam transações em andamento com operações não registradas, em vez de
+aguardar estas transações completarem.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminhubbkup63476.html" title="">Cópias de segurança em linha</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="cadminhubbkup75469.html" title="">Utilização de comandos do sistema operacional com os procedimentos do sistema de congelar e descongelar para realizar cópias de segurança em linha</a></div>
+</div>
+</div>
+
+</body>
+</html>

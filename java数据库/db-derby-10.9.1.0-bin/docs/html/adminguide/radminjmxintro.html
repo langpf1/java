@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Introduction to the Derby MBeans" />
+<meta content="Java Management Extensions (JMX) technology, JMX, using, MBeans" name="DC.subject" />
+<meta content="Java Management Extensions (JMX) technology, JMX, using, MBeans" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminjmxoverview.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenabledisable.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxjconsole.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxcode.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxtroubleshoot.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminjmxintro" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Introduction to the
+Derby MBeans</title>
+</head>
+<body id="radminjmxintro"><a name="radminjmxintro"><!-- --></a>
+
+
+<h1 class="topictitle1">Introduction to the
+<span>Derby</span> MBeans</h1>
+
+
+<div>
+<div class="section">
+<p><span>Derby</span> provides the
+MBeans described in this section.</p>
+
+<p>The API documentation for each
+<span>Derby</span> MBean describes its
+features in detail. You can find this documentation at <a href="http://db.apache.org/derby/javadoc/publishedapi/jdbc4/" target="_blank">http://db.apache.org/derby/javadoc/publishedapi/jdbc4/</a>.
+</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">VersionMBean</h2>
+<p><samp class="codeph">VersionMBean</samp> exposes version information about the running
+<span>Derby</span> system jar file.</p>
+
+<ul>
+<li>Interface: <samp class="codeph">org.apache.derby.mbeans.VersionMBean</samp></li>
+
+<li>Implementation: <samp class="codeph">org.apache.derby.iapi.services.info.Version</samp>
+(not in the public API)</li>
+
+<li>ObjectName: 
+<samp class="codeph">org.apache.derby:type=Version,system=&lt;sysID&gt;,jar=derby.jar</samp>
+(monitors <samp class="codeph">derby.jar</samp>, the
+<span>Derby</span> engine), or
+<samp class="codeph">org.apache.derby:type=Version,system=&lt;sysID&gt;,jar=derbynet.jar</samp>
+(monitors <samp class="codeph">derbynet.jar</samp>, the server)</li>
+
+<li>Instruments:
+<samp class="codeph">org.apache.derby.iapi.services.info.ProductVersionHolder</samp></li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">JDBCMBean</h2>
+<p><samp class="codeph">JDBCMBean</samp> exposes information about the JDBC driver.</p>
+
+<ul>
+<li>Interface: <samp class="codeph">org.apache.derby.mbeans.JDBCMBean</samp></li>
+
+<li>Implementation: <samp class="codeph">org.apache.derby.jdbc.JDBC</samp> (not in the
+public API)</li>
+
+<li>ObjectName: <samp class="codeph">org.apache.derby:type=JDBC,system=&lt;sysID&gt;</samp>
+</li>
+
+<li>Instruments:
+<samp class="codeph">org.apache.derby.jdbc.InternalDriver</samp> and
+<samp class="codeph">org.apache.derby.iapi.services.info.JVMInfo</samp></li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">ManagementMBean</h2>
+<p><samp class="codeph">ManagementMBean</samp> manages the state of the
+<span>Derby</span> MBeans (registered or
+not).</p>
+
+<ul>
+<li>Interface <samp class="codeph">org.apache.derby.mbeans.ManagementMBean</samp></li>
+
+<li>Implementation: <samp class="codeph">org.apache.derby.mbeans.Management</samp> (part of
+the public API; may be registered by JMX clients)</li>
+
+<li>Extended by:
+<samp class="codeph">org.apache.derby.iapi.services.jmx.ManagementService</samp>
+(interface; not in the public API), with the following implementations:
+<ul>
+<li><samp class="codeph">org.apache.derby.impl.services.jmx.JMXManagementService</samp>
+(not public)</li>
+
+<li><samp class="codeph">org.apache.derby.impl.services.jmxnone.NoManagementService</samp>
+(not in the public API; empty implementation for environments without the
+required JMX support)</li>
+
+</ul>
+
+</li>
+
+<li>ObjectName:
+<samp class="codeph">org.apache.derby:type=Management,system=&lt;sysID&gt;</samp> when
+registered by <span>Derby</span> 
+</li>
+
+<li>Instruments:
+<samp class="codeph">org.apache.derby.impl.services.jmx.JMXManagementService</samp></li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">NetworkServerMBean</h2>
+<p><samp class="codeph">NetworkServerMBean</samp> monitors and manages a running instance
+of the Network Server.</p>
+
+<ul>
+<li>Interface:
+<samp class="codeph">org.apache.derby.mbeans.drda.NetworkServerMBean</samp></li>
+
+<li>Implementation:
+<samp class="codeph">org.apache.derby.impl.drda.NetworkServerMBeanImpl</samp> (not
+in the public API)</li>
+
+<li>ObjectName:
+<samp class="codeph">org.apache.derby:type=NetworkServer,system=&lt;sysID&gt;</samp></li>
+
+<li>Instruments:
+<samp class="codeph">org.apache.derby.impl.drda.NetworkServerControlImpl</samp></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminjmxoverview.html" title="">Using Java Management Extensions (JMX) technology</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminjmxenabledisable.html" title="">Enabling and disabling JMX</a></div>
+<div><a href="radminjmxjconsole.html" title="">Using JConsole to access the Derby MBeans</a></div>
+<div><a href="radminjmxcode.html" title="">Using custom Java code to access the Derby MBeans</a></div>
+<div><a href="radminjmxtroubleshoot.html" title="">Troubleshooting JMX connection issues</a></div>
+</div>
+</div>
+
+</body>
+</html>

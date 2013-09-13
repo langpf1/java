@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="dblook examples" />
+<meta content="dblook, examples" name="DC.subject" />
+<meta content="dblook, examples" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsdblook.html" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsusingdblook.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsdblookoptions.html" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsgenddldb.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsdblookexamples" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>dblook examples</title>
+</head>
+<body id="rtoolsdblookexamples"><a name="rtoolsdblookexamples"><!-- --></a>
+
+
+<h1 class="topictitle1">dblook examples</h1>
+
+
+<div>
+<div class="section"><p>The following examples demonstrate how the various <samp class="codeph">dblook</samp> utility
+options can be specified from a command line. These examples use the <samp class="codeph">sample</samp> database.</p>
+<div class="note"><span class="notetitle">Note: </span>The
+quotations marks shown in these examples are part of the command argument
+and must be passed to <samp class="codeph">dblook</samp>. The way in which quotation
+marks are passed depends on the operating system and command line that you
+are using. With some systems it might be necessary to escape the quotation
+marks by using a forward slash before the quotation mark, for example: <samp class="codeph">"\"My
+Table"\"</samp></div>
+<p>Status messages are written to the output (either
+a -o filename, if specified, or the console) as SQL script comments. These
+status messages serve as headers to show which types of database objects are
+being, or have been, processed by the <samp class="codeph">dblook</samp> utility.</p>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Writing the DDL to the console</h2><div class="p">You can write the
+DDL to the console for everything that is in the <samp class="codeph">sample</samp> database.
+In this example, the database is in the current directory. For example:<pre>java org.apache.derby.tools.dblook -d jdbc:derby:sample
+</pre>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Including error and warning messages in the dblook command</h2><div class="p">You
+can write error and warning messages when you write the DDL to the console.
+The messages are written using <samp class="codeph">System.err</samp>. For example:<pre>java org.apache.derby.tools.dblook -d jdbc:derby:sample -verbose</pre>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Writing the DDL to a file</h2><div class="p">You can write the DDL
+to a file called <samp class="codeph">myDB_DDL.sql</samp> for everything that is in the <samp class="codeph">sample</samp> database.
+In this example, the database and file are in the current directory. For example:<pre>java org.apache.derby.tools.dblook -d jdbc:derby:sample -o myDB_DDL.sql</pre>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Specifying directory paths in the dblook command</h2><div class="p">If
+the database or file are not in the current directory, you must specify the
+directory paths. For example:<pre>java org.apache.derby.tools.dblook -d 'jdbc:derby:c:\private\stuff\sample'
+   -o 'C:\temp\newDB.sql'</pre>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Specifying a schema in the dblook command</h2><div class="p">You can
+specify the schema for the database. To write the DDL to the console, for
+all of the objects in the <samp class="codeph">sample</samp> database where the database
+is in the SAMP schema, use the following command:<pre>java org.apache.derby.tools.dblook -d jdbc:derby:sample -z samp
+</pre>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Specifying a remote database and host</h2><div class="p">If the <samp class="codeph">sample</samp> database
+is in the SAMP schema on localhost:1527, you must specify your user ID and
+password. For example, use the following command to write the DDL to the console: <pre>java org.apache.derby.tools.dblook 
+   -d 'jdbc:derby://localhost:1527/"C:\temp\sample";
+   user=someusername;password=somepassword' -z samp
+</pre>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Specifying a schema and a table within the database in the
+dblook command</h2><div class="p">You can specify that only the objects in the <samp class="codeph">sample</samp> database
+that are associated with the SAMP and the <samp class="codeph">My Table</samp> table
+are written to the console. For example:<pre>java org.apache.derby.tools.dblook -d jdbc:derby:sample -z samp -t "My Table"
+</pre>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Specifying multiple tables in the dblook command</h2>You
+can specify more than one table in the dblook command by separating the names
+of the tables with a space. For example, for objects in the <samp class="codeph">sample</samp> database
+that are associated with either the <samp class="codeph">My Table</samp> table or the <samp class="codeph">STAFF</samp> table,
+use the following command:<pre>java org.apache.derby.tools.dblook -d jdbc:derby:sample -t "My Table" staff</pre>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Writing DDL to a file without a statement delimiter</h2><div class="p">To
+write the DDL for all of the objects in<samp class="codeph">sample</samp> database to
+the <samp class="codeph">myDB_DDL.sql</samp> file without a statement delimiter, you
+must omit the default semi-colon. You can append the DDL to the output files
+if the files are already there. For example:<pre>java org.apache.derby.tools.dblook -d jdbc:derby:sample
+   -o myDB_DDL.sql -td '' -append</pre>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Excluding views from the DDL</h2><div class="p">To write the DDL to
+the console for all of the objects in the <samp class="codeph">sample</samp> database
+except for views, use the following command:<pre>java org.apache.derby.tools.dblook -d jdbc:derby:sample -noview</pre>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsdblook.html" title="">dblook</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctoolsusingdblook.html" title="">Using dblook</a></div>
+<div><a href="ctoolsgenddldb.html" title="">Generating the DDL for a database</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsdblookoptions.html" title="">dblook options</a></div>
+</div>
+</div>
+
+</body>
+</html>

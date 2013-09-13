@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Letras maiúsculas e caracteres especiais" />
+<meta content="Diferenciação de letras maiúsculas e minúsculas em palavras chave e identificadores, Palavras chave, diferenciação de letras maiúsculas e minúsculas, escapes nas instruções SQL, para apóstrofo, delimitadas por apóstrofos nas instruções SQL, suporte nas instruções SQL, diferenciação de letras maiúsculas e minúsculas no SQL, * como curinga no SELECT do SQL, % como curinga no SQL, _ como curinga no SQL, Caracteres curinga no SQL, Delimitadores de comentários no SQL, -- (delimitador de cmentário no SQL)" name="DC.subject" />
+<meta content="Diferenciação de letras maiúsculas e minúsculas em palavras chave e identificadores, Palavras chave, diferenciação de letras maiúsculas e minúsculas, escapes nas instruções SQL, para apóstrofo, delimitadas por apóstrofos nas instruções SQL, suporte nas instruções SQL, diferenciação de letras maiúsculas e minúsculas no SQL, * como curinga no SELECT do SQL, % como curinga no SQL, _ como curinga no SQL, Caracteres curinga no SQL, Delimitadores de comentários no SQL, -- (delimitador de cmentário no SQL)" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj28468" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Letras maiúsculas e caracteres especiais</title>
+</head>
+<body id="rrefsqlj28468"><a name="rrefsqlj28468"><!-- --></a>
+
+
+<h1 class="topictitle1">Letras maiúsculas e caracteres especiais</h1>
+
+
+<div>
+<div class="section">
+<div class="p">Ao utilizar classes e métodos do JDBC, são submetidas instruções SQL ao
+<span>Derby</span>
+na forma de cadeias.
+O conjunto de caracteres permitido nas cadeias contendo instruções SQL é o
+Unicode.
+Nestas cadeias se aplicam as seguintes regras:
+<ul>
+<li>Aspas delimitam os identificadores especiais, referidos no SQL-92 como
+<em>identificadores delimitados</em>.</li>
+
+<li>Apóstrofos delimitam cadeias de caracteres.</li>
+
+<li>Na cadeia de caracteres, para representar um apóstrofo (também chamado de
+aspas simples) são usados dois apóstrofos (Em outras palavras, o apóstrofo é o
+caractere de escape do apóstrofo).
+<p>As aspas não necessitam de caractere de escape.
+Para representar aspas deve-se, simplesmente, utilizar aspas.
+Entretanto, deve ser observado que no programa Java as aspas necessitam do
+caractere de escape contrabarra (\).</p>
+
+<span><strong>Exemplo:</strong></span>
+<pre><strong><span>
+-- o apóstrofo é o caractere de escape do apóstrofo</span>
+
+VALUES 'Maria D''Almeida'
+
+<span>-- no ij não há necessidade de caractere de escape para aspas</span>
+
+VALUES 'Ele disse, "Bom dia!"'
+
+<span>-- no programa Java aspas necessitam de escape</span>
+
+n = stmt.executeUpdate(
+    "UPDATE minhaTabela SET stringCol = 'Ele disse, \"Bom dia!\"'");
+</strong>
+</pre>
+
+</li>
+
+<li>As palavras chave do SQL não são sensíveis a letras maiúsculas e minúsculas.
+Por exemplo, a palavra chave SELECT pode ser escrita como SELECT, Select,
+select, ou sELECT.</li>
+
+<li>Os identificadores no estilo SQL-92 não são sensíveis a letras maiúsculas e
+minúsculas
+(consulte <em><a href="crefsqlj34834.html#crefsqlj34834">IdentificadorSQL92</a></em>),
+a menos que estejam delimitados.</li>
+
+<li>Os identificadores no estilo Java são sensíveis a letras maiúsculas e
+minúsculas.</li>
+
+<li>O * é um caractere curinga na
+<em><a href="rrefselectexpression.html#rrefselectexpression">ExpressãoSeleção</a>.</em>
+Consulte <a href="rrefselectexpression.html#rrefselectexpression__sqlj38441">O curinga *</a>.
+Também pode ser o operador de multiplicação.
+Em todos os outros casos é um meta-símbolo da sintaxe, sinalizando itens que
+podem ser repetidos zero ou mais vezes.</li>
+
+<li>% e _ são caracteres curinga quando utilizados nas cadeias de caracteres
+após o operador LIKE (exceto quando precedidos pelo caractere de escape).
+Consulte <a href="rrefsqlj23075.html#rrefsqlj23075">Expressão booleana</a>.</li>
+
+<li>De acordo com o padrão SQL-92, dois hífens (--) e o caractere de nova-linha
+delimitam um comentário.
+Os dois hífens iniciam o comentário, e o caractere de nova-linha termina o
+comentário.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj23296.html" title="">Referência da linguagem SQL</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="crefsqlj18919.html" title="">Identificadores SQL</a></div>
+<div><a href="crefsqlj39374.html" title="">Instruções</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">Funções do sistema nativas</a></div>
+<div><a href="crefsqlbuiltinsystemprocedures.html" title="">Procedimentos do sistema nativos</a></div>
+<div><a href="crefsqlj31068.html" title="">Tipos de dado</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefsqlj29026.html" title="">Funções nativas</a></div>
+<div><a href="rrefsqlj19433.html" title="">Expressões SQL</a></div>
+</div>
+</div>
+
+</body>
+</html>

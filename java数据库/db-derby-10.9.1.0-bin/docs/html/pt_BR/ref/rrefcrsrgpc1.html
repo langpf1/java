@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Colunas do ResultSet retornado por getProcedureColumns" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdmrs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefgpc1.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpgc1.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdmdfns1.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefcrsrgpc1" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Colunas do ResultSet retornado por getProcedureColumns</title>
+</head>
+<body id="rrefcrsrgpc1"><a name="rrefcrsrgpc1"><!-- --></a>
+
+
+<h1 class="topictitle1">Colunas do ResultSet retornado por <strong><em>getProcedureColumns</em></strong></h1>
+
+<div>
+<div class="section">
+<div class="p">As colunas do <em>ResultSet</em> retornado por <em>getProcedureColumns</em>
+estão descritas na API.
+Abaixo são mostrados detalhes adicionais para algumas colunas específicas:
+<ul>
+<li>PROCEDURE_CAT   <p>sempre "NULL" no <span>Derby</span></p>
+</li>
+
+<li>PROCEDURE_SCHEM   <p>esquema do procedimento Java</p>
+</li>
+
+<li>PROCEDURE_NAME   <p>nome do procedimento</p>
+</li>
+
+<li>COLUMN_NAME   <p>nome do parâmetro (consulte <a href="rrefpgc1.html#rrefpgc1__jdbc95532">columnNamePattern</a>)</p>
+</li>
+
+<li>COLUMN_TYPE   <p>indicação do que a linha descreve.
+É sempre <em>DatabaseMetaData.procedureColumnIn</em> para parâmetros de método,
+a menos que o parâmetro seja uma matriz.
+Neste caso é <em>DatabaseMetaData.procedureColumnInOut</em>.
+Retorna sempre <em>DatabaseMetaData.procedureColumnReturn</em>
+para os valores retornados.</p>
+</li>
+
+<li>TYPE_NAME   <p>Nome específico do
+<span>Derby</span>
+para o tipo.</p>
+</li>
+
+<li>NULLABLE   <p>sempre retorna <em>DatabaseMetaData.procedureNoNulls</em>
+para parâmetros primitivos, e <em>DatabaseMetaData.procedureNullable</em>
+para parâmetros de objeto</p>
+</li>
+
+<li>REMARKS   <p>uma cadeia de caracteres descrevendo o tipo Java do parâmetro do método</p>
+</li>
+
+<li>METHOD_ID   <p>coluna específica do
+<span>Derby</span>.</p>
+</li>
+
+<li>PARAMETER_ID  <p>coluna específica do
+<span>Derby</span>.</p>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefjdbc15905.html" title="">java.sql.DatabaseMetaData</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefdmrs.html" title="">Conjuntos de resultados DatabaseMetaData</a></div>
+<div><a href="rrefgpc1.html" title="">getProcedureColumns</a></div>
+<div><a href="rrefpgc1.html" title="">Parâmetros para getProcedureColumns</a></div>
+<div><a href="rrefdmdfns1.html" title="">Funcionalidades de DatabaseMetaData não suportadas</a></div>
+</div>
+</div>
+
+</body>
+</html>

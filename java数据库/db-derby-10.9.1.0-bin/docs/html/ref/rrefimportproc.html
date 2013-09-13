@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_IMPORT_TABLE system procedure" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproctablelobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportdataproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportdataproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproctablelobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportdataproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportdataproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimporttableproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimporttableproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefimportproc" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_IMPORT_TABLE system procedure</title>
+</head>
+<body id="rrefimportproc"><a name="rrefimportproc"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_IMPORT_TABLE system procedure</h1>
+
+<div>
+<div class="section"><p>The <samp class="codeph">SYSCS_UTIL.SYSCS_IMPORT_TABLE</samp> system procedure
+imports data from an input file into all of the columns of a table. If the
+table receiving the imported data already contains data, you can either replace
+or append to the existing data.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre>SYSCS_UTIL.SYSCS_IMPORT_TABLE (IN SCHEMANAME VARCHAR(128),
+IN TABLENAME VARCHAR(128), IN FILENAME VARCHAR(32672),
+IN COLUMNDELIMITER CHAR(1), IN CHARACTERDELIMITER CHAR(1),
+IN CODESET VARCHAR(128), IN REPLACE SMALLINT)</pre>
+ <p>No result is
+returned from the procedure.</p>
+ <dl>
+<dt class="dlterm">SCHEMANAME</dt>
+
+<dd>An input argument of type VARCHAR(128) that specifies the schema of the
+table. Passing a NULL value will use the default schema name.</dd>
+
+
+<dt class="dlterm">TABLENAME</dt>
+
+<dd>An input argument of type VARCHAR (128) that specifies the table name
+of the table into which the data is to be imported. This table cannot be a
+system table or a declared temporary table. Passing a null will result in
+an error.</dd>
+
+
+<dt class="dlterm">FILENAME</dt>
+
+<dd>An input argument of type VARCHAR(32672) that specifies the file that
+contains the data to be imported. If you do not specify a path, the current
+working directory is used. Passing a NULL value will result in an error.</dd>
+
+
+<dt class="dlterm">COLUMNDELIMITER</dt>
+
+<dd>An input argument of type CHAR(1) that specifies a column delimiter. The
+specified character is used in place of a comma to signal the end of a column.
+Passing a NULL value will use the default value; the default value is a comma
+(,).</dd>
+
+
+<dt class="dlterm">CHARACTERDELIMITER</dt>
+
+<dd>An input argument of type CHAR(1) that specifies a character delimiter.
+ The specified character is used in place of double quotation marks to enclose
+a character string. Passing a NULL value will use the default value; the default
+value is a double quotation mark (").</dd>
+
+
+<dt class="dlterm">CODESET</dt>
+
+<dd>An input argument of type VARCHAR(128) that specifies the code set of
+the data in the input file. The name of the code set should be one of the
+Java-supported character encodings. Data is converted from the specified code
+set to the database code set (utf-8).  Passing a NULL value will interpret
+the data file in the same code set as the JVM in which it is being executed.</dd>
+
+
+<dt class="dlterm">REPLACE</dt>
+
+<dd>A input argument of type SMALLINT. A non-zero value will run in REPLACE
+mode, while a value of zero will run in INSERT mode. REPLACE mode deletes
+all existing data from the table by truncating the data object, and inserts
+the imported data. The table definition and the index definitions are not
+changed. INSERT mode adds the imported data to the table without changing
+the existing table data. Passing a NULL will result in an error.</dd>
+
+</dl>
+If you create a schema, table, or column name as a non-delimited
+identifier, you must pass the name to the import procedure using all uppercase
+characters. If you created a schema, table, or column name as a delimited
+identifier, you must pass the name to the import procedure using the same
+case that was used when it was created.</div>
+
+<div class="section"><h2 class="sectiontitle">Execute privileges</h2>
+<p>If authentication and SQL authorization are both enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> has
+execute privileges on this procedure by default. See "Enabling user
+authentication" and "Setting the SQL standard authorization mode" in the
+<span><em>Derby Developer's Guide</em></span> for more information. The
+database owner can grant access to other users. The user must also have INSERT
+privileges on the table.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Usage</h2>
+<p>For additional information on using this procedure, see the section
+"Importing and exporting data" in the
+<span><em>Derby Server and Administration Guide</em></span>.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Example</h2><div class="p">The following example imports data into
+the <samp class="codeph">STAFF</samp> table from a delimited data file called <samp class="codeph">myfile.del</samp> with
+the percentage character (%) as the string delimiter, and a semicolon (;)
+as the column delimiter: <pre>CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE
+    (null, 'STAFF', 'c:/output/myfile.del', ';', '%', null,0);</pre>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefexportproc.html" title="The SYSCS_UTIL.SYSCS_EXPORT_TABLE system procedure exports all of the data from a table to an operating system file.">SYSCS_UTIL.SYSCS_EXPORT_TABLE system procedure</a></div>
+<div><a href="rrefexportproctablelobs.html" title="Use the SYSCS_UTIL.SYSCS_EXPORT_TABLE_LOBS_TO_EXTFILE system procedure to export all the data from a table, and place the LOB data into a separate export file. A reference to the location of the LOB data is placed in the LOB column in the main export file.">SYSCS_UTIL.SYSCS_EXPORT_TABLE_LOBS_TO_EXTFILE system procedure</a></div>
+<div><a href="rrefexportselectionproc.html" title="The SYSCS_UTIL.SYSCS_EXPORT_QUERY system procedure exports the results of a SELECT statement to an operating system file.">SYSCS_UTIL.SYSCS_EXPORT_QUERY system procedure</a></div>
+<div><a href="rrefexportselectionproclobs.html" title="Use the SYSCS_UTIL.SYSCS_EXPORT_QUERY_LOBS_TO_EXTFILE system procedure to export the result of a SELECT statement to a main export file, and place the LOB data into a separate export file. A reference to the location of the LOB data is placed in the LOB column in the main export file.">SYSCS_UTIL.SYSCS_EXPORT_QUERY_LOBS_TO_EXTFILE system procedure</a></div>
+<div><a href="rrefimportdataproc.html" title="">SYSCS_UTIL.SYSCS_IMPORT_DATA system procedure</a></div>
+<div><a href="rrefimportdataproclobs.html" title="Use the SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE system procedure to import data to a subset of columns in a table, where the LOB data is stored in a separate file. The main import file contains all of the other data and a reference to the location of the LOB data.">SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE system procedure</a></div>
+<div><a href="rrefimporttableproclobs.html" title="Use the SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE system procedure to import data to a table, where the LOB data is stored in a separate file. The main import file contains all of the other data and a reference to the location of the LOB data.">SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE system procedure</a></div>
+</div>
+</div>
+
+</body>
+</html>

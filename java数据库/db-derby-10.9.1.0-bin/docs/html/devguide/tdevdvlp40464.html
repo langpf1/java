@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Shutting down Derby or an individual database" />
+<meta name="abstract" content="Applications in an embedded environment shut down the Derby system by specifying the shutdown=true attribute in the connection URL. To shut down the system, you do not specify a database name, and you do not ordinarily specify any other attribute." />
+<meta name="description" content="Applications in an embedded environment shut down the Derby system by specifying the shutdown=true attribute in the connection URL. To shut down the system, you do not specify a database name, and you do not ordinarily specify any other attribute." />
+<meta content="Shutting down a single database, Shutting down Derby, using database connection URL attribute, Databases, shutting down individually" name="DC.subject" />
+<meta content="Shutting down a single database, Shutting down Derby, using database connection URL attribute, Databases, shutting down individually" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp845973.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevdvlp847152.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdeploy26887.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp51654.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tdevdvlp40464" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Shutting down Derby or an individual database</title>
+</head>
+<body id="tdevdvlp40464"><a name="tdevdvlp40464"><!-- --></a>
+
+
+<h1 class="topictitle1">Shutting down Derby or an individual database</h1>
+
+
+
+<div><p>Applications in an embedded environment shut down the <span>Derby</span> system
+by specifying the <em>shutdown=true</em> attribute in the connection URL. To
+shut down the system, you do not specify a database name, and you do not
+ordinarily specify any other attribute.</p>
+
+<div class="section"> <pre>jdbc:derby:;<span>shutdown=true</span></pre>
+<p>A successful
+shutdown always results in an <em>SQLException</em> to indicate that <span>Derby</span> has
+shut down and that there is no other exception.</p>
+
+<p>If you have enabled user authentication at the system level, you will need to
+specify credentials (that is, username and password) in order to shut down a
+<span>Derby</span> system, and the
+supplied username and password must also be defined at the system level.</p>
+
+<div class="important"><span class="importanttitle">Important: </span><span>Derby</span>'s
+BUILTIN authentication mechanism is suitable only for development and testing
+purposes, and it will no longer be documented in future releases. It is strongly
+recommended that production systems rely on NATIVE authentication, an
+external directory service such as LDAP, or a user-defined class for
+authentication. It is also strongly recommended that production systems protect
+network connections with SSL/TLS.</div>
+
+<p>You can also shut down
+an individual database if you specify the <em>databaseName</em>. You can shut
+down the database of the current connection if you specify the default connection
+instead of a database name<em> </em>(within an SQL statement).</p>
+<pre><strong>// shutting down a database from your application</strong>
+DriverManager.getConnection(
+    "jdbc:derby:sample;shutdown=true");</pre>
+
+<p>
+If user
+<a href="cdevcsecure36127.html#cdevcsecure36127">authentication</a>
+and
+<a href="cdevcsecure36595.html#cdevcsecure36595">SQL authorization</a>
+are both enabled, only the
+<a href="cdevcsecureDbOwner.html#cdevcsecureDbOwner">database owner</a>
+can shut down the database.
+</p>
+
+
+<pre><strong>// shutting down an authenticated database as database owner</strong>
+DriverManager.getConnection(
+    "jdbc:derby:securesample;user=joeowner;password=secret;shutdown=true");</pre>
+
+<div class="p">
+<div class="attention"><span class="attentiontitle">Attention: </span> 
+It is good practice to close existing connections before shutting down 
+the system or database. Connections created before the shutdown will not 
+be usable after shutdown is performed.  Attempting to access  connections 
+after shutdown may cause errors including instances of 
+<samp class="codeph">NullPointerException</samp> or protocol violations. 
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp51654.html" title="You specify attributes on the Derby connection URL.">Working with the database connection URL attributes</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp845973.html" title="An application can shut down a single database within a Derby system and leave the rest of the system running.">Single database shutdown</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevdeploy26887.html" title="To create databases for use on read-only media, perform these steps.">Creating and preparing the database for read-only use</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rdevdvlp847152.html" title="You can use a databaseName attribute on a database connection URL to specify the name of the database to which you want to connect.">Using the databaseName attribute</a></div>
+</div>
+</div>
+
+</body>
+</html>

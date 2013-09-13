@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="DataSource access examples" />
+<meta scheme="URI" name="DC.Relation" content="cadminnsdatasources.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminnsdatasourcexmp" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>DataSource access examples</title>
+</head>
+<body id="radminnsdatasourcexmp"><a name="radminnsdatasourcexmp"><!-- --></a>
+
+
+<h1 class="topictitle1">DataSource access examples</h1>
+
+
+<div>
+<div class="section"><p>The following example uses <samp class="codeph">org.apache.derby.jdbc.ClientDataSource</samp> to
+access the Network Server:</p>
+</div>
+
+<div class="example"> <pre>org.apache.derby.jdbc.ClientDataSource ds =
+   new org.apache.derby.jdbc.ClientDataSource();
+ds.setDatabaseName("mydb");
+ds.setCreateDatabase("create");  
+ds.setUser("user");  
+ds.setPassword("mypass"); 
+
+// The host on which Network Server is running
+ds.setServerName("localhost");
+
+// The port on which Network Server is listening
+ds.setPortNumber(1527);
+
+Connection conn = ds.getConnection(); 
+</pre>
+</div>
+
+<div class="section" id="radminnsdatasourcexmp__stmtcacheexmp"><a name="radminnsdatasourcexmp__stmtcacheexmp"><!-- --></a><h2 class="sectiontitle">Statement caching example</h2>
+<p>The following example uses 
+<samp class="codeph">org.apache.derby.jdbc.ClientConnectionPoolDataSource</samp> to
+access the Network Server and use JDBC statement caching:</p>
+</div>
+
+<div class="example">
+<pre>org.apache.derby.jdbc.ClientConnectionPoolDataSource cpds = 
+   new ClientConnectionPoolDataSource();
+
+// Set the number of statements the cache is allowed to cache.
+// Any number greater than zero will enable the cache.
+cpds.setMaxStatements(20);
+
+// Set other DataSource properties
+cpds.setDatabaseName("mydb");
+cpds.setCreateDatabase("create");
+cpds.setUser("user");
+cpds.setPassword("mypass"); 
+cpds.setServerName("localhost");
+cpds.setPortNumber(1527);
+
+// This physical connection will have JDBC statement caching enabled.
+javax.sql.PooledConnection pc = cpds.getPooledConnection();
+
+// Create a logical connection.
+java.sql.Connection con = pc.getConnection();
+
+// Interact with the database.
+java.sql.PreparedStatement ps = con.prepareStatement(
+   "select * from myTable where id = ?");
+...
+ps.close(); // Inserts or returns statement to the cache
+...
+con.close();
+
+// The next logical connection can gain from using the cache.
+con = pc.getConnection();
+
+// This prepare causes a statement to be fetched from the local cache.
+PreparedStatement ps = con.prepareStatement(
+   "select * from myTable where id = ?");
+...
+
+// To dispose of the cache, close the connection.
+pc.close();
+</pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminnsdatasources.html" title="The Network Server supports the Derby Network Client driver DataSource classes org.apache.derby.jdbc.ClientDataSource and org.apache.derby.jdbc.ClientConnectionPoolDataSource on all supported Java SE platforms.">Accessing the Network Server by using a DataSource object</a></div>
+</div>
+</div>
+
+</body>
+</html>

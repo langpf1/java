@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Offline backups" />
+<meta name="abstract" content="To perform an offline backup of a database, use operating system commands to copy the database directory." />
+<meta name="description" content="To perform an offline backup of a database, use operating system commands to copy the database directory." />
+<meta scheme="URI" name="DC.Relation" content="cadminbckupdb.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup63476.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup67525.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup21105.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminhubbkup12677" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Offline backups</title>
+</head>
+<body id="cadminhubbkup12677"><a name="cadminhubbkup12677"><!-- --></a>
+
+
+<h1 class="topictitle1">Offline backups</h1>
+
+
+
+<div><p>To perform an offline backup of a database, use operating system
+commands to copy the database directory.</p>
+
+<div class="p"><div class="important"><span class="importanttitle">Important: </span>You must shut down the database before you perform an
+offline backup.</div>
+</div>
+
+<p>For example, on Windows systems, the following operating system command 
+backs up a (closed) database that is named <em>sample</em> and that is located in <span class="filepath">d:\mydatabases</span> by
+copying it to the directory <span class="filepath">c:\mybackups\2012-04-01</span>:</p>
+
+<pre>xcopy d:\mydatabases\sample c:\mybackups\2012-04-01\sample /s /i</pre>
+
+<p>If you are not using Windows, substitute the appropriate operating
+system command for copying a directory and all contents to a new location.</p>
+
+<div class="note"><span class="notetitle">Note: </span>On Windows systems, do not attempt to update a database while it is being
+backed up in this way. Attempting to update a database during an offline
+backup will generate a java.io.IOException. Using online backups prevents
+this from occurring.</div>
+
+<p>For large systems, shutting down the database might not be convenient.
+To back up a database without having to shut it down, you can use an online backup.</p>
+
+<p>After you back up a database, make sure the backup copy is not corrupt. To
+do this, run the SYSCS_UTIL.SYSCS_CHECK_TABLE system function on all the tables
+in the backup copy. Do not discard the previous backup until you have verified
+the consistency of the current one. See
+<a href="cadminconsist01.html#cadminconsist01">Checking database consistency</a> for more
+information.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminbckupdb.html" title="You can back up a database either offline (when it is shut down) or online (when it is running).">Backing up a database</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminhubbkup63476.html" title="Use online backups to back up a database while it is running, without blocking transactions.">Online backups</a></div>
+<div><a href="cadminhubbkup67525.html" title="">When the log is in a non-default location</a></div>
+<div><a href="cadminhubbkup21105.html" title="When you back up an encrypted database, both the backup and the log files remain encrypted.">Backing up encrypted databases</a></div>
+</div>
+</div>
+
+</body>
+</html>

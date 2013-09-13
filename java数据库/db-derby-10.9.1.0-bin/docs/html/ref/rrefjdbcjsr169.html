@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="JDBC Package for Connected Device Configuration/Foundation Profile (JSR 169)" />
+<meta content="JSR 169 features, support for" name="DC.subject" />
+<meta content="JSR 169 features, support for" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32052.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34565.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27734.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc40794.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc29874.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc23502.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc38274.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc16643.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc30469.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlsavepoint.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20377.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_1summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbcjsr169" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>JDBC Package for Connected Device Configuration/Foundation Profile
+(JSR 169)</title>
+</head>
+<body id="rrefjdbcjsr169"><a name="rrefjdbcjsr169"><!-- --></a>
+
+
+<h1 class="topictitle1">JDBC Package for Connected Device Configuration/Foundation Profile
+(JSR 169)</h1>
+
+
+<div>
+<div class="section"><p><span>Derby</span> supports
+the JDBC API defined for the Connected Device Configuration/Foundation Profile,
+also known as JSR 169. The features supported are a subset of the JDBC 3.0
+specification. Support for JSR 169 is limited to the embedded driver.
+<span>Derby</span> does not support using
+the Network Server under JSR 169.</p>
+</div>
+
+<div class="section"><p>To obtain a connection using JSR 169, use the
+<samp class="codeph">org.apache.derby.jdbc.EmbeddedSimpleDataSource</samp> class.
+This class is identical in implementation to the <samp class="codeph">org.apache.derby.jdbc.EmbeddedDataSource</samp> class.
+See the <span><em>Derby Developer's Guide</em></span> for information
+on using the properties of the <samp class="codeph">org.apache.derby.jdbc.EmbeddedDataSource</samp> class.</p>
+
+<p>JSR 169 and its <span>Derby</span>
+implementation have the following limitations:</p>
+
+<ul>
+<li>Applications must get and set <samp class="codeph">DECIMAL</samp> values using alternate
+JDBC <samp class="codeph">getXXX</samp> and <samp class="codeph">setXXX</samp> methods, such as <samp class="codeph">getString()</samp> and <samp class="codeph">setString()</samp>.
+Any alternate method that works against a DECIMAL type with JDBC 3.0
+will work in JSR 169.</li>
+
+<li>The XML data type is not supported, but an application can retrieve, update,
+query, or otherwise access an XML data value if it has classes for a JAXP parser
+and for Xalan in the classpath.
+<span>Derby</span> issues an error if
+either the parser or Xalan is not found. In some situations, you may need to
+take steps to place the parser and Xalan in your classpath. See
+"XML data types and operators" in the
+<span><em>Derby Developer's Guide</em></span> for details.</li>
+
+</ul>
+
+<p>JSR 169 and its <span>Derby</span>
+implementation do not support the following:</p>
+
+<ul>
+<li>Java functions and procedures that use server-side JDBC, that is, routines
+declared with <samp class="codeph">CONTAINS SQL</samp>, <samp class="codeph">READS SQL DATA</samp>,
+or <samp class="codeph">MODIFIES SQL DATA</samp> clauses</li>
+
+<li>The <samp class="codeph">DriverManager</samp> interface (this means that you cannot use
+the <samp class="codeph">DriverManager.getConnection</samp> method to obtain
+a connection but must use the
+<samp class="codeph">org.apache.derby.jdbc.EmbeddedSimpleDataSource</samp> class instead)
+</li>
+
+<li>The standard URL used to obtain a connection,
+<samp class="codeph">jdbc:default:connection</samp> (a runtime error may occur if the
+routine tries to obtain a connection using
+<samp class="codeph">jdbc:default:connection</samp>)</li>
+
+<li>Diagnostic tables</li>
+
+<li>Triggers</li>
+
+<li>Encrypted databases</li>
+
+<li>Non-blocking I/O</li>
+
+<li>Java EE resource manager support, including distributed transactions</li>
+
+<li>Principal-based security</li>
+
+<li>LDAP-based authentication</li>
+
+<li>SSL/TLS encryption</li>
+
+<li>Replication</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefjdbc12657.html" title="Derby comes with a built-in JDBC driver.">JDBC reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjdbc32052.html" title="">java.sql.Driver interface</a></div>
+<div><a href="rrefjdbc34565.html" title="">java.sql.DriverManager.getConnection method</a></div>
+<div><a href="rrefjdbc27734.html" title="">java.sql.Connection interface</a></div>
+<div><a href="rrefjdbc15905.html" title="">java.sql.DatabaseMetaData interface</a></div>
+<div><a href="rrefjdbc40794.html" title="">java.sql.Statement interface</a></div>
+<div><a href="rrefjdbc20485.html" title="">java.sql.CallableStatement interface</a></div>
+<div><a href="rrefjdbc29874.html" title="">java.sql.PreparedStatement interface</a></div>
+<div><a href="rrefjdbc23502.html" title="">java.sql.ResultSet interface</a></div>
+<div><a href="rrefjdbc38274.html" title="">java.sql.ResultSetMetaData interface</a></div>
+<div><a href="rrefjdbc16643.html" title="">java.sql.SQLException class</a></div>
+<div><a href="rrefjdbc30469.html" title="">java.sql.SQLWarning class</a></div>
+<div><a href="rrefjdbcjavasqlsavepoint.html" title="">java.sql.Savepoint interface</a></div>
+<div><a href="rrefjdbc20377.html" title="In Derby, the java.sql.Types are mapped to SQL data types">Mapping of java.sql.Types to SQL types</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0 and 4.1 features</a></div>
+<div><a href="rrefjdbc4_1summary.html" title="">JDBC 4.1-only features</a></div>
+<div><a href="rrefjdbc1020262.html" title="">JDBC escape syntax</a></div>
+</div>
+</div>
+
+</body>
+</html>

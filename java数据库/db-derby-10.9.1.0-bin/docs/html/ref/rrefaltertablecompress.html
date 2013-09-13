@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_COMPRESS_TABLE system procedure" />
+<meta content="compressing tables, system procedures, SYSCS_UTIL.SYSCS_COMPRESS_TABLE" name="DC.subject" />
+<meta content="compressing tables, system procedures, SYSCS_UTIL.SYSCS_COMPRESS_TABLE" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefproceduresinplacecompress.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdropstatsproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefupdatestatsproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproceduresinplacecompress.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdropstatsproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefupdatestatsproc.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefaltertablecompress" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_COMPRESS_TABLE system procedure</title>
+</head>
+<body id="rrefaltertablecompress"><a name="rrefaltertablecompress"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_COMPRESS_TABLE system procedure</h1>
+
+
+<div>
+<div class="section"><p>Use the <samp class="codeph">SYSCS_UTIL.SYSCS_COMPRESS_TABLE</samp> system
+procedure to reclaim unused, allocated space in a table and its indexes. Typically,
+unused allocated space exists when a large amount of data is deleted from
+a table, or indexes are updated. By default, <span>Derby</span> does
+not return unused space to the operating system. For example, once a page
+has been allocated to a table or index, it is not automatically returned to
+the operating system until the table or index is destroyed. <samp class="codeph">SYSCS_UTIL.SYSCS_COMPRESS_TABLE</samp> allows
+you to return unused space to the operating system.</p>
+<p>The <samp class="codeph">SYSCS_UTIL.SYSCS_COMPRESS_TABLE</samp> system
+procedure updates statistics on all indexes as part of the index rebuilding
+process.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>SYSCS_UTIL.SYSCS_COMPRESS_TABLE (IN SCHEMANAME VARCHAR(128), 
+IN TABLENAME VARCHAR(128), IN SEQUENTIAL SMALLINT)</strong></pre>
+ <dl>
+<dt class="dlterm">SCHEMANAME</dt>
+
+<dd>An input argument of type VARCHAR(128) that specifies the schema of the
+table. Passing a null will result in an error. </dd>
+
+
+<dt class="dlterm">TABLENAME</dt>
+
+<dd>An input argument of type VARCHAR(128) that specifies the table name of
+the table. The string must exactly match the case of the table name, and the
+argument of "Fred" will be passed to SQL as the delimited identifier 'Fred'.
+ Passing a null will result in an error.</dd>
+
+
+<dt class="dlterm">SEQUENTIAL</dt>
+
+<dd>A non-zero input argument of type SMALLINT will force the operation to
+run in sequential mode, while an argument of 0 will force the operation not
+to run in sequential mode. Passing a null will result in an error.</dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Execute privileges</h2>
+<p>If authentication and SQL authorization are both enabled, all users have
+execute privileges on this procedure. However, in order for the procedure to run
+successfully on a given table, the user must be the owner of either the
+<a href="rrefattrib26867.html#rrefattrib26867">database</a> or the
+schema in which the table resides. See "Enabling user authentication" and
+"Setting the SQL standard authorization mode" in the
+<span><em>Derby Developer's Guide</em></span> for more information.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">SQL example</h2> <p>To compress a table called CUSTOMER
+in a schema called US, using the SEQUENTIAL option:</p>
+ <pre><strong>call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('US', 'CUSTOMER', 1)</strong></pre>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Java example</h2> <p>To compress a table called CUSTOMER
+in a schema called US, using the SEQUENTIAL option:</p>
+ <pre>CallableStatement cs = conn.prepareCall
+("CALL SYSCS_UTIL.SYSCS_COMPRESS_TABLE(?, ?, ?)");
+cs.setString(1, "US");
+cs.setString(2, "CUSTOMER");
+cs.setShort(3, (short) 1);
+cs.execute();</pre>
+</div>
+
+<div class="section"><p>If the SEQUENTIAL parameter is not specified, <span>Derby</span> rebuilds
+all indexes concurrently with the base table. If you do not specify the SEQUENTIAL
+argument, this procedure can be memory-intensive and use a lot of temporary
+disk space (an amount equal to approximately two times the used space plus
+the unused, allocated space). This is because <span>Derby</span> compresses
+the table by copying active rows to newly allocated space (as opposed to shuffling
+and truncating the existing space). The extra space used is returned to the
+operating system on COMMIT.</p>
+</div>
+
+<div class="section"><p>When SEQUENTIAL is specified, <span>Derby</span> compresses
+the base table and then compresses each index sequentially. Using SEQUENTIAL
+uses less memory and disk space, but is more time-intensive. Use the SEQUENTIAL
+argument to reduce memory and disk space usage. </p>
+</div>
+
+<div class="section"><div class="p"><samp class="codeph">SYSCS_UTIL.SYSCS_COMPRESS_TABLE</samp> cannot release
+any permanent disk space back to the operating system until a COMMIT is issued.
+This means that the space occupied by both the base table and its indexes
+cannot be released. Only the disk space that is temporarily claimed by an
+external sort can be returned to the operating system prior to a COMMIT. <div class="tip"><span class="tiptitle">Tip: </span>We recommend that you issue the <samp class="codeph">SYSCS_UTIL.SYSCS_COMPRESS_TABLE</samp> system
+procedure in the auto-commit mode. </div>
+</div>
+<div class="note"><span class="notetitle">Note: </span>This procedure acquires
+an exclusive table lock on the table being compressed. All statement plans
+dependent on the table or its indexes are invalidated. For information on
+identifying unused space, see the <cite><span><em>Derby Server and Administration Guide</em></span></cite>.</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefproceduresinplacecompress.html" title="">SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE system procedure</a></div>
+<div><a href="rrefdropstatsproc.html" title="The SYSCS_UTIL.SYSCS_DROP_STATISTICS system procedure drops all existing cardinality statistics for the index that you specify or for all of the indexes on a table.">SYSCS_UTIL.SYSCS_DROP_STATISTICS system procedure</a></div>
+<div><a href="rrefupdatestatsproc.html" title="The SYSCS_UTIL.SYSCS_UPDATE_STATISTICS system procedure updates the cardinality statistics, or creates the statistics if they do not exist, for the index that you specify or for all of the indexes on a table.">SYSCS_UTIL.SYSCS_UPDATE_STATISTICS system procedure</a></div>
+</div>
+</div>
+
+</body>
+</html>

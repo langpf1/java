@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Configuring file descriptors" />
+<meta name="abstract" content="Derby databases create one file per table or index. Some operating systems limit the number of files an application can open at one time." />
+<meta name="description" content="Derby databases create one file per table or index. Some operating systems limit the number of files an application can open at one time." />
+<meta content="File descriptors, configuring to run Derby, IOExceptions, indicating need to relax file descriptors limit" name="DC.subject" />
+<meta content="File descriptors, configuring to run Derby, IOExceptions, indicating need to relax file descriptors limit" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevstart813545.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevstart41260.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevstart39409" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Configuring file descriptors</title>
+</head>
+<body id="cdevstart39409"><a name="cdevstart39409"><!-- --></a>
+
+
+<h1 class="topictitle1">Configuring file descriptors</h1>
+
+
+
+<div><p><span>Derby</span> databases
+create one file per table or index. Some operating systems limit the number
+of files an application can open at one time.</p>
+
+<p>If the default is a low number, such as 64, you might run into unexpected <em>IOExceptions</em> (wrapped
+in <samp class="codeph"><em>SQLExceptions</em></samp>). If your operating system lets you
+configure the number of file descriptors, set this number to a higher value.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevstart41260.html" title="This section discusses Derby issues specifically related to UNIX platforms.">UNIX-specific issues</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevstart813545.html" title="Your installation contains executable script files that simplify invoking the Derby tools. On UNIX systems, these files might need to have their default protections set to include execute privilege.">Scripts</a></div>
+</div>
+</div>
+
+</body>
+</html>

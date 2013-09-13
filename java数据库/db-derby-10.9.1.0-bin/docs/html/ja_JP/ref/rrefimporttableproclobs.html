@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE システム手続き" />
+<meta name="abstract" content="SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILEシステム手続きを使って情報を表にインポートできます。このときLOBの情報は別ファイルに置かれます。 主インポートファイルには、LOBの位置への参照とそれ以外の情報のすべてが置かれます。" />
+<meta name="description" content="SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILEシステム手続きを使って情報を表にインポートできます。このときLOBの情報は別ファイルに置かれます。 主インポートファイルには、LOBの位置への参照とそれ以外の情報のすべてが置かれます。" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefimporttableproclobs" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE システム手続き</title>
+</head>
+<body id="rrefimporttableproclobs"><a name="rrefimporttableproclobs"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE システム手続き</h1>
+
+
+<div><p><samp class="codeph">SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE</samp>システム手続きを使って情報を表にインポートできます。このときLOBの情報は別ファイルに置かれます。
+主インポートファイルには、LOBの位置への参照とそれ以外の情報のすべてが置かれます。</p>
+
+<div class="section"><h2 class="sectiontitle">構文</h2><pre>SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE (
+   IN SCHEMANAME VARCHAR(128), 
+   IN TABLENAME VARCHAR(128), 
+   IN FILENAME VARCHAR(32672), 
+   IN COLUMNDELIMITER CHAR(1), 
+   IN CHARACTERDELIMITER CHAR(1), 
+   IN CODESET VARCHAR(128), 
+   IN REPLACE SMALLINT)
+   )</pre>
+
+<p>インポートユーティリティは、LOBの情報が置かれた場所への参照を主インポートファイルから取得します。</p>
+<dl>
+<dt class="dlterm">SCHEMANAME</dt>
+
+<dd>表のスキーマを指定します。既定のスキーマを指定する場合、NULLとすることができます。<span class="parmname">SCHEMANAME</span>パラメータはVARCHAR (128)型の入力値を取る引数です。</dd>
+
+
+<dt class="dlterm">TABLENAME</dt>
+
+<dd>情報がインポートされる表の名前を指定します。表はシステム表や一時表であってはなりません。文字列は表名と完全に一致していなければなりません。NULLを指定した場合エラーとなりあｍす。<span class="parmname">TABLENAME</span>パラメータはVARCHAR (128)型の入力値を取る引数です。</dd>
+
+
+<dt class="dlterm">FILENAME</dt>
+
+<dd>インポートする情報のあるファイルの名前を指定します。パスが省略されている場合、現在のディレクトリが使われます。ネットワークサーバを使っている場合、指定するファイルの位置はサーバ側の位置です。NULLを指定するとエラーとなります。<span class="parmname">FILENAME</span>パラメータは(32672)型の入力値を取る引数です。</dd>
+
+
+<dt class="dlterm">COLUMNDELIMITER</dt>
+
+<dd>列のデリミタを指定します。指定した文字はコンマの代わりに列の終わりを表します。既定値のコンマを指定するために、NULLとすることもできます。<span class="parmname">COLUMNDELIMITER</span>パラメータはCHAR (1)型の入力値を取る引数です。</dd>
+
+
+<dt class="dlterm">CHARACTERDELIMITER</dt>
+
+<dd>文字のデリミタを指定します。指定された文字は二重引用符の代わりに文字列を囲うために用いられます。既定値の二重引用符を指定するために、NULLとすることもできます。<span class="parmname">CHARACTERDELIMITER</span>パラメータはCHAR (1)型の入力値をとる引数です。</dd>
+
+
+<dt class="dlterm">CODESET</dt>
+
+<dd>入力ファイルの情報のコードセットを指定します。コードセットの名前はJavaにて利用可能な文字エンコーディングセットのうちのひとつである必要があります。情報は指定されたコードセットからデータベースのコードセット(UTF-8)に変換されます。実行中のJVMと同じコードセットを指定するために、NULLとすることもできます。<span class="parmname">CODESET</span>パラメータはVARCHAR (128)型の入力値を取る引数です。</dd>
+
+
+<dt class="dlterm">REPLACE</dt>
+
+<dd>0以外の値が指定された場合、REPLACEモードでインポートが行われます。一方、0が指定された場合、INSERTモードでインポートが行われます。REPLACEモードでは表を切り捨てて全情報が削除されたのちに、情報がインポートされます。表の定義や索引の定義は変わりません。既存表へは、REPLACEモードでのみ情報をインポートできます。INSERTモードでは、既存の表の情報はそのままにして、インポートした情報が表へ追加されます。NULLを指定するとエラーとなります。<span class="parmname">REPLACE</span>パラメータはSMALLINTデータ型の値を入力にとる引数です。</dd>
+
+</dl>
+
+<p>スキーマ、表、列名をデリミトされない識別子で作成した場合、名前の全文字を大文字にして、インポートの手続きに渡さなければなりません。スキーマ、表、列名をデリミトされた識別子で作成した場合、名前の全文字の大文字小文字を作成した時と同じにして、インポートの手続きに渡さなければなりません。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">使い方</h2>
+<p>この手続きは主インポートファイルに記録された参照を使ってLOBの情報を読み出します。
+Derby以外の情報源からインポートを行う場合、主インポートファイルに書かれたLOBへの参照の書式は、<samp class="codeph">lobsFileName.Offset.length/</samp>として下さい。</p>
+<ul>
+<li><samp class="codeph">Offset</samp>は外部ファイルの中の位置をバイト数で表します。</li>
+
+<li><samp class="codeph">length</samp>はLOB列の情報の大きさをバイト数で表します。</li>
+
+</ul>
+<p>この手続きの使い方に関するこのほかの情報は、<span><em>Derby Tools and Utilities Guide</em></span>の「バルクインポートとエクスポートの手続きを使う」を参照してください。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">LOBの情報の書かれた外部ファイルを参照する主インポートファイルから、情報をインポートする例</h2>
+<p>以下の例ではサンプルデータベースにある<em>STAFF</em>へ、<samp class="codeph">staff.del</samp>というデリミトされたデータファイルから情報をインポートします。この例ではコンマが列のデリミタです。情報は表の既存の情報に追記されます。</p>
+<pre>CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE(
+    'APP','STAFF','c:\data\staff.del',',','"','UTF-8',0); </pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">組み込みシステム手続き</a></div>
+</div>
+</div>
+
+</body>
+</html>

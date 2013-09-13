@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Instrução CREATE INDEX" />
+<meta content="Instrução CREATE INDEX" name="DC.subject" />
+<meta content="Instrução CREATE INDEX" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj20937" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Instrução CREATE INDEX</title>
+</head>
+<body id="rrefsqlj20937"><a name="rrefsqlj20937"><!-- --></a>
+
+
+<h1 class="topictitle1">Instrução CREATE INDEX</h1>
+
+
+<div>
+<div class="section" id="rrefsqlj20937__i1013640"><a name="rrefsqlj20937__i1013640"><!-- --></a>
+<p id="rrefsqlj20937__sqlj31027"><a name="rrefsqlj20937__sqlj31027"><!-- --></a>A instrução CREATE INDEX cria um índice em uma tabela.
+Os índices podem incluir uma ou mais colunas da tabela.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>CREATE [UNIQUE] INDEX <em><a href="rrefindexname.html#rrefindexname">nome-do-índice</a></em>
+ON <em><a href="rreftablename.html#rreftablename">nome-da-tabela</a></em> ( <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">nome-de-coluna-simples</a></em> [ ASC | DESC ]
+    [ , <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">nome-de-coluna-simples</a></em> [ ASC | DESC ]] * )</strong>
+</pre>
+
+<p>No <span>Derby</span>,
+o número máximo de colunas para chave do índice é 16.</p>
+
+<p>O nome do índice não pode ter mais que 128 caracteres.</p>
+
+<p>O nome da coluna não pode aparecer mais de uma vez na mesma instrução
+CREATE INDEX.
+Entretanto, índices diferentes podem incluir a mesma coluna.</p>
+
+<p>O <span>Derby</span>
+pode utilizar os índices para melhorar o desempenho das instruções de
+manipulação de dados
+(consulte o <cite><span><em>Ajuste do Derby</em></span></cite>).
+Além disso, os índices UNIQUE fornecem uma maneira de verificar a integridade
+dos dados.</p>
+
+<p>Os nomes dos índices são únicos no esquema (Alguns sistemas de banco de dados
+permitem que tabelas diferentes no mesmo esquema possuam índices com o mesmo
+nome, mas o <span>Derby</span> não
+permite).
+É assumido que a tabela e o índice estão no mesmo esquema, se o nome do
+esquema for especificado para um dos nomes, mas não para o outro.
+Se o nome do esquema for especificado tanto para o índice quanto para a tabela,
+será lançada uma exceção se os nomes dos esquemas não forem o mesmo.
+Se não for especificado o nome do esquema nem para a tabela e nem para o índice,
+será utilizado o esquema corrente.</p>
+
+<p>
+O <span>Derby</span> utiliza, por padrão,
+a ordem ascendente de cada coluna para criar o índice.
+Especificar ASC após o nome da coluna não modifica o comportamento padrão.
+A palavra chave DESC após o nome da coluna faz com que o
+<span>Derby</span>
+utilize a ordem descendente da coluna para criar o índice.
+Utilizar a ordem descendente para uma coluna pode ajudar a melhorar o desempenho
+dos comandos que requerem resultados em uma ordem de classificação mista ou
+na ordem descendente, e para os comandos que selecionam o valor mínimo ou máximo
+de uma coluna indexada.</p>
+
+<p />
+
+<p>Se for especificado um nome de índice qualificado, o nome do esquema não
+poderá começar por <samp class="codeph">SYS</samp>.</p>
+
+</div>
+
+<div class="section" id="rrefsqlj20937__sqlj27363"><a name="rrefsqlj20937__sqlj27363"><!-- --></a><h2 class="sectiontitle">Índices e restrições</h2>
+
+<p>
+
+As restrições de unicidade, de chave primária, e de chave estrangeira, geram
+índices que impõem, ou "apoiam", a restrição (por isso, algumas vezes são
+chamados de <em>índices de apoio</em>).
+Se uma coluna, ou conjunto de colunas, tiver uma restrição UNIQUE ou
+PRIMARY KEY aplicada, não será permitido criar índice com estas colunas.
+O <span>Derby</span> já terá criado um
+índice com nome gerado pelo sistema.
+Os nomes gerados pelo sistema para os índices que apoiam as restrições
+são facilmente encontrados consultando as tabelas do sistema, se for
+especificado o nome da restrição.
+Por exemplo, para descobrir o nome do índice que apoia a restrição
+PK_VÔOS:</p>
+
+<pre><strong>SELECT CONGLOMERATENAME FROM SYS.SYSCONGLOMERATES,
+SYS.SYSCONSTRAINTS WHERE
+SYS.SYSCONGLOMERATES.TABLEID = SYSCONSTRAINTS.TABLEID
+AND CONSTRAINTNAME = 'PK_VÔOS'</strong>
+</pre>
+
+</div>
+
+<div class="example">
+<pre><strong>CREATE INDEX ÍNDICE_ORIGEM ON VÔOS(AEROPORTO_ORIGEM);
+<strong>
+-- valores monetários são geralmente ordenados do maior para o menor,
+-- portanto o índice é criado na ordem descendente
+</strong>
+CREATE INDEX PAG_DESC ON SAMP.EMPREGADOS (SALÁRIO);
+<span>
+-- utilizar um tamanho de página maior para o índice
+</span>
+CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.storage.pageSize','8192');
+CREATE INDEX IDX_VENDAS ON SAMP.VENDAS (VENDAS);
+CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.storage.pageSize',NULL);
+</strong>
+</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Tamanho da página e comprimento da chave</h2>
+
+<div class="note"><span class="notetitle">Nota: </span>Em um índice, o tamanho das colunas chave deve ser igual ou menor que a
+metade do tamanho da página.
+Se o comprimento das colunas chave, de uma linha existente na tabela, for
+maior que a metade do tamanho da página do índice, a criação do índice para a
+tabela com estas colunas chave falhará.
+Este erro somente ocorre ao criar o índice, quando uma linha existente na
+tabela não respeita este critério.
+Após o índice ser criado, as inserções falham se o tamanho da chave
+associada não respeitar este critério.</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sistema de dependência de instruções</h2>
+
+<p>As instruções preparadas envolvendo SELECT, INSERT, UPDATE,
+UPDATE WHERE CURRENT, DELETE e DELETE WHERE CURRENT na tabela referenciada
+pela instrução CREATE INDEX são invalidadas quando o índice é criado.
+Os cursores abertos nas tabelas não são afetados.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj95081.html" title="">Instruções CREATE</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="A instrução CREATE FUNCTION permite criar funções Java que podem ser utilizadas em expressões.">Instrução CREATE FUNCTION</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">Instrução CREATE PROCEDURE</a></div>
+<div><a href="rrefsqlj31580.html" title="">Instrução CREATE SCHEMA</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">Instrução CREATE SYNONYM</a></div>
+<div><a href="rrefsqlj24513.html" title="">Instrução CREATE TABLE</a></div>
+<div><a href="rrefsqlj43125.html" title="">Instrução CREATE TRIGGER</a></div>
+<div><a href="rrefsqlj15446.html" title="">Instrução CREATE VIEW</a></div>
+</div>
+</div>
+
+</body>
+</html>

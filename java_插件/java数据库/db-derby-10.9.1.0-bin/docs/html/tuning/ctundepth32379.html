@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using the statement cache" />
+<meta content="Compilation, avoiding by using PreparedStatements, Prepared statements, performance benefits of, Statement cache" name="DC.subject" />
+<meta content="Compilation, avoiding by using PreparedStatements, Prepared statements, performance benefits of, Statement cache" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth29804.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctundepth32379" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using the statement cache</title>
+</head>
+<body id="ctundepth32379"><a name="ctundepth32379"><!-- --></a>
+
+
+<h1 class="topictitle1">Using the statement cache</h1>
+
+
+<div>
+<div class="p">The statement cache is enabled by default. You can use it to avoid extra
+compilation overhead:   <ul>
+<li>Your application can use <em>PreparedStatements</em> instead of <em>Statements</em>.
+  <p><em>PreparedStatements</em> are JDBC objects that you prepare (compile)
+once and execute multiple times. See the figure below. If your application
+executes statements that are almost but not exactly alike, use <em>PreparedStatements</em>,
+which can contain dynamic or IN parameters. Instead of using the literals
+for changing parameters, use question marks (?) as placeholders for such parameters.
+Provide the values when you execute the statement.</p>
+</li>
+
+</ul>
+</div>
+
+<p><span>Derby</span> supports the
+<em>ParameterMetaData</em> interface. This interface describes the number, type, and properties
+of prepared statement parameters. See the <cite><span><em>Derby Developer's Guide</em></span></cite> for
+more information.</p>
+
+<p>A connection need only compile a <em>PreparedStatement</em> once. Subsequent
+executions can use the same statement execution plan even if the parameter
+values are different, as shown in the following figure.
+(<em>PreparedStatements</em> are not shared across connections.)</p>
+
+<div class="fignone" id="ctundepth32379__ctundepth42475"><a name="ctundepth32379__ctundepth42475"><!-- --></a><span class="figcap">Figure 1. Prepared statements and the
+statement cache</span>
+<br /><img src="pstmt_os.gif" alt="This figure shows multiple executions of the same PreparedStatement over a single connection. The single PreparedStatement object uses the same statement execution plan and statement cache." /><br />
+</div>
+<ul>
+<li>Even if your statement uses <em>Statements</em> instead of <em>PreparedStatements</em>, <span>Derby</span> can reuse the statement
+execution plan for the statements from the statement cache. Statements from
+any connection can share the same statement execution plan, avoiding compilation,
+by using the single-statement cache. The statement cache maintains statement
+plans across connections. It does not, however, maintain them across reboots.
+See the figure below. <p>When, in the same database, an application submits
+an SQL <em>Statement</em> that exactly matches one already in the cache, <span>Derby</span> grabs the statement from
+the cache, even if the <em>Statement</em> has already been closed by the application.</p>
+ <p>To
+match exactly with a statement already in the cache, the SQL <em>Statement</em> must
+meet the following requirements:</p>
+ <ul>
+<li>The text must match exactly</li>
+
+<li>The current schema must match</li>
+
+<li>The Unicode flag that the statement was compiled under must match the
+current connection's flag</li>
+
+</ul>
+</li>
+
+</ul>
+
+<div class="remember"><span class="remembertitle">Remember: </span>If your application executes statements that are almost
+but not exactly alike, it is more efficient to use <em>PreparedStatements</em> with
+dynamic or IN parameters.  </div>
+
+<p>The following figure shows how
+<span>Derby</span> can reuse a statement
+execution plan that is already in the statement cache when the SQL text matches
+a prior statement <em>exactly</em>, even when the statement is executed from a
+different connection. <em>PreparedStatements</em> are much more efficient,
+however.</p>
+
+<div class="fignone" id="ctundepth32379__ctundepth12523"><a name="ctundepth32379__ctundepth12523"><!-- --></a><span class="figcap">Figure 2. Statements and the statement
+cache</span>
+<br /><img src="stmt_os.gif" alt="This figure shows how Derby can reuse a statement execution plan that is already in the statement cache, even when the statement is executed from a different connection. The figure shows three executions of two similar statements over two different database connections. Each database connection has its own statement cache. One statement is &quot;SELECT * FROM mytable WHERE id = ?&quot;. The other statement is &quot;SELECT * FROM mytable WHERE id = 2&quot;. The statement that uses the dynamic parameter is executed on both Connection One and Connection Two. When it is executed the second time, on Connection Two, it can use the statement execution plan that is already in the statement cache of Connection One. The version that does not use a dynamic parameter is executed on Connection Two only and uses the statement cache for Connection Two." /><br />
+</div>
+
+<p>The <em>derby.language.statementCacheSize</em> property controls the number of
+precompiled statements which
+<span>Derby</span> keeps in its statement
+cache. Consider raising this number if statement preparation is taking too much
+time. See the <span><em>Derby Reference Manual</em></span> for more information
+on this property.</p>
+
+<p>A multithreaded database application that frequently alternates select and
+update statements can encounter deadlocks when a prepared statement becomes
+invalid or outdated. If your application becomes deadlocked under these
+circumstances, you can work around this problem by setting the value of the
+<em>derby.language.statementCacheSize</em> property to zero.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctundepth29804.html" title="">Avoiding compiling SQL statements</a></div>
+</div>
+</div>
+
+</body>
+</html>

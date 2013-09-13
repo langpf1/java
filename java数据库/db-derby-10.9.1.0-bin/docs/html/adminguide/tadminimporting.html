@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Importing data using the built-in procedures" />
+<meta name="abstract" content="You can use the Derby import procedures to import all of the data from a table or query, or to import LOB data separately from the other data." />
+<meta name="description" content="You can use the Derby import procedures to import all of the data from a table or query, or to import LOB data separately from the other data." />
+<meta content="import and export procedures, bulk import, importing data, system procedures, import using" name="DC.subject" />
+<meta content="import and export procedures, bulk import, importing data, system procedures, import using" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport27052.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimport91458.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimport64241.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport16245.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport98264.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport27052.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportlobs.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportdefaultformat.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminexporting.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimport91458.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportjdbc.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportnulls.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimportcodeset.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimport64241.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportidentitycol.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tadminimporting" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Importing data using the built-in procedures</title>
+</head>
+<body id="tadminimporting"><a name="tadminimporting"><!-- --></a>
+
+
+<h1 class="topictitle1">Importing data using the built-in procedures</h1>
+
+
+
+<div><p>You can use the
+<span>Derby</span> import procedures to
+import all of the data from a table or query, or to import LOB data separately
+from the other data.</p>
+
+<div class="section" />
+
+
+<div class="p"><span>Use the following table to choose the correct procedure for the type
+of import that you want to perform. For examples of these procedures, see
+<a href="radminimport91458.html#radminimport91458">Examples of bulk import and export</a>.</span>
+ 
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table shows the procedures to use for various kinds of import." frame="border" border="1" rules="all"><caption>Table 1. Using the built-in import procedures</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="33%" id="N100A3">Type of Import</th>
+
+<th valign="bottom" width="67%" id="N100AA">Procedure to Use</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="33%" headers="N100A3">To import all the data to a table, where the import file
+contains the LOB data</td>
+
+<td valign="top" width="67%" headers="N100AA"><pre>SYSCS_UTIL.SYSCS_IMPORT_TABLE 
+ (IN <a href="radminimport64241.html#radminimport64241__radminimportschemaname">SCHEMANAME</a> VARCHAR(128), 
+  IN <a href="radminimport64241.html#radminimport64241__radminimport27122">TABLENAME</a> VARCHAR(128), 
+  IN <a href="radminimport64241.html#radminimport64241__radminimportfilename">FILENAME</a> VARCHAR(32672), 
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcolumndelimiter">COLUMNDELIMITER</a> CHAR(1), 
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcharacterdelimiter">CHARACTERDELIMITER</a>  CHAR(1), 
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcodesetarg">CODESET</a> VARCHAR(128), 
+  IN <a href="radminimport64241.html#radminimport64241__radminimportreplace">REPLACE</a> SMALLINT)</pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33%" headers="N100A3">To import the data to a table, where the LOB data is
+stored in a separate file and the main import file contains all of the other
+data with a reference to the LOB data</td>
+
+<td valign="top" width="67%" headers="N100AA"><pre>SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE
+ (IN <a href="radminimport64241.html#radminimport64241__radminimportschemaname">SCHEMANAME</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimport27122">TABLENAME</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportfilename">FILENAME</a> VARCHAR(32672),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcolumndelimiter">COLUMNDELIMITER</a> CHAR(1),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcharacterdelimiter">CHARACTERDELIMITER</a> CHAR(1),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcodesetarg">CODESET</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportreplace">REPLACE</a> SMALLINT)</pre>
+
+<p>The import utility looks in the main import file for a reference to the
+location of the LOB data. The format of the reference to the LOB stored in the
+main import file must be <samp class="codeph">lobsFileName.Offset.length/</samp>.</p>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33%" headers="N100A3">To import data from a file to a subset of columns in a
+table, where the import file contains the LOB data</td>
+
+<td valign="top" width="67%" headers="N100AA"><pre>SYSCS_UTIL.SYSCS_IMPORT_DATA
+ (IN <a href="radminimport64241.html#radminimport64241__radminimportschemaname">SCHEMANAME</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimport27122">TABLENAME</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportinsertcolumns">INSERTCOLUMNS</a> VARCHAR(32672),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcolumnindexes">COLUMNINDEXES</a> VARCHAR(32672),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportfilename">FILENAME</a> VARCHAR(32672),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcolumndelimiter">COLUMNDELIMITER</a> CHAR(1),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcharacterdelimiter">CHARACTERDELIMITER</a> CHAR(1),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcodesetarg">CODESET</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportreplace">REPLACE</a> SMALLINT)</pre>
+
+<p>You must specify the INSERTCOLUMNS parameter on the table into which data
+will be imported. You must specify the COLUMNINDEXES parameter to import data
+fields from a file to column in a table.</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33%" headers="N100A3">To import data to a subset of columns in a table, where
+the LOB data is stored in a separate file and the main import file contains all
+of the other data with a reference to the LOB data</td>
+
+<td valign="top" width="67%" headers="N100AA"><pre>SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE
+ (IN <a href="radminimport64241.html#radminimport64241__radminimportschemaname">SCHEMANAME</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimport27122">TABLENAME</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportinsertcolumns">INSERTCOLUMNS</a> VARCHAR(32672),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcolumnindexes">COLUMNINDEXES</a> VARCHAR(32672),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportfilename">FILENAME</a> VARCHAR(32672),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcolumndelimiter">COLUMNDELIMITER</a> CHAR(1),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcharacterdelimiter">CHARACTERDELIMITER</a> CHAR(1),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportcodesetarg">CODESET</a> VARCHAR(128),
+  IN <a href="radminimport64241.html#radminimport64241__radminimportreplace">REPLACE</a> SMALLINT)</pre>
+
+<p>The import utility looks in the main import file for a reference to the
+location of the LOB data. The format of the reference to the LOB stored in the
+main import file must be <samp class="codeph">lobsFileName.Offset.length/</samp>.</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+ 
+</div>
+
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="radminimport64241.html">Parameters for the import procedures</a></strong><br />
+The Derby import procedures use specific parameters.</li>
+<li class="ulchildlink"><strong><a href="cadminimportidentitycol.html">Import into tables that contain identity columns</a></strong><br />
+You can use the either the SYSCS_UTIL.SYSCS_IMPORT_DATA procedure or the SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE procedure to import data into a table that contains an identity column. The approach that you take depends on whether the identity column is GENERATED ALWAYS or GENERATED BY DEFAULT.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminimport16245.html" title="You can import and export large amounts of data between files and the Derby database. Instead of having to use INSERT and SELECT statements, you can use Derby system procedures to import data directly from files into tables and to export data from tables into files.">Importing and exporting data</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminimport98264.html" title="You can run the import and export procedures from within an SQL statement using ij or any Java application.">Methods for running the import and export procedures</a></div>
+<div><a href="cadminimportlobs.html" title="You can import and export large objects (LOBs) using the Derby system procedures.">Bulk import and export of large objects</a></div>
+<div><a href="cadminimportdefaultformat.html" title="There are specific requirements for the format of the input and output files when you import and export data.">File format for input and output</a></div>
+<div><a href="cadminimportjdbc.html" title="You can run import and export procedures from a JDBC program.">Running import and export procedures from JDBC</a></div>
+<div><a href="cadminimportnulls.html" title="In a delimited file, a NULL value is exported as an empty field.">How the import and export procedures process NULL values</a></div>
+<div><a href="cadminimport27052.html" title="There are requirements and limitations that you must consider before you use the Derby import and export procedures.">Bulk import and export requirements and considerations</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminexporting.html" title="You can use the Derby export procedures to export all of the data from table or query, or to export LOB data separately from the other data.">Exporting data using the built-in procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminimportcodeset.html" title="Import and export procedures accept arguments to specify codeset values. You can specify the codeset (character encoding) for import and export procedures to override the system default.">CODESET values for import and export procedures</a></div>
+<div><a href="radminimport91458.html" title="All of the examples in this section are run using the ij utility.">Examples of bulk import and export</a></div>
+<div><a href="radminimport64241.html" title="The Derby import procedures use specific parameters.">Parameters for the import procedures</a></div>
+</div>
+</div>
+
+</body>
+</html>

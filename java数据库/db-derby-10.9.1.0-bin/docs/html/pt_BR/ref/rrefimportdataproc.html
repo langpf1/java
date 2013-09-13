@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_IMPORT_DATA" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefaltertablecompress.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproceduresinplacecompress.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj38831.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsetstatstimingproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsetdbpropproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rreffreezedbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefunfreezedbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcheckpointdbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportproc.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefimportdataproc" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_IMPORT_DATA</title>
+</head>
+<body id="rrefimportdataproc"><a name="rrefimportdataproc"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_IMPORT_DATA</h1>
+
+<div>
+<div class="section">
+<p>O procedimento do sistema <samp class="codeph">SYSCS_UTIL.SYSCS_IMPORT_DATA</samp>
+importa dados para um subconjunto de colunas da tabela.
+O subconjunto de colunas é escolhido especificando as colunas para inserção.
+Este procedimento também é utilizado para importar um subconjunto de colunas
+de dados do arquivo especificando os índices das colunas.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre>SYSCS_UTIL.SYSCS_IMPORT_DATA (IN SCHEMANAME VARCHAR(128),
+IN TABLENAME VARCHAR(128), IN INSERTCOLUMNS VARCHAR(32672),
+IN COLUMNINDEXES VARCHAR(32672), IN FILENAME VARCHAR(32672),
+IN COLUMNDELIMITER CHAR(1), IN CHARACTERDELIMITER CHAR(1),
+IN CODESET VARCHAR(128), IN REPLACE SMALLINT)</pre>
+
+<p>Este procedimento não retorna resultado.</p>
+
+<dl>
+
+<dt class="dlterm">SCHEMANAME</dt>
+
+<dd>Um argumento de entrada do tipo VARCHAR(128), que especifica o nome do
+esquema da tabela. Passar um valor nulo resulta na utilização do nome
+de esquema padrão</dd>
+
+
+
+<dt class="dlterm">TABLENAME</dt>
+
+<dd>Um argumento de entrada do tipo VARCHAR(128), que especifica o nome da
+tabela para onde os dados serão importados.
+Não pode ser uma tabela do sistema ou uma tabela temporária declarada.
+Passar um valor nulo resulta em erro.</dd>
+
+
+
+<dt class="dlterm">INSERTCOLUMNS</dt>
+
+<dd>Um argumento de entrada do tipo VARCHAR (32762), que especifica os nomes das
+colunas (separados por vírgula) da tabela para onde os dados serão importados.
+Passar um valor nulo resulta em erro.</dd>
+
+
+<dt class="dlterm">COLUMNINDEXES</dt>
+
+<dd>Um argumento de entrada do tipo VARCHAR (32762), que especifica os índices
+(numerados a partir de 1 e separados por vírgulas) dos campos de dado da
+entrada a serem importados.
+Passar um valor nulo faz com que sejam utilizados todos os campos de dado de
+entrada presentes no arquivo.</dd>
+
+
+<dt class="dlterm">FILENAME</dt>
+
+<dd>Um argumento de entrada do tipo VARCHAR(32672), que especifica o nome do
+arquivo que contém os dados a serem importados.
+Se não for especificado o caminho, será utilizado o diretório de trabalho
+corrente.
+Passar um valor nulo resulta em erro.</dd>
+
+
+
+<dt class="dlterm">COLUMNDELIMITER</dt>
+
+<dd>Um argumento de entrada do tipo CHAR(1), que especifica o delimitador de
+coluna.
+O caractere especificado é utilizado no lugar da vírgula para sinalizar o fim da
+coluna.
+Passar um valor nulo resulta na utilização do valor padrão;
+o valor padrão é a vírgula (,).</dd>
+
+
+
+<dt class="dlterm">CHARACTERDELIMITER</dt>
+
+<dd>Um argumento de entrada do tipo CHAR(1), que especifica o delimitador de
+caracteres.
+O caractere especificado é utilizado no lugar das aspas para envolver a
+cadeia de caracteres.
+Passar um valor nulo resulta na utilização do valor padrão;
+o valor padrão é aspas (").</dd>
+
+
+
+<dt class="dlterm">CODESET</dt>
+
+<dd>Um argumento de entrada do tipo VARCHAR(128), que especifica o código de
+conjunto de caracteres dos dados no arquivo de entrada.
+O nome do código de conjunto de caracteres deve ser igual ao de uma das
+codificações de caracteres suportadas pelo Java.
+Os dados são convertidos do código de conjunto de caracteres especificado para
+o código de conjunto de caracteres do banco de dados (UTF-8).
+Passar um valor nulo faz interpretar os dados do arquivo no mesmo
+código de conjunto de caracteres da JVM em que está sendo executado.</dd>
+
+
+
+<dt class="dlterm">REPLACE</dt>
+
+<dd>Um argumento de entrada do tipo SMALLINT.
+Um valor diferente de zero faz com que execute no modo de substituição,
+enquanto um valor igual a zero faz com que execute no modo de inserção.
+O modo de substituição exclui todos os dados existentes da tabela truncando o
+objeto de dados, e insere os dados importados.
+A definição da tabela e as definições dos índices não são alteradas.
+O modo de inserção adiciona os dados importados à tabela, sem alterar os dados
+existentes na tabela.
+Passar um valor nulo resulta em erro.</dd>
+
+
+</dl>
+
+Se o nome do esquema, da tabela ou da coluna foi criado usando um identificador
+não delimitado, o nome deverá ser passado para o procedimento de importação
+usando todas as letras em maiúsculo.
+Se o nome do esquema, da tabela ou da coluna foi criado usando um identificador
+delimitado, o nome deverá ser passado para o procedimento de importação com
+letras maiúsculas e minúsculas, conforme utilizado na criação.
+</div>
+
+<div class="section"><h2 class="sectiontitle">Exemplo</h2>
+
+<div class="p">O exemplo a seguir importa alguns dos campos de dados do arquivo de dados
+delimitado chamado <samp class="codeph">meu_arquivo.csv</samp> para a tabela EQUIPE:
+<pre>CALL SYSCS_UTIL.SYSCS_IMPORT_DATA
+(NULL, 'EQUIPE', null, '1,3,4', 'meu_arquivo.csv', null, null, null,0)</pre>
+
+</div>
+
+</div>
+
+<div class="section">
+<p>Para obter mais informações sobre importação deve ser consultado o
+<em><span><em>Guia das Ferramentas e Utilitários do Derby</em></span></em>.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Procedimentos do sistema nativos</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefaltertablecompress.html" title="">SYSCS_UTIL.SYSCS_COMPRESS_TABLE</a></div>
+<div><a href="rrefproceduresinplacecompress.html" title="">SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE</a></div>
+<div><a href="rrefsqlj38831.html" title="">SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS</a></div>
+<div><a href="rrefsetstatstimingproc.html" title="">SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING</a></div>
+<div><a href="rrefsetdbpropproc.html" title="">SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY</a></div>
+<div><a href="rreffreezedbproc.html" title="">SYSCS_UTIL.SYSCS_FREEZE_DATABASE</a></div>
+<div><a href="rrefunfreezedbproc.html" title="">SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE</a></div>
+<div><a href="rrefcheckpointdbproc.html" title="">SYSCS_UTIL.SYSCS_CHECKPOINT_DATABASE</a></div>
+<div><a href="rrefbackupdbproc.html" title="">SYSCS_UTIL.SYSCS_BACKUP_DATABASE</a></div>
+<div><a href="rrefexportproc.html" title="">SYSCS_UTIL.SYSCS_EXPORT_TABLE</a></div>
+<div><a href="rrefexportselectionproc.html" title="">SYSCS_UTIL.SYSCS_EXPORT_QUERY</a></div>
+<div><a href="rrefimportproc.html" title="">SYSCS_UTIL.SYSCS_IMPORT_TABLE</a></div>
+</div>
+</div>
+
+</body>
+</html>

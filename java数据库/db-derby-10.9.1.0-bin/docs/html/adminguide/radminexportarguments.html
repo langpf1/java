@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Parameters for the export procedures" />
+<meta name="abstract" content="The Derby export procedures use specific parameters." />
+<meta name="description" content="The Derby export procedures use specific parameters." />
+<meta content="import and export procedures, export parameters, bulk export, procedure parameters, exporting data" name="DC.subject" />
+<meta content="import and export procedures, export parameters, bulk export, procedure parameters, exporting data" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="tadminexporting.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminexporting.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminexportarguments" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Parameters for the export procedures</title>
+</head>
+<body id="radminexportarguments"><a name="radminexportarguments"><!-- --></a>
+
+
+<h1 class="topictitle1">Parameters for the export procedures</h1>
+
+
+
+<div><p>The <span>Derby</span> export
+procedures use specific parameters.</p>
+
+<div class="section"><dl>
+<dt class="dlterm" id="radminexportarguments__radminexportschemaname"><a name="radminexportarguments__radminexportschemaname"><!-- --></a>SCHEMANAME</dt>
+
+<dd>Specifies the schema of the table. You can specify a NULL value to use the
+default schema name. The <span class="parmname">SCHEMANAME</span> parameter takes an
+input argument that is a VARCHAR(128) data type.</dd>
+
+
+<dt class="dlterm" id="radminexportarguments__radminexportselectstatement"><a name="radminexportarguments__radminexportselectstatement"><!-- --></a>SELECTSTATEMENT</dt>
+
+<dd>Specifies the SELECT statement query that returns the data to be exported.
+Specifying a NULL value will result in an error. The
+<span class="parmname">SELECTSTATEMENT</span> parameter takes an input argument that is
+a VARCHAR(32672) data type.</dd>
+
+
+<dt class="dlterm" id="radminexportarguments__radminexporttablename"><a name="radminexportarguments__radminexporttablename"><!-- --></a>TABLENAME</dt>
+
+<dd>Specifies the table name of the table or view from which the data is to
+be exported. This table cannot be a system table or a declared temporary table.
+The string must exactly match the case of the table name. Specifying a NULL
+value results in an error. The <span class="parmname">TABLENAME</span> parameter takes
+an input argument that is a VARCHAR(128) data type.</dd>
+
+
+<dt class="dlterm" id="radminexportarguments__radminexportfilename"><a name="radminexportarguments__radminexportfilename"><!-- --></a>FILENAME</dt>
+
+<dd>Specifies the file to which the data is to be exported. If the path is
+omitted, the current working directory is used. If the name of a file that
+already exists is specified, the export utility overwrites the contents of the
+file; it does not append the information. The specified location of the file
+should refer to the server-side location if you are using the Network Server.
+Specifying a NULL value results in an error. The <span class="parmname">FILENAME</span>
+parameter takes an input argument that is a VARCHAR(32672) data type.</dd>
+
+
+<dt class="dlterm" id="radminexportarguments__radminexportcolumndelimiter"><a name="radminexportarguments__radminexportcolumndelimiter"><!-- --></a>COLUMNDELIMITER</dt>
+
+<dd>Specifies a column delimiter. The specified character is used in place of a
+comma to signify the end of a column. You can specify a NULL value to use the
+default value of a comma. The <span class="parmname">COLUMNDELIMITER</span> parameter
+must be a CHAR(1) data type.</dd>
+
+
+<dt class="dlterm" id="radminexportarguments__radminexportcharacterdelimiter"><a name="radminexportarguments__radminexportcharacterdelimiter"><!-- --></a>CHARACTERDELIMITER</dt>
+
+<dd>Specifies a character delimiter. The specified character is used in place of
+double quotation marks to enclose a character string. You can specify a NULL
+value to use the default value of a double quotation mark. The
+<span class="parmname">CHARACTERDELIMITER</span> parameter takes an input argument that
+is a CHAR(1) data type.</dd>
+
+
+<dt class="dlterm" id="radminexportarguments__radminexportcodeset"><a name="radminexportarguments__radminexportcodeset"><!-- --></a>CODESET</dt>
+
+<dd>Specifies the code set of the data in the export file. The code set name
+should be one of the Java supported character encoding sets.  Data is converted
+from the database code page to the specified code page before writing to the
+file. You can specify a NULL value to write the data in the same code page
+as the JVM in which it is being executed. The <span class="parmname">CODESET</span>
+parameter takes an input argument that is a VARCHAR(128) data type.</dd>
+
+
+<dt class="dlterm" id="radminexportarguments__radminexportlobsfilename"><a name="radminexportarguments__radminexportlobsfilename"><!-- --></a>LOBSFILENAME</dt>
+
+<dd>Specifies the file that the large object data is exported to. If the path is
+omitted, the LOB file is created in the same directory as the main export file.
+If you specify the name of an existing file, the export utility overwrites the
+contents of the file. The data is not appended to the file. If you are using the
+Network Server, the file should be in a server-side location. Specifying a NULL
+value results in an error. The <span class="parmname">LOBSFILENAME</span> parameter takes
+an input argument that is a VARCHAR(32672) data type.</dd>
+
+</dl>
+
+<p>If you create a schema, table, or column name as a non-delimited identifier,
+you must pass the name to the export procedure using all uppercase characters.
+If you created a schema or table name as a delimited identifier, you must pass
+the name to the export procedure using the same case that was used when it was
+created.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="tadminexporting.html" title="You can use the Derby export procedures to export all of the data from table or query, or to export LOB data separately from the other data.">Exporting data using the built-in procedures</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminexporting.html" title="You can use the Derby export procedures to export all of the data from table or query, or to export LOB data separately from the other data.">Exporting data using the built-in procedures</a></div>
+</div>
+</div>
+
+</body>
+</html>

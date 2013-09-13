@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="OR transformations" />
+<meta content="OR transformations, Internal transformation of statements, OR predicates" name="DC.subject" />
+<meta content="OR transformations, Internal transformation of statements, OR predicates" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctuntransform35783.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform139.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform208.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform582.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform866214.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtuntransform590" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>OR transformations</title>
+</head>
+<body id="rtuntransform590"><a name="rtuntransform590"><!-- --></a>
+
+
+<h1 class="topictitle1">OR transformations</h1>
+
+
+<div>
+<div class="section"><div class="p">If all the OR predicates in a WHERE clause are of the form  
+<pre><strong><strong><em><a href="ctuntransform13966.html#ctuntransform13966__rtuntransform13785">simple column reference</a></em></strong> = <strong><em>Expression</em></strong></strong></pre>
+</div>
+</div>
+
+<div class="section"><div class="p">where the <strong><em>columnReference</em></strong> is the same for
+all predicates in the OR chain, <span>Derby</span> transforms the OR chain into an
+IN list of the following form:  
+<pre><strong><strong><em><a href="ctuntransform13966.html#ctuntransform13966__rtuntransform13785">simple column reference</a></em></strong> IN (<strong><em>Expression1</em></strong>, <strong><em>Expression2</em></strong>, ..., <strong><em>ExpressionN</em></strong>)</strong></pre>
+</div>
+</div>
+
+<div class="section"><p>The new predicate might be optimizable.</p>
+</div>
+
+<div class="section"><div class="p">For example, <span>Derby</span> can transform the following statement:  
+<pre><strong>SELECT * FROM Flights
+WHERE flight_id = 'AA1111'
+OR flight_id = 'US5555'
+OR flight_id = ?</strong></pre>
+</div>
+</div>
+
+<div class="section"><div class="p">into this one:  
+<pre><strong>SELECT * FROM Flights
+WHERE flight_id IN ('AA1111', 'US5555', ?)</strong></pre>
+</div>
+</div>
+
+<div class="section"><p>If this transformed IN list is a static IN list, <span>Derby</span> also performs
+the static IN list transformation (see <a href="rtuntransform582.html#rtuntransform582">Simple IN predicate transformations</a>).</p>
+</div>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctuntransform35783.html" title="">Predicate transformations</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtuntransform139.html" title="">BETWEEN transformations</a></div>
+<div><a href="rtuntransform208.html" title="">LIKE transformations</a></div>
+<div><a href="rtuntransform582.html" title="">Simple IN predicate transformations</a></div>
+<div><a href="rtuntransform866214.html" title="">NOT IN predicate transformations</a></div>
+</div>
+</div>
+
+</body>
+</html>

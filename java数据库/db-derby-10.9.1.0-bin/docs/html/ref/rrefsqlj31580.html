@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE SCHEMA statement" />
+<meta content="CREATE SCHEMA statement, CREATE SCHEMA, SQL statements, schemas, creating" name="DC.subject" />
+<meta content="CREATE SCHEMA statement, CREATE SCHEMA, SQL statements, schemas, creating" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreaterole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatetype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj31580" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE SCHEMA statement</title>
+</head>
+<body id="rrefsqlj31580"><a name="rrefsqlj31580"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE SCHEMA statement</h1>
+
+
+<div>
+<div class="section"> <p>A schema is a way to logically group objects in a single collection
+and provide a unique namespace for objects. </p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>CREATE SCHEMA { [ <em><a href="rrefschemaname.html#rrefschemaname">schemaName</a></em> AUTHORIZATION <em>user-name</em> ] | [ <em>schemaName</em> ] | 
+[ AUTHORIZATION <em>user-name</em> ] }</strong>
+</pre>
+ <p>The CREATE SCHEMA statement is used to create a schema. A
+schema name cannot exceed 128 characters. Schema names must be unique within
+the database.</p>
+ 
+<p>A schema name cannot start with the prefix SYS (after case normalization).
+Use of the prefix SYS raises a <em>SQLException</em>.</p>
+
+<div class="p">The CREATE SCHEMA statement is subject to access control when the 
+<samp class="codeph"><a href="rrefpropersqlauth.html#rrefpropersqlauth">derby.database.sqlAuthorization</a></samp> property is set to 
+<samp class="codeph">true</samp> for the database or system. Only the database owner can create a schema with a name 
+different from the current user name, and only the the database owner can 
+specify 
+<pre>AUTHORIZATION <em>user-name</em></pre>
+
+with a user name other than the current user name. See 
+"<a href="rrefpropersqlauth.html#rrefpropersqlauth">derby.database.sqlAuthorization</a>" for information about the 
+<samp class="codeph">derby.database.sqlAuthorization</samp> property.</div>
+
+<div class="note"><span class="notetitle">Note: </span>Although the SQL standard allows you to specify any
+<em><a href="rrefrauthid.html#rrefrauthid">AuthorizationIdentifier</a></em>
+as an AUTHORIZATION argument,
+<span>Derby</span> allows you to specify
+only a user, not a role.</div>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">CREATE SCHEMA examples</h2><div class="p">To create a schema for airline-related
+tables and give the authorization ID <samp class="codeph">anita</samp> access to all
+of the objects that use the schema, use the following syntax:<pre><strong>CREATE SCHEMA FLIGHTS AUTHORIZATION anita</strong> </pre>
+</div>
+<div class="p">To
+create a schema employee-related tables, use the following syntax:<pre><strong>CREATE SCHEMA EMP</strong> </pre>
+</div>
+<div class="p">To
+create a schema that uses the same name as the authorization ID <samp class="codeph">takumi</samp>,
+use the following syntax:<pre><strong>CREATE SCHEMA AUTHORIZATION takumi</strong> </pre>
+</div>
+<div class="p">To
+create a table called <samp class="codeph">availability</samp> in the <samp class="codeph">EMP</samp> and <samp class="codeph">FLIGHTS</samp> schemas,
+use the following syntax:<pre><strong>CREATE TABLE FLIGHTS.AVAILABILITY
+	(FLIGHT_ID CHAR(6) NOT NULL, SEGMENT_NUMBER INT NOT NULL,
+	FLIGHT_DATE DATE NOT NULL, ECONOMY_SEATS_TAKEN INT,
+	BUSINESS_SEATS_TAKEN INT, FIRSTCLASS_SEATS_TAKEN INT, 
+	CONSTRAINT FLT_AVAIL_PK
+	PRIMARY KEY (FLIGHT_ID, SEGMENT_NUMBER, FLIGHT_DATE))</strong> </pre>
+</div>
+<pre><strong>CREATE TABLE EMP.AVAILABILITY
+	(HOTEL_ID INT NOT NULL, BOOKING_DATE DATE NOT NULL, ROOMS_TAKEN INT,
+	CONSTRAINT HOTELAVAIL_PK PRIMARY KEY (HOTEL_ID, BOOKING_DATE))
+</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="The CREATE FUNCTION statement allows you to create Java functions, which you can then use in an expression.">CREATE FUNCTION statement</a></div>
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX statement</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE statement</a></div>
+<div><a href="rrefcreaterole.html" title="">CREATE ROLE statement</a></div>
+<div><a href="rrefsqljcreatesequence.html" title="">CREATE SEQUENCE statement</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">CREATE SYNONYM statement</a></div>
+<div><a href="rrefsqlj24513.html" title="">CREATE TABLE statement</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER statement</a></div>
+<div><a href="rrefsqljcreatetype.html" title="">CREATE TYPE statement</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW statement</a></div>
+</div>
+</div>
+
+</body>
+</html>

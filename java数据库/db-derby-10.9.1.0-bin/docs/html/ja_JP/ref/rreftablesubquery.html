@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="表副問合せ" />
+<meta content="TableSubquery" name="DC.subject" />
+<meta content="TableSubquery" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreftablesubquery" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>表副問合せ</title>
+</head>
+<body id="rreftablesubquery"><a name="rreftablesubquery"><!-- --></a>
+
+
+<h1 class="topictitle1">表副問合せ</h1>
+
+<div>
+<div class="section">
+<p><em>表副問合せ</em>は複数の行を返す副問合せです。</p>
+ 
+<div class="p"><em><a href="rrefscalarsubquery.html#rrefscalarsubquery">スカラー副問合せ</a></em>とは異なり、<em>表副問合せ</em>は以下の文脈にてのみ可能です。
+<ul>
+<li><a href="rrefsqlj21583.html#rrefsqlj21583">FROM 節</a>の<em><a href="rreftableexpression.html#rreftableexpression">表式</a></em></li>
+
+<li>EXISTSやIN、量の比較</li>
+
+</ul>
+</div>
+ 
+<p><a href="rrefsqlj21583.html#rrefsqlj21583">FROM 節</a>の<em><a href="rreftableexpression.html#rreftableexpression">表式</a></em>にて使われた場合、複数の列を返すことができます。</p>
+
+<p>EXISTSでは、*を使う場合のみ複数の列を返すことができます。</p>
+
+<p>INや限定条件では、単列のみ返すことができます。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2>
+<pre><strong>(<em><a href="rrefsqlj21571.html#rrefsqlj21571">問合せ</a></em>)</strong></pre>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">例</h2><pre><strong><span>-- FROM節の表式として、副問合せを使う。</span>
+SELECT VirtualFlightTable.flight_ID
+FROM
+    (SELECT flight_ID, orig_airport, dest_airport
+    FROM Flights
+    WHERE (orig_airport = 'SFO' OR dest_airport = 'SCL') )
+AS VirtualFlightTable
+<span>-- FROM節の表式として、副問合せ(values式)を使う。</span>
+SELECT mycol1
+FROM
+    (VALUES (1, 2), (3, 4))
+AS mytable (mycol1, mycol2)
+<span>-- EXISTSにて副問合せを使う</span>
+SELECT *
+FROM Flights
+WHERE EXISTS
+    (SELECT * FROM Flights WHERE dest_airport = 'SFO'
+    AND orig_airport = 'GRU')
+<span>-- INにて副問合せを使う</span>
+SELECT flight_id, segment_number
+FROM Flights
+WHERE flight_id IN
+    (SELECT flight_ID
+    FROM Flights WHERE orig_airport = 'SFO'
+    OR dest_airport = 'SCL')
+<span>-- 定量比較にて副問合せを使う</span>
+SELECT NAME, COMM 
+FROM STAFF 
+WHERE COMM &gt; 
+(SELECT AVG(BONUS + 800)
+     FROM EMPLOYEE
+     WHERE COMM &lt; 5000)</strong></pre>
+
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefqueries.html" title="">SQL 問い合わせ</a></div>
+</div>
+</div>
+
+</body>
+</html>

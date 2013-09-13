@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="The error log" />
+<meta name="abstract" content="Once you create or connect to a database within a system, Derby begins outputting information and error messages to the error log. Typically, Derby writes this information to a file called derby.log in the system directory." />
+<meta name="description" content="Once you create or connect to a database within a system, Derby begins outputting information and error messages to the error log. Typically, Derby writes this information to a file called derby.log in the system directory." />
+<meta content="Error log, description" name="DC.subject" />
+<meta content="Error log, description" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp27715.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp19297.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp27610.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdvlp25889" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>The error log</title>
+</head>
+<body id="cdevdvlp25889"><a name="cdevdvlp25889"><!-- --></a>
+
+
+<h1 class="topictitle1">The error log</h1>
+
+
+
+<div><p>Once you create or connect to a database within a system, <span>Derby</span> begins
+outputting information and error messages to the error log. Typically,
+<span>Derby</span> writes this information
+to a file called <em>derby.log</em> in the system directory.</p>
+
+<p>Alternatively, you can have <span>Derby</span> send
+messages to a stream, using the <em>derby.stream.error.method</em> or
+<em>derby.stream.error.field</em> property, or to a different file, using the
+<em>derby.stream.error.file</em> property. If you use any of these
+properties, the property setting will appear in the log.</p>
+
+<p>
+By default, <span>Derby</span> overwrites <em>derby.log</em> when
+you start the system. You can configure <span>Derby</span> to
+append to the log with the <em>derby.infolog.append</em> property.</p>
+
+<p>For information on setting all of these properties, see the
+<span><em>Derby Reference Manual</em></span>.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp27610.html" title="A Derby database exists within a system.">Derby system</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp27715.html" title="The default configuration for Derby is to boot (or start) a database when an application first makes a connection to it. When Derby boots a database, it checks to see if recovery needs to be run on the database, so in some unusual cases booting can take some time.">Booting databases</a></div>
+<div><a href="cdevdvlp19297.html" title="When developing Derby applications, create a single directory to hold your database or databases.">Recommended practices</a></div>
+</div>
+</div>
+
+</body>
+</html>

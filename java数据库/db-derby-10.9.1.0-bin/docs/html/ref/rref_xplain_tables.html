@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="XPLAIN style tables" />
+<meta scheme="URI" name="DC.Relation" content="rrefsysxplain_statements.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsysxplain_statement_timings.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsysxplain_resultsets.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsysxplain_resultset_timings.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsysxplain_scan_props.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsysxplain_sort_props.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rref_xplain_tables" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>XPLAIN style tables</title>
+</head>
+<body id="rref_xplain_tables"><a name="rref_xplain_tables"><!-- --></a>
+
+
+<h1 class="topictitle1">XPLAIN style tables</h1>
+
+<div>
+<div class="section"><p><span>Derby</span> 
+optionally creates database tables to hold statistics
+information captured using XPLAIN style. You can have zero, one, or many
+sets of these tables; each set of tables is stored in a separate
+schema. The schema which is used for capturing statement execution
+information is specified using the
+<a href="rref_syscs_set_xplain_schema.html#rref_syscs_set_xplain_schema">SYSCS_UTIL.SYSCS_SET_XPLAIN_SCHEMA</a>
+system procedure</p>
+</div>
+
+<div class="section"><p>You can query these tables to analyze the behavior of
+statement execution.</p>
+</div>
+
+<div class="section"><p>All of the above system tables reside in the schema which
+you specified. Because this
+is not the default schema, qualify all queries accessing the system tables
+with the schema name.</p>
+</div>
+
+<div class="section"><p>You can create the schema and tables ahead of time if you wish,
+        but usually it is easier to let 
+        <span>Derby</span>
+        automatically create the schema and
+the tables for you. You can capture multiple sets of data into the same
+tables, or you can specify a different schema each time.</p>
+
+    <p>
+            See "Working with RunTimeStatistics" in the 
+            <span><em>Tuning Derby</em></span>
+            for additional information.
+            </p>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsysxplain_statements.html">SYSXPLAIN_STATEMENTS system table</a></strong><br />
+The SYSXPLAIN_STATEMENTS table captures information about statements which have been executed using RUNTIMESTATISTICS with XPLAIN style.</li>
+<li class="ulchildlink"><strong><a href="rrefsysxplain_statement_timings.html">SYSXPLAIN_STATEMENT_TIMINGS system table</a></strong><br />
+The SYSXPLAIN_STATEMENT_TIMINGS table captures information about statement timings which occurred during statements that were executed using RUNTIMESTATISTICS with XPLAIN style.</li>
+<li class="ulchildlink"><strong><a href="rrefsysxplain_resultsets.html">SYSXPLAIN_RESULTSETS system table</a></strong><br />
+The SYSXPLAIN_RESULTSETS table captures information about each result set which is part of a statement that has been executed using RUNTIMESTATISTICS with XPLAIN style.</li>
+<li class="ulchildlink"><strong><a href="rrefsysxplain_resultset_timings.html">SYSXPLAIN_RESULTSET_TIMINGS system table</a></strong><br />
+The SYSXPLAIN_RESULTSET_TIMINGS table captures timing information about result set accesses which occurred during statements that were executed using RUNTIMESTATISTICS with XPLAIN style.</li>
+<li class="ulchildlink"><strong><a href="rrefsysxplain_scan_props.html">SYSXPLAIN_SCAN_PROPS system table</a></strong><br />
+The SYSXPLAIN_SCAN_PROPS table captures information about table/index accesses which occurred during statements that were executed using RUNTIMESTATISTICS with XPLAIN style.</li>
+<li class="ulchildlink"><strong><a href="rrefsysxplain_sort_props.html">SYSXPLAIN_SORT_PROPS system table</a></strong><br />
+The SYSXPLAIN_SORT_PROPS table captures information about row sorting actions which occurred during statements that were executed using RUNTIMESTATISTICS with XPLAIN style.</li>
+</ul>
+</div>
+
+</body>
+</html>

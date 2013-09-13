@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Notes on mapping of java.sql.Blob and java.sql.Clob interfaces" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc96386.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="crefjavbclobnot" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Notes on mapping of java.sql.Blob and java.sql.Clob interfaces</title>
+</head>
+<body id="crefjavbclobnot"><a name="crefjavbclobnot"><!-- --></a>
+
+
+<h1 class="topictitle1">Notes on mapping of java.sql.Blob and java.sql.Clob interfaces</h1>
+
+<div>
+<p>The usual <span>Derby</span> locking
+mechanisms (shared locks) prevent other transactions from updating or deleting
+the database item to which the <em>java.sql.Blob</em> or <em>java.sql.Clob</em> object
+is a pointer. However, in some cases, <span>Derby</span>'s
+instantaneous lock mechanisms could allow a period of time in which the column
+underlying the <em>java.sql.Blob</em> or <em>java.sql.Clob</em> is unprotected.
+A subsequent call to <em>getBlob/getClob</em>, or to a <em>java.sql.Blob</em>/<em>java.sql.Clob</em>method,
+could cause undefined behavior.</p>
+
+<p>Furthermore, there is nothing to prevent the transaction that holds the <em>java.sql.Blob</em>/<em>java.sql.Clob</em> (as
+opposed to another transaction) from updating the underlying row. (The same
+problem exists with the <em>getXXXStream</em> methods.) Program applications
+to prevent updates to the underlying object while a <em>java.sql.Blob</em>/<em>java.sql.Clob</em> is
+open on it; failing to do this could result in undefined behavior.</p>
+
+<div class="p">Do not call more than one of the <em>ResultSet getXXX</em> methods on the
+same column if one of the methods is one of the following:   <ul>
+<li><em>getBlob</em></li>
+
+<li><em>getClob</em></li>
+
+<li><em>getAsciiStream</em></li>
+
+<li><em>getBinaryStream</em></li>
+
+<li><em>getCharacterStream</em></li>
+
+</ul>
+</div>
+
+<div class="p">These methods share the same underlying stream; calling more than one
+of these methods on the same column could result in undefined behavior.
+For example:   <pre>    ResultSet rs = s.executeQuery("SELECT text FROM CLOBS WHERE i = 1");
+    while (rs.next()) {
+        aclob = rs.getClob(1);
+        ip = rs.getAsciiStream(1);
+    }</pre>
+</div>
+
+<p>The streams that handle long-columns are not thread safe. This means that
+if a user chooses to open multiple threads and access the stream from each
+thread, the resulting behavior is undefined. </p>
+
+<p>Clobs are not locale-sensitive.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc96386.html" title="">Mapping of java.sql.Blob and java.sql.Clob interfaces</a></div>
+</div>
+</div>
+
+</body>
+</html>

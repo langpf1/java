@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Understanding XPLAIN style database tables" />
+<meta content="XPLAIN style" name="DC.subject" />
+<meta content="XPLAIN style" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth37648.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth853095.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth853133.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth853228.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepthoptover.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctun_xplain_tables" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Understanding XPLAIN style database tables</title>
+</head>
+<body id="ctun_xplain_tables"><a name="ctun_xplain_tables"><!-- --></a>
+
+
+<h1 class="topictitle1">Understanding XPLAIN style database tables</h1>
+
+
+<div>
+    <p>
+        XPLAIN style is an enhanced form of RUNTIMESTATISTICS processing
+        which preserves captured statistics information in database tables.
+        Once the statistics have been collected and saved in the 
+        tables, they can be queried for analysis purposes.
+    </p>
+
+    <p>
+        Rows accumulate in the SYSXPLAIN_* database tables until you 
+        empty the tables by dropping them or executing DELETE FROM statements
+        against them.
+    </p>
+
+    <p>
+        Note that, although these tables have stylized names which all
+        start with the prefix "SYSXPLAIN_*", they are not in fact special
+        system catalogs, but are merely ordinary database tables, which
+        can be accessed in all the standard ways that any other database
+        table is accessed. The tables are automatically created if they
+        are not present when statistics are being captured. The tables
+        are all located in a particular schema which is specified by the
+        <samp class="codeph">SYSCS_UTIL.SYSCS_SET_XPLAIN_SCHEMA()</samp> system procedure.
+    </p>
+
+    <p>
+        The XPLAIN style database tables are summarized here. For more
+        information about the structure and content of each table,
+        see "XPLAIN style tables" in
+        the <span><em>Derby Reference Manual</em></span>.
+    </p>
+
+    <dl>
+        
+        <dt class="dlterm">SYSXPLAIN_STATEMENTS</dt>
+
+        <dd>This table contains one row for each statement which
+            has had statistics captured. This row contains the text of the
+            statement, as well as identifiers which can be used to join with
+            the other tables to find more data about how this statement was
+            executed.
+        </dd>
+
+        
+        
+        <dt class="dlterm">SYSXPLAIN_RESULTSETS</dt>
+
+        <dd>This table contains one row for each result set which
+            was used during the execution of a particular explained statement.
+            Most queries have one or several result sets; some complex queries
+        can have many result sets.
+        </dd>
+
+        
+        
+        <dt class="dlterm">SYSXPLAIN_SCAN_PROPS</dt>
+
+        <dd>This table contains one row for each result set which
+            performed a scan of a table, index, or constraint. Using the
+            information in this row, you can determine how much data needed
+        to be examined by the scan.
+        </dd>
+
+        
+        
+        <dt class="dlterm">SYSXPLAIN_SORT_PROPS</dt>
+
+        <dd>This table contains one row for each result set which
+            performed a sort of data. Using the information in this row, you
+        can determine how much data needed to be sorted.
+        </dd>
+
+        
+        
+        <dt class="dlterm">SYSXPLAIN_STATEMENT_TIMINGS</dt>
+
+        <dd>This table contains timing information at the statement
+            level. Timing information is optional, but if it is captured, the
+            data in this table can be used to determine how much time each
+        statement took.
+        </dd>
+
+        
+        
+        <dt class="dlterm">SYSXPLAIN_RESULTSET_TIMINGS</dt>
+
+        <dd>This table contains timing information at the result set
+            level. Timing information is optional, but if it is captured, the
+            data in this table can be used to determine how much time each
+        result set took.
+        </dd>
+
+        
+    </dl>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctundepth37648.html" title="">Analyzing the information</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctundepth853095.html" title="">Statistics timing</a></div>
+<div><a href="ctundepth853133.html" title="">Statement execution plan</a></div>
+<div><a href="ctundepth853228.html" title="">Optimizer estimates</a></div>
+<div><a href="ctundepthoptover.html" title="">Optimizer overrides</a></div>
+</div>
+</div>
+
+</body>
+</html>

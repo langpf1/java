@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CHAR 関数" />
+<meta name="abstract" content="CHAR関数により固定長の文字列への変換値が返されます。" />
+<meta name="description" content="CHAR関数により固定長の文字列への変換値が返されます。" />
+<meta content="CHAR関数" name="DC.subject" />
+<meta content="CHAR関数" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefbuiltchar" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CHAR 関数</title>
+</head>
+<body id="rrefbuiltchar"><a name="rrefbuiltchar"><!-- --></a>
+
+
+<h1 class="topictitle1">CHAR 関数</h1>
+
+
+
+<div><p>CHAR関数により固定長の文字列への変換値が返されます。</p>
+
+<div class="section">行われる変換は以下のとおりです。<ul>
+<li>文字列変換 一つ目の引数が文字列である場合です。</li>
+
+<li>日時変換 一つ目の引数が日付、時刻、タイムスタンプである場合です。</li>
+
+<li>小数変換 一つ目の引数が小数である場合です。</li>
+
+<li>倍精度浮動小数点数変換 一つ目の引数がDOUBLEあるいはREALである場合です。</li>
+
+<li>整数変換 一つ目の引数がSMALLINT、INTEGER、BIGINTである場合です。</li>
+
+</ul>
+
+一つ目の引数は、その型が組込みのデータ型である必要があります。CHAR関数の返り値は固定長の文字列です。一つ目の引数はNULLとすることができ、その場合は返り値はNULLです。一つ目の引数は、その型がXMLであってはなりません。もしXMLの値を固定長のCHARにしたいのなら、SQL/XML直列化演算子のXMLSERIALIZEを使う必要があります。</div>
+
+<div class="section"><h2 class="sectiontitle">文字から文字への変換を行う時の書き方</h2> <pre><strong>CHAR (<em>文字式</em> [, <em>数</em>] ) </strong></pre>
+ <dl>
+
+<dt class="dlterm">文字式</dt>
+
+<dd>CHAR、VARCHAR、LONG VARCHAR、CLOBのいずれかのデータ型の値を返す式。</dd>
+
+
+<dt class="dlterm">数</dt>
+
+<dd>返却される固定長文字列の長さ。値は0から254の間でなければならない。</dd>
+
+</dl>
+ <p>もし文字式の長さが数よりも小さかった場合、長さが数と等しくなるよう、関数の結果は空白によりつめられます。もし文字式の長さが数より大きかった場合、切捨てが行われます。もし空白以外の文字が切り捨てられ、文字式が長い文字列(LONG VARCHARやCLOB)でなければ、警告が返されます。</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">整数から文字への変換を行うときの書き方</h2> <pre><strong>CHAR (<em>整数式</em> ) </strong></pre>
+ <dl>
+
+<dt class="dlterm">整数式</dt>
+
+<dd>整数のデータ型(SMALLINT、INTEGER、BIGINT)型の値を返す式</dd>
+
+</dl>
+ <p>関数の結果は、SQLの整数として渡された引数を文字列で表現したものとなります。結果は引数の数を10進で表すn文字および、もし引数が負数であったなら負の符号から構成されます。また結果は左詰めされています。</p>
+ <ul>
+<li>もし一つ目の引数がSMALLINTなら、結果の文字列の長さは6です。もし結果にて数値の文字数が6に満たない場合は、6文字となるよう右側に空白が詰められます。</li>
+
+<li>もし一つ目の引数がINTEGERなら、結果の文字列の長さは11です。もし結果にて数値の文字数が11に満たない場合は、11文字となるよう右側に空白が詰められます。</li>
+
+<li>もし一つ目の引数がBIGINTなら、結果の文字列の長さは20です。もし結果にて数値の文字数が20に満たない場合は、20文字となるよう右側に空白が詰められます。</li>
+
+</ul>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">日時から文字への変換を行うときの書き方</h2> <pre><strong>CHAR (<em>日時式</em> ) </strong></pre>
+ <dl>
+
+<dt class="dlterm">日時式</dt>
+
+<dd>式は次のデータ型の何れかです。<ul>
+<li><strong>日付</strong>: 結果は日付を表す文字表現です。結果の長さは10です。</li>
+
+<li><strong>時刻</strong>: 結果は時刻を表す文字表現です。結果の長さは8です。</li>
+
+<li><strong>タイムスタンプ</strong>: 結果はタイムスタンプを表す文字表現です。結果の長さは26です。</li>
+
+</ul>
+</dd>
+
+</dl>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">小数から文字への変換を行うときの書き方</h2> <pre><strong>CHAR (<em>小数式</em> ) </strong></pre>
+ <dl>
+
+<dt class="dlterm">小数式</dt>
+
+<dd>小数のデータ型を返す式です。もし精度や目盛りの変更を行う場合は、文字への変換を行う前にDECIMALというスカラー関数により変更してください。</dd>
+
+</dl>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">浮動小数点数から文字への変換を行うときの書き方</h2> <pre><strong>CHAR (<em>浮動小数点数式</em> ) </strong></pre>
+ <dl>
+
+<dt class="dlterm">浮動小数点数式</dt>
+
+<dd>浮動小数点数のデータ型(DOUBLEやREAL)の値を返す式です。</dd>
+
+</dl>
+ </div>
+
+<div class="example"> <div class="p">CHAR関数によりEDLEVEL(smallint型と定義されているとします。)の値を、固定長の文字列として返します。<pre><strong>SELECT CHAR</strong>(EDLEVEL) <strong>FROM</strong> EMPLOYEE</pre>
+
+EDLEVELが18とするなら、その値がCHAR(6)型で'18    'と返されます。(18に空白が4つ続きます。)</div>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

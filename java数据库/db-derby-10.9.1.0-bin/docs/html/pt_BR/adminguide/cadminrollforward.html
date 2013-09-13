@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Recuperação com rolagem para frente" />
+<meta name="abstract" content="O Derby suporta a recuperação com rolagem para frente (roll-forward recovery) para restaurar um banco danificado para o estado mais recente anterior à ocorrência da falha." />
+<meta name="description" content="O Derby suporta a recuperação com rolagem para frente (roll-forward recovery) para restaurar um banco danificado para o estado mais recente anterior à ocorrência da falha." />
+<meta content="Logs arquivados em linha, habilitação, desabilitação, Cópia de segurança, Recuperação com rolagem para frente" name="DC.subject" />
+<meta content="Logs arquivados em linha, habilitação, desabilitação, Cópia de segurança, Recuperação com rolagem para frente" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup98797.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminbckupdb.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminhubbkup44.html" />
+<meta scheme="URI" name="DC.Relation" content="tadmincrtdbbkup.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminrollforward" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Recuperação com rolagem para frente</title>
+</head>
+<body id="cadminrollforward"><a name="cadminrollforward"><!-- --></a>
+
+
+<h1 class="topictitle1">Recuperação com rolagem para frente</h1>
+
+
+
+<div><p>O <span>Derby</span> suporta
+a recuperação com rolagem para frente (<em>roll-forward recovery</em>) para
+restaurar um banco danificado para o estado mais recente anterior à ocorrência
+da falha.</p>
+
+<p>O <span>Derby</span> restaura o
+banco de dados a partir da cópia de segurança completa, e refaz todas as
+transações posteriores à cópia de segurança.
+São necessários todos os arquivos de <em>log</em> posteriores à cópia de
+segurança, para refazer as transações posteriores à cópia de segurança.
+Por padrão, o banco de dados mantém apenas os <em>logs</em> requeridos para a
+recuperação de queda.
+Para a recuperação com rolagem para frente ser bem-sucedida, todos os arquivos
+de <em>log</em> posteriores à cópia de segurança devem ser guardados.
+Os arquivos de <em>log</em> podem ser guardados utilizando chamadas de função de
+cópia de segurança que habilitam guardar o <em>log</em>.</p>
+
+<p>Na recuperação com rolagem para frente o modo que guarda o <em>log</em> garante
+que todos os arquivos de <em>log</em> antigos ficam disponíveis.
+Os arquivos de <em>log</em> ficam disponíveis somente a partir do momento em que
+o modo que guarda o <em>log</em> é habilitado.</p>
+
+<div class="p">O <span>Derby</span> utiliza as
+seguinte informações para restaurar o banco de dados:
+<ul>
+<li>A cópia de segurança do banco de dados</li>
+
+<li>O conjunto de <em>logs</em> guardados</li>
+
+<li>O <em>log</em> em linha ativo no momento</li>
+
+</ul>
+
+</div>
+
+<p>A recuperação com rolagem para frente não pode ser utilizada para restaurar
+tabelas individuais.
+A recuperação com rolagem para frente recupera todo o banco de dados.</p>
+
+<p>Para restaurar um banco de dados utilizando a recuperação com rolagem para
+frente deverá existir uma cópia de segurança do banco de dados, todos os
+<em>logs</em> guardados desde que a cópia de segurança foi criada, e os arquivos
+de <em>log</em> ativos.
+Todos os arquivos de <em>log</em> deverão estar no diretório de <em>log</em> do
+banco de dados.</p>
+
+<p>Existem dois tipos de arquivo de <em>log</em> no
+<span>Derby</span>:
+os <em>logs</em> ativos e os <em>logs</em> em linha guardados.</p>
+
+<dl>
+
+<dt class="dlterm">Logs ativos</dt>
+
+<dd>Os <em>logs</em> ativos são utilizados durante a recuperação de queda para
+evitar que uma falha que deixe o banco de dados em um estado inconsistente.
+A recuperação com rolagem para frente também pode utilizar os <em>logs</em> ativos
+para recuperar até o final dos arquivos de <em>log</em>.
+Os <em>logs</em> ativos estão localizados no diretório de caminho de <em>log</em>
+do banco de dados.</dd>
+
+
+
+<dt class="dlterm">Logs em linha guardados</dt>
+
+<dd>Arquivos de <em>log</em> guardados para uso pela recuperação com rolagem
+para frente, após não serem mais necessários para recuperação de queda.
+Os <em>logs</em> em linha guardados também são mantidos no diretório de caminho
+de <em>log</em> do banco de dados.</dd>
+
+
+</dl>
+
+<p><strong>Habilitação do modo que guarda o <em>log</em></strong></p>
+
+<p>Os <em>logs</em> em linha guardados estarão disponíveis somente se o banco
+de dados for habilitado para o modo de guarda o <em>log</em>.
+Pode ser utilizado o seguinte procedimento do sistema para habilitar o banco de
+dados no modo que guarda o <em>log</em>:</p>
+
+<pre>SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE
+(IN BACKUPDIR VARCHAR(32672), IN SMALLINT DELETE_ARCHIVED_LOG_FILES)</pre>
+
+<div class="p">Os parâmetros de entrada para a chamada do exemplo anterior especificam o
+local onde a cópia de segurança deverá ser armazenada, e especifica se o banco
+de dados deverá manter os <em>logs</em> em linha guardados para a cópia de
+segurança.
+Os arquivos de <em>log</em> em linha guardados existentes, criados antes desta
+cópia de segurança, serão eliminados se o valor do parâmetro de entrada para
+o parâmetro <em>deleteOnlineArchivedLogFiles</em> for diferente de zero.
+Os arquivos de <em>log</em> são eliminados somente após a cópia de segurança ter
+sido bem-sucedida.
+<div class="note"><span class="notetitle">Nota: </span>Tenha certeza de armazenar a cópia de segurança do banco de dados em
+um local seguro ao escolher a opção de remoção do arquivo de <em>log</em>.</div>
+
+</div>
+
+<p>O procedimento SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE
+emite uma mensagem de erro quando existem operações não registradas na mesma
+transação do procedimento de cópia de segurança.</p>
+
+<p>Caso exista no sistema, quando a cópia de segurança iniciar, operações não
+registradas em andamento em outras transações, este procedimento ficará
+bloqueado até que estas transações completem, antes de realizar a cópia de
+segurança.
+O Derby converte, automaticamente, as operações não registradas para o modo
+registrado, quando estas são iniciadas quando a cópia de segurança está em
+andamento (exceto as operações que fazem manutenção de arquivos <em>jar</em> de
+aplicativo no banco de dados).
+Os procedimentos que instalam, substituem e removem arquivos <em>jar</em> no
+banco de dados são bloqueadas quando a cópia de segurança está em andamento.</p>
+
+<p>Se não for desejado que a cópia de segurança fique bloqueada até que
+as operações não registradas em outras transações completem, deve ser
+utilizado o procedimento
+SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE_NOWAIT.
+Esse procedimento emite um erro logo no início da cópia de segurança caso
+existam transações em andamento com operações não registradas, em vez de
+aguardar estas transações completarem.</p>
+
+<p><strong>Desabilitação do modo que guarda o <em>log</em></strong></p>
+
+<p>Após o modo que guarda o <em>log</em> ter sido habilitado, o banco de dados
+ficará para sempre com o modo que guarda o <em>log</em> habilitado, mesmo que
+posteriormente seja recarregado ou seja feita uma cópia de segurança.
+A única maneira de desabilitar o modo que guarda o <em>log</em> é executar o
+seguinte procedimento:</p>
+
+<pre>SYSCS_UTIL.SYSCS_DISABLE_LOG_ARCHIVE_MODE(IN SMALLINT DELETE_ARCHIVED_LOG_FILES)</pre>
+
+<p>Este procedimento do sistema desabilita o modo que guarda o <em>log</em>, e
+remove todos os arquivos de <em>log</em> guardados existentes, se o parâmetro de
+entrada <em>DELETE_ARCHIVED_LOG_FILES</em> for diferente de zero.</p>
+
+<p><strong>Realização da recuperação com rolagem para frente:</strong></p>
+
+<p>Utilizando a cópia de segurança completa, os <em>logs</em> guardados, e os
+<em>logs</em> ativos, o banco de dados pode ser restaurado até seu estado mais
+recente realizando a recuperação com rolagem para frente.
+A recuperação com rolagem para frente é realizada especificando o atributo da
+URL de conexão <em>rollForwardRecoveryFrom=&lt;caminho-da-cópia-de-segurança&gt;</em>
+em tempo de inicialização.
+Com isto o banco de dados retorna ao seu estado mais recente utilizando a cópia
+de segurança completa, os <em>logs</em> guardados e os <em>logs</em> ativos.
+Todos os arquivos de <em>log</em> deverão estar no diretório do caminho de
+<em>log</em> do banco de dados.</p>
+
+<p><strong>Cópia de segurança do banco de dados:</strong></p>
+
+<div class="p">No exemplo a seguir é realizada a cópia de segurança do banco de dados
+chamado <em>wombat</em> no diretório <em>d:/backup</em> com o modo que guarda
+arquivo de <em>log</em> habilitado:
+<pre>connect 'jdbc:derby:wombat;create=true';
+
+create table t1(a int not null primary key);
+------------------DML/DDL Operations
+CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE
+('d:/backup', 0);
+insert into t1 values(19);
+create table t2(a int);
+-----------------Operações de DML/DDL
+-----------------Queda do banco de dados (Mídia corrompida nos discos de dado)</pre>
+
+</div>
+
+<p><strong>Restauração do banco de dados utilizando a recuperação com rolagem para frente:</strong></p>
+
+<div class="p">No exemplo a seguir, o banco de dados é restaurado utilizando a recuperação
+com rolagem para frente após uma falha da mídia:
+<pre>connect 'jdbc:derby:wombat;rollForwardRecoveryFrom=d:/backup/wombat';
+select * from t1;
+-----------------Operações de DML/DDL</pre>
+
+</div>
+
+<p>Pode ser especificado o seguinte atributo na URL de conexão em tempo de
+carga do JDBC:</p>
+
+<p><em>rollForwardRecoveryFrom=caminho</em></p>
+
+<p>Para obter mais informações deve ser consultada a seção
+<em>rollForwardRecoveryFrom=caminho</em> no
+<span><em>Manual de Referência do Derby</em></span>.</p>
+
+<p>Após o banco de dados ser restaurado a partir da cópia de segurança completa,
+as transações dos <em>logs</em> em linha arquivados e dos <em>logs</em> ativos
+são refeitas.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminhubbkup98797.html" title="O Derby fornece maneira de efetuar cópia de segurança do banco de dados enquanto este está em linha. Também pode ser restaurada uma cópia de segurança completa a partir de um local especificado.">Cópia de segurança e restauração do banco de dados</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="cadminbckupdb.html" title="">Cópia de segurança do banco de dados</a></div>
+</div>
+<div class="reltasks"><strong>Tarefas relacionadas</strong><br />
+<div><a href="tadminhubbkup44.html" title="Para restaurar um banco de dados utilizando uma cópia de segurança completa presente em um determinado local, deve ser especificado o atributo restoreFrom=caminho na URL de conexão em tempo de inicialização.">Restauração do banco de dados a partir da cópia de segurança</a></div>
+<div><a href="tadmincrtdbbkup.html" title="Para criar um banco de dados utilizando uma cópia de segurança completa presente em um determinado local, deve ser especificado o atributo createFrom=caminho na URL de conexão em tempo de inicialização.">Criação de um banco de dados a partir de uma cópia de segurança</a></div>
+</div>
+</div>
+
+</body>
+</html>

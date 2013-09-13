@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="ORDER BY 節" />
+<meta name="abstract" content="ORDER BY節はSELECT文の省略可能な要素です。 ORDER BY節にてResultSetにある行の順番を指定できます。" />
+<meta name="description" content="ORDER BY節はSELECT文の省略可能な要素です。 ORDER BY節にてResultSetにある行の順番を指定できます。" />
+<meta content="ORDER BY clause, syntax, ASC, implied in ORDER BY clause, DESC, optional element of ORDER BY clause, affecting cursors, specifying expressions" name="DC.subject" />
+<meta content="ORDER BY clause, syntax, ASC, implied in ORDER BY clause, DESC, optional element of ORDER BY clause, affecting cursors, specifying expressions" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj13658" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>ORDER BY 節</title>
+</head>
+<body id="rrefsqlj13658"><a name="rrefsqlj13658"><!-- --></a>
+
+
+<h1 class="topictitle1">ORDER BY 節</h1>
+
+
+
+<div><p>ORDER BY節はSELECT文の省略可能な要素です。
+ORDER BY節にて<var class="varname">ResultSet</var>にある行の順番を指定できます。</p>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>ORDER BY { <em><a href="rrefcolumnname.html#rrefcolumnname">列名</a></em> | <em>ColumnPosition</em> | <em>Expression</em> }
+    [ ASC | DESC ]
+    [ , <em><a href="rrefcolumnname.html#rrefcolumnname">列名</a></em> | <em>列位置</em> | <em>式</em> 
+        [ ASC | DESC ] ] * </strong></pre>
+<dl>
+<dt class="dlterm">列名</dt>
+
+<dd>問い合わせの<a href="rrefsqlj41360.html#rrefsqlj41360">SELECT 文</a>の<var class="varname">選択項目</var>にて、可視である名前を参照します。
+ORDER BYで指定する列名はSELECTされる項目になくとも構いません。</dd>
+
+
+<dt class="dlterm">列位置</dt>
+
+<dd><a href="rrefsqlj41360.html#rrefsqlj41360">SELECT 文</a>の<var class="varname">選択項目</var>の、列の番号を指定する整数です。
+<span class="parmname">列位置</span>は、0より大きくかつ結果表の列数以下でなければなりません。言い換えれば、列で並び変えるために、その列がSELECTされる項目にある必要があります。</dd>
+
+
+<dt class="dlterm">式</dt>
+
+<dd>並び変えを行うキーの式で、数値や文字列、日付などの式とすることができます。
+<em>式</em>はスカラー副問い合わせやCASE式などの、行の値における式とすることができます。
+</dd>
+
+
+<dt class="dlterm">ASC</dt>
+
+<dd>結果を昇順で返すことを指定します。方向が指定されない場合、ASCが既定です。</dd>
+
+
+<dt class="dlterm">DESC</dt>
+
+<dd>結果を降順で返すことを指定します。</dd>
+
+</dl>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">但し書き</h2><ul>
+<li>SELECT DISTINCTが指定されたり、SELECT文にGROUP BY節があった場合、ORDER BYする列はSELECTされる項目になければなりません。</li>
+
+<li>ORDER BY節があると、SELECT文を更新可能カーソルとすることができません。より詳細な情報は、<a href="rrefsqlj41360.html#rrefsqlj41360__sqlj15384">更新可能なカーソルおよびResultSetの要件</a>を参照してください。
+例えば、もしINTEGERの列に整数があると、ソートのときNULLは1より大きいと見なされます。言い換えれば、NULLの値は、より上の位置にソートされます。</li>
+
+</ul>
+</div>
+
+<div class="example"><h2 class="sectiontitle">相関名を使う例</h2>
+<p>相関名が選択項目にて指定されていれば、結果セットを相関名で並び変えできます。
+たとえばCITIESデータベースから、COUNTRY列にNATIONという相関名を与えて、CITY_NAME列とCOUNTRY列に格納されているすべての情報を返す場合、次のようなSELECT文を書きます。</p>
+
+<pre>SELECT CITY_NAME, COUNTRY AS NATION 
+    FROM CITIES 
+    ORDER BY NATION
+</pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">数式を使う例</h2>
+<div class="p">結果セットを数式で並び変えることができます。例を挙げます。<pre>SELECT name, salary, bonus FROM employee 
+   ORDER BY salary+bonus</pre>
+この例では、salaryとbonus列はDECIMALデータ型です。</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">関数を使う例</h2><div class="p">結果セットを関数の呼び出し結果を元に並び変えることができます。例を挙げます。<pre>SELECT i, len FROM measures 
+   ORDER BY sin(i) 
+</pre>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefclauses.html" title="">SQL 節</a></div>
+</div>
+</div>
+
+</body>
+</html>

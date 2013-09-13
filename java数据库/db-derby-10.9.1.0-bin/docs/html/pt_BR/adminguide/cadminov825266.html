@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="O Network Server do Derby" />
+<meta scheme="URI" name="DC.Relation" content="cadminov17524.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminov825125.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminov33597.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminov825149.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminembeddedserver.html" />
+<meta scheme="URI" name="DC.Relation" content="radminembeddedserverex.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminov825266" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>O Network Server do Derby</title>
+</head>
+<body id="cadminov825266"><a name="cadminov825266"><!-- --></a>
+
+
+<h1 class="topictitle1">O Network Server do Derby</h1>
+
+
+<div>
+<p>O <em>Network Server</em> do
+<span>Derby</span>
+fornece conectividade multiusuário para os bancos de dados do
+<span>Derby</span>,
+dentro do mesmo sistema ou através da rede.
+O <em>Network Server</em> utiliza o protocolo padrão
+Arquitetura de Banco de Dados Relacional Distribuído
+(Distributed Relational Database Architecture/DRDA),
+para receber e responder os comandos dos clientes.
+Os bancos de dados são acessados através do <em>Network Server</em> do
+<span>Derby</span>
+utilizando o <em>driver</em> cliente da rede do
+<span>Derby</span>.</p>
+
+<p>O <em>Network Server</em> é uma solução para várias JVMs fazendo conexão com o
+banco de dados, diferentemente do cenário incorporado, onde somente uma JVM
+executa como parte do sistema.
+Quando o <span>Derby</span>
+está incorporado a um aplicativo de JVM-única, o <em>driver</em> de JDBC
+incorporado chama o banco de dados
+<span>Derby</span> local.
+Quando o <span>Derby</span>
+está incorporado a uma estrutura servidora, o software de conectividade da
+estrutura servidora fornece dados para vários aplicativos JDBC clientes,
+através da rede ou da Internet.</p>
+
+<div class="p">Para executar o <em>Network Server</em> do
+<span>Derby</span>,
+é necessário instalar os seguintes arquivos:
+<ul>
+<li>No lado servidor, instalar <span class="filepath">derby.jar</span> e <span class="filepath">derbynet.jar</span>.</li>
+
+<li>No lado cliente, instalar <span class="filepath">derbyclient.jar</span>.</li>
+
+</ul>
+
+</div>
+
+<p>Existem várias maneiras de gerenciar o <em>Network Server</em> do
+<span>Derby</span>, incluindo:</p>
+
+<ul>
+<li>Através da linha de comando</li>
+
+<li>Utilizando os scripts .bat e .ksh</li>
+
+<li>Através da interface <em>servlet</em></li>
+
+<li>Com seu próprio programa Java (escrito utilizando a API do <em>Network Server</em>)</li>
+
+<li>Definindo as propriedades do <em>Network Server</em></li>
+
+</ul>
+
+<p><a href="cadminapps59125.html#cadminapps59125">Utilização do Network Server com aplicativos Derby pré-existentes</a>
+explica como alterar os aplicativos Java existentes, que atualmente executam
+utilizando o
+<span>Derby</span>
+no modo incorporado, para utilizar o <em>Network Server</em> do
+<span>Derby</span>.</p>
+
+<p><a href="cadminconfig86869.html#cadminconfig86869">Gerenciamento do Network Server do Derby</a>
+explica como gerenciar o <em>Network Server</em> utilizando a linha de comando,
+inclusive para inicializar e parar.</p>
+
+<p><a href="cadminservlet98430.html#cadminservlet98430">Gerenciamento remoto do Network Server do Derby utilizando a interface servlet</a>
+explica como utilizar a interface <em>servlet</em> para gerenciar o
+<em>Network Server</em>.</p>
+
+<p><a href="cadminadvtops.html#cadminadvtops">Tópicos avançados do Network Server do Derby</a>
+contém tópicos avançados para os usuários do <em>Network Server</em> do
+<span>Derby</span>.</p>
+
+<p>Devido às diferenças entre os <em>drivers</em> de JDBC utilizados,
+podem ser encontradas diferenças de funcionalidades ao executar o
+<span>Derby</span>
+na estrutura de <em>Network Server</em>, se comparado com sua execução
+incorporado a um aplicativo usuário.
+Para obter uma lista completa das diferenças entre as configurações
+<em>Network Server</em> e incorporado, deve ser consultado
+<a href="cadminapps59125.html#cadminapps59125">Utilização do Network Server com aplicativos Derby pré-existentes</a>.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminov17524.html" title="">O Derby em uma estrutura servidora</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="cadminov825125.html" title="">Configurações de conectividade</a></div>
+<div><a href="cadminov33597.html" title="">Funcionalidades disponíveis no Derby para atender vários clientes</a></div>
+<div><a href="cadminov825149.html" title="">Servidores incorporados</a></div>
+<div><a href="cadminembeddedserver.html" title="">Como inicializar o servidor incorporado a partir de um aplicativo</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="radminembeddedserverex.html" title="">Exemplo de servidor incorporado</a></div>
+</div>
+</div>
+
+</body>
+</html>

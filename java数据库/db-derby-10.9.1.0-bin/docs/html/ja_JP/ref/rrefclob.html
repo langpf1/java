@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CLOBデータ型" />
+<meta content="CLOB data type" name="DC.subject" />
+<meta content="CLOB data type" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefclob" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CLOBデータ型</title>
+</head>
+<body id="rrefclob"><a name="rrefclob"><!-- --></a>
+
+
+<h1 class="topictitle1">CLOBデータ型</h1>
+
+
+<div>
+<div class="section"> <p>CLOB(キャラクタラージオブジェクト)の値は、最大で2,147,483,647の文字長とすることができます。CLOBはユニコードの文字情報を記録するとき使うことができます。このような情報には様々な文字からなるサイズの大きな文書などが考えられます。</p>
+
+<p>CLOBの長さは数で与えられます。もしK、MやGが数のサフィックスに与えられた場合は、それぞれ1024、1024*1024、1024*1024*1024を意味します。</p>
+
+CLOBの長さは(ユニコードの)文字数をあらわします。</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2><pre><strong>{CLOB |CHARACTER LARGE OBJECT} [ ( 長さ [{K |M |G}] ) ]</strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">既定の設定</h2><p>長さを指定しない場合、CLOBの長さは2ギガ(2,147,483,647)バイトとなります。</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">対応する実行時のJavaの型</h2><p><em>java.sql.Clob</em></p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">JDBC メタデータの型(java.sql.Types)</h2><p>CLOB</p>
+
+<p>CLOBへのハンドルを取得するには、<em>java.sql.ResultSet</em>にある<em>getClob</em>メソッドを使ってください。</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">関連する情報</h2>
+<p><a href="rrefjdbc96386.html#rrefjdbc96386">java.sql.Blobインターフェイスとjava.sql.Clobインターフェイスの対応</a>を参照してください。</p>
+ </div>
+
+<div class="example"> <pre>import java.sql.*;
+
+public class clob
+{
+	public static void main(String[] args) {
+		try {
+			String url = "jdbc:derby:clobberyclob;create=true";
+
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+			Connection conn = DriverManager.getConnection(url);
+
+            Statement s = conn.createStatement();
+            s.executeUpdate("CREATE TABLE documents (id INT, text CLOB(64 K))");
+            conn.commit();
+
+            // --- ファイルを追加する。
+            java.io.File file = new java.io.File("asciifile.txt");
+            int fileLength = (int) file.length();
+
+            // - 最初に入力ストリームを作成する。
+            java.io.InputStream fin = new java.io.FileInputStream(file);
+            PreparedStatement ps = conn.prepareStatement("INSERT
+            INTO documents VALUES (?, ?)");
+            ps.setInt(1, 1477);
+
+            // - 入力パラメータの値を入力ストリームにする。
+            ps.setAsciiStream(2, fin, fileLength);
+            ps.execute();
+            conn.commit();
+
+            // --- 列を読む。
+            ResultSet rs = s.executeQuery("SELECT text FROM documents
+             WHERE id = 1477");
+            while (rs.next()) {
+                java.sql.Clob aclob = rs.getClob(1);
+                java.io.InputStream ip = rs.getAsciiStream(1);
+                int c = ip.read();
+                while (c &gt; 0) {
+                    System.out.print((char)c);
+                    c = ip.read();
+                }
+                System.out.print("\n");
+                // ...
+            }
+        } catch (Exception e) {
+            System.out.println("Error! "+e);
+        }
+    }
+}</pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj31068.html" title="">データ型</a></div>
+</div>
+</div>
+
+</body>
+</html>

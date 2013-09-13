@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Programming applications to handle deadlocks" />
+<meta name="abstract" content="When you configure your system for deadlock and lockwait timeouts and an application could be chosen as a victim when the transaction times out, you should program your application to handle them." />
+<meta name="description" content="When you configure your system for deadlock and lockwait timeouts and an application could be chosen as a victim when the transaction times out, you should program your application to handle them." />
+<meta content="Deadlocks, programming an application to handle" name="DC.subject" />
+<meta content="Deadlocks, programming an application to handle" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts53677.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts95005.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts89097.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts16400.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts50894.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts28436.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevconcepts32861" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Programming applications to handle deadlocks</title>
+</head>
+<body id="cdevconcepts32861"><a name="cdevconcepts32861"><!-- --></a>
+
+
+<h1 class="topictitle1">Programming applications to handle deadlocks</h1>
+
+
+
+<div><p>When you configure your system for deadlock and lockwait timeouts
+and an application could be chosen as a victim when the transaction times
+out, you should program your application to handle them.</p>
+
+<p>To do this, test for <em>SQLExceptions</em> with <samp class="codeph"><em>SQLStates</em></samp> of
+40001 (deadlock timeout) or 40XL1 or 40XL2 (lockwait timeout).</p>
+
+<p>In the case of a deadlock you might want to re-try the transaction that
+was chosen as a victim. In the case of a lock wait timeout, you probably do
+not want to do this right away.</p>
+
+<p>The following code is one example of how to handle a deadlock timeout.</p>
+
+<pre><strong>/// if this code might encounter a deadlock, 
+// put the whole thing in a try/catch block
+// then try again if the deadlock victim exception 
+// was thrown</strong>
+try {
+    s6.executeUpdate(
+         "UPDATE employee " +
+         "SET bonus = 625 "
+         "WHERE empno='000150'");
+    s6.executeUpdate("UPDATE project " +
+         "SET respemp = '000150' " +
+         "WHERE projno='IF1000'");
+} 
+<strong>// note: do not catch such exceptions in database-side methods; 
+// catch such exceptions only at the outermost level of 
+// application code. 
+// See <a href="cdevspecial41728.html#cdevspecial41728">Database-side JDBC routines and SQLExceptions</a>. </strong> 
+catch (SQLException se) { 
+    if (se.getSQLState().equals("40001")) { 
+        <strong>// it was chosen as a victim of a deadlock. 
+        // try again at least once at this point.</strong> 
+        System.out.println( "Will try the transaction again."); 
+        s6.executeUpdate("UPDATE employee " + 
+        "SET bonus = 625 " + 
+        "WHERE empno='000150'"); 
+        s6.executeUpdate("UPDATE project " + 
+        "SET respemp = 000150 " + 
+        "WHERE projno='IF1000'"); 
+    } 
+    else throw se; 
+}
+</pre>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts28436.html" title="In a database, a deadlock is a situation in which two or more transactions are waiting for one another to give up locks.">Deadlocks</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevconcepts53677.html" title="Using both row-level locking and the TRANSACTION_READ_COMMITTED isolation level makes it likely that you will avoid deadlocks (both settings are Derby defaults). However, deadlocks are still possible.">Avoiding deadlocks</a></div>
+<div><a href="cdevconcepts95005.html" title="When a transaction waits more than a specific amount of time to obtain a lock (called the deadlock timeout), Derby can detect whether the transaction is involved in a deadlock.">Deadlock detection</a></div>
+<div><a href="cdevconcepts89097.html" title="Even if a transaction is not involved in a deadlock, it might have to wait a considerable amount of time to obtain a lock because of a long-running transaction or transactions holding locks on the tables it needs.">Lock wait timeouts</a></div>
+<div><a href="cdevconcepts16400.html" title="You configure the amount of time a transaction waits before Derby does any deadlock checking with the derby.locks.deadlockTimeout property.">Configuring deadlock detection and lock wait timeouts</a></div>
+<div><a href="cdevconcepts50894.html" title="If deadlocks occur frequently in your multi-user system with a particular application, you might need to do some debugging.">Debugging Deadlocks</a></div>
+</div>
+</div>
+
+</body>
+</html>

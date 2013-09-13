@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="GRANT statement" />
+<meta name="abstract" content="Use the GRANT statement to give privileges to a specific user or role, or to all users, to perform actions on database objects. You can also use the GRANT statement to grant a role to a user, to PUBLIC, or to another role." />
+<meta name="description" content="Use the GRANT statement to give privileges to a specific user or role, or to all users, to perform actions on database objects. You can also use the GRANT statement to grant a role to a user, to PUBLIC, or to another role." />
+<meta content="GRANT statement, SQL statements, GRANT" name="DC.subject" />
+<meta content="GRANT statement, SQL statements, GRANT" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljrevoke.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljrevoke.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssystableperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabssyscolperms.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljgrant" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>GRANT statement </title>
+</head>
+<body id="rrefsqljgrant"><a name="rrefsqljgrant"><!-- --></a>
+
+
+<h1 class="topictitle1">GRANT statement </h1>
+
+
+
+<div><p>Use the GRANT statement to give privileges to a specific user or
+role, or to all users, to perform actions on database objects. You can also use
+the GRANT statement to grant a role to a user, to PUBLIC, or to another role.
+</p>
+
+<div class="section"> <div class="p">The following types of privileges can be granted:<ul>
+<li>Delete data from a specific table.</li>
+
+<li>Insert data into a specific table.</li>
+
+<li>Create a foreign key reference to the named table or to a subset of columns
+from a table.</li>
+
+<li>Select data from a table, view, or a subset of columns in a table.</li>
+
+<li>Create a trigger on a table.</li>
+
+<li>Update data in a table or in a subset of columns in a table.</li>
+
+<li>Run a specified function or procedure.</li>
+
+<li>Use a sequence generator or a user-defined type.</li>
+
+</ul>
+</div>
+<p>Before you issue a GRANT statement, check that the
+<samp class="codeph"><a href="rrefpropersqlauth.html#rrefpropersqlauth">derby.database.sqlAuthorization</a></samp> property
+is set to <samp class="codeph">true</samp>. The <samp class="codeph">derby.database.sqlAuthorization</samp> property
+enables the SQL Authorization mode.</p>
+<p>You can grant privileges on an
+object if you are the owner of the object or the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a>. See the
+CREATE statement for the database object that you want to grant privileges on
+for more information.</p>
+<p>The
+syntax that you use for the GRANT statement depends on whether you are granting
+privileges to a schema object or granting a role.</p>
+
+<p>For more information on using the GRANT statement, see "Using SQL standard
+authorization" in the <span><em>Derby Developer's Guide</em></span>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax for tables</h2><pre><strong>GRANT <em><a href="rrefsqljgrant.html#rrefsqljgrant__grantprivtype">privilege-type</a></em> ON [TABLE] { <em><a href="rreftablename.html#rreftablename">table-Name</a></em> | <em><a href="rrefviewname.html#rrefviewname">view-Name</a></em> } TO <em><a href="rrefsqljgrant.html#rrefsqljgrant__grantgrantees">grantees</a></em></strong></pre>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax for routines</h2><pre><strong>GRANT EXECUTE ON { FUNCTION | PROCEDURE } <em><a href="rrefsqljgrant.html#rrefsqljgrant__grantroutinename">routine-designator</a></em> TO <em><a href="rrefsqljgrant.html#rrefsqljgrant__grantgrantees">grantees</a></em></strong></pre>
+</div>
+
+<div class="section" id="rrefsqljgrant__grantsequencesyn"><a name="rrefsqljgrant__grantsequencesyn"><!-- --></a><h2 class="sectiontitle">Syntax for sequence generators</h2>
+<pre><strong>GRANT USAGE ON SEQUENCE [ <em><a href="rrefschemaname.html#rrefschemaname">schemaName</a>.</em> ] <em><a href="crefsqlj34834.html#crefsqlj34834">SQL92Identifier</a></em> TO <em><a href="rrefsqljgrant.html#rrefsqljgrant__grantgrantees">grantees</a></em></strong></pre>
+
+<p>In order to use a sequence generator, you must have the USAGE privilege on
+it. This privilege can be granted to users and to roles. See 
+<a href="rrefsqljcreatesequence.html#rrefsqljcreatesequence">CREATE SEQUENCE statement</a> for more
+information.</p>
+
+<p>The sequence name is composed of an optional <em>schemaName</em> and a
+<em>SQL92Identifier</em>. If a <em>schemaName</em> is not provided, the current
+schema is the default schema. If a qualified sequence name is specified, the
+schema name cannot begin with SYS.</p>
+</div>
+
+<div class="section" id="rrefsqljgrant__granttypesyn"><a name="rrefsqljgrant__granttypesyn"><!-- --></a><h2 class="sectiontitle">Syntax for user-defined types</h2>
+<pre><strong>GRANT USAGE ON TYPE [ <em><a href="rrefschemaname.html#rrefschemaname">schemaName</a>.</em> ] <em><a href="crefsqlj34834.html#crefsqlj34834">SQL92Identifier</a></em> TO <em><a href="rrefsqljgrant.html#rrefsqljgrant__grantgrantees">grantees</a></em></strong></pre>
+
+<p>In order to use a user-defined type, you must have the USAGE privilege on
+it. This privilege can be granted to users and to roles. See 
+<a href="rrefsqljcreatetype.html#rrefsqljcreatetype">CREATE TYPE statement</a> for more
+information.</p>
+
+<p>The type name is composed of an optional <em>schemaName</em> and a
+<em>SQL92Identifier</em>. If a <em>schemaName</em> is not provided, the current
+schema is the default schema. If a qualified type name is specified, the schema
+name cannot begin with SYS.</p>
+</div>
+
+<div class="section" id="rrefsqljgrant__grantrolesyn"><a name="rrefsqljgrant__grantrolesyn"><!-- --></a><h2 class="sectiontitle">Syntax for roles</h2>
+<pre><strong>GRANT <em><a href="rrefrolename.html#rrefrolename">roleName</a></em> [ {, <em><a href="rrefrolename.html#rrefrolename">roleName</a></em> }* ] TO <em><a href="rrefsqljgrant.html#rrefsqljgrant__grantgrantees">grantees</a></em></strong></pre>
+
+<p>Before you can grant a role to a user or to another role, you must create the
+role using the <a href="rrefcreaterole.html#rrefcreaterole">CREATE ROLE
+statement</a>. Only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can
+grant a role.</p>
+
+<p>A role A <em>contains</em> another role B if role B is granted to role A, or is
+contained in a role C granted to role A. Privileges granted to a contained role
+are inherited by the containing roles. So the set of privileges identified by
+role A is the union of the privileges granted to role A and the privileges
+granted to any contained roles of role A.</p>
+
+</div>
+
+<div class="section" id="rrefsqljgrant__grantprivtype"><a name="rrefsqljgrant__grantprivtype"><!-- --></a><h2 class="sectiontitle">privilege-types</h2><pre><strong>  ALL PRIVILEGES |
+  privilege-list
+</strong></pre>
+</div>
+
+<div class="section" id="rrefsqljgrant__grantprivlist"><a name="rrefsqljgrant__grantprivlist"><!-- --></a><h2 class="sectiontitle">privilege-list</h2><pre><strong> table-privilege {, table-privilege }*
+</strong></pre>
+</div>
+
+<div class="section" id="rrefsqljgrant__granttablepriv"><a name="rrefsqljgrant__granttablepriv"><!-- --></a><h2 class="sectiontitle">table-privilege</h2><pre><strong>  DELETE |
+  INSERT |
+  REFERENCES [<em>column list</em>] |
+  SELECT [<em>column list</em>] |
+  TRIGGER |
+  UPDATE [<em>column list</em>]
+</strong></pre>
+</div>
+
+<div class="section" id="rrefsqljgrant__grantcollist"><a name="rrefsqljgrant__grantcollist"><!-- --></a><h2 class="sectiontitle">column list</h2><pre><strong>  ( column-identifier {, column-identifier}* )
+</strong></pre>
+</div>
+
+<div class="section"><p>Use the ALL PRIVILEGES privilege type to grant all of the privileges
+to the user or role for the specified table. You can also grant one or more table
+privileges by specifying a privilege-list.</p>
+<p>Use the DELETE privilege
+type to grant permission to delete rows from the specified table.</p>
+<p>Use
+the INSERT privilege type to grant permission to insert rows into the specified
+table.</p>
+<p>Use the REFERENCES privilege type to grant permission to create
+a foreign key reference to the specified table. If a column list is specified
+with the REFERENCES privilege, the permission is valid on only the foreign
+key reference to the specified columns.</p>
+<p>Use the SELECT privilege type
+to grant permission to perform
+<a href="rrefsqlj41360.html#rrefsqlj41360">SELECT statements</a> or
+<em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpressions</a></em>
+on a table or view. If a
+column list is specified with the SELECT privilege, the permission is valid
+on only those columns. If no column list is specified, then the privilege
+is valid on all of the columns in the table.</p>
+
+<p>For queries that do not select a specific column from the tables involved in
+a SELECT statement or <em>SelectExpression</em> (for example, queries that use
+<samp class="codeph">COUNT(*)</samp>), the user must have at least one column-level SELECT
+privilege or table-level SELECT privilege.</p>
+
+<p>Use the TRIGGER privilege
+type to grant permission to create a trigger on the specified table.</p>
+<p>Use
+the UPDATE privilege type to grant permission to use the UPDATE statement
+on the specified table. If a column list is specified, the permission applies
+only to the specified columns. To update a row using a statement that includes
+a WHERE clause, you must have the SELECT privilege on the columns in the row
+that you want to update. </p>
+</div>
+
+<div class="section" id="rrefsqljgrant__grantgrantees"><a name="rrefsqljgrant__grantgrantees"><!-- --></a><h2 class="sectiontitle">grantees</h2>
+<pre><strong>{ <em><a href="rrefrauthid.html#rrefrauthid">AuthorizationIdentifier</a></em> | <em><a href="rrefrolename.html#rrefrolename">roleName</a></em> | PUBLIC } 
+[, { <em><a href="rrefrauthid.html#rrefrauthid">AuthorizationIdentifier</a></em> | <em><a href="rrefrolename.html#rrefrolename">roleName</a></em> | PUBLIC } ] *</strong></pre>
+
+<p>You can grant privileges or roles to specific users or roles or to all users.
+Use the keyword PUBLIC to specify all users. When PUBLIC is specified, the
+privileges or roles affect all current and future users. The privileges granted
+to PUBLIC and to individual users or roles are independent privileges. For
+example, a SELECT privilege on table <samp class="codeph">t</samp> is granted to both
+PUBLIC and to the authorization ID <samp class="codeph">harry</samp>. The SELECT privilege
+is later revoked from the authorization ID <samp class="codeph">harry</samp>, but Harry can
+access the table <samp class="codeph">t</samp> through the PUBLIC privilege.</p>
+
+<p>Either the object owner or the database owner can grant privileges to a user
+or to a role. Only the database owner can grant a role to a user or to another
+role.</p>
+</div>
+
+<div class="section" id="rrefsqljgrant__grantroutinename"><a name="rrefsqljgrant__grantroutinename"><!-- --></a><h2 class="sectiontitle">routine-designator</h2><pre><strong>{
+	<em>function-name</em> | <em>procedure-name</em>
+}</strong></pre>
+</div>
+
+<div class="example" id="rrefsqljgrant__grantexamples"><a name="rrefsqljgrant__grantexamples"><!-- --></a><h2 class="sectiontitle">Examples</h2><div class="p">To grant the SELECT
+privilege on table <samp class="codeph">t</samp> to the authorization IDs <samp class="codeph">maria</samp> and <samp class="codeph">harry</samp>,
+use the following syntax:<pre><strong>GRANT SELECT ON TABLE t TO maria,harry</strong> </pre>
+</div>
+<div class="p">To
+grant the UPDATE and TRIGGER privileges on table <samp class="codeph">t</samp> to the authorization IDs <samp class="codeph">anita</samp> and <samp class="codeph">zhi</samp>,
+use the following syntax:<pre><strong>GRANT UPDATE, TRIGGER ON TABLE t TO anita,zhi</strong> </pre>
+</div>
+<div class="p">To
+grant the SELECT privilege on table <samp class="codeph">s.v</samp> to all users, use the following syntax:<pre><strong>GRANT SELECT ON TABLE s.v to PUBLIC</strong></pre>
+</div>
+<p>To grant the EXECUTE privilege on procedure <samp class="codeph">p</samp> to the authorization ID <samp class="codeph">george</samp>,
+use the following syntax:</p>
+<pre><strong>GRANT EXECUTE ON PROCEDURE p TO george</strong> </pre>
+
+<p>To grant the role <samp class="codeph">purchases_reader_role</samp> to the authorization
+IDs <samp class="codeph">george</samp> and <samp class="codeph">maria</samp>, use the following
+syntax:</p>
+
+<pre><strong>GRANT purchases_reader_role TO george,maria</strong></pre>
+
+<p>To grant the SELECT privilege on table <samp class="codeph">t</samp> to the role
+<samp class="codeph">purchases_reader_role</samp>, use the following syntax:</p>
+
+<pre><strong>GRANT SELECT ON TABLE t TO purchases_reader_role</strong></pre>
+
+<p>To grant the USAGE privilege on the sequence generator
+<samp class="codeph">order_id</samp> to the role <samp class="codeph">sales_role</samp>, use the
+following syntax:</p>
+
+<pre><strong>GRANT USAGE ON SEQUENCE order_id TO sales_role;</strong></pre>
+
+<p>To grant the USAGE privilege on the user-defined type
+<samp class="codeph">price</samp> to the role <samp class="codeph">finance_role</samp>, use the
+following syntax:</p>
+
+<pre><strong>GRANT USAGE ON TYPE price TO finance_role;</strong></pre>
+
+</div>
+
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj39374.html" title="">Statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqljrevoke.html" title="Use the REVOKE statement to remove privileges from a specific user or role, or from all users, to perform actions on database objects. You can also use the REVOKE statement to revoke a role from a user, from PUBLIC, or from another role.">REVOKE statement</a></div>
+<div><a href="rrefsistabssystableperms.html" title="The SYSTABLEPERMS table stores the table permissions that have been granted but not revoked.">SYSTABLEPERMS system table</a></div>
+<div><a href="rrefsistabssyscolperms.html" title="The SYSCOLPERMS table stores the column permissions that have been granted but not revoked.">SYSCOLPERMS system table</a></div>
+</div>
+</div>
+
+</body>
+</html>

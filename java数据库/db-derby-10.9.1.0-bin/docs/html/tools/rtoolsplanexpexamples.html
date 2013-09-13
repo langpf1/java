@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="PlanExporter example" />
+<meta content="PlanExporter, example, examples" name="DC.subject" />
+<meta content="PlanExporter, example, examples" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsplanexp.html" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsusingplanexp.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsplanexpxmlformat.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsplanexpexamples" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>PlanExporter example</title>
+</head>
+<body id="rtoolsplanexpexamples"><a name="rtoolsplanexpexamples"><!-- --></a>
+
+
+<h1 class="topictitle1">PlanExporter example</h1>
+
+
+<div>
+<div class="section"><p>This example shows the steps that you must follow in order
+to use the <samp class="codeph">PlanExporter</samp> tool.</p>
+
+</div>
+
+<div class="example">
+<ol>
+<li>Move to the directory where your database was created.</li>
+
+<li>Run the <samp class="codeph">ij</samp> tool:
+<pre>java org.apache.derby.tools.ij</pre>
+
+</li>
+
+<li>Create a connection to the database:
+<pre>CONNECT 'jdbc:derby:myDb;create=false';</pre>
+
+<div class="note"><span class="notetitle">Note: </span>You can use a <span>Derby</span>
+client/server database as well. </div>
+
+</li>
+
+<li>Use XPLAIN styles:
+<pre>
+CALL SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS(1);
+CALL SYSCS_UTIL.SYSCS_SET_XPLAIN_SCHEMA('MY_SCHEMA');
+select * from my_table;
+CALL SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS(0);
+CALL SYSCS_UTIL.SYSCS_SET_XPLAIN_SCHEMA('');
+</pre>
+
+</li>
+
+<li>Obtain the <samp class="codeph">stmt_id</samp> of the query:
+<pre>
+select stmt_text, stmt_id from MY_SCHEMA.SYSXPLAIN_STATEMENTS;
+exit;
+</pre>
+
+<p>Now find the <samp class="codeph">stmt_id</samp> of the executed query in the displayed
+results and note it down. It looks something like this:</p>
+
+<pre>9ac8804c-0129-cc31-ca9a-00000047f1e8</pre>
+
+</li>
+
+<li>Run the <samp class="codeph">PlanExporter</samp> tool in the same location:
+<pre>java org.apache.derby.tools.PlanExporter jdbc:derby:myDb MY_SCHEMA 
+    9ac8804c-0129-cc31-ca9a-00000047f1e8 -html plain_html;</pre>
+
+<p>This command uses the default style sheet provided with 
+<span>Derby</span>, and the HTML
+file will be generated at the same location, since the command does not specify
+a different path. The name of the HTML file generated is <em>plain_html.html</em>.
+</p>
+
+</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsplanexp.html" title="">PlanExporter</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctoolsusingplanexp.html" title="">Using PlanExporter</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsplanexpxmlformat.html" title="">PlanExporter XML format</a></div>
+</div>
+</div>
+
+</body>
+</html>

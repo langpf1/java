@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="The SYSCS_CHECK_TABLE function" />
+<meta content="org.apache.derby.database. ConsistencyChecker.checkTable" name="DC.subject" />
+<meta content="org.apache.derby.database. ConsistencyChecker.checkTable" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminconsist01.html" />
+<meta scheme="URI" name="DC.Relation" content="radminconsist38781.html" />
+<meta scheme="URI" name="DC.Relation" content="radminconsist24642.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminconsist30301" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>The SYSCS_CHECK_TABLE function</title>
+</head>
+<body id="radminconsist30301"><a name="radminconsist30301"><!-- --></a>
+
+
+<h1 class="topictitle1">The SYSCS_CHECK_TABLE function</h1>
+
+
+<div>
+<div class="section"><div class="p">The SYSCS_UTIL.SYSCS_CHECK_TABLE() function checks the consistency
+of a <span>Derby</span> table. In
+particular, the <em>SYSCS_UTIL.SYSCS_CHECK_TABLE</em> function verifies the
+following conditions:<ul>
+<li>Base tables are internally consistent</li>
+
+<li>Base tables and all associated indexes contain the same number of rows</li>
+
+<li>The values and row locations in each index match those of the base table</li>
+
+<li>All BTREE indexes are internally consistent</li>
+
+</ul>
+You run this function in an SQL statement, as follows:</div>
+</div>
+
+<div class="example"> <pre>VALUES SYSCS_UTIL.SYSCS_CHECK_TABLE(
+    <em>SchemaName</em>, <em>TableName</em>)</pre>
+where <em>SchemaName</em> and <em>TableName</em> are
+expressions that evaluate to a string data type. If you created a schema or
+table name as a non-delimited identifier, you must present their names in
+all upper case. For example:<pre>VALUES SYSCS_UTIL.SYSCS_CHECK_TABLE('APP', 'CITIES')</pre>
+</div>
+
+<div class="section"><p>The SYSCS_UTIL.SYSCS_CHECK_TABLE function returns a smallint.
+If the table is consistent (or if you run SYSCS_UTIL.SYSCS_CHECK_TABLE on
+a view), SYSCS_UTIL.SYSCS_CHECK_TABLE returns a non-zero value. Otherwise,
+the function throws an exception on the first inconsistency that it finds.</p>
+</div>
+
+<div class="section"><p>For a consistent table, the following result is displayed:</p>
+</div>
+
+<div class="example"> <pre>1
+-----
+1
+
+1 row selected</pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminconsist01.html" title="After you perform a backup, or if you experience hardware or operating system failure, you can use the SYSCS_UTIL.SYSCS_CHECK_TABLE system function to verify that the database is still consistent.">Checking database consistency</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminconsist38781.html" title="This section provides examples of error messages that the SYSCS_UTIL.SYSCS_CHECK_TABLE() function can return.">Sample SYSCS_CHECK_TABLE error messages</a></div>
+<div><a href="radminconsist24642.html" title="">Sample SYSCS_CHECK_TABLE queries</a></div>
+</div>
+</div>
+
+</body>
+</html>

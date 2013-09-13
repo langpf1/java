@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="IDENTITY_VAL_LOCAL関数" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefidentityvallocal" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>IDENTITY_VAL_LOCAL関数</title>
+</head>
+<body id="rrefidentityvallocal"><a name="rrefidentityvallocal"><!-- --></a>
+
+
+<h1 class="topictitle1">IDENTITY_VAL_LOCAL関数</h1>
+
+<div>
+<div class="section"><p><span>Derby</span> はIDENTITY_VAL_LOCAL関数をサポートします。</p>
+</div>
+
+<div class="section"><div class="p"><strong>構文:</strong> <pre> IDENTITY_VAL_LOCAL ( )</pre>
+</div>
+</div>
+
+<div class="section"><p>IDENTITY_VAL_LOCAL関数は非決定性の関数で、最近その接続でVALUES節のあるINSERT文により識別列へ代入された値を返します。</p>
+</div>
+
+<div class="section"><p>IDENTITY_VAL_LOCAL関数には引数はありません。関数の結果は対応する識別列のデータ型によらずDECIMAL (31,0)です。</p>
+</div>
+
+<div class="section"><p>IDENTITY_VAL_LOCAL関数により、ある接続に返される値は、単行のINSERT文で識別列に代入された最近の値です。INSERT文は識別列を持つ表へのVALUES節を持たなければなりません。
+代入された値は<span>Derby</span>が生成した識別値です。
+もし識別列を持つ表に対して単行のINSERT文が発行されていないなら、この関数はnullを返します。
+</p>
+</div>
+
+<div class="section"><div class="p">この関数の結果は以下の事柄に影響を受けません。
+ <ul>
+<li>識別列のないVALUES節を持つ単行のINSERT文</li>
+
+<li>VALUES節を持つ複数行のINSERT文</li>
+
+<li>selectによるINSERT文</li>
+
+</ul>
+</div>
+もし識別列を持つ表にINSERTトリガが定義されており、そのトリガが別の識別列を持つ表への挿入を行う場合、IDENTITY_VAL_LOCAL()関数は文で生成された値を返し、トリガによる値を返しません。</div>
+
+<div class="section"><p><strong>例:</strong></p>
+</div>
+
+<div class="example"> <pre>ij&gt; create table t1(c1 int generated always as identity, c2 int);
+0 rows inserted/updated/deleted
+ij&gt; insert into t1(c2) values (8);
+1 row inserted/updated/deleted
+ij&gt; values IDENTITY_VAL_LOCAL();
+1 
+-------------------------------
+1                              
+1 row selected
+ij&gt; select IDENTITY_VAL_LOCAL()+1, IDENTITY_VAL_LOCAL()-1 from t1;
+1                                |2                          
+-------------------------------------------------------------------
+2                                |0                                
+1 row selected
+ij&gt; insert into t1(c2) values (IDENTITY_VAL_LOCAL());
+1 row inserted/updated/deleted
+ij&gt; select * from t1;
+C1             |C2             
+-------------------------------
+1              |8              
+2              |1              
+2 rows selected
+ij&gt; values IDENTITY_VAL_LOCAL();
+1                        
+-------------------------------
+2                              
+1 row selected
+ij&gt; insert into t1(c2) values (8), (9);
+2 rows inserted/updated/deleted
+ij&gt; -- 複数の値の挿入では、関数が返す値は変わらない。
+values IDENTITY_VAL_LOCAL();
+1                        
+-------------------------------
+2                              
+1 row selected
+ij&gt; select * from t1;
+C1             |C2             
+-------------------------------
+1              |8              
+2              |1              
+3              |8              
+4              |9              
+4 rows selected
+ij&gt; insert into t1(c2) select c1 from t1;
+4 rows inserted/updated/deleted
+-- selectを元にした挿入では、関数が返す値は変わらない。
+ij&gt; values IDENTITY_VAL_LOCAL();
+1                        
+-------------------------------
+2                              
+1 row selected
+ij&gt; select * from t1;
+C1             |C2             
+-------------------------------
+1              |8              
+2              |1              
+3              |8              
+4              |9              
+5              |1              
+6              |2              
+7              |3              
+8              |4              
+8 rows selected         </pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

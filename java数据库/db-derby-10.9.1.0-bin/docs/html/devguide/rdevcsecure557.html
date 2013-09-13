@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="List of user authentication properties" />
+<meta name="abstract" content="The following table summarizes the Derby properties related to user authentication." />
+<meta name="description" content="The following table summarizes the Derby properties related to user authentication." />
+<meta content="properties, list of, user authentication" name="DC.subject" />
+<meta content="properties, list of, user authentication" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecurenativeauth.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure36127.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure37817.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure38522.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecurenativeauth.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure79358.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure42374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rdevcsecure557" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>List of user authentication properties</title>
+</head>
+<body id="rdevcsecure557"><a name="rdevcsecure557"><!-- --></a>
+
+
+<h1 class="topictitle1">List of user authentication properties</h1>
+
+
+
+<div><p>The following table summarizes the
+<span>Derby</span> properties related to
+user authentication.</p>
+
+<div class="section">
+<p>For details on these properties, see the
+<span><em>Derby Reference Manual</em></span>.</p>
+
+</div>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists and describes the Derby properties related to user authentication." frame="border" border="1" rules="all"><caption>Table 1. User authentication properties</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="54.08163265306123%" id="N1008E">Property Name</th>
+
+<th valign="bottom" width="45.91836734693878%" id="N10095">Use</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.authentication.provider</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Specifies the kind of user authentication to use.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.authentication.builtin.algorithm</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Specifies the message digest algorithm to use to protect the
+passwords that are stored in the database when using NATIVE or BUILTIN
+authentication.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.authentication.builtin.iterations</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Specifies the number of times to apply the hash function
+specified by the message digest algorithm.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.authentication.builtin.saltLength</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Specifies the number of bytes of random salt that will be
+added to users' credentials before hashing them.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.authentication.native.passwordLifetimeMillis</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Specifies the number of milliseconds that a password used for
+NATIVE authentication remans valid.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.authentication.native.passwordLifetimeThreshold</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Specifies the threshold that triggers a password-expiration
+warning for NATIVE authentication.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.connection.requireAuthentication</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Turns on user authentication. If NATIVE authentication is
+used, <span>Derby</span> behaves as if
+this property is set to TRUE.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.authentication.server</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">For LDAP user authentication, specifies the location of
+the server.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.authentication.ldap.searchAuthDN</samp>, 
+<samp class="codeph">derby.authentication.ldap.searchAuthPW</samp>,
+<samp class="codeph">derby.authentication.ldap.searchFilter</samp>, and 
+<samp class="codeph">derby.authentication.ldap.searchBase</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Configures the way that DN searches are performed.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">derby.user.UserName</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">Creates a user name and password for the BUILTIN user
+repository in <span>Derby</span>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="54.08163265306123%" headers="N1008E"><samp class="codeph">java.naming.*</samp></td>
+
+<td valign="top" width="45.91836734693878%" headers="N10095">JNDI properties. See Appendix A in the JNDI API reference
+(<a href="http://download.oracle.com/javase/1.5.0/docs/guide/jndi/spec/jndi/properties.html" target="_blank">http://download.oracle.com/javase/1.5.0/docs/guide/jndi/spec/jn
+di/properties.html</a>) for more information about these properties.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<div class="section">
+<div class="important"><span class="importanttitle">Important: </span><span>Derby</span>'s
+BUILTIN authentication mechanism is suitable only for development and testing
+purposes, and it will no longer be documented in future releases. It is strongly
+recommended that production systems rely on NATIVE authentication, an
+external directory service such as LDAP, or a user-defined class for
+authentication. It is also strongly recommended that production systems protect
+network connections with SSL/TLS.</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure42374.html" title="Derby provides support for user authentication and user authorization. User authentication determines whether a user is a valid user. It establishes the user's identity. User authorization determines what operations a user's established identity can perform. You are strongly urged to implement both authentication and authorization on any multi-user database used in production.">Working with user authentication</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecurenativeauth.html" title="Derby's simplest authentication mechanism is NATIVE authentication.">Using NATIVE authentication</a></div>
+<div><a href="cdevcsecure36127.html" title="If you use NATIVE authentication, you do not need to set the derby.connection.requireAuthentication property. When you create a database with NATIVE authentication, simply specify a username and password, and that user becomes the database owner.">Enabling user authentication</a></div>
+<div><a href="cdevcsecure37817.html" title="Derby provides several ways to define the repository of users and passwords. To specify which of these services to use with your Derby system, set the property derby.authentication.provider to an appropriate value.">Defining users</a></div>
+<div><a href="cdevcsecure38522.html" title="A directory service stores names and attributes of those names. A typical use for a directory service is to store user names and passwords for a computer system. Derby uses the Java naming and directory interface (JNDI) to interact with external directory services that can provide authentication of users' names and passwords.">External directory service</a></div>
+<div><a href="cdevcsecure79358.html" title="This section discusses programming user authentication into applications for use with Derby.">Programming applications for Derby user authentication</a></div>
+</div>
+</div>
+
+</body>
+</html>

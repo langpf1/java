@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Starting ij using properties" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsij34525.html" />
+<meta scheme="URI" name="DC.Relation" content="ttoolsij11815.html" />
+<meta scheme="URI" name="DC.Relation" content="ttoolsijcreatedatabase.html" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsij32837.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ttoolsij30600" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Starting ij using properties</title>
+</head>
+<body id="ttoolsij30600"><a name="ttoolsij30600"><!-- --></a>
+
+
+<h1 class="topictitle1">Starting ij using properties</h1>
+
+<div>
+<div class="section"> <p>You set ij properties in any of the following ways:</p>
+<ol>
+<li>by using the -D option on the command line</li>
+
+<li>by specifying a properties file using the <samp class="codeph">-p propertyfile</samp> option
+on the command line</li>
+
+</ol>
+<div class="p"><div class="remember"><span class="remembertitle">Remember: </span>ij property names are case-sensitive, while
+commands are case-insensitive.</div>
+</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2>
+<p>The following examples illustrate how to use ij properties.</p>
+
+<div class="p">To start ij by using a properties file called <samp class="codeph">ij.properties</samp>,
+use a command like the following (with the addition of the file paths):   
+<pre><strong><kbd class="userinput">java -jar derbyrun.jar -p ij.properties</kbd></strong></pre>
+</div>
+<div class="p">To
+start ij with a maximumDisplayWidth of 1000:   
+<pre><strong><kbd class="userinput">java -Dij.maximumDisplayWidth=1000 -jar derbyrun.jar</kbd></strong></pre>
+</div>
+<div class="p">To
+start ij with an <a href="rtoolsijpropref35032.html#rtoolsijpropref35032">ij.protocol</a> of <strong>jdbc:derby:</strong> and
+an <a href="rtoolsijpropref28146.html#rtoolsijpropref28146">ij.database</a> of <strong>sample</strong>,
+use the following command:  
+<pre><strong><kbd class="userinput">java -Dij.protocol=jdbc:derby: -Dij.database=sample derbyrun.jar</kbd></strong></pre>
+</div>
+<div class="p">To start ij with two named
+connections, using the <a href="rtoolsijpropref10135.html#rtoolsijpropref10135">ij.connection.connectionName</a> property,
+use a command like the following (all on one line):   
+<pre><strong><kbd class="userinput">java -Dij.connection.sample=jdbc:derby:sample 
+-Dij.connection.History=jdbc:derby:History 
+-Dderby.system.home=c:\derby\demo\databases
+-jar c:\derby\lib\derbyrun.jar</kbd></strong></pre>
+To see a list of connection names and
+the URLs used to connect to them, use the following command. (If there is
+a connection that is currently active, it will show up with an * after its
+name.) 
+<pre>ij version <span>10.9</span>
+ij(HISTORY)&gt; <strong><kbd class="userinput">show connections;</kbd></strong>
+HISTORY* -    jdbc:derby:History
+SAMPLE -     jdbc:derby:sample
+* = current connection
+ij(HISTORY)&gt;</pre>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsij34525.html" title="ij is Derby's interactive JDBC scripting tool. It is a simple utility for running scripts or interactive queries against a Derby database.">Using ij</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctoolsij32837.html" title="">Getting started with ij</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="ttoolsij11815.html" title="">Starting ij</a></div>
+<div><a href="ttoolsijcreatedatabase.html" title="">Creating a database using ij</a></div>
+</div>
+</div>
+
+</body>
+</html>

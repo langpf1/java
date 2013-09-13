@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="大文字小文字と特殊文字" />
+<meta content="Case sensitivity of keywords and identifiers, Keywords, case insensitivity of, Special characters, escaping in SQL statements, Escape character, for single-quotation mark, Strings, delimited by single quotation marks within SQL statements, Unicode escapes, support for in SQL statements, Java identifiers, case sensitivity of within SQL, * as wildcard in SQL SELECT, % as wildcard in SQL, _ as wildcard within SQL, Wildcards in SQL, Comment delimiters within SQL, -- (comment delimiters within SQL)" name="DC.subject" />
+<meta content="Case sensitivity of keywords and identifiers, Keywords, case insensitivity of, Special characters, escaping in SQL statements, Escape character, for single-quotation mark, Strings, delimited by single quotation marks within SQL statements, Unicode escapes, support for in SQL statements, Java identifiers, case sensitivity of within SQL, * as wildcard in SQL SELECT, % as wildcard in SQL, _ as wildcard within SQL, Wildcards in SQL, Comment delimiters within SQL, -- (comment delimiters within SQL)" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefkeywords29722.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsql9241891.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexcept16677.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj28468" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>大文字小文字と特殊文字</title>
+</head>
+<body id="rrefsqlj28468"><a name="rrefsqlj28468"><!-- --></a>
+
+
+<h1 class="topictitle1">大文字小文字と特殊文字</h1>
+
+
+<div>
+<div class="section"><div class="p">JDBCのクラスやメソッドにSQL文の文字列を渡して、<span>Derby</span>にSQLを発行することができます。
+SQL文の文字列に可能な文字セットはUnicodeです。この文字列には、次の規則が適用されます。<ul>
+<li>二重引用符でSQL-92に定義されている特殊識別子をデリミトして、<em>デリミトされた識別子</em>とすることができます。</li>
+
+<li>一重引用符で文字の列を区切ることができます。</li>
+
+<li>文字の列にて一重引用符またはアポストロフィーをあらわすには、一重引用符を2つ並べます。(言い方を変えれば、一重引用符は一重引用符のエスケープ文字です。)<p>二重引用符にはエスケープ文字が必要ではありません。二重引用符をあらわすには、単に二重引用符を使ってください。ただし、Javaのプログラムでは、二重引用符はバックスラッシュによるエスケープが必要であることを気に留める必要があります。</p>
+<span><strong>例:</strong></span>
+<pre><strong><span>-- 一重引用符はエスケープ文字です-- 一重引用符に対して</span>
+
+VALUES 'Joe''s umbrella'
+<span>-- ijでは二重引用符はエスケープされません。</span>
+VALUES 'He said, "hello!"'
+
+n = stmt.executeUpdate(
+    "UPDATE aTable setStringcol = 'He said, \"hello!\"'");</strong></pre>
+</li>
+
+<li>SQLのキーワードは大文字小文字を区別しません。例えば、SELECTというキーワードは、SELECT、Select、select、sELECTのいずれでも書くことができます。</li>
+
+<li>SQL-92の書き方による識別子は大文字小文字を区別しません。(<em><a href="crefsqlj34834.html#crefsqlj34834">SQL92識別子</a></em>を参照してください。)ただしデリミトされた識別子はそうではありません。</li>
+
+<li>Javaの書き方による識別子は常に大文字小文字を区別します。</li>
+
+<li>*は、<em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a>.</em>にてワイルドカード文字です。<a href="rrefselectexpression.html#rrefselectexpression__sqlj38441">ワイルドカードの*</a>を参照してください。
+この文字は同時に情報演算子でもあります。そのほかの場合この文字は、0回以上の繰り返しを表す、構文のメタ文字です。</li>
+
+<li>%と_は、LIKE演算子に続く文字の列にて使われると、ワイルドカード文字となります。(これはエスケープされなかった場合です。)詳細は<a href="rrefsqlj23075.html#rrefsqlj23075">真偽式</a>を参照してください。</li>
+
+<li>SQL-92の仕様に沿って一行あるいは複数行のコメントを書くことができます。一行のコメントは二つのダッシュ(--)で始まり改行文字で終わります。複数行の改行は前後を囲う書き方で、スラッシュ・スター(/*)で始まり、スター・スラッシュ(*/)で終わります。この書き方では入れ子となる場合があることを留意してください。コメントの開始文字と終了文字の間にある、あらゆる文字は無視されます。</li>
+
+</ul>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj23296.html" title="">SQL言語のリファレンス</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQLの識別子</a></div>
+<div><a href="crefsqlj39374.html" title="">文</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">組込みシステム関数</a></div>
+<div><a href="crefjdbc12657.html" title="Derbyは組み込みのJDBCドライバと共に提供されます。">JDBC リファレンス</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefclauses.html" title="">SQL 節</a></div>
+<div><a href="rrefsqlj19433.html" title="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。">SQL式</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN 演算</a></div>
+<div><a href="rrefqueries.html" title="">SQL 問い合わせ</a></div>
+<div><a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+<div><a href="rrefkeywords29722.html" title="">SQL予約語</a></div>
+<div><a href="rrefsql9241891.html" title="">DerbyのサポートするSQL-92の機能</a></div>
+<div><a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+<div><a href="rrefexcept16677.html" title="Derbyにて発生する全てのエラーは、JDBCからSQLExceptionとして挙がります。 もしユーザの定義した型から例外が挙がって、その例外がSQLExceptionでは無い場合、その例外はSQLExceptionにラップされています。 Derby固有のSQLExceptionは、SQLStateクラスに定義されたXで始まるコードを用います。標準に定義されたSQLStateの値は、対応する例外に対して返されます。">Derbyの例外メッセージとSQL state</a></div>
+<div><a href="rrefjdbc87220.html" title="">java.sql.BatchUpdateException クラス</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">Connected Device ConfigurationおよびFoundation Profile向けのJDBCパッケージ(JSR169)</a></div>
+<div><a href="rrefjdbc32593.html" title="">JDBC 3.0の機能</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0の機能</a></div>
+<div><a href="rrefjdbc1020262.html" title="">JDBCエスケープの構文</a></div>
+</div>
+</div>
+
+</body>
+</html>

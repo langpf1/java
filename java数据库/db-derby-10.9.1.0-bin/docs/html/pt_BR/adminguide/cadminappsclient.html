@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Acesso ao Network Server utilizando o driver cliente da rede" />
+<meta name="abstract" content="Para se conectar ao Network Server, o aplicativo precisa carregar o driver e a URL de conexão específica para o Network Server. Além disso, caso esteja sendo utilizado autenticação, deverá ser especificado nome de usuário e senha." />
+<meta name="description" content="Para se conectar ao Network Server, o aplicativo precisa carregar o driver e a URL de conexão específica para o Network Server. Além disso, caso esteja sendo utilizado autenticação, deverá ser especificado nome de usuário e senha." />
+<meta content="Driver cliente da rede" name="DC.subject" />
+<meta content="Driver cliente da rede" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps59125.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsthenetworkserverandjvms.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappschangingyourclasspath.html" />
+<meta scheme="URI" name="DC.Relation" content="tadmincbdjhhfd.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigshuttingdownthenetworkserver.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigsysteminformation.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminnsdatasources.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps811478.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsusingthederbytoolswiththene.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappssettingportnumbers.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsclientsecurity.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsclienttracing.html" />
+<meta scheme="URI" name="DC.Relation" content="radminappsclientxmp.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps810777.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminappsclient" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Acesso ao Network Server utilizando o driver cliente da rede</title>
+</head>
+<body id="cadminappsclient"><a name="cadminappsclient"><!-- --></a>
+
+
+<h1 class="topictitle1">Acesso ao Network Server utilizando o driver cliente da rede</h1>
+
+
+
+<div><p>Para se conectar ao <em>Network Server</em>, o aplicativo precisa
+carregar o <em>driver</em> e a URL de conexão específica para o
+<em>Network Server</em>.
+Além disso, caso esteja sendo utilizado autenticação, deverá ser especificado
+nome de usuário e senha.</p>
+
+<div class="p">O <em>driver</em> necessário para acessar o <em>Network Server</em> é:
+<pre>org.apache.derby.jdbc.ClientDriver</pre>
+</div>
+
+<div class="p">A sintaxe da URL requerida para acessar o <em>Network Server</em> é:
+<pre>jdbc:derby://&lt;servidor&gt;[:&lt;porta&gt;]/
+&lt;nome-do-banco-de-dados&gt;[;&lt;atributo-da-URL&gt;=&lt;valor&gt; [;...]]</pre>
+
+onde <samp class="codeph">&lt;atributo-da-UR&gt;</samp> é um atributo de cliente
+incorporado ou da rede do
+<span>Derby</span>.</div>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="Tabela 1. Propriedades de DataSource de JDBC padrão" frame="border" border="1" rules="all"><caption>Tabela 1. Propriedades de DataSource de JDBC padrão</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="22.821576763485478%" id="N100BD">Propriedade</th>
+
+<th valign="bottom" width="10.16597510373444%" id="N100C4">Tipo</th>
+
+<th valign="bottom" width="21.991701244813278%" id="N100CB">Descrição</th>
+
+<th valign="bottom" width="15.145228215767634%" id="N100D2">Atributo da URL</th>
+
+<th valign="bottom" width="29.87551867219917%" id="N100D9">Notas</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="22.821576763485478%" headers="N100BD">databaseName</td>
+
+<td valign="top" width="10.16597510373444%" headers="N100C4">String</td>
+
+<td valign="top" width="21.991701244813278%" headers="N100CB">O nome do banco de dados. Esta propriedade é requerida.</td>
+
+<td valign="top" width="15.145228215767634%" headers="N100D2">&nbsp;</td>
+
+<td valign="top" width="29.87551867219917%" headers="N100D9">Esta propriedade também está disponível quando se usa EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="22.821576763485478%" headers="N100BD">dataSourceName</td>
+
+<td valign="top" width="10.16597510373444%" headers="N100C4">String</td>
+
+<td valign="top" width="21.991701244813278%" headers="N100CB">O nome da fonte de dados.</td>
+
+<td valign="top" width="15.145228215767634%" headers="N100D2">&nbsp;</td>
+
+<td valign="top" width="29.87551867219917%" headers="N100D9">Esta propriedade também está disponível quando se usa EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="22.821576763485478%" headers="N100BD">description</td>
+
+<td valign="top" width="10.16597510373444%" headers="N100C4">String</td>
+
+<td valign="top" width="21.991701244813278%" headers="N100CB">A descrição da fonte de dados.</td>
+
+<td valign="top" width="15.145228215767634%" headers="N100D2">&nbsp;</td>
+
+<td valign="top" width="29.87551867219917%" headers="N100D9">Esta propriedade também está disponível quando se usa EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="22.821576763485478%" headers="N100BD">user</td>
+
+<td valign="top" width="10.16597510373444%" headers="N100C4">String</td>
+
+<td valign="top" width="21.991701244813278%" headers="N100CB">O nome da conta do usuário.</td>
+
+<td valign="top" width="15.145228215767634%" headers="N100D2">user</td>
+
+<td valign="top" width="29.87551867219917%" headers="N100D9">O valor padrão é APP. Esta propriedade também está disponível quando se usa EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="22.821576763485478%" headers="N100BD">password</td>
+
+<td valign="top" width="10.16597510373444%" headers="N100C4">String</td>
+
+<td valign="top" width="21.991701244813278%" headers="N100CB">A senha de banco de dados do usuário.</td>
+
+<td valign="top" width="15.145228215767634%" headers="N100D2">password</td>
+
+<td valign="top" width="29.87551867219917%" headers="N100D9">Esta propriedade também está disponível quando se usa EmbeddedDataSource.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="22.821576763485478%" headers="N100BD">serverName</td>
+
+<td valign="top" width="10.16597510373444%" headers="N100C4">String</td>
+
+<td valign="top" width="21.991701244813278%" headers="N100CB">O nome do hospedeiro, ou o endereço de TCP/IP, onde o
+servidor está escutando as requisições.</td>
+
+<td valign="top" width="15.145228215767634%" headers="N100D2">&nbsp;</td>
+
+<td valign="top" width="29.87551867219917%" headers="N100D9">O valor padrão é "localhost".</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="22.821576763485478%" headers="N100BD">portNumber</td>
+
+<td valign="top" width="10.16597510373444%" headers="N100C4">Integer</td>
+
+<td valign="top" width="21.991701244813278%" headers="N100CB">O número da porta onde o servidor está escutando as requisições.</td>
+
+<td valign="top" width="15.145228215767634%" headers="N100D2">&nbsp;</td>
+
+<td valign="top" width="29.87551867219917%" headers="N100D9">O valor padrão é "1527".</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="Tabela 2. Propriedades de DataSource específicas do cliente" frame="border" border="1" rules="all"><caption>Tabela 2. Propriedades de DataSource específicas do cliente</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="23.651452282157674%" id="N10243">Propriedade</th>
+
+<th valign="bottom" width="12.655601659751037%" id="N1024A">Tipo</th>
+
+<th valign="bottom" width="20.95435684647303%" id="N10251">Descrição</th>
+
+<th valign="bottom" width="25.103734439834025%" id="N10258">Atributo da URL</th>
+
+<th valign="bottom" width="17.634854771784234%" id="N1025F">Notas</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="23.651452282157674%" headers="N10243">traceFile</td>
+
+<td valign="top" width="12.655601659751037%" headers="N1024A">String</td>
+
+<td valign="top" width="20.95435684647303%" headers="N10251">O nome do arquivo para saída do rastreamento.
+Definir esta propriedade ativa o rastreamento.
+Consulte <a href="cadminappsclienttracing.html#cadminappsclienttracing">Rastreamento do cliente da rede</a>.</td>
+
+<td valign="top" width="25.103734439834025%" headers="N10258"><em>traceFile</em></td>
+
+<td valign="top" width="17.634854771784234%" headers="N1025F">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.651452282157674%" headers="N10243">traceDirectory</td>
+
+<td valign="top" width="12.655601659751037%" headers="N1024A">String</td>
+
+<td valign="top" width="20.95435684647303%" headers="N10251">O diretório para saída do rastreamento.
+Cada conexão envia a saída para um arquivo separado.
+Definir esta propriedade ativa o rastreamento.
+Consulte <a href="cadminappsclienttracing.html#cadminappsclienttracing">Rastreamento do cliente da rede</a>.</td>
+
+<td valign="top" width="25.103734439834025%" headers="N10258"><em>traceDirectory</em></td>
+
+<td valign="top" width="17.634854771784234%" headers="N1025F">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.651452282157674%" headers="N10243">traceLevel</td>
+
+<td valign="top" width="12.655601659751037%" headers="N1024A">Integer</td>
+
+<td valign="top" width="20.95435684647303%" headers="N10251">O nível de rastreamento do cliente, se
+<em>traceFile</em> ou <em>traceDirectory</em> estiver definido.</td>
+
+<td valign="top" width="25.103734439834025%" headers="N10258"><em>traceLevel</em></td>
+
+<td valign="top" width="17.634854771784234%" headers="N1025F">O valor padrão é TRACE_ALL.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.651452282157674%" headers="N10243">traceFileAppend</td>
+
+<td valign="top" width="12.655601659751037%" headers="N1024A">Boolean</td>
+
+<td valign="top" width="20.95435684647303%" headers="N10251">Verdade se a saída do rastreamento deverá ser
+anexada ao arquivo de rastreamento existente.</td>
+
+<td valign="top" width="25.103734439834025%" headers="N10258"><em>traceFileAppend</em></td>
+
+<td valign="top" width="17.634854771784234%" headers="N1025F">O valor padrão é falso.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.651452282157674%" headers="N10243">securityMechanism</td>
+
+<td valign="top" width="12.655601659751037%" headers="N1024A">Integer</td>
+
+<td valign="top" width="20.95435684647303%" headers="N10251">O mecanismo de segurança. Consulte <a href="cadminappsclientsecurity.html#cadminappsclientsecurity">Segurança do cliente da rede</a>.</td>
+
+<td valign="top" width="25.103734439834025%" headers="N10258"><em>securityMechanism</em></td>
+
+<td valign="top" width="17.634854771784234%" headers="N1025F">O valor padrão é USER_ONLY _SECURITY.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="23.651452282157674%" headers="N10243">retrieveMessageText</td>
+
+<td valign="top" width="12.655601659751037%" headers="N1024A">Boolean</td>
+
+<td valign="top" width="20.95435684647303%" headers="N10251">Buscar o texto da mensagem no servidor.
+É chamado um procedimento armazenado para buscar o texto da mensagem a cada
+<em>SQLException</em>, devendo iniciar uma nova unidade de trabalho.
+Esta propriedade deverá ser definida como falsa se não for desejado impacto no
+desempenho, ou quando iniciando novas unidades de trabalho.</td>
+
+<td valign="top" width="25.103734439834025%" headers="N10258"><em>retrieveMessageText</em></td>
+
+<td valign="top" width="17.634854771784234%" headers="N1025F">O valor padrão é verdade.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="Tabela 3. Propriedades de DataSource específicas do servidor" frame="border" border="1" rules="all"><caption>Tabela 3. Propriedades de DataSource específicas do servidor</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25.15463917525773%" id="N103E5">Propriedade</th>
+
+<th valign="bottom" width="7.628865979381444%" id="N103EC">Tipo</th>
+
+<th valign="bottom" width="22.268041237113405%" id="N103F3">Descrição</th>
+
+<th valign="bottom" width="15.876288659793813%" id="N103FA">Atributos da URL</th>
+
+<th valign="bottom" width="29.07216494845361%" id="N10401">Notas</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25.15463917525773%" headers="N103E5">connectionAttributes</td>
+
+<td valign="top" width="7.628865979381444%" headers="N103EC">String</td>
+
+<td valign="top" width="22.268041237113405%" headers="N103F3">Definido pela lista de atributos da conexão
+incorporada do <span>Derby</span>,
+separados por ponto-e-vírgula.</td>
+
+<td valign="top" width="15.876288659793813%" headers="N103FA">Vários</td>
+
+<td valign="top" width="29.07216494845361%" headers="N10401">Esta propriedade também está disponível quando se usa EmbeddedDataSource.
+Para obter mais informações sobre os vários atributos de conexão, deve ser
+consultado o <span><em>Manual de Referência do Derby</em></span>.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>Deve ser observado que <samp class="codeph">setAttributesAsPassword</samp>, disponível
+para o <samp class="codeph">DataSource</samp> incorporado, não está disponível para o
+<samp class="codeph">DataSource</samp> cliente.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cadminappsclientsecurity.html">Segurança do cliente da rede</a></strong><br />
+O cliente da rede do Derby permite selecionar o mecanismo de segurança, especificando o valor da propriedade securityMechanism.</li>
+<li class="ulchildlink"><strong><a href="cadminappsclienttracing.html">Rastreamento do cliente da rede</a></strong><br />
+O cliente da rede do Derby fornece facilidade de rastreamento, para coletar informações de rastreamento do JDBC e ver os fluxos do protocolo.</li>
+<li class="ulchildlink"><strong><a href="radminappsclientxmp.html">Exemplos de driver cliente da rede</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="cadminapps810777.html">Acesso ao Network Server utilizando o Universal Driver do DB2</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminapps59125.html" title="">Utilização do Network Server com aplicativos Derby pré-existentes</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="cadminappsthenetworkserverandjvms.html" title="">O Network Server e as JVMs</a></div>
+<div><a href="cadminnsdatasources.html" title="">Acesso ao Network Server utilizando DataSource</a></div>
+<div><a href="cadminapps811478.html" title="">XA e o Network Server</a></div>
+<div><a href="cadminappsusingthederbytoolswiththene.html" title="">Utilização das ferramentas do Derby com o Network Server</a></div>
+<div><a href="cadminapps.html" title="">Diferenças entre executar o Derby no modo incorporado e utilizando o Network Server</a></div>
+</div>
+<div class="reltasks"><strong>Tarefas relacionadas</strong><br />
+<div><a href="tadminappschangingyourclasspath.html" title="">Instalação dos arquivos jar requeridos e adições ao caminho de classes</a></div>
+<div><a href="tadmincbdjhhfd.html" title="">Inicialização do Network Server</a></div>
+<div><a href="tadminconfigshuttingdownthenetworkserver.html" title="Se a autenticação de usuário estiver desabilitada, o banco de dados Derby irá parar normalmente quando o Network Server for parado. Se a autenticação de usuário estiver habilitada, o banco de dados deverá ser parado explicitamente antes de parar o Network Server, especificando um nome e senha de usuário do Derby válidos.">Parar o Network Server</a></div>
+<div><a href="tadminconfigsysteminformation.html" title="">Obtenção de informações do sistema</a></div>
+<div><a href="tadminappssettingportnumbers.html" title="">Definição do número da porta</a></div>
+</div>
+</div>
+
+</body>
+</html>

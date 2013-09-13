@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="The DriverPropertyInfo Array" />
+<meta name="abstract" content="When a non-zero-length array is returned by getPropertyInfo, each element is a DriverPropertyInfo object representing a connection URL attribute that has not already been specified. Only those that make sense in the current context are returned." />
+<meta name="description" content="When a non-zero-length array is returned by getPropertyInfo, each element is a DriverPropertyInfo object representing a connection URL attribute that has not already been specified. Only those that make sense in the current context are returned." />
+<meta content="DriverPropertyInfo Array" name="DC.subject" />
+<meta content="DriverPropertyInfo Array" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevadvjdbc41138.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevadvjdbc965.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rdevadvjdbc034" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>The DriverPropertyInfo Array</title>
+</head>
+<body id="rdevadvjdbc034"><a name="rdevadvjdbc034"><!-- --></a>
+
+
+<h1 class="topictitle1">The DriverPropertyInfo Array</h1>
+
+
+
+<div><p>When a non-zero-length array is returned by <em>getPropertyInfo</em>,
+each element is a <samp class="codeph"><em>DriverPropertyInfo</em></samp> object representing
+a connection URL attribute that has not already been specified. Only those
+that make sense in the current context are returned.</p>
+
+<div class="section"><p>This <em>DriverPropertyInfo</em> object contains:</p>
+</div>
+
+<div class="section"> <ul>
+<li><em>name of the attribute</em></li>
+
+<li><em>description</em></li>
+
+<li><em>current value</em>   <p>If an attribute has a default value, this is
+set in the value field of <em>DriverPropertyInfo</em>, even if the attribute
+has not been set in the connection URL or the <samp class="codeph"><em>Properties</em></samp> object.
+If the attribute does not have a default value and it is not set in the URL
+or the <samp class="codeph"><em>Properties</em></samp> object, its value will be null.</p>
+</li>
+
+<li><em>list of choices</em></li>
+
+<li><em>whether required for a connection request</em></li>
+
+</ul>
+</div>
+
+<div class="section"><p>Several fields in a <em>DriverPropertyInfo</em> object are allowed
+to be null.</p>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rdevadvjdbc965.html">DriverPropertyInfo array example</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevadvjdbc41138.html" title="JDBC's java.sql.Driver.getPropertyInfo method allows a generic GUI tool to determine the properties for which it should prompt a user in order to get enough information to connect to a database. Depending on the values the user has supplied so far, additional values might become necessary. It might be necessary to iterate though several calls to getPropertyInfo.">Offering connection choices to the user</a></div>
+</div>
+</div>
+
+</body>
+</html>

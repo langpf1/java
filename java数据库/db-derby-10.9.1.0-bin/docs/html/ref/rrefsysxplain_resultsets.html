@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSXPLAIN_RESULTSETS system table" />
+<meta name="abstract" content="The SYSXPLAIN_RESULTSETS table captures information about each result set which is part of a statement that has been executed using RUNTIMESTATISTICS with XPLAIN style." />
+<meta name="description" content="The SYSXPLAIN_RESULTSETS table captures information about each result set which is part of a statement that has been executed using RUNTIMESTATISTICS with XPLAIN style." />
+<meta content="system tables, SYSXPLAIN_RESULTSETS, XPLAIN style statistics, SYSXPLAIN_RESULTSETS system table" name="DC.subject" />
+<meta content="system tables, SYSXPLAIN_RESULTSETS, XPLAIN style statistics, SYSXPLAIN_RESULTSETS system table" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rref_xplain_tables.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsysxplain_resultsets" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSXPLAIN_RESULTSETS system table</title>
+</head>
+<body id="rrefsysxplain_resultsets"><a name="rrefsysxplain_resultsets"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSXPLAIN_RESULTSETS system table</h1>
+
+
+
+<div><p>The SYSXPLAIN_RESULTSETS table captures information about each
+result set which is part of a statement that has been executed using
+RUNTIMESTATISTICS with XPLAIN style.</p>
+
+    <div class="section"><p>See "Working with RunTimeStatistics" in
+         <span><em>Tuning Derby</em></span> for information
+         on how to configure this.
+        </p>
+
+        <p>
+            Most statements have at least one result set associated with
+            them, and some complex statements may have many result sets
+            associated with them. Some statements, for example DDL statements
+            such as CREATE TABLE, have no result sets associated with them.
+        </p>
+
+        <p>
+            Each row in this table describes a particular result set used
+            by a particular statement. Rows
+            in this table are typically joined with rows in
+            SYSXPLAIN_STATEMENTS during analysis:</p>
+
+<pre>select st.stmt_text, rs.op_identifier 
+    from my_stats.sysxplain_statements st
+    join my_stats.sysxplain_resultsets rs
+        on st.stmt_id = rs.stmt_id</pre>
+
+            <p>Rows in this table are added
+                automatically when 
+                <span>Derby</span>
+                has been configured appropriately. The
+            rows remain in the table until you delete them or drop the table.
+                </p>
+
+<p>The following table shows the contents of the SYSXPLAIN_RESULTSETS system
+table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For each column in the SYSXPLAIN_RESULTSETS system table, this table provides its data type, its length in bytes, whether it is nullable, and a description of its contents." frame="border" border="1" rules="all"><caption>Table 1. SYSXPLAIN_RESULTSETS system table</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="31%" id="N100CD">Column Name</th>
+
+<th valign="bottom" width="17%" id="N100D4">Type</th>
+
+<th valign="bottom" width="11%" id="N100DB">Length</th>
+
+<th valign="bottom" width="12%" id="N100E2">Nullable</th>
+
+<th valign="bottom" width="28.999999999999996%" id="N100E9">Contents</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="31%" headers="N100CD">RS_ID</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">36</td>
+
+<td valign="top" width="12%" headers="N100E2">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">A unique identifier for this particular row.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">OP_IDENTIFIER</td>
+
+<td valign="top" width="17%" headers="N100D4">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">32,672</td>
+
+<td valign="top" width="12%" headers="N100E2">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">A code indicating what type of result set these statistics
+    are for.
+    Common result set types include TABLESCAN, INDEXSCAN, and PROJECTION.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">OP_DETAILS</td>
+
+<td valign="top" width="17%" headers="N100D4">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">32,672</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">Additional string information which varies for each
+    different type of result set. Interpreting this information currently
+    requires reading the
+    <span>Derby</span>
+    source code to know what values are being displayed here.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">NO_OPENS</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">Number of times this result set was opened during
+execution of the containing statement.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">NO_INDEX_UPDATES</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">The number of index updates performed by this
+    result set. This value is NULL for result sets used by queries, but may have
+    a non-zero value for modification statements such as INSERT, UPDATE, or
+    DELETE.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">LOCK_MODE</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">2</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">A code indicating the locking level that was used
+    for this result set: <em>'EX'</em> for exclusive table-level locking,
+<em>'SH'</em> for share table-level locking, 
+<em>'IX</em>' for exclusive row-level locking, or
+<em>'IS'</em> for share row-level locking.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">LOCK_GRANULARITY</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">1</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">A code indicating the locking granularity that
+    was used for this result set: <em>'T'</em> for table-level locking, or 
+<em>'R'</em> for row-level locking.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">PARENT_RS_ID</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">36</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">The result sets for a particular statement are
+    arranged in a parent-child tree structure. The output rows from one
+    result set are delivered as the input rows to its parent. This column
+    stores the identifier of the parent result set. For the outermost
+    result set in a particular statement, this column is NULL. Note that sometimes
+    there are multiple result sets with the same parent result set (that is,
+    some nodes have multiple children): for example, a UNION result set will have
+    two child result sets, representing the two sets of rows which are UNIONed
+together.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">EST_ROW_COUNT</td>
+
+<td valign="top" width="17%" headers="N100D4">DOUBLE</td>
+
+<td valign="top" width="11%" headers="N100DB">52</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">The optimizer's estimate of the total number of rows
+    for this result set.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">EST_COST</td>
+
+<td valign="top" width="17%" headers="N100D4">DOUBLE</td>
+
+<td valign="top" width="11%" headers="N100DB">52</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">The optimizer's estimated cost for this result set.
+    The value indicates the number of milliseconds that the optimizer
+    estimates it will take to process this result set.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">AFFECTED_ROWS</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">This column is non-null only for INSERT, UPDATE, and
+    DELETE result sets. For those result sets, this column holds the number of
+rows which were inserted, updated, or deleted, respectively.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">DEFERRED_ROWS</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">1</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">This column is only non-null for INSERT, UPDATE, and
+    DELETE result sets. For those result sets, this column holds <em>'Y'</em> if
+    the INSERT/UPDATE/DELETE is being performed using deferred change semantics,
+    and holds <em>'N'</em> otherwise. Deferred change semantics are used
+    when self-referencing is taking place.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">INPUT_ROWS</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">This column is used for SORT, AGGREGATE, and GROUPBY
+    result sets, and indicates the number of rows that were input to the
+result set, and thus were sorted by the sorter.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">SEEN_ROWS</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">For join and set nodes, this is the number of rows
+    seen by the "left" side of the processing. For aggregate, group, sort,
+    normalize, materialize, and certain other nodes, this is the number of
+    rows seen.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">SEEN_ROWS_RIGHT</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">For join and set nodes, this is the number of rows
+    seen by the "right" side of the processing. For example, in the statement
+<pre>select country 
+  from countries 
+union 
+select country 
+  from countries 
+  where region = 'Africa'</pre>
+
+the UNION result set has SEEN_ROWS = 6 and SEEN_ROWS_RIGHT = 19.
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">FILTERED_ROWS</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">This column holds the number of rows which were
+eliminated from the result set during processing.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">RETURNED_ROWS</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">This column holds the number of rows which were
+    returned by the result set to its caller. Generally speaking, the number
+    of returned rows is the number of rows INPUT or SEEN, minus the number
+of rows FILTERED.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">EMPTY_RIGHT_ROWS</td>
+
+<td valign="top" width="17%" headers="N100D4">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100DB">10</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">This column is used for left outer joins, and, if not null,
+    holds the number of empty rows which had to be constructed because no
+existing rows met the join criteria.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">INDEX_KEY_OPT</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">1</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">This column records when the Index Key Optimization is
+    used. The Index Key Optimization is a special optimization which occurs when
+    a query references the MAX or MIN value of a column which happens to have an
+    index, and so the MIN or MAX computation can be performed by fetching the
+    first or last, respectively, entry in the index, as in:
+<pre>select max(country_iso_code) 
+  from countries</pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">SCAN_RS_ID</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">36</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">If this resultset is one of the resultset types which
+    performs a scan of a table or index, this column contains the id value
+    which identifies the particular row in SYSXPLAIN_SCAN_PROPS that
+    describes the statistics related to the scan behavior.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">SORT_RS_ID</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">36</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">If this resultset is one of the resultset types which
+    performs a sort of a table or index, this column contains the id value
+    which identifies the particular row in SYSXPLAIN_SORT_PROPS that
+    describes the statistics related to the sort behavior. The most common
+    situations which involve sorting of the data are when processing the
+ORDER BY and GROUP BY clauses.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">STMT_ID</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">36</td>
+
+<td valign="top" width="12%" headers="N100E2">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">This column will contain the ID value which identifies
+    the particular statement for which this result set was executed. Note that
+    there may be multiple result sets executed for a single statement, so a join
+    between the SYSXPLAIN_STATEMENTS table and the SYSXPLAIN_RESULTSETS table
+may retrieve multiple rows.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100CD">TIMING_ID</td>
+
+<td valign="top" width="17%" headers="N100D4">CHAR</td>
+
+<td valign="top" width="11%" headers="N100DB">36</td>
+
+<td valign="top" width="12%" headers="N100E2">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100E9">If statistics timings were not being captured, this column
+    will have a NULL value. If statistics timings were being captured, this
+    column will contain the id value which can be used as a foreign key to join
+    with the SYSXPLAIN_RESULTSET_TIMINGS row which has the timing information
+for this resultset.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rref_xplain_tables.html" title="">XPLAIN style tables</a></div>
+</div>
+</div>
+
+</body>
+</html>

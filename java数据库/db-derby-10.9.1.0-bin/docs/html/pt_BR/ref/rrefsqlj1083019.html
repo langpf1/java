@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Onde são permitidos parâmetros dinâmicos" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1082953.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj1083019" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Onde são permitidos parâmetros dinâmicos</title>
+</head>
+<body id="rrefsqlj1083019"><a name="rrefsqlj1083019"><!-- --></a>
+
+
+<h1 class="topictitle1">Onde são permitidos parâmetros dinâmicos</h1>
+
+<div>
+<div class="section">
+<div class="p">Os parâmetros dinâmicos podem ser utilizados em qualquer lugar da expressão
+onde seu tipo de dado pode ser facilmente deduzido.
+<ol>
+<li>É permitido o uso como primeiro operando do BETWEEN, se o segundo ou o
+terceiro operando não for um parâmetro dinâmico.
+O tipo de dado do primeiro operando é assumido como sendo o tipo de dado do
+parâmetro que não é dinâmico, ou o resultado da união dos tipos do segundo e do
+terceiro operandos, se estes dois não forem parâmetros dinâmicos.
+<pre><strong>WHERE ? BETWEEN DATE('1996-01-01') AND ?
+<span>-- tipos assumidos como sendo DATE</span></strong>
+</pre>
+</li>
+
+<li>É permitido o uso como segundo ou terceiro operando do BETWEEN.
+O tipo de dado é assumido como sendo o tipo de dado do operando à esquerda.
+<pre><strong>WHERE DATE('1996-01-01') BETWEEN ? AND ?
+<span>-- tipos assumidos como sendo DATE</span></strong>
+</pre>
+</li>
+
+<li id="rrefsqlj1083019__sqlj30695"><a name="rrefsqlj1083019__sqlj30695"><!-- --></a>É permitido o uso como operando à esquerda da lista IN
+se pelo menos um item da lista não for um parâmetro dinâmico.
+O tipo de dado do operando à esquerda é assumido como sendo o resultado da
+união dos tipos de dado dos parâmetros não dinâmicos da lista.
+<pre><strong>WHERE ? NOT IN (?, ?, 'Santiago')
+<span>-- tipos assumidos como sendo CHAR</span></strong>
+</pre>
+</li>
+
+<li>É permitido o uso na lista de valores do predicado IN, se o primeiro
+operando não for um parâmetro dinâmico, ou seu tipo foi determinado pela
+regra anterior.
+O tipo dos parâmetros dinâmicos que aparecem na lista de valores é assumido
+como sendo o tipo do operando à esquerda.
+<pre><strong>WHERE <strong><em>ColunaPontoFlutuante</em></strong> IN (?, ?, ?)
+<span>-- tipos assumidos como sendo FLOAT</span></strong>
+</pre>
+</li>
+
+<li id="rrefsqlj1083019__sqlj18960"><a name="rrefsqlj1083019__sqlj18960"><!-- --></a>Para os operadores binários +, -, *, /, AND, OR, &lt;, &gt;,
+=, &lt;&gt;, &lt;= e &gt;=, é permitido o uso do parâmetro dinâmico como um
+dos operandos, mas não os dois.
+Seu tipo de dado é obtido a partir do tipo do outro lado.
+<pre><strong>WHERE ? &lt; CURRENT_TIMESTAMP
+<span>-- tipo assumido como sendo TIMESTAMP</span></strong>
+</pre>
+</li>
+
+<li>A utilização em CAST é sempre permitida, porque CAST fornece tipo de dado
+ao parâmetro dinâmico.
+<pre><strong>CALL valueOf(CAST (? AS VARCHAR(10)))</strong>
+</pre>
+</li>
+
+<li>É permitido o uso nos dois lados do operador LIKE.
+Quando utilizado no lado esquerdo, o tipo de dado do parâmetro dinâmico é
+definido como sendo o tipo de dado do operando à direita, mas com o comprimento
+máximo permitido para o tipo de dado.
+Quando utilizado no lado direito, o tipo de dado é assumido como sendo do
+mesmo comprimento e tipo de dado do operando à esquerda
+(LIKE é permitido nos tipos de dado CHAR e VARCHAR;
+para obter mais informações deve ser consultado
+<a href="rrefsqlj40899.html#rrefsqlj40899">Concatenação</a>).
+<pre><strong>WHERE ? LIKE 'Santi%'
+<span>-- tipo assumido como sendo CHAR com comprimento igual a
+-- java.lang.Integer.MAX_VALUE</span></strong>
+</pre>
+</li>
+
+<li>O parâmetro ?, sem mais nada, é permitido em apenas um dos lados do operador
+||, ou seja, "? || ?" não é permitido.
+O tipo do parâmetro ? de um dos lados do operador || é determinado pelo tipo
+da expressão do outro lado do operador ||.
+Se a expressão do outro lado for do tipo de dado CHAR ou VARCHAR, o tipo do
+parâmetro será VARCHAR com o comprimento máximo permitido para o tipo de dado.
+Se a expressão do outro lado for do tipo de dado CHAR FOR BIT DATA ou
+VARCHAR FOR BIT DATA, o tipo de dado do parâmetro será VARCHAR FOR BIT DATA
+com o comprimento máximo permitido para o tipo de dado.
+<pre><strong>SELECT coluna_bit || ?
+FROM tabela_usuario
+<span>-- tipo assumido como sendo CHAR FOR BIT DATA
+-- com o comprimento especificado para coluna_bit</span></strong>
+</pre>
+</li>
+
+<li>
+Em uma expressão condicional, que utiliza ?, também é permitida a utilização
+do parâmetro dinâmico (que também é representado por ?).
+O tipo do parâmetro dinâmico como primeiro operando é assumido como sendo
+booleano.
+Com relação ao segundo e terceiro operandos, somente um dos dois pode ser um
+parâmetro dinâmico, e seu tipo é assumido como sendo o mesmo do outro operando
+(ou seja, o terceiro e segundo operando, respectivamente).
+ <pre><strong>SELECT c1 IS NULL ? ? : c1
+<span>-- permite especificar o valor "padrão" em tempo de execução
+-- o parâmetro dinâmico é assumido como tendo o tipo de c1
+-- não podem haver parâmetros dinâmicos dos dois lados dos :</span></strong>
+</pre>
+</li>
+
+<li>É permitido usar parâmetro dinâmico como item da lista de valores ou da
+lista de seleção da instrução INSERT.
+O tipo do parâmetro dinâmico é assumido como sendo o tipo da coluna de destino.
+O parâmetro ?, sem mais nada, não é permitido na lista de seleção, inclusive na
+lista de seleção da subconsulta, a menos que exista uma coluna correspondente
+em UNION, INTERSECT ou EXCEPT
+(consulte o nº
+<a href="rrefsqlj1083019.html#rrefsqlj1083019__sqlj20756">16</a>, abaixo)
+que não seja dinâmica.
+<pre><strong>INSERT INTO t VALUES (?)
+<span>-- o parâmetro dinâmico é assumido como sendo
+-- do tipo da única coluna da tabela t</span>
+INSERT INTO t SELECT ?
+FROM t2
+<span>-- não é permitido</span></strong>
+</pre>
+</li>
+
+<li>O parâmetro ? na comparação com uma subconsulta recebe seu tipo a partir
+da expressão sendo selecionada na subconsulta. Por exemplo:
+<pre><strong>SELECT *
+FROM tab1
+WHERE ? = (SELECT x FROM tab2)
+
+SELECT *
+FROM tab1
+WHERE ? = ANY (SELECT x FROM tab2)
+<span>-- Nos dois casos, o tipo do parâmetro dinâmico é
+-- assumido como sendo o mesmo tipo de tab2.x.</span></strong>
+</pre>
+</li>
+
+<li>É permitido usar parâmetro dinâmico como o valor em uma instrução UPDATE.
+O tipo do parâmetro dinâmico é assumido como sendo o tipo da coluna na tabela
+de destino.
+<pre><strong>UPDATE t2 SET c2 =? <span>-- o tipo é assumido como sendo o tipo de c2</span></strong>
+</pre>
+</li>
+
+<li>Não é permitido parâmetro dinâmico como operando dos operadores unários
+- e +.</li>
+
+<li>LENGTH permite parâmetro dinâmico.
+O tipo é assumido como sendo o comprimento máximo do tipo VARCHAR.
+<pre><strong>SELECT LENGTH(?)</strong>
+</pre>
+</li>
+
+<li>Comparações qualificadas.
+<pre><strong>? = SOME (SELECT 1 FROM t)
+<span>-- é válido. O parâmetro dinâmico é assumido como sendo do tipo INTEGER</span>
+1 = SOME (SELECT ? FROM t)
+<span>-- é válido. O parâmetro dinâmico é assumido como sendo do tipo INTEGER</span></strong>
+</pre>
+</li>
+
+<li id="rrefsqlj1083019__sqlj20756"><a name="rrefsqlj1083019__sqlj20756"><!-- --></a>É permitido usar parâmetro dinâmico para representar uma
+coluna se aparecer em uma expressão UNION, INTERSECT ou EXCEPT;
+O <span>Derby</span> pode inferir
+o tipo de dado a partir da coluna correspondente na expressão.
+<pre><strong>SELECT ?
+FROM t
+UNION SELECT 1
+FROM t
+<span>-- o parâmetro dinâmico é assumido como sendo INT</span>
+VALUES 1 UNION VALUES ?
+<span>-- o parâmetro dinâmico é assumido como sendo INT</span></strong>
+</pre>
+
+</li>
+
+<li>É permitido parâmetro dinâmico como operando à esquerda de uma expressão IS,
+sendo assumido como booleano.</li>
+
+</ol>
+</div>
+
+</div>
+
+<div class="section">
+<div class="p">Uma vez que o tipo de dado do parâmetro dinâmico tenha sido
+determinado baseado na expressão onde se encontra, esta expressão pode estar
+em qualquer lugar onde normalmente seria permitida se não incluísse o
+parâmetro dinâmico.
+Por exemplo, acima foi dito que o parâmetro dinâmico não poderia ser utilizado
+como operando do - unário.
+Entretanto, pode aparecer em expressões que são operandos do menos unário, como:
+<pre><strong>- (1+?)</strong>
+</pre>
+
+</div>
+
+</div>
+
+<div class="section">
+<p>O parâmetro dinâmico é assumido como sendo do tipo INTEGER
+(porque o outro operando operador binário + é do tipo INT).
+Como se sabe seu tipo, é permitido como operando do - unário.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj29911.html" title="">Parâmetros dinâmicos</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefsqlj1082953.html" title="">Exemplo de parâmetros dinâmicos</a></div>
+</div>
+</div>
+
+</body>
+</html>

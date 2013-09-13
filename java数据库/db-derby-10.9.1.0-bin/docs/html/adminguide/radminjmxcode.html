@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Using custom Java code to access the Derby MBeans" />
+<meta content="Java Management Extensions (JMX) technology, JMX, using custom Java code" name="DC.subject" />
+<meta content="Java Management Extensions (JMX) technology, JMX, using custom Java code" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminjmxoverview.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxintro.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenabledisable.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxjconsole.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxtroubleshoot.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminjmxcode" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using custom Java code to access the
+Derby MBeans</title>
+</head>
+<body id="radminjmxcode"><a name="radminjmxcode"><!-- --></a>
+
+
+<h1 class="topictitle1">Using custom Java code to access the
+<span>Derby</span> MBeans</h1>
+
+
+<div>
+<div class="section">
+<p>In addition to using a tool like JConsole, you can also access the
+<span>Derby</span> MBeans from a Java
+application. How to do this may depend on how you configure the JVM that is
+running <span>Derby</span>, how you
+configure user authentication and authorization, or the host(s) from which you
+want to access the MBeans.</p>
+
+<p>This section has some example code to help you get started. You will find the
+JMX classes you need in the packages <samp class="codeph">javax.management</samp> and
+<samp class="codeph">javax.management.remote</samp>.</p>
+
+<p>You do not need any <span>Derby</span>
+libraries in the JMX client application's classpath (unless MBean proxies are
+used).</p>
+
+</div>
+
+<div class="section" id="radminjmxcode__connmbeanserver"><a name="radminjmxcode__connmbeanserver"><!-- --></a><h2 class="sectiontitle">Connecting to the MBean Server</h2>
+<p><span>Derby</span> will attempt to
+register its MBeans with the platform MBean server of the JVM running the
+<span>Derby</span> system (embedded or
+Network Server). The following examples assume that you have configured the
+<span>Derby</span> JVM to enable remote
+JMX, which means that you have set a port number
+(<samp class="codeph">com.sun.management.jmxremote.port</samp>) to be used by the JMX
+Server Connector.</p>
+
+<p>The examples below assume that the port configured for remote JMX is 9999,
+that the host name of the host running
+<span>Derby</span> is
+<samp class="codeph">example.com</samp>, and that this host is reachable from the
+client host. (This host name is fictitious, and is used for example purposes
+only.)</p>
+
+<p>The following example code shows how to connect to the MBean Server when
+JMX security has been disabled:</p>
+
+<pre>    JMXServiceURL url = new JMXServiceURL(
+            "service:jmx:rmi:///jndi/rmi://example.com:9999/jmxrmi");
+    JMXConnector jmxc = JMXConnectorFactory.connect(url, null);
+    MBeanServerConnection mbeanServerConn = 
+        jmxc.getMBeanServerConnection();</pre>
+
+<p>The following code shows how to connect to the MBean server when JMX
+password authentication is enabled (the default):</p>
+
+<pre>    JMXServiceURL url = new JMXServiceURL(
+            "service:jmx:rmi:///jndi/rmi://example.com:9999/jmxrmi");
+    // Assuming the following JMX credentials: 
+    //  username=controlRole, password=derby
+    String[] credentials = new String[] { "controlRole" , "derby" };
+    HashMap&lt;String,Object&gt; env = new HashMap&lt;String,Object&gt;();
+    // Set credentials (jmx.remote.credentials, 
+    //  see JMX Remote API 1.0 spec section 3.4)
+    env.put(JMXConnector.CREDENTIALS, credentials);
+    // if the server's RMI registry is protected with SSL/TLS (JDK 6)
+    //  (com.sun.management.jmxremote.registry.ssl=true), the following
+    //  entry must be included:
+    //env.put("com.sun.jndi.rmi.factory.socket", 
+    //    new SslRMIClientSocketFactory());  // uncomment if needed
+
+    // Connect to the server
+    JMXConnector jmxc = JMXConnectorFactory.connect(url, env);
+    MBeanServerConnection mbeanServerConn = 
+        jmxc.getMBeanServerConnection();</pre>
+
+<div class="p"><div class="note"><span class="notetitle">Note: </span>Not specifying <samp class="codeph">SslRMIClientSocketFactory</samp> when required
+may result in the error message <samp class="codeph">java.rmi.ConnectIOException: non-JRMP
+server at remote endpoint</samp>.</div>
+</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Creating a ManagementMBean</h2>
+<p>The only <span>Derby</span> MBean that
+can be created by a JMX client is the <samp class="codeph">ManagementMBean</samp>. This
+MBean is useful for controlling
+<span>Derby</span> management (for
+example, enabling and disabling management or MBeans), and to obtain information
+such as the system identifier (which may be needed to specify MBeans later).</p>
+
+<p>If you create such an MBean from your application, and if
+<span>Derby</span> has already registered
+a <samp class="codeph">ManagementMBean</samp> instance, the new MBean cannot have the same
+object name as the <samp class="codeph">ManagementMBean</samp> already registered with the
+server. It is therefore recommended to use a different object name domain
+(that is, different from <samp class="codeph">example.com</samp>) and/or a different
+<samp class="codeph">type</samp> key property value (different from
+<samp class="codeph">Management</samp>).</p>
+
+<p>The following example code shows how to create and register a new
+<samp class="codeph">ManagementMBean</samp> with the MBean server:</p>
+
+<pre>    ObjectName mgmtObjName = new ObjectName("com.example.app", 
+                   "type", "DerbyManagement");
+    try {
+        ObjectInstance mgmtObj = 
+            mbeanServerConn.createMBean("example.com.mbeans.Management", 
+                mgmtObjName);
+    } catch (InstanceAlreadyExistsException e) {
+        // A management MBean with this object name already exists!
+    }</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Activating
+<span>Derby</span> management</h2>
+<p><span>Derby</span> attempts to activate
+its JMX management service by default, so it will usually be active unless you
+explicitly deactivate it, providing that
+<span>Derby</span> has permissions to
+perform the activation. If
+<span>Derby</span> management is not
+active, you will not be able to access any MBeans except the
+<samp class="codeph">ManagementMBean</samp>.</p>
+
+<p>By accessing the <samp class="codeph">ManagementActive</samp> attribute of the
+<samp class="codeph">ManagementMBean</samp>, you can check whether the
+<span>Derby</span> JMX management service
+is active or not. The following example code performs this check and activates
+the <span>Derby</span> management service
+if it is not already active:</p>
+
+<pre>    // assuming we already have a reference to the
+    //  ManagementMBean's object name
+    Boolean active = (Boolean) 
+        mbeanServerConn.getAttribute(mgmtObjName, "ManagementActive");
+    if (!active.booleanValue()) {
+        // start management
+        mbeanServerConn.invoke(mgmtObjName, "startManagement", 
+            new Object[0], new String[0]);
+    }</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Obtaining the system identifier</h2>
+<p>The system identifier is a unique <samp class="codeph">String</samp> that distinguishes
+one running <span>Derby</span> system from
+another. All MBeans that are instantiated by
+<span>Derby</span> include the system
+identifier in their object names.</p>
+
+<p>One way to access an MBean is to fully specify its object name when
+contacting the MBean server. For this, you need to know the current system
+identifier. (Alternative ways to access MBeans include querying the MBean server
+for all MBeans, or for MBeans whose object names match a specific pattern.)</p>
+
+<p>The following example shows how to obtain the system identifier by accessing
+a <samp class="codeph">ManagementMBean</samp>:</p>
+
+<pre>    // assuming we already have a reference to the 
+    //  ManagementMBean's object name
+    String systemID = (String) mbeanServerConn.getAttribute(mgmtObjName, 
+        "SystemIdentifier");</pre>
+
+<p>The following example shows how to obtain the system identifier from a
+<span>Derby</span> MBean's object
+name:</p>
+
+<pre>    // assuming we already have a reference to the ObjectName
+    //  of an MBean registered by Derby, for example the
+    //  Derby-registered ManagementMBean
+    String systemID = derbyMgmtObjectName.getKeyProperty("system");</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Accessing a specific
+<span>Derby</span>-registered MBean</h2>
+<p>In the previous examples, you have already seen how to read a single MBean
+attribute, and how to invoke an MBean operation. In order to do this, you
+usually need a reference to the MBean's <samp class="codeph">ObjectName</samp>.</p>
+
+<p>If you consult the API documentation for the
+<span>Derby</span> MBeans at
+<a href="http://db.apache.org/derby/javadoc/publishedapi/jdbc4/" target="_blank">http://db.apache.org/derby/javadoc/publishedapi/jdbc4/</a>
+and obtain the system identifier of the
+<span>Derby</span> system you are
+accessing through JMX, you have all the information you need to be able to
+instantiate a <samp class="codeph">javax.management.ObjectName</samp> object directly, by
+fully specifying its <samp class="codeph">String</samp> representation (see the
+<samp class="codeph">ObjectName</samp> API documentation for details).</p>
+
+<p>The following example code shows how to obtain a reference to the
+<samp class="codeph">VersionMBean</samp> for <samp class="codeph">derby.jar</samp>:</p>
+
+<pre>    // Assuming we already know the system identifier 
+    // (see examples above), systemID.
+    // A list of key properties is available is each MBean's Javadoc API.
+    Hashtable&lt;String, String&gt; keyProps = new Hashtable&lt;String, String&gt;();
+    keyProps.put("type", "Version");
+    keyProps.put("jar", "derby.jar");
+    keyProps.put("system", systemID);
+    // MBeans registered by Derby always belong to the 
+    //  "org.apache.derby" domain
+    ObjectName versionObjectName = 
+        new ObjectName("org.apache.derby", keyProps);
+
+    // we can now use the object name to read an attribute
+    String versionString = 
+        (String) mbeanServerConn.getAttribute(versionObjectName, 
+            "VersionString");
+    System.out.println("VersionString: " + versionString);</pre>
+
+<p>The output would look something like this:</p>
+
+<pre>VersionString: 10.9.1.1 - (1305115)</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminjmxoverview.html" title="">Using Java Management Extensions (JMX) technology</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminjmxintro.html" title="">Introduction to the Derby MBeans</a></div>
+<div><a href="radminjmxenabledisable.html" title="">Enabling and disabling JMX</a></div>
+<div><a href="radminjmxjconsole.html" title="">Using JConsole to access the Derby MBeans</a></div>
+<div><a href="radminjmxtroubleshoot.html" title="">Troubleshooting JMX connection issues</a></div>
+</div>
+</div>
+
+</body>
+</html>

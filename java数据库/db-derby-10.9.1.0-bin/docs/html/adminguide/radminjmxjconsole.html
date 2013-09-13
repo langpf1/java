@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Using JConsole to access the Derby MBeans" />
+<meta content="Java Management Extensions (JMX) technology, JMX, using JConsole" name="DC.subject" />
+<meta content="Java Management Extensions (JMX) technology, JMX, using JConsole" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminjmxoverview.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxintro.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenabledisable.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxcode.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxtroubleshoot.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminjmxjconsole" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using JConsole to access the
+Derby MBeans</title>
+</head>
+<body id="radminjmxjconsole"><a name="radminjmxjconsole"><!-- --></a>
+
+
+<h1 class="topictitle1">Using JConsole to access the
+<span>Derby</span> MBeans</h1>
+
+
+<div>
+<div class="section">
+<p>JConsole is a graphical JMX-compliant tool that is available in recent
+versions of the Oracle JDKs. JConsole enables you to monitor and manage Java
+applications and virtual machines on a local or remote machine.</p>
+
+<p>You may use JConsole from JDK 6 or later even if you are running
+<span>Derby</span> using an earlier
+version of the JDK (or just the JRE). (You could also use JConsole from JDK 5 if
+you are running <span>Derby</span> using
+JDK 6 or later.) It is recommended that you use the newest version possible.
+More information about JConsole is available in the OpenJDK project at
+<a href="http://openjdk.java.net/tools/svc/jconsole/index.html" target="_blank">http://openjdk.java.net/tools/svc/jconsole/index.html</a>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Starting JConsole and connecting to Derby</h2>
+<p>In the Oracle JDK, the JConsole binary is available in
+<samp class="codeph">JDK_HOME/bin</samp>, where JDK_HOME is the directory in which the JDK
+is installed. To start JConsole, use the <samp class="codeph">jconsole</samp> command, as
+in the following example on a UNIX system:</p>
+
+<pre><strong>/usr/local/java/jdk1.7.0/bin/jconsole</strong></pre>
+
+<p>If you did not disable SSL when booting the managed JVM, you probably have
+to provide a truststore containing the server's SSL certificate to be able to
+establish JMX connections. If SSL client authentication is enabled, a keystore
+must be configured as well (see
+<a href="radminjmxenablepwdssl.html#radminjmxenablepwdssl">Enabling remote JMX with password authentication and SSL</a> for
+details). The following example shows how to start JConsole with SSL client and
+server authentication:</p>
+
+<pre><strong>jconsole -J-Djavax.net.ssl.trustStore=/home/user/.truststoreForClient
+-J-Djavax.net.ssl.trustStorePassword=myTruststorePassword
+-J-Djavax.net.ssl.keyStore=/home/user/.keystoreForClient
+-J-Djavax.net.ssl.keyStorePassword=myKeyStorePassword</strong></pre>
+
+<p>A graphical user interface (GUI) appears. For additional startup options,
+refer to the JConsole documentation. Once the GUI starts, you are presented with
+a list of the JVMs that are accessible on the local host. Locate the JVM that is
+running <span>Derby</span> and connect to
+it.</p>
+
+<p>To connect to a JVM on a remote host, you will need to supply the host name
+and port number, or a JMX service URL, instead.</p>
+
+<p>If you cannot find the Derby JVM running on the local host, make sure you are
+running JConsole as the same user as the Derby JVM, or as a different user with
+sufficient file system permissions. If you are using Java SE 5, make sure you
+have enabled JMX. When you use Java SE 6 or later, local JMX access is enabled
+by default.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Accessing MBeans</h2>
+<p>Once you have connected to a JVM via JConsole, the JVM's MBeans should be
+available on a separate tab in the internal JConsole window. Under the domain
+<samp class="codeph">org.apache.derby</samp> you should see a list of MBeans. Browse the
+MBeans and their attributes and operations by navigating the hierarchy
+presented.</p>
+
+<p>Another useful JConsole feature is that you can view dynamic data represented
+as JMX attributes in graph form. To view these graphs, double-click an attribute
+value that is a number.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminjmxoverview.html" title="">Using Java Management Extensions (JMX) technology</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminjmxintro.html" title="">Introduction to the Derby MBeans</a></div>
+<div><a href="radminjmxenabledisable.html" title="">Enabling and disabling JMX</a></div>
+<div><a href="radminjmxcode.html" title="">Using custom Java code to access the Derby MBeans</a></div>
+<div><a href="radminjmxtroubleshoot.html" title="">Troubleshooting JMX connection issues</a></div>
+</div>
+</div>
+
+</body>
+</html>

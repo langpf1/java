@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Forcing a failover" />
+<meta content="replicating databases, forcing failover, database replication" name="DC.subject" />
+<meta content="replicating databases, forcing failover, database replication" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplication.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplicstartrun.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplicstop.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplicsecurity.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminreplicfailures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminreplicfailover" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Forcing a failover</title>
+</head>
+<body id="cadminreplicfailover"><a name="cadminreplicfailover"><!-- --></a>
+
+
+<h1 class="topictitle1">Forcing a failover</h1>
+
+
+<div>
+<p>At any time, you can transform the
+<span>Derby</span> database that has the
+slave role into a normal 
+<span>Derby</span> database that can
+process transactions. This transformation from being a slave to becoming an
+active <span>Derby</span> database is
+called <em>failover</em>. During failover, the slave applies the parts of the
+transaction log that have not yet been processed. It then undoes operations that
+belong to uncommitted transactions, resulting in a transaction-consistent state
+that includes all transactions whose commit log record has been sent to the
+slave.</p>
+
+<p>You perform failover from the master system. To do so, you connect to the
+database on the master system using
+the <em>failover=true</em> connection URL attribute. For example, for a database
+named <samp class="codeph">wombat</samp>, you might specify the following connection URL:
+</p>
+
+<pre>
+jdbc:derby:wombat;failover=true
+</pre>
+
+<p>If the network connection between the master system and the slave system is
+lost, you can perform failover from the slave system.</p>
+
+<p>See the <span><em>Derby Reference Manual</em></span> for details about the
+<em>failover=true</em> attribute.</p>
+
+<p>There is no automatic failover or restart of replication after one of the
+instances has failed.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminreplication.html" title="Replication is an important feature of a robust database management system. In Derby, you start database replication by using connection URL attributes.">Replicating databases</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminreplicstartrun.html" title="">Starting and running replication</a></div>
+<div><a href="cadminreplicstop.html" title="">Stopping replication</a></div>
+<div><a href="cadminreplicsecurity.html" title="">Replication and security</a></div>
+<div><a href="cadminreplicfailures.html" title="">Replication failure handling</a></div>
+</div>
+</div>
+
+</body>
+</html>

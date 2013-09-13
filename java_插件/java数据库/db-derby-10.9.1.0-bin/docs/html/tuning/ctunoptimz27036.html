@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="About the optimizer's choice of sort avoidance" />
+<meta content="Sort avoidance" name="DC.subject" />
+<meta content="Sort avoidance" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz42425.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz32184.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz20327.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz11941.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz19357.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz29384.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz56859.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunoptimz27036" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>About the optimizer's choice of sort avoidance</title>
+</head>
+<body id="ctunoptimz27036"><a name="ctunoptimz27036"><!-- --></a>
+
+
+<h1 class="topictitle1">About the optimizer's choice of sort avoidance</h1>
+
+
+<div>
+<p>Some SQL statements require that data be ordered, including those with
+ORDER BY, GROUP BY, and DISTINCT. MIN() and MAX() aggregates also require
+ordering of data.</p>
+
+<div class="p"><span>Derby</span> can sometimes avoid sorting steps for:  
+<ul>
+<li>statements with ORDER BY  
+<p>See <a href="ctunoptimz56859.html#ctunoptimz56859">Cost-based ORDER BY sort avoidance</a></p>
+</li>
+
+</ul>
+</div>
+
+<div class="p"><span>Derby</span> can also perform the following optimizations, but they are
+not based on cost:  
+<ul>
+<li>sort avoidance for DISTINCT and GROUP BYs  
+<p>See <a href="ctunoptimz22460.html#ctunoptimz22460">Non-cost-based sort avoidance (tuple filtering)</a></p>
+</li>
+
+<li>statements with a MIN() aggregate  
+<p>See <a href="ctunoptimz22111.html#ctunoptimz22111">The MIN() and MAX() optimizations</a></p>
+</li>
+
+</ul>
+</div>
+
+</div>
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="ctunoptimz56859.html">Cost-based ORDER BY sort avoidance</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctunoptimz42425.html" title="">Derby's cost-based optimization</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctunoptimz32184.html" title="">About the optimizer's choice of access path</a></div>
+<div><a href="ctunoptimz20327.html" title="">About the optimizer's choice of join order</a></div>
+<div><a href="ctunoptimz11941.html" title="">About the optimizer's choice of join strategy</a></div>
+<div><a href="ctunoptimz19357.html" title="">About the system's selection of lock granularity</a></div>
+<div><a href="ctunoptimz29384.html" title="">About the optimizer's selection of bulk fetch</a></div>
+</div>
+</div>
+
+</body>
+</html>

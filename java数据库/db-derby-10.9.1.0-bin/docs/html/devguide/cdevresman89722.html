@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Getting a DataSource" />
+<meta name="abstract" content="Normally, you can simply work with the interfaces for javax.sql.DataSource, javax.sql.ConnectionPoolDataSource, and javax.sql.XADataSource, as shown in the following examples." />
+<meta name="description" content="Normally, you can simply work with the interfaces for javax.sql.DataSource, javax.sql.ConnectionPoolDataSource, and javax.sql.XADataSource, as shown in the following examples." />
+<meta content="properties, DataSource, getting" name="DC.subject" />
+<meta content="properties, DataSource, getting" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rdevresman79556.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevresman92946.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevresman19524.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevresman89722" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Getting a DataSource</title>
+</head>
+<body id="cdevresman89722"><a name="cdevresman89722"><!-- --></a>
+
+
+<h1 class="topictitle1">Getting a DataSource</h1>
+
+
+
+<div><p>Normally, you can simply work with the interfaces for <em>javax.sql.DataSource</em>, 
+<em>javax.sql.ConnectionPoolDataSource</em>, and <em>javax.sql.XADataSource</em>, as shown in the following
+examples.</p>
+
+<pre>
+<strong>// If your application is running on the Java SE 6 platform,
+// and if you would like to call DataSource methods specific 
+// to the JDBC 4 API (for example, isWrapperFor), use the
+// JDBC 4 variants of these classes:
+//
+//   org.apache.derby.jdbc.EmbeddedConnectionPoolDataSource40
+//   org.apache.derby.jdbc.EmbeddedDataSource40
+//   org.apache.derby.jdbc.EmbeddedXADataSource40
+//</strong>
+import org.apache.derby.jdbc.EmbeddedConnectionPoolDataSource;
+import org.apache.derby.jdbc.EmbeddedDataSource;
+import org.apache.derby.jdbc.EmbeddedXADataSource; 
+
+javax.sql.ConnectionPoolDataSource cpds = new EmbeddedConnectionPoolDataSource(); 
+javax.sql.DataSource ds = new EmbeddedDataSource(); 
+javax.sql.XADataSource xads = new EmbeddedXADataSource();</pre>
+
+<p><span>Derby</span> provides six properties
+for a <em>DataSource</em>. These properties are in <em>org.apache.derby.jdbc.EmbeddedDataSource</em>.
+They are:</p>
+
+<ul>
+<li><em>DatabaseName</em>   <p>This mandatory property must be set. It identifies
+which database to access. To access a database named <em>wombat</em> located at 
+<em>/local1/db/wombat</em>, call <em>setDatabaseName("/local1/db/wombat")</em>
+on the data source object. </p>
+</li>
+
+<li><em>CreateDatabase</em>   <p>Optional. Sets a property to create a database
+the next time the <em>getConnection</em> method of a data source object is called.
+The string <em>createString</em> is always "create" (or possibly null). (Use
+the method <em>setDatabaseName()</em> to define the name of
+the database.)</p>
+</li>
+
+<li><em>ShutdownDatabase</em>   <p>Optional. Sets a property to shut down a
+database. The string <em>shutDownString</em> is always "shutdown" (or possibly
+null). Shuts down the database the next time the <em>getConnection</em> method
+of a data source object is called.</p>
+</li>
+
+<li><em>DataSourceName</em>   <p>Optional. Name for <em>ConnectionPoolDataSource</em>
+or <em>XADataSource</em>. Not used by the data source object. Used for informational
+purposes only. </p>
+</li>
+
+<li><em>Description</em>   <p>Optional. Description of the data source. Not
+used by the data source object. Used for informational purposes only. </p>
+</li>
+
+<li><em>connectionAttributes</em>   <p>Optional. Connection attributes specific
+to <span>Derby</span>. See the <cite><span><em>Derby Reference Manual</em></span></cite> for a more information about
+the attributes. </p>
+</li>
+
+</ul>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevresman19524.html" title="The Java Platform, Enterprise Edition (the Java EE platform) is a standard for development of enterprise applications based on reusable components in a multi-tier environment. In addition to the features of the Java Platform, Standard Edition (the Java SE platform), the Java EE platform adds support for Enterprise JavaBeans (EJB) technology, the Java Persistence API, JavaServer Faces technology, Java Servlet technology, JavaServer Pages (JSP) technology, and many more. The Java EE platform architecture is used to bring together existing technologies and enterprise applications in a single, manageable environment.">Using Derby as a Java EE resource manager</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevresman92946.html" title="If you need to shut down or create a database, it is easiest just to work with the Derby-specific implementations of interfaces, as shown in these examples.">Shutting down or creating a database</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rdevresman79556.html" title="Derby provides two variants of each DataSource interface defined by the JDBC API.">Classes that pertain to resource managers</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="derby.ui.codeset property" />
+<meta content="derby.ui.codeset (tool property), Internationalization features, codeset" name="DC.subject" />
+<meta content="derby.ui.codeset (tool property), Internationalization features, codeset" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref29864.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref10135.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref28146.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefdatasource.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref41073.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefexceptiontrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref28788.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref32585.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefpassword.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref35032.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref12236.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref25589.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefshownoconn.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefshownoselectcount.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref38481.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefuser.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijlocale.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsijpropref97949" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>derby.ui.codeset property</title>
+</head>
+<body id="rtoolsijpropref97949"><a name="rtoolsijpropref97949"><!-- --></a>
+
+
+<h1 class="topictitle1">derby.ui.codeset property</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">Function</h2> <p>Set this property to a supported character
+encoding value when using one of the <span>Derby</span> tools
+with a language not supported by your default system.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>derby.ui.codeset=<strong><em>derbyval</em></strong></strong></pre>
+ <p>where <em>derbyval</em> is
+a supported character encoding value, for example, UTF8 (see the table later
+in this topic).</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2> <p>The following command specifies to run <samp class="codeph">ij</samp> using
+the Japanese territory (<em>derby.ui.locale=ja_JP</em>) using Japanese Latin
+Kanji mixed encoding (<em>codeset=Cp939</em>): </p>
+<pre><strong>java -Dderby.ui.locale=ja_JP -Dderby.ui.codeset=Cp939 
+    -Dij.protocol=jdbc:derby:
+    org.apache.derby.tools.ij</strong></pre>
+ <p>The following table contains
+a sampling of character encodings. Supported encodings vary from product to
+product.  For example, to see the full list of the character encodings that
+are supported by the Java Platform, Standard Edition 6 Software Development Kit,
+go to <a href="http://download.oracle.com/javase/6/docs/technotes/guides/intl/encoding.doc.html" target="_blank">http://download.oracle.com/javase/6/docs/technotes/guides/intl/encoding.doc.html</a>.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists and describes some of the available character encodings." frame="border" border="1" rules="all"><caption>Table 1. Sample character encodings</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="50%" id="N100E8">Character Encoding</th>
+
+<th valign="bottom" width="50%" id="N100EF">Explanation</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="50%" headers="N100E8">8859_1</td>
+
+<td valign="top" width="50%" headers="N100EF">ISO Latin-1</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">8859_2</td>
+
+<td valign="top" width="50%" headers="N100EF">ISO Latin-2</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">8859_7</td>
+
+<td valign="top" width="50%" headers="N100EF">ISO Latin/Greek</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">Cp1257</td>
+
+<td valign="top" width="50%" headers="N100EF">Windows Baltic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">Cp1258</td>
+
+<td valign="top" width="50%" headers="N100EF">Windows Vietnamese</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">Cp437</td>
+
+<td valign="top" width="50%" headers="N100EF">PC Original</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">EUCJIS</td>
+
+<td valign="top" width="50%" headers="N100EF">Japanese EUC</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">GB2312</td>
+
+<td valign="top" width="50%" headers="N100EF">GB2312-80 Simplified Chinese</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">JIS</td>
+
+<td valign="top" width="50%" headers="N100EF">JIS</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">KSC5601</td>
+
+<td valign="top" width="50%" headers="N100EF">KSC5601 Korean</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">MacCroatian</td>
+
+<td valign="top" width="50%" headers="N100EF">Macintosh Croatian</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">MacCyrillic</td>
+
+<td valign="top" width="50%" headers="N100EF">Macintosh Cyrillic</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">SJIS</td>
+
+<td valign="top" width="50%" headers="N100EF">PC and Windows Japanese</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="50%" headers="N100E8">UTF8</td>
+
+<td valign="top" width="50%" headers="N100EF">Standard UTF-8</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rtoolsijpropref29864.html" title="">ij properties reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsijpropref10135.html" title="">ij.connection.connectionName property</a></div>
+<div><a href="rtoolsijpropref28146.html" title="">ij.database property</a></div>
+<div><a href="rtoolsijproprefdatasource.html" title="">ij.dataSource property</a></div>
+<div><a href="rtoolsijpropref41073.html" title="">ij.driver property</a></div>
+<div><a href="rtoolsijproprefexceptiontrace.html" title="">ij.exceptionTrace property</a></div>
+<div><a href="rtoolsijpropref28788.html" title="">ij.maximumDisplayWidth property</a></div>
+<div><a href="rtoolsijpropref32585.html" title="">ij.outfile property</a></div>
+<div><a href="rtoolsijproprefpassword.html" title="">ij.password property</a></div>
+<div><a href="rtoolsijpropref35032.html" title="">ij.protocol property</a></div>
+<div><a href="rtoolsijpropref12236.html" title="">ij.protocol.protocolName property</a></div>
+<div><a href="rtoolsijpropref25589.html" title="">ij.showErrorCode property</a></div>
+<div><a href="rtoolsijproprefshownoconn.html" title="">ij.showNoConnectionsAtStart property</a></div>
+<div><a href="rtoolsijproprefshownoselectcount.html" title="">ij.showNoCountForSelect property</a></div>
+<div><a href="rtoolsijpropref38481.html" title="">ij.URLCheck property</a></div>
+<div><a href="rtoolsijproprefuser.html" title="">ij.user property</a></div>
+<div><a href="rtoolsijlocale.html" title="">derby.ui.locale property</a></div>
+</div>
+</div>
+
+</body>
+</html>

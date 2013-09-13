@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE SYNONYM 文" />
+<meta content="CREATE SYNONYM statement, Synonyms, creating" name="DC.subject" />
+<meta content="CREATE SYNONYM statement, Synonyms, creating" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljcreatesynonym" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE SYNONYM 文</title>
+</head>
+<body id="rrefsqljcreatesynonym"><a name="rrefsqljcreatesynonym"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE SYNONYM 文</h1>
+
+
+<div>
+<div class="section"><p>CREATE SYNONYM文によって同じスキーマあるいは異なるスキーマに存在する表やビューに別名を与える事ができます。
+さらに別名に別名を与えて、入れ子の別名を作成することもできます。
+別名は元の限定された表やビューの名前に代わり、SELECT、INSERT、UPDATE、DELETEやLOCK TABLE文にて利用できます。存在しない表やビューへの別名を作成することも可能ですが、別名を利用する前までに対象の表やビューは存在していなければなりません。</p>
+<p>別名は表やビューと同じ名前空間を共有します。同じスキーマに既にある表と同じ名前で別名を作ることはできません。同様に既に存在する別名と同じ名前の表やビューを作成することはできません。</p>
+
+<p>別名は作成時にまだ存在していない表やビューにも作成することができます。もし表やビューが存在していなければ、そのことを警告されます。(SQLSTATE  01522)
+DML文で別名を使うときには参照する情報は存在していなければなりません。</p>
+
+<p>入れ子になった別名(他の別名への別名)を作成することはできますが、参照関係が循環するような別名を作成しようとするとエラーとなります。(SQLSTATE 42916)</p>
+
+<p>別名はシステムスキーマに定義できません。'SYS'で名前が始まるあらゆるスキーマはシステムスキーマとみなされ、<span>Derby</span>において予約されています。</p>
+
+<p>一時表への別名は作成できません。一時表に別名を定義しようとするとエラーとなります。(SQLSTATE XCL51)</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2><pre><strong>CREATE SYNONYM <a href="rrefsynonymname.html#rrefsynonymname">別の名</a> FOR { <a href="rrefviewname.html#rrefviewname">ビュー名</a> | <a href="rreftablename.html#rreftablename">表名</a> }</strong></pre>
+
+文中の<a href="rrefsynonymname.html#rrefsynonymname">別の名</a>は、対象の表やビューに与える別名です。一方で、<a href="rrefviewname.html#rrefviewname">ビュー名</a>や<a href="rreftablename.html#rreftablename">表名</a>は、対象の表やビューの元の名前です。</div>
+
+<div class="example"><h2 class="sectiontitle">例</h2>CREATE SYNONYM SAMP.T1 FOR SAMP.TABLEWITHLONGNAME</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE 文</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="CREATE FUNCTION文により、式で利用できるJava関数を作成できます。">CREATE FUNCTION 文</a></div>
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX 文</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE 文</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA 文</a></div>
+<div><a href="rrefsqlj24513.html" title="">CREATE TABLE 文</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER 文</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW 文</a></div>
+</div>
+</div>
+
+</body>
+</html>

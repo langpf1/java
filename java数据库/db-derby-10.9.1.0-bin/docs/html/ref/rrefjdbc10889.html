@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Attributes of the Derby database connection URL" />
+<meta content="Database connection URL, attributes, Properties object" name="DC.subject" />
+<meta content="Database connection URL, attributes, Properties object" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34565.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc37352.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjavgcasyn.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc10889" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Attributes of the Derby database connection URL </title>
+</head>
+<body id="rrefjdbc10889"><a name="rrefjdbc10889"><!-- --></a>
+
+
+<h1 class="topictitle1">Attributes of the Derby database connection URL </h1>
+
+
+<div>
+<div class="section"><p>You can supply an optional list of attributes to a database connection
+URL. <span>Derby</span> translates these
+attributes into properties, so you can also set attributes in a <em>Properties</em> object
+passed to <em>DriverManager.getConnection</em>. (You cannot set those attributes
+as system properties, only in an object passed to the <em>DriverManager.getConnection</em> method.)
+If you specify any attributes both on the connection URL and in a
+<em>Properties</em> object, the attributes on the connection URL override the
+attributes in the <em>Properties</em> object.</p>
+</div>
+
+<div class="section"><p>These attributes are specific to <span>Derby</span> and
+are listed in <a href="rrefattrib24612.html#rrefattrib24612">Setting attributes for the database connection URL</a>.</p>
+</div>
+
+<div class="section"><div class="p">Attribute name/value pairs are converted into properties and added
+to the properties provided in the connection call. If no properties are provided
+in the connection call, a properties set is created that contains only the
+properties obtained from the database connection URL.   <pre><strong>import java.util.Properties;
+
+Connection conn = DriverManager.getConnection(
+    "jdbc:derby:sampleDB;create=true");
+
+<span>/* setting an attribute in a Properties object */</span>
+Properties myProps = new Properties();
+myProps.put("create", "true");
+Connection conn = DriverManager.getConnection(
+    "jdbc:derby:sampleDB", myProps);
+
+<span>/* passing user name and password */</span>
+Connection conn = DriverManager.getConnection(
+    "jdbc:derby:sampleDB", "dba", "password");</strong></pre>
+</div>
+</div>
+
+<div class="section"> <div class="note"><span class="notetitle">Note: </span>Attributes are not parsed for correctness. If you pass in
+an incorrect attribute or corresponding value, it is simply ignored. (<span>Derby</span> does provide a tool for
+parsing the correctness of attributes. For more information, see the <cite><span><em>Derby Tools and Utilities Guide</em></span></cite>.)</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc34565.html" title="">java.sql.DriverManager.getConnection method</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="crefjavgcasyn.html" title="">Additional SQL syntax</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjdbc27433.html" title="">Derby database connection URL syntax</a></div>
+<div><a href="rrefjdbc37352.html" title="">Syntax of database connection URLs for applications with embedded databases</a></div>
+</div>
+</div>
+
+</body>
+</html>

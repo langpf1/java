@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Objetos ResultSet" />
+<meta content="ResultSets, erros na instrução que afetam a criação" name="DC.subject" />
+<meta content="ResultSets, erros na instrução que afetam a criação" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc40794.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefso2" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Objetos ResultSet</title>
+</head>
+<body id="rrefso2"><a name="rrefso2"><!-- --></a>
+
+
+<h1 class="topictitle1">Objetos ResultSet</h1>
+
+
+<div>
+<div class="section">
+<p>No caso de ocorrer um erro quando a instrução SELECT é executada pela
+primeira vez, isto impede que seja aberto um objeto <em>ResultSet</em> para a
+mesma.
+O mesmo erro não fecha o <em>ResultSet</em> quando ocorre após o <em>ResultSet</em>
+ter sido aberto.</p>
+
+</div>
+
+<div class="section">
+<p>Por exemplo, se ocorrer um erro de divisão-por-zero quando o método
+<em>executeQuery</em> for chamado por <em>java.sql.Statement</em> ou
+<em>java.sql.PreparedStatement</em>, será lançada uma exceção e não será retornado
+nenhum conjunto de resultados, enquanto que, se ocorrer o mesmo erro quando o
+método <em>next</em> for chamado no objeto <em>ResultSet</em>, isto não fará
+com que o conjunto de resultados seja fechado.</p>
+
+</div>
+
+<div class="section">
+<p>Podem ocorrer erros durante a criação do <em>ResultSet</em>,
+se o sistema executar parcialmente a consulta antes da primeira linha ser
+trazida.
+Isto pode acontecer em qualquer consulta que utiliza mais de uma tabela, e em
+consultas que utilizam agregações, GROUP BY, ORDER BY, DISTINCT, INTERSECT,
+EXCEPT e UNION.</p>
+
+</div>
+
+<div class="section">
+<p>Fechar um <em>Statement</em> faz com que todos os objetos
+<em>ResultSet</em> abertos para esta instrução sejam fechados também.</p>
+
+</div>
+
+<div class="section">
+<p>O nome do cursor para o cursor do <em>ResultSet</em> pode ser definido
+antes das instrução ser executada. Entretanto, uma vez executada,
+o nome do cursor não poderá mais ser alterado.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefjdbc40794.html" title="">java.sql.Statement</a></div>
+</div>
+</div>
+
+</body>
+</html>

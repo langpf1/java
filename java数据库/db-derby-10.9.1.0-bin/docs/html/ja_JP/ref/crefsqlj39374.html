@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="文" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefkeywords29722.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsql9241891.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexcept16677.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_0summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj22771.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj81859.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcallprocedure.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdeclaretemptable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj35981.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj80721.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljgrant.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj40774.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj40506.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqljrenamestatements.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljrevoke.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj35312.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj41360.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj26498.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="crefsqlj39374" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>文</title>
+</head>
+<body id="crefsqlj39374"><a name="crefsqlj39374"><!-- --></a>
+
+
+<h1 class="topictitle1">文</h1>
+
+<div>
+<p>本節は言語の高レベルな構造と、それから言語の部分について、マニュアルを提供します。
+たとえばCREATE INDEX文は高レベルの文です。これをユーザはJDBCのインターフェイスを通して直接実行することができます。本節にはSQLの節についても書かれています。これは、高レベルの文ではなく、直接実行することはできませんが、高レベルの文の一部となることができます。例えばORDER BY節やWHERE節は節です。最後に本節には、式について書かれています。式は文に置くことができる複雑な構文です。例えば、<em><a href="rrefselectexpression.html#rrefselectexpression">Select式</a></em>や<em><a href="rreftablesubquery.html#rreftablesubquery">表副問い合わせ</a></em>等が式です。
+これらの節や式には、リファレンスとして使いやすいよう、それぞれにマニュアルの頁が用意されています。</p>
+
+<p>特に何も書かれていなければ、<em>文</em>と記された全ての高レベルの文は、JDBCのインターフェイスを介して、実行する事あるいは用意して実行することが可能です。
+一方、個々の式について、高レベルの文として実行可能か否かこのマニュアルにて書かれています。</p>
+
+<p>本節では文の利用についての一般的な情報や、個々の文についての説明が書かれています。</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="crefsqlj22771.html">依存関係</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj81859.html">ALTER TABLE 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefcallprocedure.html">CALL (手続き) 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="crefsqlj95081.html">CREATE 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefdeclaretemptable.html">DECLARE GLOBAL TEMPORARY TABLE 文</a></strong><br />
+The DECLARE GLOBAL TEMPORARY TABLE statement defines a temporary table for the current connection.</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj35981.html">DELETE 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="crefsqlj80721.html">DROP文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqljgrant.html">GRANT 文</a></strong><br />
+GRANT 文を使って、データベースにある情報の操作権限を、指定した一人あるいは全ユーザに与えることができます。</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj40774.html">INSERT 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj40506.html">LOCK TABLE 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="crefsqljrenamestatements.html">RENAME 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqljrevoke.html">REVOKE 文</a></strong><br />
+REVOKE文を使って、指定したユーザあるいは全ユーザから、データベースの情報に対して操作を行う権限を剥奪することができます。</li>
+<li class="ulchildlink"><strong><a href="crefsqlj35312.html">SET 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj41360.html">SELECT 文</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj26498.html">UPDATE文</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj23296.html" title="">SQL言語のリファレンス</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj18919.html" title="">SQLの識別子</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">組込みシステム関数</a></div>
+<div><a href="crefjdbc12657.html" title="Derbyは組み込みのJDBCドライバと共に提供されます。">JDBC リファレンス</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqlj28468.html" title="">大文字小文字と特殊文字</a></div>
+<div><a href="rrefclauses.html" title="">SQL 節</a></div>
+<div><a href="rrefsqlj19433.html" title="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。">SQL式</a></div>
+<div><a href="rrefsqlj29840.html" title="">JOIN 演算</a></div>
+<div><a href="rrefqueries.html" title="">SQL 問い合わせ</a></div>
+<div><a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+<div><a href="rrefkeywords29722.html" title="">SQL予約語</a></div>
+<div><a href="rrefsql9241891.html" title="">DerbyのサポートするSQL-92の機能</a></div>
+<div><a href="rrefsistabs38369.html" title="">Derbyのシステム表</a></div>
+<div><a href="rrefexcept16677.html" title="Derbyにて発生する全てのエラーは、JDBCからSQLExceptionとして挙がります。 もしユーザの定義した型から例外が挙がって、その例外がSQLExceptionでは無い場合、その例外はSQLExceptionにラップされています。 Derby固有のSQLExceptionは、SQLStateクラスに定義されたXで始まるコードを用います。標準に定義されたSQLStateの値は、対応する例外に対して返されます。">Derbyの例外メッセージとSQL state</a></div>
+<div><a href="rrefjdbc87220.html" title="">java.sql.BatchUpdateException クラス</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">Connected Device ConfigurationおよびFoundation Profile向けのJDBCパッケージ(JSR169)</a></div>
+<div><a href="rrefjdbc32593.html" title="">JDBC 3.0の機能</a></div>
+<div><a href="rrefjdbc4_0summary.html" title="">JDBC 4.0の機能</a></div>
+<div><a href="rrefjdbc1020262.html" title="">JDBCエスケープの構文</a></div>
+</div>
+</div>
+
+</body>
+</html>

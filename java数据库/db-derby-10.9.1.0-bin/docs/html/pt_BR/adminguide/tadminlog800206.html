@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Utilização do atributo logDevice" />
+<meta name="abstract" content="Para especificar um local diferente do padrão para o diretório de log, deve ser definido o atributo logDevice na URL de conexão com o banco de dados ao criar o banco de dados." />
+<meta name="description" content="Para especificar um local diferente do padrão para o diretório de log, deve ser definido o atributo logDevice na URL de conexão com o banco de dados ao criar o banco de dados." />
+<meta content="logDevice, Arquivo service.propertie, definição de logDevice" name="DC.subject" />
+<meta content="logDevice, Arquivo service.propertie, definição de logDevice" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminlog98.html" />
+<meta scheme="URI" name="DC.Relation" content="radminlog800241.html" />
+<meta scheme="URI" name="DC.Relation" content="radminlog800279.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminlog800315.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tadminlog800206" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Utilização do atributo logDevice</title>
+</head>
+<body id="tadminlog800206"><a name="tadminlog800206"><!-- --></a>
+
+
+<h1 class="topictitle1">Utilização do atributo logDevice</h1>
+
+
+
+<div><p>Para especificar um local diferente do padrão para o diretório de
+<em>log</em>, deve ser definido o atributo <em>logDevice</em> na URL de conexão com
+o banco de dados ao criar o banco de dados.</p>
+
+<div class="section">
+<p>Este atributo só faz sentido ao se criar o banco de dados.
+O atributo <samp class="codeph">logDevice</samp> pode ser especificado como um caminho
+absoluto, ou como um caminho relativo ao diretório onde a JVM é executada.</p>
+
+<p>Definir <em>logDevice</em> na URL de conexão com o banco de dados adiciona uma
+entrada no arquivo <em>service.properties</em>.
+Se o diretório de <em>log</em> for movido manualmente, será necessário alterar
+esta entrada no arquivo <em>service.properties</em>.
+Se o diretório de <em>log</em> for movido de volta para o local padrão, a entrada
+<em>logDevice</em> deverá ser removida do arquivo <em>service.properties</em>.</p>
+
+</div>
+
+<div class="example">
+<p>Para verificar o local do <em>log</em> de um banco de dados existente,
+pode ser consultado o atributo <samp class="codeph">logDevice</samp> como uma propriedade
+do banco de dados utilizando a seguinte declaração:
+</p>
+<pre>VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY('logDevice')</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminlog98.html" title="Pode ser melhorado o desempenho de bancos de dados grandes com muitas atualizações colocando o log do banco de dados em uma unidade separada, o que reduz a contenção de E/S.">Arquivo de log em uma unidade separada</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="cadminlog800315.html" title="">Questões relativas ao log em um local diferente do padrão</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="radminlog800241.html" title="">Exemplo de criação do log em um local diferente do padrão</a></div>
+<div><a href="radminlog800279.html" title="">Exemplo de mover o log manualmente</a></div>
+</div>
+</div>
+
+</body>
+</html>

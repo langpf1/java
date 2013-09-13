@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Defining users" />
+<meta name="abstract" content="Derby provides several ways to define the repository of users and passwords. To specify which of these services to use with your Derby system, set the property derby.authentication.provider to an appropriate value." />
+<meta name="description" content="Derby provides several ways to define the repository of users and passwords. To specify which of these services to use with your Derby system, set the property derby.authentication.provider to an appropriate value." />
+<meta content="Users, defining for a system, Authentication provider, specifying" name="DC.subject" />
+<meta content="Users, defining for a system, Authentication provider, specifying" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecurenativeauth.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure36127.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecurenativeauth.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure38522.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevcsecure557.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure79358.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure21561.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure42374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevcsecure37817" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Defining users</title>
+</head>
+<body id="cdevcsecure37817"><a name="cdevcsecure37817"><!-- --></a>
+
+
+<h1 class="topictitle1">Defining users</h1>
+
+
+
+<div><p><span>Derby</span> provides
+several ways to define the repository of users and passwords. To specify which
+of these services to use with your
+<span>Derby</span> system, set the
+property <samp class="codeph">derby.authentication.provider</samp> to an appropriate
+value.</p>
+
+<p>Setting the property as a system-wide property creates system-wide users.
+Setting the property as a database-wide property creates users for a single
+database only.</p>
+
+<ul>
+<li><a href="cdevcsecurenativeauth.html#cdevcsecurenativeauth">Using NATIVE authentication</a></li>
+
+<li><a href="cdevcsecure38522.html#cdevcsecure38522">External directory service</a>: 
+<a href="cdevcsecure41285.html#cdevcsecure41285">LDAP directory service</a>.
+</li>
+
+<li><a href="cdevcsecure21561.html#cdevcsecure21561">User-defined class</a></li>
+
+<li><a href="cdevcsecure21547.html#cdevcsecure21547">BUILTIN Derby users</a></li>
+
+</ul>
+
+<div class="note"><span class="notetitle">Note: </span>Shutting down the <span>Derby</span> system
+(for example, using the <em>shutdown=true</em> form of the connection URL without
+specifying a particular database) when user authentication is turned on requires
+that you define at least one user as a system-wide user.</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure42374.html" title="Derby provides support for user authentication and user authorization. User authentication determines whether a user is a valid user. It establishes the user's identity. User authorization determines what operations a user's established identity can perform. You are strongly urged to implement both authentication and authorization on any multi-user database used in production.">Working with user authentication</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecurenativeauth.html" title="Derby's simplest authentication mechanism is NATIVE authentication.">Using NATIVE authentication</a></div>
+<div><a href="cdevcsecure36127.html" title="If you use NATIVE authentication, you do not need to set the derby.connection.requireAuthentication property. When you create a database with NATIVE authentication, simply specify a username and password, and that user becomes the database owner.">Enabling user authentication</a></div>
+<div><a href="cdevcsecure38522.html" title="A directory service stores names and attributes of those names. A typical use for a directory service is to store user names and passwords for a computer system. Derby uses the Java naming and directory interface (JNDI) to interact with external directory services that can provide authentication of users' names and passwords.">External directory service</a></div>
+<div><a href="cdevcsecure79358.html" title="This section discusses programming user authentication into applications for use with Derby.">Programming applications for Derby user authentication</a></div>
+<div><a href="cdevcsecure21561.html" title="Set derby.authentication.provider to the full name of a class that implements the public interface org.apache.derby.authentication.UserAuthenticator.">User-defined class</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rdevcsecure557.html" title="The following table summarizes the Derby properties related to user authentication.">List of user authentication properties</a></div>
+</div>
+</div>
+
+</body>
+</html>

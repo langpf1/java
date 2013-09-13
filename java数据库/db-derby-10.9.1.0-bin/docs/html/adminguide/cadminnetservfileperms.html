@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Controlling database file access" />
+<meta content="derby.storage.useDefaultFilePermissions property, database files, specifying permissions with Java SE 7 and up, file permissions, specifying with Java SE 7 and up, permissions, file, specifying with Java SE 7 and up" name="DC.subject" />
+<meta content="derby.storage.useDefaultFilePermissions property, database files, specifying permissions with Java SE 7 and up, file permissions, specifying with Java SE 7 and up, permissions, file, specifying with Java SE 7 and up" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminadvtops.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminnetservsecurity.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminnetservrun.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminnetservusrauth.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminssl.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfiguringthenetworkserver.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminlogfile.html" />
+<meta scheme="URI" name="DC.Relation" content="tadmintracefacility.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminnetservfileperms" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Controlling database file access</title>
+</head>
+<body id="cadminnetservfileperms"><a name="cadminnetservfileperms"><!-- --></a>
+
+
+<h1 class="topictitle1">Controlling database file access</h1>
+
+
+<div>
+<p>When <span>Derby</span> creates new
+files, the visibility of the new file (that is, which users can access it) is
+normally determined by the JVM environment and the file location only (that is,
+by the umask setting on UNIX and Linux systems and by the default file
+permissions on Windows NTFS).</p>
+
+<p>On Java SE 7 or later,
+<span>Derby</span> may further restrict
+the file permissions to the operating system account that started the Java
+process (that is, to the minimum access needed for operation). This means that
+other operating system accounts will have no access to directories or files
+created by <span>Derby</span>. This
+behavior can be helpful in enhancing default security for database files.</p>
+
+<p>The exact behavior is determined by two factors: how the
+<span>Derby</span> engine is started, and
+the presence or absence and specified value of the property
+<samp class="codeph">derby.storage.useDefaultFilePermissions</samp>.</p>
+
+<p>The two tables that follow show how file access works with Java SE 6 and with
+Java SE 7 and later JVMs. In both tables,</p>
+
+<ul>
+<li>"Environment" means that access is controlled entirely by the JVM
+environment and the file location only (that is, by the umask setting on UNIX
+and Linux systems and by the default file permissions on Windows NTFS).</li>
+
+<li>"Restricted" means that
+<span>Derby</span> restricts access to the
+operating system account that started the JVM.</li>
+
+</ul>
+
+<p>The following table shows how file access works on Java SE 6 systems.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table shows how access to Derby files is controlled on Java SE 6 systems." frame="border" border="1" rules="all"><caption>Table 1. File access on Java SE 6 systems</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="20%" id="N100E4">Property Setting</th>
+
+<th valign="bottom" width="40%" id="N100EB">Server Started from Command Line</th>
+
+<th valign="bottom" width="40%" id="N100F2">Server Started Programmatically or Embedded</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="20%" headers="N100E4">Not applicable</td>
+
+<td valign="top" width="40%" headers="N100EB">Environment</td>
+
+<td valign="top" width="40%" headers="N100F2">Environment</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>The following table shows how file access works on Java SE 7 and later
+systems with various settings of the
+<samp class="codeph">derby.storage.useDefaultFilePermissions</samp> property.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table shows how access to Derby files is controlled on Java SE 7 and later systems." frame="border" border="1" rules="all"><caption>Table 2. File access on Java SE 7 and later systems</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="20%" id="N1016C">Property Setting</th>
+
+<th valign="bottom" width="40%" id="N10173">Server Started from Command Line</th>
+
+<th valign="bottom" width="40%" id="N1017A">Server Started Programmatically or Embedded</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="20%" headers="N1016C">No property specified</td>
+
+<td valign="top" width="40%" headers="N10173">Restricted</td>
+
+<td valign="top" width="40%" headers="N1017A">Environment</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="20%" headers="N1016C">Property set to true</td>
+
+<td valign="top" width="40%" headers="N10173">Environment</td>
+
+<td valign="top" width="40%" headers="N1017A">Environment</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="20%" headers="N1016C">Property set to false</td>
+
+<td valign="top" width="40%" headers="N10173">Restricted</td>
+
+<td valign="top" width="40%" headers="N1017A">Restricted</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>For more information, see "derby.storage.useDefaultFilePermissions" in
+the <span><em>Derby Reference Manual</em></span>.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminadvtops.html" title="">Derby Network Server advanced topics</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminnetservsecurity.html" title="">Network Server security</a></div>
+<div><a href="cadminssl.html" title="">Network encryption and authentication with SSL/TLS</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminnetservrun.html" title="">Running the Network Server under the security manager</a></div>
+<div><a href="tadminnetservusrauth.html" title="">Running the Network Server with User Authentication</a></div>
+<div><a href="tadminconfiguringthenetworkserver.html" title="">Configuring the Network Server to handle connections</a></div>
+<div><a href="tadminlogfile.html" title="">Controlling logging by using the log file</a></div>
+<div><a href="tadmintracefacility.html" title="">Controlling tracing by using the trace facility</a></div>
+</div>
+</div>
+
+</body>
+</html>

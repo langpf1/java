@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="How you use the XPLAIN style" />
+<meta content="XPLAIN style, using" name="DC.subject" />
+<meta content="XPLAIN style, using" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth13055.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth26674.html" />
+<meta scheme="URI" name="DC.Relation" content="ttundepth34375.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth37648.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctun_xplain_style" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>How you use the XPLAIN style</title>
+</head>
+<body id="ctun_xplain_style"><a name="ctun_xplain_style"><!-- --></a>
+
+
+<h1 class="topictitle1">How you use the XPLAIN style</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">Overview</h2>
+    <p>
+        XPLAIN style is an enhanced form of RUNTIMESTATISTICS processing
+        which preserves captured statistics information in 
+        <a href="ctun_xplain_tables.html#ctun_xplain_tables">database 
+            tables</a>.
+        Once the statistics have been collected and saved in the 
+        tables, they can be queried for analysis purposes.
+    </p>
+
+    <p>
+        Note that <span>Derby</span>
+        spells XPLAIN without the initial 'E'. This is done
+        to help distinguish the
+        <span>Derby</span>
+        functionality from the explain
+        functionality that you might be familiar with from commercial DBMS
+        products. The current XPLAIN implementation is optimized for
+        ad-hoc queries and tool support. Furthermore, the explain data
+        is quite extensive to analyze. 
+        <span>Derby</span>
+        tries to implement a
+        compromise between detailed explain information which is
+        almost unreadable by human users and which has to be evaluated
+        with the help of a tool, versus a compact version of explain
+        data which is only applicable for rough investigations but
+        is still browseable by human users. We feel that the information
+        in the XPLAIN system tables is sufficiently detailed to be powerful,
+        but still simple enough to provide useful information to
+        ad-hoc querying during interactive use.
+    </p>
+
+    <p>
+    To use XPLAIN style, first turn on RUNTIMESTATISTICS using the
+            <samp class="codeph">SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS()</samp> system
+            procedure.</p>
+
+        <p>Optionally, turn on statistics timing using the
+            <samp class="codeph">SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING</samp>
+            system procedure.  If you do not turn on statistics timing,
+            you will see the statement execution
+            plan only, and not the timing information.</p>
+
+        <p>Next, to activate XPLAIN style, use the
+            <samp class="codeph">SYSCS_UTIL.SYSCS_SET_XPLAIN_SCHEMA()</samp> system
+        procedure:</p>
+
+<pre>-- turn on RUNTIMESTATISTICS for connection:
+<strong>CALL SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS(1);</strong>
+<strong>CALL SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING(1);</strong>
+-- Indicate that statistics information should be captured into
+-- database tables in the MYSCHEMA schema:
+<strong>CALL SYSCS_UTIL.SYSCS_SET_XPLAIN_SCHEMA('MYSCHEMA');</strong>
+--execute queries, step through result sets, perform application processing...
+<strong>CALL SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS(0);</strong></pre>
+
+<p>Although the syntax is different, the basic steps for working with
+    XPLAIN style are the same in a Java program.</p>
+
+<p>XPLAIN style is further refined by the use of XPLAIN-only mode. By
+    default, XPLAIN-only mode is off, which means that statements are
+    compiled and executed normally. When XPLAIN-only mode is on, statements
+    are compiled, but not executed. This is useful for investigating what
+    query plan has been selected for a statement, without actually
+    executing the statement. To activate XPLAIN-only mode, use the
+    <samp class="codeph">SYSCS_UTIL.SYSCS_SET_XPLAIN_MODE()</samp> system procedure:</p>
+
+<pre>
+    call SYSCS_UTIL.SYSCS_SET_XPLAIN_MODE(1);
+</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Examples</h2><p>Some examples of usage follow.</p>
+
+    <p>Retrieve the text of statements
+        which were captured, in order by the time when the statistics were
+    captured:</p>
+
+<pre>
+    select stmt_text, xplain_time from myschema.sysxplain_statements
+    order by xplain_time
+</pre>
+
+<p>Retrieve the text of statements which were captured, showing the
+    statements which took the longest time to execute first:</p>
+
+<pre>
+    select s.stmt_text, st.execute_time from myschema.sysxplain_statements s,
+           myschema.sysxplain_statement_timings st
+    where s.timing_id = st.timing_id
+    order by st.execute_time desc
+</pre>
+
+<p>Show the statements that were executed, together with the result sets
+    that each statement required:</p>
+
+<pre>
+    select st.stmt_text, rs.op_identifier 
+    from myschema.sysxplain_statements st
+    join myschema.sysxplain_resultsets rs
+         on st.stmt_id = rs.stmt_id
+</pre>
+
+<p>Find statements which resulted in an external sort being performed:</p>
+
+<pre>
+    select s.stmt_text, s.stmt_id, rs.op_identifier, srt.no_input_rows
+    from myschema.sysxplain_sort_props srt,
+         myschema.sysxplain_resultsets rs,
+         myschema.sysxplain_statements s
+    where rs.stmt_id = s.stmt_id and rs.sort_rs_id = srt.sort_rs_id
+          and srt.sort_type = 'EX'
+</pre>
+
+<p>Show statements which resulted in a sort, sorted by the number of
+    rows which were sorted by that statement.</p>
+
+<pre>
+    select s.stmt_text, s.stmt_id, rs.op_identifier, srt.no_input_rows
+    from myschema.sysxplain_sort_props srt,
+         myschema.sysxplain_resultsets rs,
+         myschema.sysxplain_statements s
+    where rs.stmt_id = s.stmt_id and rs.sort_rs_id = srt.sort_rs_id
+    order by srt.no_input_rows desc
+</pre>
+
+<p>Find statements which resulted in a tablescan of the COUNTRIES table,
+    and display the number of pages and rows that were visited by each scan:</p>
+
+<pre>
+    select st.stmt_text, sp.no_visited_pages, sp.no_visited_rows 
+    from myschema.sysxplain_scan_props sp, 
+         myschema.sysxplain_resultsets rs, 
+         myschema.sysxplain_statements st 
+    where st.stmt_id = rs.stmt_id and 
+          rs.scan_rs_id = sp.scan_rs_id and 
+          rs.op_identifier = 'TABLESCAN' and 
+          sp.scan_object_name = 'COUNTRIES'
+</pre>
+
+</div>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctundepth13055.html" title="">Working with RunTimeStatistics</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctundepth26674.html" title="">Overview</a></div>
+<div><a href="ctundepth37648.html" title="">Analyzing the information</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="ttundepth34375.html" title="">How you use the RUNTIMESTATISTICS attribute</a></div>
+</div>
+</div>
+
+</body>
+</html>

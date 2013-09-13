@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Running the SimpleNetworkClientSample program" />
+<meta scheme="URI" name="DC.Relation" content="cadminovntsrvsample.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminovsrvsmpprgm.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminovrunsrvprgm.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminovcliconnect.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tadminovclirun" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Running the SimpleNetworkClientSample program</title>
+</head>
+<body id="tadminovclirun"><a name="tadminovclirun"><!-- --></a>
+
+
+<h1 class="topictitle1">Running the SimpleNetworkClientSample program</h1>
+
+<div>
+<div class="section"> <p>To connect to the Network Server that has been started with the
+SimpleNetworkServerSample program: </p>
+</div>
+
+<ol>
+<li class="stepexpand"><span>Open a command prompt and change directories to the%<span>DERBY_HOME</span>%\demo\nserverdemo
+directory, where %<span>DERBY_HOME</span>%
+is the directory where you installed <span>Derby</span>.</span>
+</li>
+
+<li class="stepexpand"><span>Set the classpath to include the following jar files: </span> <ul>
+<li>The current directory (".")</li>
+
+<li>derbyclient.jar</li>
+
+</ul>
+</li>
+
+<li class="stepexpand"><span>After you set up your environment correctly, run the SimpleNetworkClientSample
+program from the same directory: </span> <pre>java SimpleNetworkClientSample</pre>
+
+ If the program runs successfully, you will receive output similar
+to that shown in the following example: <pre>Starting Sample client program
+Got a client connection via the DriverManager.
+connection from datasource; 
+Got a client connection via a DataSource.
+Testing the connection obtained via DriverManager by executing a sample query
+number of rows in sys.systables = 16
+Testing the connection obtained via a DataSource by executing a sample query
+number of rows in sys.systables = 16
+Goodbye!</pre>
+</li>
+
+</ol>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminovntsrvsample.html" title="This Derby Network Server sample program demonstrates how to obtain an embedded connection and client connections to the same database by using the Network Server. This program shows how to use either the DriverManager or a DataSource to obtain client connections.">Network Server sample programs for embedded and client connections</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminovsrvsmpprgm.html" title="">Overview of the SimpleNetworkServerSample program</a></div>
+<div><a href="cadminovcliconnect.html" title="">Connecting a client to the Network Server with the SimpleNetworkClientSample program</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminovrunsrvprgm.html" title="">Running the SimpleNetworkServerSample program</a></div>
+</div>
+</div>
+
+</body>
+</html>

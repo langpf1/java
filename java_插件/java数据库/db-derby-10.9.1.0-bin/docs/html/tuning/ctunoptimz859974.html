@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="GROUP BY" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz22460.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunoptimz859947.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunoptimz859974" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>GROUP BY</title>
+</head>
+<body id="ctunoptimz859974"><a name="ctunoptimz859974"><!-- --></a>
+
+
+<h1 class="topictitle1">GROUP BY</h1>
+
+
+<div>
+<div class="p">Tuple filtering is applied for a GROUP BY when the following criteria are
+met:   
+<ul>
+<li>All grouping columns come from the same table and the optimizer has chosen
+the table in question to be the outermost table in the query block. </li>
+
+<li>The optimizer has chosen an index as the access path for the table in
+question. </li>
+
+<li>The grouping columns, plus any simple column references from the table
+that have equality predicates on them, are a prefix of the index that the
+optimizer selected as the access path for the table. </li>
+
+</ul>
+</div>
+
+<div class="p">Here is the most common case in which tuple filtering will be applied:
+  
+<pre><strong>SELECT max(c2) FROM t1 GROUP BY c1</strong></pre>
+</div>
+
+<div class="p">Equality predicates allow tuple filtering on the following:  
+<pre><strong>SELECT c2, SUM(c3)
+FROM t1
+WHERE c1 = 5 GROUP BY c2
+
+SELECT max(c4)
+FROM t1
+WHERE c1 = 5 AND c3 = 6 GROUP BY c2</strong></pre>
+</div>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctunoptimz22460.html" title="">Non-cost-based sort avoidance (tuple filtering)</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctunoptimz859947.html" title="">DISTINCT</a></div>
+</div>
+</div>
+
+</body>
+</html>

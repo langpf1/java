@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Shutting down by using the API" />
+<meta content="Network Server, shutting down using the API" name="DC.subject" />
+<meta content="Network Server, shutting down using the API" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigshuttingdownthenetworkserver.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfig815333.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tadminconfig815357" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Shutting down by using the API</title>
+</head>
+<body id="tadminconfig815357"><a name="tadminconfig815357"><!-- --></a>
+
+
+<h1 class="topictitle1">Shutting down by using the API</h1>
+
+
+<div>
+<div class="section"> <p>You can use the NetworkServerControl API to shut down the Network
+Server from within a Java application. The name of the method that you use
+to shutdown the Network Server is <samp class="codeph">shutdown()</samp>.</p>
+ </div>
+
+<div class="example">
+<p>For example, the following command shuts down the Network Server
+running on the current machine using the default port number (1527):</p>
+
+<pre>
+NetworkServerControl server = new NetworkServerControl();
+server.shutdown();
+</pre>
+
+<p>To shut down a server running with user authentication, you need to use
+a NetworkServerControl instance created with user credentials:</p>
+
+<pre>
+NetworkServerControl server = new NetworkServerControl(username, password);
+server.shutdown();
+</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="tadminconfigshuttingdownthenetworkserver.html" title="To shut down a Network Server, you can invoke a script, a jar file, or a class.">Shutting down the Network Server</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminconfig815333.html" title="">Shutting down by using the command line</a></div>
+</div>
+</div>
+
+</body>
+</html>

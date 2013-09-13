@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Where dynamic parameters are allowed" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1082953.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj1083019" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Where dynamic parameters are allowed</title>
+</head>
+<body id="rrefsqlj1083019"><a name="rrefsqlj1083019"><!-- --></a>
+
+
+<h1 class="topictitle1">Where dynamic parameters are allowed</h1>
+
+<div>
+<div class="section"><div class="p">You can use dynamic parameters anywhere in an expression where
+their data type can be easily deduced.   <ol>
+<li>Use as the first operand of BETWEEN is allowed if one of the second and
+third operands is not also a dynamic parameter. The type of the first operand
+is assumed to be the type of the non-dynamic parameter, or the union result
+of their types if both are not dynamic parameters.   <pre><strong>WHERE ? BETWEEN DATE('1996-01-01') AND ?
+<span>-- types assumed to be DATE</span></strong></pre>
+</li>
+
+<li>Use as the second or third operand of BETWEEN is allowed. Type is assumed
+to be the type of the left operand.   <pre><strong>WHERE DATE('1996-01-01') BETWEEN ? AND ?
+<span>-- types assumed to be DATE</span></strong></pre>
+</li>
+
+<li id="rrefsqlj1083019__sqlj30695"><a name="rrefsqlj1083019__sqlj30695"><!-- --></a>Use as the left operand of an IN list is allowed if at
+least one item in the list is not itself a dynamic parameter. Type for the
+left operand is assumed to be the union result of the types of the non-dynamic
+parameters in the list.   <pre><strong>WHERE ? NOT IN (?, ?, 'Santiago')
+<span>-- types assumed to be CHAR</span></strong></pre>
+</li>
+
+<li>Use in the values list in an IN predicate is allowed if the first operand
+is not a dynamic parameter or its type was determined in the previous rule.
+Type of the dynamic parameters appearing in the values list is assumed to
+be the type of the left operand.   <pre><strong>WHERE <strong><em>FloatColumn</em></strong> IN (?, ?, ?)
+<span>-- types assumed to be FLOAT</span></strong></pre>
+</li>
+
+<li id="rrefsqlj1083019__sqlj18960"><a name="rrefsqlj1083019__sqlj18960"><!-- --></a>For the binary operators +, -, *, /, AND, OR, &lt;, &gt;,
+=, &lt;&gt;, &lt;=, and &gt;=, use of a dynamic parameter as one operand but
+not both is permitted. Its type is taken from the other side.   <pre><strong>WHERE ? &lt; CURRENT_TIMESTAMP
+<span>-- type assumed to be a TIMESTAMP</span></strong></pre>
+</li>
+
+<li>Use in a CAST is always permitted. This gives the dynamic parameter a
+type.   <pre><strong>CALL valueOf(CAST (? AS VARCHAR(10)))</strong></pre>
+</li>
+
+<li>Use on either or both sides of LIKE operator is permitted. When used on
+the left, the type of the dynamic parameter is set to the type of the right
+operand, but with the maximum allowed length for the type. When used on the
+right, the type is assumed to be of the same length and type as the left operand.
+(LIKE is permitted on CHAR and VARCHAR types; see <a href="rrefsqlj40899.html#rrefsqlj40899">Concatenation operator</a> for
+more information.)   <pre><strong>WHERE ? LIKE 'Santi%'
+<span>-- type assumed to be CHAR with a length of
+-- java.lang.Integer.MAX_VALUE</span></strong></pre>
+</li>
+
+<li>A ? parameter is allowed by itself on only one side of the || operator.
+That is, "? || ?" is not allowed. The type of a ? parameter on one side of
+a || operator is determined by the type of the expression on the other side
+of the || operator. If the expression on the other side is a CHAR or VARCHAR,
+the type of the parameter is VARCHAR with the maximum allowed length for the
+type. If the expression on the other side is a CHAR FOR BIT DATA or VARCHAR
+FOR BIT DATA type, the type of the parameter is VARCHAR FOR BIT DATA with
+the maximum allowed length for the type.   <pre><strong>SELECT BITcolumn || ?
+FROM UserTable
+<span>-- Type assumed to be CHAR FOR BIT DATA of length specified for BITcolumn</span></strong></pre>
+</li>
+
+<li>In
+a conditional expression, which uses a ?, use of a dynamic parameter (which
+is also represented as a ?) is allowed. The type of a dynamic parameter as
+the first operand is assumed to be boolean. Only one of the second and third
+operands can be a dynamic parameter, and its type will be assumed to be the
+same as that of the other (that is, the third and second operand, respectively).
+ <pre><strong>SELECT c1 IS NULL ? ? : c1
+<span>-- allows you to specify a "default" value at execution time
+-- dynamic parameter assumed to be the type of c1
+-- you cannot have dynamic parameters on both sides
+-- of the :</span></strong></pre>
+</li>
+
+<li>A dynamic parameter is allowed as an item in the values list or select
+list of an INSERT statement. The type of the dynamic parameter is assumed
+to be the type of the target column.<pre><strong>INSERT INTO t VALUES (?)
+<span>-- dynamic parameter assumed to be the type
+-- of the only column in table t</span>
+INSERT INTO t SELECT ?
+FROM t2
+<span>-- not allowed</span></strong></pre>
+</li>
+
+<li>A ? parameter in a comparison with a subquery takes its type from the
+expression being selected by the subquery. For example:   <pre><strong>SELECT *
+FROM tab1
+WHERE ? = (SELECT x FROM tab2)
+
+SELECT *
+FROM tab1
+WHERE ? = ANY (SELECT x FROM tab2)
+<span>-- In both cases, the type of the dynamic parameter is
+-- assumed to be the same as the type of tab2.x.</span></strong></pre>
+</li>
+
+<li>A dynamic parameter is allowed as the value in an UPDATE statement. The
+type of the dynamic parameter is assumed to be the type of the column in the
+target table.   <pre><strong>UPDATE t2 SET c2 =? <span>-- type is assumed to be type of c2</span></strong></pre>
+</li>
+
+<li>Dynamic parameters are allowed as the operand of the unary operators -
+or +. For example:<pre><strong>CREATE TABLE t1 (c11 INT, c12 SMALLINT, c13 DOUBLE, c14 CHAR(3))
+SELECT * FROM t1 WHERE c11 BETWEEN -? AND +?
+<span>-– The type of both of the unary operators is INT
+-- based on the context in which they are used (that is,
+-- because c11 is INT, the unary parameters also get the 
+-- type INT.</span></strong></pre>
+</li>
+
+<li>LENGTH allow a dynamic parameter. The type is assumed to be a maximum
+length VARCHAR type.   <pre><strong>SELECT LENGTH(?)</strong></pre>
+</li>
+
+<li>Qualified comparisons.   <pre><strong>? = SOME (SELECT 1 FROM t)
+<span>-- is valid. Dynamic parameter assumed to be INTEGER type</span>
+1 = SOME (SELECT ? FROM t)
+<span>-- is valid. Dynamic parameter assumed to be INTEGER type.</span></strong></pre>
+</li>
+
+<li>A dynamic parameter is allowed as the left operand of an IS expression
+and is assumed to be a boolean.</li>
+
+</ol>
+</div>
+</div>
+
+<div class="section"><p>Once the type of a dynamic parameter is determined based on the
+expression it is in, that expression is allowed anywhere it would normally
+be allowed if it did not include a dynamic parameter.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj29911.html" title="">Dynamic parameters</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqlj1082953.html" title="">Dynamic parameters example</a></div>
+</div>
+</div>
+
+</body>
+</html>

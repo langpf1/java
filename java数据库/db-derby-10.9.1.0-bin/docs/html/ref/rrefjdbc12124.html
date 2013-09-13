@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="JDBC escape syntax for time formats" />
+<meta content="t (JDBC escape keyword), {t (JDBC escape syntax), JDBC escape syntax for, Time formats" name="DC.subject" />
+<meta content="t (JDBC escape keyword), {t (JDBC escape syntax), JDBC escape syntax for, Time formats" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc70824.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc28456.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbclimit.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc88908.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc37244.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcescapedate.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc41784.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc12124" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>JDBC escape syntax for time formats</title>
+</head>
+<body id="rrefjdbc12124"><a name="rrefjdbc12124"><!-- --></a>
+
+
+<h1 class="topictitle1">JDBC escape syntax for time formats</h1>
+
+
+<div>
+<div class="section"> <p><span>Derby</span> interprets
+the JDBC escape syntax for time as equivalent to the correct SQL syntax for
+times. <span>Derby</span> also supports
+the ISO format of 8 characters (6 digits, and 2 decimal points).</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>{t 'hh:mm:ss'}</strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Equivalent to</h2><pre><strong>TIME('hh:mm:ss')</strong></pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2> <pre><strong>VALUES {t '20:00:03'}</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc1020262.html" title="">JDBC escape syntax</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjdbc70824.html" title="">JDBC escape keyword for call statements</a></div>
+<div><a href="rrefjdbc28456.html" title="">JDBC escape syntax for LIKE clauses</a></div>
+<div><a href="rrefjdbclimit.html" title="">JDBC escape syntax for limit/offset clauses</a></div>
+<div><a href="rrefjdbc88908.html" title="">JDBC escape syntax for fn keyword</a></div>
+<div><a href="rrefjdbc37244.html" title="">JDBC escape syntax for outer joins</a></div>
+<div><a href="rrefjdbcescapedate.html" title="">JDBC escape syntax for date formats</a></div>
+<div><a href="rrefjdbc41784.html" title="">JDBC escape syntax for timestamp formats</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE TRIGGER statement" />
+<meta content="CREATE TRIGGER statement, SQL statements, CREATE TRIGGER, triggers, creating, defining when they fire, database events, referencing clause, referencing old and new values, statement versus row triggers, triggered-SQL-statement, order of execution, recursion" name="DC.subject" />
+<meta content="CREATE TRIGGER statement, SQL statements, CREATE TRIGGER, triggers, creating, defining when they fire, database events, referencing clause, referencing old and new values, statement versus row triggers, triggered-SQL-statement, order of execution, recursion" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreaterole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatetype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj89752.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj43125" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE TRIGGER statement</title>
+</head>
+<body id="rrefsqlj43125"><a name="rrefsqlj43125"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE TRIGGER statement</h1>
+
+
+<div>
+<div class="section"> <p>A trigger defines a set of actions that are executed when a database
+event occurs on a specified table. A <em>database event</em> is a delete, insert,
+or update operation. For example, if you define a trigger for a delete on
+a particular table, the trigger's action occurs whenever someone deletes a
+row or rows from the table.</p>
+<p>Along with constraints, triggers can help
+enforce data integrity rules with actions such as cascading deletes or updates.
+Triggers can also perform a variety of functions such as issuing alerts, updating
+other tables, sending e-mail, and other useful actions.</p>
+<p>You can define
+any number of triggers for a single table, including multiple triggers on
+the same table for the same event.</p>
+<p>You can create a trigger in any schema
+where you are the schema owner. To create a trigger on a table that you do
+not own, you must be granted the TRIGGER privilege on that table. The 
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a>
+can also create triggers on any table in any schema.</p>
+
+<p>A trigger operates with the privileges of the owner of the trigger. See
+"Using SQL standard authorization" and "Privileges on views, triggers, and
+constraints" in the <span><em>Derby Developer's Guide</em></span> for
+details.</p>
+
+<p>The trigger
+does not need to reside in the same schema as the table on which the trigger
+is defined.</p>
+<p>If a qualified trigger name is specified, the schema name
+cannot begin with <em>SYS</em>.</p>
+</div>
+
+<div class="section" id="rrefsqlj43125__syn001"><a name="rrefsqlj43125__syn001"><!-- --></a><h2 class="sectiontitle">Syntax</h2><pre><strong>CREATE TRIGGER <em><a href="rreftriggername.html#rreftriggername">TriggerName</a></em>
+{ AFTER | NO CASCADE BEFORE } 
+{ INSERT | DELETE | UPDATE [ OF <em>column-Name</em> [, <em><a href="rrefcolumnname.html#rrefcolumnname">column-Name</a></em>]* ] }
+ON <em><a href="rreftablename.html#rreftablename">table-Name</a></em>
+[ <em><a href="rrefsqlj89752.html#rrefsqlj89752">ReferencingClause</a></em> ]
+[ FOR EACH { ROW | STATEMENT } ] [ MODE DB2SQL ] 
+<em><a href="rrefsqlj43125.html#rrefsqlj43125__i1149821">Triggered-SQL-statement</a></em></strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Before or after: when triggers fire</h2> <div class="p">Triggers are
+defined as either <em>Before</em> or <em>After</em> triggers. <ul>
+<li><em>Before</em> triggers fire before the statement's changes are applied
+and before any constraints have been applied. Before triggers can be either
+row or statement triggers (see <a href="rrefsqlj43125.html#rrefsqlj43125__sqlj54276">Statement versus row triggers</a>).</li>
+
+<li><em>After</em> triggers fire after all constraints have been satisfied and
+after the changes have been applied to the target table. <em>After</em> triggers
+can be either row or statement triggers (see <a href="rrefsqlj43125.html#rrefsqlj43125__sqlj54276">Statement versus row triggers</a>).</li>
+
+</ul>
+</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Insert, delete, or update: what causes the trigger to fire</h2> <div class="p">A
+trigger is fired by one of the following database events, depending on how
+you define it (see <a href="rrefsqlj43125.html#rrefsqlj43125__syn001">Syntax</a> above):
+  <ul>
+<li>INSERT</li>
+
+<li>UPDATE</li>
+
+<li>DELETE</li>
+
+</ul>
+</div>
+ <p>You can define any number of triggers for a given event on a
+given table. For update, you can specify columns.</p>
+ </div>
+
+<div class="section" id="rrefsqlj43125__sqlj67748"><a name="rrefsqlj43125__sqlj67748"><!-- --></a><h2 class="sectiontitle">Referencing old and new values: the referencing
+clause</h2> <p>Many triggered-SQL-statements need to refer to data that
+is currently being changed by the database event that caused them to fire.
+The triggered-SQL-statement might need to refer to the new (post-change or
+"after") values. </p>
+ <p><span>Derby</span> provides
+you with a number of ways to refer to data that is currently being changed
+by the database event that caused the trigger to fire. Changed data can be
+referred to in the triggered-SQL-statement using <em>transition variables</em> or <em>transition
+tables</em>. The referencing clause allows you to provide a correlation name
+or alias for these transition variables by specifying OLD/NEW AS <em>correlation-Name </em>.</p>
+ <div class="p">For
+example, if you add the following clause to the trigger definition:   <pre><strong>REFERENCING OLD AS DELETEDROW</strong></pre>
+</div>
+ <div class="p">you
+can then refer to this correlation name in the triggered-SQL-statement:   <pre><strong>DELETE FROM HotelAvailability WHERE hotel_id = DELETEDROW.hotel_id</strong></pre>
+</div>
+ <div class="p">The OLD and NEW transition variables map to a <em>java.sql.ResultSet</em> with
+a single row.   <div class="note"><span class="notetitle">Note: </span>Only row triggers (see <a href="rrefsqlj43125.html#rrefsqlj43125__sqlj54276">Statement versus row triggers</a>)
+can use the transition variables. INSERT row triggers cannot reference an
+OLD row. DELETE row triggers cannot reference a NEW row.</div>
+</div>
+ <p>For
+statement triggers, transition <em>tables</em> serve as a table identifier for
+the triggered-SQL-statement or the trigger qualification. The referencing
+clause allows you to provide a correlation name or alias for these transition
+tables by specifying OLD_TABLE/NEW_TABLE AS correlation-Name</p>
+ <div class="p">For example:
+  <pre><strong>REFERENCING OLD_TABLE AS DeletedHotels</strong></pre>
+</div>
+ <div class="p">allows
+you to use that new identifier (<em>DeletedHotels</em>) in the triggered-SQL-statement:
+  <pre><strong>DELETE FROM HotelAvailability WHERE hotel_id IN
+    (SELECT hotel_id FROM DeletedHotels)</strong></pre>
+</div>
+ <div class="p">The old and
+new transition tables map to a <em>java.sql.ResultSet</em> with cardinality
+equivalent to the number of rows affected by the triggering event.   <div class="note"><span class="notetitle">Note: </span>Only
+statement triggers (see <a href="rrefsqlj43125.html#rrefsqlj43125__sqlj54276">Statement versus row triggers</a>)
+can use the transition tables. INSERT statement triggers cannot reference
+an OLD table. DELETE statement triggers cannot reference a NEW table.</div>
+</div>
+ <p>The
+referencing clause can designate only one new correlation or identifier and
+only one old correlation or identifier. Row triggers cannot designate an identifier
+for a transition table and statement triggers cannot designate a correlation
+for transition variables.  </p>
+ </div>
+
+<div class="section" id="rrefsqlj43125__sqlj54276"><a name="rrefsqlj43125__sqlj54276"><!-- --></a><h2 class="sectiontitle">Statement versus row triggers</h2> <div class="p">You
+have the option to specify whether a trigger is a <em>statement trigger</em> or a <em>row trigger</em>.
+If it is not specified in the CREATE TRIGGER statement via FOR EACH clause, then the trigger is  
+a <em>statement trigger</em> by default.
+  <ul>
+<li><em>statement triggers</em>   <p>A statement trigger fires once per triggering
+event and regardless of whether any rows are modified by the insert, update,
+or delete event.</p>
+</li>
+
+<li><em>row triggers</em>   <p>A row trigger fires once for each row affected
+by the triggering event. If no rows are affected, the trigger does not fire.</p>
+</li>
+
+</ul>
+ <div class="note"><span class="notetitle">Note: </span>An update that sets a column value to the value that it originally
+contained (for example, UPDATE T SET C = C) causes a row trigger to fire,
+even though the value of the column is the same as it was prior to the triggering
+event.</div>
+</div>
+ </div>
+
+<div class="section" id="rrefsqlj43125__i1149821"><a name="rrefsqlj43125__i1149821"><!-- --></a><h2 class="sectiontitle">Triggered-SQL-statement</h2> <div class="p">The action
+defined by the trigger is called the triggered-SQL-statement (in <a href="rrefsqlj43125.html#rrefsqlj43125__syn001">Syntax</a> above,
+see the last line). It has the following limitations:   <ul>
+<li>It must not contain any dynamic parameters (?).</li>
+
+<li>It must not create, alter, or drop the table upon which the trigger is
+defined.</li>
+
+<li>It must not add an index to or remove an index from the table on which
+the trigger is defined.</li>
+
+<li>It must not add a trigger to or drop a trigger from the table upon which
+the trigger is defined.</li>
+
+<li>It must not commit or roll back the current transaction or change the
+isolation level.</li>
+
+<li>Before triggers cannot have INSERT, UPDATE or DELETE statements as their
+action.</li>
+
+<li>Before triggers cannot call procedures that modify SQL data as their action.</li>
+
+<li>The NEW variable of a Before trigger cannot reference a generated column.
+</li>
+
+</ul>
+</div>
+<p>The triggered-SQL-statement can reference database objects other
+than the table upon which the trigger is declared. If any of these database
+objects is dropped, the trigger is invalidated. If the trigger cannot be successfully
+recompiled upon the next execution, the invocation throws an exception and
+the statement that caused it to fire will be rolled back.</p>
+<p>For more information
+on triggered-SQL-statements, see the <cite><span><em>Derby Developer's Guide</em></span></cite>.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Order of execution</h2> <div class="p">When a database event occurs
+that fires a trigger, <span>Derby</span> performs
+actions in this order:   <ul>
+<li>It fires <em>No Cascade Before</em> triggers.</li>
+
+<li>It performs constraint checking (primary key, unique key, foreign key,
+check).</li>
+
+<li>It performs the insert, update, or delete.</li>
+
+<li>It fires <em>After</em> triggers.</li>
+
+</ul>
+</div>
+ <p>When multiple triggers are defined for the same database event
+for the same table for the same trigger time (before or after), triggers are
+fired in the order in which they were created.</p>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2>
+<pre><strong><span>-- Statements and triggers:
+</span>
+CREATE TRIGGER t1 NO CASCADE BEFORE UPDATE ON x
+  FOR EACH ROW MODE DB2SQL
+  values app.notifyEmail('Jerry', 'Table x is about to be updated'); 
+
+CREATE TRIGGER FLIGHTSDELETE
+  AFTER DELETE ON FLIGHTS
+  REFERENCING OLD_TABLE AS DELETEDFLIGHTS
+  FOR EACH STATEMENT 
+  DELETE FROM FLIGHTAVAILABILITY WHERE FLIGHT_ID IN
+  (SELECT FLIGHT_ID FROM DELETEDFLIGHTS);
+
+CREATE TRIGGER FLIGHTSDELETE3
+  AFTER DELETE ON FLIGHTS
+  REFERENCING OLD AS OLD
+  FOR EACH ROW 
+  DELETE FROM FLIGHTAVAILABILITY WHERE FLIGHT_ID = OLD.FLIGHT_ID;
+</strong></pre>
+ <div class="note"><span class="notetitle">Note: </span>You can find more examples in the <cite><span><em>Derby Developer's Guide</em></span></cite>.</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Trigger recursion</h2> <p>The maximum trigger recursion
+depth is 16.</p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Related information</h2> <div class="p">Special system functions that
+return information about the current time or current user are evaluated when
+the trigger fires, not when it is created. Such functions include:   <ul>
+<li><a href="rrefsqlj34177.html#rrefsqlj34177">CURRENT_DATE function</a></li>
+
+<li><a href="rrefsqlj33772.html#rrefsqlj33772">CURRENT_TIME function</a></li>
+
+<li><a href="rrefsqlj15866.html#rrefsqlj15866">CURRENT_TIMESTAMP function</a></li>
+
+<li><a href="rrefsqlj42324.html#rrefsqlj42324">CURRENT_USER function</a></li>
+
+<li><a href="rrefsqlj25228.html#rrefsqlj25228">SESSION_USER function</a></li>
+
+<li><a href="rrefsqlj42476.html#rrefsqlj42476">USER function</a></li>
+
+</ul>
+</div>
+ </div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlj89752.html">ReferencingClause</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="The CREATE FUNCTION statement allows you to create Java functions, which you can then use in an expression.">CREATE FUNCTION statement</a></div>
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX statement</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE statement</a></div>
+<div><a href="rrefcreaterole.html" title="">CREATE ROLE statement</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA statement</a></div>
+<div><a href="rrefsqljcreatesequence.html" title="">CREATE SEQUENCE statement</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">CREATE SYNONYM statement</a></div>
+<div><a href="rrefsqlj24513.html" title="">CREATE TABLE statement</a></div>
+<div><a href="rrefsqljcreatetype.html" title="">CREATE TYPE statement</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW statement</a></div>
+</div>
+</div>
+
+</body>
+</html>

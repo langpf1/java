@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY system procedure" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefreloadpolicyproc" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY system procedure</title>
+</head>
+<body id="rrefreloadpolicyproc"><a name="rrefreloadpolicyproc"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY system procedure</h1>
+
+<div>
+<div class="section"><p>The <samp class="codeph">SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY</samp> system
+procedure reloads the security policy, allowing you to fine-tune your
+Java security on the fly. For more information on security policies,
+see the section titled "Running the Network Server under the security
+manager" in the
+<cite><span><em>Derby Server and Administration Guide</em></span></cite>
+and the section titled "Running Derby under a security manager" in the
+<cite><span><em>Derby Developer's Guide</em></span></cite>.
+</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre>SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY()</pre>
+ <p>No
+result set is returned by this procedure.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Execute privileges</h2>
+<p>If authentication and SQL authorization are both enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> has
+execute privileges on this procedure by default. See "Enabling user
+authentication" and "Setting the SQL standard authorization mode" in the
+<span><em>Derby Developer's Guide</em></span> for more information. The
+database owner can grant access to other users.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Example</h2> <pre>
+CallableStatement cs = conn.prepareCall
+("CALL SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY()");
+cs.execute();
+cs.close();
+</pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+</div>
+</div>
+
+</body>
+</html>

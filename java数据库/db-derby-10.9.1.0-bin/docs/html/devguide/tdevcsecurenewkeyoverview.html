@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Encrypting databases with a new key" />
+<meta name="abstract" content="You can apply a new encryption key to a Derby database by specifying a new boot password or a new external key." />
+<meta name="description" content="You can apply a new encryption key to a Derby database by specifying a new boot password or a new external key." />
+<meta content="encrypting databases, new key, overview, databases, overview of encrypting, new key" name="DC.subject" />
+<meta content="encrypting databases, new key, overview, databases, overview of encrypting, new key" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="tdevcsecureunencrypteddb.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure88690.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure96815.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure97760.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tdevcsecurenewkeyoverview" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Encrypting databases with a new key</title>
+</head>
+<body id="tdevcsecurenewkeyoverview"><a name="tdevcsecurenewkeyoverview"><!-- --></a>
+
+
+<h1 class="topictitle1">Encrypting databases with a new key</h1>
+
+
+
+<div><p>You can apply a new encryption key to a <span>Derby</span> database
+by specifying a new boot password or a new external key.</p>
+
+<div class="section"><p>Encrypting a database with a new encryption key is a time consuming
+process because it involves encrypting all of the existing data in the database
+with the new encryption key. If the process is interrupted before completion,
+all the changes are rolled back the next time that the database is booted.
+If the interruption occurs immediately after the database is encrypted with
+the new encryption key but before the connection is returned to the application,
+you might not be able to boot the database with the old encryption key. In
+these rare circumstances, you should try to boot the database with the new
+encryption key. </p>
+<div class="note"><span class="notetitle">Recommendation: </span>Ensure that
+you have enough free disk space before you encrypt a database with a new key.
+In addition to the disk space required for the current size of the database,
+temporary disk space is required to store the old version of the data to restore
+the database back to it's original state if the new encryption is interrupted
+or returns errors. All of the temporary disk space is released back to the
+operating system after the database is reconfigured to work with the new encryption
+key.</div>
+<p>To encrypt a database with a new encryption key:</p>
+</div>
+
+
+<div class="p"><span>Use the type of encryption that is currently used to encrypt the
+database:</span>
+<ul>
+<li>To <a href="tdevcsecurenewbootpw.html#tdevcsecurenewbootpw">encrypt
+the database with a new boot password key</a>, use the <em>newBootPassword</em> attribute.</li>
+
+<li>To <a href="tdevcsecurenewextkey.html#tdevcsecurenewextkey">encrypt
+the database with a new external encryption key</a>, use the <em>newEncryptionKey</em> attribute.</li>
+
+</ul>
+
+ 
+  If <a href="cdevcsecure36127.html#cdevcsecure36127">authentication</a>
+  and
+  <a href="cdevcsecure36595.html#cdevcsecure36595">SQL authorization</a>
+  are both enabled, the credentials of the 
+  <a href="cdevcsecureDbOwner.html#cdevcsecureDbOwner">database owner</a>
+  must be supplied, since reencryption is a restricted operation.
+
+
+</div>
+
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure97760.html" title="This section describes using encryption in Derby.">Working with encryption</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecure88690.html" title="You configure a Derby database for encryption when you create the database by specifying the dataEncryption=true attribute on the connection URL.">Encrypting databases on creation</a></div>
+<div><a href="cdevcsecure96815.html" title="">Requirements for Derby encryption</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevcsecureunencrypteddb.html" title="You can encrypt an unencrypted Derby database by specifying attributes on the connection URL when you boot the database. The attributes that you specify depend on how you want the database encrypted.">Encrypting an existing unencrypted database</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Expressão booleana" />
+<meta content="Expressão booleana" name="DC.subject" />
+<meta content="Expressão booleana" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1080779.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj23075" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Expressão booleana</title>
+</head>
+<body id="rrefsqlj23075"><a name="rrefsqlj23075"><!-- --></a>
+
+
+<h1 class="topictitle1">Expressão booleana</h1>
+
+
+<div>
+<div class="section">
+<p>As expressões booleanas são permitidas na cláusula WHERE e nas restrições
+de verificação.
+As expressões booleanas nas restrições de verificação possuem limitações não
+descritas aqui; para obter mais informações deve ser consultada a
+<a href="rrefsqlj13590.html#rrefsqlj13590">Cláusula CONSTRAINT</a>.
+As expressões booleanas nas cláusulas WHERE possuem uma sintaxe bem liberal;
+consulte, por exemplo, a
+<a href="rrefsqlj33602.html#rrefsqlj33602">Cláusula WHERE</a>.</p>
+
+</div>
+
+<div class="section">
+<div class="p">As expressões booleanas podem incluir um ou mais operadores booleanos,
+listados em <a href="rrefsqlj23075.html#rrefsqlj23075__sqlj34517">Operadores booleanos SQL</a>.
+
+<div class="tablenoborder"><a name="rrefsqlj23075__sqlj34517"><!-- --></a><table cellspacing="0" cellpadding="4" summary="Tabela 1. &#10;&#10;Operadores booleanos SQL&#10;" id="rrefsqlj23075__sqlj34517" width="100%" frame="border" border="1" rules="all"><caption>Tabela 1. 
+<span />
+Operadores booleanos SQL
+</caption>
+
+
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="24%" id="N100A4">Operador</th>
+
+<th align="left" valign="bottom" width="46%" id="N100AD">Explicação e exemplo</th>
+
+<th align="left" valign="bottom" width="30%" id="N100B6">Sintaxe</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="24%" headers="N100A4">
+
+
+
+AND, OR, NOT
+</td>
+
+<td valign="top" width="46%" headers="N100AD">
+Avalia os operandos, que são expressões booleanas
+<pre><strong>(AEROPORTO_ORIGEM = 'SFO') OR
+    (AEROPORTO_DESTINO = 'GRU')
+<span>-- retorna verdade</span></strong>
+</pre>
+
+</td>
+
+<td valign="top" width="30%" headers="N100B6"> <pre><strong>{
+<strong><em>  Expressão</em></strong> AND
+<strong><em>    Expressão </em></strong>|
+<strong><em>  Expressão</em></strong> OR
+<strong><em>    Expressão</em></strong> |
+  NOT <strong><em>Expressão</em></strong>
+}</strong>
+</pre>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N100A4">Comparações
+
+</td>
+
+<td valign="top" width="46%" headers="N100AD">
+&lt;, =, &gt;, &lt;=, &gt;=, &lt;&gt; são aplicáveis a todos os tipos nativos.
+<pre><strong>DATE('1998-02-26') &lt;
+    DATE('1998-03-01')
+<span>-- retorna verdade</span></strong>
+</pre>
+</td>
+
+<td valign="top" width="30%" headers="N100B6"> <pre><strong><strong><em>Expressão</em></strong>
+{
+  &lt; |
+  = |
+  &gt; |
+  &lt;= |
+  &gt;= |
+  &lt;&gt;
+}
+<strong><em>Expressão</em></strong></strong>
+</pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N100A4">IS NULL, IS NOT NULL
+
+
+</td>
+
+<td valign="top" width="46%" headers="N100AD">Testa se o resultado de uma expressão é nulo ou não.
+  <pre><strong>WHERE NOME_DO_MEIO IS NULL</strong>
+</pre>
+</td>
+
+<td valign="top" width="30%" headers="N100B6">
+<pre><strong><strong><em>Expressão</em></strong> IS [ NOT ]
+  NULL</strong>
+</pre>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N100A4">LIKE
+
+
+</td>
+
+<td valign="top" width="46%" headers="N100AD">
+Tenta fazer a correspondência entre uma expressão de caractere e um padrão de
+caractere, que é uma cadeia de caracteres que inclui um ou mais caracteres
+curinga.
+<p>O caractere % corresponde a qualquer número (zero ou mais) de caracteres
+na posição correspondente na primeira expressão de caractere.</p>
+
+<p>O caractere _ corresponde a um caractere
+na posição correspondente na expressão de caractere.</p>
+
+<div class="p">Qualquer outro caractere corresponde apenas a este caractere na posição
+correspondente na expressão de caractere.
+<pre><strong>cidade LIKE 'Sant_'</strong>
+</pre>
+
+</div>
+
+<div class="p">Para tratar os caracteres % e _ como caracteres constante, o caractere
+deve ser precedido por um caractere de escape opcional, especificado na
+cláusula ESCAPE.
+<pre><strong>SELECT a FROM tabA WHERE a
+LIKE '%=_' ESCAPE '='</strong>
+</pre>
+
+</div>
+
+</td>
+
+<td valign="top" width="30%" headers="N100B6"> <pre><strong><strong><em>ExpressãoCaractere</em></strong>
+  [ NOT ] LIKE
+<strong><em>  ExpressãoCaractere
+  ComCaractereCuringa</em></strong>
+  [ ESCAPE
+  '<strong><em>CaractereDeEscape</em></strong>']</strong>
+</pre>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N100A4">BETWEEN
+
+</td>
+
+<td valign="top" width="46%" headers="N100AD">
+Testa se o primeiro operando está entre o segundo e o terceiro operandos.
+O segundo operando deve ser menor que o terceiro operando.
+Aplicável apenas aos tipos de dado onde se pode aplicar &lt;= e &gt;=.
+<pre><strong>WHERE DATA_DE_RESERVA BETWEEN
+    DATE('1998-02-26') AND
+    DATE('1998-03-01')</strong>
+</pre>
+
+</td>
+
+<td valign="top" width="30%" headers="N100B6">
+<pre><strong><strong><em>Expressão</em></strong> [ NOT ]
+BETWEEN <strong><em>Expressão</em></strong>
+  AND <strong><em>Expressão</em></strong></strong>
+</pre>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N100A4">IN
+
+</td>
+
+<td valign="top" width="46%" headers="N100AD">
+Opera sobre uma subconsulta a tabela ou uma lista de valores.
+Retorna TRUE se o valor da expressão à esquerda está presente no resultado da
+subconsulta a tabela ou na lista de valores.
+A subconsulta a tabela pode retornar várias linhas, mas deve retornar uma
+única coluna.
+<pre><strong>WHERE DATA_DE_RESERVA NOT IN
+    (SELECT DATA_DE_RESERVA FROM
+RESERVAS_EM_HOTEL WHERE QUARTOS_DISPONÍVEIS = 0)</strong>
+</pre>
+</td>
+
+<td valign="top" width="30%" headers="N100B6">
+<pre><strong>{
+<strong><em>  Expressão</em></strong> [ NOT ]
+    IN
+    <strong><em><a href="rreftablesubquery.html#rreftablesubquery">SubconsultaTabela</a></em></strong> |
+<strong><em>  Expressão</em></strong> [ NOT ]
+    IN ( <strong><em>Expressão</em></strong>
+    [, <strong><em>Expressão</em></strong> ]* )
+}</strong>
+</pre>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N100A4">EXISTS
+
+</td>
+
+<td valign="top" width="46%" headers="N100AD">
+Opera sobre uma subconsulta a tabela.
+Retorna TRUE se a subconsulta a tabela retornar alguma linha,
+e FALSE se não retornar nenhuma linha.
+A subconsulta a tabela pode retornar várias colunas (somente se for utilizado
+* para indicar várias colunas) e linhas.
+<pre><strong>WHERE EXISTS
+  (SELECT *
+  FROM VÔOS
+  WHERE AEROPORTO_DESTINO = 'SFO'
+  AND AEROPORTO_ORIGEM = 'GRU')</strong>
+</pre>
+
+</td>
+
+<td valign="top" width="30%" headers="N100B6">
+<pre><strong>[NOT] EXISTS <strong><em><a href="rreftablesubquery.html#rreftablesubquery">SubconsultaTabela</a></em></strong></strong>
+</pre>
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="24%" headers="N100A4">Comparação quantificada
+
+</td>
+
+<td valign="top" width="46%" headers="N100AD">
+A comparação quantificada é um operador de comparação
+(&lt;, =, &gt;, &lt;=, &gt;=, &lt;&gt;)
+com ALL, ANY ou SOME aplicado.
+<p>Opera sobre subconsultas a tabela, que podem retornar várias linhas, mas
+devem retornar uma única coluna.</p>
+
+<div class="p">Se for utilizado ALL, a comparação deverá ser verdade para todos os valores
+retornados pela subconsulta a tabela.
+Se for utilizado ANY ou SOME, a comparação deverá ser verdade para pelo menos um
+valor da subconsulta a tabela.
+ANY e SOME são equivalentes.
+<pre><strong>WHERE TAXA_NORMAL &lt; ALL
+(SELECT ORÇAMENTO/550 FROM GRUPOS) </strong>
+</pre>
+
+</div>
+
+</td>
+
+<td valign="top" width="30%" headers="N100B6"> <pre><strong><strong><em>Expressão</em></strong>
+  OperadorComparação
+  {
+    ALL |
+    ANY |
+    SOME
+  }
+  <strong><em><a href="rreftablesubquery.html#rreftablesubquery">SubconsultaTabela</a></em></strong></strong>
+</pre>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefsqlj19433.html" title="">Expressões SQL</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="crefsqlj29911.html" title="">Parâmetros dinâmicos</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefsqlj1080779.html" title="">Precedência das expressões</a></div>
+</div>
+</div>
+
+</body>
+</html>

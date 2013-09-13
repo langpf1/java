@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Application development overview" />
+<meta name="abstract" content="Derby application developers use the Java Database Connectivity (JDBC) API, the application programming interface that makes it possible to access relational databases from Java programs." />
+<meta name="description" content="Derby application developers use the Java Database Connectivity (JDBC) API, the application programming interface that makes it possible to access relational databases from Java programs." />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp39409.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp19524.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdvlp14839" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Application development overview</title>
+</head>
+<body id="cdevdvlp14839"><a name="cdevdvlp14839"><!-- --></a>
+
+
+<h1 class="topictitle1">Application development overview</h1>
+
+
+
+<div><p><span>Derby</span> application
+developers use the Java Database Connectivity (JDBC) API, the application
+programming interface that makes it possible
+to access relational databases from Java programs.</p>
+
+<p>The JDBC API is part of the Java Platform, Standard Edition and is
+not specific to <span>Derby</span>.
+It consists of the <em>java.sql</em> and <em>javax.sql</em> packages, which is
+a set of classes and interfaces that make it possible to access databases
+(from a number of different vendors, not just <span>Derby</span>)
+from a Java application.</p>
+
+<p>To develop <span>Derby</span> applications
+successfully, you will need to learn the JDBC API. This section does not teach you
+how to program with the JDBC API.</p>
+
+<p>This section covers the details of application programming that are specific
+to <span>Derby</span> applications.
+For example, all JDBC applications typically start their DBMS's JDBC driver
+and use a connection URL to connect to a database. This chapter gives you
+the details of how to start <span>Derby</span>'s
+JDBC driver and how to work with <span>Derby</span>'s
+connection URL to accomplish various tasks. It also covers essential <span>Derby</span> concepts
+such as the <span>Derby</span> system.</p>
+
+<p>You will find reference information about the particulars of <span>Derby</span>'s
+implementation of the JDBC API in the <cite><span><em>Derby Reference Manual</em></span></cite>. </p>
+
+<p><span>Derby</span> application developers
+will need to learn SQL. <em>SQL</em> is the standard query language used with
+relational databases and is not tied to a particular programming language.
+No matter how a particular RDBMS has been implemented, the user can design
+databases and insert, modify, and retrieve data using the standard SQL statements
+and well-defined data types. SQL-92 is the version of SQL standardized by
+ANSI and ISO in 1992; <span>Derby</span> supports
+entry-level SQL-92 as well as some higher-level features. Entry-level SQL-92
+is a subset of full SQL-92 specified by ANSI and ISO that is supported by
+nearly all major DBMSs today. This chapter does not teach you SQL. You will
+find reference information about the particulars of <span>Derby</span>'s
+implementation of SQL in the <cite><span><em>Derby Reference Manual</em></span></cite>.</p>
+
+<p><span>Derby</span> implements the JDBC
+API so as to allow <span>Derby</span> to
+serve as a resource manager in a Java EE compliant system.</p>
+
+<p>When an application embeds
+<span>Derby</span>, application users take
+on the role of database administrator and must maintain the integrity of the
+database. See "Part Two:
+<span>Derby</span> Administration Guide"
+in the <span><em>Derby Server and Administration Guide</em></span> for
+information on administrative tasks such as backing up and restoring
+databases. In particular, see the topic "Maintaining database integrity" for
+information on preventing database corruption. You will need to make this
+information available to your users.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp19524.html" title="This section describes the core Derby functionality. In addition, it details the most basic Derby deployment, Derby embedded in a Java application.">JDBC applications and Derby basics</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp39409.html" title="This section explains how to use and configure Derby in an embedded environment.">Derby embedded basics</a></div>
+</div>
+</div>
+
+</body>
+</html>

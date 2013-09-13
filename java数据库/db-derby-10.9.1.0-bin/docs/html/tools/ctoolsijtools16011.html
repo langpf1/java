@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Database connection URLs" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsijtools20118.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctoolsijtools16011" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Database connection URLs</title>
+</head>
+<body id="ctoolsijtools16011"><a name="ctoolsijtools16011"><!-- --></a>
+
+
+<h1 class="topictitle1">Database connection URLs</h1>
+
+
+<div>
+<p>A JDBC URL provides a way of identifying a database so that the appropriate
+driver recognizes it and connects to it. In the <span>Derby</span> documents,
+a JDBC URL is referred to as a database connection URL.</p>
+
+<p>After the driver is loaded, an application must specify the correct database
+connection URL to connect to a specific database. The <span>Derby</span> database
+connection URL allows you to accomplish tasks other than simply connecting.
+For more information about the <span>Derby</span> database
+connection URLs, see the <cite><span><em>Derby Developer's Guide</em></span></cite>.</p>
+
+<p>A JDBC URL always starts with <em>jdbc:</em>. After that, the format for
+the database connection URL depends on the JDBC driver. </p>
+
+<div class="p">Here is the format for the database connection URL for connecting to an
+existing <span>Derby</span> database
+using the embedded driver:   <ul>
+<li>jdbc:derby:<em>databaseName</em>;<em>URLAttributes</em></li>
+
+</ul>
+</div>
+
+<div class="p">The format for the database connection URL for connecting to an existing <span>Derby</span> database using the
+Network Client is:   <ul>
+<li>jdbc:derby://<em>host:port</em>/<em>databaseName</em>;<em>URLAttributes</em></li>
+
+</ul>
+</div>
+
+<div class="p">The italicized items stand for something the user fills in:   <ul>
+<li><em id="ctoolsijtools16011__rtoolsijtools16246"><a name="ctoolsijtools16011__rtoolsijtools16246"><!-- --></a>databaseName</em>   <p>The name of the database
+you want to connect to. This might also include the file system path to the
+database.</p>
+</li>
+
+<li><em id="ctoolsijtools16011__rtoolsijtools12861"><a name="ctoolsijtools16011__rtoolsijtools12861"><!-- --></a>URLAttributes</em>   <p>One or more of the supported
+attributes of the database connection URL, such as <em>upgrade=true</em>, <em>create=true</em> or <em>territory=ll_CC</em>.
+For more information, see "Setting attributes for the database connection URL"
+in the <cite><span><em>Derby Reference Manual</em></span></cite>.</p>
+</li>
+
+<li><em>host</em>   <p>The name of the machine where the server is running.
+It can be the name of the machine or the address.</p>
+</li>
+
+<li><em id="ctoolsijtools16011__rtoolsijtools27024"><a name="ctoolsijtools16011__rtoolsijtools27024"><!-- --></a>port</em>   <p>The port number used by the server
+framework</p>
+</li>
+
+</ul>
+</div>
+
+<div class="section" id="ctoolsijtools16011__ctoolsabtproto"><a name="ctoolsijtools16011__ctoolsabtproto"><!-- --></a><h2 class="sectiontitle">About Protocols</h2> <p>Officially,
+the portion of the database connection URL called the protocol is <em>jdbc:</em>,
+just as<em> http://</em> is a protocol in Web URLs. However, the second portion
+of the database connection URL (everything between <em>jdbc:</em> and <em>databaseName</em>),
+which is called the subprotocol, is informally considered part of the protocol.
+Later in this book you might see references to protocol. Consider protocol
+to be everything that comes before <em>databaseName</em>.</p>
+</div>
+
+<div class="section"><p>For complete information about the database connection URL, see
+the <cite><span><em>Derby Developer's Guide</em></span></cite>.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsijtools20118.html" title="Most of the Derby tools are JDBC applications. A JDBC application is one that uses the classes in the java.sql package to interact with a DBMS.">JDBC connection basics</a></div>
+</div>
+</div>
+
+</body>
+</html>

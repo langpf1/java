@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE system procedure" />
+<meta name="abstract" content="Use the SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE system procedure to import data to a subset of columns in a table, where the LOB data is stored in a separate file. The main import file contains all of the other data and a reference to the location of the LOB data." />
+<meta name="description" content="Use the SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE system procedure to import data to a subset of columns in a table, where the LOB data is stored in a separate file. The main import file contains all of the other data and a reference to the location of the LOB data." />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproctablelobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportdataproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportproctablelobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefexportselectionproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportdataproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimporttableproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimportproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefimporttableproclobs.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefimportdataproclobs" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE system procedure</title>
+</head>
+<body id="rrefimportdataproclobs"><a name="rrefimportdataproclobs"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE system procedure</h1>
+
+
+<div><p>Use the <samp class="codeph">SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE</samp> system
+procedure to import data to a subset of columns in a table, where the LOB
+data is stored in a separate file. The main import file contains all of the
+other data and a reference to the location of the LOB data. </p>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre>SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE (
+   IN SCHEMANAME VARCHAR(128), 
+   IN TABLENAME VARCHAR(128), 
+   IN INSERTCOLUMNS VARCHAR(32672), 
+   IN COLUMNINDEXES VARCHAR(32672),
+   IN FILENAME VARCHAR(32672), 
+   IN COLUMNDELIMITER CHAR(1), 
+   IN CHARACTERDELIMITER CHAR(1), 
+   IN CODESET VARCHAR(128), 
+   IN REPLACE SMALLINT)
+   )
+</pre>
+<p>The import utility looks in the main import file for a reference
+to the location of the LOB data.</p>
+<dl>
+<dt class="dlterm">SCHEMANAME</dt>
+
+<dd>Specifies the schema of the table. You can specify a NULL value to use
+the default schema name. The <span class="parmname">SCHEMANAME</span> parameter takes
+an input argument that is a VARCHAR(128) data type.</dd>
+
+
+<dt class="dlterm">TABLENAME</dt>
+
+<dd>Specifies the name of the table into which the data is to be imported.
+This table cannot be a system table or a declared temporary table. The string
+must exactly match case of the table name. Specifying a NULL value results
+in an error. The <span class="parmname">TABLENAME</span> parameter takes an input argument
+that is a VARCHAR(128) data type.</dd>
+
+
+<dt class="dlterm">INSERTCOLUMNS</dt>
+
+<dd>Specifies the comma separated column names of the table into which the
+data will be imported. You can specify a NULL value to import into all columns
+of the table. The <span class="parmname">INSERTCOLUMNS</span> parameter takes an input
+argument that is a VARCHAR(32672) data type.</dd>
+
+
+<dt class="dlterm">COLUMNINDEXES</dt>
+
+<dd>Specifies the comma separated column indexes (numbered from one) of the
+input data fields that will be imported. You can specify a NULL value to use
+all input data fields in the file. The <span class="parmname">COLUMNINDEXES</span> parameter
+takes an input argument that is a VARCHAR(32672) data type.</dd>
+
+
+<dt class="dlterm">FILENAME</dt>
+
+<dd>Specifies the name of the file that contains the data to be imported.
+If the path is omitted, the current working directory is used. The specified
+location of the file should refer to the server side location if using the
+Network Server. Specifying a NULL value results in an error. The <span class="parmname">fileName</span> parameter
+takes an input argument that is a VARCHAR(32672) data type.</dd>
+
+
+<dt class="dlterm">COLUMNDELIMITER</dt>
+
+<dd>Specifies a column delimiter. The specified character is used in place
+of a comma to signify the end of a column. You can specify a NULL value to
+use the default value of a comma. The <span class="parmname">COLUMNDELIMITER</span> parameter
+takes an input argument that is a CHAR(1) data type.</dd>
+
+
+<dt class="dlterm">CHARACTERDELIMITER</dt>
+
+<dd>Specifies a character delimiter. The specified character is used in place
+of double quotation marks to enclose a character string. You can specify a
+NULL value to use the default value of a double quotation mark. The <span class="parmname">CHARACTERDELIMITER</span> parameter
+takes an input argument that is a CHAR(1) data type.</dd>
+
+
+<dt class="dlterm">CODESET</dt>
+
+<dd>Specifies the code set of the data in the input file. The code set name
+should be one of the Java-supported character encoding sets. Data is converted
+from the specified code set to the database code set (UTF-8). You can specify
+a NULL value to interpret the data file in the same code set as the JVM in
+which it is being executed. The <span class="parmname">CODESET</span> parameter takes
+an input argument that is a VARCHAR(128) data type.</dd>
+
+
+<dt class="dlterm">REPLACE</dt>
+
+<dd>A non-zero value for the replace parameter will import in REPLACE mode,
+while a zero value will import in INSERT mode. REPLACE mode deletes all existing
+data from the table by truncating the table and inserts the imported data.
+The table definition and the index definitions are not changed. You can only
+import with REPLACE mode if the table already exists. INSERT mode adds the
+imported data to the table without changing the existing table data. Specifying
+a NULL value results in an error. The <span class="parmname">REPLACE</span> parameter
+takes an input argument that is a SMALLINT data type.</dd>
+
+</dl>
+<p>If you create a schema, table, or column name as a non-delimited
+identifier, you must pass the name to the import procedure using all uppercase
+characters. If you created a schema, table, or column name as a delimited
+identifier, you must pass the name to the import procedure using the same
+case that was used when it was created.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Execute privileges</h2>
+<p>If authentication and SQL authorization are both enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> has
+execute privileges on this procedure by default. See "Enabling user
+authentication" and "Setting the SQL standard authorization mode" in the
+<span><em>Derby Developer's Guide</em></span> for more information. The
+database owner can grant access to other users. The user must also have INSERT
+privileges on the table.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Usage</h2><p>This procedure will read the LOB data using
+the reference that is stored in the main import file. The format of the reference
+to the LOB stored in the main import file must be <samp class="codeph">lobsFileName.Offset.length/</samp>. </p>
+<ul>
+<li><samp class="codeph">Offset</samp> is position in the external file in bytes</li>
+
+<li><samp class="codeph">length</samp> is the size of the LOB column data in bytes</li>
+
+</ul>
+<p>For additional information on using this procedure, see the section
+"Importing and exporting data" in the
+<span><em>Derby Server and Administration Guide</em></span>.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Example importing data into specific columns, using a separate
+import file for the LOB data</h2>The following example shows how to import
+data into several columns of the STAFF table. The STAFF table includes a LOB
+column in a sample database. The import file <samp class="codeph">staff.del</samp> is
+a delimited data file. The <samp class="codeph">staff.del</samp> file contains references
+that point to a separate file which contains the LOB data. The data in the
+import file is formatted using double quotation marks (") as the string delimiter
+and a comma (,) as the  column delimiter. The data will be appended to the
+existing data  in the STAFF table.  <pre>CALL SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE
+    (null, 'STAFF', 'NAME,DEPT,SALARY,PICTURE', '2,3,4,6',
+    'c:\data\staff.del', ',','"','UTF-8',  0);</pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefexportproc.html" title="The SYSCS_UTIL.SYSCS_EXPORT_TABLE system procedure exports all of the data from a table to an operating system file.">SYSCS_UTIL.SYSCS_EXPORT_TABLE system procedure</a></div>
+<div><a href="rrefexportproctablelobs.html" title="Use the SYSCS_UTIL.SYSCS_EXPORT_TABLE_LOBS_TO_EXTFILE system procedure to export all the data from a table, and place the LOB data into a separate export file. A reference to the location of the LOB data is placed in the LOB column in the main export file.">SYSCS_UTIL.SYSCS_EXPORT_TABLE_LOBS_TO_EXTFILE system procedure</a></div>
+<div><a href="rrefexportselectionproc.html" title="The SYSCS_UTIL.SYSCS_EXPORT_QUERY system procedure exports the results of a SELECT statement to an operating system file.">SYSCS_UTIL.SYSCS_EXPORT_QUERY system procedure</a></div>
+<div><a href="rrefexportselectionproclobs.html" title="Use the SYSCS_UTIL.SYSCS_EXPORT_QUERY_LOBS_TO_EXTFILE system procedure to export the result of a SELECT statement to a main export file, and place the LOB data into a separate export file. A reference to the location of the LOB data is placed in the LOB column in the main export file.">SYSCS_UTIL.SYSCS_EXPORT_QUERY_LOBS_TO_EXTFILE system procedure</a></div>
+<div><a href="rrefimportdataproc.html" title="">SYSCS_UTIL.SYSCS_IMPORT_DATA system procedure</a></div>
+<div><a href="rrefimportproc.html" title="">SYSCS_UTIL.SYSCS_IMPORT_TABLE system procedure</a></div>
+<div><a href="rrefimporttableproclobs.html" title="Use the SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE system procedure to import data to a table, where the LOB data is stored in a separate file. The main import file contains all of the other data and a reference to the location of the LOB data.">SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE system procedure</a></div>
+</div>
+</div>
+
+</body>
+</html>

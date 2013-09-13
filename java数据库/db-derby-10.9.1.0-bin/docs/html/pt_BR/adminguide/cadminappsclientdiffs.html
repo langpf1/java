@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Diferenças entre os drivers cliente incorporado e cliente da rede" />
+<meta content="Driver cliente da rede, diferenças com relação ao driver incorporado" name="DC.subject" />
+<meta content="Driver cliente da rede, diferenças com relação ao driver incorporado" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps.html" />
+<meta scheme="URI" name="DC.Relation" content="radminappsresultsetdiffs.html" />
+<meta scheme="URI" name="DC.Relation" content="radminapps811974.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps49914.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminappsclientdiffs" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Diferenças entre os drivers cliente incorporado e cliente da rede</title>
+</head>
+<body id="cadminappsclientdiffs"><a name="cadminappsclientdiffs"><!-- --></a>
+
+
+<h1 class="topictitle1">Diferenças entre os drivers cliente incorporado e cliente da rede</h1>
+
+
+<div>
+<div class="p">A seguir estão as diferenças conhecidas existentes entre o <em>driver</em>
+incorporado e o <em>driver</em> cliente da rede do
+<span>Derby</span>.
+Deve ser observado que podem existir diferenças não documentadas, ainda não
+identificadas.
+Algumas diferenças presentes no cliente da rede poderão ser modificadas em versões
+futuras, para corresponder às funcionalidades do <em>driver</em> incorporado.<ul>
+<li>As mensagens de erro e <em>SQLStates</em> podem diferir entre os
+<em>drivers</em> cliente da rede e incorporado.
+Alguns <em>SQLStates</em> podem ser nulos ao utilizar o cliente da rede, em
+particular nos erros de conversão de dados.</li>
+
+<li>As exceções e advertências SQL múltiplas somente retornam o <em>SQLState</em>
+da primeira exceção, quando se utiliza o cliente da rede.
+Os textos das exceções adicionais são anexados ao texto da primeira exceção.
+Consulte <a href="radminapps811974.html#radminapps811974">Diferenças nas mensagens de erro</a>.</li>
+
+<li>Para utilizar identificação do usuário e senha criptografados,
+é necessário possuir a Extensão de Criptografia do Java da IBM
+(Java Cryptography Extension/JCE) versão 1.2.1, ou mais recente.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminapps.html" title="">Diferenças entre executar o Derby no modo incorporado e utilizando o Network Server</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="radminappsresultsetdiffs.html" title="">Conjuntos de resultados atualizáveis</a></div>
+<div><a href="cadminapps49914.html" title="">Diferenças na autenticação do usuário</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="radminapps811974.html" title="">Diferenças nas mensagens de erro</a></div>
+</div>
+</div>
+
+</body>
+</html>

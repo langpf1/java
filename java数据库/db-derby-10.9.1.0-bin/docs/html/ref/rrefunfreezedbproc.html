@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE system procedure" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscschecktablefunc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbnowaitproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbenablelogproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbenablelognowaitproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rreffreezedbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rreffreezedbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbenablelogproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbenablelognowaitproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefbackupdbnowaitproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscschecktablefunc.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefunfreezedbproc" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE system procedure</title>
+</head>
+<body id="rrefunfreezedbproc"><a name="rrefunfreezedbproc"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE system procedure</h1>
+
+<div>
+<div class="section"><p>The <samp class="codeph">SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE</samp> system
+procedure unfreezes a database after backup.</p>
+
+<p>See "Using operating system commands with the freeze and unfreeze system
+procedures to perform an online backup" in the
+<span><em>Derby Server and Administration Guide</em></span> for more information on using
+this procedure.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre>SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE()</pre>
+ <p>No
+result set is returned by this procedure.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Execute privileges</h2>
+<p>If authentication and SQL authorization are both enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> has
+execute privileges on this procedure by default. See "Enabling user
+authentication" and "Setting the SQL standard authorization mode" in the
+<span><em>Derby Developer's Guide</em></span> for more information. The
+database owner can grant access to other users.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Example</h2> <pre>String backupdirectory = "c:/mybackups/" + JCalendar.getToday();
+CallableStatement cs = conn.prepareCall
+("CALL SYSCS_UTIL.SYSCS_FREEZE_DATABASE()");
+cs.execute();
+cs.close();
+// user supplied code to take full backup of "backupdirectory"
+// now unfreeze the database once backup has completed:
+CallableStatement cs = conn.prepareCall
+("CALL SYSCS_UTIL.SYSCS_UNFREEZE_DATABASE()");
+cs.execute();
+cs.close();
+</pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsyscschecktablefunc.html" title="">SYSCS_UTIL.SYSCS_CHECK_TABLE system function</a></div>
+<div><a href="rrefbackupdbproc.html" title="">SYSCS_UTIL.SYSCS_BACKUP_DATABASE system procedure</a></div>
+<div><a href="rrefbackupdbnowaitproc.html" title="The SYSCS_UTIL.SYSCS_BACKUP_DATABASE_NOWAIT system procedure backs up the database to a specified backup directory.">SYSCS_UTIL.SYSCS_BACKUP_DATABASE_NOWAIT system procedure</a></div>
+<div><a href="rrefbackupdbenablelogproc.html" title="">SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE system procedure</a></div>
+<div><a href="rrefbackupdbenablelognowaitproc.html" title="">SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE_NOWAIT system procedure</a></div>
+<div><a href="rreffreezedbproc.html" title="">SYSCS_UTIL.SYSCS_FREEZE_DATABASE system procedure</a></div>
+</div>
+</div>
+
+</body>
+</html>

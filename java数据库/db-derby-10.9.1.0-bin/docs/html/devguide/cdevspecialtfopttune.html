@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Measuring the cost of Derby-style table functions" />
+<meta name="abstract" content="This topic shows how to measure the cost of a Derby-style table function." />
+<meta name="description" content="This topic shows how to measure the cost of a Derby-style table function." />
+<meta content="Functions, calculating table function costs, Optimizer" name="DC.subject" />
+<meta content="Functions, calculating table function costs, Optimizer" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevspecialtfoptimizer.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevspecialtfopttune" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Measuring the cost of
+Derby-style table
+functions</title>
+</head>
+<body id="cdevspecialtfopttune"><a name="cdevspecialtfopttune"><!-- --></a>
+
+
+<h1 class="topictitle1">Measuring the cost of
+<span>Derby</span>-style table
+functions</h1>
+
+
+
+<div><p>This topic shows how to measure the cost of a
+<span>Derby</span>-style table
+function.</p>
+
+
+<p>
+The following formula describes how to estimate the value returned
+by  <em>VTICosting.getEstimatedCostPerInstantiation()</em>:
+</p>
+
+
+<p><strong>
+C = I * A
+</strong></p>
+
+
+<p>where</p>
+
+
+<ul>
+<li><strong>C</strong> = The estimated <strong>C</strong>ost for creating and running the
+        table function. That is, the value returned by
+<em>VTICosting.getEstimatedCostPerInstantiation()</em>.
+        In general, <strong>C</strong>ost is a measure of time in milliseconds.</li>
+
+<li><strong>I</strong> = The  optimizer's <strong>I</strong>mprecision. A measure of how skewed the optimizer's estimates tend
+        to be in your particular environment. See below for instructions on how to estimate this <strong>I</strong>mprecision.</li>
+
+<li><strong>A</strong> = The <strong>A</strong>ctual time in milliseconds which it takes
+        to create and run this table function.</li>
+
+</ul>
+
+
+<div class="section"><h2 class="sectiontitle">Calculating the optimizer's imprecision</h2> 
+
+<p>
+We treat optimizer <strong>I</strong>mprecision as a constant across the
+        runtime environment. The following formula describes it:
+</p>
+
+
+<p><strong>
+I = O / T
+</strong></p>
+
+
+<p>where</p>
+
+
+<ul>
+<li><strong>O</strong> = The <strong>O</strong>ptimizer's estimated cost for a plan.</li>
+
+<li><strong>T</strong> = The <strong>T</strong>otal runtime in milliseconds for the plan.</li>
+
+</ul>
+
+
+<p>
+To estimate these values, turn on
+<span>Derby</span> statistics collection
+and run the following experiment several times, averaging the results:
+</p>
+
+
+<ul>
+<li><strong>Select</strong> = Select all of the rows from a big table.</li>
+
+<li><strong>Record</strong> = In the statistics output, look for the ResultSet
+          which represents the table scan. That scan has a field
+          labelled "optimizer estimated cost". That's <strong>O</strong>. Now
+          look for the fields in that ResultSet's statistics labelled
+"constructor time", "open time", "next time", and "close time". Add up
+          all of those fields. That total is <strong>T</strong>.
+</li>
+
+</ul>
+
+
+<p>
+For example:
+</p>
+
+
+<pre>
+MAXIMUMDISPLAYWIDTH 7000;
+
+CALL SYSCS_UTIL.SYSCS_SET_RUNTIMESTATISTICS(1);
+CALL SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING(1);
+
+select * from T;
+
+values SYSCS_UTIL.SYSCS_GET_RUNTIMESTATISTICS();
+</pre>
+
+
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Calculating the actual runtime cost of a table function</h2> 
+
+<p>
+The following formula explains how to compute the <strong>A</strong>ctual
+        runtime cost for the table function:
+</p>
+
+
+<p><strong>
+A =  ( P * N ) + E
+</strong></p>
+
+
+<p>where</p>
+
+
+<ul>
+<li><strong>P</strong> = The runtime spent <strong>P</strong>er row (in milliseconds).</li>
+
+<li><strong>N</strong> = The <strong>N</strong>umber of rows in the table function.</li>
+
+<li><strong>E</strong> = The time spent creating an <strong>E</strong>mpty instance of the
+          table function which has no rows in it. Usually, <strong>P * N</strong> dwarfs
+          <strong>E</strong>. That is, the table function instantiation cost is very
+          small compared to the actual cost of looping through the
+          rows. However, for some table functions, <strong>E</strong> may be significant
+          and may dominate the table function's cost when <strong>N</strong> is small.</li>
+
+</ul>
+
+
+<p>
+You may know that <strong>E</strong> is basically 0. If so, you can skip this step.
+Otherwise, to estimate <strong>E</strong>, turn on
+<span>Derby</span> statistics collection
+and run the following experiment several times, averaging the results:
+</p>
+
+
+<ul>
+<li><strong>Short-circuit</strong> = Short-circuit the next() method of the
+<em>ResultSet</em>
+returned by your <span>Derby</span>-style
+table function so that it returns
+          <em>false</em> the first time it is called. This makes it
+          appear that the
+<em>ResultSet</em>
+has no rows.
+</li>
+
+<li><strong>Select</strong> = Select all of the rows from the table function.</li>
+
+<li><strong>Record</strong> = In the statistics output, look for the VTIResultSet
+          which represents the table function scan. Add up
+          the values of the fields in that VTIResultSet's statistics labelled
+"constructor time", "open time", "next time", and "close time".
+          That total is <strong>E</strong>.
+</li>
+
+</ul>
+
+
+<p>
+To estimate <strong>P</strong>, turn on
+<span>Derby</span> statistics collection
+and run the following experiment several times, averaging the results:
+</p>
+
+
+<ul>
+<li><strong>Select</strong> = Select all of the rows from the table function.</li>
+
+<li><strong>Record</strong> = In the statistics output, look for the VTIResultSet
+          which represents the table function scan. Add up
+          the values of the fields in that VTIResultSet's statistics labelled
+"constructor time", "open time", "next time", and "close
+          time". Subtract <strong>E</strong> from the result. Now divide by the
+          value of the field "Rows seen".
+          The result is <strong>P</strong>.
+</li>
+
+</ul>
+
+
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Computing the value returned by <em>getEstimatedCostPerInstantiation()</em></h2> 
+
+<p>
+Putting all of this together, the following formula describes the
+        value returned by your
+table function's
+<em>VTICosting.getEstimatedCostPerInstantiation()</em>
+method.
+</p>
+
+
+<p><strong>
+C = O/T * [ ( P * N ) + E ]
+</strong></p>
+
+
+</div>
+
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevspecialtfoptimizer.html" title="This topic explains how to fine-tune the Derby optimizer's decision about where to place a table function in the join order.">Optimizer support for Derby-style table functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

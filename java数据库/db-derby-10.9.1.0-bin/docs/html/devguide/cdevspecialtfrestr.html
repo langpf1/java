@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Writing restricted table functions" />
+<meta name="abstract" content="Restricted table functions are Derby-style table functions which perform more efficiently because they can be told in advance which columns they will be asked to fetch along with simple limits on those columns. This feature exploits the expressiveness of the Java programming language and does not require any extensions to SQL." />
+<meta name="description" content="Restricted table functions are Derby-style table functions which perform more efficiently because they can be told in advance which columns they will be asked to fetch along with simple limits on those columns. This feature exploits the expressiveness of the Java programming language and does not require any extensions to SQL." />
+<meta content="Functions, programming table functions" name="DC.subject" />
+<meta content="Functions, programming table functions" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevspecialtabfuncs.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevspecialtfrestr" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Writing restricted table functions</title>
+</head>
+<body id="cdevspecialtfrestr"><a name="cdevspecialtfrestr"><!-- --></a>
+
+
+<h1 class="topictitle1">Writing restricted table functions</h1>
+
+
+
+<div><p>Restricted table functions are
+<span>Derby</span>-style table functions
+which perform more efficiently because they can be told in advance which columns
+they will be asked to fetch along with simple limits on those columns. This
+feature exploits the expressiveness of the Java programming language and does
+not require any extensions to SQL.
+</p>
+
+<p>A table function returns a rectangular chunk of data. If you use a restricted
+table function, <span>Derby</span> can
+tell the table function to return a shorter and  narrower rectangle.</p>
+
+<p>
+Consider the following scan of a table in a foreign database:</p>
+
+<pre>    select id, firstName, lastName
+    from table( foreignDatabaseEmployeeTable() ) s
+    where lastName = 'Stone'
+</pre>
+
+<p>
+If <em>foreignDatabaseEmployeeTable</em> is a restricted table function,
+<span>Derby</span> can tell the table
+function to fetch only the <em>id</em>, <em>firstName</em>, and <em>lastName</em>
+columns. In addition, <span>Derby</span>
+can tell the table function that it does not need to scan the entire
+foreign table; instead, the table function only needs to retrieve information
+for employees whose last name is "Stone".</p>
+
+<p>
+Depending on the table function and query, this feature can support 1000X, 
+1000000X, or even greater performance improvements.</p>
+
+<div class="section"><h2 class="sectiontitle">How to use restricted table functions</h2>
+<p>
+Creating and using a restricted table function involves the following steps:</p>
+
+<ol>
+<li><strong>Implement</strong> - You must write a class which implements both
+<em>java.sql.ResultSet</em> and the
+<span>Derby</span>-specific interface
+<em>org.apache.derby.vti.RestrictedVTI</em>. This interface defines an
+<em>initScan()</em> method. When executing a query,
+<span>Derby</span> uses that method to
+tell the table function what columns it will have to fetch and what bounds
+should be applied to those columns in order to reduce the number of rows
+returned. For the rest of this discussion, this user-written class will be
+referred to as <em>MyVTIClass</em>.</li>
+
+<li><strong>Publish</strong> - You must publish the table function by creating a public
+static method which returns a <em>MyVTIClass</em>. This is important. The
+<span>Derby</span> compiler must be able
+to see that the table function returns an object which implements both
+<em>java.sql.ResultSet</em> and <em>org.apache.derby.vti.RestrictedVTI</em>.</li>
+
+<li><strong>Declare</strong> - You declare the table function to
+<span>Derby</span> using the same CREATE
+FUNCTION syntax you are already familiar with. This syntax does not change.</li>
+
+<li><strong>Invoke</strong> - You then use the table function in a query. When
+<span>Derby</span> compiles the query, it
+sees that the return type of the table function implements
+<em>org.apache.derby.vti.RestrictedVTI</em>. Armed with this information, at
+runtime <span>Derby</span> calls the
+<em>initScan()</em> method once before calling any of the <em>ResultSet</em> methods.
+</li>
+
+</ol>
+
+<p>For example, you would declare the function as follows:</p>
+
+<pre>
+public class MyVTIClass implements ResultSet, RestrictedVTI
+{
+    ...
+
+    public void initScan(java.lang.String[] columnNames, 
+        org.apache.derby.vti.Restriction restriction ) 
+        throws SQLException {
+         ... 
+    }
+}
+</pre>
+
+<p>Then you publish the table function method:</p>
+
+<pre>
+public static MyVTIClass foreignDatabaseEmployeeTable() 
+    throws SQLException {
+    ... 
+}
+</pre>
+
+<p>Then you declare the table function to
+<span>Derby</span>:</p>
+
+<pre>
+create function foreignDatabaseEmployeeTable()
+returns table
+(
+    id int,
+    birthday date,
+    taxPayerID varchar( 50 ),
+    firstName varchar( 50 ),
+    lastName varchar( 50 )
+)
+language java
+parameter style DERBY_JDBC_RESULT_SET
+no sql
+external name 'com.example.portal.ForeignQueries.foreignDatabaseEmployeeTable'
+</pre>
+
+<p>Finally, you invoke the table function in a query:</p>
+
+<pre>
+select id, firstName, lastName
+from table( foreignDatabaseEmployeeTable() ) s
+where lastName = 'Stone'
+</pre>
+
+<p>When you invoke this query,
+<span>Derby</span> does the following:</p>
+
+<ul>
+<li><strong>Prepare</strong> - When
+<span>Derby</span> prepares the query,
+<span>Derby</span> sees that the
+<em>foreignDatabaseEmployeeTable()</em> method returns an object which implements
+<em>org.apache.derby.vti.RestrictedVTI</em>. This is all that
+<span>Derby</span> needs to know in order
+to compile a plan which takes advantage of this feature.</li>
+
+<li><strong>Execute</strong> - When
+<span>Derby</span> executes the query,
+<span>Derby</span> calls
+<em>initScan()</em>. In this example,
+<span>Derby</span> calls
+<em>initScan()</em> with the following arguments:
+<pre>
+initScan( new String[] { "ID", null, null, "FIRSTNAME", "LASTNAME" }, 
+    new Restriction.ColumnQualifier(
+        "LASTNAME", ORDER_OP_EQUALS, "Stone" ) )
+</pre>
+
+<p>This, in turn, causes the following to happen:</p>
+
+  <ul>
+  <li><em>Width</em> - The call to <em>initScan()</em> told the table function what
+   columns should be fetched.</li>
+
+  <li><em>Length</em> - The call to <em>initScan()</em> told the table function how
+   to filter the rows it returns.</li>
+
+  <li><em>Loop</em> - <span>Derby</span> then
+   calls <em>MyVTIClass.next()</em> and retrieves rows until
+   <em>MyVTIClass.next()</em> returns false. For each row,
+   <span>Derby</span> calls:
+     <ul>
+     <li><em>MyVTIClass.getInt( 1 )</em> to get the <em>id</em> column.</li>
+
+     <li><em>MyVTIClass.getString( 4 )</em> to get the <em>firstName</em>
+      column.</li>
+
+     <li><em>MyVTIClass.getString( 5 )</em> to get the <em>lastName</em>
+      column.</li>
+
+     </ul>
+
+  </li>
+
+  </ul>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Contract</h2>
+<p><span>Derby</span> calls
+<em>initScan()</em> before calling any other method on the <em>ResultSet</em>. The
+call to <em>initScan()</em> merely passes hints, which the restricted table
+function can exploit in order to perform better.
+<span>Derby</span> enforces the
+restriction outside the table function. Therefore, a restricted table function
+can still fetch extra columns and can ignore part or all of the restriction set
+by the call to <em>initScan()</em>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Affected Operations</h2>
+<p>Compared to ordinary table functions, a restricted table function can perform
+better in queries involving the following comparisons of its columns to
+constants:</p>
+
+<pre>
+&lt;
+&lt;=
+=
+!=
+&lt;&gt;
+&gt;
+&gt;=
+IS NULL
+IS NOT NULL
+</pre>
+
+<p>In addition, performance gains can be realized for queries involving the
+following operators on the columns of the restricted table function:</p>
+
+<pre>
+LIKE
+BETWEEN
+</pre>
+
+<p>However, this feature does not boost performance either for the IN operator,
+or in situations where <span>Derby</span>
+transforms OR lists into IN lists. See "Or transformations" in
+<span><em>Tuning Derby</em></span> for more information.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevspecialtabfuncs.html" title="Derby lets you create table functions. Table functions are functions which package up external data to look like Derby tables. The external data can be an XML file, a table in a foreign database, a live data feed--in short, any information source that can be presented as a JDBC ResultSet.">Programming Derby-style table functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

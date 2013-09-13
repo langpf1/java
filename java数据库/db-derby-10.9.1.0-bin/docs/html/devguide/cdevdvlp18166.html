@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Storage and recovery" />
+<meta name="abstract" content="A Derby database (unless it is an in-memory database) provides persistent storage and recovery. Derby ensures that all committed transactions are durable, even if the system fails, through the use of a database transaction log." />
+<meta name="description" content="A Derby database (unless it is an in-memory database) provides persistent storage and recovery. Derby ensures that all committed transactions are durable, even if the system fails, through the use of a database transaction log." />
+<meta content="Recovery, Start-up, description, Shutdown" name="DC.subject" />
+<meta content="Recovery, Start-up, description, Shutdown" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp42173.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp21955.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdvlp18166" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Storage and recovery</title>
+</head>
+<body id="cdevdvlp18166"><a name="cdevdvlp18166"><!-- --></a>
+
+
+<h1 class="topictitle1">Storage and recovery</h1>
+
+
+
+<div><p>A <span>Derby</span> database
+(unless it is an in-memory database)
+provides persistent storage and recovery. <span>Derby</span> ensures
+that all committed transactions are durable, even if the system fails, through
+the use of a database transaction log.</p>
+
+<p>Whereas inserts, updates, and deletes may be cached before being written
+to disk, log entries tracking all those changes are never cached but always
+forced to disk when a transaction commits. If the system or operating system
+fails unexpectedly, when <span>Derby</span> next
+starts up it can use the log to perform recovery, recovering the "lost" transactions
+from the log and rolling back uncommitted transactions. <em>Recovery</em> ensures
+that all committed transactions at the time the system failed are applied
+to the database, and all transactions that were active are rolled back. Thus
+the databases are left in a consistent, valid state.</p>
+
+<p>In normal operation, <span>Derby</span> keeps
+the log small through periodic checkpoints. Checkpointing marks the portions
+of the log that are no longer useful, writes changed pages to disk, then truncates
+the log.</p>
+
+<p><span>Derby</span> checkpoints the
+log file as it fills. It also checkpoints the log when a shutdown command
+is issued. Shutting down the JVM in which <span>Derby</span> is
+running without issuing the proper shutdown command is equivalent to a system
+failure from <span>Derby</span>'s point
+of view.</p>
+
+<p>Booting a database means that <span>Derby</span> checks
+to see if recovery needs to be run on a database. Recovery can be costly,
+so using the proper shutdown command improves connection or startup performance.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp21955.html" title="A Derby database contains dictionary objects such as tables, columns, indexes, and jar files. A Derby database can also store its own configuration information.">A Derby database</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp42173.html" title="You create new databases and access existing ones by specifying attributes to the Derby connection URL.">Creating, dropping, and backing up databases</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<base target="contentwin" /><title>Tuning Derby</title>
+</head>
+<body>
+<ul>
+<li><a href="rtuncopyright.html">Copyright</a></li>
+<li><a href="rtunlicense.html">License</a></li>
+<li><a href="ctunpropref1002477.html">About this guide</a>
+<ul>
+<li><a href="ctunpropref11181.html">Purpose of this guide</a></li>
+<li><a href="ctunpropref22460.html">Audience</a></li>
+<li><a href="ctunpropref23947.html">How this guide is organized</a></li>
+</ul>
+</li>
+<li><a href="ctunperf22457.html">Performance tips and tricks</a>
+<ul>
+<li><a href="ctunperf25864.html">The tips</a>
+<ul>
+<li><a href="ctunperf18705.html">Use prepared statements with substitution parameters</a></li>
+<li><a href="ctunperf10679.html">Create indexes, and make sure they are being used</a></li>
+<li><a href="ctunperfstatistics.html">Ensure table statistics are accurate</a></li>
+<li><a href="ctunperf54492.html">Increase the size of the data page cache</a></li>
+<li><a href="ctunperf10065.html">Tune the size of database pages</a>
+<ul>
+<li><a href="ctunperf816059.html">Performance trade-offs of large pages</a></li>
+</ul>
+</li>
+<li><a href="ctunperf23868.html">Avoid expensive queries</a></li>
+<li><a href="ctunperf98197.html">Use the appropriate getXXX and setXXX methods for the type</a></li>
+<li><a href="ctunperf16556.html">Tune database booting/class loading</a></li>
+<li><a href="ctunperf16800.html">Avoid inserts in autocommit mode if possible</a></li>
+<li><a href="ctunperftablefunctions.html">Improve the performance of table functions</a></li>
+<li><a href="ctunperfinmemdb.html">Configure Derby to use an in-memory database</a></li>
+<li><a href="ctunperfsequences.html">Increase the concurrency of sequences</a></li>
+</ul>
+</li>
+<li><a href="ctunperf31086.html">More tips</a>
+<ul>
+<li><a href="ctunperf17936.html">Shut down the system properly</a></li>
+<li><a href="ctunperf816635.html">Put Derby first in your classpath</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="ctundepth39739.html">Tuning databases and applications</a>
+<ul>
+<li><a href="ctundepth21935.html">Application and database design issues</a>
+<ul>
+<li><a href="ctundepth10525.html">Avoiding table scans of large tables</a>
+<ul>
+<li><a href="ctundepth23033.html">Always create indexes</a></li>
+<li><a href="ctundepth36205.html">Prevent the user from issuing expensive queries</a></li>
+</ul>
+</li>
+<li><a href="ctundepth29804.html">Avoiding compiling SQL statements</a>
+<ul>
+<li><a href="ctundepth32379.html">Using the statement cache</a></li>
+</ul>
+</li>
+<li><a href="ctundepth14326.html">Shielding users from Derby class-loading events</a></li>
+</ul>
+</li>
+<li><a href="ttundepth33391.html">Analyzing statement execution</a></li>
+<li><a href="ctundepth13055.html">Working with RunTimeStatistics</a>
+<ul>
+<li><a href="ctundepth26674.html">Overview</a></li>
+<li><a href="ttundepth34375.html">How you use the RUNTIMESTATISTICS attribute</a></li>
+<li><a href="ctun_xplain_style.html">How you use the XPLAIN style</a></li>
+<li><a href="ctundepth37648.html">Analyzing the information</a>
+<ul>
+<li><a href="ctundepth853095.html">Statistics timing</a></li>
+<li><a href="ctundepth853133.html">Statement execution plan</a></li>
+<li><a href="ctundepth853228.html">Optimizer estimates</a></li>
+<li><a href="ctundepthoptover.html">Optimizer overrides</a></li>
+<li><a href="ctun_xplain_tables.html">Understanding XPLAIN style database tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="ctunoptimz39739.html">DML statements and performance</a>
+<ul>
+<li><a href="ctunoptimz23977.html">Performance and optimization</a>
+<ul>
+<li><a href="ctunoptimz30217.html">Index use and access paths</a>
+<ul>
+<li><a href="ctunoptimz33368.html">What is an index?</a></li>
+<li><a href="ctunoptimz39106.html">What's optimizable?</a></li>
+<li><a href="ctunoptimz30768.html">Covering indexes</a></li>
+<li><a href="ctunoptimz41314.html">Useful indexes can use qualifiers</a></li>
+<li><a href="ctunoptimz22900.html">When a table scan Is better</a></li>
+<li><a href="ctunoptimz856914.html">Indexes have a cost for inserts, updates, and deletes</a></li>
+</ul>
+</li>
+<li><a href="ctunoptimz12168.html">Joins and performance</a>
+<ul>
+<li><a href="ctunoptimz857385.html">Join order overview</a></li>
+<li><a href="ctunoptimz23173.html">Join strategies</a></li>
+</ul>
+</li>
+<li><a href="ctunoptimz42425.html">Derby's cost-based optimization</a>
+<ul>
+<li><a href="ctunoptimz32184.html">About the optimizer's choice of access path</a></li>
+<li><a href="ctunoptimz20327.html">About the optimizer's choice of join order</a></li>
+<li><a href="ctunoptimz11941.html">About the optimizer's choice of join strategy</a></li>
+<li><a href="ctunoptimz27036.html">About the optimizer's choice of sort avoidance</a></li>
+<li><a href="ctunoptimz19357.html">About the system's selection of lock granularity</a></li>
+<li><a href="ctunoptimz29384.html">About the optimizer's selection of bulk fetch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="ctunoptimz27975.html">Locking and performance</a>
+<ul>
+<li><a href="ctunoptimz42065.html">Transaction-based lock escalation</a></li>
+<li><a href="ctunoptimz11775.html">Locking a table for the duration of a transaction</a></li>
+</ul>
+</li>
+<li><a href="ctunoptimz860097.html">Non-cost-based optimizations</a>
+<ul>
+<li><a href="ctunoptimz22460.html">Non-cost-based sort avoidance (tuple filtering)</a>
+<ul>
+<li><a href="ctunoptimz859947.html">DISTINCT</a></li>
+<li><a href="ctunoptimz859974.html">GROUP BY</a></li>
+</ul>
+</li>
+<li><a href="ctunoptimz22111.html">The MIN() and MAX() optimizations</a></li>
+</ul>
+</li>
+<li><a href="ctunoptimzoverride.html">Overriding the default optimizer behavior</a></li>
+</ul>
+</li>
+<li><a href="ctunstats18908.html">Selectivity and cardinality statistics</a>
+<ul>
+<li><a href="ctunstats57793.html">Determinations of rows scanned from disk for a table scan</a>
+<ul>
+<li><a href="ctunstats848901.html">How the optimizer determines the number of rows in a table</a></li>
+</ul>
+</li>
+<li><a href="ctunstats60669.html">Estimations of rows scanned from disk for an index scan</a>
+<ul>
+<li><a href="ctunstats848961.html">Queries with a known search condition</a></li>
+<li><a href="ctunstats849000.html">Queries with an unknown search condition</a></li>
+</ul>
+</li>
+<li><a href="ctunstats849203.html">Statistics-based versus hard-wired selectivity</a>
+<ul>
+<li><a href="ctunstats72938.html">Selectivity from cardinality statistics</a></li>
+<li><a href="ctunstats52657.html">Selectivity from hard-wired assumptions</a></li>
+</ul>
+</li>
+<li><a href="ctunstats849251.html">What are cardinality statistics?</a></li>
+<li><a href="ctunstats46438.html">Working with cardinality statistics</a>
+<ul>
+<li><a href="ctunstats57373.html">When cardinality statistics are automatically updated</a></li>
+<li><a href="ctunstats849505.html">When cardinality statistics go stale</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="ctuntransform13966.html">Internal language transformations</a>
+<ul>
+<li><a href="ctuntransform35783.html">Predicate transformations</a>
+<ul>
+<li><a href="rtuntransform139.html">BETWEEN transformations</a></li>
+<li><a href="rtuntransform208.html">LIKE transformations</a>
+<ul>
+<li><a href="rtuntransform345.html">Character string beginning with constant</a></li>
+<li><a href="rtuntransform443.html">Character string without wildcards</a></li>
+<li><a href="rtuntransform472.html">Unknown parameter</a></li>
+</ul>
+</li>
+<li><a href="rtuntransform582.html">Simple IN predicate transformations</a></li>
+<li><a href="rtuntransform866214.html">NOT IN predicate transformations</a></li>
+<li><a href="rtuntransform590.html">OR transformations</a></li>
+</ul>
+</li>
+<li><a href="ctuntransform37032.html">Transitive closure</a>
+<ul>
+<li><a href="rtuntransform866547.html">Transitive closure on join clauses</a></li>
+<li><a href="rtuntransform866587.html">Transitive Closure on Search Clauses</a></li>
+</ul>
+</li>
+<li><a href="ctuntransform11313.html">View transformations</a>
+<ul>
+<li><a href="ctuntransform22576.html">View flattening</a></li>
+<li><a href="ctuntransform36623.html">Predicates pushed into views or derived tables</a></li>
+</ul>
+</li>
+<li><a href="ctuntransform13699.html">Subquery processing and transformations</a>
+<ul>
+<li><a href="ctuntransform25857.html">Materialization</a></li>
+<li><a href="ctuntransform36368.html">Flattening a subquery into a normal join</a></li>
+<li><a href="ctuntransform25868.html">Flattening a subquery into an EXISTS join</a></li>
+<li><a href="ctuntransform47182.html">Flattening VALUES subqueries</a></li>
+<li><a href="ctuntransform867165.html">DISTINCT elimination in IN, ANY, and EXISTS subqueries</a></li>
+<li><a href="ctuntransform867201.html">IN/ANY subquery transformation</a></li>
+</ul>
+</li>
+<li><a href="ctuntransform55045.html">Outer join transformations</a></li>
+<li><a href="ctuntransform16033.html">Sort avoidance</a>
+<ul>
+<li><a href="ctuntransform16279.html">DISTINCT elimination based on a uniqueness condition</a></li>
+<li><a href="ctuntransform21780.html">Combining ORDER BY and DISTINCT</a></li>
+<li><a href="ctuntransform14044.html">Combining ORDER BY and UNION</a></li>
+</ul>
+</li>
+<li><a href="ctuntransform41535.html">Aggregate processing</a>
+<ul>
+<li><a href="rtuntransform867602.html">COUNT(nonNullableColumn)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rtuntrademderby.html">Trademarks</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using PlanExporter" />
+<meta content="PlanExporter, using" name="DC.subject" />
+<meta content="PlanExporter, using" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsplanexp.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsplanexpxmlformat.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsplanexpexamples.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctoolsusingplanexp" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using PlanExporter</title>
+</head>
+<body id="ctoolsusingplanexp"><a name="ctoolsusingplanexp"><!-- --></a>
+
+
+<h1 class="topictitle1">Using PlanExporter</h1>
+
+
+<div>
+<p>Before you run the <samp class="codeph">PlanExporter</samp> tool, make sure that
+your classpath contains the
+<span>Derby</span> jar files, including
+<em>derbytools.jar</em>. </p>
+
+
+<p>Before you run the <samp class="codeph">PlanExporter</samp> tool, you must capture the 
+<samp class="codeph">stmt_id</samp> of the query you have executed from
+<samp class="codeph">SYSXPLAIN_STATEMENTS system table</samp>. To do so, follow these
+steps:</p>
+
+<ol>
+<li><strong>Use XPLAIN styles to capture the runtime statistics.</strong> 
+<p>Refer to "SYSCS_UTIL.SYSCS_SET_XPLAIN_SCHEMA system procedure" in the
+<span><em>Derby Reference Manual</em></span> to see how to do this.</p>
+
+<div class="note"><span class="notetitle">Note: </span> You must remember the <samp class="codeph">schema_name</samp>.</div>
+ </li>
+
+<li><strong>Query the SYSXPLAIN_STATEMENTS system table
+to obtain the <samp class="codeph">stmt_id</samp> of the query you have executed.</strong> 
+<p>Refer to "SYSXPLAIN_STATEMENTS system table" in the
+<span><em>Derby Reference Manual</em></span> for information 
+about the SYSXPLAIN_STATEMENTS system table.</p>
+
+</li>
+
+</ol>
+
+<p>You can run the tool as follows in the directory where your database
+is located.</p>
+
+<pre>
+java org.apache.derby.tools.PlanExporter <em>derby_connection_URL schema_name stmt_id options</em>
+</pre>
+
+<p>The <em>options</em> can be passed according to your requirements. Consider 
+the following possible scenarios:</p>
+
+<ul>
+<li>
+<p>To generate an XML file of the query plan, specify the following option:</p>
+
+<pre>-xml <em>path</em></pre>
+
+<p>The <em>path</em> can be either absolute or relative. If the root filename does
+not have a suffix, the tool appends <samp class="codeph">.xml</samp>.</p>
+
+</li>
+
+<li>
+<p>To generate a plain HTML file of the query plan, you can use the default
+simple style sheet provided with
+<span>Derby</span>. Specify the following
+options:</p>
+
+<pre>-html <em>path</em></pre>
+
+<p>If the root filename does not have a suffix, the tool appends
+<samp class="codeph">.html</samp>.</p>
+
+<p>To generate the XML file as well, specify the following options:</p>
+
+<pre>-xml <em>path</em> -html <em>path</em></pre>
+ 
+<p>To use a different style sheet that does not contain any <em>javascript</em>
+functions, specify the following options:</p>
+
+<pre>-xsl <em>path</em> -html <em>path</em></pre>
+ 
+<p>To generate the XML file as well, specify the following options:</p>
+
+<pre>-xml <em>path</em> -xsl <em>path</em> -html <em>path</em></pre>
+
+</li>
+
+<li>
+<p>To generate an advanced view of the query plan, you can use advanced XSL
+style sheets provided with
+<span>Derby</span> inside <em>derbytools.jar/org/apache/derby/impl/tools/planexporter/resources/</em>, or you can specify a
+style sheet created by you. To do this, specify the following options:</p>
+
+<pre>-adv -xsl <em>fileName</em> -xml <em>path</em></pre>
+ 
+<div class="note"><span class="notetitle">Note: </span> 
+<ul>
+<li>Before you use the <samp class="codeph">-adv</samp> feature, you must copy the advanced
+XSL style sheet into the current directory. Thus, you must specify only
+the name of the style sheet, not the path.</li>
+
+<li>Generating HTML is not supported when you use the <samp class="codeph">-adv</samp>
+feature of the <samp class="codeph">PlanExporter</samp> tool. But if you open
+the generated XML file in a web browser, the browser will do the
+necessary transformation.</li>
+
+</ul>
+
+</div>
+
+</li>
+
+</ul>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsplanexp.html" title="">PlanExporter</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsplanexpxmlformat.html" title="">PlanExporter XML format</a></div>
+<div><a href="rtoolsplanexpexamples.html" title="">PlanExporter example</a></div>
+</div>
+</div>
+
+</body>
+</html>

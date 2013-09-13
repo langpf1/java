@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Sintaxe de escape do JDBC para a palavra chave fn" />
+<meta content="fn (palavra chave de escape do JDBC), substring (função escalar do JDBC), mod (função escalar do JDBC), locate (função escalar do JDBC), abs (função escalar do JDBC), sqrt (função escalar do JDBC), concat (função escalar do JDBC), função TIMESTAMPADD, função TIMESTAMPDIFF" name="DC.subject" />
+<meta content="fn (palavra chave de escape do JDBC), substring (função escalar do JDBC), mod (função escalar do JDBC), locate (função escalar do JDBC), abs (função escalar do JDBC), sqrt (função escalar do JDBC), concat (função escalar do JDBC), função TIMESTAMPADD, função TIMESTAMPDIFF" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc70824.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27768.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc28456.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc37244.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc12124.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc41784.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc88908" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Sintaxe de escape do JDBC para a palavra chave fn</title>
+</head>
+<body id="rrefjdbc88908"><a name="rrefjdbc88908"><!-- --></a>
+
+
+<h1 class="topictitle1">Sintaxe de escape do JDBC para a palavra chave fn</h1>
+
+
+<div>
+<div class="section">
+<p>A palavra chave <em>fn</em> permite utilizar várias funções escalares.
+O nome da função vem imediatamente após a palavra chave <em>fn</em>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>{fn <em>chamadaFunção</em>}</strong>
+</pre>
+<p>onde <em>chamadaFunção</em> é uma das seguintes funções:</p>
+
+<pre><strong>concat (<strong><em>ExpressãoCaractere</em></strong>,
+<strong><em>ExpressãoCaractere</em></strong>)</strong></pre>
+
+<p>Cadeia de caracteres formada anexando a segunda cadeia à primeira;
+se uma das cadeias for nula, o resultado será nulo.
+{fn concat (<em>ExpressãoCaractere</em>, <em>ExpressãoCaractere</em>)
+é equivalente à sintaxe nativa { ExpressãoCaractere || ExpressãoCaractere }.
+Para obter mais detalhes deve ser consultado
+<a href="rrefsqlj40899.html#rrefsqlj40899">Concatenação</a>.</p>
+
+<pre><strong><em>sqrt (<strong><em>ExpressãoPontoFlutuante</em></strong>)</em></strong>
+</pre>
+<p>Raiz quadrada do número de ponto flutuante.</p>
+
+<p>{fn sqrt (<em>ExpressãoPontoFlutuante</em>)} é equivalente à sintaxe nativa
+<a href="rrefsqlj73147.html#rrefsqlj73147__i1195048">SQRT(ExpressãoPontoFlutuante)</a>.
+Para obter mais detalhes deve ser consultado
+<a href="rrefsqlj73147.html#rrefsqlj73147">SQRT</a>.</p>
+
+<pre><strong>abs (<strong><em>ExpressãoNumérica</em></strong>)</strong></pre>
+
+<p>Valor absoluto do número.
+{fn abs(<em>ExpressãoNumérica</em>)} é equivalente à sintaxe nativa
+<a href="rrefsqlj98067.html#rrefsqlj98067__i1195049">ABSOLUTE(ExpressãoNumérica)</a>.
+Para obter mais detalhes deve ser consultado <a href="rrefsqlj98067.html#rrefsqlj98067">ABS ou ABSVAL</a>.
+</p>
+<pre><strong>locate(<strong><em>ExpressãoCaractere</em></strong>, <strong><em>ExpressãoCaractere</em></strong> [, <strong><em>posiçãoInício</em></strong>] )</strong></pre>
+
+<p>Posição na segunda <em>ExpressãoCaractere</em> da primeira ocorrência da
+primeira <em>ExpressãoCaractere</em>, procurando a partir do início da segunda
+expressão caractere, a menos que esteja especificada a <em>posiçãoInício</em>.
+{fn locate(<em>ExpressãoCaractere</em>,<em>ExpressãoCaractere</em> [, <em>posiçãoInício</em>])}
+é equivalente à sintaxe nativa
+<a href="rrefsqlj61998.html#rrefsqlj61998__i1195050">LOCATE(ExpressãoCaractere, ExpressãoCaractere [, PosiçãoInício] )</a>.
+Para obter mais detalhes deve ser consultado
+<a href="rrefsqlj61998.html#rrefsqlj61998">LOCATE</a>.</p>
+
+<pre><strong>substring(<strong><em>ExpressãoCaractere</em></strong>, <strong><em>posiçãoInício</em></strong>, <strong><em>comprimento</em></strong>)</strong></pre>
+
+<p>A cadeia de caracteres formada pela extração de <em>comprimento</em> caracteres
+da <em>ExpressãoCaractere</em> a partir da <em>posiçãoInício</em>;
+a posição começa em 1.</p>
+
+<pre><strong>mod(<strong><em>tipo_inteiro</em></strong>, <strong><em>tipo_inteiro</em></strong>)</strong></pre>
+
+<p>MOD retorna o resto (módulo) do argumento 1 dividido pelo argumento 2.
+O resultado será negativo apenas se o argumento 1 for negativo.
+Para obter mais detalhes deve ser consultado
+<a href="rrefsqljmod.html#rrefsqljmod">MOD</a>.</p>
+
+<div class="note"><span class="notetitle">Nota: </span>Esta sintaxe permite o uso de qualquer função nativa do
+<span>Derby</span>,
+e não apenas as listadas nesta seção.</div>
+
+<pre><strong>TIMESTAMPADD( <em>intervalo</em>, <em>expressãoInteira</em>, <em>expressãoCarimboTempo</em> )</strong></pre>
+
+<p>Utiliza a função <samp class="codeph">TIMESTAMPADD</samp> para adicionar o valor de
+um intervalo a um carimbo do tempo.
+A função aplica o inteiro ao carimbo do tempo especificado baseado no tipo
+de intervalo, e retorna a soma como um novo carimbo do tempo.
+Pode ser realizada subtração no carimbo do tempo utilizando inteiros negativos.</p>
+
+<p>Deve ser observado que <samp class="codeph">TIMESTAMPADD</samp> é uma função do JDBC
+com escape, sendo acessível apenas utilizando a sintaxe de função com escape
+do JDBC.</p>
+
+<p>Para realizar <samp class="codeph">TIMESTAMPADD</samp> em datas e horas, é necessário
+convertê-los para carimbo do tempo.
+As datas são convertidas em carimbos do tempo colocando 00:00:00.0 no campo
+das horas.
+As horas são convertidas em carimbos do tempo colocando a data corrente no
+campo da data.</p>
+
+<p>Deve ser observado que não deve ser colocada uma coluna data/hora dentro de
+uma função aritmética de carimbo do tempo na cláusula WHERE, porque o
+otimizador não usará nenhum índice na coluna.</p>
+
+<pre><strong>TIMESTAMPDIFF( intervalo, expressãoCarimboTempo1, expressãoCarimboTempo2 )</strong></pre>
+
+<p>Utiliza a função <samp class="codeph">TIMESTAMPDIFF</samp> para descobrir a diferença
+entre dois valores de carimbo do tempo no intervalo especificado.
+Por exemplo, a função pode retornar o número de minutos entre dois carimbos do
+tempo especificados.</p>
+
+<p>Deve ser observado que <samp class="codeph">TIMESTAMPDIFF</samp> é uma função do JDBC
+com escape, sendo acessível apenas utilizando a sintaxe de função com escape
+do JDBC.</p>
+
+<p>Para realizar <samp class="codeph">TIMESTAMPDIFF</samp> em datas e horas, é
+necessário convertê-los em carimbo do tempo.
+As datas são convertidas em carimbos do tempo colocando 00:00:00.0 no campo
+das horas.
+As horas são convertidas em carimbos do tempo colocando a data corrente no
+campo da data.</p>
+
+<p>Deve ser observado que não deve ser colocada uma coluna data/hora dentro de
+uma função aritmética de carimbo do tempo na cláusula WHERE, porque o
+otimizador não usará nenhum índice para a coluna.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Intervalos válidos para TIMESTAMPADD e TIMESTAMPDIFF</h2>
+
+As funções <samp class="codeph">TIMESTAMPADD</samp> e <samp class="codeph">TIMESTAMPDIFF</samp>
+podem ser utilizadas para realizar aritmética com carimbos do tempo.
+Estas duas funções utilizam os seguintes intervalos válidos para as operações
+aritméticas:
+<ul>
+<li>SQL_TSI_DAY</li>
+
+<li>SQL_TSI_FRAC_SECOND</li>
+
+<li>SQL_TSI_HOUR</li>
+
+<li>SQL_TSI_MINUTE</li>
+
+<li>SQL_TSI_MONTH</li>
+
+<li>SQL_TSI_QUARTER</li>
+
+<li>SQL_TSI_SECOND</li>
+
+<li>SQL_TSI_WEEK</li>
+
+<li>SQL_TSI_YEAR</li>
+
+</ul>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Exemplo de TIMESTAMPADD e TIMESTAMPDIFF</h2>
+
+<pre><strong>{fn TIMESTAMPADD( SQL_TSI_MONTH, 1, CURRENT_TIMESTAMP)}</strong></pre>
+
+<p>Retorna um valor carimbo do tempo um mês após o carimbo do tempo corrente.</p>
+
+<pre><strong>{fn TIMESTAMPDIFF(SQL_TSI_WEEK, CURRENT_TIMESTAMP,
+  timestamp('2001-01-01-12.00.00.000000'))}</strong></pre>
+
+<p>Retorna o número de semanas entre agora e a hora especificada em
+1 de janeiro de 2001.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefjdbc1020262.html" title="">Sintaxe de escape do JDBC</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefjdbc70824.html" title="">Palavra chave de escape do JDBC para instruções call</a></div>
+<div><a href="rrefjdbc27768.html" title="">Sintaxe de escape do JDBC</a></div>
+<div><a href="rrefjdbc28456.html" title="">Sintaxe de escape do JDBC para cláusulas LIKE</a></div>
+<div><a href="rrefjdbc37244.html" title="">Sintaxe de escape do JDBC para junções externas</a></div>
+<div><a href="rrefjdbc12124.html" title="">Sintaxe de escape do JDBC para formatos de hora</a></div>
+<div><a href="rrefjdbc41784.html" title="">Sintaxe de escape do JDBC para formatos de carimbo do tempo</a></div>
+</div>
+</div>
+
+</body>
+</html>

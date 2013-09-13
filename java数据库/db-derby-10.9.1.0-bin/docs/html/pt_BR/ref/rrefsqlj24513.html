@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Instrução CREATE TABLE" />
+<meta content="Instrução CREATE TABLE, Padrões, Padrões de coluna" name="DC.subject" />
+<meta content="Instrução CREATE TABLE, Padrões, Padrões de coluna" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj30540.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj37836.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj24513" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Instrução CREATE TABLE</title>
+</head>
+<body id="rrefsqlj24513"><a name="rrefsqlj24513"><!-- --></a>
+
+
+<h1 class="topictitle1">Instrução CREATE TABLE</h1>
+
+
+<div>
+<div class="section">
+<p>A instrução CREATE TABLE cria uma tabela. As tabelas contêm colunas e
+restrições, que são regras que os dados devem estar em conformidade.
+A restrição no nível-de-tabela especifica uma coluna ou várias colunas.
+As colunas possuem um tipo de dado e podem especificar restrições de coluna
+(restrições no nível-de-coluna).</p>
+
+<p>Para obter informações sobre as restrições deve ser consultada a
+<a href="rrefsqlj13590.html#rrefsqlj13590">Cláusula CONSTRAINT</a>.</p>
+
+<p>Pode ser especificado um valor padrão para a coluna.
+O valor padrão é o valor a ser inserido na coluna quando não é especificado
+nenhum outro valor.
+Quando não é especificado explicitamente, o valor padrão para a coluna é NULL.
+Consulte <a href="rrefsqlj30540.html#rrefsqlj30540__sqlj64478">Valor padrão da coluna</a>.</p>
+
+<p>Podem ser especificadas propriedades de armazenamento, como o tamanho da
+página para a tabela, chamando o procedimento do sistema
+<samp class="codeph">SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY</samp>.</p>
+
+<p>Se for especificado um nome de tabela qualificado, o nome do esquema não
+poderá começar por <em>SYS</em>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>CREATE TABLE <em><a href="rreftablename.html#rreftablename">nome-da-tabela</a></em>
+    ( {<em><a href="rrefsqlj30540.html#rrefsqlj30540">definição-da-coluna</a></em> | <em><a href="rrefsqlj42154.html#rrefsqlj42154">restrição no nível-de-tabela</a></em>}
+    [ , {<em><a href="rrefsqlj30540.html#rrefsqlj30540">definição-da-coluna</a></em> | <em><a href="rrefsqlj42154.html#rrefsqlj42154">restrição no nível-de-tabela</a></em>} ] * )</strong>
+</pre>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Exemplos</h2>
+
+<pre><strong>CREATE TABLE DISPONIBILIDADE_HOTEL (
+    ID_HOTEL           INT NOT NULL,
+    DATA_RESERVA       DATE NOT NULL,
+    QUARTOS_RESERVADOS INT DEFAULT 0,
+    PRIMARY KEY (ID_HOTEL, DATA_RESERVA));
+
+<span>-- A definição de chave primária no nível-de-tabela permite
+-- incluir duas colunas na definição da chave primária</span>
+
+PRIMARY KEY (ID_HOTEL, DATA_RESERVA))
+
+<span>-- Atribuir um atributo de coluna de identidade a uma coluna INTEGER,
+-- e também definir uma restrição de chave primária na coluna</span>
+
+CREATE TABLE PESSOAS (
+    ID_PESSOA INT NOT NULL GENERATED ALWAYS AS IDENTITY
+    CONSTRAINT PK_PESSOAS PRIMARY KEY,
+    PESSOA VARCHAR(26));
+
+<span>-- Atribuir um atributo de coluna de identidade a uma coluna SMALLINT
+-- com valor inicial igual a 5 e valor do incremento igual a 5.</span>
+
+CREATE TABLE GRUPOS (
+    ID_GRUPO SMALLINT NOT NULL
+        GENERATED ALWAYS AS IDENTITY (START WITH 5, INCREMENT BY 5),
+    ENDEREÇO VARCHAR(100),
+    TEL      VARCHAR(15));</strong>
+</pre>
+
+<div class="note"><span class="notetitle">Nota: </span>Para obter mais exemplos de instruções CREATE TABLE utilizando
+várias restrições deve ser consultada a
+<a href="rrefsqlj13590.html#rrefsqlj13590">Cláusula CONSTRAINT</a>.</div>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlj30540.html">definição-da-coluna</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj37836.html">especificação-de-coluna-gerada</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefsqlj95081.html" title="">Instruções CREATE</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="A instrução CREATE FUNCTION permite criar funções Java que podem ser utilizadas em expressões.">Instrução CREATE FUNCTION</a></div>
+<div><a href="rrefsqlj20937.html" title="">Instrução CREATE INDEX</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">Instrução CREATE PROCEDURE</a></div>
+<div><a href="rrefsqlj31580.html" title="">Instrução CREATE SCHEMA</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">Instrução CREATE SYNONYM</a></div>
+<div><a href="rrefsqlj43125.html" title="">Instrução CREATE TRIGGER</a></div>
+<div><a href="rrefsqlj15446.html" title="">Instrução CREATE VIEW</a></div>
+</div>
+</div>
+
+</body>
+</html>

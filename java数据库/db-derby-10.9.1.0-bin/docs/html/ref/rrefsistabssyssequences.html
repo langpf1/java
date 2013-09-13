@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSSEQUENCES system table" />
+<meta name="abstract" content="The SYSSEQUENCES table describes the sequence generators in the database." />
+<meta name="description" content="The SYSSEQUENCES table describes the sequence generators in the database." />
+<meta content="system tables, SYSSEQUENCES, sequence generators, SYSSEQUENCES system table" name="DC.subject" />
+<meta content="system tables, SYSSEQUENCES, sequence generators, SYSSEQUENCES system table" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscspeeksequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljdropsequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljdropsequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscspeeksequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpreallocator.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpreallocator.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsistabs38369.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsistabssyssequences" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSSEQUENCES system table</title>
+</head>
+<body id="rrefsistabssyssequences"><a name="rrefsistabssyssequences"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSSEQUENCES system table</h1>
+
+
+
+<div><p>The SYSSEQUENCES table describes the sequence generators in the
+database.</p>
+
+<div class="section">
+<div class="p"><div class="note"><span class="notetitle">Note: </span>Users should not directly query the SYSSEQUENCES table, because that
+will slow down the performance of sequence generators. Instead, users should
+call the
+<a href="rrefsyscspeeksequence.html#rrefsyscspeeksequence">SYSCS_UTIL.SYSCS_PEEK_AT_SEQUENCE system function</a>.</div>
+</div>
+
+<p>The following table shows the contents of the SYSSEQUENCES system table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For each column in the SYSSEQUENCES system table, this table provides its data type, its length in bytes, whether it is nullable, and a description of its contents." frame="border" border="1" rules="all"><caption>Table 1. SYSSEQUENCES system table</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="28.999999999999996%" id="N100B1">Column Name</th>
+
+<th valign="bottom" width="24%" id="N100B8">Type</th>
+
+<th valign="bottom" width="11%" id="N100BF">Length</th>
+
+<th valign="bottom" width="12%" id="N100C6">Nullable</th>
+
+<th valign="bottom" width="24%" id="N100CD">Contents</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">SEQUENCEID</td>
+
+<td valign="top" width="24%" headers="N100B8">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BF">36</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">The ID of the sequence generator. This is the primary key.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">SEQUENCENAME</td>
+
+<td valign="top" width="24%" headers="N100B8">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100BF">128</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">The name of the sequence generator. There is a unique index
+on (SCHEMAID, SEQUENCENAME).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">SCHEMAID</td>
+
+<td valign="top" width="24%" headers="N100B8">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BF">36</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">The ID of the schema that holds the sequence generator.
+There is a foreign key linking this column to SYSSCHEMAS.SCHEMAID.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">SEQUENCEDATATYPE</td>
+
+<td valign="top" width="24%" headers="N100B8"><em>org.apache.derby.
+catalog.
+TypeDescriptor</em>
+<p>This class is not part of the public API.</p>
+</td>
+
+<td valign="top" width="11%" headers="N100BF">2,147,483,647</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">System type that describes the precision, length, scale,
+nullability, type name, and storage type of the data</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">CURRENTVALUE</td>
+
+<td valign="top" width="24%" headers="N100B8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100BF">20</td>
+
+<td valign="top" width="12%" headers="N100C6">true</td>
+
+<td valign="top" width="24%" headers="N100CD">The current value of the sequence generator. This is not the
+actual next value for the sequence generator. That value can be obtained by
+calling the system function SYSCS_UTIL.SYSCS_PEEK_AT_SEQUENCE.
+SYSSEQUENCES.CURRENTVALUE holds the end of the range of values which have been
+preallocated in order to boost concurrency. The initial
+value of this column is STARTVALUE. This column is NULL only if the sequence
+generator is exhausted and cannot issue any more numbers.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">STARTVALUE</td>
+
+<td valign="top" width="24%" headers="N100B8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100BF">20</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">The initial value of the sequence generator</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">MINIMUMVALUE</td>
+
+<td valign="top" width="24%" headers="N100B8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100BF">20</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">The minimum value of the sequence generator</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">MAXIMUMVALUE</td>
+
+<td valign="top" width="24%" headers="N100B8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100BF">20</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">The maximum value of the sequence generator</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">INCREMENT</td>
+
+<td valign="top" width="24%" headers="N100B8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100BF">20</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">The step size of the sequence generator</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="28.999999999999996%" headers="N100B1">CYCLEOPTION</td>
+
+<td valign="top" width="24%" headers="N100B8">CHAR</td>
+
+<td valign="top" width="11%" headers="N100BF">1</td>
+
+<td valign="top" width="12%" headers="N100C6">false</td>
+
+<td valign="top" width="24%" headers="N100CD">If the sequence generator cycles, this value is <em>'Y'</em>.
+If the sequence generator does not cycle, this value is <em>'N'</em>.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsistabs38369.html" title="">Derby system tables</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsyscspeeksequence.html" title="">SYSCS_UTIL.SYSCS_PEEK_AT_SEQUENCE system function</a></div>
+<div><a href="rrefsqljcreatesequence.html" title="">CREATE SEQUENCE statement</a></div>
+<div><a href="rrefsqljdropsequence.html" title="">DROP SEQUENCE statement</a></div>
+<div><a href="rrefproperpreallocator.html" title="">derby.language.sequence.preallocator</a></div>
+</div>
+</div>
+
+</body>
+</html>

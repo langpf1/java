@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="collation=collation 属性" />
+<meta content="collation, database attribute, TERRITORY_BASED, collation attribute" name="DC.subject" />
+<meta content="collation, database attribute, TERRITORY_BASED, collation attribute" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib24612.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefattribcollation" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>collation=collation 属性</title>
+</head>
+<body id="rrefattribcollation"><a name="rrefattribcollation"><!-- --></a>
+
+
+<h1 class="topictitle1">collation=collation 属性</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">機能</h2>
+<p><samp class="codeph">collation</samp>属性は照合がデータベースに設定された地域に沿って行われるのか、ユニコードのコードポイントに沿って行われるのかを指定します。
+<samp class="codeph">collation</samp>属性の有効な値は、TERRITORY_BASEDとUCS_BASICです。</p>
+
+<div class="restriction"><span class="restrictiontitle">制約事項: </span><samp class="codeph">collation</samp>属性を指定できるのはデータベースを作成した時です。既存のデータベースや、アップグレードするデータベースに、この属性を指定することはできません。</div>
+
+<p><span>Derby</span>のデータベースを作成するときに、<samp class="codeph">collation</samp>属性にTERRITORY_BASEDを与えた場合、照合は<samp class="codeph">territory</samp>属性に指定した言語や国のコードに基づき行われます。</p>
+
+<p>データベースを作成するときに<samp class="codeph">territory</samp>属性を指定しなかった場合、<span>Derby</span>は<samp class="codeph">java.util.Locale.getDefault</samp>メソッドにより、Java仮想マシン(JVM)の地域情報の既定値が現在何であるかを取得します。</p>
+
+<div class="note"><span class="notetitle">注: </span><samp class="codeph">collation</samp>属性はユーザが定義した表についてのみ有効です。システム表ではユニコードのコードポイントに沿って照合が行われます。</div>
+</div>
+
+<div class="example"><h2 class="sectiontitle">例</h2><p>次の例では<samp class="codeph">MexicanDB</samp>データベースを作成するURLを示します。territory属性では言語コードにスペイン語を指定して、国コードにメキシコを指定します。<samp class="codeph">collation</samp>属性はデータベースが地域情報に基づいて、照合を行うことを指定します。</p>
+
+<pre>jdbc:derby:MexicanDB;create=true;territory=es_MX;collation=TERRITORY_BASED </pre>
+ </div>
+
+<div class="section">
+<span>Derby</span>で照合がどのように扱われるかは、<cite><span><em>Derby Developer's Guide</em></span></cite>の「<span>Derby</span>での文字による照合」を参照してください。</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefattrib24612.html" title="Derbyでは、データベース接続URLに属性を指定する、 JDBCの機能を利用できます。">データベース接続URLに属性を指定する。</a></div>
+</div>
+</div>
+
+</body>
+</html>

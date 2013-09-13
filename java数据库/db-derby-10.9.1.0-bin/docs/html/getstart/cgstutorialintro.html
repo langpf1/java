@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Self-study tutorial for users new to Derby" />
+<meta name="abstract" content="To help you get up and running with Derby as quickly as possible, this self-study guide highlights some of the more important features of Derby." />
+<meta name="description" content="To help you get up and running with Derby as quickly as possible, this self-study guide highlights some of the more important features of Derby." />
+<meta content="Java Development Kit version, verifying, JDK version, Working with Derby activities, prerequisites, environment variables, JAVA_HOME environment variable, DERBY_HOME environment variable" name="DC.subject" />
+<meta content="Java Development Kit version, verifying, JDK version, Working with Derby activities, prerequisites, environment variables, JAVA_HOME environment variable, DERBY_HOME environment variable" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cwwdactivities.html" />
+<meta scheme="URI" name="DC.Relation" content="twwdactivity1_overview.html" />
+<meta scheme="URI" name="DC.Relation" content="twwdactivity2.html" />
+<meta scheme="URI" name="DC.Relation" content="twwdactivity3_Setup.html" />
+<meta scheme="URI" name="DC.Relation" content="twwdactivity4.html" />
+<meta scheme="URI" name="DC.Relation" content="cwwdsummary.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cgstutorialintro" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Self-study tutorial for users new to Derby</title>
+</head>
+<body id="cgstutorialintro"><a name="cgstutorialintro"><!-- --></a>
+
+
+<h1 class="topictitle1">Self-study tutorial for users new to <span>Derby</span></h1>
+
+
+
+<div><p>To help you get up and running with <span>Derby</span> as
+quickly as possible, this self-study guide highlights some of the more important
+features of  <span>Derby</span>. </p>
+
+<div class="section"><h2 class="sectiontitle">Tutorial skills and software requirements</h2><p> This tutorial uses a series of activities designed to demonstrate
+the use of  <span>Derby</span> in the
+embedded and client/server configurations. After performing these activities,
+you will find <span>Derby</span> to
+be an easy-to-use and fully functional relational database management system
+(RDBMS). </p>
+<p>To
+perform the tutorial activities, you do not need to have any prior knowledge
+of Java software, the Java Database Connectivity (JDBC) API, or SQL. Each
+activity provides the complete command syntax that you need to use for each
+operation. Instructions include the syntax for both a UNIX Korn shell and
+a Windows command prompt.  </p>
+<p>This tutorial demonstrates, but does not
+teach, the Java, JDBC and SQL code that is presented. If you want a deeper
+understanding of these topics, you will need to consult additional reference
+materials.</p>
+<div class="p">To perform the tutorial activities, you must have: <ul>
+<li>A Java Development Kit (JDK) version 1.4 or higher installed on your computer</li>
+
+<li>The binary (<samp class="codeph">bin</samp>) installation of <span>Apache Derby</span> version <span>10.9</span> installed on your computer</li>
+
+<li>A basic knowledge of the computer command line interface:<ul>
+<li>How to start a command shell or window</li>
+
+<li>How to navigate the file system hierarchy</li>
+
+</ul>
+</li>
+
+</ul>
+</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">System configuration</h2><p>You should <a href="tgssetupverify.html#tgssetupverify">verify
+the system configuration</a> before you perform the tutorial activities.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Problems and feedback on the tutorial activities</h2><p>If
+you experience problems with any aspect of the tutorial activities, send an
+e-mail message to <samp class="codeph">derby-user@db.apache.org</samp>.  Someone from
+the <span>Derby</span> community will
+respond to your message. </p>
+<p>The questions and feedback received will be
+used to make this tutorial more useful.</p>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cwwdactivities.html">Tutorial overview</a></strong><br />
+Each activity in this self-study tutorial highlights an important feature of Derby.</li>
+<li class="ulchildlink"><strong><a href="twwdactivity1_overview.html">Activity 1: Run SQL using the embedded driver</a></strong><br />
+In this activity, you will use the embedded driver to load the Derby database engine, create and connect to a database, and use some basic SQL statements.</li>
+<li class="ulchildlink"><strong><a href="twwdactivity2.html">Activity 2: Run SQL using the client driver</a></strong><br />
+This activity uses Derby within a client/server configuration by using the Network Server. The ij tool is the client application that connects to the Derby Network Server. In this activity, you create a database called seconddb and run some basic SQL statements.</li>
+<li class="ulchildlink"><strong><a href="twwdactivity3_Setup.html">Activity 3: Run a JDBC program using the embedded driver</a></strong><br />
+This activity loads the Derby database engine using a simple Java JDBC program.</li>
+<li class="ulchildlink"><strong><a href="twwdactivity4.html">Activity 4: Create and run a JDBC program using the client driver and Network Server</a></strong><br />
+This activity demonstrates the ease with which a program that embeds Derby can be modified for a client/server implementation that uses the Derby Network Server.</li>
+<li class="ulchildlink"><strong><a href="cwwdsummary.html">What next with Derby?</a></strong><br />
+Congratulations on completing the activities in this tutorial. You now have experience with using Derby in both the embedded and client/server architectures.</li>
+</ul>
+</div>
+
+</body>
+</html>

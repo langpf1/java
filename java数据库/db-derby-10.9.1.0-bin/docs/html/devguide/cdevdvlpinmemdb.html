@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using in-memory databases" />
+<meta name="abstract" content="For testing and developing applications, or for processing transient or reproducible data, you can use Derby's in-memory database facility." />
+<meta name="description" content="For testing and developing applications, or for processing transient or reproducible data, you can use Derby's in-memory database facility." />
+<meta content="in-memory databases, databases, in-memory" name="DC.subject" />
+<meta content="in-memory databases, databases, in-memory" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp19524.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdvlpinmemdb" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using in-memory databases</title>
+</head>
+<body id="cdevdvlpinmemdb"><a name="cdevdvlpinmemdb"><!-- --></a>
+
+
+<h1 class="topictitle1">Using in-memory databases</h1>
+
+
+
+<div><p>For testing and developing applications, or for processing transient
+or reproducible data, you can use
+<span>Derby</span>'s in-memory database
+facility.</p>
+
+<p>An in-memory database resides completely in main memory, not in the file
+system. It is useful for testing and developing applications, when you may want
+to create and discard databases that will never be used again. It is also 
+useful when you need to process only temporary or reproducible data.</p>
+
+<p>If you have the required memory available, you may also benefit from faster
+processing (no disk I/O) and from the simplicity of not having to explicitly
+delete databases you have finished with.</p>
+
+<div class="section"><h2 class="sectiontitle">Creating an in-memory database</h2>
+<p>To create an in-memory database, specify <samp class="codeph">memory</samp> as the JDBC
+subsubprotocol. For example, to create an in-memory database named
+<samp class="codeph">myDB</samp> using the embedded driver, use the following connection
+URL:</p>
+
+<pre>jdbc:derby:memory:myDB;create=true</pre>
+
+<p>For the network client driver, use the following connection URL. Because
+the client driver does not understand the <samp class="codeph">memory</samp>
+subsubprotocol, you must include it in the database name:</p>
+
+<pre>jdbc:derby://<em>myhost</em>:1527/memory:myDB;create=true</pre>
+
+<p>Be careful to specify a colon (<samp class="codeph">:</samp>) after
+<samp class="codeph">memory</samp>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Referring to in-memory databases</h2>
+<p>When you create or refer to an in-memory database, any path that is not
+absolute is interpreted as relative to the system directory, just as with file
+system databases. For example, if the system directory is
+<samp class="codeph">C:\myderby</samp>, the following paths are regarded as
+equivalent:</p>
+
+<pre>jdbc:derby:memory:db
+jdbc:derby:memory:C:\myderby\db</pre>
+
+<p>Similarly, <span>Derby</span> treats
+the following URLs as names for the same in-memory database:</p>
+
+<pre>jdbc:derby:memory:/home/myname/db
+jdbc:derby:memory:/home/myname/../myname/db</pre>
+
+<p><a href="cdevdvlp40350.html#cdevdvlp40350">Conventions for specifying the database path</a> has more information on
+database paths.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Using in-memory databases</h2>
+<p>When you use an in-memory database, you need to make sure to configure the
+heap and the <span>Derby</span> page
+cache size. See "Configure
+<span>Derby</span> to use an in-memory
+database" in <span><em>Tuning Derby</em></span> for details.</p>
+
+<p>For examples of how to use an in-memory database, see some of the
+<samp class="codeph">ij</samp> command examples in the
+<span><em>Derby Tools and Utilities Guide</em></span> (<samp class="codeph">execute</samp>
+and <samp class="codeph">async</samp>, for example).</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Removing an in-memory database</h2>
+<p>To remove an in-memory database, use the connection URL attribute <em>drop</em>
+as follows:</p>
+
+<pre>jdbc:derby:memory:myDB;drop=true</pre>
+
+<pre>jdbc:derby://<em>myhost</em>:1527/memory:myDB;drop=true</pre>
+
+<p>You can shut down an in-memory database using the <em>shutdown=true</em>
+attribute before you drop the database, but this is optional. Dropping the
+database also performs the shutdown.</p>
+
+<p>When you drop the database,
+<span>Derby</span> issues what appears to
+be an error but is actually an indication of success. You need to catch error
+08006, as described in "The WwdEmbedded program" in
+<span><em>Getting Started with Derby</em></span>.</p>
+
+<p>
+If user
+<a href="cdevcsecure36127.html#cdevcsecure36127">authentication</a>
+and
+<a href="cdevcsecure36595.html#cdevcsecure36595">SQL authorization</a>
+are both enabled, only the
+<a href="cdevcsecureDbOwner.html#cdevcsecureDbOwner">database owner</a>
+can drop the database.
+</p>
+
+<p>An in-memory database is automatically removed if any of the following
+happens:</p>
+
+<ul>
+<li>The Java Virtual Machine (JVM) is shut down normally (for example, if you
+exit the <samp class="codeph">ij</samp> tool)</li>
+
+<li>The JVM crashes</li>
+
+<li>The machine you are running on crashes or shuts down</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Persisting an in-memory database</h2>
+<p>If you create an in-memory database and then decided that you want to keep it
+after all, you can use one of the backup system procedures
+(SYSCS_UTIL.SYSCS_BACKUP_DATABASE, for example) to persist it. You can then boot
+it as an in-memory database at a later time, or use it as a normal file system
+database. See "Backing up and restoring databases" in
+<span><em>Derby Server and Administration Guide</em></span> for information on using the
+backup procedures.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp19524.html" title="This section describes the core Derby functionality. In addition, it details the most basic Derby deployment, Derby embedded in a Java application.">JDBC applications and Derby basics</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="INSERT statement" />
+<meta content="INSERT statement" name="DC.subject" />
+<meta content="INSERT statement" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj40774" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>INSERT statement</title>
+</head>
+<body id="rrefsqlj40774"><a name="rrefsqlj40774"><!-- --></a>
+
+
+<h1 class="topictitle1">INSERT statement</h1>
+
+
+<div>
+<div class="section"> <p>An
+INSERT statement creates a row or rows and stores them in the named table.
+The number of values assigned in an INSERT statement must be the same as the
+number of specified or implied columns.</p>
+
+<p>Whenever you insert into a table which has generated columns,
+<span>Derby</span> calculates the values
+of those columns.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>INSERT INTO table-Name
+    [ (<em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">Simple-column-Name</a></em> [ , <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">Simple-column-Name</a></em>]* ) ]
+          Query [ <em><a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a></em> ]
+                [ <em><a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">result offset clause</a></em> ]
+                [ <em><a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">fetch first clause</a></em> ]
+</strong></pre>
+ <div class="p"><em>Query</em> can be:   <ul>
+<li>A <em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a></em></li>
+
+<li>A single-row or multiple-row VALUES expression
+<p>Single-row and multiple-row VALUES expressions
+can include the keyword DEFAULT. Specifying DEFAULT for a column inserts the
+column's default value into the column. Another way to insert the default
+value into the column is to omit the column from the column list and only
+insert values into other columns in the table. For more information, see <a href="rrefsqlj11277.html#rrefsqlj11277">VALUES expression</a>.</p>
+
+<p>The DEFAULT literal is the only value which you can directly
+insert into a generated column.</p>
+</li>
+
+<li>UNION expressions</li>
+
+</ul>
+</div>
+
+<p>When you want insertion to happen with a specific ordering (for example, in
+conjunction with auto-generated keys), it can be useful to specify an ORDER BY
+clause on the result set to be inserted.</p>
+
+<p>If the Query is a VALUES expression, it cannot contain or be followed by an
+ORDER BY, result offset, or fetch first clause. However, if the VALUES
+expression does not contain the DEFAULT keyword, the VALUES clause can be put
+in a subquery and ordered, as in the following statement:</p>
+
+<pre><strong>INSERT INTO t SELECT * FROM (VALUES 'a','c','b') t ORDER BY 1;</strong></pre>
+
+<p>For more information about Query, see <a href="rrefsqlj21571.html#rrefsqlj21571">Query</a>.</p>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2> <pre><strong>INSERT INTO COUNTRIES
+      VALUES ('Taiwan', 'TW', 'Asia')
+
+-- Insert a new department into the DEPARTMENT table,
+-- but do not assign a manager to the new department
+INSERT INTO DEPARTMENT (DEPTNO, DEPTNAME, ADMRDEPT)
+	VALUES ('E31', 'ARCHITECTURE', 'E01')
+<span>-- Insert two new departments using one statement 
+-- into the DEPARTMENT table as in the previous example, 
+-- but do not assign a manager to the new department.</span>
+INSERT INTO DEPARTMENT (DEPTNO, DEPTNAME, ADMRDEPT)
+	VALUES ('B11', 'PURCHASING', 'B01'),
+	('E41', 'DATABASE ADMINISTRATION', 'E01')
+<span>--  Create a temporary table MA_EMP_ACT with the 
+-- same columns as the EMP_ACT table. 
+-- Load MA_EMP_ACT with the rows from the EMP_ACT
+-- table with a project number (PROJNO) 
+-- starting with the letters 'MA'.</span>
+CREATE TABLE MA_EMP_ACT 
+    (
+	EMPNO CHAR(6)  NOT NULL, 
+	PROJNO CHAR(6)  NOT NULL, 
+	ACTNO SMALLINT  NOT NULL, 
+	EMPTIME DEC(5,2), 
+	EMSTDATE DATE, 
+	EMENDATE  DATE
+    );
+
+INSERT INTO MA_EMP_ACT
+	SELECT * FROM EMP_ACT
+	WHERE SUBSTR(PROJNO, 1, 2) = 'MA';
+<span>-- Insert the DEFAULT value for the LOCATION column</span>
+INSERT INTO DEPARTMENT
+      VALUES ('E31', 'ARCHITECTURE', '00390', 'E01', DEFAULT)
+
+<span>-- Create an AIRPORTS table and insert into it
+-- some of the fields from the CITIES table, with the airport
+-- codes sorted alphabetically</span>
+CREATE TABLE AIRPORTS (
+  AIRPORT_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY
+    PRIMARY KEY,
+  AIRPORT VARCHAR(3),
+  CITY VARCHAR(24) NOT NULL,
+  COUNTRY VARCHAR(26) NOT NULL
+);
+
+INSERT INTO AIRPORTS (AIRPORT, CITY, COUNTRY)
+  SELECT AIRPORT, CITY_NAME, COUNTRY FROM CITIES
+  ORDER BY AIRPORT;
+</strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Statement dependency system</h2> <p>The INSERT
+statement depends on the table being inserted into, all of the conglomerates
+(units of storage such as heaps or indexes) for that table, and any other
+table named in the statement. Any statement that creates or drops an index or
+a constraint for the target table of a prepared INSERT statement invalidates
+the prepared INSERT statement.</p>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj39374.html" title="">Statements</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Libraries provided by Derby" />
+<meta name="abstract" content="This section shows the different libraries used by Derby and their purposes." />
+<meta name="description" content="This section shows the different libraries used by Derby and their purposes." />
+<meta content="derbyclient.jar, derby.jar, derbytools.jar, Sample application libraries, Sample database libraries, derbyrun.jar" name="DC.subject" />
+<meta content="derbyclient.jar, derby.jar, derbytools.jar, Sample application libraries, Sample database libraries, derbyrun.jar" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rgslib27507.html" />
+<meta scheme="URI" name="DC.Relation" content="cgslib19524.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rgslib46043" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Libraries provided by Derby</title>
+</head>
+<body id="rgslib46043"><a name="rgslib46043"><!-- --></a>
+
+
+<h1 class="topictitle1">Libraries provided by Derby</h1>
+
+
+
+<div><p>This section shows the different libraries used by
+<span>Derby</span> and their
+purposes.</p>
+
+<div class="section">
+<p>The following table shows the
+<span>Derby</span> engine library.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the Derby engine library and describes its uses." frame="border" border="1" rules="all"><caption>Table 1. Engine library</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="35%" id="N1009F">Library Name</th>
+
+<th valign="bottom" width="65%" id="N100A6">Use</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="35%" headers="N1009F"><samp class="codeph">derby.jar</samp></td>
+
+<td valign="top" width="65%" headers="N100A6">For embedded databases. <p>You always need this library for embedded
+environments. For client/server environments, you only need this library on
+the server.</p>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>For embedded environments, you need a library in the classpath to use
+a tool. For a client/server environment, you need a library on the client
+only. The following table shows the tools libraries.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the Derby tools libraries and describes their uses." frame="border" border="1" rules="all"><caption>Table 2. Tools libraries</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="35%" id="N10114">Library Name</th>
+
+<th valign="bottom" width="65%" id="N1011B">Use</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="35%" headers="N10114"><samp class="codeph">derbytools.jar</samp></td>
+
+<td valign="top" width="65%" headers="N1011B">Required for running all the
+<span>Derby</span> tools (such as
+<samp class="codeph">ij</samp>, <samp class="codeph">dblook</samp>, and import/export).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N10114"><samp class="codeph">derbyrun.jar</samp></td>
+
+<td valign="top" width="65%" headers="N1011B">Executable jar file that can be used to start the
+<span>Derby</span> tools.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>The following table shows the
+<span>Derby</span> Network Server
+library.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the Derby Network Server library and describes its uses." frame="border" border="1" rules="all"><caption>Table 3. Network Server library</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="35%" id="N101BA">Library Name</th>
+
+<th valign="bottom" width="65%" id="N101C1">Use</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="35%" headers="N101BA"><samp class="codeph">derbynet.jar</samp></td>
+
+<td valign="top" width="65%" headers="N101C1">Required to start the
+<span>Derby</span> Network Server.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>The following table shows the
+<span>Derby</span> network client
+library.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the Derby network client library and describes its uses." frame="border" border="1" rules="all"><caption>Table 4. Network client library</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="35%" id="N10236">Library Name</th>
+
+<th valign="bottom" width="65%" id="N1023D">Use</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="35%" headers="N10236"><samp class="codeph">derbyclient.jar</samp></td>
+
+<td valign="top" width="65%" headers="N1023D">Required to use the
+<span>Derby</span> network client
+driver.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>The following table shows the
+<span>Derby</span> locale libraries.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the Derby locale libraries and describes their uses." frame="border" border="1" rules="all"><caption>Table 5. Locale libraries</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="35%" id="N102B2">Library Name</th>
+
+<th valign="bottom" width="65%" id="N102B9">Use</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_cs.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Czech
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_de_DE.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the German
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_es.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Spanish
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_fr.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the French
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_hu.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Hungarian
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_it.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Italian
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_ja_JP.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Japanese
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_ko_KR.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Korean
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_pl.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Polish
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_pt_BR.jar</samp>
+</td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Brazilian
+Portuguese locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_ru.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Russian
+locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_zh_CN.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the Simplified
+Chinese locale.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="35%" headers="N102B2"><samp class="codeph">derbyLocale_zh_TW.jar</samp></td>
+
+<td valign="top" width="65%" headers="N102B9">Required to provide translated messages for the
+Traditional Chinese locale.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cgslib19524.html" title="This section describes Derby libraries and scripts.">Derby libraries and scripts: complete reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rgslib27507.html" title="Derby includes scripts that start the Derby tools, add the appropriate libraries to the CLASSPATH, and start and stop the Network Server. These scripts available only when you download the bin distribution of Derby.">Scripts included with Derby</a></div>
+</div>
+</div>
+
+</body>
+</html>

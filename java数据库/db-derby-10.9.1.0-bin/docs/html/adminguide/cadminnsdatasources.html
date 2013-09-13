@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Accessing the Network Server by using a DataSource object" />
+<meta name="abstract" content="The Network Server supports the Derby Network Client driver DataSource classes org.apache.derby.jdbc.ClientDataSource and org.apache.derby.jdbc.ClientConnectionPoolDataSource on all supported Java SE platforms." />
+<meta name="description" content="The Network Server supports the Derby Network Client driver DataSource classes org.apache.derby.jdbc.ClientDataSource and org.apache.derby.jdbc.ClientConnectionPoolDataSource on all supported Java SE platforms." />
+<meta content="DataSource objects, and Network Server, Network Server, using DataSource objects" name="DC.subject" />
+<meta content="DataSource objects, and Network Server, Network Server, using DataSource objects" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps59125.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsthenetworkserverandjvms.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappschangingyourclasspath.html" />
+<meta scheme="URI" name="DC.Relation" content="tadmincbdjhhfd.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigshuttingdownthenetworkserver.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminconfigsysteminformation.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsclient.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps811478.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminappsusingthederbytoolswiththene.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminappssettingportnumbers.html" />
+<meta scheme="URI" name="DC.Relation" content="radminnsdatasourcexmp.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminnsdatasources" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Accessing the Network Server by using a DataSource object</title>
+</head>
+<body id="cadminnsdatasources"><a name="cadminnsdatasources"><!-- --></a>
+
+
+<h1 class="topictitle1">Accessing the Network Server by using a DataSource object</h1>
+
+
+
+<div><p>The Network Server supports the 
+<span>Derby</span> Network
+Client driver <samp class="codeph">DataSource</samp> classes
+<samp class="codeph">org.apache.derby.jdbc.ClientDataSource</samp> and
+<samp class="codeph">org.apache.derby.jdbc.ClientConnectionPoolDataSource</samp>
+on all supported Java SE platforms.
+</p>
+
+<p>If your client runs on the Java SE 6 platform, and if you want to use 
+<samp class="codeph">DataSource</samp> methods specific to the JDBC 4 API, use the
+<samp class="codeph">DataSource</samp> classes named
+<samp class="codeph">org.apache.derby.jdbc.ClientDataSource40</samp> and
+<samp class="codeph">org.apache.derby.jdbc.ClientConnectionPoolDataSource40</samp>.</p>
+
+<p>
+If your client is running on the Java SE 6 platform, all connection objects 
+returned from the <samp class="codeph">DataSource</samp> will be JDBC 4 connection objects,
+whether or not you are using a <samp class="codeph">DataSource</samp> whose name ends in
+"40".
+</p>
+
+<div class="section"><h2 class="sectiontitle">Using statement caching</h2>
+<p><span>Derby</span> supports JDBC
+statement caching, which can improve the performance of applications that use
+<samp class="codeph">PreparedStatement</samp> or <samp class="codeph">CallableStatement</samp>
+objects. Statement caching avoids the performance penalty incurred by going over
+the network from the client to the server to prepare a statement that has
+already been prepared on the same connection.</p>
+
+<p>To use statement caching, you must use an
+<samp class="codeph">org.apache.derby.jdbc.ClientConnectionPoolDataSource</samp> or an
+<samp class="codeph">org.apache.derby.jdbc.ClientConnectionPoolDataSource40</samp> object.
+After you instantiate this object, perform these steps:</p>
+
+<ol>
+<li>Specify the desired size of your statement cache by calling the
+<samp class="codeph">setMaxStatements</samp> method on the <samp class="codeph">DataSource</samp>
+object, specifying an argument greater than zero.</li>
+
+<li>Call the <samp class="codeph">getPooledConnection</samp> method on the
+<samp class="codeph">DataSource</samp> object to obtain a
+<samp class="codeph">javax.sql.PooledConnection</samp> object (a physical
+connection).</li>
+
+<li>Call the <samp class="codeph">javax.sql.PooledConnection.getConnection</samp> method
+to obtain a <samp class="codeph">java.sql.Connection</samp> object (a logical
+connection).</li>
+
+</ol>
+
+<p>After you obtain a connection, use either prepared statements or callable
+statements to interact with the database. Close each statement to return it to
+the cache after you finish using it. The statements you create are held in the
+cache on the client side and reused when needed.</p>
+
+<p>See
+<a href="radminnsdatasourcexmp.html#radminnsdatasourcexmp__stmtcacheexmp">Statement caching example</a>
+for a code example.</p>
+
+<p>Use of the JDBC statement cache makes each physical connection use more
+memory. The amount depends on how many statements the connection is allowed to
+cache and how many statements are actually cached.</p>
+
+<p>If you enable JDBC statement caching, error handling changes slightly. Some
+errors that previously appeared when the <samp class="codeph">prepareStatement</samp>
+method was executed may now appear during statement execution. For example,
+suppose you query a table using a prepared statement that is then cached. If the
+table is deleted, the prepared statement that queries the table is not
+invalidated. If the query is prepared again on the same connection, the cached
+object is fetched from the cache, and the <samp class="codeph">prepareStatement</samp> call
+seems to have succeeded, although the statement has not actually been prepared.
+When the prepared statement is executed, the error is detected on the server
+side, and the client is notified.</p>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="radminnsdatasourcexmp.html">DataSource access examples</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminapps59125.html" title="">Using the Network Server with preexisting Derby applications</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminappsthenetworkserverandjvms.html" title="">The Network Server and JVMs</a></div>
+<div><a href="cadminappsclient.html" title="When connecting to the Network Server, your application needs to load a driver and connection URL that is specific to the Network Server. In addition, you must specify a user name and password if you are using authentication.">Accessing the Network Server by using the network client driver</a></div>
+<div><a href="cadminapps811478.html" title="">XA and the Network Server</a></div>
+<div><a href="cadminappsusingthederbytoolswiththene.html" title="">Using the Derby tools with the Network Server</a></div>
+<div><a href="cadminapps.html" title="">Differences between running Derby in embedded mode and using the Network Server</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminappschangingyourclasspath.html" title="">Installing required jar files and adding them to the classpath</a></div>
+<div><a href="tadmincbdjhhfd.html" title="To start the Network Server, you can invoke a script, a jar file, or a class.">Starting the Network Server</a></div>
+<div><a href="tadminconfigshuttingdownthenetworkserver.html" title="To shut down a Network Server, you can invoke a script, a jar file, or a class.">Shutting down the Network Server</a></div>
+<div><a href="tadminconfigsysteminformation.html" title="">Obtaining system information</a></div>
+<div><a href="tadminappssettingportnumbers.html" title="">Setting port numbers</a></div>
+</div>
+</div>
+
+</body>
+</html>

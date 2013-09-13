@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="HAVING 節" />
+<meta content="HAVING clause" name="DC.subject" />
+<meta content="HAVING clause" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj14854" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>HAVING 節</title>
+</head>
+<body id="rrefsqlj14854"><a name="rrefsqlj14854"><!-- --></a>
+
+
+<h1 class="topictitle1">HAVING 節</h1>
+
+<div>
+<div class="section">
+<p>HAVING節により<em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a></em>のGROUP BYの結果が絞り込まれます。WHERE節が選択列一覧に作用するのとは異なり、HAVING節は表から分類された部分集合に対して作用します。もしGROUP BY節がなければ、HAVING節は結果を単独の分類と見なして作用します。
+SELECT節にてGROUP BY句のない列を直接参照することはできません。しかし定数や集約、特殊変数を参照することはできます。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2>
+<pre><strong>HAVING <em>検索条件</em></strong></pre>
+
+<div class="p"><em>検索条件</em>は特殊な<em>真偽式</em>で、分類列(<a href="rrefsqlj32654.html#rrefsqlj32654">GROUP BY 節</a>を参照してください。)か、集約式の一部である列のみ含める事ができます。
+例えば以下の例では、SALARYという列は分類の列や集約、副問い合わせにある列ではないので、この文は不正です。
+<pre><strong>-- SELECT COUNT(*)
+-- FROM SAMP.STAFF
+-- GROUP BY ID
+-- HAVING SALARY &gt; 15000</strong></pre>
+</div>
+
+<p>HAVING節の集約はSELECTの一覧になくてもかまいません。
+もしHAVING節が副問い合わせを含むならば、その副問い合わせは分類の列についてのみ、外の問い合わせを参照することができます。</p>
+
+</div>
+
+<div class="example">
+<pre><strong><span>-- 2席以上の航路ごとに、エコノミー席の合計を調べる。</span>
+SELECT SUM(ECONOMY_SEATS_TAKEN), AIRLINE_FULL
+FROM FLIGHTAVAILABILITY, AIRLINES
+WHERE SUBSTR(FLIGHTAVAILABILITY.FLIGHT_ID, 1, 2) = AIRLINE
+GROUP BY AIRLINE_FULL
+HAVING COUNT(*) &gt; 1
+</strong></pre>
+
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefclauses.html" title="">SQL 節</a></div>
+</div>
+</div>
+
+</body>
+</html>

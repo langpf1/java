@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Roll-forward recovery" />
+<meta name="abstract" content="Derby supports roll-forward recovery to restore a damaged database to the most recent state before a failure occurred." />
+<meta name="description" content="Derby supports roll-forward recovery to restore a damaged database to the most recent state before a failure occurred." />
+<meta content="Online archived logs, Online archived logs, enabling, disabling, Backing up, Roll-forward recovery" name="DC.subject" />
+<meta content="Online archived logs, Online archived logs, enabling, disabling, Backing up, Roll-forward recovery" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cadminhubbkup98797.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminbckupdb.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminhubbkup44.html" />
+<meta scheme="URI" name="DC.Relation" content="tadmincrtdbbkup.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminrollforward" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Roll-forward recovery</title>
+</head>
+<body id="cadminrollforward"><a name="cadminrollforward"><!-- --></a>
+
+
+<h1 class="topictitle1">Roll-forward recovery</h1>
+
+
+
+<div><p><span>Derby</span> supports
+roll-forward recovery to restore a damaged database to the most recent state
+before a failure occurred.</p>
+
+<p><span>Derby</span> restores a database
+from full backup and replays all the transactions after the backup. All the
+log files after a backup are required to replay the transactions after the
+backup. By default, the database keeps only logs that are required for crash-recovery.
+For roll-forward recovery to be successful, all log files must be archived
+after a backup. Log files can be archived using the backup function calls
+that enable log archiving.</p>
+
+<p>In roll-forward recovery the log archival mode ensures that all old log
+files are available. The log files are available only from the time that the
+log archival mode is enabled. </p>
+
+<div class="p"><span>Derby</span> uses the following
+information to restore the database: <ul>
+<li>The backup copy of the database</li>
+
+<li>The set of archived logs</li>
+
+<li>The current online active log</li>
+
+</ul>
+</div>
+
+<p>You cannot use roll-forward recovery to restore individual tables. Roll-forward
+recovery recovers the entire database.</p>
+
+<p>To restore a database by using roll-forward recovery, you must already
+have a backup copy of the database, all the archived logs since the backup
+was created, and the active log files. All the log files should be in the
+database log directory.</p>
+
+<p>There are two types of log files in <span>Derby</span>:
+active logs and online archived logs.</p>
+
+<dl>
+<dt class="dlterm">Active logs</dt>
+
+<dd>Active logs are used during crash recovery to prevent a failure that might
+leave a database in an inconsistent state. Roll-forward recovery can also
+use the active logs to recover to the end of the log files. Active logs are
+located in the database log path directory.</dd>
+
+
+<dt class="dlterm">Online archived logs</dt>
+
+<dd>Log files that are stored for roll-forward recovery use when they are
+no longer needed for crash recovery. Online archived logs are also kept in
+the database log path directory.</dd>
+
+</dl>
+
+<p><strong>Enabling log archival mode</strong></p>
+
+<p>Online archive logs are available only if the database is enabled for log
+archival mode. You can use the following system procedure to enable the database
+for log archival mode:</p>
+
+<pre>SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE
+(IN BACKUPDIR VARCHAR(32672), IN SMALLINT DELETE_ARCHIVED_LOG_FILES)</pre>
+
+<div class="p">The input parameters for the calls in the previous example specify the
+location where the backup should be stored and specify whether or not the
+database should keep online archived logs for the backup. Existing online
+archived log files that were created before this backup will be deleted if
+the input parameter value for the <em>deleteOnlineArchivedLogFiles</em> parameter
+is non-zero. The log files are deleted only after a successful backup. <div class="note"><span class="notetitle">Note: </span>Make
+sure to store the backup database in a safe place when you choose the log
+file removal option.</div>
+</div>
+
+<p>The SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE procedure
+will issue an error if there are any unlogged operations in the same transaction
+as backup procedure.</p>
+
+<p>If any unlogged operations are in progress in other transactions in the
+system when the backup starts, this procedure will block until those transactions
+are complete before performing the backup. Derby automatically converts unlogged
+operations to logged mode if they are started while the backup is in progress
+(except operations that maintain application jar files in the database). Procedures
+to install, replace, and remove jar files in a database are blocked while
+the backup is in progress.</p>
+
+<p>If you do not want backup to block until unlogged operations in other transactions
+are complete, use the SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE_NOWAIT
+procedure. This procedure issues an error immediately at the start of the
+backup if there are any transactions in progress with unlogged operations,
+instead of waiting for those transactions to complete.</p>
+
+<p><strong>Disabling log archival mode:</strong></p>
+
+<p>After you enable log archival mode, the database will always have the log
+archival mode enabled even if it is subsequently booted or backed up. The
+only way to disable the log archive mode is to run the following procedure:</p>
+
+<pre>SYSCS_UTIL.SYSCS_DISABLE_LOG_ARCHIVE_MODE(IN SMALLINT DELETE_ARCHIVED_LOG_FILES)</pre>
+
+<p>This system procedure disables the log archive mode and deletes any existing
+online archived log files if the input parameter <em>DELETE_ARCHIVED_LOG_FILES</em> is
+non-zero.</p>
+
+<p><strong>Performing roll-forward recovery:</strong></p>
+
+<p>By using the full backup copy, archived logs, and active logs, you can
+restore a database to its most recent state by performing roll-forward recovery.
+You perform a roll-forward recovery by specifying the connection URL attribute <em>rollForwardRecoveryFrom=path</em> at
+boot time. This brings the database to its most recent state by using full
+backup copy, archived logs, and active logs. All the log files should be in
+the database log path directory.</p>
+
+<p>For more information, see "rollForwardRecoveryFrom=path attribute"
+in the <span><em>Derby Reference Manual</em></span>.</p>
+
+
+<p><strong>Backing up a database:</strong></p>
+
+<div class="p">In the following example, a database named wombat is backed up to the d:/backup
+directory with log archive mode enabled:<pre>connect 'jdbc:derby:wombat;create=true';
+
+create table t1(a int not null primary key);
+------------------DML/DDL Operations
+CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE_AND_ENABLE_LOG_ARCHIVE_MODE
+('d:/backup', 0);
+insert into t1 values(19);
+create table t2(a int);
+-----------------DML/DDL Operations
+-----------------Database Crashed (Media Corruption on data disks)</pre>
+</div>
+
+<p><strong>Restoring a database using roll-forward recovery:</strong></p>
+
+<div class="p">In the following example, the database is restored using roll-forward recovery
+after a media failure:<pre>connect 'jdbc:derby:wombat;rollForwardRecoveryFrom=d:/backup/wombat';
+select * from t1;
+---------------DML/DDL Operations</pre>
+</div>
+
+<p>After a database is restored from full backup, transactions from the online
+archived logs and active logs are replayed.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminhubbkup98797.html" title="Derby provides a way to back up a database while it is either offline or online. You can also restore a full backup from a specified location.">Backing up and restoring databases</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminbckupdb.html" title="You can back up a database either offline (when it is shut down) or online (when it is running).">Backing up a database</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminhubbkup44.html" title="To restore a database by using a full backup from a specified location, specify the restoreFrom=Path attribute in the boot time connection URL.">Restoring a database from a backup copy</a></div>
+<div><a href="tadmincrtdbbkup.html" title="To create a database from a full backup copy at a specified location, specify the createFrom=Path attribute in the boot time connection URL.">Creating a database from a backup copy</a></div>
+</div>
+</div>
+
+</body>
+</html>

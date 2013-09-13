@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Enabling remote JMX with password authentication only" />
+<meta content="Java Management Extensions (JMX) technology, JMX, enabling with password authentication" name="DC.subject" />
+<meta content="Java Management Extensions (JMX) technology, JMX, enabling with password authentication" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenabledisable.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablenoauth.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepwdssl.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablesimpleauth.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepolicy.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxdisable.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminjmxenablepwd" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Enabling remote JMX with password authentication only</title>
+</head>
+<body id="radminjmxenablepwd"><a name="radminjmxenablepwd"><!-- --></a>
+
+
+<h1 class="topictitle1">Enabling remote JMX with password authentication only</h1>
+
+
+<div>
+<div class="section">
+<p>Some JVMs include built-in support for JMX password authentication. For
+example, with Oracle Java Development Kit (JDK) 6 or later, authentication is
+enabled by default, and it is possible to specify a properties file that
+contains usernames and passwords. The properties file syntax is the same as for
+other Java properties files.</p>
+
+<div class="p"><div class="note"><span class="notetitle">Note: </span>When authentication is enabled and a Java Security Manager is
+installed, additional permissions may need to be granted to users in the
+security policy used. See
+<a href="radminjmxenablepolicy.html#radminjmxenablepolicy">Fine-grained authorization using a security policy</a> for
+details.</div>
+</div>
+
+<p>For example, you could create a password file called
+<samp class="codeph">jmxremote.password</samp>:</p>
+
+<pre>## Defining two "roles", each with its own password
+monitorRole  derbym
+controlRole  derby</pre>
+
+<p>The security of the password file relies on your file system's access control
+mechanisms. The file must be readable by the owner only. Also, you may need to
+change the permissions on the password file to be readable only by the user who
+starts the server. To do this on Windows (NTFS), use a command like the
+following:</p>
+
+<pre><strong>cacls jmxremote.password /P <em>username</em>:R</strong></pre>
+
+<div class="p"><div class="note"><span class="notetitle">Note: </span>FAT file systems do not support this feature.</div>
+</div>
+
+<p>The following example starts the Network Server on the command line with
+built-in JMX password authentication enabled. SSL is disabled, meaning that JMX
+information, including user names and passwords most likely will be transferred
+unprotected on the computer network. The command line appears on multiple lines
+to improve readability, but you would enter it as a single <samp class="codeph">java</samp>
+command.</p>
+
+<div class="p"><div class="important"><span class="importanttitle">Important: </span>It is not recommended to disable SSL in production
+environments.</div>
+</div>
+
+<pre><strong>java -Dcom.sun.management.jmxremote.port=9999
+-Dcom.sun.management.jmxremote.ssl=false 
+-Dcom.sun.management.jmxremote.password.file=jmxremote.password
+-jar lib/derbyrun.jar server start</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="radminjmxenabledisable.html" title="">Enabling and disabling JMX</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminjmxenablenoauth.html" title="">Enabling remote JMX with no authentication or SSL</a></div>
+<div><a href="radminjmxenablepwdssl.html" title="">Enabling remote JMX with password authentication and SSL</a></div>
+<div><a href="radminjmxenablesimpleauth.html" title="">Simple authorization using an access file</a></div>
+<div><a href="radminjmxenablepolicy.html" title="">Fine-grained authorization using a security policy</a></div>
+<div><a href="radminjmxdisable.html" title="">Disabling access to MBeans</a></div>
+</div>
+</div>
+
+</body>
+</html>

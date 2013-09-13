@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE system procedure" />
+<meta content="reclaiming unused space, system procedures, SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE" name="DC.subject" />
+<meta content="reclaiming unused space, system procedures, SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefaltertablecompress.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefaltertablecompress.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdropstatsproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefupdatestatsproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdropstatsproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefupdatestatsproc.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefproceduresinplacecompress" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE system procedure</title>
+</head>
+<body id="rrefproceduresinplacecompress"><a name="rrefproceduresinplacecompress"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE system procedure</h1>
+
+
+<div>
+<div class="section"><p>Use the <samp class="codeph">SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE</samp> system
+procedure to reclaim unused, allocated space in a table and its indexes. Typically,
+unused allocated space exists when a large amount of data is deleted from
+a table and there has not been any subsequent inserts to use the space created
+by the deletes. By default, <span>Derby</span> does
+not return unused space to the operating system. For example, once a page
+has been allocated to a table or index, it is not automatically returned to
+the operating system until the table or index is destroyed. <samp class="codeph">SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE</samp> allows
+you to return unused space to the operating system.</p>
+<p>This system procedure
+can be used to force three levels of in-place compression of a SQL table: <samp class="codeph">PURGE_ROWS</samp>, <samp class="codeph">DEFRAGMENT_ROWS</samp>,
+and <samp class="codeph">TRUNCATE_END</samp>. Unlike <samp class="codeph">SYSCS_UTIL.SYSCS_COMPRESS_TABLE()</samp>,
+all work is done in place in the existing table/index.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2><pre><strong>SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE(
+		IN SCHEMANAME VARCHAR(128),
+		IN TABLENAME VARCHAR(128),
+		IN PURGE_ROWS SMALLINT,
+		IN DEFRAGMENT_ROWS SMALLINT,
+		IN TRUNCATE_END SMALLINT )</strong></pre>
+ <dl>
+<dt class="dlterm">SCHEMANAME</dt>
+
+<dd>An input argument of type VARCHAR(128) that specifies the schema of the
+table. Passing a null will result in an error. </dd>
+
+
+<dt class="dlterm">TABLENAME</dt>
+
+<dd>An input argument of type VARCHAR(128) that specifies the table name of
+the table. The string must exactly match the case of the table name, and the
+argument of "Fred" will be passed to SQL as the delimited identifier 'Fred'.
+ Passing a null will result in an error.</dd>
+
+
+<dt class="dlterm">PURGE_ROWS</dt>
+
+<dd>If PURGE_ROWS is set to a non-zero value, then a single pass is made through
+the table which will purge committed deleted rows from the table. This space
+is then available for future inserted rows, but remains allocated to the table.
+As this option scans every page of the table, its performance is linearly
+related to the size of the table.</dd>
+
+
+<dt class="dlterm">DEFRAGMENT_ROWS</dt>
+
+<dd>If DEFRAGMENT_ROWS is set to a non-zero value, then a single defragment
+pass is made which will move existing rows from the end of the table towards
+the front of the table. The goal of defragmentation is to empty a set of pages
+at the end of the table which can then be returned to the operating system
+by the TRUNCATE_END option. It is recommended to only run DEFRAGMENT_ROWS
+if also specifying the TRUNCATE_END option. The DEFRAGMENT_ROWS option scans
+the whole table and needs to update index entries for every base table row
+move, so the execution time is linearly related to the size of the table.</dd>
+
+
+<dt class="dlterm">TRUNCATE_END</dt>
+
+<dd>If TRUNCATE_END is set to a non-zero value, then all contiguous pages
+at the end of the table will be returned to the operating system. Running
+the PURGE_ROWS and/or DEFRAGMENT_ROWS options may increase the number of pages
+affected. This option by itself performs no scans of the table. </dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Execute privileges</h2>
+<p>If authentication and SQL authorization are both enabled, all users have
+execute privileges on this procedure. However, in order for the procedure to run
+successfully on a given table, the user must be the owner of either the
+<a href="rrefattrib26867.html#rrefattrib26867">database</a> or the
+schema in which the table resides. See "Enabling user authentication" and
+"Setting the SQL standard authorization mode" in the
+<span><em>Derby Developer's Guide</em></span> for more information.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">SQL example</h2><div class="p">To compress a table called CUSTOMER
+in a schema called US, using all available compress options:<pre><strong>call SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE('US', 'CUSTOMER', 1, 1, 1);</strong></pre>
+</div>
+<div class="p">To return the empty free space at the end of the same
+table, the following call will run much quicker than running all options but
+will likely return much less space:<pre><strong>call SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE('US', 'CUSTOMER', 0, 0, 1);</strong></pre>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Java example</h2><div class="p">To compress a table called CUSTOMER
+in a schema called US, using all available compress options:<pre>CallableStatement cs = conn.prepareCall
+("CALL SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE(?, ?, ?, ?, ?)");
+cs.setString(1, "US");
+cs.setString(2, "CUSTOMER");
+cs.setShort(3, (short) 1);
+cs.setShort(4, (short) 1);
+cs.setShort(5, (short) 1);
+cs.execute();</pre>
+</div>
+<div class="p">To return the empty free space at the end
+of the same table, the following call will run much quicker than running all
+options but will likely return much less space:<pre>CallableStatement cs = conn.prepareCall
+("CALL SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE(?, ?, ?, ?, ?)");
+cs.setString(1, "US");
+cs.setString(2, "CUSTOMER");
+cs.setShort(3, (short) 0);
+cs.setShort(4, (short) 0);
+cs.setShort(5, (short) 1);
+cs.execute();</pre>
+</div>
+</div>
+
+<div class="section"><div class="p"><div class="tip"><span class="tiptitle">Tip: </span>We recommend that you issue the <samp class="codeph">SYSCS_UTIL.SYSCS_INPLACE_COMPRESS_TABLE</samp> system
+procedure in the auto-commit mode. </div>
+<div class="note"><span class="notetitle">Note: </span>This procedure acquires an
+exclusive table lock on the table being compressed. All statement plans dependent
+on the table or its indexes are invalidated. For information on identifying
+unused space, see the <cite><span><em>Derby Server and Administration Guide</em></span></cite>.</div>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefaltertablecompress.html" title="">SYSCS_UTIL.SYSCS_COMPRESS_TABLE system procedure</a></div>
+<div><a href="rrefdropstatsproc.html" title="The SYSCS_UTIL.SYSCS_DROP_STATISTICS system procedure drops all existing cardinality statistics for the index that you specify or for all of the indexes on a table.">SYSCS_UTIL.SYSCS_DROP_STATISTICS system procedure</a></div>
+<div><a href="rrefupdatestatsproc.html" title="The SYSCS_UTIL.SYSCS_UPDATE_STATISTICS system procedure updates the cardinality statistics, or creates the statistics if they do not exist, for the index that you specify or for all of the indexes on a table.">SYSCS_UTIL.SYSCS_UPDATE_STATISTICS system procedure</a></div>
+</div>
+</div>
+
+</body>
+</html>

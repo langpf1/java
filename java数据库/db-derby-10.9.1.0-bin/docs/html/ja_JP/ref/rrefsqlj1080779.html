@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="式に関する優先順位" />
+<meta content="Expressions, hierarchy of, precedence of" name="DC.subject" />
+<meta content="Expressions, hierarchy of, precedence of" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefselectexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftableexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj11277.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj23075.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj1080779" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>式に関する優先順位</title>
+</head>
+<body id="rrefsqlj1080779"><a name="rrefsqlj1080779"><!-- --></a>
+
+
+<h1 class="topictitle1">式に関する優先順位</h1>
+
+
+<div>
+<div class="section"><div class="p">演算子の優先順位を高いものから低いものに並べて示します。   <ul>
+<li>(), ?, 定数 (符号を含む), NULL, <em>列参照</em>, <em>スカラー副問合せ</em>,
+CAST</li>
+
+<li>LENGTH, CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP, その他の組込み関数</li>
+
+<li>単一のオペランドをとる+および-</li>
+
+<li>*, /, || (連結)</li>
+
+<li>二つのオペランドをとる+および-</li>
+
+<li>比較、 定量比較、 EXISTS, IN, IS NULL, LIKE, BETWEEN,
+IS</li>
+
+<li>NOT</li>
+
+<li>AND</li>
+
+<li>OR</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><p>演算子を括弧の中に書くことにより、優先順位を明示的に指定することができます。括弧の外にある演算子が括弧の中の式に適用される前に、括弧の中の演算子は評価されます。</p>
+</div>
+
+<div class="example"><h2 class="sectiontitle">例</h2>
+<pre><strong>(3+4)*9
+(age &lt; 16 OR age &gt; 65) AND employed = TRUE</strong></pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj19433.html" title="多くの文や式の構文の語句に、式や表副問合せのような式の一種があります。 式は文の定められた場所に置くことができます。">SQL式</a></div>
+</div>
+<div class="relconcepts"><strong>関連概念</strong><br />
+<div><a href="crefsqlj29911.html" title="">動的パラメータ</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefselectexpression.html" title="">選択式</a></div>
+<div><a href="rreftableexpression.html" title="">TableExpression</a></div>
+<div><a href="rrefsqlj11277.html" title="">VALUES式</a></div>
+<div><a href="rrefsqlj23075.html" title="">真偽式</a></div>
+</div>
+</div>
+
+</body>
+</html>

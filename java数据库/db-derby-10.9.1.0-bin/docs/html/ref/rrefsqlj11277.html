@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="VALUES expression" />
+<meta content="VALUES expression" name="DC.subject" />
+<meta content="VALUES expression" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefselectexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rreftableexpression.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljnextvaluefor.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1080779.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj23075.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcase.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj11277" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>VALUES expression</title>
+</head>
+<body id="rrefsqlj11277"><a name="rrefsqlj11277"><!-- --></a>
+
+
+<h1 class="topictitle1">VALUES expression</h1>
+
+
+<div>
+<div class="section"> <div class="p">The VALUES expression allows construction of a row or a table
+from other values. A VALUES expression can be used in all the places where a
+query can, and thus can be used in any of the following ways:
+<ul>
+<li>As a statement that returns a <em>ResultSet</em></li>
+
+<li>Within expressions and statements wherever subqueries are permitted</li>
+
+<li>As the source of values for an INSERT statement (in an INSERT statement, 
+you normally use a VALUES expression when you do not use a 
+<em><a href="rrefselectexpression.html#rrefselectexpression">SelectExpression</a></em>)</li>
+
+</ul>
+</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>{
+    VALUES ( <em>Value</em> {, <em>Value</em> }* )
+        [ , ( <em>Value</em> {, <em>Value</em> }* ) ]* |
+    VALUES <em>Value</em> [ , <em>Value</em> ]*
+} [ <em><a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY clause</a></em> ]
+  [ <em><a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">result offset clause</a></em> ]
+  [ <em><a href="rrefsqljoffsetfetch.html#rrefsqljoffsetfetch">fetch first clause</a></em> ]
+</strong></pre>
+ 
+<p>where <em>Value</em> is defined as</p>
+
+<pre><strong><em>Expression</em> | DEFAULT</strong></pre>
+
+<p>The first form constructs multi-column rows. The second
+form constructs single-column rows, each expression being the value of the
+column of the row.</p>
+ <p>The DEFAULT keyword is allowed only if the VALUES
+expression is in an INSERT statement. Specifying DEFAULT for a column inserts
+the column's default value into the column. Another way to insert the default
+value into the column is to omit the column from the column list and only
+insert values into other columns in the table.</p>
+
+<p>A VALUES expression that is used in an INSERT statement cannot use an
+ORDER BY, result offset, or fetch first clause. However, if the VALUES
+expression does not contain the DEFAULT keyword, the VALUES clause can be put
+in a subquery and ordered, as in the following statement:</p>
+
+<pre><strong>INSERT INTO t SELECT * FROM (VALUES 'a','c','b') t ORDER BY 1;</strong></pre>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2><pre><strong><span>-- 3 rows of 1 column</span>
+VALUES (1),(2),(3)
+<span>-- 3 rows of 1 column</span>
+VALUES 1, 2, 3 
+<span>-- 1 row of 3 columns</span>
+VALUES (1, 2, 3)
+<span>-- 3 rows of 2 columns</span>
+VALUES (1,21),(2,22),(3,23)
+<span>-- using ORDER BY and FETCH FIRST</span>
+VALUES (3,21),(1,22),(2,23) ORDER BY 1 FETCH FIRST 2 ROWS ONLY
+<span>-- using ORDER BY and OFFSET</span>
+VALUES (3,21),(1,22),(2,23) ORDER BY 1 OFFSET 1 ROW
+<span>-- constructing a derived table</span>
+VALUES ('orange', 'orange'), ('apple', 'red'),
+('banana', 'yellow')
+<span>-- Insert two new departments using one statement into the DEPARTMENT table, 
+-- but do not assign a manager to the new department.</span>
+INSERT INTO DEPARTMENT (DEPTNO, DEPTNAME, ADMRDEPT)
+  VALUES ('B11', 'PURCHASING', 'B01'),
+    ('E41', 'DATABASE ADMINISTRATION', 'E01')
+<span>-- insert a row with a DEFAULT value for the MAJPROJ column</span>
+INSERT INTO PROJECT (PROJNO, PROJNAME, DEPTNO, RESPEMP, PRSTDATE, MAJPROJ) 
+VALUES ('PL2101', 'ENSURE COMPAT PLAN', 'B01', '000020', CURRENT_DATE, DEFAULT)
+
+<span>-- using a built-in function</span>
+VALUES CURRENT_DATE
+<span>-- getting the value of an arbitrary expression</span>
+VALUES (3*29, 26.0E0/3)
+<span>-- getting a value returned by a built-in function</span>
+values char(1)
+</strong></pre>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj19433.html" title="Syntax for many statements and expressions includes the term Expression, or a term for a specific kind of expression such as TableSubquery. Expressions are allowed in these specified places within statements.">SQL expressions</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="crefsqlj29911.html" title="">Dynamic parameters</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefselectexpression.html" title="">SelectExpression</a></div>
+<div><a href="rreftableexpression.html" title="">TableExpression</a></div>
+<div><a href="rrefsqljnextvaluefor.html" title="">NEXT VALUE FOR expression</a></div>
+<div><a href="rrefsqlj1080779.html" title="">Expression precedence</a></div>
+<div><a href="rrefsqlj23075.html" title="">Boolean expressions</a></div>
+<div><a href="rrefcase.html" title="The CASE expression can be used for conditional expressions in Derby.">CASE expression</a></div>
+</div>
+</div>
+
+</body>
+</html>

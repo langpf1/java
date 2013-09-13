@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="java.sql.Blob e java.sql.Clob" />
+<meta content="java.sql.Blob, java.sql.Clob, BLOB data type, CLOB data type" name="DC.subject" />
+<meta content="java.sql.Blob, java.sql.Clob, BLOB data type, CLOB data type" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc25142.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32052.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34565.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc34954.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27734.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc40794.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc29874.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc23502.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc38274.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc16643.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc30469.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20377.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc80004.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc77156.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc59162.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc99392.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc52637.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc66688.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc71949.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc87220.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjsr169.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32593.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlconnection30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcdatabasemetadata30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcparametermetadata30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlpreparedstatement30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlsavepoint.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlstatement30.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjavbclobnot.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc96386" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>java.sql.Blob e java.sql.Clob</title>
+</head>
+<body id="rrefjdbc96386"><a name="rrefjdbc96386"><!-- --></a>
+
+
+<h1 class="topictitle1">java.sql.Blob e java.sql.Clob</h1>
+
+
+<div>
+<div class="section">
+<p>No JDBC 2.0, <em>java.sql.Blob</em> é o mapeamento para o tipo BLOB
+(objeto grande binário) do SQL;
+<em>java.sql.Clob</em> é o mapeamento para o tipo CLOB (objeto grande caractere)
+do SQL.</p>
+
+</div>
+
+<div class="section">
+<p>java.sql.Blob e java.sql.Clob fornecem um ponteiro lógico para um objeto
+grande, em vez de uma cópia completa do objeto.
+O <span>Derby</span>
+processa somente uma página de dados na memória por vez.
+Não há necessidade de processar e armazenar todo o BLOB em memória apenas para
+acessar alguns poucos bytes iniciais do objeto LOB</p>
+
+</div>
+
+<div class="section">
+<div class="p">O <span>Derby</span>
+agora suporta os tipos de dado nativos BLOB e CLOB.
+O <span>Derby</span>
+também fornece o seguinte suporte para estes tipos de dado:
+<ul>
+<li><strong>Funcionalidades do BLOB</strong>
+O <span>Derby</span> suporta a interface
+<em>java.sql.Blob</em>, e os métodos relacionados ao BLOB em
+<em><a href="rrefjdbc99392.html#rrefjdbc99392">java.sql.PreparedStatement</a></em> e
+<em><a href="rrefjdbc77156.html#rrefjdbc77156">java.sql.ResultSet</a></em>.
+Os métodos <em>getBlob</em> de <em>CallableStatement</em> não estão implementados.</li>
+
+<li><strong>Funcionalidades do CLOB</strong>
+O <span>Derby</span>
+suporta a interface java.sql.Clob, e os métodos relacionados ao CLOB em
+<em><a href="rrefjdbc99392.html#rrefjdbc99392">java.sql.PreparedStatement</a></em> e
+<em><a href="rrefjdbc77156.html#rrefjdbc77156">java.sql.ResultSet</a></em>.
+Os métodos <em>getClob</em> dos procedimentos de <em>CallableStatement</em>
+não estão implementados.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section">
+<div class="p">Para utilizar as funcionalidades java.sql.Blob e java.sql.Clob:
+<ul>
+<li>Utilizar o tipo BLOB do SQL para armazenamento;
+Os tipos LONG VARCHAR FOR BIT DATA, BINARY e VARCHAR FOR BIT DATA
+também funcionam.</li>
+
+<li>Utilizar o tipo CLOB do SQL para armazenamento;
+Os tipos LONG VARCHAR, CHAR e VARCHAR também funcionam.</li>
+
+<li>Utilizar os métodos <em>getBlob</em> ou <em>getClob</em> da
+interface <em>java.sql.ResultSet</em>, para obter um tratador de <em>BLOB</em> ou
+<em>CLOB</em> para os dados subjacentes.</li>
+
+<li>Não podem ser chamados métodos estáticos (Extensão SQL sobre SQL)
+em qualquer coluna LOB.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section">
+<p>Além disso, a conversão entre cadeias e BLOBs não é recomendada,
+porque a conversão é dependente da plataforma e do banco de dados. </p>
+
+</div>
+
+<div class="section">
+<p>O <span>Derby</span>
+utiliza cadeias UNICODE (caracteres com 2 bytes), enquanto outros produtos
+de banco de dados podem utilizar caracteres ASCII (1 byte por caractere).
+Se forem utilizadas várias páginas de código, cada caractere poderá necessitar
+de vários bytes.
+Poderá ser necessário um tipo BLOB maior para acomodar uma cadeia normal no
+<span>Derby</span>.
+Devem ser utilizados tipos CLOB para armazenar cadeias.</p>
+
+</div>
+
+<div class="section">
+<div class="p"><strong>Restrições de BLOB, CLOB, (tipos-LOB):</strong>
+<ul>
+<li>Os tipos-LOB não podem ser comparados com relação a igualdade (=)
+e desigualdade (!=, &lt;&gt;). </li>
+
+<li>Os valores dos tipos-LOB não são ordenáveis, portanto não são suportados os
+testes &lt;, &lt;=, &gt;, &gt;=.</li>
+
+<li>Os tipos-LOB não podem ser utilizados em índices, ou como colunas de
+chave primária.</li>
+
+<li>Também são proibidas as cláusulas DISTINCT, GROUP BY e ORDER BY
+nos tipos-LOB.</li>
+
+<li>Os tipos-LOB não podem estar envolvidos em conversões implícitas como
+outros tipos base.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section">
+<p>O <span>Derby</span>
+implementa todos os métodos para estas interfaces do JDBC 2.0, exceto pelos
+métodos <em>set</em> e <em>get</em> da interface <em>CallableStatement</em>.</p>
+
+</div>
+
+<div class="section">
+<p><strong>Recomendações:</strong>
+Como o tempo de vida de <em>java.sql.Blob</em> e <em>java.sql.Clob</em> termina
+quando a transação é efetivada, deve ser desativada a auto-efetivação
+(auto-commit) quando se usa as funcionalidades
+<em>java.sql.Blob</em> e <em>java.sql.Clob</em>.</p>
+
+</div>
+
+<div class="section">
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="Tabela 1. Métodos java.sql.Blob do JDBC 2.0 suportados" width="100%" frame="border" border="1" rules="all"><caption>Tabela 1. Métodos java.sql.Blob do JDBC 2.0 suportados</caption>
+
+
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="13%" id="N10229">Retorna</th>
+
+<th align="left" valign="bottom" width="32%" id="N10232">Assinatura</th>
+
+<th align="left" valign="bottom" width="55.00000000000001%" id="N1023B">Notas de implementação</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="13%" headers="N10229"><em>InputStream</em></td>
+
+<td valign="top" width="32%" headers="N10232"><em>getBinaryStream()</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1023B">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="13%" headers="N10229"><em>byte[]</em></td>
+
+<td valign="top" width="32%" headers="N10232"><em>getBytes(long pos, int length)</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1023B">São lançadas exceções se <em>pos</em> &lt; 1,
+se <em>pos</em> for maior que o comprimento, ou se <em>length</em> &lt;= 0.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="13%" headers="N10229"><em>long</em></td>
+
+<td valign="top" width="32%" headers="N10232"><em>length()</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1023B">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="13%" headers="N10229"><em>long</em></td>
+
+<td valign="top" width="32%" headers="N10232"><em>position(byte[] pattern, long start)</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1023B">São lançadas exceções se <em>pattern</em> == null,
+se <em>start</em> &lt; 1, ou se <em>pattern</em> for uma matriz de comprimento 0.
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="13%" headers="N10229"><em>long</em></td>
+
+<td valign="top" width="32%" headers="N10232"><em>position(Blob pattern, long start)</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1023B">São lançadas exceções se <em>pattern</em> == null,
+se <em>start</em> &lt; 1, se <em>pattern</em> possuir comprimento 0,
+ou se for lançada uma exceção ao tentar ler o primeiro byte de <em>pattern</em>.
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="Tabela 2. Métodos java.sql.Clob do JDBC 2.0 suportados" width="100%" frame="border" border="1" rules="all"><caption>Tabela 2. Métodos java.sql.Clob do JDBC 2.0 suportados</caption>
+
+
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="14.000000000000002%" id="N1036E">Retorna</th>
+
+<th align="left" valign="bottom" width="36%" id="N10377">Assinatura</th>
+
+<th align="left" valign="bottom" width="50%" id="N10380">Notas de implementação</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1036E"><em>InputStream</em></td>
+
+<td valign="top" width="36%" headers="N10377"><em>getAsciiStream()</em></td>
+
+<td valign="top" width="50%" headers="N10380">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1036E"><em>Reader</em></td>
+
+<td valign="top" width="36%" headers="N10377"><em>getCharacterStream()</em></td>
+
+<td valign="top" width="50%" headers="N10380">NÃO SUPORTADO</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1036E"><em>String</em></td>
+
+<td valign="top" width="36%" headers="N10377"><em>getSubString(long pos, int length)</em></td>
+
+<td valign="top" width="50%" headers="N10380">São lançadas exceções se <em>pos</em> &lt; 1,
+se <em>pos</em> for maior que o comprimento de <em>Clob</em>, ou se
+<em>length</em> &lt;= 0.
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1036E"><em>long</em></td>
+
+<td valign="top" width="36%" headers="N10377"><em>length()</em></td>
+
+<td valign="top" width="50%" headers="N10380">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1036E"><em>long</em></td>
+
+<td valign="top" width="36%" headers="N10377"><em>position(Clob searchstr, long start) </em></td>
+
+<td valign="top" width="50%" headers="N10380">São lançadas exceções se <em>searchStr</em> == null, se
+<em>start</em> &lt; 1, se <em>searchStr</em> possuir comprimento 0,
+ou se for lançada uma exceção ao tentar ler o primeiro caractere de
+<em>searchStr.</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1036E"><em>long</em></td>
+
+<td valign="top" width="36%" headers="N10377"><em>position(String searchstr, long start) </em></td>
+
+<td valign="top" width="50%" headers="N10380">São lançadas exceções se <em>searchStr</em> == null,
+se <em>start</em> &lt; 1, ou se o padrão for uma cadeia vazia.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="crefjavbclobnot.html">Notas</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="crefjdbc12657.html" title="">Referência do JDBC</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="crefjdbc25142.html" title="">Classes, interfaces e métodos java.sql do núcleo do JDBC</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="rrefjdbc32052.html" title="">java.sql.Driver</a></div>
+<div><a href="rrefjdbc34565.html" title="">java.sql.DriverManager.getConnection</a></div>
+<div><a href="rrefjdbc34954.html" title="">java.sql.Driver.getPropertyInfo</a></div>
+<div><a href="rrefjdbc27734.html" title="">java.sql.Connection</a></div>
+<div><a href="rrefjdbc15905.html" title="">java.sql.DatabaseMetaData</a></div>
+<div><a href="rrefjdbc40794.html" title="">java.sql.Statement</a></div>
+<div><a href="rrefjdbc29874.html" title="">java.sql.PreparedStatement</a></div>
+<div><a href="rrefjdbc20485.html" title="">java.sql.CallableStatement</a></div>
+<div><a href="rrefjdbc23502.html" title="">java.sql.ResultSet</a></div>
+<div><a href="rrefjdbc38274.html" title="">java.sql.ResultSetMetaData</a></div>
+<div><a href="rrefjdbc16643.html" title="">java.sql.SQLException</a></div>
+<div><a href="rrefjdbc30469.html" title="">java.sql.SQLWarning</a></div>
+<div><a href="rrefjdbc20377.html" title="">Mapeamento de java.sql.Types em tipos SQL</a></div>
+<div><a href="rrefjdbc80004.html" title="">java.sql.Connection</a></div>
+<div><a href="rrefjdbc77156.html" title="">java.sql.ResultSet</a></div>
+<div><a href="rrefjdbc59162.html" title="">java.sql.Statement</a></div>
+<div><a href="rrefjdbc99392.html" title="">java.sql.PreparedStatement</a></div>
+<div><a href="rrefjdbc52637.html" title="">java.sql.CallableStatement</a></div>
+<div><a href="rrefjdbc66688.html" title="">java.sql.DatabaseMetaData</a></div>
+<div><a href="rrefjdbc71949.html" title="">java.sql.ResultSetMetaData</a></div>
+<div><a href="rrefjdbc87220.html" title="">java.sql.BatchUpdateException</a></div>
+<div><a href="rrefjdbcjsr169.html" title="">Pacote JDBC para Connected Device Configuration/Foundation Profile (JSR169)</a></div>
+<div><a href="rrefjdbc32593.html" title="">Funcionalidades apenas do JDBC 3.0</a></div>
+<div><a href="rrefjdbcjavasqlconnection30.html" title="">java.sql.Connection</a></div>
+<div><a href="rrefjdbcdatabasemetadata30.html" title="">java.sql.DatabaseMetaData</a></div>
+<div><a href="rrefjdbcparametermetadata30.html" title="">java.sql.ParameterMetaData</a></div>
+<div><a href="rrefjdbcjavasqlpreparedstatement30.html" title="">java.sql.PreparedStatement</a></div>
+<div><a href="rrefjdbcjavasqlsavepoint.html" title="">java.sql.Savepoint</a></div>
+<div><a href="rrefjdbcjavasqlstatement30.html" title="">java.sql.Statement</a></div>
+<div><a href="rrefjdbc1020262.html" title="">Sintaxe de escape do JDBC</a></div>
+</div>
+</div>
+
+</body>
+</html>

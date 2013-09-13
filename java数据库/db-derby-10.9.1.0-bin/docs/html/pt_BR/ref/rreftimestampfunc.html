@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="TIMESTAMP" />
+<meta content="Função TIMESTAMP" name="DC.subject" />
+<meta content="Função TIMESTAMP" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreftimestampfunc" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>TIMESTAMP</title>
+</head>
+<body id="rreftimestampfunc"><a name="rreftimestampfunc"><!-- --></a>
+
+
+<h1 class="topictitle1">TIMESTAMP</h1>
+
+
+<div>
+<div class="section">
+<p>A função TIMESTAMP retorna o carimbo do tempo a partir de um valor, ou de
+um par de valores.</p>
+
+<div class="p">As regras para os argumentos dependem do segundo argumento ser especificado:
+<ul>
+<li>Se for especificado apenas um argumento: Deverá ser um carimbo do tempo, a
+representação cadeia de caracteres válida de um carimbo do tempo, ou uma
+cadeia de caracteres de comprimento 14, que não seja CLOB nem LONG VARCHAR.
+A cadeia de caracteres de comprimento 14 deverá ser uma cadeia de dígitos
+representando uma data e hora válida no formato <em>yyyyxxddhhmmss</em>, onde
+<em>yyyy</em> é o ano, <em>xx</em> é o mês, <em>dd</em> é o dia, <em>hh</em> é a hora,
+<em>mm</em> é o minuto e <em>ss</em> são os segundos.</li>
+
+<li>Se os dois argumentos forem especificados: O primeiro argumento deverá ser
+uma data, ou a representação cadeia de caracteres válida de uma data, e o
+segundo argumento deverá ser uma hora, ou a representação cadeia de caracteres
+válida de uma hora.</li>
+
+</ul>
+As outras regras dependem do segundo argumento ser especificado:
+<ul>
+<li>Se os dois argumentos forem especificados: O resultado será um carimbo do
+tempo com a data especificada pelo primeiro argumento e a hora especificada
+pelo segundo argumento.
+A parte relativa aos microssegundos será zero.</li>
+
+<li>Se for especificado apenas um argumento, e este for um carimbo do tempo:
+O resultado será este carimbo do tempo.</li>
+
+<li>Se for especificado apenas um argumento, e este for uma cadeia de caracteres:
+O resultado será o carimbo do tempo representado pela cadeia de caracteres.
+Se o argumento for uma cadeia de caracteres de comprimento 14,
+o carimbo do tempo terá a parte relativa aos microssegundos igual a zero.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe</h2>
+
+<pre><strong>TIMESTAMP ( <em>expressão</em> [, <em>expressão</em> ] )</strong></pre>
+
+</div>
+
+<div class="example">
+<p>Assumindo que a coluna DATA_INÍCIO (DATA) possua um valor equivalente a
+1988-12-25, e a coluna HORA_INÍCIO (HORA) possua um valor equivalente a
+17.12.30.</p>
+
+<pre><strong>TIMESTAMP(DATA_INÍCIO, HORA_INÍCIO)</strong></pre>
+
+<p>Retorna o valor '1988-12-25-17.12.30.000000'.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefsqlj29026.html" title="">Funções nativas</a></div>
+</div>
+</div>
+
+</body>
+</html>

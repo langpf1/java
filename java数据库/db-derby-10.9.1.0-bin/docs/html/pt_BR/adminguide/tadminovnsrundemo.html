@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Execução do programa exemplo NsSample" />
+<meta scheme="URI" name="DC.Relation" content="radminovnssample.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tadminovnsrundemo" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Execução do programa exemplo NsSample</title>
+</head>
+<body id="tadminovnsrundemo"><a name="tadminovnsrundemo"><!-- --></a>
+
+
+<h1 class="topictitle1">Execução do programa exemplo NsSample</h1>
+
+<div>
+<div class="section">
+<p>Para executar o programa NsSample:</p>
+
+</div>
+
+<ol>
+<li class="stepexpand">
+<span>Abra a linha de comando e torne o diretório
+%<span>DERBY_HOME</span>%\demo\
+o diretório corrente, onde
+%<span>DERBY_HOME</span>%
+é o diretório onde o
+<span>Derby</span>
+foi instalado.</span>
+</li>
+
+<li class="stepexpand">
+<span>Defina a variável de ambiente CLASSPATH incluindo o diretório corrente
+("."), e incluindo também os seguintes arquivos <em>jar</em> para que se possa
+utilizar o <em>Network Server</em> e o <em>driver</em> cliente da rede:</span>
+ 
+<dl>
+
+<dt class="dlterm">derbynet.jar</dt>
+
+<dd>O arquivo <em>jar</em> do <em>Network Server</em>.
+Deverá estar presente na variável de ambiente CLASSPATH, para que se possa
+utilizar qualquer uma das funções do <em>Network Server</em>.</dd>
+
+
+
+<dt class="dlterm">derbyclient.jar</dt>
+
+<dd>Este arquivo <em>jar</em> deverá estar presente na variável de ambiente
+CLASSPATH, para que se possa utilizar o <em>driver</em> cliente da rede.</dd>
+
+
+
+<dt class="dlterm">derby.jar</dt>
+
+<dd>O arquivo <em>jar</em> do motor de banco de dados
+<span>Derby</span>.</dd>
+
+
+
+<dt class="dlterm">derbytools.jar</dt>
+
+<dd>O arquivo <em>jar</em> das ferramentas do
+<span>Derby</span>.</dd>
+
+</dl>
+</li>
+
+<li class="stepexpand">
+<span>A definição da variável de ambiente CLASSPATH pode ser testada executando
+o seguinte comando Java:</span>
+ 
+<pre>java org.apache.derby.tools.sysinfo</pre>
+
+ Este comando mostra os arquivos <em>jar</em> do
+<span>Derby</span>
+presentes no caminho de classes, assim como suas respectivas versões.
+</li>
+
+<li class="stepexpand">
+<span>Após o ambiente ter sido definido corretamente, o programa <em>NsSample</em>
+será executado a partir deste diretório:</span>
+ 
+<pre>java nserverdemo.NsSample</pre>
+
+ Se a execução do programa for bem-sucedida, será recebida uma
+saída semelhante à mostrada a seguir:
+<pre>Using JDBC driver: org.apache.derby.jdbc.ClientDriver
+Derby Network Server created
+[NsSample] Unable to obtain a connection to network server, trying again after 3000 ms.
+O servidor está pronto para aceitar conexões na porta 1621.
+Número da conexão: 1.
+[NsSample] Derby Network Server started.
+[NsSample] Sample Derby Network Server program demo starting.
+Please wait .....................
+Número da conexão: 2.
+[NsSampleWork] Begin creating table - SAMPLETBL and necessary indexes.
+[NsSampleClientThread] Thread id - 1; started.
+[NsSampleWork] Thread id - 1; requests database connection, dbUrl =jdbc:derby:NSSampledb;
+[NsSampleClientThread] Thread id - 2; started.
+[NsSampleWork] Thread id - 2; requests database connection, dbUrl =jdbc:derby://localhost:1621/NSSampledb;create=true;
+Número da conexão: 3.
+[NsSampleWork] Thread id - 2; deleted 1 row with t_key = 9631
+[NsSampleWork] Thread id - 2; deleted 1 row with t_key = 9595
+[NsSampleWork] Thread id - 2 selected 1 row [754,Derby29        ,4.0290892E7,9389]
+[NsSampleWork] Thread id - 2; updated 1 row with t_key = 9389
+[NsSampleWork] Thread id - 2; inserted 1 row.
+[NsSampleWork] Thread id - 2; deleted 1 row with t_key = 9476
+[NsSampleWork] Thread id - 2 selected 1 row [51,Derby29        ,4.0290892E7,9389]
+[NsSampleWork] Thread id - 2; deleted 1 row with t_key = 9389
+[NsSampleWork] Thread id - 2 selected 1 row [486,Derby25        ,6.138386E23,9383]
+[NsSampleWork] Thread id - 2; inserted 1 row.
+[NsSampleWork] Thread id - 2; closed connection to the database.
+[NsSampleClientThread] Thread id - 2; finished all tasks.
+[NsSampleWork] Thread id - 1; deleted 1 row with t_key = 9383
+[NsSampleWork] Thread id - 1 selected 1 row [948,Derby33        ,7609340.0,9100]
+[NsSampleWork] Thread id - 1 selected 1 row [948,Derby33        ,7609340.0,9100]
+[NsSampleWork] Thread id - 1 selected 1 row [948,Derby33        ,7609340.0,9100]
+[NsSampleWork] Thread id - 1; updated 1 row with t_key = 9100
+[NsSampleWork] Thread id - 1 selected 1 row [54,Derby33        ,7609340.0,9100]
+[NsSampleWork] Thread id - 1 selected 1 row [54,Derby33        ,7609340.0,9100]
+[NsSampleWork] Thread id - 1 selected 1 row [54,Derby33        ,7609340.0,9100]
+[NsSampleWork] Thread id - 1; updated 1 row with t_key = 9100
+[NsSampleWork] Thread id - 1 selected 1 row [55,Derby33        ,7609340.0,9100]
+[NsSampleWork] Thread id - 1; closed connection to the database.
+[NsSampleClientThread] Thread id - 1; finished all tasks.
+[NsSample] Shutting down network server.
+Número da conexão: 4.
+Encerramento bem-sucedido.
+[NsSample] End of Network server demo.
+</pre>
+
+
+</li>
+
+</ol>
+
+<div class="section">A execução do programa <em>NsSample</em> também cria o seguinte
+diretório e arquivo:<dl>
+
+<dt class="dlterm">NSSampledb</dt>
+
+<dd>Este diretório contém o banco de dados <em>NSSampledb</em>.</dd>
+
+
+
+<dt class="dlterm">derby.log </dt>
+
+<dd>Este arquivo de <em>log</em> contém as mensagens de progresso e erro do
+<span>Derby</span>.</dd>
+
+
+</dl>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="radminovnssample.html" title="O programa de demonstração NsSample é um aplicativo JDBC simples que interage com o Network Server.">O programa exemplo NsSample</a></div>
+</div>
+</div>
+
+</body>
+</html>

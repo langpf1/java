@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Verifying system properties" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop16827.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop11561.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop13074.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevsetprop824983" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Verifying system properties</title>
+</head>
+<body id="cdevsetprop824983"><a name="cdevsetprop824983"><!-- --></a>
+
+
+<h1 class="topictitle1">Verifying system properties</h1>
+
+
+<div>
+<p>You can find out the value of a system property if you set it
+programmatically. You cannot find out the value of a system property if you set
+it in the <em>derby.properties</em> file.</p>
+
+<div class="p">For example, if you set the value of the
+<samp class="codeph">derby.storage.pageSize</samp> system-wide property in your program or
+on the command line, the following code will retrieve its value from the System
+Properties object:
+<pre><strong>Properties sprops = System.getProperties();
+System.out.println("derby.storage.pageSize value: "
++ sprops.getProperty("derby.storage.pageSize"));
+</strong></pre>
+</div>
+
+<p>You can also use Java Management Extensions (JMX) technology to obtain
+system information, including some settings that correspond to system
+properties. For details, see "Using Java Management Extensions (JMX) technology"
+in the <span><em>Derby Server and Administration Guide</em></span>.</p>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevsetprop16827.html" title="">Setting system-wide properties</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevsetprop11561.html" title="">Changing the system-wide properties programmatically</a></div>
+<div><a href="cdevsetprop13074.html" title="">Changing the system-wide properties by using the derby.properties file</a></div>
+</div>
+</div>
+
+</body>
+</html>

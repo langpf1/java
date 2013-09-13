@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Encrypting an existing unencrypted database" />
+<meta name="abstract" content="You can encrypt an unencrypted Derby database by specifying attributes on the connection URL when you boot the database. The attributes that you specify depend on how you want the database encrypted." />
+<meta name="description" content="You can encrypt an unencrypted Derby database by specifying attributes on the connection URL when you boot the database. The attributes that you specify depend on how you want the database encrypted." />
+<meta content="encrypting databases, existing unencrypted databases, databases, encrypting, existing unencrypted" name="DC.subject" />
+<meta content="encrypting databases, existing unencrypted databases, databases, encrypting, existing unencrypted" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure60146.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure96815.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevcsecurenewkeyoverview.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure97760.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tdevcsecureunencrypteddb" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Encrypting an existing unencrypted database</title>
+</head>
+<body id="tdevcsecureunencrypteddb"><a name="tdevcsecureunencrypteddb"><!-- --></a>
+
+
+<h1 class="topictitle1">Encrypting an existing unencrypted database</h1>
+
+
+
+<div><p>You can encrypt an unencrypted <span>Derby</span> database
+by specifying attributes on the connection URL when you boot the database.
+The attributes that you specify depend on how you want the database encrypted.</p>
+
+<div class="p"><ul>
+<li>If the database is configured with log archival, you must disable log
+archival and perform a shutdown before you can encrypt the database. </li>
+
+<li>If there are any global transaction that are in the prepared state after
+recovery, the database cannot be encrypted.</li>
+
+</ul>
+</div>
+
+<div class="section"><p>When you encrypt an existing, unencrypted database, you can specify
+whether the database should be encrypted using a boot password or an external
+encryption key.  You can also specify the <em>encryptionProvider</em> attribute
+and the <em>encryptionAlgorithm</em> attribute on the connection URL. The database
+is configure with the specified encryption attributes and all of the existing
+data in the database is encrypted. </p>
+<p>Encrypting a database is a time
+consuming process because it involves encrypting all of the existing data
+in the database. If the process is interrupted before completion, all the
+changes are rolled back the next time that the database is booted. If the
+interruption occurs immediately after the database is encrypted but before
+the connection is returned to the application, you might not be able to boot
+the database without the boot password or external encryption key. In these
+rare circumstances, you should try to boot the database with the boot password
+or the external encryption key. </p>
+<div class="note"><span class="notetitle">Recommendation: </span>Ensure
+that you have enough free disk space before you encrypt a database. In addition
+to the disk space required for the current size of the database, temporary
+disk space is required to store the old version of the data to restore the
+database back to it's original state if the encryption is interrupted or returns
+errors. All of the temporary disk space is released back to the operating
+system after the database is encrypted.</div>
+<p>To encrypt an existing unencrypted
+database:</p>
+</div>
+
+
+<div class="p"><span>Specify the <em>dataEncryption=true</em> attribute and either the <em>encryptionKey</em> attribute
+or the <em>bootPassword</em> attribute in a URL and boot the database.</span>
+ For example, to encrypt the <samp class="codeph">salesdb</samp> database with
+the boot password <samp class="codeph">abc1234xyz</samp>, specify the following attributes
+in the URL:<pre>jdbc:derby:salesdb;dataEncryption=true;bootPassword=abc1234xyz </pre>
+
+ 
+  <p>
+  If <a href="cdevcsecure36127.html#cdevcsecure36127">authentication</a>
+  and
+  <a href="cdevcsecure36595.html#cdevcsecure36595">SQL authorization</a>
+  are both enabled, the credentials of the 
+  <a href="cdevcsecureDbOwner.html#cdevcsecureDbOwner">database owner</a>
+  must be supplied as well, since encryption is a restricted operation.
+</p>
+
+
+ <p>
+If you disabled log archival before you encrypted the database, create
+a new backup of the database after the database is encrypted. For more
+information, see the section "Backing up and restoring databases" in the
+<span><em>Derby Server and Administration Guide</em></span>, particularly "Roll-forward
+recovery".</p>
+</div>
+
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure97760.html" title="This section describes using encryption in Derby.">Working with encryption</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecure60146.html" title="If you create an encrypted database using the bootPassword attribute, you must specify the boot password to reboot the database. If you create an encrypted database using the encryptionKey attribute, you must specify the encryptionKey to reboot the database.">Booting an encrypted database</a></div>
+<div><a href="cdevcsecure96815.html" title="">Requirements for Derby encryption</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevcsecurenewkeyoverview.html" title="You can apply a new encryption key to a Derby database by specifying a new boot password or a new external key.">Encrypting databases with a new key</a></div>
+</div>
+</div>
+
+</body>
+</html>

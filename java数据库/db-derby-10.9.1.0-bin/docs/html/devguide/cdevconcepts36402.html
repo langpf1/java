@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Types and scope of locks in Derby systems" />
+<meta name="abstract" content="There are several types of locks available in Derby systems, including exclusive, shared, and update locks." />
+<meta name="description" content="There are several types of locks available in Derby systems, including exclusive, shared, and update locks." />
+<meta content="Locks, exclusive, shared, update" name="DC.subject" />
+<meta content="Locks, exclusive, shared, update" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts15366.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts22300.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts23810.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts28436.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts30291.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts842279.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts842304.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts842385.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevconcepts2462.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevconcepts8424.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts842613.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevconcepts36402" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Types and scope of locks in Derby systems</title>
+</head>
+<body id="cdevconcepts36402"><a name="cdevconcepts36402"><!-- --></a>
+
+
+<h1 class="topictitle1">Types and scope of locks in Derby systems</h1>
+
+
+
+<div><p>There are several types of locks available in <span>Derby</span> systems,
+including exclusive, shared, and update locks.</p>
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cdevconcepts842279.html">Exclusive locks</a></strong><br />
+When a statement modifies data, its transaction holds an exclusive lock on data that prevents other transactions from accessing the data.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts842304.html">Shared locks</a></strong><br />
+When a statement reads data without making any modifications, its transaction obtains a shared lock on the data.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts842385.html">Update locks</a></strong><br />
+When a user-defined update cursor (created with the FOR UPDATE clause or by using concurrency mode ResultSet.CONCUR_UPDATABLE) reads data, its transaction obtains an update lock on the data.</li>
+<li class="ulchildlink"><strong><a href="rdevconcepts2462.html">Lock compatibility</a></strong><br />
+The following table shows the compatibility between lock types. "Yes" means that the lock types are compatible, while "No" means that they are incompatible.</li>
+<li class="ulchildlink"><strong><a href="rdevconcepts8424.html">Scope of locks</a></strong><br />
+The amount of data locked by a statement can vary.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts842613.html">Notes on locking</a></strong><br />
+In addition to the locks already described, foreign key lookups require briefly held shared locks on the referenced table (row or table, depending on the configuration).</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts30291.html" title="This section discusses topics pertinent to multi-user systems, in which concurrency is important.">Locking, concurrency, and isolation</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevconcepts15366.html" title="Derby provides four transaction isolation levels. Setting the transaction isolation level for a connection allows a user to specify how severely the user's transaction should be isolated from other transactions.">Isolation levels and concurrency</a></div>
+<div><a href="cdevconcepts22300.html" title="If a connection does not specify its isolation level, it inherits the default isolation level for the Derby system. The default value is CS.">Configuring isolation levels</a></div>
+<div><a href="cdevconcepts23810.html" title="Derby can be configured for table-level locking. With table-level locking, when a transaction locks data in order to prevent any transaction anomalies, it always locks the entire table, not just those rows being accessed.">Lock granularity</a></div>
+<div><a href="cdevconcepts28436.html" title="In a database, a deadlock is a situation in which two or more transactions are waiting for one another to give up locks.">Deadlocks</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Gerenciamento remoto do Network Server do Derby utilizando a interface servlet" />
+<meta name="abstract" content="Pode ser utilizada a interface servlet para gerenciar o Network Server remotamente. Para utilizar a interface servlet, a servlet deverá estar registrada no servidor Web, e o servidor Web deverá ter conhecimento de derby.system.home." />
+<meta name="description" content="Pode ser utilizada a interface servlet para gerenciar o Network Server remotamente. Para utilizar a interface servlet, a servlet deverá estar registrada no servidor Web, e o servidor Web deverá ter conhecimento de derby.system.home." />
+<meta scheme="URI" name="DC.Relation" content="cadminpartone.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminov11108.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminapps59125.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminconfig86869.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminadvtops.html" />
+<meta scheme="URI" name="DC.Relation" content="radminsampleprograms.html" />
+<meta scheme="URI" name="DC.Relation" content="radminservlet810694.html" />
+<meta scheme="URI" name="DC.Relation" content="radminservlet810717.html" />
+<meta scheme="URI" name="DC.Relation" content="radminservlet810796.html" />
+<meta scheme="URI" name="DC.Relation" content="radminservlet810822.html" />
+<meta scheme="URI" name="DC.Relation" content="radminservlet810910.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminservlet98430" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Gerenciamento remoto do Network Server do Derby utilizando a interface servlet</title>
+</head>
+<body id="cadminservlet98430"><a name="cadminservlet98430"><!-- --></a>
+
+
+<h1 class="topictitle1">Gerenciamento remoto do Network Server do Derby utilizando a interface servlet</h1>
+
+
+<div><p>Pode ser utilizada a interface <em>servlet</em> para gerenciar o
+<em>Network Server</em> remotamente.
+Para utilizar a interface <em>servlet</em>, a <em>servlet</em> deverá estar
+registrada no servidor Web, e o servidor Web deverá ter conhecimento de
+<em>derby.system.home</em>.</p>
+
+<p>O arquivo <em>Web Application Archive</em> (WAR), <em>derby.war</em>, para o
+<em>Network Server</em> do
+<span>Derby</span>,
+está disponível em
+<em>$<span>DERBY_HOME</span>/lib</em>.
+Este arquivo registra a <em>servlet</em> do <em>Network Server</em> no caminho
+relativo <em>/derbynet</em>.
+Para obter instruções sobre como instalar este arquivo, deve ser consultada a
+documentação do servidor de aplicativos.</p>
+
+<p>Por exemplo, se <em>derby.war</em> for instalado no <em>WebSphere Application
+Server</em> com o contexto raiz <span class="filepath">derby</span>, a URL do servidor
+será:</p>
+
+<pre>http://&lt;servidor&gt;[:porta]/derby/derbynet</pre>
+
+<div class="note"><span class="notetitle">Nota: </span>A máquina <em>servlet</em> não faz parte do <em>Network Server</em>.</div>
+
+<p>A <em>servlet</em> aceita os seguintes parâmetros de configuração opcionais:</p>
+
+<dl>
+
+<dt class="dlterm">portNumber</dt>
+
+<dd>Especifica o número da porta a ser utilizada pelo <em>Network Server</em>.</dd>
+
+
+
+<dt class="dlterm">startNetworkServerOnInit</dt>
+
+<dd>Especifica que o <em>Network Server</em> deverá ser inicializado quando a
+<em>servlet</em> for inicializada.</dd>
+
+
+
+<dt class="dlterm">tracingDirectory</dt>
+
+<dd>Especifica o local dos arquivos de rastreamento.
+Se o diretório de rastreamento não for especificado, os arquivos de rastreamento
+serão colocados em <em>derby.system.home</em>.</dd>
+
+
+</dl>
+
+<p>Esta seção descreve as páginas da <em>servlet</em>.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="radminservlet810694.html">Página de inicialização</a></strong><br />
+A página de inicialização é utilizada para inicializar o servidor.</li>
+<li class="ulchildlink"><strong><a href="radminservlet810717.html">Página de execução</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="radminservlet810796.html">Página de rastreamento da sessão</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="radminservlet810822.html">Página do diretório de rastreamento</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="radminservlet810910.html">Definição de parâmetros do Network Server</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="cadminpartone.html" title="">Parte 1: Guia do servidor Derby</a></div>
+</div>
+<div class="relconcepts"><strong>Conceitos relacionados</strong><br />
+<div><a href="cadminov11108.html" title="">O Derby em um ambiente multiusuário</a></div>
+<div><a href="cadminapps59125.html" title="">Utilização do Network Server com aplicativos Derby pré-existentes</a></div>
+<div><a href="cadminconfig86869.html" title="O Network Server do Derby pode executar como um servidor autônomo, com o Derby como uma parte incorporada do aplicativo.">Gerenciamento do Network Server do Derby</a></div>
+<div><a href="cadminadvtops.html" title="">Tópicos avançados do Network Server do Derby</a></div>
+</div>
+<div class="relref"><strong>Referências relacionadas</strong><br />
+<div><a href="radminsampleprograms.html" title="">Programas exemplo para o Network Server do Derby</a></div>
+</div>
+</div>
+
+</body>
+</html>

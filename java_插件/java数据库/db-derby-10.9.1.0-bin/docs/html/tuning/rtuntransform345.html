@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Character string beginning with constant" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform208.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform443.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform472.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtuntransform345" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Character string beginning with constant</title>
+</head>
+<body id="rtuntransform345"><a name="rtuntransform345"><!-- --></a>
+
+
+<h1 class="topictitle1">Character string beginning with constant</h1>
+
+
+<div>
+<div class="section"><div class="p">A LIKE predicate in which a column is compared to a character string that <em>begins</em> with a character constant (not a wildcard) is transformed
+into three predicates: one predicate that uses the LIKE operator, one that
+uses the &gt;= operator, and one that uses the &lt; operator. For example:
+  
+<pre><strong>country LIKE 'Ch%i%'</strong></pre>
+</div>
+</div>
+
+<div class="section"><div class="p">becomes   
+<pre><strong>country LIKE 'Ch%i%'
+AND country &gt;= 'Ch'
+AND country &lt; 'Ci'</strong></pre>
+</div>
+</div>
+
+<div class="section"><p>The first (LIKE) predicate is not optimizable, but the new predicates added
+by the transformation are.</p>
+</div>
+
+<div class="section"><div class="p">When the character string begins with one more character constants and
+ends with a single "%", the first LIKE clause is eliminated. For example:
+ 
+<pre><strong>country LIKE 'Ch%'</strong></pre>
+</div>
+</div>
+
+<div class="section"><div class="p">becomes  
+<pre><strong>country &gt;= 'Ch'
+AND country &lt; 'Ci'</strong></pre>
+</div>
+</div>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rtuntransform208.html" title="">LIKE transformations</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtuntransform443.html" title="">Character string without wildcards</a></div>
+<div><a href="rtuntransform472.html" title="">Unknown parameter</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SQLJ.REPLACE_JAR system procedure" />
+<meta name="abstract" content="The SQLJ.REPLACE_JAR system procedure replaces a jar file in a database." />
+<meta name="description" content="The SQLJ.REPLACE_JAR system procedure replaces a jar file in a database." />
+<meta content="SQLJ.REPLACE_JAR system procedure, system procedures, SQLJ.REPLACE_JAR, jar files, replacing in databases" name="DC.subject" />
+<meta content="SQLJ.REPLACE_JAR system procedure, system procedures, SQLJ.REPLACE_JAR, jar files, replacing in databases" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefstorejardb.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefstorejarinstall.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefstorejarremove.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefstorejarreplace" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SQLJ.REPLACE_JAR system procedure</title>
+</head>
+<body id="rrefstorejarreplace"><a name="rrefstorejarreplace"><!-- --></a>
+
+
+<h1 class="topictitle1">SQLJ.REPLACE_JAR system procedure</h1>
+
+
+
+<div><p> 
+The SQLJ.REPLACE_JAR system procedure replaces a jar file in a database.
+</p>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre>SQLJ.REPLACE_JAR(IN JAR_FILE_PATH_OR_URL VARCHAR(32672), 
+                 IN QUALIFIED_JAR_NAME VARCHAR(32672))</pre>
+
+<dl>
+<dt class="dlterm">JAR_FILE_PATH_OR_URL</dt>
+
+<dd>The path or URL of the jar file to use as a replacement. A path includes
+both the directory and the file name (unless the file is in the current
+directory, in which case the directory is optional). For example:
+<pre>d:/todays_build/tours.jar</pre>
+</dd>
+
+
+<dt class="dlterm">QUALIFIED_JAR_NAME</dt>
+
+<dd>The <span>Derby</span> name of the
+jar file, qualified by the schema name. Two examples:
+<pre>MYSCHEMA.Sample1</pre>
+
+<pre> -- a delimited identifier.
+MYSCHEMA."Sample2"</pre>
+
+</dd>
+
+
+</dl>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Execute privileges</h2>
+<p>If authentication and SQL authorization are both enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> has
+execute privileges on this procedure by default. See "Enabling user
+authentication" and "Setting the SQL standard authorization mode" in the
+<span><em>Derby Developer's Guide</em></span> for more information. The
+database owner can grant access to other users.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">SQL example</h2>
+<pre><strong>-- SQL statement</strong>
+CALL sqlj.replace_jar('c:\myjarfiles\newtours.jar', 'APP.Sample1')
+
+<strong>-- SQL statement
+-- replace jar from remote location</strong>
+CALL SQLJ.REPLACE_JAR('http://www.example.com/tours.jar', 'APP.Sample2')</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefstorejardb.html" title="">System procedures for storing jar files in a database</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefstorejarinstall.html" title="The SQLJ.INSTALL_JAR system procedure stores a jar file in a database.">SQLJ.INSTALL_JAR system procedure</a></div>
+<div><a href="rrefstorejarremove.html" title="The SQLJ.REMOVE_JAR system procedure removes a jar file from a database.">SQLJ.REMOVE_JAR system procedure</a></div>
+</div>
+</div>
+
+</body>
+</html>

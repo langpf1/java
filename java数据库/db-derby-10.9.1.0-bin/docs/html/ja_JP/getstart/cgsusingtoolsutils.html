@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Derbyのツールと、そのスクリプトについて" />
+<meta name="abstract" content="Derbyには便利なツールや機能が幾つか用意されています。." />
+<meta name="description" content="Derbyには便利なツールや機能が幾つか用意されています。." />
+<meta content="Derby, scripts, using, tools, using, tools, in Derby, scripts, in Derby" name="DC.subject" />
+<meta content="Derby, scripts, using, tools, using, tools, in Derby, scripts, in Derby" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="tgssetupjavaenvir.html" />
+<meta scheme="URI" name="DC.Relation" content="cgsinsta.html" />
+<meta scheme="URI" name="DC.Relation" content="cgsusingsysinfo.html" />
+<meta scheme="URI" name="DC.Relation" content="tgsrunningij.html" />
+<meta scheme="URI" name="DC.Relation" content="tgs26250.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cgsusingtoolsutils" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Derbyのツールと、そのスクリプトについて</title>
+</head>
+<body id="cgsusingtoolsutils"><a name="cgsusingtoolsutils"><!-- --></a>
+
+
+<h1 class="topictitle1"><span>Derby</span>のツールと、そのスクリプトについて</h1>
+
+
+
+<div><p><span>Derby</span>には便利なツールや機能が幾つか用意されています。. </p>
+
+<p><span>Derby</span>には、<span class="cmdname">dblook</span>、 <span class="cmdname">ij</span>、
+それと<span class="cmdname">sysinfo</span>というツールが用意されています。これらの<span>Derby</span>のツールは<span>Derby</span>に用意されたスクリプトで起動します。</p>
+
+<p>またDerbyには、ツールの<span class="cmdname">ij</span>から呼び出し可能なシステムプロシージャとして提供されている機能もあります。これらのシステムプロシージャを使って、たとえば外部のファイルとの間でインポートやエキスポートを行うことができます。システムプロシージャの使い方は、<cite><span><em>Derby Tools and Utilities Guide</em></span></cite>と、<cite><span><em>Derby Reference Manual</em></span></cite>に書かれています。</p>
+
+
+<p>それぞれのツールは、<span>DERBY_HOME</span><span class="filepath">/bin</span>のディレクトリにあるスクリプトで起動します。ここにあるスクリプトはそのほかにも、classpathを設定するときに重宝します。</p>
+
+<div class="p"><span>DERBY_HOME</span><span class="filepath">/bin</span>のディレクトリにあるスクリプトは、DBMSを組み込みモードで実行するように作られています。これらのツールをNetwork Serverで使う場合、次のコマンドを使ってください。<ul>
+<li><span class="cmdname">dblook</span>は-dオプションとNetwork ServerへのURLを指定してスクリプトを読んでください。たとえば、<samp class="codeph">dblook
+-d 'jdbc:derby://localhost/myDB;user=usr'</samp> の様にです。</li>
+
+<li><span class="cmdname">ij</span>は、<samp class="codeph">set DERBY_OPTS=-Dij.protocol=jdbc:derby://localhost/</samp>というコマンドを実行した後に、<span class="cmdname">ij</span>を <samp class="codeph">ij</samp>コマンドで実行してください。</li>
+
+<li><span class="cmdname">sysinfo</span>は、<samp class="codeph">NetworkServerControl sysinfo</samp>コマンドで実行してください。</li>
+
+</ul>
+</div>
+
+<p><cite><span><em>Getting Started with Derby</em></span></cite>にある例では、どのように<span>Derby</span>のスクリプトを使って、<span>Derby</span>のツールを起動するかを説明するために、
+組み込みモードで<span>Derby</span>を使っているものとしています。</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cgsusingsysinfo.html">sysinfoを使う</a></strong><br />
+Derbyが提供する sysinfoは、Javaの実行環境に関する情報とDerbyのバージョン情報を表示するツールです。</li>
+<li class="ulchildlink"><strong><a href="tgsrunningij.html">ijを動かす</a></strong><br />
+ijというツールを使ってDerbyのデータベースに接続できます。</li>
+<li class="ulchildlink"><strong><a href="tgs26250.html">classpathの設定</a></strong><br />
+classpath とは、JVMや他のJavaアプリケーションの実行に必要なクラスライブラリの一覧です。classpathを設定するためのスクリプトがDerbyには用意されていますが、スクリプトを使わずにJavaで直接ツールを呼ぶ場合には、手作業でCLASSPATHという環境変数を設定しなければなりません。</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="cgsinsta.html" title="あなたがDerbyおよび JDBC を使ったプログラミングに不慣れであれば、この節の内容はこの製品の利用を始めるときの助けとなるでしょう。">Derbyのインストールと利用</a></div>
+</div>
+<div class="reltasks"><strong>関連タスク</strong><br />
+<div><a href="tgssetupjavaenvir.html" title="配布されたDerbyのbinにあるスクリプトを正常に実行するためには、幾つかの環境変数の設定が必要です。 またスクリプトは、WindowsのコマンドプロンプトやUnixのシェルのような、コマンドラインの環境から実行する必要があります。">環境設定</a></div>
+</div>
+</div>
+
+</body>
+</html>

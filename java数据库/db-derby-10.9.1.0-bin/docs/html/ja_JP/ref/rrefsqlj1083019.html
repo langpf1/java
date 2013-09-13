@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="動的パラメータを置ける場所" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj29911.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj1082953.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj1083019" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>動的パラメータを置ける場所</title>
+</head>
+<body id="rrefsqlj1083019"><a name="rrefsqlj1083019"><!-- --></a>
+
+
+<h1 class="topictitle1">動的パラメータを置ける場所</h1>
+
+<div>
+<div class="section"><div class="p">データ型が簡単に決定される場所であれば、式の何処にでも動的パラメータを置くことができます。<ol>
+<li>BETWEENでは、二つ目と三つ目のオペランドのどちらかが動的パラメータでなければ、最初のオペランドを動的パラメータとすることができます。
+一つ目のオペランドの型は、残りの二つが動的パラメータでなければ、それら動的ではないパラメータの型もしくはそれらを統合した型とみなされます。
+<pre><strong>WHERE ? BETWEEN DATE('1996-01-01') AND ?
+<span>-- 型はDATEとみなされます。</span></strong></pre>
+</li>
+
+<li>BETWEENの二つ目、三つ目のオペランドを動的パラメータとすることができます。
+これらの型は左辺のオペランドと同じ型とみなされます。<pre><strong>WHERE DATE('1996-01-01') BETWEEN ? AND ?
+<span>-- 型はDATEとみなされます。</span></strong></pre>
+</li>
+
+<li id="rrefsqlj1083019__sqlj30695"><a name="rrefsqlj1083019__sqlj30695"><!-- --></a>INでは一覧のうち一つでも動的パラメータではない項目があれば、左辺のオペランドを動的パラメータとすることができます。
+左辺のオペランドの型は一覧にある動的でないパラメータの項目の型を統合した型とみなされます。<pre><strong>WHERE ? NOT IN (?, ?, 'Santiago')
+<span>-- 型はCHARとみなされます。</span></strong></pre>
+</li>
+
+<li>INでは、最初のオペランドが動的パラメータではないか前掲のルールによりその型が決まる場合、INの述部の一覧に動的パラメータを置くことができます。
+値の一覧に置かれた動的パラメータの型は、左辺のオペランドの型と同じものとみなされます。
+<pre><strong>WHERE <strong><em>FloatColumn</em></strong> IN (?, ?, ?)
+<span>-- 型はFLOATとみなされます。</span></strong></pre>
+</li>
+
+<li id="rrefsqlj1083019__sqlj18960"><a name="rrefsqlj1083019__sqlj18960"><!-- --></a>オペランドを2つ持つ演算子の、+・-・*・/・AND・OR・&lt;・&gt;・
+=・&lt;・&gt;・&lt;=と&gt;=では、片方のオペランドを動的パラメータとすることができますが、両方を動的パラメータとすることはできません。 
+動的パラメータの型はもう片方のオペランドの型となります。
+<pre><strong>WHERE ? &lt; CURRENT_TIMESTAMP
+<span>-- 型はTIMESTAMPとみなされます。</span></strong></pre>
+</li>
+
+<li>CASTでは常に動的パラメータを利用できます。これにより動的パラメータに型を与えることができます。
+<pre><strong>CALL valueOf(CAST (? AS VARCHAR(10)))</strong></pre>
+</li>
+
+<li>LIKE演算子の片方あるいは両方のオペランドを動的パラメータとすることが可能です。
+左辺を動的パラメータとした場合、その型は右辺のオペランドと同じものとみなされます。なお最大長は型の最大長となります。右辺を動的パラメータとした場合、左辺のオペランドの長さと型が適用されます。
+(LIKEではCHARとVARCHARの型を利用する事が可能です。詳細は<a href="rrefsqlj40899.html#rrefsqlj40899">Concatenation</a>を参照してください。)
+<pre><strong>WHERE ? LIKE 'Santi%'
+<span>--型は最大長がjava.lang.Integer.MAX_VALUEの
+--CHARとみなされます。</span></strong></pre>
+</li>
+
+<li>動的パラメータの?は、||演算子の片方の側にのみ置くことができます。
+すなわち"? || ?"は不可能です。||演算子の片側にある?パラメータの型は、その反対側にある||演算子のオペランドの式の型によって決まります。もし反対側の式の型がCHARあるいはVARCHARであれば、動的パラメータの型はその型の最大長のVARCHARです。
+もし反対側の式の型がCHAR FOR BIT DATAあるいはVARCHAR FOR BIT DATAであれば、動的パラメータの型はその方の最大長のVARCHAR FOR BIT DATAです。
+<pre><strong>SELECT BITcolumn || ?
+FROM UserTable
+<span>-- 型はBITcolumnと同じ最大長のCHAR FOR BIT DATAとなります。</span></strong></pre>
+</li>
+
+<li>条件式では?で表される動的パラメータの利用が可能です。式の最初のオペランドに置かれた動的パラメータの型は真偽型とみなされます。
+式の二つ目あるいは三つ目のうち、片方だけを動的パラメータとすることができます。動的パラメータの型は、もう片方の型と同じものとみなされます。(つまり対応するのは三つ目と二つ目のオペランドとなります。)
+ <pre><strong>SELECT c1 IS NULL ? ? : c1
+<span>-- この例では実行時に既定値を与えることができます。
+-- その動的パラメータの型はc1と同じ型とみなされます。
+-- :の両側に動的パラメータを置くことはできません。
+</span></strong></pre>
+</li>
+
+<li>INSERT文のvaluesの一覧やselectの一覧に、動的パラメータを置くことができます。
+動的パラメータの型は対象列の型と同じ型とみなされます。
+<pre><strong>INSERT INTO t VALUES (?)
+<span>-- 動的パラメータの型は、
+-- t表の唯一つの列と同じ型となります。</span>
+INSERT INTO t SELECT ?
+FROM t2
+<span>-- これは不可です。</span></strong></pre>
+</li>
+
+<li>副問合せと比較される?パラメータは、副問合せで選択された式の型をとります。
+例を挙げます。
+<pre><strong>SELECT *
+FROM tab1
+WHERE ? = (SELECT x FROM tab2)
+
+SELECT *
+FROM tab1
+WHERE ? = ANY (SELECT x FROM tab2)
+<span>-- 両方の場合において、動的パラメータの型は、
+-- tab2.xと同じ型とみなされます。</span></strong></pre>
+</li>
+
+<li>UPDATE文の値に対して動的パラメータを置くことができます。動的パラメータの型は、対照表の列の型と同じものとみなされます。
+<pre><strong>UPDATE t2 SET c2 =? <span>-- c2と同じ型とみなされます。</span></strong></pre>
+</li>
+
+<li>単一オペランドをとる-や+の演算子にて、動的パラメータを利用可能です。
+例を挙げます。<pre><strong>CREATE TABLE t1 (c11 INT, c12 SMALLINT, c13 DOUBLE, c14 CHAR(3))
+SELECT * FROM t1 WHERE c11 BETWEEN -? AND +?
+<span>-– 両方の単一オペランドをとる演算子の型は、文脈に沿ってINTとなります。
+-- (すなわち、c11がINTなので、単一オペランドをとる演算子もINTの型をとります。)
+</span></strong></pre>
+</li>
+
+<li>LENGTHにて、動的パラメータを利用可能です。その型は最大長のVARCHARとみなされます。
+<pre><strong>SELECT LENGTH(?)</strong></pre>
+</li>
+
+<li>定量比較<pre><strong>? = SOME (SELECT 1 FROM t)
+<span>-- これは有効です。動的なパラメータの型はINTEGERとみなされます。</span>
+1 = SOME (SELECT ? FROM t)
+<span>-- これは有効です。動的なパラメータの型はINTEGERとみなされます。</span></strong></pre>
+</li>
+
+<li>IS式の左辺に動的パラメータを置くことができ、その型は真偽型とみなされます。</li>
+
+</ol>
+</div>
+</div>
+
+<div class="section"><p>動的なパラメータの型が決まる式は一般的に、その動的パラメータを定数に置き換えて、どのような場所にも置くことができます。</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj29911.html" title="">動的パラメータ</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefsqlj1082953.html" title="">動的パラメータの例</a></div>
+</div>
+</div>
+
+</body>
+</html>

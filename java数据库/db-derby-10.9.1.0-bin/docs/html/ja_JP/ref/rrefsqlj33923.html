@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="集約 (集合関数)" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj33923" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>集約 (集合関数)</title>
+</head>
+<body id="rrefsqlj33923"><a name="rrefsqlj33923"><!-- --></a>
+
+
+<h1 class="topictitle1">集約 (集合関数)</h1>
+
+<div>
+<div class="section">
+<p>この節は集約(ANSI SQL-92では<em>集合関数</em>、データベースの書籍によっては<em>列関数</em>と呼びます。)について説明します。集約は、行の集合に対して式を評価する方法を提供します。他の組込み関数は単式に対して作用しますが、集約は値の集合に対して作用して一つのスカラー値にまとめられます。組込みの集約により、値の集合に対して、式の最小値、最大値、合計、計数を行い、例えば行を数えるような事ができます。また組込みのものとは別に集約を作って、例えば標準偏差を計算するようなこともできます。</p>
+</div>
+
+<div class="section"><div class="p">
+組込みの集約は、<a href="rrefsqlj33923.html#rrefsqlj33923__sqlj92398">組込みの集約にて可能なデータ型</a>にあるデータ型に作用させることができます。
+  
+<div class="tablenoborder"><a name="rrefsqlj33923__sqlj92398"><!-- --></a><table cellspacing="0" cellpadding="4" summary="表 1. 組込みの集約にて可能なデータ型" id="rrefsqlj33923__sqlj92398" frame="border" border="1" rules="all"><caption>表 1. 組込みの集約にて可能なデータ型</caption>
+
+<thead align="left">
+<tr>
+<th valign="top" width="33.33333333333333%" id="N1007E">&nbsp;</th>
+
+<th align="left" valign="bottom" width="33.33333333333333%" id="N10084">全データ型</th>
+
+<th align="left" valign="bottom" width="33.33333333333333%" id="N1008D">組込みの数値型</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1007E">COUNT</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10084">X</td>
+
+<td valign="top" width="33.33333333333333%" headers="N1008D">X</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1007E">MIN</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10084">&nbsp;</td>
+
+<td valign="top" width="33.33333333333333%" headers="N1008D">X</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1007E">MAX</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10084">&nbsp;</td>
+
+<td valign="top" width="33.33333333333333%" headers="N1008D">X</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1007E">AVG</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10084">&nbsp;</td>
+
+<td valign="top" width="33.33333333333333%" headers="N1008D">X</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="33.33333333333333%" headers="N1007E">SUM</td>
+
+<td valign="top" width="33.33333333333333%" headers="N10084">&nbsp;</td>
+
+<td valign="top" width="33.33333333333333%" headers="N1008D">X</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+<div class="section"><div class="p">
+集約は以下の文脈にのみ置くことができます。<ul>
+<li><em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a></em>の<em>選択項目</em></li>
+
+<li><a href="rrefsqlj14854.html#rrefsqlj14854">HAVING節</a></li>
+
+<li>集約がその問合せにあるならば、<a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY 節</a>(別名を使う)つまり、<em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a></em>の<em>選択項目</em>に集約がある場合に限り、集約への別名を<a href="rrefsqlj13658.html#rrefsqlj13658">ORDER BY 節</a>に置くことができます。</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><div class="p"><em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a></em>の<em>選択項目</em>にある全式は、集約か分類列である必要があります。(<a href="rrefsqlj32654.html#rrefsqlj32654">GROUP BY 節</a>を参照してください。)
+(GROUP BY 節がないにもかかわらず、HAVING節がある場合も同様です。)
+なぜならば、<em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a></em>の<em>ResultSet</em>は、スカラー(単値)かベクトル(副値)のいずれかでなければならず、その混合は許されていないからです。(集約はスカラーの値と評価され、列への参照はベクトルの値と評価されます。)例えば次の問合せはスカラーとベクトルの値が混ざっているので無効です。
+<pre><strong><span>-- not valid</span>
+SELECT MIN(flying_time), flight_id
+FROM Flights</strong></pre>
+</div>
+</div>
+
+<div class="section"><div class="p">集約にて外部への参照(相関)は無効です。つまり、副問合せが集約を含むならば、その集約が作用する式は、副問合せの外にある問合せの列を参照できません。
+例えば、SUM演算子が外の問合せの列に対して行われているので、次の問合せは有効ではありません。
+<pre><strong>SELECT c1
+FROM t1
+GROUP BY c1
+HAVING c2 &gt;
+    (SELECT t2.x
+    FROM t2
+    WHERE t2.y = SUM(t1.c3)) </strong></pre>
+</div>
+</div>
+
+<div class="section"><p>集約が外の問合せにある場合、その<em>ResultSet</em>のカーソルは更新可能ではありません。</p>
+</div>
+
+<div class="section"><div class="p">この節には以下の集約があります。<ul>
+<li><a href="rrefsqlj32693.html#rrefsqlj32693">AVG関数</a></li>
+
+<li><a href="rrefsqlj38716.html#rrefsqlj38716">COUNT 関数</a></li>
+
+<li><a href="rrefsqlj27781.html#rrefsqlj27781">MAX関数</a></li>
+
+<li><a href="rrefsqlj33520.html#rrefsqlj33520">MIN関数</a></li>
+
+<li><a href="rrefsqlj13083.html#rrefsqlj13083">SUM関数</a></li>
+
+</ul>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefsqlj29026.html" title="">組み込み関数</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE TABLE 文" />
+<meta content="CREATE TABLE statement, CREATE TABLE, SQL statements, tables, creating" name="DC.subject" />
+<meta content="CREATE TABLE statement, CREATE TABLE, SQL statements, tables, creating" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj30540.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj37836.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj24513" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE TABLE 文</title>
+</head>
+<body id="rrefsqlj24513"><a name="rrefsqlj24513"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE TABLE 文</h1>
+
+
+<div>
+<div class="section"> <p>CREATE TABLE文により表を作成します。表には列および制約があって、情報が沿うべき規則が決められています。表ごとの制約は列の集合ないしは列を指定します。列にはデータ型が決まっていて、列の制約(列ごとの制約)があります。</p>
+
+<div class="p">表や<a href="rrefattrib26867.html#rrefattrib26867">データベースの所有者</a>は自動的に以下の権限を持ち、また他のユーザにこれらの権限を与える事ができます。<ul>
+<li>INSERT</li>
+
+<li>SELECT</li>
+
+<li>REFERENCES</li>
+
+<li>TRIGGER</li>
+
+<li>UPDATE</li>
+
+</ul>
+これらの権限を表やデータベースの所有者から剥奪することはできません。</div>
+
+<p>制約についての情報は、<a href="rrefsqlj13590.html#rrefsqlj13590">CONSTRAINT 節</a>を参照してください。</p>
+
+<p>列には既定値を与えることができます。既定値とは値が指定されなかったとき、列に挿入される値です。明示されない場合列の既定値はNULLです。詳細は<a href="rrefsqlj30540.html#rrefsqlj30540__sqlj64478">列の既定値</a>を参照してください。</p>
+
+<p><samp class="codeph">SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY</samp>というシステムの手続を呼ぶことで、ページサイズのような記録の属性を設定することができます。</p>
+
+<p>表を限定する場合、スキーマ名は<em>SYS</em>で始まってはなりません。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2>
+    <p>CREATE TABLEには二通りの書き方があります。これは、列の定義と制約を指定しようとするか、問い合わせ式の結果に基づき列を定義するかによります。</p>
+
+<pre><strong>CREATE TABLE <em><a href="rreftablename.html#rreftablename">表名</a></em></strong>
+    ( {<em><a href="rrefsqlj30540.html#rrefsqlj30540">列定義</a></em> | <em><a href="rrefsqlj42154.html#rrefsqlj42154">表毎制約</a></em>}
+    [ , {<em><a href="rrefsqlj30540.html#rrefsqlj30540">列定義</a></em> | <em><a href="rrefsqlj42154.html#rrefsqlj42154">表毎制約</a></em>} ] * )
+  |
+      [ ( <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">列名</a></em> [ , <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">列名</a></em> ] * ) ]
+      <strong>AS</strong> <em>問い合わせ式</em>
+      <strong>WITH NO DATA</strong>
+   }
+
+</pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">例</h2><pre><strong>CREATE TABLE HOTELAVAILABILITY
+     (HOTEL_ID INT NOT NULL, BOOKING_DATE DATE NOT NULL,
+	ROOMS_TAKEN INT DEFAULT 0, PRIMARY KEY (HOTEL_ID, BOOKING_DATE));
+<span>-- 表で主キーを定義することで、2列からなる主キーを定義できます。</span>
+PRIMARY KEY (hotel_id, booking_date))
+<span>-- 識別子列の属性を、INTEGERの列に与え、
+-- さらに列に主キー制約を定義します。</span>
+CREATE TABLE PEOPLE
+	(PERSON_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY
+	CONSTRAINT PEOPLE_PK PRIMARY KEY, PERSON VARCHAR(26));
+<span>-- 識別子列の属性を、SMALLINTの列に与え、
+-- 初期値を5に増分値を5に設定します。</span>
+CREATE TABLE GROUPS
+	(GROUP_ID SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY 
+	(START WITH 5, INCREMENT BY 5), ADDRESS VARCHAR(100), PHONE VARCHAR(15));</strong></pre>
+<div class="note"><span class="notetitle">注: </span>さまざまな制約を使った、より多くのCREATE TABLE文の例が<a href="rrefsqlj13590.html#rrefsqlj13590">CONSTRAINT 節</a>にあります。</div>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">CREATE TABLE ... AS ... </h2>
+    <p>もう一つのCREATE TABLE文の書き方は、問い合わせで列の名前と/あるいは列のデータ型を指定します。問い合わせ結果の列は、新しい表の各列を作成するときにモデルとして利用されます。</p>
+
+<p>新しい表に列名が指定されなかった場合、問い合わせの結果の全列が、新しい表に同じ名前と対応するデータ型で作成されます。
+ひとつあるいはそれ以上の列の名前が新しい表に指定された場合、問い合わせ式の結果には同数の列が無ければなりません。問い合わせ結果の列のデータ型は新しい表の対応する列に引き継がれます。</p>
+
+<p>WITH NO DATA節は問い合わせ結果行のデータは使われず、列の名称と型だけが利用されることを表します。
+WITH NO DATAは<strong>必ず</strong>指定してください。今後のリリースにて、DerbyでもWITH DATAを指定して、問い合わせ式の結果を新規作成された表に挿入するように出来るようになるかもしれません。しかし現在のリリースでは、WITH NO DATAの文しか処理されません。</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">例</h2>
+    <pre><strong>
+<span>-- 既存の表の全列とデータ型を使って新しい表を作成する。</span>
+CREATE TABLE T3 AS SELECT * FROM T1 WITH NO DATA;
+<span>-- 列に名前を指定して表を作成する。そのデータ型は既存表の列に沿ったものとする。</span>
+CREATE TABLE T3 (A,B,C,D,E) AS SELECT * FROM T1 WITH NO DATA;
+<span>-- 列に名前を指定して表を作成する。そのデータ型は既存表の指定された列のデータ型に沿ったものとする。</span>
+CREATE TABLE T3 (A,B,C) AS SELECT V,DP,I FROM T1 WITH NO DATA;
+<span>-- この例では問い合わせ式の結果にある列に名前がないが、そのデータ型は新規作成された表にて対応する列のデータ型となる。</span>
+CREATE TABLE T3 (X,Y) AS SELECT 2*I,2.0*F FROM T1 WITH NO DATA;
+</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlj30540.html">列定義</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefsqlj37836.html">発番列仕様</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj95081.html" title="">CREATE 文</a></div>
+</div>
+<div class="relref"><strong>関連資料</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="CREATE FUNCTION文により、式で利用できるJava関数を作成できます。">CREATE FUNCTION 文</a></div>
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX 文</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE 文</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA 文</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">CREATE SYNONYM 文</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER 文</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW 文</a></div>
+</div>
+</div>
+
+</body>
+</html>

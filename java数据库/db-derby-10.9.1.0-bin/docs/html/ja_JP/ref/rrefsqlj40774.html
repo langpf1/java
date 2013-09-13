@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="INSERT 文" />
+<meta content="INSERT statement" name="DC.subject" />
+<meta content="INSERT statement" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlj40774" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>INSERT 文</title>
+</head>
+<body id="rrefsqlj40774"><a name="rrefsqlj40774"><!-- --></a>
+
+
+<h1 class="topictitle1">INSERT 文</h1>
+
+
+<div>
+<div class="section"> <p>
+INSERT文により一つ以上の行を作成して、指定した名前の表に格納できます。
+INSERT文で指定された値の数は、指定された列あるいは暗示された列の数と同じでなければなりません。</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">構文</h2> <pre><strong>INSERT INTO 表名
+    [ (<em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">単純列名</a></em> [ , <em><a href="rrefsimplecolumnname.html#rrefsimplecolumnname">単純列名</a></em>]* ) ]
+	  問合せ</strong></pre>
+ <div class="p"><em>問合せには</em>以下のいずれかをとることができます。
+<ul>
+<li><em><a href="rrefselectexpression.html#rrefselectexpression">選択式</a></em></li>
+
+<li>VALUES一覧</li>
+
+<li>複数行VALUES式<p>単一行あるいは複数行の一覧には、DEFAULTというキーワードを含めることができます。列にDEFAULTを指定すると、その列には既定値が挿入されます。列に既定値を挿入する場合、列の一覧にてその列を省略して、表のほかの列に値を挿入することもできます。詳細については<a href="rrefsqlj11277.html#rrefsqlj11277">VALUES式</a>を参照してください。</p>
+</li>
+
+<li>UNION式</li>
+
+</ul>
+</div>
+ <p>問合せの詳細については、<a href="rrefsqlj21571.html#rrefsqlj21571">問合せ</a>を参照してください。</p>
+ </div>
+
+<div class="example"> <pre><strong>INSERT INTO COUNTRIES
+      VALUES ('Taiwan', 'TW', 'Asia')
+
+-- DEPARTMENTという表に新しい部署を挿入します。
+-- ただし、新しい部署に新しい管理者は割り当てません。
+INSERT INTO DEPARTMENT (DEPTNO, DEPTNAME, ADMRDEPT)
+	VALUES ('E31', 'ARCHITECTURE', 'E01')
+<span>-- 2つの新しい部署を一つの文で前と同じようにDEPARTMENTという表に挿入します。
+-- ただし、新しい部署に新しい管理者は割り当てません。</span>
+INSERT INTO DEPARTMENT (DEPTNO, DEPTNAME, ADMRDEPT)
+	VALUES ('B11', 'PURCHASING', 'B01'),
+	('E41', 'DATABASE ADMINISTRATION', 'E01')
+<span>--  EMP_ACTと同じ列を持つ、MA_EMP_ACTという
+-- 一時表を作ります。
+-- MA_EMP_ACTにEMP_ACTという表から、
+-- プロジェクト番号(PROJNO)が'MA'という文字で始まる行をロードします。</span>
+CREATE TABLE MA_EMP_ACT 
+    (
+	EMPNO CHAR(6)  NOT NULL, 
+	PROJNO CHAR(6)  NOT NULL, 
+	ACTNO SMALLINT  NOT NULL, 
+	EMPTIME DEC(5,2), 
+	EMSTDATE DATE, 
+	EMENDATE  DATE
+    );
+
+INSERT INTO MA_EMP_ACT
+	SELECT * FROM EMP_ACT
+	WHERE SUBSTR(PROJNO, 1, 2) = 'MA';
+<span>-- LOCATIONという列にDEFAULTの値を挿入します。</span>
+INSERT INTO DEPARTMENT
+      VALUES ('E31', 'ARCHITECTURE', '00390', 'E01', DEFAULT)
+</strong></pre>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">文の依存</h2> 
+<p>INSERT 文は挿入先の表や、その表の全てのコングロマリット(ヒープや索引などの記録の単位です。)や、文中のその他の表に依存します。準備されたINSERT文の対象表にて、索引や制約を作成したり破棄したりすると、その準備されたINSERT文は無効となります。</p>
+ </div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="crefsqlj39374.html" title="">文</a></div>
+</div>
+</div>
+
+</body>
+</html>

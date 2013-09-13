@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Configuring deadlock detection and lock wait timeouts" />
+<meta name="abstract" content="You configure the amount of time a transaction waits before Derby does any deadlock checking with the derby.locks.deadlockTimeout property." />
+<meta name="description" content="You configure the amount of time a transaction waits before Derby does any deadlock checking with the derby.locks.deadlockTimeout property." />
+<meta content="deadlocks, configuring detection, configuring lock wait timeouts" name="DC.subject" />
+<meta content="deadlocks, configuring detection, configuring lock wait timeouts" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts53677.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts95005.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts89097.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts50894.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts32861.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts28436.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevconcepts16400" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Configuring deadlock detection and lock wait timeouts</title>
+</head>
+<body id="cdevconcepts16400"><a name="cdevconcepts16400"><!-- --></a>
+
+
+<h1 class="topictitle1">Configuring deadlock detection and lock wait timeouts</h1>
+
+
+
+<div><p>You configure the amount of time a transaction waits before <span>Derby</span> does any deadlock checking
+with the <em>derby.locks.deadlockTimeout</em> property.</p>
+
+<p>You configure the amount of time a transaction waits before timing out
+with the <samp class="codeph"><em>derby.locks.waitTimeout</em></samp> property. When configuring
+your database or system, you should consider these properties together. For
+example, in order for any deadlock checking to occur, the <samp class="codeph"><em>derby.locks.deadlockTimeout</em></samp> property
+must be set to a value lower than the <samp class="codeph"><em>derby.locks.waitTimeout</em></samp> property.
+If it is set to a value equal to or higher than the <samp class="codeph"><em>derby.locks.waitTimeout</em></samp>,
+the transaction times out before <span>Derby</span> does
+any deadlock checking.</p>
+
+<p>By default, <em>derby.locks.waitTimeout</em> is
+set to 60 seconds. -1 is the equivalent of no wait timeout. This means that
+transactions never time out, although <span>Derby</span> can
+choose a transaction as a deadlock victim.</p>
+
+<p>In the following figure, <samp class="codeph"><em>derby.locks.deadlockTimeout</em></samp>
+is set to 30 seconds, while <samp class="codeph"><em>derby.locks.waitTimeout</em></samp> has
+no limit.</p>
+
+<div class="fignone" id="cdevconcepts16400__cdevconcepts27089"><a name="cdevconcepts16400__cdevconcepts27089"><!-- --></a><span class="figcap">Figure 1. Configuration with
+deadlock checking after 30 seconds and no lock wait timeouts</span>
+<br /><img src="lockwa3.gif" alt="This figure shows a configuration in which transactions are never aborted unless they are selected as the victim when deadlocks are checked. If at 30 seconds there is no deadlock, the transaction will wait until it can obtain a lock (or forever)." /><br />
+</div>
+
+<p>In the following figure, <samp class="codeph"><em>derby.locks.deadlockTimeout</em></samp>
+is set to 60 seconds, while <samp class="codeph"><em>derby.locks.waitTimeout</em></samp> is
+set to 90 seconds.</p>
+
+<div class="fignone" id="cdevconcepts16400__cdevconcepts91443"><a name="cdevconcepts16400__cdevconcepts91443"><!-- --></a><span class="figcap">Figure 2. Configuration with
+deadlock checking after 60 seconds and lock wait timeout at 90 seconds</span>
+<br /><img src="lockwa1.gif" alt="This figure shows a configuration where deadlock checking occurs after a transaction has waited 60 seconds for a lock. After it has waited for 90 seconds, the transaction times out and is rolled back." /><br />
+</div>
+
+<p>In the following figure, <samp class="codeph"><em>derby.locks.deadlockTimeout</em></samp>
+is set to 60 seconds, while <samp class="codeph"><em>derby.locks.waitTimeout</em></samp> is
+set to 50 seconds, lower than the deadlock timeout limit.</p>
+
+<div class="fignone" id="cdevconcepts16400__cdevconcepts14875"><a name="cdevconcepts16400__cdevconcepts14875"><!-- --></a><span class="figcap">Figure 3. Configuration with
+no deadlock checking and a 50-second lock wait timeout</span>
+<br /><img src="lockwa2.gif" alt="This figure shows a configuration where no deadlock checking occurs. The transactions time out after they have waited 50 seconds." /><br />
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts28436.html" title="In a database, a deadlock is a situation in which two or more transactions are waiting for one another to give up locks.">Deadlocks</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevconcepts53677.html" title="Using both row-level locking and the TRANSACTION_READ_COMMITTED isolation level makes it likely that you will avoid deadlocks (both settings are Derby defaults). However, deadlocks are still possible.">Avoiding deadlocks</a></div>
+<div><a href="cdevconcepts95005.html" title="When a transaction waits more than a specific amount of time to obtain a lock (called the deadlock timeout), Derby can detect whether the transaction is involved in a deadlock.">Deadlock detection</a></div>
+<div><a href="cdevconcepts89097.html" title="Even if a transaction is not involved in a deadlock, it might have to wait a considerable amount of time to obtain a lock because of a long-running transaction or transactions holding locks on the tables it needs.">Lock wait timeouts</a></div>
+<div><a href="cdevconcepts50894.html" title="If deadlocks occur frequently in your multi-user system with a particular application, you might need to do some debugging.">Debugging Deadlocks</a></div>
+<div><a href="cdevconcepts32861.html" title="When you configure your system for deadlock and lockwait timeouts and an application could be chosen as a victim when the transaction times out, you should program your application to handle them.">Programming applications to handle deadlocks</a></div>
+</div>
+</div>
+
+</body>
+</html>

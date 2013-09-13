@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Granting permissions to Derby" />
+<meta name="abstract" content="This section discusses which permissions should be granted to Derby (the code base derby.jar)." />
+<meta name="description" content="This section discusses which permissions should be granted to Derby (the code base derby.jar)." />
+<meta content="Permissions, granting to Derby" name="DC.subject" />
+<meta content="Permissions, granting to Derby" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure871387.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcbabejdfj.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevbabejgjd" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Granting permissions to Derby</title>
+</head>
+<body id="cdevbabejgjd"><a name="cdevbabejgjd"><!-- --></a>
+
+
+<h1 class="topictitle1">Granting permissions to Derby</h1>
+
+
+
+<div><p>This section discusses which permissions should be granted to <span>Derby</span> (the code base
+<samp class="codeph">derby.jar</samp>).</p>
+
+<p>See "Default Policy Implementation and Policy File Syntax" at
+<a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/PolicyFiles.html" target="_blank">http://docs.oracle.com/javase/7/docs/technotes/guides/security/PolicyFiles.html</a>
+for more information about creating policy files.</p>
+
+<div class="section"><h2 class="sectiontitle">Mandatory permissions</h2><dl>
+<dt class="dlterm">permission java.lang.RuntimePermission createClassLoader</dt>
+
+<dd>Mandatory. It allows <span>Derby</span> to
+execute SQL queries and supports loading class files from jar files stored
+in the database.</dd>
+
+
+<dt class="dlterm">permission java.util.PropertyPermission "derby.*", "read"</dt>
+
+<dd>Allows <span>Derby</span> to read
+individual <span>Derby</span> properties
+set in the JVM machine's system set. If the action is denied, properties in the JVM machine's
+system set are ignored.</dd>
+
+
+<dt class="dlterm">permission java.util.PropertyPermission "derby.storage.jvmInstanceId",
+"write"</dt>
+
+<dd>This property is used by Derby to prevent the accidental boot of the database
+by two class loaders. If the database is booted by two class loaders, database
+corruption can occur. 
+If write permission for this property is not granted, a message is printed
+to the log file which indicates that the <span>Derby</span> database
+is not protected from dual boot and possible corruption.</dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Database access permissions</h2><dl>
+<dt class="dlterm">permission java.io.FilePermission "directory${/}/-", "read,write,delete"</dt>
+
+<dd>Allows <span>Derby</span> to manage
+files within the database that maps to the directory specified. For read-only
+databases, only the "read" action needs to be granted.</dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Optional permissions</h2><dl>
+<dt class="dlterm">permission java.io.FilePermission "${derby.system.home}", "read,write"</dt>
+
+<dd>Allows <span>Derby</span> to determine
+the system directory when set by <em>derby.system.home </em>and create it if
+needed. If the system directory already exists then only the "read" permission
+needs to be granted.</dd>
+
+
+<dt class="dlterm">permission java.util.PropertyPermission "user.dir", "read"</dt>
+
+<dd>Permits access to the system directory value if <em>derby.system.home</em> is
+not set or no permission has been granted to read the <em>derby.system.home</em> property.</dd>
+
+
+<dt class="dlterm">permission java.util.PropertyPermission "sun.arch.data.model", "read"</dt>
+
+<dd>If set by the JVM, this is the definite answer to whether the system is 32 or 64 bit.</dd>
+
+
+<dt class="dlterm">permission java.util.PropertyPermission "os.arch", "read"</dt>
+
+<dd>Used by <span>Derby</span> to determine if the
+system is 32 or 64 bit, if the system property <em>sun.arch.data.model</em> isn't set by
+the JVM. <span>Derby</span> has to recognize the value of
+<em>os.arch</em> to determine if the system is 32 or 64 bit, and if the value isn't recognized
+a heuristic will be used instead.</dd>
+
+
+<dt class="dlterm">permission java.io.FilePermission "${derby.system.home}${/}derby.properties",
+"read"</dt>
+
+<dd>Allows <span>Derby</span> to read
+the system properties file from the system directory.</dd>
+
+
+<dt class="dlterm">permission java.io.FilePermission "${derby.system.home}${/}derby.log",
+"read,write,delete"</dt>
+
+<dt class="dlterm">permission java.io.FilePermission "${user.dir}${/}derby.log", "read,write,delete";</dt>
+
+<dd>Only one of these permissions is needed. Permits the application to read,
+write, and delete to the <span>Derby</span> log
+file, unless the log has been re-directed. (See the <em>derby.stream.error</em> properties
+in the <span><em>Derby Reference Manual</em></span> for more
+information.) If one of the requested valid actions is denied, the <span>Derby</span> log
+will be <samp class="codeph">java.lang.System.err</samp>.</dd>
+
+
+<dt class="dlterm">permission java.security.SecurityPermission "getPolicy"</dt>
+
+<dd>You need this permission if you want to change the security policy on
+the fly and reload it into a running system. Given this permission, a DBA
+can reload the policy file by calling the <samp class="codeph">SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY</samp> system
+procedure. For more information, see the section which describes this procedure
+in the <span><em>Derby Reference Manual</em></span>. </dd>
+
+
+<dt class="dlterm">permission java.lang.RuntimePermission "setContextClassLoader"</dt>
+
+<dd>Allows <span>Derby</span> to set the context class loader for long running threads to null to avoid potential for class loader leaks in application server environments when the application server starts <span>Derby</span> in a custom class loader. </dd>
+
+
+<dt class="dlterm">permission java.lang.RuntimePermission "getClassLoader"</dt>
+
+<dd> This permission is also needed when setting the context class loader to avoid class loader leaks. The class loader for the parent is saved and set to null before creation of the thread and restored afterwards. </dd>
+
+
+<dt class="dlterm">permission java.lang.RuntimePermission "getStackTrace";</dt>
+
+<dt class="dlterm">permission java.lang.RuntimePermission "modifyThreadGroup";</dt>
+
+<dd>These two permissions are needed to allow extended diagnostics, specifically
+the stack traces of all threads, to be dumped to <em>derby.log</em> on severe
+errors and when the <em>derby.stream.error.extendedDiagSeverityLevel</em> property
+is set. See the documentation of this property in the
+<span><em>Derby Reference Manual</em></span> for details.</dd>
+
+
+<dt class="dlterm">permission javax.management.MBeanServerPermission "createMBeanServer";</dt>
+
+<dd>Allows <span>Derby</span> to create an
+MBean server. If the JVM running
+<span>Derby</span> supports the platform
+MBean server, <span>Derby</span> will
+automatically try to create such a server if it does not already exist. For
+details, see "Using Java Management Extensions (JMX) technology" in the
+<span><em>Derby Server and Administration Guide</em></span>.</dd>
+
+
+<dt class="dlterm">permission javax.management.MBeanPermission "org.apache.derby.*#[org.apache.derby:*]","registerMBean,unregisterMBean";</dt>
+
+<dd>Allows <span>Derby</span> to register
+and unregister its (JMX) MBeans. Such MBeans are associated with the domain
+<samp class="codeph">org.apache.derby</samp>, which is also the prefix of the fully
+qualified class name of all
+<span>Derby</span> MBeans. For more
+information about the <span>Derby</span>
+MBeans, refer to the public API (Javadoc) documentation of the package
+<samp class="codeph">org.apache.derby.mbeans</samp> and its subpackages. It is possible to fine-tune
+this permission, for example in order to allow access only to certain MBeans.
+To fine-tune this permission, see the API documentation for
+<samp class="codeph">javax.management.MBeanPermission</samp>
+or the JMX Instrumentation and Agent Specification.
+</dd>
+
+
+<dt class="dlterm">permission javax.management.MBeanTrustPermission "register";</dt>
+
+<dd>Trusts <span>Derby</span> code to be
+the source of MBeans and to register these in the MBean server.</dd>
+
+
+<dt class="dlterm">permission java.net.SocketPermission "localhost:389", "connect,resolve";</dt>
+
+<dd>Allows <span>Derby</span> code to
+contact the LDAP server to perform authentication. This permission must be
+granted to <samp class="codeph">derby.jar</samp>. Port 389 is the default LDAP port.</dd>
+
+
+<dt class="dlterm">permission java.sql.SQLPermission "callAbort";</dt>
+
+<dd>Allows <span>Derby</span> code to call
+the <samp class="codeph">java.sql.Connection.abort</samp> method. This permission must be
+granted both to the <span>Derby</span>
+JDBC driver (by granting it to <samp class="codeph">derby.jar</samp> and
+<samp class="codeph">derbyclient.jar</samp>) and to the application code that calls
+<samp class="codeph">Connection.abort()</samp>. Do not grant this permission to application
+code unless you are certain that only superusers can invoke the code.</dd>
+
+
+</dl>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Combining permissions</h2><div class="p">You might grant one <em>FilePermission</em> that
+encompasses several or all of the permissions instead of separately granting
+a number of the more specific permissions. For example:<pre>permission java.io.FilePermission "${derby.system.home}/-", "read,write,delete";</pre>
+
+This allows the <span>Derby</span> engine
+complete access to the system directory and any databases contained in the
+system directory.</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcbabejdfj.html" title="When running within an application or application server with a Java security manager enabled, Derby must be granted certain permissions to execute and access database files.">Running Derby under a security manager</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecure871387.html" title="">Examples of Java security policy files for embedded Derby</a></div>
+</div>
+</div>
+
+</body>
+</html>

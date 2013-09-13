@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Optimizer overrides" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth37648.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth853095.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth853133.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth853228.html" />
+<meta scheme="URI" name="DC.Relation" content="ctun_xplain_tables.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctundepthoptover" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Optimizer overrides</title>
+</head>
+<body id="ctundepthoptover"><a name="ctundepthoptover"><!-- --></a>
+
+
+<h1 class="topictitle1">Optimizer overrides</h1>
+
+<div>
+<p>RUNTIMESTATISTICS provides information about user-specified optimizer hints
+that were specified by using a  -- DERBY-PROPERTIES clause.</p>
+
+<div class="p">The following example shows a SELECT statement in which the optimizer was
+forced to use a particular index:<pre><strong>SELECT * FROM t1 -- DERBY-PROPERTIES index = t1_c1 
+FOR UPDATE OF c2, c1</strong></pre>
+</div>
+
+<div class="p">RUNTIMESTATISTICS returns the following information about this statement:<pre>Statement Name: 
+		 null
+Statement Text: select * from t1 --DERBY-PROPERTIES index = t1_c1 
+for update of c2, c1
+
+
+Parse Time: 0
+Bind Time: 0
+Optimize Time: 0
+Generate Time: 0
+Compile Time: 0
+Execute Time: 0
+Begin Compilation Timestamp : null
+End Compilation Timestamp : null
+Begin Execution Timestamp : null
+End Execution Timestamp : null
+Statement Execution Plan Text: 
+Index Row to Base Row ResultSet for T1:
+Number of opens = 1
+Rows seen = 4
+Columns accessed from heap = {0, 1, 2}
+		 constructor time (milliseconds) = 0
+		 open time (milliseconds) = 0
+		 next time (milliseconds) = 0
+		 close time (milliseconds) = 0
+                 User supplied optimizer overrides on T1 are { index=T1_C1 }
+		 Index Scan ResultSet for T1 using index T1_C1 at read committed isolation level 
+                 using exclusive row locking chosen by the optimizer
+		 Number of opens = 1
+		 Rows seen = 4
+		 Rows filtered = 0
+		 Fetch Size = 1
+		 		 constructor time (milliseconds) = 0
+		 		 open time (milliseconds) = 0
+		 		 next time (milliseconds) = 0
+		 		 close time (milliseconds) = 0
+		 		 next time in milliseconds/row = 0
+		 scan information: 
+		 		 Bit set of columns fetched=All
+		 		 Number of columns fetched=2
+		 		 Number of deleted rows visited=0
+		 		 Number of pages visited=1
+		 		 Number of rows qualified=4
+		 		 Number of rows visited=4
+		 		 Scan type=btree
+		 		 Tree height=1
+		 		 start position: 
+		 None
+		 		 stop position: 
+		 None
+		 		 qualifiers:
+None
+
+</pre>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctundepth37648.html" title="">Analyzing the information</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctundepth853095.html" title="">Statistics timing</a></div>
+<div><a href="ctundepth853133.html" title="">Statement execution plan</a></div>
+<div><a href="ctundepth853228.html" title="">Optimizer estimates</a></div>
+<div><a href="ctun_xplain_tables.html" title="">Understanding XPLAIN style database tables</a></div>
+</div>
+</div>
+
+</body>
+</html>

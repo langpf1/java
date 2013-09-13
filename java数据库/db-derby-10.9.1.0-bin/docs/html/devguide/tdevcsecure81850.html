@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Configuring security in an embedded environment" />
+<meta name="abstract" content="In an embedded environment, typically there is only one database per system and there are no administrative resources to protect databases." />
+<meta name="description" content="In an embedded environment, typically there is only one database per system and there are no administrative resources to protect databases." />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure42374.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure36595.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevcsecure82556.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure12392.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tdevcsecure81850" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Configuring security in an embedded environment</title>
+</head>
+<body id="tdevcsecure81850"><a name="tdevcsecure81850"><!-- --></a>
+
+
+<h1 class="topictitle1">Configuring security in an embedded environment</h1>
+
+
+
+<div><p>In an embedded environment, typically there is only one database
+per system and there are no administrative resources to protect databases.</p>
+
+<div class="section">To configure security in an embedded environment:</div>
+
+<ol>
+<li><span>Encrypt the database when you create it.</span></li>
+
+<li><span>Configure all security features as database-level properties. 
+These properties are stored in the database (which is encrypted). See
+<a href="cdevsetprop824451.html#cdevsetprop824451">Scope of properties</a> and 
+<a href="cdevsetprop12821.html#cdevsetprop12821">Setting database-wide properties</a> for more
+information.</span></li>
+
+<li><span>Turn on protection for database-level properties so that they cannot
+be overridden by system properties by setting the <em>derby.database.propertiesOnly</em> property
+to TRUE. See the <span><em>Derby Reference Manual</em></span> for details
+on this property.</span></li>
+
+<li><span>To prevent unauthorized users from accessing databases once they
+are booted, turn on user authentication and SQL authorization for the database.
+Use NATIVE authentication or, alternatively, LDAP or a user-defined
+class.</span></li>
+
+</ol>
+
+<div class="section" />
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure12392.html" title="In most cases, you enable Derby's security features through the use of properties. It is important to understand the best way of setting properties for your environment.">Configuring security for your environment</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecure42374.html" title="Derby provides support for user authentication and user authorization. User authentication determines whether a user is a valid user. It establishes the user's identity. User authorization determines what operations a user's established identity can perform. You are strongly urged to implement both authentication and authorization on any multi-user database used in production.">Working with user authentication</a></div>
+<div><a href="cdevcsecure36595.html" title="When you specify user authorizations, Derby verifies that a user has been granted permission to access a system, database, object, or SQL action.">User authorizations</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevcsecure82556.html" title="This procedure requires a system with multiple databases and some administrative resources.">Configuring security in a client/server environment</a></div>
+</div>
+</div>
+
+</body>
+</html>

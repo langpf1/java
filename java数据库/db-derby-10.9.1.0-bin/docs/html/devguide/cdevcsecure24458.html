@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Authorization identifiers, user authentication, and user authorization" />
+<meta name="abstract" content="When working with both user authentication and user authorization, you need to understand how user names are treated by each system." />
+<meta name="description" content="When working with both user authentication and user authorization, you need to understand how user names are treated by each system." />
+<meta content="Users, and schemas, Schemas, and users" name="DC.subject" />
+<meta content="Users, and schemas, Schemas, and users" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecureDbOwner.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure865580.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevcsecure622.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure36595.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure37241.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevcsecure24458" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Authorization identifiers, user authentication, and user authorization</title>
+</head>
+<body id="cdevcsecure24458"><a name="cdevcsecure24458"><!-- --></a>
+
+
+<h1 class="topictitle1">Authorization identifiers, user authentication, and user authorization</h1>
+
+
+
+<div><p>When working with both user authentication and user authorization,
+you need to understand how user names are treated by each system.</p>
+
+<p>If an external authentication system is used, the conversion of the user's
+name to an authorization identifier does not happen until <em>after</em> authentication
+has occurred but <em>before</em> user authorization. Imagine, for example, a
+user named Fred.</p>
+
+<ul>
+<li>Within the user authentication system, Fred is known as <em>FRed</em>. Your
+external user authorization service is case-sensitive, so Fred must always
+type his name that way.   <pre>Connection conn = DriverManager.getConnection(
+    "jdbc:derby:myDB", "FRed", "flintstone");</pre>
+</li>
+
+<li>Within the <span>Derby</span> user
+authorization system, Fred becomes a case-insensitive authorization identifier.
+Fred is known as <em>FRED</em>.</li>
+
+</ul>
+
+<p>Let's take a second example, where Fred has a slightly different name within
+the user authentication system.</p>
+
+<ul>
+<li>Within the user authentication system, Fred is known as <em>Fred!</em>.
+You must now put double quotes around the name, because it is not a valid <samp class="codeph"><em>SQL92Identifier</em></samp>.
+(<span>Derby</span> knows to remove
+the double quotes when passing the name to the external authentication system.)
+  <pre>Connection conn = DriverManager.getConnection(
+    "jdbc:derby:myDB", "\"Fred!\"", "flintstone");</pre>
+</li>
+
+<li>Within the <span>Derby</span> user
+authorization system, <em>Fred</em> becomes a case-sensitive authorization identifier.
+Fred is known as <em>Fred!</em>.</li>
+
+</ul>
+
+<p>As shown in the first example, your external authentication system may
+be case-sensitive, whereas the authorization identifier within <span>Derby</span> may
+not be. If your authentication system allows two distinct users whose names
+differ by case, delimit all user names within the connection request to make
+all user names case-sensitive within the <span>Derby</span> system.
+In addition, you must also delimit user names that do not conform to <em>SQL92Identifier</em> rules
+with double quotes.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure37241.html" title="User names within the Derby system are known as authorization identifiers. The authorization identifier is a string that represents the name of the user, if one was provided in the connection request.">Users and authorization identifiers</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecureDbOwner.html" title="The term database owner refers to the current authorization identifier when the database is created, that is, the user creating the database. If you use NATIVE authentication, or if you manually enable or plan to enable SQL authorization, controlling the identity of the database owner becomes important.">Database owner</a></div>
+<div><a href="cdevcsecure865580.html" title="User names can affect a user's default schema.">User names and schemas</a></div>
+<div><a href="cdevcsecure36595.html" title="When you specify user authorizations, Derby verifies that a user has been granted permission to access a system, database, object, or SQL action.">User authorizations</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rdevcsecure622.html" title="Specifying an invalid authorization identifier in a database user authorization property raises an exception. Specifying an invalid authorization identifier in a connection request raises an exception.">Exceptions when using authorization identifiers</a></div>
+</div>
+</div>
+
+</body>
+</html>

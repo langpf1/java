@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Prevent the user from issuing expensive queries" />
+<meta content="Expensive queries, importance of avoiding, how to avoid" name="DC.subject" />
+<meta content="Expensive queries, importance of avoiding, how to avoid" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth10525.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth23033.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctundepth36205" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Prevent the user from issuing expensive queries </title>
+</head>
+<body id="ctundepth36205"><a name="ctundepth36205"><!-- --></a>
+
+
+<h1 class="topictitle1">Prevent the user from issuing expensive queries </h1>
+
+
+<div>
+<div class="p">Some applications have complete control over the queries that they issue;
+the queries are built into the applications. Other applications allow users
+to construct queries by filling in fields on a form. Any time you let users
+construct ad-hoc queries, you risk the possibility that the query a user constructs
+will be one like the following:   
+<pre><strong>SELECT * FROM ExtremelyHugeTable
+ORDER BY unIndexedColumn</strong></pre>
+</div>
+
+<p>This statement has no WHERE clause. It will require a full table scan.
+To make matters worse, <span>Derby</span> will then have to order the data. Most
+likely, the user does not want to browse through all 100,000 rows, and does
+not care whether the rows are all in order.</p>
+
+<p>Do everything you can to avoid table scans and sorting of large results
+(such as table scans).</p>
+
+<div class="p">Some things you can do to disallow such runaway queries:  
+<ul>
+<li>Use client-side checking to make sure some minimal fields are always filled
+in. Eliminate or disallow queries that cannot use indexes and are not optimizable.
+In other words, force an optimizable WHERE clause by making sure that the
+columns on which an index is built are included in the WHERE clause of the
+query. Reduce or disallow DISTINCT clauses (which often require sorting) on
+large tables.</li>
+
+<li>For queries with large results, do not let the database do the ordering.
+Retrieve data in chunks (provide a Next button to allow the user to retrieve
+the next chunk, if desired), and order the data in the application.</li>
+
+<li>Do not use SELECT DISTINCT to populate lists; instead, maintain a separate
+table of the unique items.</li>
+
+</ul>
+</div>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctundepth10525.html" title="">Avoiding table scans of large tables</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctundepth23033.html" title="">Always create indexes</a></div>
+</div>
+</div>
+
+</body>
+</html>

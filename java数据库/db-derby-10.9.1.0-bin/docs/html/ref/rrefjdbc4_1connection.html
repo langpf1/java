@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="java.sql.Connection interface: JDBC 4.1 features" />
+<meta content="Connection interface, abort method" name="DC.subject" />
+<meta content="Connection interface, abort method" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_1summary.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc4_1connection" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>java.sql.Connection interface: JDBC 4.1 features</title>
+</head>
+<body id="rrefjdbc4_1connection"><a name="rrefjdbc4_1connection"><!-- --></a>
+
+
+<h1 class="topictitle1">java.sql.Connection interface: JDBC 4.1 features</h1>
+
+
+<div>
+<div class="section">
+<p>
+JDBC 4.1 adds new features to the <em>Connection</em> interface:
+</p>
+
+<ul>
+<li><strong>Aborting connections</strong> - The <em>abort(Executor)</em> method aborts
+a running connection. Outstanding transactional work is rolled back, and the
+physical connection to the database is destroyed. When running under a Java
+<em>SecurityManager</em>, this method can be called only if
+<em>SQLPermission("callAbort")</em> has been granted both to the
+<span>Derby</span> JDBC driver (in
+<em>derby.jar</em> and <em>derbyclient.jar</em>) and to the
+application code that calls <em>Connection.abort()</em>. For security reasons,
+permission to execute this method should not be granted lightly. Do not grant
+this permission to application code unless you are certain that only superusers
+can invoke the code. For more information, see "Granting permissions to 
+<span>Derby</span>" in the
+<span><em>Derby Developer's Guide</em></span>.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc4_1summary.html" title="">JDBC 4.1-only features</a></div>
+</div>
+</div>
+
+</body>
+</html>

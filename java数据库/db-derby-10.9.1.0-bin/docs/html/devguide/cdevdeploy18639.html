@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Embedded systems and properties" />
+<meta name="abstract" content="Database-wide properties are stored in the database and are simpler for deployment, while system-wide parameters might be easier for development." />
+<meta name="description" content="Database-wide properties are stored in the database and are simpler for deployment, while system-wide parameters might be easier for development." />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy855368.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy855655.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy15325.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp19297.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdeploy26887.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy855655.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdeploy18639" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Embedded systems and properties</title>
+</head>
+<body id="cdevdeploy18639"><a name="cdevdeploy18639"><!-- --></a>
+
+
+<h1 class="topictitle1">Embedded systems and properties</h1>
+
+
+
+<div><p>Database-wide properties are stored in the database and are simpler
+for deployment, while system-wide parameters might be easier for development.</p>
+
+<ul>
+<li>If you are setting any system-wide properties, see if they can be set
+as database-wide properties instead.</li>
+
+<li>Are any properties being set in the <em>derby.properties</em> file? Some
+properties can only be set on a system-wide basis. If so, deploy the entire
+system directory along with the properties file. Deploy only those databases
+that you wish to include. Setting properties programmatically can simplify
+this step- you will not have to worry about deploying the system directory/properties
+file.</li>
+
+</ul>
+
+<p>Extra steps are required for deploying an application and an embedded database
+on read-only media.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdeploy855655.html" title="You can embed Derby in any Java application (single- or multi-user) by deploying the following packages.">Deploying Derby in an embedded environment</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdeploy855368.html" title="In an embedded environment, Derby runs in the same JVM as the application.">Embedded deployment application overview</a></div>
+<div><a href="cdevdeploy855655.html" title="You can embed Derby in any Java application (single- or multi-user) by deploying the following packages.">Deploying Derby in an embedded environment</a></div>
+<div><a href="cdevdeploy15325.html" title="You can create Derby databases for use on read-only media such as CD-ROMs.">Creating Derby databases for read-only use</a></div>
+<div><a href="cdevdvlp19297.html" title="When developing Derby applications, create a single directory to hold your database or databases.">Recommended practices</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevdeploy26887.html" title="To create databases for use on read-only media, perform these steps.">Creating and preparing the database for read-only use</a></div>
+</div>
+</div>
+
+</body>
+</html>

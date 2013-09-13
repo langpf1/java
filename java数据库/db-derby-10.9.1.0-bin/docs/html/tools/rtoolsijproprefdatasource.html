@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="ij.dataSource property" />
+<meta content="ij.dataSource property" name="DC.subject" />
+<meta content="ij.dataSource property" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref29864.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref10135.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref28146.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref41073.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefexceptiontrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref28788.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref32585.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefpassword.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref35032.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref12236.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref25589.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefshownoconn.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefshownoselectcount.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref38481.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefuser.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref97949.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijlocale.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsijproprefdatasource" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>ij.dataSource property</title>
+</head>
+<body id="rtoolsijproprefdatasource"><a name="rtoolsijproprefdatasource"><!-- --></a>
+
+
+<h1 class="topictitle1">ij.dataSource property</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">Function</h2><p>The <samp class="codeph">ij.dataSource</samp> property
+specifies the datasource to be used to access the database. When specifying
+a datasource, <samp class="codeph">ij</samp> does
+not use the DriverManager mechanism to establish connections. </p>
+ </div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+When you set the <samp class="codeph">ij.dataSource</samp> property <samp class="codeph">ij</samp> will automatically try to connect to a database. To establish a connection to a specific database using <samp class="codeph">ij.dataSource</samp>, set the <samp class="codeph">ij.dataSource.databaseName</samp> property. If you do not set this property, <samp class="codeph">ij</samp> will start with an error. 
+If you want to create the database, specify the <samp class="codeph">ij.dataSource.createDatabase</samp> property as well as <samp class="codeph">ij.dataSource.databaseName</samp>. 
+Do not specify <samp class="codeph">ij.protocol</samp> when setting <samp class="codeph">ij.dataSource</samp> as that would activate the DriverManager mechanism. 
+<pre>ij.dataSource=<var class="varname">datasource class name</var>
+ij.dataSource.databaseName=<var class="varname">databasename</var>
+[ij.dataSource.createDatabase=create]</pre>
+
+If you do not specify <samp class="codeph">ij.dataSource.databaseName</samp> and get an error indicating no database was found, you can still connect to a database by using <samp class="codeph">ij</samp>'s 
+<a href="rtoolsijcomref22318.html#rtoolsijcomref22318"><samp class="codeph">connect</samp> command</a>. 
+You should not specify the protocol (for example jdbc:derby:) in the <samp class="codeph">connect</samp> command when using <samp class="codeph">ij.dataSource</samp>.
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example 1</h2> 
+<p>In the following example, <samp class="codeph">ij</samp> connects to a database named 
+<samp class="codeph">sample</samp> using an <samp class="codeph">EmbeddedDataSource</samp>. The 
+<samp class="codeph">sample</samp> database is created if it does not already exist.
+</p>
+
+<pre>
+<var class="varname">#
+# If your application runs on JDK 1.6 or higher, then you should
+# specify the JDBC4 variant of this DataSource:
+# org.apache.derby.jdbc.EmbeddedDataSource40.
+# If your application runs with a jvm supporting JSR169, you cannot use
+# org.apache.derby.jdbc.EmbeddedDataSource, instead, use: 
+# org.apache.derby.jdbc.EmbeddedSimpleDataSource.
+#</var><strong>
+java -Dij.dataSource=org.apache.derby.jdbc.EmbeddedDataSource
+-Dij.dataSource.databaseName=sample -Dij.dataSource.createDatabase=create
+  org.apache.derby.tools.ij</strong>
+ij version <span>10.9</span> 
+CONNECTION0*
+* = current connection
+ij&gt; </pre>
+ </div>
+
+<div class="example"><h2 class="sectiontitle">Example 2</h2> 
+<p>In the following example, <samp class="codeph">ij</samp> starts using an 
+<samp class="codeph">EmbeddedSimpleDataSource</samp>, without specifying 
+<samp class="codeph">ij.dataSource.databaseName</samp>. This results in an error indicating 
+no database was found. After the error, the <samp class="codeph">connect</samp> command 
+is used to create and connect to a database named <samp class="codeph">smalldb</samp>.
+</p>
+
+<pre>
+<var class="varname">#
+# Start ij using EmbeddedSimpleDataSource
+#</var><strong>
+java -Dij.dataSource=org.apache.derby.jdbc.EmbeddedSimpleDataSource
+  org.apache.derby.tools.ij</strong> 
+ERROR XJ004: Database '' not found.
+ij version <span>10.9</span> 
+ij&gt; connect 'smalldb;create=true'; 
+ij&gt; </pre>
+ </div>
+
+<div class="section">For more information about DataSources, refer to the JDBC documentation
+and "Using <span>Derby</span> as a
+J2EE Resource Manager" in the <cite><span><em>Derby Developer's Guide</em></span></cite>.</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rtoolsijpropref29864.html" title="">ij properties reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsijpropref10135.html" title="">ij.connection.connectionName property</a></div>
+<div><a href="rtoolsijpropref28146.html" title="">ij.database property</a></div>
+<div><a href="rtoolsijpropref41073.html" title="">ij.driver property</a></div>
+<div><a href="rtoolsijproprefexceptiontrace.html" title="">ij.exceptionTrace property</a></div>
+<div><a href="rtoolsijpropref28788.html" title="">ij.maximumDisplayWidth property</a></div>
+<div><a href="rtoolsijpropref32585.html" title="">ij.outfile property</a></div>
+<div><a href="rtoolsijproprefpassword.html" title="">ij.password property</a></div>
+<div><a href="rtoolsijpropref35032.html" title="">ij.protocol property</a></div>
+<div><a href="rtoolsijpropref12236.html" title="">ij.protocol.protocolName property</a></div>
+<div><a href="rtoolsijpropref25589.html" title="">ij.showErrorCode property</a></div>
+<div><a href="rtoolsijproprefshownoconn.html" title="">ij.showNoConnectionsAtStart property</a></div>
+<div><a href="rtoolsijproprefshownoselectcount.html" title="">ij.showNoCountForSelect property</a></div>
+<div><a href="rtoolsijpropref38481.html" title="">ij.URLCheck property</a></div>
+<div><a href="rtoolsijproprefuser.html" title="">ij.user property</a></div>
+<div><a href="rtoolsijpropref97949.html" title="">derby.ui.codeset property</a></div>
+<div><a href="rtoolsijlocale.html" title="">derby.ui.locale property</a></div>
+</div>
+</div>
+
+</body>
+</html>

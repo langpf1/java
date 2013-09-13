@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Shielding users from Derby class-loading events" />
+<meta content="Class loading, when it occurs in Derby, how to minimize impact of" name="DC.subject" />
+<meta content="Class loading, when it occurs in Derby, how to minimize impact of" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth21935.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth10525.html" />
+<meta scheme="URI" name="DC.Relation" content="ctundepth29804.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctundepth14326" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Shielding users from Derby class-loading events</title>
+</head>
+<body id="ctundepth14326"><a name="ctundepth14326"><!-- --></a>
+
+
+<h1 class="topictitle1">Shielding users from Derby class-loading events</h1>
+
+
+<div>
+<p>JVMs tend to load classes as they are needed, which means the first time
+you need a class in a piece of software, it takes longer to use.</p>
+
+<div class="p"><span>Derby</span> has three clear
+cases when a lot of class loading occurs:   <ul>
+<li><em>When the system boots</em>   <p>The system boots when you load the embedded
+driver, <em>org.apache.derby.</em><em>jdbc.EmbeddedDriver</em>. In a server framework,
+the system boots when you start the server framework. Booting <span>Derby</span> loads
+basic <span>Derby</span> classes.</p>
+</li>
+
+<li><em>When the first database boots</em>   <p>Booting the first database loads
+some more <span>Derby</span> classes.
+The default behavior is that the first database boots when the first connection
+is made to it. You can also configure the system to boot databases at startup.
+Depending on your application, one or the other might be preferable. </p>
+</li>
+
+<li><em>When you compile the first query</em>   <p>Compiling the first query
+loads additional classes.</p>
+</li>
+
+</ul>
+</div>
+
+<p>For any of these events, you can control the impact they have on users
+by starting them in separate threads while other tasks are occurring.</p>
+
+<p>In addition, if you are using <em>PreparedStatements</em>, prepare them in
+a separate thread in the background while other tasks are occurring.</p>
+
+<div class="section"><h2 class="sectiontitle">Tuning tips for multi-user systems</h2>
+<ul>
+<li>For concurrency, use row-level locking and the READ_COMMITTED isolation
+level.</li>
+
+<li>For read-only applications, use table-level locking and the READ_COMMITTED
+isolation level.</li>
+
+<li>Boot databases at startup to minimize the impact of connecting.</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Tuning tips for single-user systems</h2>
+<ul>
+<li><span>Derby</span> boots when you
+first load the embedded JDBC driver (<em>org.apache.derby.</em><em>jdbc.EmbeddedDriver</em>).
+Load this driver during the least time-sensitive portion of your program,
+such as when it is booting or when you are waiting for user input. For server
+frameworks, the driver is loaded automatically when the server boots.</li>
+
+<li>Boot the database at connection (the default behavior), not at startup.
+Connect in a background thread if possible.</li>
+
+<li>Turn off row-level locking and use READ_COMMITTED isolation level.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctundepth21935.html" title="">Application and database design issues</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctundepth10525.html" title="">Avoiding table scans of large tables</a></div>
+<div><a href="ctundepth29804.html" title="">Avoiding compiling SQL statements</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="ij.URLCheck property" />
+<meta content="Attributes to database connection URL, validating in ij, URL attributes, verifying in ij, ij.URLCheck property" name="DC.subject" />
+<meta content="Attributes to database connection URL, validating in ij, URL attributes, verifying in ij, ij.URLCheck property" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref29864.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref10135.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref28146.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefdatasource.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref41073.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefexceptiontrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref28788.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref32585.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefpassword.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref35032.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref12236.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref25589.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefshownoconn.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefshownoselectcount.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefuser.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref97949.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijlocale.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsijpropref38481" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>ij.URLCheck property</title>
+</head>
+<body id="rtoolsijpropref38481"><a name="rtoolsijpropref38481"><!-- --></a>
+
+
+<h1 class="topictitle1">ij.URLCheck property</h1>
+
+<div>
+<div class="section"><h2 class="sectiontitle">Function</h2>
+<p>This property determines whether <samp class="codeph">ij</samp> checks for invalid or non-<span>Derby</span> URL
+attributes when you are using the embedded driver. Set this property to <em>false</em> to prevent <samp class="codeph">ij</samp> from validating URL attributes. The default value is <em>true</em>.</p>
+
+<div class="p">When the <em>ij.URLCheck</em> property is set to <em>true</em>, you are notified whenever a connection URL contains an incorrectly
+specified attribute. For example if the attribute name is misspelled or cased
+incorrectly <samp class="codeph">ij</samp> prints a message.  
+<div class="note"><span class="notetitle">Note: </span><samp class="codeph">ij</samp> checks
+attribute <em>values</em> if the attribute has pre-defined
+values. For example, the attribute <em>shutdown</em> has the
+pre-defined values of <em>true</em> or <em>false</em>. If you try to set the attribute <em>shutdown</em> to a value other than
+<em>true</em> or <em>false</em>, <samp class="codeph">ij</samp> displays an error. For example:  
+<pre>ij&gt; <strong>Connect 'jdbc:derby:anyDB;shutdown=rue';</strong>
+ERROR XJ05B: JDBC attribute 'shutdown' has an invalid value 'rue',
+valid values are '{true|false}'.
+ij&gt;</pre>
+</div>
+</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>ij.URLCheck={ false | true }</strong></pre>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<div class="p">By default, <samp class="codeph">ij</samp> displays messages about invalid attributes:  
+<pre><strong>java org.apache.derby.tools.ij</strong>
+ij version <span>10.9</span> 
+ij&gt; <strong>connect 'mydb;uSer=naomi';</strong>
+URL Attribute [uSer=naomi]
+   Case of the <span>Derby</span> attribute is incorrect.</pre>
+</div>
+
+<div class="p">The following command line specifies to turn off URL attribute checking
+in <samp class="codeph">ij</samp>.   
+<pre><strong>java -Dij.URLCheck=false org.apache.derby.tools.ij</strong>
+ij version <span>10.9</span> 
+ij&gt; <strong>connect 'mydb;uSer=naomi';</strong>
+ij&gt;</pre>
+</div>
+
+<p>Typically, you would only explicitly turn off the URL checker if you were
+using <samp class="codeph">ij</samp> with a non-<span>Derby</span> JDBC driver or database.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Notes</h2>
+<p>The URL checker does not check the validity of properties, only database connection URL <em>attributes</em>.</p>
+
+<p>For a list of attributes, see "Setting attributes for the database
+connection URL" in the <span><em>Derby Reference Manual</em></span>. Because
+the <em>ij.URLCheck</em> property is valid only with the embedded driver, it does
+not apply to attributes such as <em>securityMechanism=value</em>,
+<em>ssl=sslMode</em>, and the attributes related to tracing.</p>
+
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rtoolsijpropref29864.html" title="">ij properties reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsijpropref10135.html" title="">ij.connection.connectionName property</a></div>
+<div><a href="rtoolsijpropref28146.html" title="">ij.database property</a></div>
+<div><a href="rtoolsijproprefdatasource.html" title="">ij.dataSource property</a></div>
+<div><a href="rtoolsijpropref41073.html" title="">ij.driver property</a></div>
+<div><a href="rtoolsijproprefexceptiontrace.html" title="">ij.exceptionTrace property</a></div>
+<div><a href="rtoolsijpropref28788.html" title="">ij.maximumDisplayWidth property</a></div>
+<div><a href="rtoolsijpropref32585.html" title="">ij.outfile property</a></div>
+<div><a href="rtoolsijproprefpassword.html" title="">ij.password property</a></div>
+<div><a href="rtoolsijpropref35032.html" title="">ij.protocol property</a></div>
+<div><a href="rtoolsijpropref12236.html" title="">ij.protocol.protocolName property</a></div>
+<div><a href="rtoolsijpropref25589.html" title="">ij.showErrorCode property</a></div>
+<div><a href="rtoolsijproprefshownoconn.html" title="">ij.showNoConnectionsAtStart property</a></div>
+<div><a href="rtoolsijproprefshownoselectcount.html" title="">ij.showNoCountForSelect property</a></div>
+<div><a href="rtoolsijproprefuser.html" title="">ij.user property</a></div>
+<div><a href="rtoolsijpropref97949.html" title="">derby.ui.codeset property</a></div>
+<div><a href="rtoolsijlocale.html" title="">derby.ui.locale property</a></div>
+</div>
+</div>
+
+</body>
+</html>

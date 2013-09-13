@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="java.sql.Blobインターフェイスとjava.sql.Clobインターフェイスの対応" />
+<meta content="java.sql.Blob interface, java.sql.Clob interface, BLOB data type, CLOB data type" name="DC.subject" />
+<meta content="java.sql.Blob interface, java.sql.Clob interface, BLOB data type, CLOB data type" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20377.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjavbclobnot.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc96386" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>java.sql.Blobインターフェイスとjava.sql.Clobインターフェイスの対応</title>
+</head>
+<body id="rrefjdbc96386"><a name="rrefjdbc96386"><!-- --></a>
+
+
+<h1 class="topictitle1">java.sql.Blobインターフェイスとjava.sql.Clobインターフェイスの対応</h1>
+
+
+<div>
+<div class="section"><p>JDBC 2.0では<em>java.sql.Blob</em>はSQLのBLOB(binary large object)型に対応して、<em>java.sql.Clob</em>はSQLのCLOB(character large object)型に対応します。</p>
+</div>
+
+<div class="section"><p>java.sql.Blobとjava.sql.Clobは情報(large object)全体ではなく、それへの論理的なポインタを表します。<span>Derby</span>では一時に唯一つのデータページだけがメモリ上で処理されます。BLOBの情報の最初の数バイトを読み書きするのに、LOB全体が処理される必要はありません。</p>
+</div>
+
+<div class="section"><div class="p">現在の<span>Derby</span>に組み込まれた型には、BLOBとCLOBが用意されています。
+また<span>Derby</span>はこれらのデータ型に対して以下の機能を提供します。
+<ul>
+<li><strong>BLOBの機能</strong> 
+<span>Derby</span>では<em>java.sql.Blob</em>インターフェイスと<em><a href="rrefjdbc99392.html#rrefjdbc99392">java.sql.PreparedStatementインターフェイス: JDBC2.0で提供されるメソッド</a></em>および<em><a href="rrefjdbc77156.html#rrefjdbc77156">java.sql.ResultSet</a></em>のBLOBに関連したメソッドが用意されています。
+<em>CallableStatement</em>の<em>getBlob</em>メソッドは実装されていません。</li>
+
+<li><strong>CLOBの機能</strong> 
+<span>Derby</span>ではjava.sql.Clobインターフェイスと<em><a href="rrefjdbc99392.html#rrefjdbc99392">java.sql.PreparedStatementインターフェイス: JDBC2.0で提供されるメソッド</a></em>と<em><a href="rrefjdbc77156.html#rrefjdbc77156">java.sql.ResultSet</a></em>のCLOBに関連したメソッドが用意されています。
+<em>CallableStatement</em>の<em>getClob</em>メソッドは実装されていません。</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="section"><div class="p">java.sql.Blobとjava.sql.Clobの機能を使うには以下のようにします。
+<ul>
+<li>情報をSQLのBLOB型で記録します。LONG VARCHAR FOR BIT DATA、BINARYおよびVARCHAR FOR BIT DATA型でも可能です。</li>
+
+<li>情報をSQLのCLOB型で記録します。LONG VARCHAR、CHARおよびVARCHAR型でも可能です。</li>
+
+<li><em>java.sql.ResultSet</em>インターフェイスの<em>getBlob</em>あるいは<em>getClob</em>メソッドを使って、参照される情報を扱う<em>BLOB</em>や<em>CLOB</em>を取得します。</li>
+
+<li>LOBの列に対して静的なメソッドを呼ぶことはできません。</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><p>加えて文字列とBLOBの間で型変換を行うことは推奨されません。なぜなら型変換はプラットフォーム・データベースに依存するからです。</p>
+</div>
+
+<div class="section"><p><span>Derby</span>はユニコード文字列(1文字2バイト)を使いますが、他のデータベース製品はASCII文字(1文字あたり1バイト)を使うかもしれません。使われる文字コードの種類によっては一文字が数バイトを必要とすることも考えられます。文字列を記録する為に、<span>Derby</span>では他より大きなBLOBの型を必要とする場合があります。
+文字列を記録する場合はCLOB型を利用するべきです。</p>
+</div>
+
+<div class="section"><div class="p"><strong>BLOB、CLOB、(LOB型)の制約</strong>   <ul>
+<li>LOB型は等号(=)や不等号(!=、 &lt;&gt;. で比較できません。</li>
+
+<li>LOB型で順序付けることはできません。また&lt;、 &lt;=、 &gt;、 &gt;=による比較も不可能です。</li>
+
+<li>LOB型への索引やLOB型の主キー列は不可能です。</li>
+
+<li>LOB型について、DISTINCT、GROUP BY、ORDER BY節は利用できません。</li>
+
+<li>他の基本型と違い、LOB型では暗黙の型変換を行えません。</li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><p><span>Derby</span>では、<em>CallableStatement</em>のsetおよびgetメソッドを除いた、以下のJDBC 2.0のインターフェイスのメソッドが実装されています。</p>
+</div>
+
+<div class="section"><p><strong>推奨事項:</strong> <em>java.sql.Blob</em>と<em>java.sql.Clob</em>の生存期間はトランザクションがコミットされるとき終了するので、<em>java.sql.Blob</em>および<em>java.sql.Clob</em>を利用するときは自動コミットを切って下さい。</p>
+</div>
+
+
+<div class="section"><div class="p"> 
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. 提供されるJDBC 2.0 java.sql.Blobのメソッド" width="100%" frame="border" border="1" rules="all"><caption>表 1. 提供されるJDBC 2.0 java.sql.Blobのメソッド</caption>
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="13%" id="N101FC">返り値</th>
+
+<th align="left" valign="bottom" width="32%" id="N10205">シグネチャ</th>
+
+<th align="left" valign="bottom" width="55.00000000000001%" id="N1020E">実装の覚書</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="13%" headers="N101FC"><em>InputStream</em></td>
+
+<td valign="top" width="32%" headers="N10205"><em>getBinaryStream()</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1020E">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="13%" headers="N101FC"><em>byte[]</em></td>
+
+<td valign="top" width="32%" headers="N10205"><em>getBytes(long pos, int length)</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1020E"><em>pos</em> &lt; 1だったり、<em>pos</em>がlengthより大きかったり、<em>length</em> &lt;= 0であった場合、例外が発生します。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="13%" headers="N101FC"><em>long</em></td>
+
+<td valign="top" width="32%" headers="N10205"><em>length()</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1020E">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="13%" headers="N101FC"><em>long</em></td>
+
+<td valign="top" width="32%" headers="N10205"><em>position(byte[] pattern, long start)</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1020E"><em>pattern</em> == nullであったり、<em>start</em> &lt;
+1であったり、<em>pattern</em>の配列長が0であった場合、例外が発生します。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="13%" headers="N101FC"><em>long</em></td>
+
+<td valign="top" width="32%" headers="N10205"><em>position(Blob pattern, long start)</em></td>
+
+<td valign="top" width="55.00000000000001%" headers="N1020E"><em>pattern</em> == nullだったり、<em>start</em> &lt;
+1だったり、<em>pattern</em>の長さが0であったり、<em>pattern</em>の最初の数バイトを読むとき例外が起きると、例外が発生します。</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+  
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 2. 提供されるJDBC 2.0 java.sql.Clob のメソッド" width="100%" frame="border" border="1" rules="all"><caption>表 2. 提供されるJDBC 2.0 java.sql.Clob のメソッド</caption>
+
+<thead align="left">
+<tr>
+<th align="left" valign="bottom" width="14.000000000000002%" id="N1033B">返り値</th>
+
+<th align="left" valign="bottom" width="36%" id="N10344">シグネチャ</th>
+
+<th align="left" valign="bottom" width="50%" id="N1034D">実装上の覚書</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1033B"><em>InputStream</em></td>
+
+<td valign="top" width="36%" headers="N10344"><em>getAsciiStream()</em></td>
+
+<td valign="top" width="50%" headers="N1034D">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1033B"><em>Reader</em></td>
+
+<td valign="top" width="36%" headers="N10344"><em>getCharacterStream()</em></td>
+
+<td valign="top" width="50%" headers="N1034D">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1033B"><em>String</em></td>
+
+<td valign="top" width="36%" headers="N10344"><em>getSubString(long pos, int length)</em></td>
+
+<td valign="top" width="50%" headers="N1034D"><em>pos</em> &lt; 1だったり、<em>pos</em>が<em> Clob</em>の長さより大きかったり、length &lt;= 0であった場合、例外が発生します。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1033B"><em>long</em></td>
+
+<td valign="top" width="36%" headers="N10344"><em>length()</em></td>
+
+<td valign="top" width="50%" headers="N1034D">&nbsp;</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1033B"><em>long</em></td>
+
+<td valign="top" width="36%" headers="N10344"><em>position(Clob searchstr, long start) </em></td>
+
+<td valign="top" width="50%" headers="N1034D"><em>searchStr</em> == nullだったり<em>start</em> &lt;
+1だったり、<em>searchStr </em>の長さが0だったり、<em>searchStr</em>の最初の数バイトを読むとき例外が起きると、例外が発生します。</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="14.000000000000002%" headers="N1033B"><em>long</em></td>
+
+<td valign="top" width="36%" headers="N10344"><em>position(String searchstr, long start) </em></td>
+
+<td valign="top" width="50%" headers="N1034D"><em>searchStr</em> == nullだったり、start &lt;
+1だったり、patternが空文字列であった場合、例外が発生します。</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="crefjavbclobnot.html">java.sql.Blobとjava.sql.Clobの対応に関する但し書き</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefjdbc20377.html" title="Derbyにてjava.sql.TypesはSQLデータ型に対応付けされます。">SQL型とjava.sql.Typesの対応</a></div>
+</div>
+</div>
+
+</body>
+</html>

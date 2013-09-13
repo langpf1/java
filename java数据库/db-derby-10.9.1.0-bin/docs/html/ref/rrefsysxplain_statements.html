@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSXPLAIN_STATEMENTS system table" />
+<meta name="abstract" content="The SYSXPLAIN_STATEMENTS table captures information about statements which have been executed using RUNTIMESTATISTICS with XPLAIN style." />
+<meta name="description" content="The SYSXPLAIN_STATEMENTS table captures information about statements which have been executed using RUNTIMESTATISTICS with XPLAIN style." />
+<meta content="system tables, SYSXPLAIN_STATEMENTS, XPLAIN style statistics, SYSXPLAIN_STATEMENTS system table" name="DC.subject" />
+<meta content="system tables, SYSXPLAIN_STATEMENTS, XPLAIN style statistics, SYSXPLAIN_STATEMENTS system table" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rref_xplain_tables.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsysxplain_statements" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSXPLAIN_STATEMENTS system table</title>
+</head>
+<body id="rrefsysxplain_statements"><a name="rrefsysxplain_statements"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSXPLAIN_STATEMENTS system table</h1>
+
+
+
+<div><p>The SYSXPLAIN_STATEMENTS table captures information about statements
+which have been executed using RUNTIMESTATISTICS with XPLAIN style.</p>
+
+    <div class="section"><p>See "Working with RunTimeStatistics" in
+         <span><em>Tuning Derby</em></span> for information
+         on how to configure this.
+        </p>
+
+        <p>
+            Each row in this table describes a single statement which has
+            been captured. Depending on the precise configuration of the
+            RUNTIMESTATISTICS and XPLAIN features, there may be additional
+            rows in the other XPLAIN system tables with additional information;
+            the STMT_ID and TIMING_ID columns in this table are used to join
+            against those tables.</p>
+<p>Rows in this table are added
+            automatically when 
+            <span>Derby</span>
+            has been configured appropriately. The
+            rows remain in the table until you delete them or drop the table.
+                </p>
+
+<p>The following table shows the contents of the SYSXPLAIN_STATEMENTS system
+table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For each column in the SYSXPLAIN_STATEMENTS system table, this table provides its data type, its length in bytes, whether it is nullable, and a description of its contents." frame="border" border="1" rules="all"><caption>Table 1. SYSXPLAIN_STATEMENTS system table</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="31%" id="N100BF">Column Name</th>
+
+<th valign="bottom" width="17%" id="N100C6">Type</th>
+
+<th valign="bottom" width="11%" id="N100CD">Length</th>
+
+<th valign="bottom" width="12%" id="N100D4">Nullable</th>
+
+<th valign="bottom" width="28.999999999999996%" id="N100DB">Contents</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="31%" headers="N100BF">STMT_ID</td>
+
+<td valign="top" width="17%" headers="N100C6">CHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">36</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">A unique identifier for this particular captured statement.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">STMT_NAME</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">128</td>
+
+<td valign="top" width="12%" headers="N100D4">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">The name of the associated query or statement. This value
+    is NULL if the user did not assign a name (by calling 
+    <em>java.sql.Statement.setCursorName()</em>).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">STMT_TYPE</td>
+
+<td valign="top" width="17%" headers="N100C6">CHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">3</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">A code indicating what type of statement this is:
+<em>'S'</em> for SELECT, <em>'I'</em> for INSERT, <em>'U'</em> for UPDATE,
+<em>'D'</em> for DELETE, <em>'C'</em> for CALL, <em>'DDL'</em> for Data Definition
+(such as CREATE TABLE), <em>'SA'</em> for SELECT (Approximate), or blank,
+indicating the statement was a comment.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">STMT_TEXT</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">32,672</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">The text of the statement.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">JVM_ID</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">32,672</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">A code indicating what version of the JVM was running
+    when this statement was captured: <em>'4'</em> for J2SE_14 (JDK 1.4.0 or 1.4.1),
+<em>'5'</em> for J2SE_142 (JDK 1.4.2), <em>'6'</em> for J2SE_15 (JDK 1.5), or 
+<em>'7'</em> for J2SE_16 (JDK 1.6).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">OS_IDENTIFIER</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">32,672</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">Contains information about the operating system 
+which was being used when this statement was captured.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">XPLAIN_MODE</td>
+
+<td valign="top" width="17%" headers="N100C6">CHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">1</td>
+
+<td valign="top" width="12%" headers="N100D4">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">A code indicating the XPLAIN mode which was in use
+    when this statement was captured: <em>'F'</em> for FULL,
+    or <em>'O'</em> for ONLY.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">XPLAIN_TIME</td>
+
+<td valign="top" width="17%" headers="N100C6">TIMESTAMP</td>
+
+<td valign="top" width="11%" headers="N100CD">29</td>
+
+<td valign="top" width="12%" headers="N100D4">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">Contains the date and time when this statement
+was captured.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">XPLAIN_THREAD_ID</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">32,672</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">The JVM thread which was running when this statement
+was captured</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">TRANSACTION_ID</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">32,672</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">An internal identifier for the transaction which was
+active when this statement was captured.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">SESSION_ID</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">32,672</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">An internal identifier for the session which was
+active when this statement was captured.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">DATABASE_NAME</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">128</td>
+
+<td valign="top" width="12%" headers="N100D4">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">Contains the name of the database which was being
+used when this statement was captured.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">DRDA_ID</td>
+
+<td valign="top" width="17%" headers="N100C6">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">32,672</td>
+
+<td valign="top" width="12%" headers="N100D4">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">In a network environment, this column contains
+    an internal identifier for the network connection which was
+    active when this statement was captured. In an embedded environment,
+this column is null.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BF">TIMING_ID</td>
+
+<td valign="top" width="17%" headers="N100C6">CHAR</td>
+
+<td valign="top" width="11%" headers="N100CD">36</td>
+
+<td valign="top" width="12%" headers="N100D4">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DB">This field will be NULL unless
+    SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING has been called to enable
+    statistics timing. If statistics timings are being captured, then this
+    column will contain the ID of the row in SYSXPLAIN_STATEMENT_TIMINGS
+which records the statement timing for this statement.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rref_xplain_tables.html" title="">XPLAIN style tables</a></div>
+</div>
+</div>
+
+</body>
+</html>

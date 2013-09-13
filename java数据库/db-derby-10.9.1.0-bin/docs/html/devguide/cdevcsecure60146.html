@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Booting an encrypted database" />
+<meta name="abstract" content="If you create an encrypted database using the bootPassword attribute, you must specify the boot password to reboot the database. If you create an encrypted database using the encryptionKey attribute, you must specify the encryptionKey to reboot the database." />
+<meta name="description" content="If you create an encrypted database using the bootPassword attribute, you must specify the boot password to reboot the database. If you create an encrypted database using the encryptionKey attribute, you must specify the encryptionKey to reboot the database." />
+<meta content="encrypted databases, booting" name="DC.subject" />
+<meta content="encrypted databases, booting" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure88690.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevcsecureunencrypteddb.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure866716.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevcsecurenewbootpw.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevcsecurenewextkey.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcsecure97760.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevcsecure60146" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Booting an encrypted database</title>
+</head>
+<body id="cdevcsecure60146"><a name="cdevcsecure60146"><!-- --></a>
+
+
+<h1 class="topictitle1">Booting an encrypted database</h1>
+
+
+
+<div><p>If you create an encrypted database using the <em>bootPassword</em> attribute,
+you must specify the boot password to reboot the database. If you create an
+encrypted database using the <em>encryptionKey</em> attribute, you must specify
+the <em>encryptionKey</em> to reboot the database.</p>
+
+<p>Encrypted databases cannot be booted automatically along with all other
+system databases on system startup (see "<em>derby.system.bootAll</em>" in the
+<span><em>Derby Reference Manual</em></span>). Instead, you boot encrypted
+databases when you first connect to the database.</p>
+
+<div class="p"><dl>
+<dt class="dlterm">Booting a database with the <em>bootPassword</em> attribute</dt>
+
+<dd>To access an encrypted database called <samp class="codeph">wombat</samp> that was
+created with the boot password <samp class="codeph">clo760uds2caPe</samp>, use the following
+connection URL:<pre>jdbc:derby:wombat;bootPassword=clo760uds2caPe</pre>
+</dd>
+
+
+<dt class="dlterm">Booting a database with the <em>encryptionKey</em> attribute</dt>
+
+<dd>To access an encrypted database called <samp class="codeph">flintstone</samp> that
+was created with the <samp class="codeph">encryptionKey=c566bab9ee8b62a5ddb4d9229224c678</samp> and
+with the <samp class="codeph">encryptionAlgorithm=AES/CBC/NoPadding</samp>, use the following
+connection URL:   <pre>jdbc:derby:flintstone;encryptionAlgorithm=AES/CBC/NoPadding;
+encryptionKey=c566bab9ee8b62a5ddb4d9229224c678  </pre>
+</dd>
+
+</dl>
+</div>
+
+<p>After the database is booted, all connections can access the database without
+the boot password. Only a connection that boots the database requires the
+key.</p>
+
+<div class="p">For example, the following connections would boot the database and require
+the boot password or encryption key, depending on what mechanism was used
+to encrypt the database originally:<ul>
+<li>The first connection to the database in the JVM session</li>
+
+<li>The first connection to the database after the database has been explicitly
+shut down</li>
+
+<li>The first connection to the database after the system has been shut down
+and then rebooted</li>
+
+</ul>
+</div>
+
+<div class="note"><span class="notetitle">Note: </span>The boot password and the encryption key are not meant to prevent unauthorized
+connections to the database after the database is booted. To protect a database
+after it has been booted, turn on user authentication (see <a href="cdevcsecure42374.html#cdevcsecure42374">Working with user authentication</a>).</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevcsecure97760.html" title="This section describes using encryption in Derby.">Working with encryption</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcsecure88690.html" title="You configure a Derby database for encryption when you create the database by specifying the dataEncryption=true attribute on the connection URL.">Encrypting databases on creation</a></div>
+<div><a href="cdevcsecure866716.html" title="When you encrypt a database you must also specify a boot password, which is an alpha-numeric string used to generate the encryption key.">Creating the boot password</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevcsecureunencrypteddb.html" title="You can encrypt an unencrypted Derby database by specifying attributes on the connection URL when you boot the database. The attributes that you specify depend on how you want the database encrypted.">Encrypting an existing unencrypted database</a></div>
+<div><a href="tdevcsecurenewbootpw.html" title="You can apply a new boot password to a Derby database by specifying the newBootPassword attribute on the connection URL when you boot the database.">Encrypting databases with a new boot password</a></div>
+<div><a href="tdevcsecurenewextkey.html" title="You can apply a new external encryption key to a Derby database by specifying the newEncryptionKey attribute on the connection URL when you boot the database.">Encrypting databases with a new external encryption key</a></div>
+</div>
+</div>
+
+</body>
+</html>

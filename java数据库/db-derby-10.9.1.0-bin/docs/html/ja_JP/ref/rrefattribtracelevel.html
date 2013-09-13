@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="traceLevel=value 属性" />
+<meta content="traceLevel=value database connection URL attribute" name="DC.subject" />
+<meta content="traceLevel=value database connection URL attribute" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib24612.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefattribtracelevel" name="DC.Identifier" />
+<meta content="ja" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>traceLevel=value 属性</title>
+</head>
+<body id="rrefattribtracelevel"><a name="rrefattribtracelevel"><!-- --></a>
+
+
+<h1 class="topictitle1">traceLevel=value 属性</h1>
+
+
+<div>
+<div class="section"><h2 class="sectiontitle">機能</h2>
+<p>トレースが有効になっているとき、<span>Derby</span>のネットワーククライアントに適用されるトレースのレベルを指定します。<em>value</em>は数値です。トレースのレベルを指定しない場合、規定はTRACE_ALLです。
+</p>
+
+<p>トレースのより詳細な情報は、<span><em>Derby Server and Administration Guide</em></span>の「ネットワーククライアントのトレース」を参照してください。
+また、トレースに関連した他の属性である、
+<em><a href="rrefattribtracefile.html#rrefattribtracefile">traceFile=path</a></em>、
+<em><a href="rrefattribtracefileappend.html#rrefattribtracefileappend">traceFileAppend=true</a></em>および
+<em><a href="rrefattribtracedirectory.html#rrefattribtracedirectory">traceDirectory=path</a></em>を参照してください。
+</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">トレースのレベル</h2>
+<p>以下の表で設定できるトレースのレベルと、その値を示します。</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="表 1. Available tracing levels and values" width="100%" frame="border" border="1" rules="all"><caption>表 1. Available tracing levels and values</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="81.92771084337349%" id="N100BC">トレースのレベル</th>
+
+<th valign="bottom" width="9.036144578313253%" id="N100C3">16進数</th>
+
+<th valign="bottom" width="9.036144578313253%" id="N100CA">10進数</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_NONE</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x0</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">0</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_CONNECTION_CALLS</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x1</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">1</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_STATEMENT_CALLS</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x2</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">2</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_RESULT_SET_CALLS</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x4</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">4</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_DRIVER_CONFIGURATION</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x10</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">16</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_CONNECTS</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x20</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">32</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_PROTOCOL_FLOWS</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x40</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">64</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_RESULT_SET_META_DATA</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x80</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">128</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_PARAMETER_META_DATA</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x100</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">256</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_DIAGNOSTICS</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x200</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">512</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_XA_CALLS</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0x800</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">2048</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="81.92771084337349%" headers="N100BC">org.apache.derby.jdbc.ClientDataSource.TRACE_ALL</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100C3">0xFFFFFFFF</td>
+
+<td valign="top" width="9.036144578313253%" headers="N100CA">-1</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>トレースのレベルを複数指定する場合、以下の方法を使ってください。
+</p>
+
+<ul>
+<li><samp class="codeph">ij</samp>を使っている場合、10進数を加算した合計値を指定してください。たとえば、プロトコルのフローと接続の呼び出しをトレースする場合、TRACE_PROTOCOL_FLOWS (64)とTRACE_CONNECTION_CALLS (1)の値を加算して、合計値の65を指定します。</li>
+
+<li>JDBCによるプログラムを実行する場合、以下の方法を使ってください。
+<ul>
+<li>ビット演算のOR演算子( | )を二つ以上のトレース値に使います。たとえばプロトコルのフローと接続の呼び出しをトレースする場合、次の値をトレースレベルに指定します。<pre>TRACE_PROTOCOL_FLOWS | TRACE_CONNECTION_CALLS</pre>
+
+</li>
+ 
+<li>ビット演算の否定演算子( ~ )を特定のトレースを除外する場合に使います。たとえばプロトコルのフロー以外のすべてをトレースする場合、次の値をトレースレベルに指定します。<pre>~TRACE_PROTOCOL_FLOWS</pre>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">他の属性との組み合わせ</h2>
+<p>この属性を指定する場合、<em>traceFile=path</em>属性あるいは<em>traceDirectory=path</em>属性を指定しなければなりません。</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">例</h2>
+<pre><strong>-- 新規データベースでのトレースを有効にする。
+jdbc:derby://localhost:1527/mydb;create=true;traceFile=trace.out;traceLevel=65
+</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>親トピック:</strong> <a href="rrefattrib24612.html" title="Derbyでは、データベース接続URLに属性を指定する、 JDBCの機能を利用できます。">データベース接続URLに属性を指定する。</a></div>
+</div>
+</div>
+
+</body>
+</html>

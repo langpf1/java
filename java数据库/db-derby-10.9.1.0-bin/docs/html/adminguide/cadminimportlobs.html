@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Bulk import and export of large objects" />
+<meta name="abstract" content="You can import and export large objects (LOBs) using the Derby system procedures." />
+<meta name="description" content="You can import and export large objects (LOBs) using the Derby system procedures." />
+<meta content="bulk import and export, large objects, large objects, importing and exporting, importing data, exporting data, CLOB data, BLOB data, CHAR FOR BIT DATA, VARCHAR FOR BIT DATA, LONG VARCHAR FOR BIT DATA" name="DC.subject" />
+<meta content="bulk import and export, large objects, large objects, importing and exporting, importing data, exporting data, CLOB data, BLOB data, CHAR FOR BIT DATA, VARCHAR FOR BIT DATA, LONG VARCHAR FOR BIT DATA" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="radminimport91458.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport16245.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport98264.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimport27052.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportdefaultformat.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminimporting.html" />
+<meta scheme="URI" name="DC.Relation" content="tadminexporting.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimport91458.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportjdbc.html" />
+<meta scheme="URI" name="DC.Relation" content="cadminimportnulls.html" />
+<meta scheme="URI" name="DC.Relation" content="radminimportcodeset.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cadminimportlobs" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Bulk import and export of large objects</title>
+</head>
+<body id="cadminimportlobs"><a name="cadminimportlobs"><!-- --></a>
+
+
+<h1 class="topictitle1">Bulk import and export of large objects</h1>
+
+
+
+<div><p>You can import and export large objects (LOBs) using the
+<span>Derby</span> system
+procedures.</p>
+
+<div class="section"><h2 class="sectiontitle">Importing and exporting CLOB and BLOB data</h2>
+<p>CLOB and BLOB data can be exported to the same file as the rest of the column
+data, or the LOB column data can be exported to a separate external file. When
+the LOB column data is exported to a separate external file, reference to the
+location of the LOB data is placed in the LOB column in the main export
+file.</p>
+
+<p>Importing and exporting LOB data using a separate external file might be
+faster than storing the LOB data in the same file as the rest of the column
+data:</p>
+
+<ul>
+<li>The CLOB data does not have to be scanned for the delimiters inside the
+data</li>
+
+<li>The BLOB data does not need to be converted to hexadecimal format</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Importing and exporting other binary data</h2>
+<p>When you export columns that contain the data types CHAR FOR BIT DATA,
+VARCHAR FOR BIT DATA, and LONG VARCHAR FOR BIT DATA, the column data is always
+exported to the main export file. The data is written in hexadecimal format. To
+import data into a table that has columns of these data types, the data in the
+import file for those columns must be in hexadecimal format.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Importing LOB data from a file that contains all of the
+data</h2>
+<p>You can use the SYSCS_UTIL.SYSCS_IMPORT_TABLE and
+SYSCS_UTIL.SYSCS_IMPORT_DATA procedures to import data into a table that
+contains a LOB column. The LOB data must be stored in the same file as the other
+column data that you are importing. If you are importing data from a file that
+was exported from a non-<span>Derby</span>
+source, the binary data must be in hexadecimal format.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Importing LOB data from a separate external file</h2>
+<p>You can use the SYSCS_UTIL.SYSCS_IMPORT_TABLE_LOBS_FROM_EXTFILE and
+SYSCS_UTIL.SYSCS_IMPORT_DATA_LOBS_FROM_EXTFILE procedures to import LOB data
+that is stored in a file that is separate from the main import file. These
+procedures read the LOB data using the reference that is stored in the main
+import file.  If you are importing data from a
+non-<span>Derby</span> source, the
+references to the LOB data must be in the main import file in the format
+<span class="parmname">lobsFileName.Offset.length/</span>. This is the same method that
+the <span>Derby</span> export procedures
+use to export the LOB data to a separate external file.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Exporting LOB data to the same file as the other column
+data</h2>
+<p>You can use the SYSCS_UTIL.SYSCS_EXPORT_TABLE and
+SYSCS_UTIL.SYSCS_EXPORT_QUERY procedures to write LOB data, along with rest of
+the column data, to a single export file.</p>
+
+<p>CLOB column data is treated same as other character data. Character
+delimiters are allowed inside the CLOB data. The export procedures write the
+delimiter inside the data as a double-delimiter.</p>
+
+<p>BLOB column data is written to the export file in hexadecimal format. For
+each byte of BLOB data, two characters are generated. The first character
+represents the high nibble (4 bits) in hexadecimal and the second character
+represents the low nibble.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Exporting LOB data to a separate external file from the other
+column data</h2>
+<p>You can use the SYSCS_UTIL.SYSCS_EXPORT_TABLE_LOBS_TO_EXTFILE and
+SYSCS_UTIL.SYSCS_EXPORT_QUERY_LOBS_TO_EXTFILE procedures to write LOB data to a
+separate external file. These procedures include the
+<span class="parmname">lobFileName</span> parameter, which specifies the name of the
+external file for the LOB data.</p>
+
+<p>When you use these procedures, the location of the LOB data is written to the
+main export file. The format of the  reference to the LOB stored in the main
+export file is <span class="parmname">lobsFileName.Offset.length/</span>.</p>
+
+<ul>
+<li><span class="parmname">Offset</span> is the position in the external file in
+bytes</li>
+
+<li><span class="parmname">length</span> is the size of the LOB column data in
+bytes</li>
+
+</ul>
+
+<p>If a LOB column value is NULL, length is written as -1. No data conversion
+is performed when you export LOB data to an external file. BLOB data is written
+in binary format, and CLOB data is written using the codeset that you
+specify.</p>
+
+<p>See <a href="radminimport91458.html#radminimport91458">Examples of bulk import and export</a> for
+examples using each of the import and export procedures.</p>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cadminimport16245.html" title="You can import and export large amounts of data between files and the Derby database. Instead of having to use INSERT and SELECT statements, you can use Derby system procedures to import data directly from files into tables and to export data from tables into files.">Importing and exporting data</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cadminimport98264.html" title="You can run the import and export procedures from within an SQL statement using ij or any Java application.">Methods for running the import and export procedures</a></div>
+<div><a href="cadminimport27052.html" title="There are requirements and limitations that you must consider before you use the Derby import and export procedures.">Bulk import and export requirements and considerations</a></div>
+<div><a href="cadminimportdefaultformat.html" title="There are specific requirements for the format of the input and output files when you import and export data.">File format for input and output</a></div>
+<div><a href="cadminimportjdbc.html" title="You can run import and export procedures from a JDBC program.">Running import and export procedures from JDBC</a></div>
+<div><a href="cadminimportnulls.html" title="In a delimited file, a NULL value is exported as an empty field.">How the import and export procedures process NULL values</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tadminimporting.html" title="You can use the Derby import procedures to import all of the data from a table or query, or to import LOB data separately from the other data.">Importing data using the built-in procedures</a></div>
+<div><a href="tadminexporting.html" title="You can use the Derby export procedures to export all of the data from table or query, or to export LOB data separately from the other data.">Exporting data using the built-in procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminimportcodeset.html" title="Import and export procedures accept arguments to specify codeset values. You can specify the codeset (character encoding) for import and export procedures to override the system default.">CODESET values for import and export procedures</a></div>
+<div><a href="radminimport91458.html" title="All of the examples in this section are run using the ij utility.">Examples of bulk import and export</a></div>
+</div>
+</div>
+
+</body>
+</html>

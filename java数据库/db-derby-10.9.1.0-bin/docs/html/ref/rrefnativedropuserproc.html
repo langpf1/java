@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_UTIL.SYSCS_DROP_USER system procedure" />
+<meta name="abstract" content="The SYSCS_UTIL.SYSCS_DROP_USER system procedure removes a user account from a database." />
+<meta name="description" content="The SYSCS_UTIL.SYSCS_DROP_USER system procedure removes a user account from a database." />
+<meta content="system procedures, SYSCS_UTIL.SYSCS_DROP_USER, SYSCS_UTIL.SYSCS_DROP_USER system procedure, NATIVE authentication" name="DC.subject" />
+<meta content="system procedures, SYSCS_UTIL.SYSCS_DROP_USER, SYSCS_UTIL.SYSCS_DROP_USER system procedure, NATIVE authentication" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefnativecreateuserproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefnativecreateuserproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefnativemodifypasswordproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefnativeresetpasswordproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefnativemodifypasswordproc.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefnativeresetpasswordproc.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefnativedropuserproc" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_UTIL.SYSCS_DROP_USER system procedure</title>
+</head>
+<body id="rrefnativedropuserproc"><a name="rrefnativedropuserproc"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_UTIL.SYSCS_DROP_USER system procedure</h1>
+
+
+
+<div><p>The <samp class="codeph">SYSCS_UTIL.SYSCS_DROP_USER</samp> system procedure
+removes a user account from a database.</p>
+
+<div class="section">
+<p>This procedure is used in conjunction with NATIVE authentication. For
+details about NATIVE authentication, see
+<em><a href="rrefproper13766.html#rrefproper13766">derby.authentication.provider</a></em>
+and "Using NATIVE authentication" in the
+<span><em>Derby Developer's Guide</em></span>.</p>
+
+<p>You are not allowed to remove the user account of the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a>.</p>
+
+<p>If you use this procedure to remove a user account, the schemas and data
+objects owned by the user remain in the database and can be accessed only by
+the database owner or by other users who have been granted access to them. If
+the user is created again, the user regains access to the schemas and data
+objects.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre>SYSCS_UTIL.SYSCS_DROP_USER(IN USERNAME VARCHAR(128))</pre>
+ 
+<p>No result set is returned by this procedure.</p>
+
+<dl>
+<dt class="dlterm">USERNAME</dt>
+
+<dd>A user name that is case-sensitive if you place the name string in double
+quotes. This user name is an authorization identifier.
+See "Authorization identifiers, user authentication, and user authorization" in
+the <span><em>Derby Developer's Guide</em></span> for more information about
+how these names are treated. If the user name is that of the database owner,
+an error is raised.</dd>
+
+
+</dl>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Execute privileges</h2>
+<p>If authentication and SQL authorization are both enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> has
+execute privileges on this procedure by default. See "Using NATIVE
+authentication," "Enabling user authentication," and "Setting the SQL standard
+authorization mode" in the <span><em>Derby Developer's Guide</em></span> for
+more information. The database owner can grant access to other users.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">JDBC example</h2> 
+<p>Drop a user named FRED:</p>
+
+<pre>CallableStatement cs = conn.prepareCall
+("CALL SYSCS_UTIL.SYSCS_DROP_USER('fred')");
+cs.execute();
+cs.close();</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">SQL example</h2>
+<p>Drop a user named FreD:</p>
+
+<pre>CALL SYSCS_UTIL.SYSCS_DROP_USER('"FreD"')</pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefnativecreateuserproc.html" title="The SYSCS_UTIL.SYSCS_CREATE_USER system procedure adds a new user account to a database.">SYSCS_UTIL.SYSCS_CREATE_USER system procedure</a></div>
+<div><a href="rrefnativemodifypasswordproc.html" title="The SYSCS_UTIL.SYSCS_MODIFY_PASSWORD system procedure is called by a user to change that user's own password.">SYSCS_UTIL.SYSCS_MODIFY_PASSWORD system procedure</a></div>
+<div><a href="rrefnativeresetpasswordproc.html" title="The SYSCS_UTIL.SYSCS_RESET_PASSWORD system procedure resets a password that has expired or has been forgotten.">SYSCS_UTIL.SYSCS_RESET_PASSWORD system procedure</a></div>
+</div>
+</div>
+
+</body>
+</html>

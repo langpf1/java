@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSXPLAIN_RESULTSET_TIMINGS system table" />
+<meta name="abstract" content="The SYSXPLAIN_RESULTSET_TIMINGS table captures timing information about result set accesses which occurred during statements that were executed using RUNTIMESTATISTICS with XPLAIN style." />
+<meta name="description" content="The SYSXPLAIN_RESULTSET_TIMINGS table captures timing information about result set accesses which occurred during statements that were executed using RUNTIMESTATISTICS with XPLAIN style." />
+<meta content="system tables, SYSXPLAIN_RESULTSET_TIMINGS, XPLAIN style statistics, SYSXPLAIN_RESULTSET_TIMINGS system table" name="DC.subject" />
+<meta content="system tables, SYSXPLAIN_RESULTSET_TIMINGS, XPLAIN style statistics, SYSXPLAIN_RESULTSET_TIMINGS system table" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rref_xplain_tables.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsysxplain_resultset_timings" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSXPLAIN_RESULTSET_TIMINGS system table</title>
+</head>
+<body id="rrefsysxplain_resultset_timings"><a name="rrefsysxplain_resultset_timings"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSXPLAIN_RESULTSET_TIMINGS system table</h1>
+
+
+
+<div><p>The SYSXPLAIN_RESULTSET_TIMINGS table captures timing information
+about result set accesses which occurred during statements that were executed
+using RUNTIMESTATISTICS with XPLAIN style.</p>
+
+    <div class="section"><p>See "Working with RunTimeStatistics" in
+         <span><em>Tuning Derby</em></span> for information
+         on how to configure this.
+            Note that statistics timing must be configured by calling
+            SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING(1).
+            Each row in this table describes various timing information
+            for this particular result set in this particular statement.
+            Rows in this table are typically joined with rows in
+            SYSXPLAIN_STATEMENTS and SYSXPLAIN_RESULTSETS during analysis.
+        For example:</p>
+
+<pre>select rs.op_identifier, rst.execute_time
+    from my_stats.sysxplain_resultsets rs,
+         my_stats.sysxplain_resultset_timings rst
+    where rs.stmt_id = ? and
+          rs.timing_id = rst.timing_id
+    order by rst.execute_time desc</pre>
+
+            <p>Rows in this table are added
+            automatically when 
+            <span>Derby</span>
+            has been configured appropriately. The
+            rows remain in the table until you delete them or drop the table.
+                </p>
+
+<p>The following table shows the contents of the SYSXPLAIN_RESULTSET_TIMINGS
+system table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For each column in the SYSXPLAIN_RESULTSET_TIMINGS system table, this table provides its data type, its length in bytes, whether it is nullable, and a description of its contents." frame="border" border="1" rules="all"><caption>Table 1. SYSXPLAIN_RESULTSET_TIMINGS system table</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="31%" id="N100C1">Column Name</th>
+
+<th valign="bottom" width="17%" id="N100C8">Type</th>
+
+<th valign="bottom" width="11%" id="N100CF">Length</th>
+
+<th valign="bottom" width="12%" id="N100D6">Nullable</th>
+
+<th valign="bottom" width="28.999999999999996%" id="N100DD">Contents</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="31%" headers="N100C1">TIMING_ID</td>
+
+<td valign="top" width="17%" headers="N100C8">CHAR</td>
+
+<td valign="top" width="11%" headers="N100CF">36</td>
+
+<td valign="top" width="12%" headers="N100D6">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">A unique ID for this particular row. This column can
+    be used to join against the TIMING_ID column in the
+SYSXPLAIN_RESULTSETS table.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">CONSTRUCTOR_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">The time it took to construct this instance of this
+result set, in milliseconds.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">OPEN_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">The time it took to open this instance of this
+    result set, in milliseconds. Note that if this result set was opened
+    multiple times, this column is the sum of all the individual open times.
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">NEXT_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">The accumulated time for all the calls to fetch the
+    next row from this result set, in milliseconds,
+    for all the opens of this result set.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">CLOSE_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">The time it took to close this instance of the result
+set, in milliseconds.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">EXECUTE_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">The time for all operations performed by this
+    result set, excluding the time taken by all the children result sets of
+    this result set, in milliseconds.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">AVG_NEXT_TIME_PER_ROW</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">If there was at least one row returned from this result
+    set, then this value is the NEXT_TIME value divided by the number of rows
+    returned from this result set, which thus is the average time, in
+milliseconds, that it took to retrieve a row from this result set.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">PROJECTION_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">This value is NULL unless this result set is a
+    PROJECTION result set, in which case this column contains the time,
+    in milliseconds, that it took to perform projection of columns from the
+rows in this result set.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">RESTRICTION_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">This value is NULL unless this result set is a
+PROJECTION result set, in which case this column contains the time,
+in milliseconds, that it took to perform restriction of rows from the
+rows in this result set.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">TEMP_CONG_CREATE_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">For result sets which involve a materialization of
+    a temporary intermediate result set, this value is the time it took to
+    create the materialized result set, in milliseconds. This materialization
+    may occur with hash joins where the number of rows in the intermediate
+result is too large to hold in memory.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100C1">TEMP_CONG_FETCH_TIME</td>
+
+<td valign="top" width="17%" headers="N100C8">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100CF">20</td>
+
+<td valign="top" width="12%" headers="N100D6">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100DD">Similar to TEMP_CONG_CREATE_TIME, this value is
+    the time it took to retrieve rows from the materialized result set, in
+milliseconds.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rref_xplain_tables.html" title="">XPLAIN style tables</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CHAR" />
+<meta content="Função CHAR" name="DC.subject" />
+<meta content="Função CHAR" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefbuiltchar" name="DC.Identifier" />
+<meta content="pt-br" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CHAR</title>
+</head>
+<body id="rrefbuiltchar"><a name="rrefbuiltchar"><!-- --></a>
+
+
+<h1 class="topictitle1">CHAR</h1>
+
+
+<div>
+<div class="section">
+A função CHAR retorna a representação cadeia de caracteres de comprimento fixo
+de:
+<ul>
+<li>uma cadeia de caracteres, se o primeiro argumento for algum tipo de
+cadeia de caracteres.</li>
+
+<li>um valor data/hora, se o primeiro argumento for DATE, TIME ou TIMESTAMP.</li>
+
+<li>um número decimal, se o primeiro argumento for um número decimal.</li>
+
+<li>um número de ponto flutuante de precisão dupla, se o primeiro argumento
+for DOUBLE ou REAL.</li>
+
+<li>um número inteiro, se o primeiro argumento for SMALLINT, INTEGER ou BIGINT.</li>
+
+</ul>
+
+O primeiro argumento deve ser de um tipo de dado nativo.
+O resultado da função é uma cadeia de caracteres de comprimento fixo.
+Se o primeiro argumento puder ser nulo, o resultado poderá ser nulo.
+Se o primeiro argumento for nulo, o resultado será o valor nulo.
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe caractere para caractere</h2>
+
+<pre><strong>CHAR (<em>ExpressãoCaractere</em> [, <em>inteiro</em>] ) </strong>
+</pre>
+ <dl>
+
+<dt class="dlterm">ExpressãoCaractere</dt>
+
+<dd>Uma expressão que retorna um valor do tipo de dado CHAR, VARCHAR,
+LONG VARCHAR ou CLOB.</dd>
+
+
+
+<dt class="dlterm">inteiro</dt>
+
+<dd>O atributo comprimento da cadeia de caracteres de comprimento fixo
+resultante.
+O valor deve estar entre 0 e 254.</dd>
+
+
+</dl>
+
+<p>Se o comprimento da expressão caractere for menor que o atributo comprimento
+do resultado, o resultado será preenchido com brancos até o comprimento do
+resultado.
+Se o comprimento da expressão caractere for maior que o atributo comprimento
+do resultado, será realizado um truncamento.
+Retorna uma advertência, a menos que os caracteres truncados sejam todos brancos
+e a expressão caractere não seja uma cadeia longa (LONG VARCHAR ou CLOB).</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe inteiro para caractere</h2>
+
+<pre><strong>CHAR (<em>ExpressãoInteira</em>)</strong>
+</pre>
+
+<dl>
+
+<dt class="dlterm">ExpressãoInteira</dt>
+
+<dd>Uma expressão que retorna um valor com tipo de dado inteiro (SMALLINT,
+INTEGER ou BIGINT).</dd>
+
+
+</dl>
+
+<p>O resultado é a representação cadeia de caracteres do argumento na forma
+de uma constante inteira do SQL.
+O resultado consiste de n caracteres, que são os dígitos significativos que
+representam o valor do argumento, precedidos pelo sinal menos se o argumento
+for negativo.
+É alinhado à esquerda.</p>
+
+<ul>
+<li>Se o primeiro argumento for um SMALLINT: O comprimento do resultado
+será igual a 6.
+Se o número de caracteres do resultado for menor que 6, então o resultado
+será preenchido à direita com brancos até o comprimento 6.</li>
+
+<li>Se o primeiro argumento for um INTEGER: O comprimento do resultado
+será igual 11.
+Se o número de caracteres no resultado for menor que 11, então o resultado
+será preenchido à direita com brancos até o comprimento 11.</li>
+
+<li>Se o primeiro argumento for um BIGINT: O comprimento do resultado
+será igual a 20.
+Se o número de caracteres no resultado for menor que 20, então o resultado
+será preenchido à direita com brancos até o comprimento 20.</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe de data/hora para caractere</h2>
+
+<pre><strong>CHAR (<em>ExpressãoDataHora</em>)</strong>
+</pre>
+ <dl>
+
+<dt class="dlterm">ExpressãoDataHora</dt>
+
+<dd>Uma expressão de um dos três seguintes tipos de dado:
+<ul>
+<li><strong>DATE</strong>: O resultado é a representação caractere da data.
+O comprimento do resultado é 10.</li>
+
+<li><strong>TIME</strong>: O resultado é a representação caractere da hora.
+O comprimento do resultado é 8.</li>
+
+<li><strong>TIMESTAMP</strong>: O resultado é a representação caractere do carimbo do
+tempo. O comprimento do resultado é 26.</li>
+
+</ul>
+
+</dd>
+
+
+</dl>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Decimal para caractere</h2>
+
+<pre><strong>CHAR (<em>ExpressãoDecimal</em>)</strong>
+</pre>
+
+<dl>
+
+<dt class="dlterm">ExpressãoDecimal</dt>
+
+<dd>Uma expressão que retorna um valor com tipo de dado decimal.
+Se for desejada uma precisão e escala diferente, poderá ser utilizado primeiro
+a função escalar DECIMAL para fazer a alteração.</dd>
+
+
+</dl>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Sintaxe ponto flutuante para caractere</h2>
+
+<pre><strong>CHAR (<em>ExpressãoPontoFlutuante</em>)</strong>
+</pre>
+
+<dl>
+
+<dt class="dlterm">ExpressãoPontoFlutuante</dt>
+
+<dd>Uma expressão que retorna um valor como tipo de dado de ponto flutuante
+(DOUBLE ou REAL).</dd>
+
+
+</dl>
+
+</div>
+
+<div class="example">
+<div class="p">Utilizar a função CHAR para retornar os valores para NÍVEL_EDUC (definido
+como SMALLINT) como uma cadeia de caracteres de comprimento fixo:
+<pre><strong>SELECT CHAR</strong>(NÍVEL_EDUC) <strong>FROM</strong> EMPREGADOS</pre>
+
+Um NÍVEL_EDUC igual a 18 retorna como o valor CHAR(6) igual a
+'18    ' (18 seguido por quatro brancos).</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Tópico pai:</strong> <a href="rrefsqlj29026.html" title="">Funções nativas</a></div>
+</div>
+</div>
+
+</body>
+</html>

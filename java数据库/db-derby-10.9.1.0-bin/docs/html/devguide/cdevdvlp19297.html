@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Recommended practices" />
+<meta name="abstract" content="When developing Derby applications, create a single directory to hold your database or databases." />
+<meta name="description" content="When developing Derby applications, create a single directory to hold your database or databases." />
+<meta content="System directory, creating and naming directory for" name="DC.subject" />
+<meta content="System directory, creating and naming directory for" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp27715.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp25889.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp39943.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp20458.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp846402.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdeploy18639.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp27610.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevdvlp19297" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Recommended practices</title>
+</head>
+<body id="cdevdvlp19297"><a name="cdevdvlp19297"><!-- --></a>
+
+
+<h1 class="topictitle1">Recommended practices</h1>
+
+
+
+<div><p>When developing <span>Derby</span> applications,
+create a single directory to hold your database or databases.</p>
+
+<div class="p">Give this directory a unique name, to help you remember that: <ul>
+<li>All databases exist within a system.</li>
+
+<li>System-wide properties affect the entire system, and persistent system-wide
+properties live in the system directory.</li>
+
+<li>You can boot all the databases in the system, and the boot-up times of
+all databases affect the performance of the system.</li>
+
+<li>You can preboot databases only if they are within the system. (Databases
+do not necessarily have to live inside the system <em>directory</em>, but keeping
+your databases there is the recommended practice.)</li>
+
+<li>Once you connect to a database, it is part of the current system and thus
+inherits all system-wide properties.</li>
+
+<li>Only one instance of <span>Derby</span> can
+run in a JVM at a single time.</li>
+
+<li>The error log is located inside the system directory.</li>
+
+</ul>
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp27610.html" title="A Derby database exists within a system.">Derby system</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevdvlp27715.html" title="The default configuration for Derby is to boot (or start) a database when an application first makes a connection to it. When Derby boots a database, it checks to see if recovery needs to be run on the database, so in some unusual cases booting can take some time.">Booting databases</a></div>
+<div><a href="cdevdvlp25889.html" title="Once you create or connect to a database within a system, Derby begins outputting information and error messages to the error log. Typically, Derby writes this information to a file called derby.log in the system directory.">The error log</a></div>
+<div><a href="cdevdvlp39943.html" title="The text file derby.properties contains the definition of properties, or configuration parameters that are valid for the entire system.">derby.properties</a></div>
+<div><a href="cdevdvlp20458.html" title="Derby prevents two instances of itself from booting the same database by using a file called db.lck inside the database directory.">Double-booting system behavior</a></div>
+<div><a href="cdevdvlp846402.html" title="You can also connect to databases in other directories (including subdirectories of the system directory) by specifying a relative or absolute path name to identify the database. The way you specify an absolute path is defined by the host operating system.">Connecting to databases outside the system directory</a></div>
+<div><a href="cdevdeploy18639.html" title="Database-wide properties are stored in the database and are simpler for deployment, while system-wide parameters might be easier for development.">Embedded systems and properties</a></div>
+</div>
+</div>
+
+</body>
+</html>

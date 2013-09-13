@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Java EE Compliance: Java Transaction API and javax.sql Interfaces" />
+<meta content="Resource manager, Derby as a Java EE system, JNDI, javax.sql.DataSource, Connection pooling, javax.sql.ConnectionPoolDataSource, javax.sql.PooledConnection, XA, Distributed transaction management, javax.sql.XAxxx interfaces, java.transaction.xa package" name="DC.subject" />
+<meta content="Resource manager, Derby as a Java EE system, JNDI, javax.sql.DataSource, Connection pooling, javax.sql.ConnectionPoolDataSource, javax.sql.PooledConnection, XA, Distributed transaction management, javax.sql.XAxxx interfaces, java.transaction.xa package" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjta51021.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjta18596.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjta16677" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Java EE Compliance: Java Transaction API and javax.sql Interfaces</title>
+</head>
+<body id="rrefjta16677"><a name="rrefjta16677"><!-- --></a>
+
+
+<h1 class="topictitle1">Java EE Compliance: Java Transaction API and javax.sql Interfaces</h1>
+
+
+<div>
+<div class="section"><p>The Java 2 Platform, Enterprise Edition (the Java EE platform), is a
+standard for development of enterprise applications based on reusable components
+in a multi-tier environment. In addition to the features of the Java Platform,
+Standard Edition (the Java SE platform), the Java EE platform adds support for
+Enterprise JavaBeans (EJB) technology, the Java Persistence API, JavaServer
+Faces technology, Java Servlet technology, JavaServer Pages (JSP) technology,
+and many more. The Java EE platform architecture is used to bring together
+existing technologies and enterprise applications in a single, manageable
+environment.</p>
+</div>
+
+<div class="section"><p><span>Derby</span> is a
+Java EE platform conformant component in a distributed Java EE system. As such,
+<span>Derby</span> is
+one part of a larger system that includes, among other things, a JNDI server,
+a connection pool module, a transaction manager, a resource manager, and user
+applications.  Within this system, <span>Derby</span> can
+serve as the resource manager.</p>
+
+<p>For more information on the Java EE platform, see
+<a href="http://www.oracle.com/technetwork/java/javaee/documentation/index.html" target="_blank">http://www.oracle.com/technetwork/java/javaee/documentation/index.html</a>.
+</p>
+
+<div class="p">In
+order to qualify as a resource manager in a Java EE system, the Java EE
+platform requires these basic areas of support:   <ul>
+<li>JNDI support<p>Allows calling applications to register names for databases
+and access them through those names instead of through database connection
+URLs. Implementation of one of the JDBC interfaces, <em><a href="rrefjta18596.html#rrefjta18596__jta20722">javax.sql.DataSource</a>,</em> provides
+this support.</p>
+</li>
+
+<li>Connection pooling <p>A mechanism by which a connection pool server keeps
+a set of open connections to a resource manager (<span>Derby</span>).
+A user requesting a connection can get one of the available connections from
+the pool. Such a connection pool is useful in client/server environments because
+establishing a connection is relatively expensive. In an embedded environment,
+connections are much cheaper, making the performance advantage of a connection
+pool negligible. Implementation of two of the JDBC interfaces, <em><a href="rrefjta18596.html#rrefjta18596__jta96573">javax.sql.ConnectionPoolDataSource
+and javax.sql.PooledConnection</a></em>, provide this support.</p>
+</li>
+
+<li>XA support<p>XA is one of several standards for distributed transaction
+management. It is based on two-phase commit. The <em>javax.sql.XAxxx</em> interfaces,
+along with <em>java.transaction.xa</em> package, are an abstract implementation
+of XA. For more information about XA, see <cite>X/Open CAE Specification-Distributed
+Transaction Processing: The XA Specification</cite>, X/Open Document No. XO/CAE/91/300
+or ISBN 1 872630 24 3. Implementation of the JTA API, the interfaces of the
+java.transaction.xa package (<em><a href="rrefjta18596.html#rrefjta18596__jta18170">javax.sql.XAConnection</a>,</em> <em><a href="rrefjta18596.html#rrefjta18596__jta88962">javax.sql.XADataSource</a>,</em> <em><a href="rrefjta51021.html#rrefjta51021__jta18387">javax.transaction.xa.XAResource</a>,</em> <em><a href="rrefjta51021.html#rrefjta51021__jta75105">javax.transaction.xa.Xid</a>,</em> and <em><a href="rrefjta51021.html#rrefjta51021__jta93666">javax.transaction.xa.XAException</a></em>),
+provides this support.</p>
+</li>
+
+</ul>
+</div>
+<div class="p">With the exception of the core JDBC interfaces, these interfaces
+are not visible to the end-user application; instead, they are used only by
+the other back-end components in the system.   <div class="note"><span class="notetitle">Note: </span>For information on the
+classes that implement these interfaces and on how to use
+<span>Derby</span> as a resource manager,
+see "Using <span>Derby</span> as a Java EE
+Resource Manager" in the <span><em>Derby Developer's Guide</em></span>.</div>
+</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefjta51021.html">The JTA API</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefjta18596.html">javax.sql: JDBC Interfaces</a></strong><br />
+</li>
+</ul>
+</div>
+
+</body>
+</html>

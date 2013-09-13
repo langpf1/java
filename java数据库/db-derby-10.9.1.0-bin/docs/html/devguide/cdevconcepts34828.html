@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Working with multiple connections to a single database" />
+<meta name="abstract" content="This section discusses deploying Derby so that many connections can exist to a single database." />
+<meta name="description" content="This section discusses deploying Derby so that many connections can exist to a single database." />
+<meta content="Multiple connections, in single application" name="DC.subject" />
+<meta content="Multiple connections, in single application" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts38375.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts41275.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts30291.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts23499.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp22619.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts24927.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts19524.html" />
+<meta scheme="URI" name="DC.Relation" content="rdevconcepts713.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts10914.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevconcepts24019.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevconcepts34828" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Working with multiple connections to a single database</title>
+</head>
+<body id="cdevconcepts34828"><a name="cdevconcepts34828"><!-- --></a>
+
+
+<h1 class="topictitle1">Working with multiple connections to a single database</h1>
+
+
+
+<div><p>This section discusses deploying <span>Derby</span> so
+that many connections can exist to a single database.</p>
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rdevconcepts713.html">Deployment options and threading and connection modes</a></strong><br />
+A database can be available to multiple connections in several situations.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts10914.html">Multi-user database access</a></strong><br />
+Multi-user database access is possible if Derby is running inside a server framework.</li>
+<li class="ulchildlink"><strong><a href="cdevconcepts24019.html">Multiple connections from a single application</a></strong><br />
+A single application can work with multiple Connections to the same database and assign them to different threads.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevconcepts19524.html" title="This section looks at some advanced Derby application concepts.">Controlling Derby application behavior</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevconcepts38375.html" title="Session and transaction capabilities for SQL are handled through JDBC routines, not by SQL commands.">The JDBC connection and transaction model</a></div>
+<div><a href="cdevconcepts41275.html" title="A result set maintains a cursor, which points to its current row of data. It can be used to step through and process the rows one by one.">Result set and cursor mechanisms</a></div>
+<div><a href="cdevconcepts30291.html" title="This section discusses topics pertinent to multi-user systems, in which concurrency is important.">Locking, concurrency, and isolation</a></div>
+<div><a href="cdevconcepts23499.html" title="JDBC allows you to share a single Connection among multiple threads.">Working with multiple threads sharing a single connection</a></div>
+<div><a href="cdevdvlp22619.html" title="As a rule, do not use Thread.interrupt() calls to signal possibly waiting threads that are also accessing a database, because Derby may catch the interrupt and close the connection to the database. Use wait and notify calls instead.">Working with database threads in an embedded environment</a></div>
+<div><a href="cdevconcepts24927.html" title="JDBC generates exceptions of the type java.sql.SQLException. If your application runs on JDK 1.6 or higher, the exceptions will be the refined subtypes of java.sql.SQLException introduced by JDBC4. To see the exceptions generated by Derby, retrieve and process the SQLExceptions in a catch block.">Working with Derby SQLExceptions in an application</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Enabling remote JMX with no authentication or SSL" />
+<meta content="Java Management Extensions (JMX) technology, JMX, enabling without authentication" name="DC.subject" />
+<meta content="Java Management Extensions (JMX) technology, JMX, enabling without authentication" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenabledisable.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepwd.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepwdssl.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablesimpleauth.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxenablepolicy.html" />
+<meta scheme="URI" name="DC.Relation" content="radminjmxdisable.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="radminjmxenablenoauth" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Enabling remote JMX with no authentication or SSL</title>
+</head>
+<body id="radminjmxenablenoauth"><a name="radminjmxenablenoauth"><!-- --></a>
+
+
+<h1 class="topictitle1">Enabling remote JMX with no authentication or SSL</h1>
+
+
+<div>
+<div class="section">
+<p>The following simple example starts the
+<span>Derby</span> Network Server on the
+command line with <em>insecure</em> remote JMX management and monitoring enabled,
+using an Oracle JDK 6 or later JVM. Password authentication over SSL is enabled by
+default, but here these security features are disabled, to keep the example
+simple.</p>
+
+<div class="p"><div class="important"><span class="importanttitle">Important: </span>It is not recommended to disable authentication or SSL
+in production environments.</div>
+</div>
+
+<pre><strong>java -Dcom.sun.management.jmxremote.port=9999
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.ssl=false 
+-jar $DERBY_HOME/lib/derbyrun.jar server start</strong></pre>
+
+<p>When you start the Network Server from the command line, it automatically
+installs a security manager using a basic default security policy, unless you
+specify the <samp class="codeph">-noSecurityManager</samp> option. You may need to
+customize this policy to make it suit your needs. See
+<a href="radminjmxenablepolicy.html#radminjmxenablepolicy">Fine-grained authorization using a security policy</a> for
+details.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="radminjmxenabledisable.html" title="">Enabling and disabling JMX</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="radminjmxenablepwd.html" title="">Enabling remote JMX with password authentication only</a></div>
+<div><a href="radminjmxenablepwdssl.html" title="">Enabling remote JMX with password authentication and SSL</a></div>
+<div><a href="radminjmxenablesimpleauth.html" title="">Simple authorization using an access file</a></div>
+<div><a href="radminjmxenablepolicy.html" title="">Fine-grained authorization using a security policy</a></div>
+<div><a href="radminjmxdisable.html" title="">Disabling access to MBeans</a></div>
+</div>
+</div>
+
+</body>
+</html>

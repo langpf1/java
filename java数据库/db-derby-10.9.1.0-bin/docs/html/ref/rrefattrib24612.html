@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Setting attributes for the database connection URL" />
+<meta name="abstract" content="Derby allows you to supply a list of attributes to its database connection URL, which is a JDBC feature." />
+<meta name="description" content="Derby allows you to supply a list of attributes to its database connection URL, which is a JDBC feature." />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib42100.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribcollation.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib26867.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefrom.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib17246.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib15290.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribderegister.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribdrop.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribencryptkey.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib88843.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib60346.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribfailover.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib72457.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribnewencryptkey.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribnewbootpw.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib42686.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefrestorefrom.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribretrievemsgtext.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefrollforward.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribsecmech.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib16471.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribslavehost.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribslaveport.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribssl.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribstartmaster.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribstartslave.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribstopmaster.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribstopslave.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib56769.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribtracedirectory.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribtracefile.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribtracefileappend.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribtracelevel.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattribupgrade.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib10035.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefattrib34183.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefattrib24612" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Setting attributes for the database connection URL </title>
+</head>
+<body id="rrefattrib24612"><a name="rrefattrib24612"><!-- --></a>
+
+
+<h1 class="topictitle1">Setting attributes for the database connection URL </h1>
+
+
+<div><p><span>Derby</span> allows
+you to supply a list of attributes to its database connection URL, which is
+a JDBC feature.</p>
+
+<div class="section"><p>The attributes are specific to <span>Derby</span>.</p>
+</div>
+
+<div class="section"><p>You typically set attributes in a semicolon-separated list following
+the protocol and subprotocol (and, in some cases, the subsubprotocol). For
+information on how you set attributes, see <a href="rrefjdbc10889.html#rrefjdbc10889">Attributes of the Derby database connection URL</a>. This section provides reference
+information only.</p>
+
+<p>The <em>DriverManager.getConnection</em> method can take both a connection URL
+and a <em>Properties</em> object as arguments. If you specify any attributes both
+on the connection URL and in a <em>Properties</em> object, the attributes on the
+connection URL override the attributes in the <em>Properties</em> object.</p>
+
+</div>
+
+<div class="section"> <div class="note"><span class="notetitle">Note: </span>Attributes are not parsed for correctness. If you pass in
+an incorrect attribute or corresponding value, it is simply ignored.</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefattrib42100.html">bootPassword=key attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribcollation.html">collation=collation attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib26867.html">create=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefcreatefrom.html">createFrom=path attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib17246.html">databaseName=nameofDatabase attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib15290.html">dataEncryption=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribderegister.html">deregister=false attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribdrop.html">drop=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribencryptkey.html">encryptionKey=key attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib88843.html">encryptionProvider=providerName attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib60346.html">encryptionAlgorithm=algorithm attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribfailover.html">failover=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib72457.html">logDevice=logDirectoryPath attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribnewencryptkey.html">newEncryptionKey=key attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribnewbootpw.html">newBootPassword=newPassword attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib42686.html">password=userPassword attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefrestorefrom.html">restoreFrom=path attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribretrievemsgtext.html">retrieveMessageText=false attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefrollforward.html">rollForwardRecoveryFrom=path attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribsecmech.html">securityMechanism=value attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib16471.html">shutdown=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribslavehost.html">slaveHost=hostname attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribslaveport.html">slavePort=portValue attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribssl.html">ssl=sslMode attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribstartmaster.html">startMaster=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribstartslave.html">startSlave=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribstopmaster.html">stopMaster=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribstopslave.html">stopSlave=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib56769.html">territory=ll_CC attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribtracedirectory.html">traceDirectory=path attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribtracefile.html">traceFile=path attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribtracefileappend.html">traceFileAppend=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribtracelevel.html">traceLevel=value attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattribupgrade.html">upgrade=true attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib10035.html">user=userName attribute</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="rrefattrib34183.html">Creating a connection without specifying attributes</a></strong><br />
+</li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE FUNCTION statement" />
+<meta name="abstract" content="The CREATE FUNCTION statement allows you to create Java functions, which you can then use in an expression." />
+<meta name="description" content="The CREATE FUNCTION statement allows you to create Java functions, which you can then use in an expression." />
+<meta content="CREATE FUNCTION statement, CREATE FUNCTION, SQL statements, functions, creating" name="DC.subject" />
+<meta content="CREATE FUNCTION statement, CREATE FUNCTION, SQL statements, functions, creating" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreaterole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatetype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefcreatefunctionstatement" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE FUNCTION statement</title>
+</head>
+<body id="rrefcreatefunctionstatement"><a name="rrefcreatefunctionstatement"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE FUNCTION statement</h1>
+
+
+
+<div><p>The CREATE FUNCTION statement allows you to create Java functions,
+which you can then use in an expression.</p>
+
+<div class="section"><p>The function owner and the 
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a>
+automatically gain the
+EXECUTE privilege on the function, and are able to grant this privilege to
+other users. The EXECUTE privileges cannot be revoked from the function and
+database owners.</p>
+
+
+<p>
+For details on how Derby matches functions to Java methods,
+see <a href="rrefsqljargmatching.html#rrefsqljargmatching">Argument matching</a>.
+</p>
+
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2> <pre><strong>CREATE FUNCTION <em><a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrprofunctionname">function-name</a></em> ( [ <a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrprofunctionparameter">FunctionParameter</a> 
+   [, <a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrprofunctionparameter">FunctionParameter</a>] ] * ) RETURNS <a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrfunctionreturntype">ReturnDataType</a> [ <a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrprofunctionelement">FunctionElement</a> ] *</strong></pre>
+</div>
+
+<div class="example" id="rrefcreatefunctionstatement__rrefcrprofunctionname"><a name="rrefcreatefunctionstatement__rrefcrprofunctionname"><!-- --></a><h2 class="sectiontitle">function-Name</h2><pre><strong>[ <em><a href="rrefschemaname.html#rrefschemaname">schemaName</a>.</em> ] <em><a href="crefsqlj34834.html#crefsqlj34834">SQL92Identifier</a></em></strong></pre>
+<p>If
+schema-Name is not provided, the current schema is the default schema. If
+a qualified procedure name is specified, the schema name cannot begin with
+SYS.</p>
+</div>
+
+<div class="example" id="rrefcreatefunctionstatement__rrefcrprofunctionparameter"><a name="rrefcreatefunctionstatement__rrefcrprofunctionparameter"><!-- --></a><h2 class="sectiontitle">FunctionParameter</h2><pre><strong>[ parameter-Name ] <em>DataType</em></strong></pre>
+</div>
+
+<div class="section"><p>PararameterName must be unique within a function.</p>
+<p>The syntax
+of <em>DataType</em> is described in <a href="crefsqlj31068.html#crefsqlj31068">Data types</a>.</p>
+<div class="note"><span class="notetitle">Note: </span>Data-types
+such as BLOB, CLOB, LONG VARCHAR, LONG VARCHAR FOR BIT DATA, and XML are not
+allowed as parameters in a CREATE FUNCTION statement.</div>
+</div>
+
+
+<div class="example" id="rrefcreatefunctionstatement__rrefcrfunctionreturntype"><a name="rrefcreatefunctionstatement__rrefcrfunctionreturntype"><!-- --></a><h2 class="sectiontitle">ReturnDataType</h2>
+<pre><strong><a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrfunctiontabletype">TableType</a> | <em>DataType</em></strong></pre>
+</div>
+
+<div class="section"><p>The syntax
+of <em>DataType</em> is described in <a href="crefsqlj31068.html#crefsqlj31068">Data types</a>.</p>
+</div>
+
+
+<div class="example" id="rrefcreatefunctionstatement__rrefcrfunctiontabletype"><a name="rrefcreatefunctionstatement__rrefcrfunctiontabletype"><!-- --></a><h2 class="sectiontitle">TableType</h2>
+<pre><strong>TABLE( <a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrfunctioncolelement">ColumnElement</a> [, <a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrfunctioncolelement">ColumnElement</a> ]* )</strong></pre>
+</div>
+
+<div class="section"><p>This is the return type of a table function. Currently, only Derby-style table functions are supported.
+They are functions which return JDBC <em>ResultSet</em>s. For more information, see
+"Programming Derby-style table functions" in the
+<cite><span><em>Derby Developer's Guide</em></span></cite>.
+</p>
+
+
+<p>
+At run-time, as values are read out of the user-supplied <em>ResultSet</em>,  Derby coerces those values
+to the data types declared in the CREATE FUNCTION statement. This affects values typed as
+CHAR, VARCHAR, LONG VARCHAR, CHAR FOR BIT DATA, VARCHAR FOR BIT DATA,
+LONG VARCHAR FOR BIT DATA, and DECIMAL/NUMERIC. Values which are too long are truncated
+to the maximum length declared in the CREATE FUNCTION statement. In addition,
+if a <em>String</em> value is returned in the <em>ResultSet</em> for a column of CHAR type
+and the <em>String</em> is shorter than the declared length of the CHAR column, Derby
+pads the end of the <em>String</em> with blanks in order to stretch it out to the declared
+length.
+</p>
+
+
+</div>
+
+
+<div class="example" id="rrefcreatefunctionstatement__rrefcrfunctioncolelement"><a name="rrefcreatefunctionstatement__rrefcrfunctioncolelement"><!-- --></a><h2 class="sectiontitle">ColumnElement</h2>
+<pre><strong><em><a href="crefsqlj34834.html#crefsqlj34834">SQL92Identifier</a></em> <em>DataType</em></strong></pre>
+</div>
+
+<div class="section"><p>The syntax
+of <em>DataType</em> is described in <a href="crefsqlj31068.html#crefsqlj31068">Data types</a>.</p>
+<div class="note"><span class="notetitle">Note: </span>XML is not
+allowed as the type of a column in the dataset returned by a table function.</div>
+</div>
+
+
+<div class="example" id="rrefcreatefunctionstatement__rrefcrprofunctionelement"><a name="rrefcreatefunctionstatement__rrefcrprofunctionelement"><!-- --></a><h2 class="sectiontitle">FunctionElement</h2> <pre><strong> {
+| LANGUAGE { JAVA }
+| <a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrfunctiondetchar">DeterministicCharacteristic</a>
+| EXTERNAL NAME <em>string</em>
+| PARAMETER STYLE <a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrfunctionparameterstyle">ParameterStyle</a>
+| EXTERNAL SECURITY { DEFINER | INVOKER }
+| { NO SQL | CONTAINS SQL | READS SQL DATA }
+| { RETURNS NULL ON NULL INPUT | CALLED ON NULL INPUT }
+ }</strong></pre>
+</div>
+
+<div class="section"><h2 class="sectiontitle">LANGUAGE</h2><p><strong>JAVA</strong>- the database manager will
+call the function as a public static method in a Java class.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">EXTERNAL NAME <em>string</em></h2><div class="p"><em>String</em> describes
+the Java method to be called when the function is executed, and takes the
+following form: <pre>class_name.method_name</pre>
+The External
+Name cannot have any extraneous spaces.</div>
+</div>
+
+<div class="section" id="rrefcreatefunctionstatement__rrefcrfunctiondetchar"><a name="rrefcreatefunctionstatement__rrefcrfunctiondetchar"><!-- --></a><h2 class="sectiontitle">DeterministicCharacteristic</h2>
+<pre><strong>DETERMINISTIC | NOT DETERMINISTIC</strong></pre>
+
+<p>Declares that the function is deterministic, meaning that with the same
+set of input values, it always computes the same result. The default is NOT
+DETERMINISTIC. <span>Derby</span> cannot
+recognize whether an operation is actually deterministic, so you must take care
+to specify the <samp class="codeph">DeterministicCharacteristic</samp> correctly.</p>
+
+</div>
+
+<div class="example" id="rrefcreatefunctionstatement__rrefcrfunctionparameterstyle"><a name="rrefcreatefunctionstatement__rrefcrfunctionparameterstyle"><!-- --></a><h2 class="sectiontitle">ParameterStyle</h2>
+<pre><strong>JAVA | DERBY_JDBC_RESULT_SET</strong></pre>
+</div>
+
+<div class="section"><p>The function will
+use a parameter-passing convention that conforms to the Java language and
+SQL Routines specification. INOUT and OUT parameters will be passed as single
+entry arrays to facilitate returning values. Result sets can be returned through
+additional parameters to the Java method of type java.sql.ResultSet[] that
+are passed single entry arrays.</p>
+<p><span>Derby</span> does
+not support long column types (for example Long Varchar, BLOB, and so on).
+An error will occur if you try to use one of these long column types. </p>
+
+<p>The PARAMETER STYLE is DERBY_JDBC_RESULT_SET if and only if this
+is a Derby-style table function, that is, a function which returns
+<a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement__rrefcrfunctiontabletype">TableType</a>
+and which is mapped to a method which returns a JDBC
+<em>ResultSet</em>. Otherwise, the PARAMETER STYLE must be JAVA.
+</p>
+
+</div>
+
+<div class="section" id="rrefcreatefunctionstatement__rrefcrfunctiondefrts"><a name="rrefcreatefunctionstatement__rrefcrfunctiondefrts"><!-- --></a><h2 class="sectiontitle">EXTERNAL SECURITY</h2>
+<p>If SQL authorization mode is enabled, a function runs by default with the
+privileges specified for the user who invokes the function (invoker's rights).
+To specify that the function should run with the privileges specified for the
+user who defines the function (definer's rights), create the function with
+EXTERNAL SECURITY DEFINER. Those privileges include the right to set the current
+role to a role for which the definer has privileges. When the function is first
+invoked, no role is set; even if the invoker has set a current role, the
+function running with definer's rights has no current role set initially.</p>
+
+<p>See <em><a href="rrefpropersqlauth.html#rrefpropersqlauth">derby.database.sqlAuthorization</a></em> for
+details about setting SQL authorization mode.</p>
+
+<p>When a function with definer's rights is invoked, the current default schema
+is set to the eponymously named schema of the definer. For example, if the
+defining user is called OWNER, the default schema will also be set to OWNER.</p>
+
+<p>When a function with invoker's rights is called, the current default
+schema and current role are unchanged initially within the function. Similarly,
+if SQL authorization mode is not enabled, the current default schema is
+unchanged initially within the function.</p>
+
+<p>When the call returns, any changes made inside the function to the default
+current schema (and current role, if relevant) are reset (popped).</p>
+
+<p>If SQL authorization mode is not enabled, an attempt to create a function
+with EXTERNAL SECURITY will result in an error.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">NO SQL, CONTAINS SQL, READS SQL DATA</h2> <p>Indicates
+whether the function issues any SQL statements and, if so, what type.</p>
+ <dl>
+
+<dt class="dlterm">CONTAINS SQL</dt>
+
+<dd>Indicates that SQL statements that neither read nor modify SQL data can
+be executed by the function. Statements that are not supported in any function
+return a different error.</dd>
+
+
+<dt class="dlterm">NO SQL</dt>
+
+<dd>Indicates that the function cannot execute any SQL statements</dd>
+
+
+<dt class="dlterm">READS SQL DATA </dt>
+
+<dd>Indicates that some SQL statements that do not modify SQL data can be
+included in the function. Statements that are not supported in any stored
+function return a different error. This is the default value.</dd>
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">RETURNS NULL ON NULL INPUT or CALLED ON NULL INPUT</h2><div class="p">Specifies
+whether the function is called if any of the input arguments is null. The
+result is the null value. <dl>
+<dt class="dlterm">RETURNS NULL ON NULL INPUT</dt>
+
+<dd>Specifies that the function is not invoked if any of the input arguments
+is null. The result is the null value.</dd>
+
+
+<dt class="dlterm">CALLED ON NULL INPUT</dt>
+
+<dd>Specifies that the function is invoked if any or all input arguments are
+null. This specification means that the function must be coded to test for
+null argument values. The function can return a null or non-null value. This
+is the default setting.</dd>
+
+</dl>
+</div>
+</div>
+
+<div class="section"><div class="p">The function elements may appear in any order, but each type of
+element can only appear once. A function definition must contain these elements: <ul>
+<li><strong>LANGUAGE</strong></li>
+
+<li><strong>PARAMETER STYLE</strong></li>
+
+<li><strong>EXTERNAL NAME</strong></li>
+
+</ul>
+</div>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Example of declaring a scalar function</h2>
+<pre><strong>
+CREATE FUNCTION TO_DEGREES
+( RADIANS DOUBLE )
+RETURNS DOUBLE
+PARAMETER STYLE JAVA
+NO SQL LANGUAGE JAVA
+EXTERNAL NAME 'java.lang.Math.toDegrees'
+</strong></pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Example of declaring a table function</h2>
+<pre><strong>
+CREATE FUNCTION PROPERTY_FILE_READER
+( FILENAME VARCHAR( 32672 ) )
+RETURNS TABLE
+  (
+     KEY_COL     VARCHAR( 10 ),
+     VALUE_COL VARCHAR( 1000 )
+  )
+LANGUAGE JAVA
+PARAMETER STYLE DERBY_JDBC_RESULT_SET
+NO SQL
+EXTERNAL NAME 'vtis.example.PropertyFileVTI.propertyFileVTI'
+</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqlj20937.html" title="">CREATE INDEX statement</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="">CREATE PROCEDURE statement</a></div>
+<div><a href="rrefcreaterole.html" title="">CREATE ROLE statement</a></div>
+<div><a href="rrefsqlj31580.html" title="">CREATE SCHEMA statement</a></div>
+<div><a href="rrefsqljcreatesequence.html" title="">CREATE SEQUENCE statement</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="">CREATE SYNONYM statement</a></div>
+<div><a href="rrefsqlj24513.html" title="">CREATE TABLE statement</a></div>
+<div><a href="rrefsqlj43125.html" title="">CREATE TRIGGER statement</a></div>
+<div><a href="rrefsqljcreatetype.html" title="">CREATE TYPE statement</a></div>
+<div><a href="rrefsqlj15446.html" title="">CREATE VIEW statement</a></div>
+</div>
+</div>
+
+</body>
+</html>
